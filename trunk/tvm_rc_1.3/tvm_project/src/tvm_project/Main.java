@@ -12,9 +12,6 @@ public class Main
 
     /**
      * Main program.
-     *
-     *Test af subversion
-     * 
      */
     //Code
     public void Main()
