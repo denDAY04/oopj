@@ -13,7 +13,7 @@ public class Main
     /**
      * Main program.
      *
-     *Test af subvertion
+     *Test af subversion
      * 
      */
     //Code
