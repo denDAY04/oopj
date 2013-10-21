@@ -6,8 +6,7 @@ public class UserInterface {
     // User input is string in all cases; if int or double is needed-
     // a call to InputValidation is usedd 
     Scanner userInputStr = new Scanner(System.in);
-    InputValidation InpVal = new InputValidation();
-    
+
     
     /**
     * Standard constructor.
@@ -46,12 +45,12 @@ public class UserInterface {
         System.out.println("2 : English / Engelsk");
         System.out.print("Choice / valg: ");
         temp = userInputStr.nextLine();
-        tempInt = InpVal.isInterger(temp);
+        tempInt = this.isInterger(temp);
         while (tempInt != 1  && tempInt != 2 && tempInt != 1337) {
             System.out.println("Error: Undefined input / Fejl: Udefineret indtastning.");
             System.out.print("Try again / Prøv igen: ");
             temp = userInputStr.nextLine();
-            tempInt= InpVal.isInterger(temp); 
+            tempInt= this.isInterger(temp); 
         }
         this.language=tempInt;
         System.out.println();
@@ -72,18 +71,18 @@ public class UserInterface {
             System.out.print("Choose amount of tickets: ");
         }
         temp = userInputStr.nextLine();
-        ticketAmount = InpVal.isInterger(temp);
+        ticketAmount = this.isInterger(temp);
         while (ticketAmount == -1  || ticketAmount>100 || ticketAmount==0 ) {
             if (language == 1) {
                 System.out.println("Fejl i indtastningen.");
                 System.out.print("Prøv igen: ");
                 temp = userInputStr.nextLine();
-                ticketAmount = InpVal.isInterger(temp);
+                ticketAmount = this.isInterger(temp);
             } else {
                 System.out.println("Input error.");
                 System.out.print("Try again: ");
                 temp = userInputStr.nextLine();
-                ticketAmount = InpVal.isInterger(temp);
+                ticketAmount = this.isInterger(temp);
             }
         }
         System.out.println();
@@ -105,7 +104,7 @@ public class UserInterface {
             System.out.print("How many zones: ");
         }
         temp = userInputStr.nextLine();
-        amountZones = InpVal.isInterger(temp);
+        amountZones = this.isInterger(temp);
         if (amountZones < 2) {
            return 2;
         } else if (amountZones > 8) {
@@ -205,18 +204,18 @@ public class UserInterface {
         }
         
         temp = userInputStr.nextLine();
-        ticketIndex = InpVal.isInterger(temp);
+        ticketIndex = this.isInterger(temp);
         while (true) {
             if ((ticketIndex <= 0 || ticketIndex>t.size()) && language == 1 ) {
                 System.out.println("Fejl: forkert indtastning.");
                 System.out.print("Prøv igen: ");
                 temp = userInputStr.nextLine();
-                ticketIndex = InpVal.isInterger(temp);
+                ticketIndex = this.isInterger(temp);
             } else if ((ticketIndex <= 0 || ticketIndex>t.size()) && language == 2 ) {
                 System.out.println("Error: invalid input.");
                 System.out.print("Try again: ");
                 temp = userInputStr.nextLine();
-                ticketIndex = InpVal.isInterger(temp);
+                ticketIndex = this.isInterger(temp);
             } else {
                 break;
             }
@@ -306,18 +305,18 @@ public class UserInterface {
         System.out.println("0 : Log ud");
         System.out.print("valg: ");
         temp = userInputStr.nextLine();
-        serviceChoice = InpVal.isInterger(temp);
+        serviceChoice = this.isInterger(temp);
         while (true) {
             if (serviceChoice == -1) {
                 System.out.println("Fejl: Ingen heltal fundest.");
                 System.out.print("Prøv igen: ");
                 temp = userInputStr.nextLine();
-                serviceChoice = InpVal.isInterger(temp);
+                serviceChoice = this.isInterger(temp);
             } else if (serviceChoice > 9) {
                 System.out.println("Fejl: Udefineret indtstning.");
                 System.out.print("Prøv igen: ");
                 temp = userInputStr.nextLine();
-                serviceChoice = InpVal.isInterger(temp);
+                serviceChoice = this.isInterger(temp);
             } else {
                 break;
             }
@@ -338,12 +337,12 @@ public class UserInterface {
         System.out.println();
         System.out.print("Indtast maskinens unikke ID kode: ");
         temp = userInputStr.nextLine();
-        HardwareID = InpVal.isInterger(temp);
+        HardwareID = this.isInterger(temp);
         while (HardwareID == -1) {
             System.out.println("Fejl: Ingen heltal fundet.");
             System.out.print("Prøv igen: ");
             temp = userInputStr.nextLine();
-            HardwareID = InpVal.isInterger(temp);
+            HardwareID = this.isInterger(temp);
         }
         System.out.println();
         return HardwareID;
@@ -403,12 +402,12 @@ public class UserInterface {
         System.out.println();
         System.out.print("Indtast pris pr. zone: ");
         temp = userInputStr.nextLine();
-        zonePrice = InpVal.isInterger(temp);
+        zonePrice = this.isInterger(temp);
         while (zonePrice == -1) {
             System.out.println("Fejl: Ingen heltal fundet.");
             System.out.print("Prøv igen: ");
             temp = userInputStr.nextLine();
-            zonePrice = InpVal.isInterger(temp);
+            zonePrice = this.isInterger(temp);
         }
         System.out.println();
         return zonePrice;
@@ -423,7 +422,7 @@ public class UserInterface {
         int n;
         
         temp = userInputStr.nextLine();
-        n = InpVal.isInterger(temp);
+        n = this.isInterger(temp);
         
         return n;
     }
@@ -434,6 +433,46 @@ public class UserInterface {
      */
     public int getLanguage() {
         return language;
+    }
+    
+        /**
+     * Try make string to int.
+     * @param s
+     * @return 
+     */
+    public int isInterger(String s) {
+        int temp;
+        try {
+            temp = Integer.parseInt(s);        // Try make s to int
+        } catch (NumberFormatException e) {    //catch exception - return error
+            return -1;
+        }
+        if (temp==0){
+            return -1;
+        }
+        
+        if (temp < 0) {                     // invert negatives
+            temp *= -1;
+        }
+        return temp;                        //if no exception, return int
+    }
+    
+    /**
+     * Try make string to double.
+     * @param s
+     * @return 
+     */
+    public double isDouble(String s) {
+        double temp;
+        try {
+            temp = Double.parseDouble(s);      // Try make s to double
+        } catch (NumberFormatException e) {    //catch exception - return error
+            return -1;
+        }
+        if (temp < 0.0) {                     // invert negatives
+            temp *= -1;
+        }
+        return temp;                        // if no exception, return double
     }
 }
 
