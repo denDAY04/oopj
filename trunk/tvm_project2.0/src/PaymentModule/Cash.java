@@ -13,9 +13,9 @@ public class Cash extends Payment
     {
         if (language == 1)
         {
-            UI.printLn("At betale: "+totalPrice+" DKK");
+            UI.printLn("At betale: "+totalPrice+" DKK.");
             UI.printLn("Indkast penge!");
-            UI.printLn("Tast 9999 for at annullere købet");
+            UI.printLn("Tast 9999 for at annullere købet.");
             while (totalPrice>0)
             {
                 paid = UI.getInt(); // check for invalid value
@@ -29,22 +29,22 @@ public class Cash extends Payment
                 
                 if (paid==9999) 
                 {   //cancel purchase
-                    UI.printLn("Køb afbrudt");
-                    UI.printLn("Modtag venligst dine penge retur");
+                    UI.printLn("Køb afbrudt.");
+                    UI.printLn("Modtag venligst dine penge retur.");
                     return false;
                 }
                    
                 totalPrice -= paid;
-                UI.printLn("Indkastet: "+paid+" DKK, Mangler: "+totalPrice+" DKK");
+                UI.printLn("Indkastet: "+paid+" DKK, Mangler: "+totalPrice+" DKK.");
             }
             
             UI.printLn("Betaling gennemført!");
         }
         else if (language == 2)
         {
-            UI.printLn("Required payment: "+totalPrice+" DKK");
+            UI.printLn("Required payment: "+totalPrice+" DKK.");
             UI.printLn("Insert cash!");
-            UI.printLn("Type 9999 to cancel purchase.");
+            UI.printLn("Type 9999 to cancel the purchase.");
             while (totalPrice>0)
             {
                 paid = UI.getInt();
@@ -57,13 +57,13 @@ public class Cash extends Payment
                  
                  if (paid==9999) 
                  {
-                   UI.printLn("Purchase canceled");
-                   UI.printLn("Please accept your money back");
+                   UI.printLn("Purchase canceled.");
+                   UI.printLn("Please accept your money back.");
                    return false;
                  }
 
                  totalPrice -= paid;
-                 UI.printLn("Inserted: "+paid+" DKK, Remaining: "+totalPrice+" DKK");
+                 UI.printLn("Inserted: "+paid+" DKK, Remaining: "+totalPrice+" DKK.");
             }
             UI.printLn("Payment completed!");
         }
