@@ -16,8 +16,8 @@ public class Payment
         return false;
     }
     
-    public void CancelPayment(int totalPrice, int language)
+    /*public void CancelPayment(int totalPrice, int language)
     {
         System.out.println("Error 22 - Running master class, must run sub class.");
-    }    
+    }   */ 
 }
