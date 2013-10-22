@@ -18,6 +18,7 @@ public class Main
     private ShoppingBasket sBasket;
     private Cash CashPayment;
     private CreditCard CreditCardPayment;
+    private paySMS SMSPayment;
 
     /**
      * Main program.
@@ -34,6 +35,7 @@ public class Main
          Paym = new Payment(UserInt);
          CashPayment = new Cash(UserInt);
          CreditCardPayment = new CreditCard(UserInt);
+         SMSPayment = new paySMS(UserInt);
          Stat = new Statistics(UserInt); 
          sBasket = new ShoppingBasket(cTickets,Stat);
          /*creates a service module, and supplying refrences to the allready 
@@ -95,6 +97,10 @@ public class Main
             else if (paymentSelection == 2)
             {
                 Paym = CreditCardPayment;
+            }
+            else if (paymentSelection == 3)
+            {
+                Paym = SMSPayment;         
             }
             payed = Paym.MakePayment(sBasket.getTotalPrice(),language);                //sends total price and language to payment module.
         }
