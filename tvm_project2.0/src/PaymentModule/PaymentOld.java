@@ -4,7 +4,6 @@ import Interface.UserInterface;
 
 public class PaymentOld
 {
-    //test
     UserInterface UI;     
     public PaymentOld (UserInterface UI)
     {

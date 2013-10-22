@@ -1,5 +1,4 @@
 package JUnit;
-//test
 
 import static org.junit.Assert.*;
 import org.junit.After;
