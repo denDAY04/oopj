@@ -1,4 +1,6 @@
 package tvm_project;
+import tvm_project.PaymentModule.*;
+
 /**
  * Write a description of class Main here.
  * 
@@ -15,6 +17,7 @@ public class Main
                      private Statistics Stat;
                      private Service Ser;
                      private ShoppingBasket sBasket;
+                     private Cash CashPayment;
 
     /**
      * Main program.
@@ -31,6 +34,7 @@ public class Main
      cTickets = new CreatedTickets();
      UserInt = new UserInterface();
      Paym = new Payment(UserInt);
+     CashPayment = new Cash(UserInt);
      Stat = new Statistics(UserInt); 
      sBasket = new ShoppingBasket(cTickets,Stat);
      Ser = new Service(UserInt,Stat,cTickets,sBasket);   // creates a service module, and supplying refrences to the allready created objects, so it can call methoeds in these.
@@ -80,7 +84,14 @@ public class Main
        if (!sBasket.getCart().isEmpty())                                  // if there are items in the shopping cart.
        saleAccepted = UserInt.acceptSale();                               // asks user to confirm the sale
        if (saleAccepted == 1)
-       payed = Paym.Pay(sBasket.getTotalPrice(),language);                //sends total price and language to payment module.
+       {
+       int paymentSelection = UserInt.SelectPaymentType(language);
+       if (paymentSelection == 1)
+       {
+           Paym = CashPayment;
+       }
+       payed = Paym.MakePayment(sBasket.getTotalPrice(),language);                //sends total price and language to payment module.
+       }
        boolean printError = false;
        int returnmoney=0;
        if (payed == true)                                                 // if user payed

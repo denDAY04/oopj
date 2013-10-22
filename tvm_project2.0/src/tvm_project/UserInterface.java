@@ -174,6 +174,32 @@ public class UserInterface {
         return saleAccepted;
     }
     
+    public int SelectPaymentType(int language)
+    {
+        if (language == 1)
+        {
+            System.out.println("Vælg betalingsmetode:");
+            System.out.println("Tryk 1: Kontant betaling");
+            System.out.println("Tryk 2: Betalingskort");
+            System.out.println("Tryk 3: Betal med SMS");
+        }
+        else if (language == 2)
+        {
+            System.out.println("Choose desired payment method: ");
+            System.out.println("Press 1: Pay with cash");
+            System.out.println("Press 2: Creditcard payment");
+            System.out.println("Press 3: Pay by SMS");
+        }
+        int input = this.getInt();
+        while (input <= 0 || input>3)
+        {
+            if (language == 1) System.err.println("Fejl 40 - Indtast et tal mellem 1 og 3.");
+            else if (language == 2) System.err.println("Error 40 - Enter a number between 1 and 3.");
+            input = this.getInt();
+        }
+        return input;
+    }
+    
     
     /**
      * Show menu of active tickets in the machine. Get index from user to buy.
