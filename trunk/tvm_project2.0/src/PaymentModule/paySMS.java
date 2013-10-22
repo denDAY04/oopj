@@ -59,7 +59,7 @@ public class paySMS extends Payment
             confirmSMS = "JA";
             cancelSMS = "NEJ";
             
-            while (!confirmSMS.equals(confirmationSMS) || !cancelSMS.equals(confirmationSMS))
+            while (!(confirmSMS.equals(confirmationSMS) || cancelSMS.equals(confirmationSMS)))
             {
                 UI.printLn("Fejl: Ikke et gyldigt svar.");
                 UI.printLn("Besvar beskeden med enten JA eller NEJ.");
