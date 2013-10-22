@@ -1,9 +1,9 @@
 package tvm_project;        
 
-public class Payment
+public class PaymentOld
 {
     UserInterface UI;     
-    public Payment (UserInterface UI)
+    public PaymentOld (UserInterface UI)
     {
     this.UI=UI;
     }
