@@ -455,6 +455,17 @@ public class UserInterface {
     }
     
     /**
+     * Return a string given from user.
+     * @return 
+     */
+    public String getString() {
+        String temp;
+        temp = userInputStr.nextLine();
+        
+        return temp;
+    }
+    
+    /**
      * Return the language index.
      * @return 
      */
