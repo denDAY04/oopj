@@ -1,4 +1,6 @@
-package MachineLogic;
+package Interface;
+
+import MachineLogic.*;
 
 public class Printer 
 {
