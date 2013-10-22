@@ -2,7 +2,6 @@ package MachineLogic;
 import java.sql.Timestamp;
 import java.util.*;
 
-//test
 public class Ticket 
 {
     private int pricePerZone;

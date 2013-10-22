@@ -6,7 +6,6 @@ package MachineLogic;
 
 import Interface.Printer;
 import java.util.*;
-//test
 
 /**
  *
