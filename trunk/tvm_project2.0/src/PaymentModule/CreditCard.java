@@ -28,6 +28,7 @@ public class CreditCard extends Payment
                 UI.printLn("Fejl: Forkert PIN-kode.");
                 UI.printLn("Prøv igen.");
                 pinCode = UI.getInt();
+                cardPinCode = ((Integer) pinCode).toString();
             }
 
             if (pinCode==99999) 
@@ -35,6 +36,8 @@ public class CreditCard extends Payment
                 UI.printLn("Køb afbrudt.");
                 return false;
             }
+            
+            UI.printLn("Venter på godkendelse...");
             
             try 
             {
@@ -61,6 +64,7 @@ public class CreditCard extends Payment
                 UI.printLn("Error: Wrong PIN-code.");
                 UI.printLn("Try again.");
                 pinCode = UI.getInt();
+                cardPinCode = ((Integer) pinCode).toString();
             }
 
             if (pinCode==99999) 
@@ -68,6 +72,8 @@ public class CreditCard extends Payment
                 UI.printLn("Purchase canceled.");
                 return false;
             }
+            
+            UI.printLn("Waiting for confirmation...");
             
             try 
             {
