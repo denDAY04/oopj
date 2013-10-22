@@ -6,6 +6,8 @@ public class paySMS extends Payment
     private int cellNumber;
     private String phoneNumber;
     private String confirmationSMS;
+    private String confirmSMS;
+    private String cancelSMS;
     
     public paySMS(UserInterface UI)
     {
@@ -54,37 +56,24 @@ public class paySMS extends Payment
             UI.printLn("eller besvar med teksten NEJ, for at annulere købet.");
             
             confirmationSMS = UI.getString();
+            confirmSMS = "JA";
+            cancelSMS = "NEJ";
             
-            while (true)
-            {
-                if (confirmationSMS.equals("JA"))
-                {
-                    UI.printLn("Betaling gennemført!");
-                    return false;
-                }
-                else if (confirmationSMS.equals("NEJ"))
-                {
-                    UI.printLn("Køb afbrudt.");
-                }
-                else
-                {
-                    UI.printLn("Fejl: Ikke et gyldigt svar.");
-                    UI.printLn("Besvar beskeden med enten JA eller NEJ.");
-                    confirmationSMS = UI.getString();
-                }
-            }           
-            /*while (!confirmationSMS.equals("JA") || !confirmationSMS.equals("NEJ"))
+            while (!confirmSMS.equals(confirmationSMS) || !cancelSMS.equals(confirmationSMS))
             {
                 UI.printLn("Fejl: Ikke et gyldigt svar.");
                 UI.printLn("Besvar beskeden med enten JA eller NEJ.");
                 confirmationSMS = UI.getString();
             }
             
-            if (confirmationSMS.equals("JA"))
+            if (confirmationSMS.equals(confirmSMS))
             {
-                UI.printLn("Betaling gennemført!");
-            }*/
-
+                UI.printLn("Betaling gennemført!");                 
+            }
+            else if (confirmationSMS.equals(cancelSMS))
+            {
+                UI.printLn("Køb afbrudt.");
+            }
         }
         else if (language == 2)
         {
