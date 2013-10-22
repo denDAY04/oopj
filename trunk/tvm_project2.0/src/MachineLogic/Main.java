@@ -106,6 +106,7 @@ public class Main
         }
          
         boolean printError = false;
+//test
         int returnmoney=0;
         if (payed == true)                                                 // if user payed
         {

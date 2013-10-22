@@ -61,6 +61,7 @@ public class paySMS extends Payment
             
             while (!(confirmSMS.equals(confirmationSMS) || cancelSMS.equals(confirmationSMS)))
             {
+                //test
                 UI.printLn("Fejl: Ikke et gyldigt svar.");
                 UI.printLn("Besvar beskeden med enten JA eller NEJ.");
                 confirmationSMS = UI.getString();

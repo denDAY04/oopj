@@ -2,6 +2,7 @@ package Interface;
 import MachineLogic.*;
 import javax.swing.*;               //Importing the required classes
 public class UseGraphicalTicket 
+//test
 {
     GraphicalTicket gticket;
     

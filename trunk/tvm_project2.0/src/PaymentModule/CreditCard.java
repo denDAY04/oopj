@@ -3,6 +3,7 @@ import Interface.UserInterface;
 
 public class CreditCard extends Payment
 {
+    //test
     private int pinCode;
     private String cardPinCode;
     

@@ -8,6 +8,7 @@ public class Statistics
 ArrayList<Ticket> logStatsArray = new ArrayList<Ticket>();
 ArrayList<Ticket> dayStatsArray = new ArrayList<Ticket>();
 
+//test
 private int moneyDay=0;
 private int moneyTotal=0;
 private int ticketsTotal=0;

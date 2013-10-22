@@ -2,6 +2,7 @@ package Interface;
 
 import MachineLogic.*;
 
+//test
 public class Printer 
 {
     //Creates a new instance of the object UseGraphicalTicket named test
