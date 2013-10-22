@@ -14,7 +14,7 @@ import org.junit.Test;
 import MachineLogic.CreatedTickets;
 import MachineLogic.ShoppingBasket;
 import MachineLogic.Statistics;
-import MachineLogic.UserInterface;
+import Interface.UserInterface;
 
 /**
  *

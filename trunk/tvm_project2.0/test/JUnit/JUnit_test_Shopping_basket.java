@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 import MachineLogic.CreatedTickets;
 import MachineLogic.ShoppingBasket;
 import MachineLogic.Statistics;
-import MachineLogic.UserInterface;
+import Interface.UserInterface;
 
 /**
  * The test class JUnit_test_Shopping_basket.
