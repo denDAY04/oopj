@@ -3,6 +3,8 @@ import MachineLogic.*;
 import java.awt.*;      //Importing the required classes for this program
 import javax.swing.*;
 
+//test
+
 public class GraphicalTicket extends JPanel
 {
   //Declaration of the various variables used

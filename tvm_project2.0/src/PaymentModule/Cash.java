@@ -3,6 +3,7 @@ import Interface.UserInterface;
 
 public class Cash extends Payment
 {
+    //test
     public Cash(UserInterface UI)
     {
         super(UI);
