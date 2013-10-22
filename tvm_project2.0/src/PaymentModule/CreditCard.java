@@ -11,3 +11,5 @@ public class CreditCard extends Payment
     @Override
     public boolean MakePayment(int totalPrice, int language)
     {
+        
+    }
