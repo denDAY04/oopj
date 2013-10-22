@@ -37,6 +37,7 @@ public class Main
      UserInt = new UserInterface();
      Paym = new Payment(UserInt);
      CashPayment = new Cash(UserInt);
+     CreditCardPayment = new CreditCard(UserInt);
      Stat = new Statistics(UserInt); 
      sBasket = new ShoppingBasket(cTickets,Stat);
      Ser = new Service(UserInt,Stat,cTickets,sBasket);   // creates a service module, and supplying refrences to the allready created objects, so it can call methoeds in these.
