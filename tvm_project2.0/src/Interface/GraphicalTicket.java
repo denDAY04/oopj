@@ -1,4 +1,5 @@
-package MachineLogic;
+package Interface;
+import MachineLogic.*;
 import java.awt.*;      //Importing the required classes for this program
 import javax.swing.*;
 

@@ -11,10 +11,10 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import tvm_project.CreatedTickets;
-import tvm_project.ShoppingBasket;
-import tvm_project.Statistics;
-import tvm_project.UserInterface;
+import MachineLogic.CreatedTickets;
+import MachineLogic.ShoppingBasket;
+import MachineLogic.Statistics;
+import MachineLogic.UserInterface;
 
 /**
  *

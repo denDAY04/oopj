@@ -1,4 +1,5 @@
-package MachineLogic;
+package Interface;
+import MachineLogic.*;
 import java.util.*;
 public class UserInterface {
     private int language;       //1 danish, 2 english 

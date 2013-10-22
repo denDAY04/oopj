@@ -6,10 +6,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert.*;
 import java.sql.Timestamp;
-import tvm_project.CreatedTickets;
-import tvm_project.ShoppingBasket;
-import tvm_project.Statistics;
-import tvm_project.UserInterface;
+import MachineLogic.CreatedTickets;
+import MachineLogic.ShoppingBasket;
+import MachineLogic.Statistics;
+import MachineLogic.UserInterface;
 
 /**
  * The test class JUnit_test_Shopping_basket.
