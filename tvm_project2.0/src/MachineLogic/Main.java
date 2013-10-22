@@ -1,7 +1,6 @@
 package MachineLogic;
 import Interface.UserInterface;
-import PaymentModule.Cash;
-import PaymentModule.Payment;
+import PaymentModule.*;
 
 /**
  * Write a description of class Main here.
@@ -20,6 +19,7 @@ public class Main
                      private Service Ser;
                      private ShoppingBasket sBasket;
                      private Cash CashPayment;
+                     private CreditCard CreditCardPayment;
 
     /**
      * Main program.
@@ -91,6 +91,10 @@ public class Main
        if (paymentSelection == 1)
        {
            Paym = CashPayment;
+       }
+       else if (paymentSelection == 2)
+       {
+           Paym = CreditCardPayment;
        }
        payed = Paym.MakePayment(sBasket.getTotalPrice(),language);                //sends total price and language to payment module.
        }
