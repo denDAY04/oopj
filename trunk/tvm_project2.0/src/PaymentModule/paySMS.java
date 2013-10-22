@@ -55,7 +55,25 @@ public class paySMS extends Payment
             
             confirmationSMS = UI.getString();
             
-            while (!confirmationSMS.equals("JA") || !confirmationSMS.equals("NEJ"))
+            while (true)
+            {
+                if (confirmationSMS.equals("JA"))
+                {
+                    UI.printLn("Betaling gennemført!");
+                    return false;
+                }
+                else if (confirmationSMS.equals("NEJ"))
+                {
+                    UI.printLn("Køb afbrudt.");
+                }
+                else
+                {
+                    UI.printLn("Fejl: Ikke et gyldigt svar.");
+                    UI.printLn("Besvar beskeden med enten JA eller NEJ.");
+                    confirmationSMS = UI.getString();
+                }
+            }           
+            /*while (!confirmationSMS.equals("JA") || !confirmationSMS.equals("NEJ"))
             {
                 UI.printLn("Fejl: Ikke et gyldigt svar.");
                 UI.printLn("Besvar beskeden med enten JA eller NEJ.");
@@ -65,7 +83,7 @@ public class paySMS extends Payment
             if (confirmationSMS.equals("JA"))
             {
                 UI.printLn("Betaling gennemført!");
-            }
+            }*/
 
         }
         else if (language == 2)
