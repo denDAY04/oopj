@@ -124,20 +124,29 @@ public class UserInterface {
         int addToCart = 0;       // 0 cancel, 1 accept
         String addToCartString;
         
-        if (language == 1) {
+        if (language == 1) 
+        {
             System.out.print("Tilføj til din kurv? (J/N): ");
             addToCartString = userInputStr.nextLine();
-            if (addToCartString.equals("j") || addToCartString.equals("J")) {
+            if (addToCartString.equals("j") || addToCartString.equals("J")) 
+            {
                 addToCart = 1;
-            } else {
+            } 
+            else 
+            {
                 System.out.println("Du har afbrudt købet.");
             }
-        } else {
+        } 
+        else 
+        {
             System.out.print("Add to cart? (Y/N): ");
             addToCartString = userInputStr.nextLine();
-            if (addToCartString.equals("y") || addToCartString.equals("Y")) {
+            if (addToCartString.equals("y") || addToCartString.equals("Y")) 
+            {
                 addToCart = 1;
-            } else {
+            } 
+            else 
+            {
                 System.out.println("You have canceled the sale.");
             }
         }
