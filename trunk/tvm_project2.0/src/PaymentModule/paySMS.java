@@ -25,6 +25,12 @@ public class paySMS extends Payment
             
             cellNumber = UI.getInt(); // check for invalid value
             phoneNumber = ((Integer) cellNumber).toString();
+            
+            if (cellNumber==9999) 
+            {   //cancel purchase
+                UI.printLn("Køb afbrudt.");
+                return false;
+            }
 
             while (phoneNumber.length() != 8)
             {
@@ -32,12 +38,6 @@ public class paySMS extends Payment
                 UI.printLn("Prøv igen.");
                 cellNumber = UI.getInt();
                 phoneNumber = ((Integer) cellNumber).toString();
-            }
-
-            if (cellNumber==9999) 
-            {   //cancel purchase
-                UI.printLn("Køb afbrudt.");
-                return false;
             }
             
             UI.printLn("Sender ordrebekræftelse...");
@@ -55,7 +55,7 @@ public class paySMS extends Payment
             UI.printLn("Besvar med teksten JA, for at bekræfte køb af billet");
             UI.printLn("eller besvar med teksten NEJ, for at annulere købet.");
             
-            confirmationSMS = UI.getString();
+            confirmationSMS = UI.getString().toUpperCase();
             confirmSMS = "JA";
             cancelSMS = "NEJ";
             
@@ -73,6 +73,7 @@ public class paySMS extends Payment
             else if (confirmationSMS.equals(cancelSMS))
             {
                 UI.printLn("Køb afbrudt.");
+                return false;
             }
         }
         else if (language == 2)
@@ -83,6 +84,12 @@ public class paySMS extends Payment
             
             cellNumber = UI.getInt(); // check for invalid value
             phoneNumber = ((Integer) cellNumber).toString();
+            
+            if (cellNumber==9999) 
+            {   //cancel purchase
+                UI.printLn("Purchase canceled.");
+                return false;
+            }
 
             while (phoneNumber.length() != 8)
             {
@@ -90,12 +97,6 @@ public class paySMS extends Payment
                 UI.printLn("Try again.");
                 cellNumber = UI.getInt();
                 phoneNumber = ((Integer) cellNumber).toString();
-            }
-
-            if (cellNumber==9999) 
-            {   //cancel purchase
-                UI.printLn("Purchase canceled.");
-                return false;
             }
             
             UI.printLn("Sending orderconfirmation...");
@@ -113,11 +114,11 @@ public class paySMS extends Payment
             UI.printLn("Respond with the text YES, to confirm purchase of ticket");
             UI.printLn("or respond with the text NO, to cancel purchase.");
             
-            confirmationSMS = UI.getString();
+            confirmationSMS = UI.getString().toUpperCase();
             confirmSMS = "YES";
             cancelSMS = "NO";
             
-            while (!(confirmationSMS.equals(confirmSMS) || confirmationSMS.equals(cancelSMS)))
+            while (!(confirmSMS.equals(confirmationSMS) || cancelSMS.equals(confirmationSMS)))
             {
                 UI.printLn("Error: Not a valid response.");
                 UI.printLn("Respond with either YES or NO.");
@@ -131,6 +132,7 @@ public class paySMS extends Payment
             else if (confirmationSMS.equals(cancelSMS))
             {
                 UI.printLn("Your purchase has been canceled.");
+                return false;
             }
         }
         return true;
