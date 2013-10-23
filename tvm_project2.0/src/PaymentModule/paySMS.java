@@ -21,7 +21,7 @@ public class paySMS extends Payment
         {
             UI.printLn("At betale: "+totalPrice+" DKK");
             UI.printLn("Venligst indtast dit telefonnummer.");
-            UI.printLn("Tast 99999 for at annullere købet.");
+            UI.printLn("Tast 9999 for at annullere købet.");
             
             cellNumber = UI.getInt(); // check for invalid value
             phoneNumber = ((Integer) cellNumber).toString();
@@ -114,17 +114,23 @@ public class paySMS extends Payment
             UI.printLn("or respond with the text NO, to cancel purchase.");
             
             confirmationSMS = UI.getString();
+            confirmSMS = "YES";
+            cancelSMS = "NO";
             
-            while (!"YES".equals(confirmationSMS) || !"NO".equals(confirmationSMS))
+            while (!(confirmationSMS.equals(confirmSMS) || confirmationSMS.equals(cancelSMS)))
             {
                 UI.printLn("Error: Not a valid response.");
                 UI.printLn("Respond with either YES or NO.");
                 confirmationSMS = UI.getString();
             }
             
-            if (confirmationSMS.equals("JA"))
+            if (confirmationSMS.equals(confirmSMS))
             {
                 UI.printLn("Purchase completed!");
+            }
+            else if (confirmationSMS.equals(cancelSMS))
+            {
+                UI.printLn("Your purchase has been canceled.");
             }
         }
         return true;
