@@ -1,11 +1,27 @@
 package Interface;
 
 import MachineLogic.*;
+import javax.swing.*;
 
 public class Printer 
 {
+    
+    GraphicalTicket gticket;
+    
+    //This is the method call to use in the main order to print a ticket     
+    public void printTicket(String type,String typeENG, String amountTickets, String startZone, String amountZones, String totalPrice ,String timeStamp,String ticketID,int language)
+    {
+        JFrame frame = new JFrame("BlueJ Trafikselskab"); //Creates a new frame
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400,570);
+
+        //Creates a new instance of the object GraphicalTicket to use
+        gticket = new GraphicalTicket(type,typeENG, amountTickets, startZone, amountZones, totalPrice ,timeStamp, ticketID, language);
+        frame.setContentPane(gticket); 
+        frame.setVisible(true); 
+    }
+    
     //Creates a new instance of the object UseGraphicalTicket named test
-     UseGraphicalTicket useGTicket;
     /**
     * Printing method to simulate printing hardware.
     */
@@ -13,7 +29,6 @@ public class Printer
                                    String amountTickets, String totalPrice, 
                            String timeStamp, String ticketID, int language)
     {
-        useGTicket = new UseGraphicalTicket();
         if (language == 1)
         {
             System.out.println("###############################");
@@ -63,17 +78,12 @@ public class Printer
             System.out.println();
 
         }
-       
-        
+               
         /*Calls the printTicket(); method on the object test, which should
           show a ticket on the screen*/
-        useGTicket.printTicket(type, typeENG, amountTickets, startZone, amountZones, totalPrice, timeStamp, ticketID,language);
-        
+        printTicket(type, typeENG, amountTickets, startZone, amountZones, totalPrice, timeStamp, ticketID,language);
         
         return true;  // can test printer error
-
-        
-        
         
     }
     
