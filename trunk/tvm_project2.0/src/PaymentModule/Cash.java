@@ -35,9 +35,13 @@ public class Cash extends Payment
                 }
                    
                 totalPrice -= paid;
-                UI.printLn("Indkastet: "+paid+" DKK, Mangler: "+totalPrice+" DKK.");
+                int totalPrice2 = totalPrice;
+                if (totalPrice2 <0) totalPrice2 = 0; 
+                UI.printLn("Indkastet: "+paid+" DKK, Mangler: "+totalPrice2+" DKK.");
             }
-            
+            if (totalPrice<0)
+             UI.printLn("Modtag retur: " + (totalPrice*-1)+" Kr.");
+
             UI.printLn("Betaling gennemført!");
         }
         else if (language == 2)
@@ -63,8 +67,13 @@ public class Cash extends Payment
                  }
 
                  totalPrice -= paid;
-                 UI.printLn("Inserted: "+paid+" DKK, Remaining: "+totalPrice+" DKK.");
+                 int totalPrice2 = totalPrice;
+                 if (totalPrice2 <0) totalPrice2 = 0; 
+                 UI.printLn("Inserted: "+paid+" DKK, Remaining: "+totalPrice2+" DKK.");
             }
+             if (totalPrice<0)
+             UI.printLn("Accept return: " + (totalPrice*-1)+" DKK");
+
             UI.printLn("Payment completed!");
         }
         return true;
