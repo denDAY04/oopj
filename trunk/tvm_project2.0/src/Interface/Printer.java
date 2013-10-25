@@ -64,8 +64,8 @@ public class Printer extends JPanel {
 
         if (language == 1) {
             g.drawString("Type:                                " + amountTickets + " " + type, 75, 135);
-            g.drawString("Fra zone:                                       " + startZone, 75, 183);
-            g.drawString("Antal zoner:                                   " + amountZones, 75, 234);
+            g.drawString("Fra zone:                                         " + startZone, 75, 183);
+            g.drawString("Antal zoner:                                     " + amountZones, 75, 234);
             g.drawString("Billet pris:", 163, 288);
 
             //Setting a new font called ticketFont2 for the following text
@@ -73,23 +73,23 @@ public class Printer extends JPanel {
             g.setFont(ticketFont2);
 
             //Text painted on the ticket with the font ticketFont2
-            g.drawString(totalPrice + " DKK", 157, 313);
+            g.drawString(totalPrice + " DKK", 126, 313);
             g.setFont(ticketFont);
             g.drawString("Billetten er gyldig 2 timer fra køb", 75, 362);
         } else {
             g.drawString("Type:                                " + amountTickets + " " + typeENG, 75, 135);
-            g.drawString("From zone:                                     " + startZone, 75, 183);
-            g.drawString("Number of zones:                          " + amountZones, 75, 234);
-            g.drawString("Ticket price:", 163, 288);
+            g.drawString("From zone:                                  " + startZone, 75, 183);
+            g.drawString("Number of zones:                       " + amountZones, 75, 234);
+            g.drawString("Ticket price:", 160, 288);
 
             //Setting a new font called ticketFont2 for the following text
             Font ticketFont2 = new Font("Calibri", Font.BOLD, 28);
             g.setFont(ticketFont2);
 
             //Text painted on the ticket with the font ticketFont2
-            g.drawString(totalPrice + " DKK", 157, 313);
+            g.drawString(totalPrice + " DKK", 128, 313);
             g.setFont(ticketFont);
-            g.drawString("Valid 2 hours from purchase", 75, 362);
+            g.drawString("Valid 2 hours from purchase", 90, 362);
         }
 
         g.drawString(timeStamp, 190, 412);
@@ -106,7 +106,7 @@ public class Printer extends JPanel {
 
     //This is the method call to use in the main order to print a ticket     
     public void printTicket(String type, String typeENG, String amountTickets, String startZone, String amountZones, String totalPrice, String timeStamp, String ticketID, int language)
-        {
+        { 
         this.type = type;
         this.amountTickets = amountTickets;
         this.startZone = startZone;
@@ -135,7 +135,7 @@ public class Printer extends JPanel {
             String amountTickets, String totalPrice,
             String timeStamp, String ticketID, int language) {
         if (language == 1) {
-            System.out.println("###############################");
+            /*System.out.println("###############################");
             System.out.println("#-----BlueJ Trafikselskab-----#");
             System.out.println("#            Billet           #");
             System.out.println("#                             #");
@@ -155,9 +155,9 @@ public class Printer extends JPanel {
             System.out.println("#                             #");
             System.out.println("# >>" + ticketID + "<<          #");
             System.out.println("###############################");
-            System.out.println();
+            System.out.println();*/
         } else if (language == 2) {
-            System.out.println("###############################");
+            /*System.out.println("###############################");
             System.out.println("#-----BlueJ Trafikselskab-----#");
             System.out.println("#            Ticket           #");
             System.out.println("#                             #");
@@ -177,14 +177,14 @@ public class Printer extends JPanel {
             System.out.println("#                             #");
             System.out.println("# >>" + ticketID + "<<          #");
             System.out.println("###############################");
-            System.out.println();
+            System.out.println();*/
 
-        }
+        } 
 
         /*Calls the printTicket(); method on the object test, which should
          show a ticket on the screen*/
         printTicket(type, typeENG, amountTickets, startZone, amountZones, totalPrice, timeStamp, ticketID, language);
-
+        
         return true;  // can test printer error
 
     }
