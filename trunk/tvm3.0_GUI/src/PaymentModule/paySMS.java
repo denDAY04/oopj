@@ -17,6 +17,7 @@ public class paySMS extends Payment
     @Override
     public boolean MakePayment(int totalPrice, int language)
     {
+        int canclePayment = 9999;       // input required to cancel payment
         if (language == 1)
         {
             UI.printLn("At betale: "+totalPrice+" DKK");
@@ -26,7 +27,7 @@ public class paySMS extends Payment
             cellNumber = UI.getInt(); // check for invalid value
             phoneNumber = ((Integer) cellNumber).toString();
             
-            if (cellNumber==9999) 
+            if (cellNumber==canclePayment) 
             {   //cancel purchase
                 UI.printLn("Køb afbrudt.");
                 return false;
@@ -85,7 +86,7 @@ public class paySMS extends Payment
             cellNumber = UI.getInt(); // check for invalid value
             phoneNumber = ((Integer) cellNumber).toString();
             
-            if (cellNumber==9999) 
+            if (cellNumber==canclePayment) 
             {   //cancel purchase
                 UI.printLn("Purchase canceled.");
                 return false;
