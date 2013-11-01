@@ -2,7 +2,10 @@ package Interface;
 import MachineLogic.*;
 import java.util.*;
 public class UserInterface {
-    private int language;       //1 danish, 2 english 
+    private int language;       //1 danish, 2 english
+    private int danishLanguage = 1;      // menu-select variable
+    private int englishLanguage = 2;     // menu-select variable
+    private int admintPassword = 1337;   // menu-select variable
     
     // User input is string in all cases; if int or double is needed-
     // a call to InputValidation is usedd 
@@ -37,23 +40,23 @@ public class UserInterface {
     * Let user select language for menus. 
     */
     public void setLanguage() {
-        String temp;            // Temp string to hold user input
-        int tempInt;            // Temp int for evaluation
+        String inputLine;            // Temp string to hold user input
+        int inputInt;                // Temp int for evaluation
         
         System.out.println();
         System.out.println("Select language / vælg sprog ");
         System.out.println("1 : Danish / Dansk");
         System.out.println("2 : English / Engelsk");
         System.out.print("Choice / valg: ");
-        temp = userInputStr.nextLine();
-        tempInt = this.isInterger(temp);
-        while (tempInt != 1  && tempInt != 2 && tempInt != 1337) {
+        inputLine = userInputStr.nextLine();
+        inputInt = this.isInterger(inputLine);
+        while (inputInt != danishLanguage  && inputInt != englishLanguage && inputInt != admintPassword) {
             System.out.println("Error: Undefined input / Fejl: Udefineret indtastning.");
             System.out.print("Try again / Prøv igen: ");
-            temp = userInputStr.nextLine();
-            tempInt= this.isInterger(temp); 
+            inputLine = userInputStr.nextLine();
+            inputInt= this.isInterger(inputLine); 
         }
-        this.language=tempInt;
+        this.language=inputInt;
         System.out.println();
     }
     
@@ -66,7 +69,7 @@ public class UserInterface {
         int ticketAmount;
         String temp;            // Temporary string to hold user input
         
-        if (language == 1) {
+        if (language == danishLanguage) {
             System.out.print("Vælg antal billetter: ");
         } else {
             System.out.print("Choose amount of tickets: ");
@@ -74,7 +77,7 @@ public class UserInterface {
         temp = userInputStr.nextLine();
         ticketAmount = this.isInterger(temp);
         while (ticketAmount == -1  || ticketAmount>100 || ticketAmount==0 ) {
-            if (language == 1) {
+            if (language == danishLanguage) {
                 System.out.println("Fejl i indtastningen.");
                 System.out.print("Prøv igen: ");
                 temp = userInputStr.nextLine();
@@ -95,11 +98,11 @@ public class UserInterface {
      * @return 
      */
     public int getZones() {
-            int amountZones;            // #zones the ticket will be valid for
+        int amountZones;            // #zones the ticket will be valid for
         String temp;                // Temporary string to hold user input
                  
         System.out.println();
-        if (language == 1) {
+        if (language == danishLanguage) {
             System.out.print("Hvor mange zoner: ");
         } else {
             System.out.print("How many zones: ");
@@ -107,9 +110,9 @@ public class UserInterface {
         temp = userInputStr.nextLine();
         amountZones = this.isInterger(temp);
         if (amountZones < 2) {
-           return 2;
+           return 2;            // no less than 2 zones can be chosen
         } else if (amountZones > 8) {
-            return 8;
+            return 8;           // 8 zones counts for all zones
         } else {
             return amountZones;
         }
@@ -124,7 +127,7 @@ public class UserInterface {
         int addToCart = 0;       // 0 cancel, 1 accept
         String addToCartString;
         
-        if (language == 1) 
+        if (language == danishLanguage) 
         {
             System.out.print("Tilføj til din kurv? (J/N): ");
             addToCartString = userInputStr.nextLine();
@@ -163,7 +166,7 @@ public class UserInterface {
         int saleAccepted = 0;       // 0 cancel, 1 accept
         String saleAcceptedString;
         
-        if (language == 1) {
+        if (language == danishLanguage) {
           System.out.print("Accepterer du købet? (J/N): ");
             saleAcceptedString = userInputStr.nextLine();
             if (saleAcceptedString.equals("j") || saleAcceptedString.equals("J")) {
@@ -186,14 +189,14 @@ public class UserInterface {
     
     public int SelectPaymentType(int language)
     {
-        if (language == 1)
+        if (language == danishLanguage)
         {
             System.out.println("Vælg betalingsmetode:");
             System.out.println("Tryk 1: Kontant betaling");
             System.out.println("Tryk 2: Betalingskort");
             System.out.println("Tryk 3: Betal med SMS");
         }
-        else if (language == 2)
+        else if (language == englishLanguage)
         {
             System.out.println("Choose desired payment method: ");
             System.out.println("Press 1: Pay with cash");
@@ -203,8 +206,8 @@ public class UserInterface {
         int input = this.getInt();
         while (input <= 0 || input>3)
         {
-            if (language == 1) System.err.println("Fejl 40 - Indtast et tal mellem 1 og 3.");
-            else if (language == 2) System.err.println("Error 40 - Enter a number between 1 and 3.");
+            if (language == danishLanguage) System.err.println("Fejl 40 - Indtast et tal mellem 1 og 3.");
+            else if (language == englishLanguage) System.err.println("Error 40 - Enter a number between 1 and 3.");
             input = this.getInt();
         }
         return input;
@@ -221,7 +224,7 @@ public class UserInterface {
         int ticketIndex;        // index on the ticket user selects
         String temp;            //temp string with user input for validation
         
-        if (language == 1) {
+        if (language == danishLanguage) {
             System.out.println("Der er følgende typer billetter:");
             for (Ticket element : t) {
                 System.out.println("Billet nr. "+(n+1)+" : "+element.getTypeDA()+" per zone "+element.getPricePerZone()+" kr. minimum 2 zoner.");
@@ -242,12 +245,12 @@ public class UserInterface {
         temp = userInputStr.nextLine();
         ticketIndex = this.isInterger(temp);
         while (true) {
-            if ((ticketIndex <= 0 || ticketIndex>t.size()) && language == 1 ) {
+            if ((ticketIndex <= 0 || ticketIndex>t.size()) && language == danishLanguage) {
                 System.out.println("Fejl: forkert indtastning.");
                 System.out.print("Prøv igen: ");
                 temp = userInputStr.nextLine();
                 ticketIndex = this.isInterger(temp);
-            } else if ((ticketIndex <= 0 || ticketIndex>t.size()) && language == 2 ) {
+            } else if ((ticketIndex <= 0 || ticketIndex>t.size()) && language == englishLanguage) {
                 System.out.println("Error: invalid input.");
                 System.out.print("Try again: ");
                 temp = userInputStr.nextLine();
@@ -272,7 +275,7 @@ public class UserInterface {
         int moretickets=0;      // counter for more tickets or not
         String temp;            //temp string with user input for validation
         
-        if (language == 1) {
+        if (language == danishLanguage) {
             System.out.println("Der er følgende billetter i din kurv:");
             for (Ticket element : t) {
                 int ticketprice = (element.getPricePerZone()*element.getZones());
@@ -300,7 +303,7 @@ public class UserInterface {
         
         String moreticketsString;
         
-        if (language == 1) {
+        if (language == danishLanguage) {
             moreticketsString = userInputStr.nextLine();
             if (moreticketsString.equals("j") || moreticketsString.equals("J")) {
                 moretickets = 1;
