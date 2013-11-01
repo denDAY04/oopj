@@ -89,7 +89,7 @@ public class Main
          if (!sBasket.getCart().isEmpty())     // if there are items in the shopping cart.
          saleAccepted = UserInt.acceptSale();  // asks user to confirm the sale
          if (saleAccepted == 1) {
-            int paymentSelection = UserInt.SelectPaymentType(language);
+            int paymentSelection = UserInt.selectPaymentType(language);
             switch (paymentSelection) {
                 case 1:
                     Paym = CashPayment;

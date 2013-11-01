@@ -54,93 +54,73 @@ public class Service
 
             if ((System.currentTimeMillis() - startTime) < (1*60*1000))               // Auto time out
             {
-
-                if (valg==1)   // 1 : Vis dagsstatistik
-                {
-                    UI.printLn("Antal biletter solgt : "+ST.TicketSoldDay()+" stk.");        
-                    UI.printLn("Antal print tilbage : "+Math.min(ST.CheckPaper(),ST.CheckInk())+" stk.");
-                    UI.printLn("Omsat for : "+ST.MoneyDay()+" kr.");
-                    UI.printLn("Dagens salg:");
-                    ST.ShowDayLog();
+                switch (valg) {
+                    case 1:  // 1 : Vis dagsstatistik
+                        UI.printLn("Antal biletter solgt : "+ST.TicketSoldDay()+" stk.");        
+                        UI.printLn("Antal print tilbage : "+Math.min(ST.CheckPaper(),ST.CheckInk())+" stk.");
+                        UI.printLn("Omsat for : "+ST.MoneyDay()+" kr.");
+                        UI.printLn("Dagens salg:");
+                        ST.ShowDayLog();
+                        break;
+                    case 2:  // 2 : Skift billetrulle
+                        UI.printLn("Nulstiller papir variabel... OK.");                          
+                        ST.ResetPaper();
+                        break;
+                    case 3:  // 3 : Skift blækpatron
+                        UI.printLn("Nulstiller blæk variabel... OK.");                           
+                        ST.ResetInk();
+                        break;
+                    case 4: // 4 : Udskriv og nulstil salgs statestik
+                        UI.printLn("Dagens salg:");
+                        ST.ShowDayLog();
+                        UI.printLn("Statistik for dagens salg.");
+                        UI.printLn("Omsat for "+ST.MoneyDay()+" kr.");
+                        UI.printLn("Solgt "+ST.TicketSoldDay()+" billetter"); 
+                        UI.printLn("Nulstiller statestik... OK.");                               
+                        ST.ResetDayStatistics();
+                        break;
+                    case 5: // 5 : Sæt ud af drift
+                        UI.printLn("OUT OF ORDER");                                             
+                        UI.printLn("UDE AF DRIFT");
+                        System.exit(0);                      // Exit program
+                        break;
+                    case 6: // 6 : Standard Service besøg
+                        ST.ResetInk();
+                        ST.ResetPaper();
+                        UI.printLn("Nulstiller forbrugs variable........ OK.");                       
+                        ST.ResetDayStatistics();
+                        UI.printLn("Nulstiller statestik........... OK.");
+                        break;
+                    case 7: // 7 : Vis total statestik
+                        UI.printLn("Total salg:");                    
+                        UI.printLn("Omsat for "+ST.MoneyTotal()+" kr.");
+                        UI.printLn("Solgt "+ST.TicketSoldTotal()+" billetter"); 
+                        UI.printLn("Total salg:");
+                        ST.ShowLog();
+                        break;
+                    case 8: // 8 : Udskriv test billetter.
+                        for (int n=1; n<CT.getArray().size()+1;n++)                                               // get the array of all possibel tickets
+                            {
+                             SB.addToCart(n,2,1);       // add one of each ticket to the shopping cart
+                             SB.printTicket(0,1,8888);  // prints the ticket from the cart in danish
+                             SB.printTicket(0,2,8888);  // prints the ticket from the cart in english
+                             ST.testPrint();            // updates the ticket machine variabels.
+                             ST.testPrint();
+                             SB.clearCart();            // empty the shopping basket.
+                            }
+                        break;
+                    case 0: //0 : Log ud 
+                        return;
+                    default:
+                        return;       
                 }
-
-                if (valg==2)   // 2 : Skift billetrulle
-                {
-                    UI.printLn("Nulstiller papir variabel... OK.");                          
-                    ST.ResetPaper();   
-                }
-
-                if (valg==3)  // 3 : Skift blækpatron
-                {
-                    UI.printLn("Nulstiller blæk variabel... OK.");                           
-                  ST.ResetInk();           
-                }
-
-                if (valg==4)  // 4 : Udskriv og nulstil salgs statestik"
-                {
-                  UI.printLn("Dagens salg:");
-                  ST.ShowDayLog();
-                  UI.printLn("Statistik for dagens salg.");
-                  UI.printLn("Omsat for "+ST.MoneyDay()+" kr.");
-                  UI.printLn("Solgt "+ST.TicketSoldDay()+" billetter"); 
-                  UI.printLn("Nulstiller statestik... OK.");                               
-                  ST.ResetDayStatistics();
-                }
-
-                if (valg==5) // 5 : Sæt ud af drift
-                {
-                    UI.printLn("OUT OF ORDER");                                             
-                    UI.printLn("UDE AF DRIFT");
-                    System.exit(0);                                                                 // Exit program        
-                }
-
-                if (valg==6)  // 6 : Standard Service besøg
-                {
-                    ST.ResetInk();
-                    ST.ResetPaper();
-                    UI.printLn("Nulstiller forbrugs variable........ OK.");                       
-                    ST.ResetDayStatistics();
-                    UI.printLn("Nulstiller statestik........... OK.");
-                }     
-                
-                if (valg==7)  // 7 : Vis total statestik
-                {
-                  UI.printLn("Total salg:");                    
-                  UI.printLn("Omsat for "+ST.MoneyTotal()+" kr.");
-                  UI.printLn("Solgt "+ST.TicketSoldTotal()+" billetter"); 
-                  UI.printLn("Total salg:");
-                  ST.ShowLog();
-                }                     
-                if (valg==8)  // 8 : Udskriv test billetter.
-                {
-                   
-                    for (int n=1; n<CT.getArray().size()+1;n++)                                               // get the array of all possibel tickets
-                    {
-                     SB.addToCart(n,2,1);       // add one of each ticket to the shopping cart
-                     SB.printTicket(0,1,8888);  // prints the ticket from the cart in danish
-                     SB.printTicket(0,2,8888);  // prints the ticket from the cart in english
-                     ST.testPrint();            // updates the ticket machine variabels.
-                     ST.testPrint();
-                     SB.clearCart();            // empty the shopping basket.
-                    } 
-
-                     
-                   
-                }                      
-
-                if (valg==0)  //0 : Log ud 
-                {  
-                    break;
-                } 
             }
             else
             {
                 UI.printLn("Time Out");
                 return;
             }
-
-        }
-        
+        }      
     }
     
     /**

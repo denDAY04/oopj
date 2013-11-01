@@ -187,7 +187,7 @@ public class UserInterface {
         return saleAccepted;
     }
     
-    public int SelectPaymentType(int language)
+    public int selectPaymentType(int language)
     {
         if (language == danishLanguage)
         {
@@ -497,10 +497,6 @@ public class UserInterface {
         } catch (NumberFormatException e) {    //catch exception - return error
             return -1;
         }
-        if (temp==0){
-            return -1;
-        }
-        
         if (temp < 0) {                     // invert negatives
             temp *= -1;
         }
