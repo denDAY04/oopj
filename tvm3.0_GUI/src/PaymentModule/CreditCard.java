@@ -14,6 +14,7 @@ public class CreditCard extends Payment
     @Override
     public boolean MakePayment(int totalPrice, int language)
     {
+        int canclePayment = 99999;       // input required to cancel payment
         if (language == 1)
         {
             UI.printLn("At betale: "+totalPrice+" DKK");
@@ -31,7 +32,7 @@ public class CreditCard extends Payment
                 cardPinCode = ((Integer) pinCode).toString();
             }
 
-            if (pinCode==99999) 
+            if (pinCode==canclePayment) 
             {   //cancel purchase
                 UI.printLn("Køb afbrudt.");
                 return false;
@@ -67,7 +68,7 @@ public class CreditCard extends Payment
                 cardPinCode = ((Integer) pinCode).toString();
             }
 
-            if (pinCode==99999) 
+            if (pinCode==canclePayment) 
             {   //cancel purchase
                 UI.printLn("Purchase canceled.");
                 return false;

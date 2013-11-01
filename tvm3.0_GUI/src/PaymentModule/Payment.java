@@ -8,7 +8,7 @@ public class Payment
         this.UI = UI;
     }
     
-    public int paid = 0;
+    protected int paid = 0;
     
     public boolean MakePayment(int totalPrice, int language)
     {
@@ -16,8 +16,4 @@ public class Payment
         return false;
     }
     
-    /*public void CancelPayment(int totalPrice, int language)
-    {
-        System.err.println("Error 22 - Running master class, must run sub class.");
-    }   */ 
 }

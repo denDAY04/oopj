@@ -11,6 +11,7 @@ public class Cash extends Payment
     @Override
     public boolean MakePayment(int totalPrice, int language)
     {
+        int canclePayment = 9999;       // input required to cancel payment
         if (language == 1)
         {
             UI.printLn("At betale: "+totalPrice+" DKK.");
@@ -27,7 +28,7 @@ public class Cash extends Payment
                     paid = UI.getInt();
                 } 
                 
-                if (paid==9999) 
+                if (paid==canclePayment) 
                 {   //cancel purchase
                     UI.printLn("Køb afbrudt.");
                     UI.printLn("Modtag venligst dine penge retur.");
@@ -59,7 +60,7 @@ public class Cash extends Payment
                    paid = UI.getInt();
                  }
                  
-                 if (paid==9999) 
+                 if (paid==canclePayment) 
                  {
                    UI.printLn("Purchase canceled.");
                    UI.printLn("Please accept your money back.");
