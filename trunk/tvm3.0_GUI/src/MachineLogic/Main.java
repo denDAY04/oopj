@@ -60,11 +60,12 @@ public class Main
          UserInt.printLn("Welcome to the BlueJ Trafikselskab");
          UserInt.printLn("Velkommen til BlueJ Trafikselskab");
         
-         while (language==1337 || language==0)
+         int adminPassword = 1337;
+         while (language==adminPassword || language==0)
          {
          UserInt.setLanguage();                     // shows the lanuage menu
          language = UserInt.getLanguage();          // gets the language variable
-         if (language==1337)                        // service menu code
+         if (language==adminPassword)                        // service menu code
          Ser.menu();    
          }
          
@@ -87,24 +88,21 @@ public class Main
          
          if (!sBasket.getCart().isEmpty())     // if there are items in the shopping cart.
          saleAccepted = UserInt.acceptSale();  // asks user to confirm the sale
-         if (saleAccepted == 1)
-         {
+         if (saleAccepted == 1) {
             int paymentSelection = UserInt.SelectPaymentType(language);
-            if (paymentSelection == 1)
-            {
-                Paym = CashPayment;
-            }
-            else if (paymentSelection == 2)
-            {
-                Paym = CreditCardPayment;
-            }
-            else if (paymentSelection == 3)
-            {
-                Paym = SMSPayment;         
+            switch (paymentSelection) {
+                case 1:
+                    Paym = CashPayment;
+                    break;
+                case 2:
+                    Paym = CreditCardPayment;
+                    break;
+                case 3:
+                    Paym = SMSPayment;
+                    break;
             }
             payed = Paym.MakePayment(sBasket.getTotalPrice(),language);                //sends total price and language to payment module.
-        }
-         
+         }
         boolean printError = false;
         int returnmoney=0;
         if (payed == true)                                                 // if user payed
