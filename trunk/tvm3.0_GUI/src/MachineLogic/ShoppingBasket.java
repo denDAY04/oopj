@@ -36,8 +36,7 @@ public void addToCart(int ticketIndex,int amountZones,int ticketAmount) // adds 
     
         ShoppingBasket.add((new Ticket(cTickets.transferTicket(ticketIndex-1),ticketAmount,amountZones)));  
 
-        } 
-{}  
+        }  
               
       
      public boolean printTicket(int index,int language,int hardwareID)  // prints a ticket at location index in the ShoppingBasket array.
