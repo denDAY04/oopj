@@ -3,7 +3,7 @@ import java.util.* ;
 
 public class CreatedTickets 
 {
-    ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
+    public ArrayList<Ticket> ticketList = new ArrayList<Ticket>();
     
     
     /**
