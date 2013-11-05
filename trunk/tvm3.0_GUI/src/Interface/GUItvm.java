@@ -170,7 +170,6 @@ public class GUItvm extends javax.swing.JFrame {
     //Variables
     private int hardID;
     private int startZone;
-    private int x;
     private void opsætNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_opsætNextActionPerformed
         hardID = (int) Integer.parseInt(hardwareID.getText());
         startZone = (int) Integer.parseInt(startZonText.getText());
@@ -189,6 +188,7 @@ public class GUItvm extends javax.swing.JFrame {
         {
             CT.addTicket((int) Integer.parseInt(zonePriceText.getText()), typeDaText.getText(), typeEngText.getText(), startZone);
             zonePriceText.setText(""); typeDaText.setText(""); typeEngText.setText("");
+            errorLabel1.setText("");
         }
 
         addMore.setSelected(false);
@@ -252,6 +252,7 @@ public class GUItvm extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new GUItvm().setVisible(true);
             }
