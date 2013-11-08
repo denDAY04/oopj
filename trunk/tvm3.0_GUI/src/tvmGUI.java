@@ -38,6 +38,7 @@ public class tvmGUI extends javax.swing.JFrame {
         InSetup1StartZone = new javax.swing.JTextField();
         ButSetup1Next = new javax.swing.JButton();
         LabSetup1Error = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         Setup2 = new javax.swing.JPanel();
         LabSetup2Info = new javax.swing.JLabel();
         LabSetup2Time = new javax.swing.JLabel();
@@ -61,16 +62,23 @@ public class tvmGUI extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new java.awt.CardLayout());
 
+        Setup1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         LabSetup1Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabSetup1Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1Title.setText("Opsæt automat");
         LabSetup1Title.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Setup1.add(LabSetup1Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 241, -1));
 
         LabSetup1HardwareID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1HardwareID.setText("Indtast maskinens unikke ID kode.");
+        Setup1.add(LabSetup1HardwareID, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 129, 170, -1));
+        Setup1.add(InSetup1HardwareID, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 149, 170, -1));
 
         LabSetup1StartZone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1StartZone.setText("Indtast start zone.");
+        Setup1.add(LabSetup1StartZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 187, 170, -1));
+        Setup1.add(InSetup1StartZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 207, 170, -1));
 
         ButSetup1Next.setText("Næste");
         ButSetup1Next.addActionListener(new java.awt.event.ActionListener() {
@@ -78,53 +86,17 @@ public class tvmGUI extends javax.swing.JFrame {
                 ButSetup1NextActionPerformed(evt);
             }
         });
+        Setup1.add(ButSetup1Next, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 547, 95, 32));
 
         LabSetup1Error.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabSetup1Error.setForeground(new java.awt.Color(255, 0, 0));
         LabSetup1Error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1Error.setText("Fejl - Ugyldig indtastning");
+        Setup1.add(LabSetup1Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 238, 170, -1));
 
-        javax.swing.GroupLayout Setup1Layout = new javax.swing.GroupLayout(Setup1);
-        Setup1.setLayout(Setup1Layout);
-        Setup1Layout.setHorizontalGroup(
-            Setup1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Setup1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButSetup1Next, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34))
-            .addGroup(Setup1Layout.createSequentialGroup()
-                .addGap(270, 270, 270)
-                .addComponent(LabSetup1Title, javax.swing.GroupLayout.DEFAULT_SIZE, 241, Short.MAX_VALUE)
-                .addGap(289, 289, 289))
-            .addGroup(Setup1Layout.createSequentialGroup()
-                .addGap(307, 307, 307)
-                .addGroup(Setup1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LabSetup1HardwareID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(InSetup1HardwareID)
-                    .addComponent(LabSetup1StartZone, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(InSetup1StartZone)
-                    .addComponent(LabSetup1Error, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        Setup1Layout.setVerticalGroup(
-            Setup1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(Setup1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(LabSetup1Title)
-                .addGap(50, 50, 50)
-                .addComponent(LabSetup1HardwareID)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(InSetup1HardwareID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LabSetup1StartZone)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(InSetup1StartZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LabSetup1Error)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 284, Short.MAX_VALUE)
-                .addComponent(ButSetup1Next, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BackgroundGUI.png"))); // NOI18N
+        jLabel1.setText("jLabel1");
+        Setup1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
 
         getContentPane().add(Setup1, "card2");
 
@@ -426,6 +398,7 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JList ListSetup2TicketList;
     private javax.swing.JPanel Setup1;
     private javax.swing.JPanel Setup2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
