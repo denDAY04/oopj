@@ -37,4 +37,14 @@ public class CreatedTickets
     {
         return(ticketList);
     }
+    
+    public void ClearArray()
+    {
+        ticketList.clear();
+    }
+    
+    public String isInArrayList(int index)
+    {
+        return ticketList.get(index).getTypeDA();
+    }
 }
