@@ -1,11 +1,12 @@
 import MachineLogic.*;
 import java.awt.Color;
+import java.util.Date;
 import java.util.ArrayList;
+import java.util.Collections;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author Nordahl
@@ -16,9 +17,16 @@ public class tvmGUI extends javax.swing.JFrame {
      * Creates new form tvmGUI
      */
     public tvmGUI() {
-        initComponents();
+        this.ListContent = new ArrayList<>();
+        Date time = new Date();
+        initComponents();       
+        //Initialize labels to be invisible
         LabSetup1Error.setVisible(false);
         LabSetup2Error.setVisible(false);
+        LabSetup2ErrorList.setVisible(false);
+        
+        LabSetup2Time.setText(time.toString().substring(0,19));
+        LabWelcomeDATime.setText(time.toString().substring(0,19));
     }
 
     /**
@@ -38,7 +46,6 @@ public class tvmGUI extends javax.swing.JFrame {
         InSetup1StartZone = new javax.swing.JTextField();
         ButSetup1Next = new javax.swing.JButton();
         LabSetup1Error = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
         Setup2 = new javax.swing.JPanel();
         LabSetup2Info = new javax.swing.JLabel();
         LabSetup2Time = new javax.swing.JLabel();
@@ -56,29 +63,29 @@ public class tvmGUI extends javax.swing.JFrame {
         ButSetup2Save = new javax.swing.JButton();
         ButSetup2Back = new javax.swing.JButton();
         LabSetup2Error = new javax.swing.JLabel();
+        LabSetup2ErrorList = new javax.swing.JLabel();
+        WelcomeDA = new javax.swing.JPanel();
+        LabWelcomeDATitle = new javax.swing.JLabel();
+        LabWelcomeDAInstruct = new javax.swing.JLabel();
+        LabWelcomeDAInfo = new javax.swing.JLabel();
+        LabWelcomeDATime = new javax.swing.JLabel();
+        CBWelcomeDAType = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(800, 600));
+        setMinimumSize(new java.awt.Dimension(820, 630));
         setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new java.awt.CardLayout());
-
-        Setup1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabSetup1Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabSetup1Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1Title.setText("Opsæt automat");
         LabSetup1Title.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        Setup1.add(LabSetup1Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 241, -1));
 
         LabSetup1HardwareID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabSetup1HardwareID.setText("Indtast maskinens unikke ID kode.");
-        Setup1.add(LabSetup1HardwareID, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 129, 170, -1));
-        Setup1.add(InSetup1HardwareID, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 149, 170, -1));
+        LabSetup1HardwareID.setText("Indtast maskinens unikke ID kode");
 
         LabSetup1StartZone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1StartZone.setText("Indtast start zone.");
-        Setup1.add(LabSetup1StartZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 187, 170, -1));
-        Setup1.add(InSetup1StartZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 207, 170, -1));
 
         ButSetup1Next.setText("Næste");
         ButSetup1Next.addActionListener(new java.awt.event.ActionListener() {
@@ -86,25 +93,67 @@ public class tvmGUI extends javax.swing.JFrame {
                 ButSetup1NextActionPerformed(evt);
             }
         });
-        Setup1.add(ButSetup1Next, new org.netbeans.lib.awtextra.AbsoluteConstraints(679, 547, 95, 32));
 
         LabSetup1Error.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabSetup1Error.setForeground(new java.awt.Color(255, 0, 0));
         LabSetup1Error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1Error.setText("Fejl - Ugyldig indtastning");
-        Setup1.add(LabSetup1Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 238, 170, -1));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/BackgroundGUI.png"))); // NOI18N
-        jLabel1.setText("jLabel1");
-        Setup1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 800, 600));
+        javax.swing.GroupLayout Setup1Layout = new javax.swing.GroupLayout(Setup1);
+        Setup1.setLayout(Setup1Layout);
+        Setup1Layout.setHorizontalGroup(
+            Setup1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Setup1Layout.createSequentialGroup()
+                .addGroup(Setup1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(Setup1Layout.createSequentialGroup()
+                        .addGap(270, 270, 270)
+                        .addComponent(LabSetup1Title, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Setup1Layout.createSequentialGroup()
+                        .addGap(307, 307, 307)
+                        .addComponent(InSetup1HardwareID, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Setup1Layout.createSequentialGroup()
+                        .addGap(310, 310, 310)
+                        .addComponent(LabSetup1StartZone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Setup1Layout.createSequentialGroup()
+                        .addGap(307, 307, 307)
+                        .addComponent(InSetup1StartZone, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(Setup1Layout.createSequentialGroup()
+                        .addGap(307, 307, 307)
+                        .addComponent(LabSetup1Error, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(289, 289, 289))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Setup1Layout.createSequentialGroup()
+                .addComponent(LabSetup1HardwareID, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(255, 255, 255))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Setup1Layout.createSequentialGroup()
+                .addComponent(ButSetup1Next, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
+        Setup1Layout.setVerticalGroup(
+            Setup1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(Setup1Layout.createSequentialGroup()
+                .addGap(50, 50, 50)
+                .addComponent(LabSetup1Title)
+                .addGap(50, 50, 50)
+                .addComponent(LabSetup1HardwareID)
+                .addGap(6, 6, 6)
+                .addComponent(InSetup1HardwareID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(21, 21, 21)
+                .addComponent(LabSetup1StartZone)
+                .addGap(3, 3, 3)
+                .addComponent(InSetup1StartZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(11, 11, 11)
+                .addComponent(LabSetup1Error)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                .addComponent(ButSetup1Next, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
+        );
 
         getContentPane().add(Setup1, "card2");
 
         Setup2.setMinimumSize(new java.awt.Dimension(800, 600));
 
-        LabSetup2Info.setText("Derp");
-
-        LabSetup2Time.setText("Herp");
+        LabSetup2Time.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabSetup2Time.setText(" ");
 
         LabSetup2Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabSetup2Title.setText("Opret billetter");
@@ -151,6 +200,10 @@ public class tvmGUI extends javax.swing.JFrame {
         LabSetup2Error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup2Error.setText("Fejl - Ugyldig indtastning");
 
+        LabSetup2ErrorList.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        LabSetup2ErrorList.setForeground(new java.awt.Color(255, 0, 0));
+        LabSetup2ErrorList.setText("Fejl - Ingen billetter oprettet");
+
         javax.swing.GroupLayout Setup2Layout = new javax.swing.GroupLayout(Setup2);
         Setup2.setLayout(Setup2Layout);
         Setup2Layout.setHorizontalGroup(
@@ -161,7 +214,7 @@ public class tvmGUI extends javax.swing.JFrame {
                     .addGroup(Setup2Layout.createSequentialGroup()
                         .addComponent(LabSetup2Info)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LabSetup2Time)
+                        .addComponent(LabSetup2Time, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap())
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Setup2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -194,6 +247,10 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(ButSetup2AddM, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
+            .addGroup(Setup2Layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(LabSetup2ErrorList)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         Setup2Layout.setVerticalGroup(
             Setup2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -223,7 +280,9 @@ public class tvmGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(LabSetup2Error))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 239, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(LabSetup2ErrorList)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
                 .addGroup(Setup2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButSetup2AddM, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButSetup2Save, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -232,6 +291,61 @@ public class tvmGUI extends javax.swing.JFrame {
         );
 
         getContentPane().add(Setup2, "card3");
+
+        LabWelcomeDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LabWelcomeDATitle.setText("Velkommen til BlueJ Trafikselskab");
+
+        LabWelcomeDAInstruct.setText("Vælg billettype, antal zoner og antal billetter fra dropdown menuerne herunder og tryk næste.");
+
+        LabWelcomeDAInfo.setText(" ");
+
+        LabWelcomeDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabWelcomeDATime.setText(" ");
+
+        CBWelcomeDAType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vælg billettype..." }));
+        CBWelcomeDAType.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CBWelcomeDATypeActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout WelcomeDALayout = new javax.swing.GroupLayout(WelcomeDA);
+        WelcomeDA.setLayout(WelcomeDALayout);
+        WelcomeDALayout.setHorizontalGroup(
+            WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WelcomeDALayout.createSequentialGroup()
+                .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(WelcomeDALayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabWelcomeDAInstruct)
+                            .addComponent(LabWelcomeDATitle)
+                            .addComponent(CBWelcomeDAType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 273, Short.MAX_VALUE))
+                    .addGroup(WelcomeDALayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LabWelcomeDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LabWelcomeDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        WelcomeDALayout.setVerticalGroup(
+            WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(WelcomeDALayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabWelcomeDAInfo)
+                    .addComponent(LabWelcomeDATime))
+                .addGap(42, 42, 42)
+                .addComponent(LabWelcomeDATitle)
+                .addGap(18, 18, 18)
+                .addComponent(LabWelcomeDAInstruct)
+                .addGap(42, 42, 42)
+                .addComponent(CBWelcomeDAType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(410, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(WelcomeDA, "card4");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -250,44 +364,14 @@ public class tvmGUI extends javax.swing.JFrame {
         }
         return temp; 
     }
+    
     //Variables
     private int hardID;
     private int startZone;
     CreatedTickets CT = new CreatedTickets();
-    ArrayList<String> ListContent = new ArrayList();
-//----------------------------------SETUP1-------------------------------------
-    private void ButSetup1NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup1NextActionPerformed
-      
-        hardID = this.isInteger(InSetup1HardwareID.getText());
-        startZone = this.isInteger(InSetup1StartZone.getText());
-        if(hardID == -1)
-        {
-            LabSetup1Error.setVisible(true);
-            LabSetup1HardwareID.setForeground(Color.red);
-        }
-        else
-        {
-            LabSetup1HardwareID.setForeground(Color.black);
-        }
-        if(startZone == -1)
-        {
-            LabSetup1Error.setVisible(true);
-            LabSetup1StartZone.setForeground(Color.red);
-        }
-        else
-        {    
-            LabSetup1StartZone.setForeground(Color.black);
-        }
-        if (hardID !=-1 && startZone !=-1)
-        {
-            LabSetup1Error.setVisible(false);
-            System.out.println(""+hardID);
-            System.out.println(""+startZone);
-            Setup1.setVisible(false);
-            Setup2.setVisible(true); 
-        }
-    }//GEN-LAST:event_ButSetup1NextActionPerformed
+    ArrayList<String> ListContent;
 
+//---------------------------------SETUP2--------------------------------------
     private void ButSetup2AddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2AddMActionPerformed
         String TypeDA = InSetup2TypeDA.getText();
         String TypeENG = InSetup2TypeENG.getText();
@@ -319,25 +403,198 @@ public class tvmGUI extends javax.swing.JFrame {
         {
             LabSetup2TypeENG.setForeground(Color.black);
         }
+        
+        LabSetup2ErrorList.setVisible(false);
+        
         if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
         {
             LabSetup2Error.setVisible(false);
+            LabSetup2ErrorList.setVisible(false);
             CT.addTicket(PricePZ, TypeDA, TypeENG, startZone);
             InSetup2TypeDA.setText(""); InSetup2TypeENG.setText(""); InSetup2PricePZ.setText("");
-            
             ListContent.add(TypeDA+", "+TypeENG+", "+PricePZ+", "+startZone);
             ListSetup2TicketList.setListData(ListContent.toArray());
+            CBWelcomeDAType.addItem(TypeDA);
         }
     }//GEN-LAST:event_ButSetup2AddMActionPerformed
 
     private void ButSetup2SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2SaveActionPerformed
-        // TODO add your handling code here:
+        String TypeDA = InSetup2TypeDA.getText();
+        String TypeENG = InSetup2TypeENG.getText();
+        int PricePZ = this.isInteger(InSetup2PricePZ.getText());
+        if (ListSetup2TicketList.getModel().getSize() == 0)
+        {
+            if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
+            {
+                LabSetup2Error.setVisible(false);
+                CT.addTicket(PricePZ, TypeDA, TypeENG, startZone);
+                InSetup2TypeDA.setText(""); InSetup2TypeENG.setText(""); InSetup2PricePZ.setText("");
+                ListContent.add(TypeDA+", "+TypeENG+", "+PricePZ+", "+startZone);
+                ListSetup2TicketList.setListData(ListContent.toArray());
+                Setup2.setVisible(false);
+                WelcomeDA.setVisible(true);
+                LabWelcomeDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+                CBWelcomeDAType.addItem(TypeDA);
+            }
+            else
+            {
+                LabSetup2ErrorList.setVisible(true);
+            }
+        }
+        else
+        {
+            LabSetup2ErrorList.setVisible(false);
+        }
+        
+        if(PricePZ == -1)
+        {
+            LabSetup2Error.setVisible(true);
+            LabSetup2PricePZ.setForeground(Color.red);
+        }
+        else
+        {
+            LabSetup2PricePZ.setForeground(Color.black);
+        }
+        if(TypeDA.equals(""))
+        {
+            LabSetup2Error.setVisible(true);
+            LabSetup2TypeDA.setForeground(Color.red);
+        }
+        else
+        {    
+            LabSetup2TypeDA.setForeground(Color.black);
+        }
+        if (TypeENG.equals(""))
+        {
+            LabSetup2Error.setVisible(true);
+            LabSetup2TypeENG.setForeground(Color.red);
+        }
+        else
+        {
+            LabSetup2TypeENG.setForeground(Color.black);
+        }
+        
+        if (!ListContent.isEmpty() /*&& PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals("")*/)
+        {
+            if (PricePZ ==-1 && TypeDA.equals("") && TypeENG.equals(""))
+            {
+                LabSetup2Error.setVisible(false);
+                CT.addTicket(PricePZ, TypeDA, TypeENG, startZone);
+                InSetup2TypeDA.setText(""); InSetup2TypeENG.setText(""); InSetup2PricePZ.setText("");
+                ListContent.add(TypeDA+", "+TypeENG+", "+PricePZ+", "+startZone);
+                ListSetup2TicketList.setListData(ListContent.toArray());
+                Setup2.setVisible(false);
+                WelcomeDA.setVisible(true);
+                LabWelcomeDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+                CBWelcomeDAType.addItem(TypeDA);
+            }
+            else if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
+            {
+                LabSetup2Error.setVisible(false);
+                CT.addTicket(PricePZ, TypeDA, TypeENG, startZone);
+                InSetup2TypeDA.setText(""); InSetup2TypeENG.setText(""); InSetup2PricePZ.setText("");
+                ListContent.add(TypeDA+", "+TypeENG+", "+PricePZ+", "+startZone);
+                ListSetup2TicketList.setListData(ListContent.toArray());
+                Setup2.setVisible(false);
+                WelcomeDA.setVisible(true);
+                LabWelcomeDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+                CBWelcomeDAType.addItem(TypeDA);
+            }
+            else
+            {
+                if(PricePZ == -1)
+                {
+                    LabSetup2Error.setVisible(true);
+                    LabSetup2PricePZ.setForeground(Color.red);
+                }
+                else
+                {
+                    LabSetup2PricePZ.setForeground(Color.black);
+                }
+                if(TypeDA.equals(""))
+                {
+                    LabSetup2Error.setVisible(true);
+                    LabSetup2TypeDA.setForeground(Color.red);
+                }
+                else
+                {    
+                    LabSetup2TypeDA.setForeground(Color.black);
+                }
+                if (TypeENG.equals(""))
+                {
+                    LabSetup2Error.setVisible(true);
+                    LabSetup2TypeENG.setForeground(Color.red);
+                }
+                else
+                {
+                    LabSetup2TypeENG.setForeground(Color.black);
+                }
+            }
+        }
     }//GEN-LAST:event_ButSetup2SaveActionPerformed
 
     private void ButSetup2BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2BackActionPerformed
+        //Change window to previous window
         Setup2.setVisible(false);
         Setup1.setVisible(true);
+        
+        //Returning all warning labels to default
+        LabSetup2TypeENG.setForeground(Color.black);
+        LabSetup2TypeDA.setForeground(Color.black);
+        LabSetup2PricePZ.setForeground(Color.black);
+        LabSetup2Error.setVisible(false);
+        LabSetup2ErrorList.setVisible(false);
+        
+        //Clearing all ArrayLists
+        ListSetup2TicketList.setListData(new Object[0]);
+        ListContent.clear();
+        CT.ClearArray();
+        CBWelcomeDAType.removeAllItems(); CBWelcomeDAType.addItem("Vælg billettype...");
     }//GEN-LAST:event_ButSetup2BackActionPerformed
+
+//----------------------------------SETUP1-------------------------------------
+    private void ButSetup1NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup1NextActionPerformed
+
+        hardID = this.isInteger(InSetup1HardwareID.getText());
+        startZone = this.isInteger(InSetup1StartZone.getText());
+        if(hardID == -1)
+        {
+            LabSetup1Error.setVisible(true);
+            LabSetup1HardwareID.setForeground(Color.red);
+        }
+        else
+        {
+            LabSetup1HardwareID.setForeground(Color.black);
+        }
+        if(startZone == -1)
+        {
+            LabSetup1Error.setVisible(true);
+            LabSetup1StartZone.setForeground(Color.red);
+        }
+        else
+        {
+            LabSetup1StartZone.setForeground(Color.black);
+        }
+        if (hardID !=-1 && startZone !=-1)
+        {
+            LabSetup1Error.setVisible(false);
+            Setup1.setVisible(false);
+            Setup2.setVisible(true);
+        }
+        
+        LabSetup2Info.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+        Setup1.setVisible(false);
+        Setup2.setVisible(true);
+    }//GEN-LAST:event_ButSetup1NextActionPerformed
+
+//---------------------------------WelcomeDA-----------------------------------
+    private void CBWelcomeDATypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBWelcomeDATypeActionPerformed
+        /*int x = CT.getArray().size();
+        for (int n = 0; n<x; n++)
+        {
+            CBWelcomeDAType.addItem(CT.transferTicket(n).getTypeDA());
+        }*/
+    }//GEN-LAST:event_CBWelcomeDATypeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -378,6 +635,7 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JButton ButSetup2AddM;
     private javax.swing.JButton ButSetup2Back;
     private javax.swing.JButton ButSetup2Save;
+    private javax.swing.JComboBox CBWelcomeDAType;
     private javax.swing.JTextField InSetup1HardwareID;
     private javax.swing.JTextField InSetup1StartZone;
     private javax.swing.JTextField InSetup2PricePZ;
@@ -388,6 +646,7 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JLabel LabSetup1StartZone;
     private javax.swing.JLabel LabSetup1Title;
     private javax.swing.JLabel LabSetup2Error;
+    private javax.swing.JLabel LabSetup2ErrorList;
     private javax.swing.JLabel LabSetup2Info;
     private javax.swing.JLabel LabSetup2PricePZ;
     private javax.swing.JLabel LabSetup2TicketList;
@@ -395,10 +654,14 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JLabel LabSetup2Title;
     private javax.swing.JLabel LabSetup2TypeDA;
     private javax.swing.JLabel LabSetup2TypeENG;
+    private javax.swing.JLabel LabWelcomeDAInfo;
+    private javax.swing.JLabel LabWelcomeDAInstruct;
+    private javax.swing.JLabel LabWelcomeDATime;
+    private javax.swing.JLabel LabWelcomeDATitle;
     private javax.swing.JList ListSetup2TicketList;
     private javax.swing.JPanel Setup1;
     private javax.swing.JPanel Setup2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel WelcomeDA;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
