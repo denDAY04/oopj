@@ -15,12 +15,8 @@ private int ticketNumber=0;
 private int ticketsDay=0;
 private int inkLeft=1000;
 private int paperLeft=1000;
-private UserInterface UserInt;
 
-public Statistics (UserInterface UserInt)
-{
-this.UserInt=UserInt;
-}
+public Statistics (){}
      /**
      * Update all variables and arrays for a printed ticket .
      * @param t
@@ -49,22 +45,26 @@ this.UserInt=UserInt;
        /**
         * Show the total sales log.   .
         */
-	public void ShowLog()
+	public ArrayList<String> getLog()
 	{
+        ArrayList<String> tempArr = null;
         for(Ticket t : logStatsArray)
         {
-			UserInt.printLn(t.getTimeStamp() + "- fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
+			tempArr.add(t.getTimeStamp() + "- fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
         }
+        return tempArr;
     }
 	/**
         * Show the daily total sales log.   .
         */
-	public void ShowDayLog()
+	public ArrayList<String> getDayLog()
 	{
+        ArrayList<String> tempArr = null;
         for(Ticket t : dayStatsArray)
         {
-			UserInt.printLn(t.getTimeStamp() + "- fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
+			tempArr.add(t.getTimeStamp() + "- fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
         }
+        return tempArr;
     }
         /**
      * ink variable accessor method.

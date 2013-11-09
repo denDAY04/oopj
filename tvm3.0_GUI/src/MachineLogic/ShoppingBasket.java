@@ -34,7 +34,7 @@ public class ShoppingBasket
 public void addToCart(int ticketIndex,int amountZones,int ticketAmount) // adds a ticket to the shopping cart, using a ticket from created tickets as a template
         {
     
-        ShoppingBasket.add((new Ticket(cTickets.transferTicket(ticketIndex-1),ticketAmount,amountZones)));  
+        ShoppingBasket.add((new Ticket(cTickets.transferTicket(ticketIndex),ticketAmount,amountZones)));  
 
         }  
               

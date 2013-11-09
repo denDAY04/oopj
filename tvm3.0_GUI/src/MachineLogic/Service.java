@@ -60,7 +60,7 @@ public class Service
                         UI.printLn("Antal print tilbage : "+Math.min(ST.CheckPaper(),ST.CheckInk())+" stk.");
                         UI.printLn("Omsat for : "+ST.MoneyDay()+" kr.");
                         UI.printLn("Dagens salg:");
-                        ST.ShowDayLog();
+                        ST.getDayLog();
                         break;
                     case 2:  // 2 : Skift billetrulle
                         UI.printLn("Nulstiller papir variabel... OK.");                          
@@ -72,7 +72,7 @@ public class Service
                         break;
                     case 4: // 4 : Udskriv og nulstil salgs statestik
                         UI.printLn("Dagens salg:");
-                        ST.ShowDayLog();
+                        ST.getDayLog();
                         UI.printLn("Statistik for dagens salg.");
                         UI.printLn("Omsat for "+ST.MoneyDay()+" kr.");
                         UI.printLn("Solgt "+ST.TicketSoldDay()+" billetter"); 
@@ -96,7 +96,7 @@ public class Service
                         UI.printLn("Omsat for "+ST.MoneyTotal()+" kr.");
                         UI.printLn("Solgt "+ST.TicketSoldTotal()+" billetter"); 
                         UI.printLn("Total salg:");
-                        ST.ShowLog();
+                        ST.getLog();
                         break;
                     case 8: // 8 : Udskriv test billetter.
                         for (int n=1; n<CT.getArray().size()+1;n++)                                               // get the array of all possibel tickets
