@@ -24,6 +24,9 @@ public class tvmGUI extends javax.swing.JFrame {
         LabSetup1Error.setVisible(false);
         LabSetup2Error.setVisible(false);
         LabSetup2ErrorList.setVisible(false);
+        LabWelcomeDAError.setText(" ");
+        LabWelcomeDATypeError.setText(" ");
+        LabWelcomeDAZonesError.setText("");
         
         LabSetup2Time.setText(time.toString().substring(0,19));
         LabWelcomeDATime.setText(time.toString().substring(0,19));
@@ -70,10 +73,14 @@ public class tvmGUI extends javax.swing.JFrame {
         LabWelcomeDAInfo = new javax.swing.JLabel();
         LabWelcomeDATime = new javax.swing.JLabel();
         CBWelcomeDAType = new javax.swing.JComboBox();
+        LabWelcomeDAPricePZ = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        LabWelcomeDATypeError = new javax.swing.JLabel();
+        LabWelcomeDAZonesError = new javax.swing.JLabel();
+        LabWelcomeDAError = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(820, 630));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         getContentPane().setLayout(new java.awt.CardLayout());
 
         LabSetup1Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
@@ -302,12 +309,31 @@ public class tvmGUI extends javax.swing.JFrame {
         LabWelcomeDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabWelcomeDATime.setText(" ");
 
+        CBWelcomeDAType.setMaximumRowCount(10);
         CBWelcomeDAType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vælg billettype..." }));
         CBWelcomeDAType.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CBWelcomeDATypeActionPerformed(evt);
             }
         });
+
+        LabWelcomeDAPricePZ.setText(" ");
+
+        jComboBox1.setMaximumRowCount(10);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vælg antal zoner...", "2-zoner", "3-zoner", "4-zoner", "5-zoner", "6-zoner", "7-zoner", "8-zoner", "Alle-zoner" }));
+
+        LabWelcomeDATypeError.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        LabWelcomeDATypeError.setForeground(new java.awt.Color(255, 0, 0));
+        LabWelcomeDATypeError.setText(" ");
+
+        LabWelcomeDAZonesError.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        LabWelcomeDAZonesError.setForeground(new java.awt.Color(255, 0, 0));
+        LabWelcomeDAZonesError.setText(" ");
+
+        LabWelcomeDAError.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        LabWelcomeDAError.setForeground(new java.awt.Color(255, 0, 0));
+        LabWelcomeDAError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabWelcomeDAError.setText(" ");
 
         javax.swing.GroupLayout WelcomeDALayout = new javax.swing.GroupLayout(WelcomeDA);
         WelcomeDA.setLayout(WelcomeDALayout);
@@ -316,18 +342,37 @@ public class tvmGUI extends javax.swing.JFrame {
             .addGroup(WelcomeDALayout.createSequentialGroup()
                 .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(WelcomeDALayout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabWelcomeDAInstruct)
-                            .addComponent(LabWelcomeDATitle)
-                            .addComponent(CBWelcomeDAType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 273, Short.MAX_VALUE))
-                    .addGroup(WelcomeDALayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(LabWelcomeDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LabWelcomeDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(LabWelcomeDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(WelcomeDALayout.createSequentialGroup()
+                        .addGap(63, 63, 63)
+                        .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(WelcomeDALayout.createSequentialGroup()
+                                .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabWelcomeDAInstruct)
+                                    .addComponent(LabWelcomeDATitle))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WelcomeDALayout.createSequentialGroup()
+                                .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(WelcomeDALayout.createSequentialGroup()
+                                        .addComponent(CBWelcomeDAType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(LabWelcomeDAPricePZ, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE))
+                                    .addGroup(WelcomeDALayout.createSequentialGroup()
+                                        .addComponent(LabWelcomeDATypeError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addGap(178, 178, 178)))
+                                .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabWelcomeDAZonesError, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(320, 320, 320)))))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WelcomeDALayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(LabWelcomeDAError, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(270, 270, 270))
         );
         WelcomeDALayout.setVerticalGroup(
             WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -340,9 +385,18 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(LabWelcomeDATitle)
                 .addGap(18, 18, 18)
                 .addComponent(LabWelcomeDAInstruct)
-                .addGap(42, 42, 42)
-                .addComponent(CBWelcomeDAType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(410, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabWelcomeDATypeError)
+                    .addComponent(LabWelcomeDAZonesError))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(CBWelcomeDAType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabWelcomeDAPricePZ)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 156, Short.MAX_VALUE)
+                .addComponent(LabWelcomeDAError)
+                .addContainerGap(240, Short.MAX_VALUE))
         );
 
         getContentPane().add(WelcomeDA, "card4");
@@ -589,11 +643,29 @@ public class tvmGUI extends javax.swing.JFrame {
 
 //---------------------------------WelcomeDA-----------------------------------
     private void CBWelcomeDATypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBWelcomeDATypeActionPerformed
-        /*int x = CT.getArray().size();
-        for (int n = 0; n<x; n++)
+        //Checking which item is selected and setting price accordingly
+        int n = CBWelcomeDAType.getItemCount()-1;
+        for (int m = 0; m<n; m++)
         {
-            CBWelcomeDAType.addItem(CT.transferTicket(n).getTypeDA());
-        }*/
+            String type = CT.transferTicket(m).getTypeDA();
+            if (type.equals(CBWelcomeDAType.getSelectedItem().toString()))
+            {
+                int PricePZ = CT.transferTicket(m).getPricePerZone();
+                LabWelcomeDAPricePZ.setText("Pris pr. zone: "+PricePZ+"DKK");
+            }
+        }
+        if (CBWelcomeDAType.getSelectedItem().toString().equals("Vælg billettype..."))
+        {
+            LabWelcomeDAError.setText("Fejl - Et eller flere valg er ugyldige");
+            LabWelcomeDATypeError.setText("Ugyldigt valg");
+            LabWelcomeDAPricePZ.setVisible(false);
+        }
+        else
+        {
+            LabWelcomeDAError.setText(" ");
+            LabWelcomeDATypeError.setText(" ");
+            LabWelcomeDAPricePZ.setVisible(true);
+        }
     }//GEN-LAST:event_CBWelcomeDATypeActionPerformed
 
     /**
@@ -654,14 +726,19 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JLabel LabSetup2Title;
     private javax.swing.JLabel LabSetup2TypeDA;
     private javax.swing.JLabel LabSetup2TypeENG;
+    private javax.swing.JLabel LabWelcomeDAError;
     private javax.swing.JLabel LabWelcomeDAInfo;
     private javax.swing.JLabel LabWelcomeDAInstruct;
+    private javax.swing.JLabel LabWelcomeDAPricePZ;
     private javax.swing.JLabel LabWelcomeDATime;
     private javax.swing.JLabel LabWelcomeDATitle;
+    private javax.swing.JLabel LabWelcomeDATypeError;
+    private javax.swing.JLabel LabWelcomeDAZonesError;
     private javax.swing.JList ListSetup2TicketList;
     private javax.swing.JPanel Setup1;
     private javax.swing.JPanel Setup2;
     private javax.swing.JPanel WelcomeDA;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }
