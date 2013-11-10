@@ -21,10 +21,11 @@ public class tvmGUI extends javax.swing.JFrame {
         this.ListContent = new ArrayList<>();
         Date time = new Date();
         initComponents();       
-        //Initialize labels to be invisible
+        // Initialize labels to be invisible
         LabSetup1Error.setVisible(false);
         LabSetup2Error.setVisible(false);
         LabSetup2ErrorList.setVisible(false);
+        // Initialize error labels to be empty/single space
         LabWelcomeDAError.setText(" ");
         LabWelcomeDATypeError.setText(" ");
         LabWelcomeDAZonesError.setText(" ");
@@ -32,6 +33,7 @@ public class tvmGUI extends javax.swing.JFrame {
         
         LabSetup2Time.setText(time.toString().substring(0,19));
         LabWelcomeDATime.setText(time.toString().substring(0,19));
+        LabCartDATime.setText(time.toString().substring(0,19));
     }
 
     /**
@@ -87,6 +89,19 @@ public class tvmGUI extends javax.swing.JFrame {
         ButWelcomeDANext = new javax.swing.JButton();
         ButWelcomeDAHelp = new javax.swing.JButton();
         ButWelcomeDALang = new javax.swing.JButton();
+        CartDA = new javax.swing.JPanel();
+        LabCartDAInfo = new javax.swing.JLabel();
+        LabCartDATime = new javax.swing.JLabel();
+        LabCartDATitle = new javax.swing.JLabel();
+        LabCartDAInstruct = new javax.swing.JLabel();
+        LabCartDATotal = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        ButCartDAClear = new javax.swing.JButton();
+        ButCartDARemove = new javax.swing.JButton();
+        ButCartDAAddM = new javax.swing.JButton();
+        ButCartDAPay = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        ListCartDATicketList = new javax.swing.JList();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(820, 630));
@@ -445,7 +460,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(LabWelcomeDATitle)
                 .addGap(18, 18, 18)
                 .addComponent(LabWelcomeDAInstruct)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabWelcomeDATypeError)
                     .addComponent(LabWelcomeDAZonesError)
@@ -456,7 +471,7 @@ public class tvmGUI extends javax.swing.JFrame {
                     .addComponent(LabWelcomeDAPricePZ)
                     .addComponent(CBWelcomeDAZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CBWelcomeDAAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 153, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
                 .addComponent(LabWelcomeDAError)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(LabWelcomeDATempPrice)
@@ -471,6 +486,128 @@ public class tvmGUI extends javax.swing.JFrame {
         );
 
         getContentPane().add(WelcomeDA, "card4");
+
+        CartDA.setPreferredSize(new java.awt.Dimension(800, 600));
+
+        LabCartDAInfo.setText(" ");
+
+        LabCartDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabCartDATime.setText(" ");
+
+        LabCartDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LabCartDATitle.setText("Indkøbskurv");
+
+        LabCartDAInstruct.setText("Herunder kan du se dine valgte billetter. Du kan vælge at slette billetter, tilføje flere, rydde alt, eller gå til betaling. ");
+
+        LabCartDATotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        LabCartDATotal.setText("Total pris: ");
+
+        jButton1.setText("?");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        ButCartDAClear.setText("Ryd alt");
+        ButCartDAClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCartDAClearActionPerformed(evt);
+            }
+        });
+
+        ButCartDARemove.setText("Fjern");
+        ButCartDARemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCartDARemoveActionPerformed(evt);
+            }
+        });
+
+        ButCartDAAddM.setText("Tilføj flere");
+        ButCartDAAddM.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCartDAAddMActionPerformed(evt);
+            }
+        });
+
+        ButCartDAPay.setText("Gå til betaling");
+        ButCartDAPay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCartDAPayActionPerformed(evt);
+            }
+        });
+
+        ListCartDATicketList.setFont(new java.awt.Font("Consolas", 0, 15)); // NOI18N
+        jScrollPane2.setViewportView(ListCartDATicketList);
+
+        javax.swing.GroupLayout CartDALayout = new javax.swing.GroupLayout(CartDA);
+        CartDA.setLayout(CartDALayout);
+        CartDALayout.setHorizontalGroup(
+            CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CartDALayout.createSequentialGroup()
+                .addGroup(CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CartDALayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LabCartDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(LabCartDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(CartDALayout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addGroup(CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(LabCartDATotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(CartDALayout.createSequentialGroup()
+                                .addComponent(LabCartDATitle, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(270, 270, 270)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+            .addGroup(CartDALayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButCartDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(84, 84, 84)
+                .addComponent(ButCartDARemove, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(82, 82, 82)
+                .addComponent(ButCartDAAddM, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(71, 71, 71)
+                .addComponent(ButCartDAPay, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(23, 23, 23))
+            .addGroup(CartDALayout.createSequentialGroup()
+                .addGroup(CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(CartDALayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(LabCartDAInstruct, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, CartDALayout.createSequentialGroup()
+                        .addGap(115, 115, 115)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(114, Short.MAX_VALUE))
+        );
+        CartDALayout.setVerticalGroup(
+            CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CartDALayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabCartDAInfo)
+                    .addComponent(LabCartDATime))
+                .addGap(51, 51, 51)
+                .addComponent(LabCartDATitle)
+                .addGap(18, 18, 18)
+                .addComponent(LabCartDAInstruct)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(27, 27, 27)
+                .addComponent(LabCartDATotal)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addGroup(CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButCartDAPay, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButCartDAAddM, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButCartDARemove, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButCartDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20))
+        );
+
+        getContentPane().add(CartDA, "card5");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -549,6 +686,34 @@ public class tvmGUI extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Formate a string to be 15 characters long, by inserting spaces.
+     * @param item String to be formated.
+     * @return The formated string.
+     */
+    public String fitToListCart(String item) {
+        while (item.length() < 15) {
+            item += " ";
+        }
+        return item;
+    }
+    
+    /**
+     * Resets the combo boxes in the WelcomeDA window, and set the 
+     * error labels blank.
+     */
+    public void resetSelectionScreen() {
+        // Reset Combo boxes
+        CBWelcomeDAType.setSelectedIndex(0);
+        CBWelcomeDAZone.setSelectedIndex(0);
+        CBWelcomeDAAmount.setSelectedIndex(0);
+        // Set error labes blank
+        LabWelcomeDAAmountError.setText(" ");
+        LabWelcomeDAError.setText(" ");
+        LabWelcomeDATypeError.setText(" ");
+        LabWelcomeDAZonesError.setText(" ");
+    }
+    
     //Variables
     private int hardID;
     private int startZone;
@@ -556,15 +721,16 @@ public class tvmGUI extends javax.swing.JFrame {
     private Statistics ST = new Statistics();       
     private ShoppingBasket SB = new ShoppingBasket(CT, ST);
     private ArrayList<String> ListContent;
+    private ArrayList<String> CartContent = new ArrayList<String>();
     private int amountZones = 0;
     private int amountTickets = 0;
     private int TypePricePZ = 0;
 
 //---------------------------------SETUP2--------------------------------------
     private void ButSetup2AddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2AddMActionPerformed
-        String TypeDA = InSetup2TypeDA.getText();
-        String TypeENG = InSetup2TypeENG.getText();
-        int PricePZ = this.isInteger(InSetup2PricePZ.getText());
+        String TypeDA = InSetup2TypeDA.getText().trim();
+        String TypeENG = InSetup2TypeENG.getText().trim();
+        int PricePZ = this.isInteger(InSetup2PricePZ.getText().trim());
         checkFieldsSetup2(PricePZ, TypeDA, TypeENG);
         LabSetup2ErrorList.setVisible(false);
         if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
@@ -580,8 +746,8 @@ public class tvmGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ButSetup2AddMActionPerformed
 
     private void ButSetup2SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2SaveActionPerformed
-        String TypeDA = InSetup2TypeDA.getText();
-        String TypeENG = InSetup2TypeENG.getText();
+        String TypeDA = InSetup2TypeDA.getText().trim();
+        String TypeENG = InSetup2TypeENG.getText().trim();
         int PricePZ = this.isInteger(InSetup2PricePZ.getText());
         if (ListSetup2TicketList.getModel().getSize() == 0)
         {
@@ -749,7 +915,7 @@ public class tvmGUI extends javax.swing.JFrame {
             LabWelcomeDAAmountError.setText("Ugyldigt valg");
             LabWelcomeDATotalPrice.setText("Total pris: ");
         } else { 
-            amountTickets =  Integer.parseInt(CBWelcomeDAAmount.getSelectedItem().toString().substring(0, 1));
+            amountTickets = Integer.parseInt(CBWelcomeDAAmount.getSelectedItem().toString().substring(0, 1));
             LabWelcomeDAError.setText(" ");
             LabWelcomeDAAmountError.setText(" ");
         }
@@ -784,16 +950,101 @@ public class tvmGUI extends javax.swing.JFrame {
             }
         }       
         SB.addToCart(ticketIndex, amountZones, startZone);
+        
+        // add selected ticket to soppingcart
+        String toListAmount = amountTickets+" stk.";
+        String toListType = CT.transferTicket(ticketIndex).getTypeDA();
+        String toListZones = amountZones+"-zoner";
+        String toListSinglePrice = CT.transferTicket(ticketIndex).getPricePerZone()+" DKK";
+        String toListsubTotal = TypePricePZ*amountZones+" DKK";
+        // Separate variable to calculate total price
+        int subTotalCalc = TypePricePZ*amountZones;
+        
+        //Convert type length to maximum 8 characters
+
+        if(toListType.length() > 9) {
+            toListType = toListType.substring(0, 8);
+        }
+        //Fit to list design with 20 characters in total
+        toListAmount = fitToListCart(toListAmount);
+        toListType = fitToListCart(toListType);
+        toListZones = fitToListCart(toListZones);
+        toListSinglePrice = fitToListCart(toListSinglePrice);
+        
+        // Add selected ticket to an array and display the array on a list on next window
+        CartContent.add(toListAmount+toListType+toListZones+toListSinglePrice+toListsubTotal);
+        ListCartDATicketList.setListData(CartContent.toArray());
+        
+        // Show next window
+        WelcomeDA.setVisible(false);
+        CartDA.setVisible(true);
+        LabCartDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+        LabCartDATotal.setText("Total pris: "+SB.getTotalPrice()+" DKK");
     }//GEN-LAST:event_ButWelcomeDANextActionPerformed
 
     private void ButWelcomeDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButWelcomeDAHelpActionPerformed
         JOptionPane.showMessageDialog(this, 
-   "\nFor hjælp ring xx xx xx xx"
-  + "\nFor teknisk assistance ring xx xx xx xx"
-  + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
-  + "\n"
-  + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",-1);
+            "\nFor hjælp ring xx xx xx xx"
+           + "\nFor teknisk assistance ring xx xx xx xx"
+           + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
+           + "\n"
+           + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",
+        -1);
     }//GEN-LAST:event_ButWelcomeDAHelpActionPerformed
+
+//---------------------------------CartDA-----------------------------------
+    private void ButCartDAPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDAPayActionPerformed
+        // If no items in list, abort method call
+        if (CartContent.isEmpty()) {
+            return;
+        }
+        
+        // INSERT CODE FOR ENABLING NEXT WINDOW
+    }//GEN-LAST:event_ButCartDAPayActionPerformed
+
+    private void ButCartDAAddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDAAddMActionPerformed
+        // Reset selectionscreen's inputs
+        resetSelectionScreen();
+        // Switch to selection window
+        WelcomeDA.setVisible(true);
+        CartDA.setVisible(false);
+    }//GEN-LAST:event_ButCartDAAddMActionPerformed
+
+    private void ButCartDARemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDARemoveActionPerformed
+        int TickToDelete = ListCartDATicketList.getSelectedIndex();
+        if (TickToDelete == -1) {        // If no item is selected, escape method call.
+            return;
+        }
+        // Delete string from list-array and Ticket from shopping-array
+        CartContent.remove(TickToDelete);
+        SB.removeTicket(TickToDelete);
+        // Remake list after deletion
+        ListCartDATicketList.setListData(CartContent.toArray());
+        // Recalculate total price
+        LabCartDATotal.setText("Total pris: "+SB.getTotalPrice()+" DKK");
+    }//GEN-LAST:event_ButCartDARemoveActionPerformed
+
+    private void ButCartDAClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDAClearActionPerformed
+        // Clear content of cart-array, list-array, and list
+        ListCartDATicketList.removeAll();
+        CartContent.clear();
+        SB.clearCart();
+        // Reset selectionscreen's inputs
+        resetSelectionScreen();
+        // Show welcome screen
+        WelcomeDA.setVisible(true);
+        CartDA.setVisible(false);
+    }//GEN-LAST:event_ButCartDAClearActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        JOptionPane.showMessageDialog(this, 
+            "\nFor hjælp ring xx xx xx xx"
+           + "\nFor teknisk assistance ring xx xx xx xx"
+           + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
+           + "\n"
+           + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",
+        -1);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     
     
@@ -832,6 +1083,10 @@ public class tvmGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButCartDAAddM;
+    private javax.swing.JButton ButCartDAClear;
+    private javax.swing.JButton ButCartDAPay;
+    private javax.swing.JButton ButCartDARemove;
     private javax.swing.JButton ButSetup1Next;
     private javax.swing.JButton ButSetup2AddM;
     private javax.swing.JButton ButSetup2Back;
@@ -842,11 +1097,17 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox CBWelcomeDAAmount;
     private javax.swing.JComboBox CBWelcomeDAType;
     private javax.swing.JComboBox CBWelcomeDAZone;
+    private javax.swing.JPanel CartDA;
     private javax.swing.JTextField InSetup1HardwareID;
     private javax.swing.JTextField InSetup1StartZone;
     private javax.swing.JTextField InSetup2PricePZ;
     private javax.swing.JTextField InSetup2TypeDA;
     private javax.swing.JTextField InSetup2TypeENG;
+    private javax.swing.JLabel LabCartDAInfo;
+    private javax.swing.JLabel LabCartDAInstruct;
+    private javax.swing.JLabel LabCartDATime;
+    private javax.swing.JLabel LabCartDATitle;
+    private javax.swing.JLabel LabCartDATotal;
     private javax.swing.JLabel LabSetup1Error;
     private javax.swing.JLabel LabSetup1HardwareID;
     private javax.swing.JLabel LabSetup1StartZone;
@@ -871,10 +1132,13 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JLabel LabWelcomeDATotalPrice;
     private javax.swing.JLabel LabWelcomeDATypeError;
     private javax.swing.JLabel LabWelcomeDAZonesError;
+    private javax.swing.JList ListCartDATicketList;
     private javax.swing.JList ListSetup2TicketList;
     private javax.swing.JPanel Setup1;
     private javax.swing.JPanel Setup2;
     private javax.swing.JPanel WelcomeDA;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }

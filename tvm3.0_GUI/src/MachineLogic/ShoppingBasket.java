@@ -37,29 +37,37 @@ public void addToCart(int ticketIndex,int amountZones,int ticketAmount) // adds 
         ShoppingBasket.add((new Ticket(cTickets.transferTicket(ticketIndex),ticketAmount,amountZones)));  
 
         }  
-              
-      
-     public boolean printTicket(int index,int language,int hardwareID)  // prints a ticket at location index in the ShoppingBasket array.
-       {
-             boolean printok;            
-             ShoppingBasket.get(index).setTimeStamp();              // timestap the ticket
-             String Hardwarestring = intToFourChar(hardwareID);
-             int subtotal =  ShoppingBasket.get(index).getPricePerZone()* ShoppingBasket.get(index).getZones()* ShoppingBasket.get(index).getAmountTickets();   // calculate the value to be printed on the ticket.
-             String typeStr =  convertTo8Lenght( ShoppingBasket.get(index).getTypeDA());             // makes a 8 char long string of the name, to fit on the ticket.
-             String typeENGStr =  convertTo8Lenght( ShoppingBasket.get(index).getTypeENG());
-             String startZoneStr = intToFourChar( ShoppingBasket.get(index).getStartZone());         // makes a 4 char long string of the startzone, to fit on the ticket.
-             String zonesStr = intToFourChar( ShoppingBasket.get(index).getZones());
-             String amountTicketsStr = intToFourChar( ShoppingBasket.get(index).getAmountTickets());
-             String totalPriceStr =  convertTo8Lenght(Integer.toString(subtotal));
-             String timeStamp =  ShoppingBasket.get(index).getTimeStamp();
-             String ticketID = Hardwarestring+">>"+convertTo8Lenght0(Stat.getTicketNumber());    // Prints unique codestring on ticket containig machine ID and unique ticket number.
-             printok = Print.print(typeStr,typeENGStr,startZoneStr,zonesStr,amountTicketsStr,totalPriceStr,timeStamp,ticketID,language);    // prints the ticket and checks for errors.
-             if (printok == false) return false;
-             else
-             {
-             return true;
-             }}
-         
+
+/**
+ * Remove a ticket from the array of tickets that are in the cart.
+ * @param index The index integer of the ticket to be removed.
+ */
+public void removeTicket(int index) {
+    ShoppingBasket.remove(index);
+} 
+
+
+public boolean printTicket(int index,int language,int hardwareID)  // prints a ticket at location index in the ShoppingBasket array.
+  {
+        boolean printok;            
+        ShoppingBasket.get(index).setTimeStamp();              // timestap the ticket
+        String Hardwarestring = intToFourChar(hardwareID);
+        int subtotal =  ShoppingBasket.get(index).getPricePerZone()* ShoppingBasket.get(index).getZones()* ShoppingBasket.get(index).getAmountTickets();   // calculate the value to be printed on the ticket.
+        String typeStr =  convertTo8Lenght( ShoppingBasket.get(index).getTypeDA());             // makes a 8 char long string of the name, to fit on the ticket.
+        String typeENGStr =  convertTo8Lenght( ShoppingBasket.get(index).getTypeENG());
+        String startZoneStr = intToFourChar( ShoppingBasket.get(index).getStartZone());         // makes a 4 char long string of the startzone, to fit on the ticket.
+        String zonesStr = intToFourChar( ShoppingBasket.get(index).getZones());
+        String amountTicketsStr = intToFourChar( ShoppingBasket.get(index).getAmountTickets());
+        String totalPriceStr =  convertTo8Lenght(Integer.toString(subtotal));
+        String timeStamp =  ShoppingBasket.get(index).getTimeStamp();
+        String ticketID = Hardwarestring+">>"+convertTo8Lenght0(Stat.getTicketNumber());    // Prints unique codestring on ticket containig machine ID and unique ticket number.
+        printok = Print.print(typeStr,typeENGStr,startZoneStr,zonesStr,amountTicketsStr,totalPriceStr,timeStamp,ticketID,language);    // prints the ticket and checks for errors.
+        if (printok == false) return false;
+        else
+        {
+        return true;
+        }}
+
        
 
         /**
