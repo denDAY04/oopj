@@ -9,133 +9,14 @@ public class paySMS extends Payment
     private String confirmSMS;
     private String cancelSMS;
     
-    public paySMS(UserInterface UI)
+    public paySMS()
     {
-        super(UI);
+        
     }
     
-    @Override
-    public boolean MakePayment(int totalPrice, int language)
+    
+    public boolean MakePaymentBool()
     {
-        int canclePayment = 9999;       // input required to cancel payment
-        if (language == 1)
-        {
-            UI.printLn("At betale: "+totalPrice+" DKK");
-            UI.printLn("Venligst indtast dit telefonnummer.");
-            UI.printLn("Tast 9999 for at annullere købet.");
-            
-            cellNumber = UI.getInt(); // check for invalid value
-            phoneNumber = ((Integer) cellNumber).toString();
-            
-            if (cellNumber==canclePayment) 
-            {   //cancel purchase
-                UI.printLn("Køb afbrudt.");
-                return false;
-            }
-
-            while (phoneNumber.length() != 8)
-            {
-                UI.printLn("Fejl: Ikke et gyldigt telefonnummer.");
-                UI.printLn("Prøv igen.");
-                cellNumber = UI.getInt();
-                phoneNumber = ((Integer) cellNumber).toString();
-            }
-            
-            UI.printLn("Sender ordrebekræftelse...");
-            
-            try 
-            {
-                Thread.sleep(4000);
-            }
-            catch(InterruptedException ex) 
-            {
-                Thread.currentThread().interrupt();
-            }
-            
-            UI.printLn("##################ORDREBEKRÆFTELSE##################");
-            UI.printLn("Besvar med teksten JA, for at bekræfte køb af billet");
-            UI.printLn("eller besvar med teksten NEJ, for at annulere købet.");
-            
-            confirmationSMS = UI.getString().toUpperCase();
-            confirmSMS = "JA";
-            cancelSMS = "NEJ";
-            
-            while (!(confirmSMS.equals(confirmationSMS) || cancelSMS.equals(confirmationSMS)))
-            {
-                UI.printLn("Fejl: Ikke et gyldigt svar.");
-                UI.printLn("Besvar beskeden med enten JA eller NEJ.");
-                confirmationSMS = UI.getString();
-            }
-            
-            if (confirmationSMS.equals(confirmSMS))
-            {
-                UI.printLn("Betaling gennemført!");                 
-            }
-            else if (confirmationSMS.equals(cancelSMS))
-            {
-                UI.printLn("Køb afbrudt.");
-                return false;
-            }
-        }
-        else if (language == 2)
-        {
-            UI.printLn("Payment required: "+totalPrice+" DKK");
-            UI.printLn("Please enter your phonenumber.");
-            UI.printLn("Press 9999 to cancel the purchase.");
-            
-            cellNumber = UI.getInt(); // check for invalid value
-            phoneNumber = ((Integer) cellNumber).toString();
-            
-            if (cellNumber==canclePayment) 
-            {   //cancel purchase
-                UI.printLn("Purchase canceled.");
-                return false;
-            }
-
-            while (phoneNumber.length() != 8)
-            {
-                UI.printLn("Error: Not a valid phonenumber.");
-                UI.printLn("Try again.");
-                cellNumber = UI.getInt();
-                phoneNumber = ((Integer) cellNumber).toString();
-            }
-            
-            UI.printLn("Sending orderconfirmation...");
-            
-            try 
-            {
-                Thread.sleep(4000);
-            }
-            catch(InterruptedException ex) 
-            {
-                Thread.currentThread().interrupt();
-            }
-            
-            UI.printLn("####################ORDERCONFIRMATION###################");
-            UI.printLn("Respond with the text YES, to confirm purchase of ticket");
-            UI.printLn("or respond with the text NO, to cancel purchase.");
-            
-            confirmationSMS = UI.getString().toUpperCase();
-            confirmSMS = "YES";
-            cancelSMS = "NO";
-            
-            while (!(confirmSMS.equals(confirmationSMS) || cancelSMS.equals(confirmationSMS)))
-            {
-                UI.printLn("Error: Not a valid response.");
-                UI.printLn("Respond with either YES or NO.");
-                confirmationSMS = UI.getString();
-            }
-            
-            if (confirmationSMS.equals(confirmSMS))
-            {
-                UI.printLn("Purchase completed!");
-            }
-            else if (confirmationSMS.equals(cancelSMS))
-            {
-                UI.printLn("Your purchase has been canceled.");
-                return false;
-            }
-        }
-        return true;
+        return false;
     }
 }
