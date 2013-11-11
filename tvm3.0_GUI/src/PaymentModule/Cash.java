@@ -4,6 +4,7 @@ import Interface.UserInterface;
 public class Cash extends Payment
 {
     int moneyNeeded = 0;
+    int totalInsertedMoney = 0;
     
     /**
      * Constructor. Stores the total price in a field variable.
@@ -28,8 +29,17 @@ public class Cash extends Payment
      * @return The new value of the money needed to be paid.
      */
     public int MakePaymentInt(int insertedmoney) {
+        totalInsertedMoney += insertedmoney; 
         moneyNeeded -= insertedmoney;
         return moneyNeeded;
+    }
+    
+    /**
+     * Get the total amount of money inserted.
+     * @return Integer.
+     */
+    public int getInsertedMoney() {
+        return totalInsertedMoney;
     }
 }
     

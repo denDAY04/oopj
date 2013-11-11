@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -37,6 +38,7 @@ public class tvmGUI extends javax.swing.JFrame {
         LabCartDATime.setText(time.toString().substring(0,19));
         LabPayDATime.setText(time.toString().substring(0,19));
         LabCashDATime.setText(time.toString().substring(0,19));
+        LabOutOfOrderTime.setText(time.toString().substring(0,19));
     }
 
     /**
@@ -133,6 +135,10 @@ public class tvmGUI extends javax.swing.JFrame {
         ButCashDAHelp = new javax.swing.JButton();
         ButCashDAClear = new javax.swing.JButton();
         ButCashDABack = new javax.swing.JButton();
+        OutOfOrder = new javax.swing.JPanel();
+        LabOutOfOrderTitle = new javax.swing.JLabel();
+        LabOutOfOrderInfo = new javax.swing.JLabel();
+        LabOutOfOrderTime = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(820, 630));
@@ -784,9 +790,8 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
                 .addGroup(PayDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButPayDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addGroup(PayDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(ButPayDABack, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                        .addComponent(ButPayDAClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(ButPayDABack, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
+                    .addComponent(ButPayDAClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -906,6 +911,43 @@ public class tvmGUI extends javax.swing.JFrame {
 
         getContentPane().add(CashDA, "card7");
 
+        LabOutOfOrderTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LabOutOfOrderTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabOutOfOrderTitle.setText("Ude af drift / Out of order");
+
+        LabOutOfOrderInfo.setText(" ");
+
+        LabOutOfOrderTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabOutOfOrderTime.setText("  ");
+
+        javax.swing.GroupLayout OutOfOrderLayout = new javax.swing.GroupLayout(OutOfOrder);
+        OutOfOrder.setLayout(OutOfOrderLayout);
+        OutOfOrderLayout.setHorizontalGroup(
+            OutOfOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OutOfOrderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(OutOfOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(LabOutOfOrderTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(OutOfOrderLayout.createSequentialGroup()
+                        .addComponent(LabOutOfOrderInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
+                        .addComponent(LabOutOfOrderTime, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        OutOfOrderLayout.setVerticalGroup(
+            OutOfOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(OutOfOrderLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(OutOfOrderLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabOutOfOrderInfo)
+                    .addComponent(LabOutOfOrderTime))
+                .addGap(231, 231, 231)
+                .addComponent(LabOutOfOrderTitle)
+                .addContainerGap(315, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(OutOfOrder, "card8");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
     //Variables
@@ -1011,6 +1053,40 @@ public class tvmGUI extends javax.swing.JFrame {
         LabWelcomeDAZonesError.setText(" ");
     }
     
+    /**
+     * Prints the tickets in the shopping cart and updates statistics. 
+     * If error arises during printing a dialog window is opened.
+     * @param window The JPanel from which the call is made. Is hidden if 
+     * a printer error is encountered.
+     */
+    public void printTickets(JPanel window) {
+        //Print all tickets in the basket
+        for (int index=0;index<(SB.getCart().size());index++) {
+            if (SB.printTicket(index,language,hardID)== false){      //if printing failed
+                // Show dialog box with error message
+                JOptionPane.showMessageDialog(this, 
+                    "\nFejl"
+                   + "\nDer opstod en fejl ved printning af en billet."
+                   + "\nKontakt tekniker på tlf. xx xx xx xx og"
+                   + "\nhusk dine returpenge."
+                   + "\nVi beklager ulegligheden."
+                   + "\n"
+                   + "\nBlueJ Trakfikselskab","Teknisk fejl",
+                JOptionPane.ERROR_MESSAGE);
+                // Set info label and out-of-order variable
+                LabOutOfOrderInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+                outOfOrder = true;
+                // Go to out-of-order window
+                window.setVisible(false);
+                OutOfOrder.setVisible(true);
+                break;
+            } else {
+                // Send the ticket to the statistics module
+                ST.LogSale(SB.getCart().get(index));
+            }      
+        }
+    }
+    
     //Variables
     private int hardID;
     private int startZone;
@@ -1018,11 +1094,15 @@ public class tvmGUI extends javax.swing.JFrame {
     private Statistics ST = new Statistics();       
     private ShoppingBasket SB = new ShoppingBasket(CT, ST);
     private Cash CH = null;
+    private CreditCard CC = null;
+    private paySMS SMS = null;
     private ArrayList<String> ListContent;
     private ArrayList<String> CartContent = new ArrayList<String>();
     private int amountZones = 0;
     private int amountTickets = 0;
-    private int TypePricePZ = 0;
+    private int typePricePZ = 0;
+    private int language = 1;   //1 danish; 2 english
+    private boolean outOfOrder = false;
 
 //---------------------------------SETUP2--------------------------------------
     private void ButSetup2AddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2AddMActionPerformed
@@ -1145,8 +1225,8 @@ public class tvmGUI extends javax.swing.JFrame {
             String type = CT.transferTicket(m).getTypeDA();
             if (type.equals(CBWelcomeDAType.getSelectedItem().toString()))
             {
-                TypePricePZ = CT.transferTicket(m).getPricePerZone();
-                LabWelcomeDAPricePZ.setText("Pris pr. zone: "+TypePricePZ+" DKK");
+                typePricePZ = CT.transferTicket(m).getPricePerZone();
+                LabWelcomeDAPricePZ.setText("Pris pr. zone: "+typePricePZ+" DKK");
             }
         }
         if (CBWelcomeDAType.getSelectedItem().toString().equals("Vælg billettype..."))
@@ -1166,12 +1246,12 @@ public class tvmGUI extends javax.swing.JFrame {
                 !CBWelcomeDAZone.getSelectedItem().toString().equals("Vælg antal zoner...") &&
                 !CBWelcomeDAAmount.getSelectedItem().toString().equals("Vælg antal billetter...")
             ) {
-                LabWelcomeDATotalPrice.setText("Total pris: "+(TypePricePZ*amountZones*amountTickets)+" DKK");
+                LabWelcomeDATotalPrice.setText("Total pris: "+(typePricePZ*amountZones*amountTickets)+" DKK");
             }
             if (!CBWelcomeDAType.getSelectedItem().toString().equals("Vælg billettype...") &&
                 !CBWelcomeDAZone.getSelectedItem().toString().equals("Vælg antal zoner...") 
             ) {
-                LabWelcomeDATempPrice.setText("Pris pr. billet: "+(TypePricePZ*amountZones)+" DKK");
+                LabWelcomeDATempPrice.setText("Pris pr. billet: "+(typePricePZ*amountZones)+" DKK");
             }
         }
     }//GEN-LAST:event_CBWelcomeDATypeActionPerformed
@@ -1194,16 +1274,16 @@ public class tvmGUI extends javax.swing.JFrame {
                 !CBWelcomeDAZone.getSelectedItem().toString().equals("Vælg antal zoner...") &&
                 !CBWelcomeDAAmount.getSelectedItem().toString().equals("Vælg antal billetter...")
             ) {
-                LabWelcomeDATotalPrice.setText("Total pris: "+(TypePricePZ*amountZones*amountTickets)+" DKK");
+                LabWelcomeDATotalPrice.setText("Total pris: "+(typePricePZ*amountZones*amountTickets)+" DKK");
             }
             if (!CBWelcomeDAType.getSelectedItem().toString().equals("Vælg billettype...") &&
                 !CBWelcomeDAZone.getSelectedItem().toString().equals("Vælg antal zoner...") 
             ) {
-                LabWelcomeDATempPrice.setText("Pris pr. billet: "+(TypePricePZ*amountZones)+" DKK");
+                LabWelcomeDATempPrice.setText("Pris pr. billet: "+(typePricePZ*amountZones)+" DKK");
             }
         }
         if (!CBWelcomeDAType.getSelectedItem().toString().equals("Vælg billettype...") && !CBWelcomeDAZone.getSelectedItem().toString().equals("Vælg antal zoner...")) {
-            LabWelcomeDATempPrice.setText("Pris pr. billet: "+(TypePricePZ*amountZones)+" DKK");
+            LabWelcomeDATempPrice.setText("Pris pr. billet: "+(typePricePZ*amountZones)+" DKK");
         }      
     }//GEN-LAST:event_CBWelcomeDAZoneActionPerformed
 
@@ -1221,7 +1301,7 @@ public class tvmGUI extends javax.swing.JFrame {
             !CBWelcomeDAZone.getSelectedItem().toString().equals("Vælg antal zoner...") &&
             !CBWelcomeDAAmount.getSelectedItem().toString().equals("Vælg antal billetter...")
         ) {
-            LabWelcomeDATotalPrice.setText("Total pris: "+(TypePricePZ*amountZones*amountTickets)+" DKK");
+            LabWelcomeDATotalPrice.setText("Total pris: "+(typePricePZ*amountZones*amountTickets)+" DKK");
         }
 
     }//GEN-LAST:event_CBWelcomeDAAmountActionPerformed
@@ -1264,7 +1344,7 @@ public class tvmGUI extends javax.swing.JFrame {
         String toListSinglePrice = (CT.transferTicket(ticketIndex).getPricePerZone()*selectedAmountZones)+" DKK";
         
         // Separate variable to calculate total price
-        int subTotalCalc = TypePricePZ*amountZones*amountTickets;
+        int subTotalCalc = typePricePZ*amountZones*amountTickets;
         String toListsubTotal = subTotalCalc+" DKK";
         
         //Convert type length to maximum 8 characters
@@ -1367,10 +1447,11 @@ public class tvmGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ButPayDAHelpActionPerformed
 
     private void ButPayDACashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDACashActionPerformed
-        // Polymorph Pay to a cash module
+        // New instance of Cash simulation
         CH = new Cash(SB.getTotalPrice());
-        // Text for machine info label
+        // Set labels
         LabCashDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+        LabCashDAMissing.setText("Mangler: "+SB.getTotalPrice()+" DKK");
         // Go to next window
         PayDA.setVisible(false);
         CashDA.setVisible(true);
@@ -1451,13 +1532,48 @@ public class tvmGUI extends javax.swing.JFrame {
         int missingMoney = CH.MakePaymentInt(insertedMoney);
         
         if (missingMoney < 0) {
-            // SHOW DIALOG BOX ABOUT RETURNED OVERFLOW OF MONEY
-            // PRINT TICKET
-            //RETURN TO WELCOMMING WINDOW
+            // Show dialog box about ticket printing and money-change
+            JOptionPane.showMessageDialog(this, 
+                "\nBetaling gennemført."
+               + "\nHusk din billet og byttepenge."
+               + "\nFortsat god dag."
+               + "\n"
+               + "\nBlueJ Trakfikselskab","Betaling gennemført",
+            -1);
+            // Print tickets
+            printTickets(CashDA);
         } else if (missingMoney == 0) {
-            // PRING TICKET
-            //RETURN TO WELCOMMING WINDOW
-        } else 
+            // Print tickets
+            printTickets(CashDA);
+            // Show dialog box about ticket printing
+            JOptionPane.showMessageDialog(this, 
+                "\nBetaling gennemført."
+               + "\nHusk din billet."
+               + "\nFortsat god dag."
+               + "\n"
+               + "\nBlueJ Trakfikselskab","Betaling gennemført",
+            -1);
+        } else {
+            //Update labes
+            LabCashDAInserted.setText("Penge indstat: "+CH.getInsertedMoney()+" DKK");
+            LabCashDAMissing.setText("Mangler: "+missingMoney+" DKK");
+            // Return to avoid resetting to welcomming screen
+            return;
+        }
+        //If not out of order
+        if (!outOfOrder) {
+            // Set Cash pointer to null
+            CH = null;
+            // Clear content of cart-array, list-array, and list
+            ListCartDATicketList.removeAll();
+            CartContent.clear();
+            SB.clearCart();
+            // Reset selectionscreen's inputs
+            resetSelectionScreen();
+            // Go back to welcomeing screen
+            CashDA.setVisible(false);
+            WelcomeDA.setVisible(true);
+        }
     }//GEN-LAST:event_ButCashDAPayActionPerformed
     
     
@@ -1546,6 +1662,9 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JLabel LabCashDAMissing;
     private javax.swing.JLabel LabCashDATime;
     private javax.swing.JLabel LabCashDATitle;
+    private javax.swing.JLabel LabOutOfOrderInfo;
+    private javax.swing.JLabel LabOutOfOrderTime;
+    private javax.swing.JLabel LabOutOfOrderTitle;
     private javax.swing.JLabel LabPayDAInfo;
     private javax.swing.JLabel LabPayDAInstruct;
     private javax.swing.JLabel LabPayDATime;
@@ -1576,6 +1695,7 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JLabel LabWelcomeDAZonesError;
     private javax.swing.JList ListCartDATicketList;
     private javax.swing.JList ListSetup2TicketList;
+    private javax.swing.JPanel OutOfOrder;
     private javax.swing.JPanel PayDA;
     private javax.swing.JPanel Setup1;
     private javax.swing.JPanel Setup2;
