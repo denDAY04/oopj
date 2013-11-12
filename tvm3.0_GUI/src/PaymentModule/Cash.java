@@ -1,5 +1,4 @@
 package PaymentModule;
-import Interface.UserInterface;
 
 public class Cash extends Payment
 {
@@ -25,12 +24,12 @@ public class Cash extends Payment
     
     /**
      * Subtracts the parameter int from the price needed to be paid.
-     * @param insertedmoney The number in integer to be subtracted.
+     * @param insertedMoney The number in integer to be subtracted.
      * @return The new value of the money needed to be paid.
      */
-    public int MakePaymentInt(int insertedmoney) {
-        totalInsertedMoney += insertedmoney; 
-        moneyNeeded -= insertedmoney;
+    public int MakePaymentInt(int insertedMoney) {
+        totalInsertedMoney += insertedMoney; 
+        moneyNeeded -= insertedMoney;
         return moneyNeeded;
     }
     
