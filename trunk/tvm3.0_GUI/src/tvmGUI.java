@@ -32,6 +32,8 @@ public class tvmGUI extends javax.swing.JFrame {
         LabPayDATime.setText(time.toString().substring(0,19));
         LabCashDATime.setText(time.toString().substring(0,19));
         LabOutOfOrderTime.setText(time.toString().substring(0,19));
+        LabCardDATime.setText(time.toString().substring(0,19));
+        LabSMSDATime.setText(time.toString().substring(0,19));
     }
 
     /**
@@ -128,6 +130,28 @@ public class tvmGUI extends javax.swing.JFrame {
         ButCashDAHelp = new javax.swing.JButton();
         ButCashDAClear = new javax.swing.JButton();
         ButCashDABack = new javax.swing.JButton();
+        CardDA = new javax.swing.JPanel();
+        LabCardDAInfo = new javax.swing.JLabel();
+        LabCardDATime = new javax.swing.JLabel();
+        LabCardDATitle = new javax.swing.JLabel();
+        LabCardDAInstruct = new javax.swing.JLabel();
+        PwdCardDACode = new javax.swing.JPasswordField();
+        LabCardDATotal = new javax.swing.JLabel();
+        ButCardDAConfirm = new javax.swing.JButton();
+        ButCardDAHelp = new javax.swing.JButton();
+        ButCardDAClear = new javax.swing.JButton();
+        ButCardDABack = new javax.swing.JButton();
+        SMSDA = new javax.swing.JPanel();
+        LabSMSDAInfo = new javax.swing.JLabel();
+        LabSMSDATime = new javax.swing.JLabel();
+        LabSMSDATitle = new javax.swing.JLabel();
+        LabSMSDAInstruct = new javax.swing.JLabel();
+        LabSMSDATotal = new javax.swing.JLabel();
+        ButSMSDAConfirm = new javax.swing.JButton();
+        InSMSDAPhoneNMB = new javax.swing.JTextField();
+        ButSMSDAHelp = new javax.swing.JButton();
+        ButSMSDABack = new javax.swing.JButton();
+        ButSMSDAClear = new javax.swing.JButton();
         OutOfOrder = new javax.swing.JPanel();
         LabOutOfOrderTitle = new javax.swing.JLabel();
         LabOutOfOrderInfo = new javax.swing.JLabel();
@@ -486,7 +510,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabWelcomeDAInfo)
                     .addComponent(LabWelcomeDATime))
-                .addGap(42, 42, 42)
+                .addGap(44, 44, 44)
                 .addComponent(LabWelcomeDATitle)
                 .addGap(18, 18, 18)
                 .addComponent(LabWelcomeDAInstruct)
@@ -501,7 +525,7 @@ public class tvmGUI extends javax.swing.JFrame {
                     .addComponent(LabWelcomeDAPricePZ)
                     .addComponent(CBWelcomeDAZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CBWelcomeDAAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 152, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
                 .addComponent(LabWelcomeDAError)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
                 .addComponent(LabWelcomeDATempPrice)
@@ -645,11 +669,11 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addGroup(CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabCartDAInfo)
                     .addComponent(LabCartDATime))
-                .addGap(51, 51, 51)
+                .addGap(44, 44, 44)
                 .addComponent(LabCartDATitle)
                 .addGap(18, 18, 18)
                 .addComponent(LabCartDAInstruct)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
                 .addGroup(CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabCartDASTK)
                     .addComponent(LabCartDKType)
@@ -752,11 +776,11 @@ public class tvmGUI extends javax.swing.JFrame {
                         .addContainerGap()
                         .addGroup(PayDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(PayDALayout.createSequentialGroup()
-                                .addComponent(ButPayDAHelp)
+                                .addComponent(ButPayDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButPayDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 94, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(57, 57, 57)
-                                .addComponent(ButPayDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(ButPayDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(98, 98, 98)
+                                .addComponent(ButPayDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(PayDALayout.createSequentialGroup()
                                 .addComponent(LabPayDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
@@ -770,7 +794,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addGroup(PayDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabPayDAInfo)
                     .addComponent(LabPayDATime))
-                .addGap(53, 53, 53)
+                .addGap(44, 44, 44)
                 .addComponent(LabPayDATitle)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LabPayDAInstruct)
@@ -780,11 +804,11 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(ButPayDACard, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(ButPayDASMS, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 96, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addGroup(PayDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ButPayDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(ButPayDABack, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE)
-                    .addComponent(ButPayDAClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ButPayDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButPayDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButPayDAClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -800,7 +824,7 @@ public class tvmGUI extends javax.swing.JFrame {
         LabCashDATitle.setText("Kontant betaling");
 
         LabCashDAInstruct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        LabCashDAInstruct.setText("Indsæt beløbet til betaling i feltet og tryk “Indsæt penge”");
+        LabCashDAInstruct.setText("Indsæt beløbet til betaling i feltet og tryk “Indsæt penge”. For penge tilbage, tryk \"Afbryd\".");
 
         LabCashDAInserted.setText("Penge indsat: ");
 
@@ -838,10 +862,6 @@ public class tvmGUI extends javax.swing.JFrame {
         CashDA.setLayout(CashDALayout);
         CashDALayout.setHorizontalGroup(
             CashDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CashDALayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButCashDAPay, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(344, 344, 344))
             .addGroup(CashDALayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(CashDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -860,20 +880,21 @@ public class tvmGUI extends javax.swing.JFrame {
                                 .addComponent(InCashDAInserted, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(347, 347, 347))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, CashDALayout.createSequentialGroup()
-                                .addComponent(LabCashDAInstruct, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(253, 253, 253))))
+                                .addComponent(ButCashDAPay, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(344, 344, 344))))
                     .addGroup(CashDALayout.createSequentialGroup()
                         .addGroup(CashDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(CashDALayout.createSequentialGroup()
-                                .addComponent(ButCashDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ButCashDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButCashDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(104, 104, 104)
-                                .addComponent(ButCashDAClear))
+                                .addComponent(ButCashDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(102, 102, 102)
+                                .addComponent(ButCashDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(CashDALayout.createSequentialGroup()
                                 .addComponent(LabCashDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 212, Short.MAX_VALUE)
-                                .addComponent(LabCashDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(LabCashDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LabCashDAInstruct, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
         );
         CashDALayout.setVerticalGroup(
@@ -883,7 +904,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addGroup(CashDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabCashDATime)
                     .addComponent(LabCashDAInfo))
-                .addGap(46, 46, 46)
+                .addGap(44, 44, 44)
                 .addComponent(LabCashDATitle)
                 .addGap(18, 18, 18)
                 .addComponent(LabCashDAInstruct)
@@ -895,15 +916,226 @@ public class tvmGUI extends javax.swing.JFrame {
                     .addComponent(LabCashDAInserted))
                 .addGap(49, 49, 49)
                 .addComponent(ButCashDAPay, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 245, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
                 .addGroup(CashDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ButCashDABack, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
-                    .addComponent(ButCashDAClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButCashDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(ButCashDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButCashDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButCashDABack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         getContentPane().add(CashDA, "card7");
+
+        LabCardDAInfo.setText(" ");
+
+        LabCardDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabCardDATime.setText("  ");
+
+        LabCardDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LabCardDATitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabCardDATitle.setText("Betaling med betalingskort");
+
+        LabCardDAInstruct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabCardDAInstruct.setText("Indsæt betalingskort og indtast din pin-kode i feltet nedenunder. Tryk herefter på godkend.");
+
+        PwdCardDACode.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        LabCardDATotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LabCardDATotal.setText("Total pris: ");
+
+        ButCardDAConfirm.setText("Godkend");
+        ButCardDAConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCardDAConfirmActionPerformed(evt);
+            }
+        });
+
+        ButCardDAHelp.setText("?");
+        ButCardDAHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCardDAHelpActionPerformed(evt);
+            }
+        });
+
+        ButCardDAClear.setText("Afbryd");
+        ButCardDAClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCardDAClearActionPerformed(evt);
+            }
+        });
+
+        ButCardDABack.setText("Tilbage");
+        ButCardDABack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButCardDABackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout CardDALayout = new javax.swing.GroupLayout(CardDA);
+        CardDA.setLayout(CardDALayout);
+        CardDALayout.setHorizontalGroup(
+            CardDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CardDALayout.createSequentialGroup()
+                .addGroup(CardDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(CardDALayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(CardDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabCardDATitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(CardDALayout.createSequentialGroup()
+                                .addComponent(LabCardDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
+                                .addComponent(LabCardDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(LabCardDAInstruct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(CardDALayout.createSequentialGroup()
+                                .addComponent(ButCardDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(ButCardDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(105, 105, 105)
+                                .addComponent(ButCardDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(CardDALayout.createSequentialGroup()
+                        .addGroup(CardDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(CardDALayout.createSequentialGroup()
+                                .addGap(330, 330, 330)
+                                .addComponent(PwdCardDACode, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(CardDALayout.createSequentialGroup()
+                                .addGap(352, 352, 352)
+                                .addComponent(ButCardDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(CardDALayout.createSequentialGroup()
+                                .addGap(330, 330, 330)
+                                .addComponent(LabCardDATotal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        CardDALayout.setVerticalGroup(
+            CardDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(CardDALayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(CardDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabCardDAInfo)
+                    .addComponent(LabCardDATime))
+                .addGap(44, 44, 44)
+                .addComponent(LabCardDATitle)
+                .addGap(18, 18, 18)
+                .addComponent(LabCardDAInstruct)
+                .addGap(18, 18, 18)
+                .addComponent(PwdCardDACode, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LabCardDATotal)
+                .addGap(18, 18, 18)
+                .addComponent(ButCardDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+                .addGroup(CardDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ButCardDAClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButCardDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButCardDABack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        getContentPane().add(CardDA, "card9");
+
+        LabSMSDAInfo.setText(" ");
+
+        LabSMSDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabSMSDATime.setText(" ");
+
+        LabSMSDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LabSMSDATitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabSMSDATitle.setText("Betaling med SMS");
+
+        LabSMSDAInstruct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabSMSDAInstruct.setText("Indtast telefonnummeret som regningen skal sendes til og tryk herefter på godkend. ");
+
+        LabSMSDATotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LabSMSDATotal.setText("Total pris: ");
+
+        ButSMSDAConfirm.setText("Godkend");
+        ButSMSDAConfirm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButSMSDAConfirmActionPerformed(evt);
+            }
+        });
+
+        InSMSDAPhoneNMB.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        ButSMSDAHelp.setText("?");
+        ButSMSDAHelp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButSMSDAHelpActionPerformed(evt);
+            }
+        });
+
+        ButSMSDABack.setText("Tilbage");
+        ButSMSDABack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButSMSDABackActionPerformed(evt);
+            }
+        });
+
+        ButSMSDAClear.setText("Afbryd");
+        ButSMSDAClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButSMSDAClearActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout SMSDALayout = new javax.swing.GroupLayout(SMSDA);
+        SMSDA.setLayout(SMSDALayout);
+        SMSDALayout.setHorizontalGroup(
+            SMSDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SMSDALayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(SMSDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(SMSDALayout.createSequentialGroup()
+                        .addComponent(LabSMSDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                        .addComponent(LabSMSDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(LabSMSDATitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(LabSMSDAInstruct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(SMSDALayout.createSequentialGroup()
+                        .addGroup(SMSDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(SMSDALayout.createSequentialGroup()
+                                .addGap(342, 342, 342)
+                                .addComponent(ButSMSDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(SMSDALayout.createSequentialGroup()
+                                .addGap(312, 312, 312)
+                                .addGroup(SMSDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(LabSMSDATotal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(InSMSDAPhoneNMB, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, SMSDALayout.createSequentialGroup()
+                        .addComponent(ButSMSDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(ButSMSDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(103, 103, 103)
+                        .addComponent(ButSMSDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+        );
+        SMSDALayout.setVerticalGroup(
+            SMSDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(SMSDALayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(SMSDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabSMSDAInfo)
+                    .addComponent(LabSMSDATime))
+                .addGap(44, 44, 44)
+                .addComponent(LabSMSDATitle)
+                .addGap(18, 18, 18)
+                .addComponent(LabSMSDAInstruct)
+                .addGap(18, 18, 18)
+                .addComponent(InSMSDAPhoneNMB, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(LabSMSDATotal)
+                .addGap(18, 18, 18)
+                .addComponent(ButSMSDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+                .addGroup(SMSDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(ButSMSDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(ButSMSDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButSMSDABack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        getContentPane().add(SMSDA, "card10");
 
         LabOutOfOrderTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabOutOfOrderTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -1176,11 +1408,12 @@ public class tvmGUI extends javax.swing.JFrame {
 //        ListSetup2TicketList.removeAll();
 //        ListContent.clear();
 //        CT.ClearArray();
-        for (int i = 2; i <= CBWelcomeDAType.getItemCount()+3; i++) { //+1 to avoid-
-            CBWelcomeDAType.removeItemAt(i);             // deleting first item
-        }
-//        CBWelcomeDAType.removeAll(); 
-//        CBWelcomeDAType.addItem("Vælg billettype...");
+        //int CBWItemCount = CBWelcomeDAType.getItemCount();
+        //for (;CBWItemCount > 1 ; CBWItemCount--) { //+1 to avoid-
+        //    CBWelcomeDAType.removeItemAt(CBWItemCount); 
+        //}
+        CBWelcomeDAType.removeAllItems();
+        CBWelcomeDAType.addItem("Vælg billettype...");
         //Clearing all ArrayLists and Jlist
         ListSetup2TicketList.removeAll();
         ListContent.clear();
@@ -1456,13 +1689,25 @@ public class tvmGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ButPayDACashActionPerformed
 
     private void ButPayDACardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDACardActionPerformed
-        // NOT DONE!
-        PayDA.setVisible(false);
+        // Set lables
+        LabCardDAInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
+        LabCardDATotal.setText("Total pris: "+SB.getTotalPrice()+" DKK");
+        String wrongPin = "1337";    // A pin to force simulation of failed pin
+        // Make Creditcard instance
+        CC = new CreditCard(wrongPin);
+        // Move to next window
+        switchWindow(PayDA, CardDA);
     }//GEN-LAST:event_ButPayDACardActionPerformed
 
     private void ButPayDASMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDASMSActionPerformed
-        // NOT DONE!
-        PayDA.setVisible(false);
+        // Set lables
+        LabSMSDAInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
+        LabSMSDATotal.setText("Total pris: "+SB.getTotalPrice()+" DKK");
+        String failedNUM = "88888888";  // number to force error-simulation
+        // Make SMS instance            
+        SMS = new paySMS(failedNUM);
+        // Move to next window
+        switchWindow(PayDA, SMSDA);
     }//GEN-LAST:event_ButPayDASMSActionPerformed
     
     private void ButPayDABackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDABackActionPerformed
@@ -1570,6 +1815,167 @@ public class tvmGUI extends javax.swing.JFrame {
             switchWindow(CashDA, WelcomeDA);
         }
     }//GEN-LAST:event_ButCashDAPayActionPerformed
+
+    //---------------------------------CardDA-----------------------------------
+    private void ButCardDAConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCardDAConfirmActionPerformed
+        // Get text from password field
+        String pinString = PwdCardDACode.getText();
+        // Make payment
+        if (CC.MakePaymentBool(pinString) == false) {   // If simulation failed.
+            JOptionPane.showMessageDialog(this, 
+                "\nFejl."
+               + "\nDu har indtastet en ugyldig pin."
+               + "\nPrøv igen, eller afbryd."
+               + "\n"
+               + "\nBlueJ Trakfikselskab","Forkert pin",
+            JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            // Print ticket 
+            printTickets(CardDA);
+            // Show dialog confirming transaction
+            JOptionPane.showMessageDialog(this, 
+                "\nBetaling gennemført."
+               + "\nSe slisken neden for for din billet og husk dit kort."
+               + "\nFortsat god dag."
+               + "\n"
+               + "\nBlueJ Trakfikselskab","Betaling gennemført",
+            JOptionPane.INFORMATION_MESSAGE);
+ 
+            //If not out of order
+            if (!outOfOrder) {
+                // Set Credit Card pointer to null
+                CC = null;
+                // Clear content of cart-array, list-array, and list
+                ListCartDATicketList.removeAll();
+                CartContent.clear();
+                SB.clearCart();
+                // Clear pin field
+                PwdCardDACode.setText("");
+                // Reset inserted money label
+                LabCardDATotal.setText("Total pris: ");
+                // Reset selectionscreen's inputs
+                resetSelectionScreen();
+                // Go back to welcomeing screen
+                switchWindow(CardDA, WelcomeDA);
+            }
+        }
+    }//GEN-LAST:event_ButCardDAConfirmActionPerformed
+
+    private void ButCardDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCardDAHelpActionPerformed
+        JOptionPane.showMessageDialog(this, 
+            "\nFor hjælp ring xx xx xx xx"
+           + "\nFor teknisk assistance ring xx xx xx xx"
+           + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
+           + "\n"
+           + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",
+        JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_ButCardDAHelpActionPerformed
+
+    private void ButCardDAClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCardDAClearActionPerformed
+        // Set Credit Card pointer to null
+        CC = null;
+        // Clear content of cart-array, list-array, and list
+        ListCartDATicketList.removeAll();
+        CartContent.clear();
+        SB.clearCart();
+        // Clear pin field
+        PwdCardDACode.setText("");
+        // Reset total price label
+        LabCardDATotal.setText("Total pris: ");
+        // Reset selectionscreen's inputs
+        resetSelectionScreen();
+        // Go back to welcomeing screen
+        switchWindow(CardDA, WelcomeDA);
+    }//GEN-LAST:event_ButCardDAClearActionPerformed
+
+    private void ButCardDABackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCardDABackActionPerformed
+        // Set credit card pointer to null
+        CC = null;
+        // Go back to previous window
+        switchWindow(CardDA, PayDA);
+    }//GEN-LAST:event_ButCardDABackActionPerformed
+
+    //---------------------------------SMSDA-----------------------------------
+    private void ButSMSDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSMSDAHelpActionPerformed
+        JOptionPane.showMessageDialog(this, 
+            "\nFor hjælp ring xx xx xx xx"
+           + "\nFor teknisk assistance ring xx xx xx xx"
+           + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
+           + "\n"
+           + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",
+        JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_ButSMSDAHelpActionPerformed
+
+    private void ButSMSDAConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSMSDAConfirmActionPerformed
+        // Get String from text field
+        String phoneNUM = InSMSDAPhoneNMB.getText();
+        // Make payment
+        if (SMS.MakePaymentBool(phoneNUM)) {
+            // Show dialog refering to a fictional message
+            JOptionPane.showMessageDialog(this, 
+                "\nVi har modtaget dit nummer."
+               + "\nEn besked vil blive sendt til nummeret inden for ét minut."
+               + "\nFølg venligst instruktionerne i beskeden."
+               + "\nFortsat god dag."
+               + "\n"
+               + "\nBlueJ Trakfikselskab","Nummer modtaget",
+            JOptionPane.INFORMATION_MESSAGE);
+            // For each ticket
+            for (int index=0;index<(SB.getCart().size());index++) {
+                // Send the ticket to the statistics module
+                ST.LogSale(SB.getCart().get(index));
+            }
+        } else {
+            // Show dialog with error
+            JOptionPane.showMessageDialog(this, 
+                "\nDer skete en fejl."
+               + "\nDet indtastede nummer kunne ikke findes."
+               + "\nPrøv igen, gå tilbage og vælg anden betaling,"
+               + "\neller afbryd."
+               + "\n"
+               + "\nBlueJ Trakfikselskab","Nummer ikke fundet",
+            JOptionPane.ERROR_MESSAGE);
+            return;         // To avoid resetting to welcomming screen
+        }
+        // Set SMS pointer to null
+        SMS = null;
+        // Clear content of cart-array, list-array, and list
+        ListCartDATicketList.removeAll();
+        CartContent.clear();
+        SB.clearCart();
+        // Clear phone number field
+        InSMSDAPhoneNMB.setText("");
+        // Reset total price label
+        LabSMSDATotal.setText("Total pris: ");
+        // Reset selectionscreen's inputs
+        resetSelectionScreen();
+        // Go back to welcomeing screen
+        switchWindow(SMSDA, WelcomeDA);
+    }//GEN-LAST:event_ButSMSDAConfirmActionPerformed
+
+    private void ButSMSDABackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSMSDABackActionPerformed
+        // Set SMS pointer to null
+        SMS = null;
+        // Go back to previous window
+        switchWindow(SMSDA, PayDA);
+    }//GEN-LAST:event_ButSMSDABackActionPerformed
+
+    private void ButSMSDAClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSMSDAClearActionPerformed
+        // Set SMS pointer to null
+        SMS = null;
+        // Clear content of cart-array, list-array, and list
+        ListCartDATicketList.removeAll();
+        CartContent.clear();
+        SB.clearCart();
+        // Clear phone number field
+        InSMSDAPhoneNMB.setText("");
+        // Reset total price label
+        LabSMSDATotal.setText("Total pris: ");
+        // Reset selectionscreen's inputs
+        resetSelectionScreen();
+        // Go back to welcomeing screen
+        switchWindow(SMSDA, WelcomeDA);
+    }//GEN-LAST:event_ButSMSDAClearActionPerformed
     
     
     
@@ -1608,6 +2014,10 @@ public class tvmGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButCardDABack;
+    private javax.swing.JButton ButCardDAClear;
+    private javax.swing.JButton ButCardDAConfirm;
+    private javax.swing.JButton ButCardDAHelp;
     private javax.swing.JButton ButCartDAAddM;
     private javax.swing.JButton ButCartDAClear;
     private javax.swing.JButton ButCartDAHelp;
@@ -1623,6 +2033,10 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JButton ButPayDAClear;
     private javax.swing.JButton ButPayDAHelp;
     private javax.swing.JButton ButPayDASMS;
+    private javax.swing.JButton ButSMSDABack;
+    private javax.swing.JButton ButSMSDAClear;
+    private javax.swing.JButton ButSMSDAConfirm;
+    private javax.swing.JButton ButSMSDAHelp;
     private javax.swing.JButton ButSetup1Next;
     private javax.swing.JButton ButSetup2AddM;
     private javax.swing.JButton ButSetup2Back;
@@ -1633,14 +2047,21 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JComboBox CBWelcomeDAAmount;
     private javax.swing.JComboBox CBWelcomeDAType;
     private javax.swing.JComboBox CBWelcomeDAZone;
+    private javax.swing.JPanel CardDA;
     private javax.swing.JPanel CartDA;
     private javax.swing.JPanel CashDA;
     private javax.swing.JTextField InCashDAInserted;
+    private javax.swing.JTextField InSMSDAPhoneNMB;
     private javax.swing.JTextField InSetup1HardwareID;
     private javax.swing.JTextField InSetup1StartZone;
     private javax.swing.JTextField InSetup2PricePZ;
     private javax.swing.JTextField InSetup2TypeDA;
     private javax.swing.JTextField InSetup2TypeENG;
+    private javax.swing.JLabel LabCardDAInfo;
+    private javax.swing.JLabel LabCardDAInstruct;
+    private javax.swing.JLabel LabCardDATime;
+    private javax.swing.JLabel LabCardDATitle;
+    private javax.swing.JLabel LabCardDATotal;
     private javax.swing.JLabel LabCartDAInfo;
     private javax.swing.JLabel LabCartDAInstruct;
     private javax.swing.JLabel LabCartDASTK;
@@ -1664,6 +2085,11 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JLabel LabPayDAInstruct;
     private javax.swing.JLabel LabPayDATime;
     private javax.swing.JLabel LabPayDATitle;
+    private javax.swing.JLabel LabSMSDAInfo;
+    private javax.swing.JLabel LabSMSDAInstruct;
+    private javax.swing.JLabel LabSMSDATime;
+    private javax.swing.JLabel LabSMSDATitle;
+    private javax.swing.JLabel LabSMSDATotal;
     private javax.swing.JLabel LabSetup1Error;
     private javax.swing.JLabel LabSetup1HardwareID;
     private javax.swing.JLabel LabSetup1StartZone;
@@ -1692,6 +2118,8 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JList ListSetup2TicketList;
     private javax.swing.JPanel OutOfOrder;
     private javax.swing.JPanel PayDA;
+    private javax.swing.JPasswordField PwdCardDACode;
+    private javax.swing.JPanel SMSDA;
     private javax.swing.JPanel Setup1;
     private javax.swing.JPanel Setup2;
     private javax.swing.JPanel WelcomeDA;
