@@ -6,14 +6,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author Nordahl
- */
+
 public class tvmGUI extends javax.swing.JFrame {
 
     /**
@@ -797,6 +790,7 @@ public class tvmGUI extends javax.swing.JFrame {
 
         getContentPane().add(PayDA, "card6");
 
+        LabCashDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabCashDATime.setText(" ");
 
         LabCashDAInfo.setText(" ");
@@ -972,20 +966,19 @@ public class tvmGUI extends javax.swing.JFrame {
     }
     
     /**
-     * For creation of tickets and adding them to list.
-     * @param PricePZ
-     * @param TypeDA
-     * @param TypeENG 
+     * For creation of tickets by adding them to an array of tickets, and array
+     * of strings, and a Jlist displaying the Strings.
+     * @param PricePZ Price per zone - integer.
+     * @param TypeDA Name of ticket type in Danish - string.
+     * @param TypeENG Name of ticket type in English - string.
      */
-    public void addTicketToListSetup2 (int PricePZ, String TypeDA, String TypeENG) {
+    public void addTicketToListSetup2 (int PricePZ, String TypeDA, String TypeENG) {       
         LabSetup2Error.setVisible(false);
+        LabSetup2ErrorList.setVisible(false);
         CT.addTicket(PricePZ, TypeDA, TypeENG, startZone);
         InSetup2TypeDA.setText(""); InSetup2TypeENG.setText(""); InSetup2PricePZ.setText("");
         ListContent.add(TypeDA+", "+TypeENG+", "+PricePZ+", "+startZone);
         ListSetup2TicketList.setListData(ListContent.toArray());
-        Setup2.setVisible(false);
-        WelcomeDA.setVisible(true);
-        LabWelcomeDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
         CBWelcomeDAType.addItem(TypeDA);
     }
     
@@ -1087,6 +1080,17 @@ public class tvmGUI extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Set the visibility of current JPanel to false, and true on the JPanel
+     * that needs displaying next. 
+     * @param currentWindow The Jpanel from which the method is called, and needs to be hidden.
+     * @param nextWindow The JPanel that needs to be displayed next.
+     */
+    public void switchWindow(JPanel currentWindow, JPanel nextWindow) {
+        currentWindow.setVisible(false);
+        nextWindow.setVisible(true);
+    }
+    
     //Variables
     private int hardID;
     private int startZone;
@@ -1113,13 +1117,7 @@ public class tvmGUI extends javax.swing.JFrame {
         LabSetup2ErrorList.setVisible(false);
         if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
         {            
-            LabSetup2Error.setVisible(false);
-            LabSetup2ErrorList.setVisible(false);
-            CT.addTicket(PricePZ, TypeDA, TypeENG, startZone);
-            InSetup2TypeDA.setText(""); InSetup2TypeENG.setText(""); InSetup2PricePZ.setText("");
-            ListContent.add(TypeDA+", "+TypeENG+", "+PricePZ+", "+startZone);
-            ListSetup2TicketList.setListData(ListContent.toArray());
-            CBWelcomeDAType.addItem(TypeDA);
+            addTicketToListSetup2(PricePZ, TypeDA, TypeENG);
         }
     }//GEN-LAST:event_ButSetup2AddMActionPerformed
 
@@ -1132,6 +1130,8 @@ public class tvmGUI extends javax.swing.JFrame {
             if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
             {
                 addTicketToListSetup2(PricePZ, TypeDA, TypeENG);
+                switchWindow(Setup2, WelcomeDA);
+                LabWelcomeDAInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
                 return;
             }
             else
@@ -1148,12 +1148,13 @@ public class tvmGUI extends javax.swing.JFrame {
         {
             if (PricePZ ==-1 && TypeDA.equals("") && TypeENG.equals(""))
             {
-                Setup2.setVisible(false);
-                WelcomeDA.setVisible(true);
+                switchWindow(Setup2, WelcomeDA);
             }
             else if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
             {
                 addTicketToListSetup2(PricePZ, TypeDA, TypeENG);
+                switchWindow(Setup2, WelcomeDA);
+                LabWelcomeDAInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
             }
             else
             {
@@ -1164,21 +1165,19 @@ public class tvmGUI extends javax.swing.JFrame {
 
     private void ButSetup2BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2BackActionPerformed
         //Change window to previous window
-        Setup2.setVisible(false);
-        Setup1.setVisible(true);
-        
+        switchWindow(Setup2, Setup1);        
         //Returning all warning labels to default
         LabSetup2TypeENG.setForeground(Color.black);
         LabSetup2TypeDA.setForeground(Color.black);
         LabSetup2PricePZ.setForeground(Color.black);
         LabSetup2Error.setVisible(false);
         LabSetup2ErrorList.setVisible(false);
-        
         //Clearing all ArrayLists
         ListSetup2TicketList.setListData(new Object[0]);
         ListContent.clear();
         CT.ClearArray();
-        CBWelcomeDAType.removeAllItems(); CBWelcomeDAType.addItem("Vælg billettype...");
+        CBWelcomeDAType.removeAllItems(); 
+        CBWelcomeDAType.addItem("Vælg billettype...");
     }//GEN-LAST:event_ButSetup2BackActionPerformed
 
 //----------------------------------SETUP1-------------------------------------
@@ -1207,13 +1206,9 @@ public class tvmGUI extends javax.swing.JFrame {
         if (hardID !=-1 && startZone !=-1)
         {
             LabSetup1Error.setVisible(false);
-            Setup1.setVisible(false);
-            Setup2.setVisible(true);
+            LabSetup2Info.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
+            switchWindow(Setup1, Setup2);
         }
-        
-        LabSetup2Info.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
-        Setup1.setVisible(false);
-        Setup2.setVisible(true);
     }//GEN-LAST:event_ButSetup1NextActionPerformed
 
 //---------------------------------WelcomeDA-----------------------------------
@@ -1327,8 +1322,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 break;
             }
         }       
-        SB.addToCart(ticketIndex, amountZones, CBWelcomeDAAmount.getSelectedIndex());
-        
+        SB.addToCart(ticketIndex, amountZones, CBWelcomeDAAmount.getSelectedIndex());        
         // add selected ticket to soppingcart
         String toListAmount = amountTickets+" stk.";
         String toListType = CT.transferTicket(ticketIndex).getTypeDA();
@@ -1341,7 +1335,7 @@ public class tvmGUI extends javax.swing.JFrame {
         } else {    // If not, substring to first char to ignore " stk"
             selectedAmountZones = Integer.parseInt(temp_s.substring(0,1));
         }
-        String toListSinglePrice = (CT.transferTicket(ticketIndex).getPricePerZone()*selectedAmountZones)+" DKK";
+        String toListSinglePrice = (CT.transferTicket(ticketIndex).getPricePerZone()*selectedAmountZones)+" DKK";        
         
         // Separate variable to calculate total price
         int subTotalCalc = typePricePZ*amountZones*amountTickets;
@@ -1362,9 +1356,8 @@ public class tvmGUI extends javax.swing.JFrame {
         ListCartDATicketList.setListData(CartContent.toArray());
         
         // Show next window
-        WelcomeDA.setVisible(false);
-        CartDA.setVisible(true);
-        LabCartDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+        switchWindow(WelcomeDA, CartDA);
+        LabCartDAInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
         LabCartDATotal.setText("Total pris: "+SB.getTotalPrice()+" DKK");
     }//GEN-LAST:event_ButWelcomeDANextActionPerformed
 
@@ -1375,7 +1368,7 @@ public class tvmGUI extends javax.swing.JFrame {
            + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
            + "\n"
            + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",
-        -1);
+        JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButWelcomeDAHelpActionPerformed
 
 //---------------------------------CartDA-----------------------------------
@@ -1385,18 +1378,16 @@ public class tvmGUI extends javax.swing.JFrame {
             return;
         }
         // Text for machine info label
-        LabPayDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+        LabPayDAInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
         // Move to next window
-        PayDA.setVisible(true);
-        CartDA.setVisible(false);
+        switchWindow(CartDA, PayDA);
     }//GEN-LAST:event_ButCartDAPayActionPerformed
 
     private void ButCartDAAddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDAAddMActionPerformed
         // Reset selectionscreen's inputs
         resetSelectionScreen();
         // Switch to selection window
-        WelcomeDA.setVisible(true);
-        CartDA.setVisible(false);
+        switchWindow(CartDA, WelcomeDA);
     }//GEN-LAST:event_ButCartDAAddMActionPerformed
 
     private void ButCartDARemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDARemoveActionPerformed
@@ -1421,8 +1412,7 @@ public class tvmGUI extends javax.swing.JFrame {
         // Reset selectionscreen's inputs
         resetSelectionScreen();
         // Show welcome screen
-        WelcomeDA.setVisible(true);
-        CartDA.setVisible(false);
+        switchWindow(CartDA, WelcomeDA);
     }//GEN-LAST:event_ButCartDAClearActionPerformed
 
     private void ButCartDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDAHelpActionPerformed
@@ -1432,7 +1422,7 @@ public class tvmGUI extends javax.swing.JFrame {
            + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
            + "\n"
            + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",
-        -1);
+        JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButCartDAHelpActionPerformed
 
     //---------------------------------PayDA-----------------------------------
@@ -1443,18 +1433,17 @@ public class tvmGUI extends javax.swing.JFrame {
            + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
            + "\n"
            + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",
-        -1);
+        JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButPayDAHelpActionPerformed
 
     private void ButPayDACashActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDACashActionPerformed
         // New instance of Cash simulation
         CH = new Cash(SB.getTotalPrice());
         // Set labels
-        LabCashDAInfo.setText("Maskin ID: "+hardID+"  Zone:"+startZone);
+        LabCashDAInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
         LabCashDAMissing.setText("Mangler: "+SB.getTotalPrice()+" DKK");
         // Go to next window
-        PayDA.setVisible(false);
-        CashDA.setVisible(true);
+        switchWindow(PayDA, CashDA);
     }//GEN-LAST:event_ButPayDACashActionPerformed
 
     private void ButPayDACardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDACardActionPerformed
@@ -1469,8 +1458,7 @@ public class tvmGUI extends javax.swing.JFrame {
     
     private void ButPayDABackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDABackActionPerformed
         // Go back to previous window
-        CartDA.setVisible(true);
-        PayDA.setVisible(false);
+        switchWindow(PayDA, CartDA);
     }//GEN-LAST:event_ButPayDABackActionPerformed
 
     private void ButPayDAClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDAClearActionPerformed
@@ -1481,8 +1469,7 @@ public class tvmGUI extends javax.swing.JFrame {
         // Reset selectionscreen's inputs
         resetSelectionScreen();
         // Go back to welcomeing screen
-        WelcomeDA.setVisible(true);
-        PayDA.setVisible(false);
+        switchWindow(PayDA, WelcomeDA);
     }//GEN-LAST:event_ButPayDAClearActionPerformed
     
     //---------------------------------CashDA-----------------------------------
@@ -1493,15 +1480,14 @@ public class tvmGUI extends javax.swing.JFrame {
            + "\nHusk at oplyse maskinens ID, som kan findes i øvre venstre hjørne."
            + "\n"
            + "\nBlueJ Trakfikselskab","Hjælp og teknisk support",
-        -1);
+        JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButCashDAHelpActionPerformed
 
     private void ButCashDABackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCashDABackActionPerformed
         // Set Cash pointer to null
         CH = null;
         // Go back to previous window
-        PayDA.setVisible(true);
-        CashDA.setVisible(false);
+        switchWindow(CashDA, PayDA);
     }//GEN-LAST:event_ButCashDABackActionPerformed
 
     private void ButCashDAClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCashDAClearActionPerformed
@@ -1513,9 +1499,8 @@ public class tvmGUI extends javax.swing.JFrame {
         SB.clearCart();
         // Reset selectionscreen's inputs
         resetSelectionScreen();
-        // Go back to welcomeing screen
-        WelcomeDA.setVisible(true);
-        PayDA.setVisible(false);
+        // Go back to welcomming screen
+        switchWindow(CashDA, WelcomeDA);
         //Show dialog box about money returned
         JOptionPane.showMessageDialog(this, 
             "\nDu har valgt at afbryde købet."
@@ -1524,7 +1509,7 @@ public class tvmGUI extends javax.swing.JFrame {
            + "\nFortsat god dag."
            + "\n"
            + "\nBlueJ Trakfikselskab","Afbryd af køb",
-        -1);
+        JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButCashDAClearActionPerformed
 
     private void ButCashDAPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCashDAPayActionPerformed
@@ -1539,7 +1524,7 @@ public class tvmGUI extends javax.swing.JFrame {
                + "\nFortsat god dag."
                + "\n"
                + "\nBlueJ Trakfikselskab","Betaling gennemført",
-            -1);
+            JOptionPane.INFORMATION_MESSAGE);
             // Print tickets
             printTickets(CashDA);
         } else if (missingMoney == 0) {
@@ -1552,10 +1537,10 @@ public class tvmGUI extends javax.swing.JFrame {
                + "\nFortsat god dag."
                + "\n"
                + "\nBlueJ Trakfikselskab","Betaling gennemført",
-            -1);
+            JOptionPane.INFORMATION_MESSAGE);
         } else {
             //Update labes
-            LabCashDAInserted.setText("Penge indstat: "+CH.getInsertedMoney()+" DKK");
+            LabCashDAInserted.setText("Penge indsat: "+CH.getInsertedMoney()+" DKK");
             LabCashDAMissing.setText("Mangler: "+missingMoney+" DKK");
             // Return to avoid resetting to welcomming screen
             return;
@@ -1568,11 +1553,12 @@ public class tvmGUI extends javax.swing.JFrame {
             ListCartDATicketList.removeAll();
             CartContent.clear();
             SB.clearCart();
+            // Reset inserted money label
+            LabCashDAInserted.setText("Penge indsat: ");
             // Reset selectionscreen's inputs
             resetSelectionScreen();
             // Go back to welcomeing screen
-            CashDA.setVisible(false);
-            WelcomeDA.setVisible(true);
+            switchWindow(CashDA, WelcomeDA);
         }
     }//GEN-LAST:event_ButCashDAPayActionPerformed
     
