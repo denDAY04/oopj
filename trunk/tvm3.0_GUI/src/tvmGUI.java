@@ -1396,27 +1396,23 @@ public class tvmGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ButSetup2SaveActionPerformed
 
     private void ButSetup2BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2BackActionPerformed
-//        //Change window to previous window
-//        switchWindow(Setup2, Setup1);          
         //Returning all warning labels to default
         LabSetup2TypeENG.setForeground(Color.black);
         LabSetup2TypeDA.setForeground(Color.black);
         LabSetup2PricePZ.setForeground(Color.black);
         LabSetup2Error.setVisible(false);
         LabSetup2ErrorList.setVisible(false);
-//        //Clearing all ArrayLists and Jlist
-//        ListSetup2TicketList.removeAll();
-//        ListContent.clear();
-//        CT.ClearArray();
-        //int CBWItemCount = CBWelcomeDAType.getItemCount();
-        //for (;CBWItemCount > 1 ; CBWItemCount--) { //+1 to avoid-
-        //    CBWelcomeDAType.removeItemAt(CBWItemCount); 
-        //}
-        CBWelcomeDAType.removeAllItems();
-        CBWelcomeDAType.addItem("Vælg billettype...");
-        //Clearing all ArrayLists and Jlist
-        ListSetup2TicketList.removeAll();
+        // Get number of items in typeCombobox; -1 to ignore first element
+        int CBWItemCount = CBWelcomeDAType.getItemCount()-1;
+        // Delete every other item than the first
+        for (;CBWItemCount > 0 ; CBWItemCount--) { 
+            CBWelcomeDAType.removeItemAt(CBWItemCount); 
+        }
+        //Clear array of Strings for Jlist
         ListContent.clear();
+        // Set Jlist with empty array
+        ListSetup2TicketList.setListData(ListContent.toArray());
+        // Clear array of created tickets
         CT.ClearArray();
         //Change window to previous window
         switchWindow(Setup2, Setup1); 
