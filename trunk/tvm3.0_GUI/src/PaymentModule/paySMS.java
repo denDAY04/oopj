@@ -1,5 +1,4 @@
 package PaymentModule;
-import Interface.UserInterface;
 
 public class paySMS extends Payment
 {
