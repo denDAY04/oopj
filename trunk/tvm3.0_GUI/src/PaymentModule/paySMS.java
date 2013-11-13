@@ -3,7 +3,6 @@ package PaymentModule;
 public class paySMS extends Payment
 {
     String failedNUM;
-    String NUMWMinusSpaces = "";
 
     /**
      * Constructor with a string argument to create a phone number that will 
@@ -17,9 +16,19 @@ public class paySMS extends Payment
     }
     
     
+    /**
+     * Make a payment transaction with a phone number as the String in the 
+     * argument. The String is removed of spaces before being used.
+     * @param NUM Phone number to checked. Is a String
+     * @return False if length of numbers is not 8. False if it contains
+     * non-integer characters. False if it equals the number set in the
+     * construcor. True otherwise. 
+     */
     public boolean MakePaymentBool(String NUM)
     {
-        //Trim spaces
+        String NUMWMinusSpaces = "";
+        
+        // Trim spaces
         for (int i = 0; i < NUM.length(); i++) {
             if (NUM.charAt(i) != ' ') {
                 NUMWMinusSpaces += NUM.charAt(i);
