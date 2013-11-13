@@ -24,10 +24,15 @@ public class Cash extends Payment
     
     /**
      * Subtracts the parameter int from the price needed to be paid.
+     * Negative values are converted to positive. 
      * @param insertedMoney The number in integer to be subtracted.
      * @return The new value of the money needed to be paid.
      */
     public int MakePaymentInt(int insertedMoney) {
+        // If negative value, convert to positive
+        if (insertedMoney < 0) {
+            insertedMoney *= -1;
+        }
         totalInsertedMoney += insertedMoney; 
         moneyNeeded -= insertedMoney;
         return moneyNeeded;

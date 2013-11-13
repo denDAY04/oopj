@@ -1824,7 +1824,7 @@ public class tvmGUI extends javax.swing.JFrame {
                + "\nPrøv igen, eller afbryd."
                + "\n"
                + "\nBlueJ Trakfikselskab","Forkert pin",
-            JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.ERROR_MESSAGE);
         } else {
             // Print ticket 
             printTickets(CardDA);
