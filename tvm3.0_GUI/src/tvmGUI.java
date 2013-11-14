@@ -1427,7 +1427,6 @@ public class tvmGUI extends javax.swing.JFrame {
                 // Send the ticket to the statistics module
                 ST.LogSale(SB.getCart().get(index));
             }
-            ST.LogSale(SB.getCart().get(index));
         }
     }
     
@@ -2095,6 +2094,7 @@ public class tvmGUI extends javax.swing.JFrame {
         switchWindow(SMSDA, WelcomeDA);
     }//GEN-LAST:event_ButSMSDAClearActionPerformed
 
+    //---------------------------------Service-----------------------------------
     private void ButAdminSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAdminSimulationActionPerformed
         // Set text in menu field
         TextAdminMenu.setText(
@@ -2107,8 +2107,11 @@ public class tvmGUI extends javax.swing.JFrame {
             +"\n5 : Sæt ud af drift"
             +"\n6 : Standard service besøg"
             +"\n7 : Vis total statestik"
+            +"\n8 : Print test billet"
             +"\n0 : Log ud"
         );
+        // Reset input field in admin window
+        InAdminSelection.setText(null);
         // Switch to admin window
         switchWindow(WelcomeDA, Admin);
     }//GEN-LAST:event_ButAdminSimulationActionPerformed
@@ -2140,6 +2143,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 default:
                     // Add text to area
                     TextAdminLog.append(element);
+                    TextAdminLog.append("\n");      // linebreak
             }
         }     
     }//GEN-LAST:event_ButAdminOkActionPerformed
