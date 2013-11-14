@@ -1,6 +1,7 @@
 package MachineLogic;
 
-import Interface.UserInterface;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 /**
  *   +Service() : void
@@ -18,149 +19,91 @@ import Interface.UserInterface;
 public class Service
 
 {
-    private UserInterface UI;
     private Statistics ST;
     private CreatedTickets CT;
     private ShoppingBasket SB;
        
-    public Service(UserInterface UI,Statistics ST,CreatedTickets CT,ShoppingBasket SB)
+    public Service(Statistics ST,CreatedTickets CT,ShoppingBasket SB)
     {
-        this.UI=UI;
         this.ST=ST;
         this.CT=CT;
         this.SB=SB;
     }
     
      /**
-     * Service menu method.
-     *
-     */
-    public void menu()
+      * Service menu to be displayed on the terminal rather than the graphical 
+      * user interface. 
+      * @return True in all cases unless the machine should be set out of order.
+      */
+    public ArrayList<String> getData(int menuSelection)
     {
-        long startTime = System.currentTimeMillis();
-        while(true)
-        {
-            int valg = UI.serviceMenu(); // call to userinterface
-
-            //            1 : Vis dagsstatistik 
-            //            2 : Skift billetrulle 
-            //            3 : Skift blækpatron
-            //            4 : Udskriv og nulstil salgs statestik 
-            //            5 : Sæt ud af drift
-            //            6 : Standard service besøg 
-            //            7 : Vis total statestik 
-            //            0 : Log ud 
-                       
-
-            if ((System.currentTimeMillis() - startTime) < (1*60*1000))               // Auto time out
-            {
-                switch (valg) {
-                    case 1:  // 1 : Vis dagsstatistik
-                        UI.printLn("Antal biletter solgt : "+ST.TicketSoldDay()+" stk.");        
-                        UI.printLn("Antal print tilbage : "+Math.min(ST.CheckPaper(),ST.CheckInk())+" stk.");
-                        UI.printLn("Omsat for : "+ST.MoneyDay()+" kr.");
-                        UI.printLn("Dagens salg:");
-                        ST.getDayLog();
-                        break;
-                    case 2:  // 2 : Skift billetrulle
-                        UI.printLn("Nulstiller papir variabel... OK.");                          
-                        ST.ResetPaper();
-                        break;
-                    case 3:  // 3 : Skift blækpatron
-                        UI.printLn("Nulstiller blæk variabel... OK.");                           
-                        ST.ResetInk();
-                        break;
-                    case 4: // 4 : Udskriv og nulstil salgs statestik
-                        UI.printLn("Dagens salg:");
-                        ST.getDayLog();
-                        UI.printLn("Statistik for dagens salg.");
-                        UI.printLn("Omsat for "+ST.MoneyDay()+" kr.");
-                        UI.printLn("Solgt "+ST.TicketSoldDay()+" billetter"); 
-                        UI.printLn("Nulstiller statestik... OK.");                               
-                        ST.ResetDayStatistics();
-                        break;
-                    case 5: // 5 : Sæt ud af drift
-                        UI.printLn("OUT OF ORDER");                                             
-                        UI.printLn("UDE AF DRIFT");
-                        System.exit(0);                      // Exit program
-                        break;
-                    case 6: // 6 : Standard Service besøg
-                        ST.ResetInk();
-                        ST.ResetPaper();
-                        UI.printLn("Nulstiller forbrugs variable........ OK.");                       
-                        ST.ResetDayStatistics();
-                        UI.printLn("Nulstiller statestik........... OK.");
-                        break;
-                    case 7: // 7 : Vis total statestik
-                        UI.printLn("Total salg:");                    
-                        UI.printLn("Omsat for "+ST.MoneyTotal()+" kr.");
-                        UI.printLn("Solgt "+ST.TicketSoldTotal()+" billetter"); 
-                        UI.printLn("Total salg:");
-                        ST.getLog();
-                        break;
-                    case 8: // 8 : Udskriv test billetter.
-                        for (int n=1; n<CT.getArray().size()+1;n++)                                               // get the array of all possibel tickets
-                            {
-                             SB.addToCart(n,2,1);       // add one of each ticket to the shopping cart
-                             SB.printTicket(0,1,8888);  // prints the ticket from the cart in danish
-                             SB.printTicket(0,2,8888);  // prints the ticket from the cart in english
-                             ST.testPrint();            // updates the ticket machine variabels.
-                             ST.testPrint();
-                             SB.clearCart();            // empty the shopping basket.
-                            }
-                        break;
-                    case 0: //0 : Log ud 
-                        return;
-                    default:
-                        return;       
+        // ArrayList of strings to be printed in the GUI
+        ArrayList<String> data = new ArrayList<String>();
+        // Menu actions
+        switch (menuSelection) {
+            case 1:  // 1 : Vis dagsstatistik
+                data.add("Antal biletter solgt : "+ST.TicketSoldDay()+" stk.");        
+                data.add("Antal print tilbage : "+Math.min(ST.CheckPaper(),ST.CheckInk())+" stk.");
+                data.add("Omsat for : "+ST.MoneyDay()+" kr.");
+                data.add("Dagens salg:");
+                for (String element: ST.getDayLog()) {
+                    data.add(element);
                 }
-            }
-            else
-            {
-                UI.printLn("Time Out");
-                return;
-            }
-        }      
-    }
-    
-    /**
-     * Initialize TVM
-     *
-     * @return
-     * @param
-     */
-    public int setup()
-    {
-                       
-                     UI.printLn("-- Opsæt automaten --"); 
-                     int hardwareID = UI.setHardwareID();
-                     UI.printLn("Indtast start zone");
-                     int z = UI.getInt();
-                     while (z == -1) {
-                         UI.printLn("Fejl: Ingen heltal fundet. ");
-                         UI.printLn("Prøv igen.");
-                         z = UI.getInt();
-                     } 
-                     while(true)
-                     {
-                         String newtypeDK = UI.setTypeDK();
-                         String newtypeEN = UI.setTypeEN();
-
-                         int zp = UI.setZonePrice();
-                         CT.addTicket(zp, newtypeDK, newtypeEN, z);
-                         UI.printLn("Skal der tilføjes flere billetter ? ");
-                         UI.printLn("Tryk '1' for at gemme og afslutte opsætningen.");
-                         UI.printLn("Tryk '2' for at tilføje flere billetter."); 
-                         int x = UI.getInt();
-                         while (x != 1&&x != 2) {
-                         UI.printLn("Fejl: forkert indtastning.");
-                         UI.printLn("Prøv igen.");
-                         x = UI.getInt();
-                          }
-                        if (x==1) break;
+                return data;
+            case 2:  // 2 : Skift billetrulle
+                data.add("Nulstiller papir variabel... OK.");                          
+                return data;
+            case 3:  // 3 : Skift blækpatron
+                data.add("Nulstiller blæk variabel... OK.");                           
+                ST.ResetInk();
+                return data;
+            case 4: // 4 : Udskriv og nulstil salgs statestik
+                data.add("Dagens salg:");
+                for (String element : ST.getDayLog()) {
+                    data.add(element);
+                }
+                data.add("Statistik for dagens salg.");
+                data.add("Omsat for "+ST.MoneyDay()+" kr.");
+                data.add("Solgt "+ST.TicketSoldDay()+" billetter"); 
+                data.add("Nulstiller statestik... OK.");                               
+                ST.ResetDayStatistics();
+                return data;
+            case 5: // 5 : Sæt ud af drift
+                data.add("OOO");     // out of order-keyword
+                return data;
+            case 6: // 6 : Standard Service besøg
+                ST.ResetInk();
+                ST.ResetPaper();
+                data.add("Nulstiller forbrugs variable........ OK.");                       
+                ST.ResetDayStatistics();
+                data.add("Nulstiller statestik........... OK.");
+                return data;
+            case 7: // 7 : Vis total statestik
+                data.add("Total salg:");                    
+                data.add("Omsat for "+ST.MoneyTotal()+" kr.");
+                data.add("Solgt "+ST.TicketSoldTotal()+" billetter"); 
+                data.add("Total salg:");
+                for (String element : ST.getLog()) {
+                    data.add(element);
+                }
+                return data;
+            case 8: // 8 : Udskriv test billetter.
+                for (int n=1; n<CT.getArray().size()+1;n++)                                               // get the array of all possibel tickets
+                    {
+                     SB.addToCart(n,2,1);       // add one of each ticket to the shopping cart
+                     SB.printTicket(0,1,8888);  // prints the ticket from the cart in danish
+                     SB.printTicket(0,2,8888);  // prints the ticket from the cart in english
+                     ST.testPrint();            // updates the ticket machine variabels.
+                     ST.testPrint();
+                     SB.clearCart();            // empty the shopping basket.
                     }
-                                 
-           
-        return hardwareID;   
+                return data;
+            case 0: //0 : Log ud 
+                data.add("LO");     // log out keyword
+                return data;
+            default:
+                data.add("LO");     // log out keyword
+                return data;       
         }
-    }
+    }       
+}

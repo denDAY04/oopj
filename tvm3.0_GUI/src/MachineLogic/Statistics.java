@@ -65,7 +65,7 @@ public Statistics (){}
 			tempArr.add(t.getTimeStamp() + "- fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
         }
         return tempArr;
-    }
+        }
         /**
      * ink variable accessor method.
      * @return
