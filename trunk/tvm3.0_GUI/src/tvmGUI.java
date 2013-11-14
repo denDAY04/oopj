@@ -3,7 +3,8 @@ import PaymentModule.*;
 import java.awt.Color;
 import java.util.Date;
 import java.util.ArrayList;
-import java.util.Collections;
+import java.util.Scanner;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -15,7 +16,7 @@ public class tvmGUI extends javax.swing.JFrame {
     public tvmGUI() {
         this.ListContent = new ArrayList<>();
         Date time = new Date();
-        initComponents();       
+        initComponents();
         // Initialize labels to be invisible
         LabSetup1Error.setVisible(false);
         LabSetup2Error.setVisible(false);
@@ -34,6 +35,7 @@ public class tvmGUI extends javax.swing.JFrame {
         LabOutOfOrderTime.setText(time.toString().substring(0,19));
         LabCardDATime.setText(time.toString().substring(0,19));
         LabSMSDATime.setText(time.toString().substring(0,19));
+        LabAdminTime.setText(time.toString().substring(0,19));
     }
 
     /**
@@ -89,6 +91,8 @@ public class tvmGUI extends javax.swing.JFrame {
         ButWelcomeDANext = new javax.swing.JButton();
         ButWelcomeDAHelp = new javax.swing.JButton();
         ButWelcomeDALang = new javax.swing.JButton();
+        ButAdminSimulation = new javax.swing.JButton();
+        LabAdminSimulation = new javax.swing.JLabel();
         CartDA = new javax.swing.JPanel();
         LabCartDAInfo = new javax.swing.JLabel();
         LabCartDATime = new javax.swing.JLabel();
@@ -156,6 +160,17 @@ public class tvmGUI extends javax.swing.JFrame {
         LabOutOfOrderTitle = new javax.swing.JLabel();
         LabOutOfOrderInfo = new javax.swing.JLabel();
         LabOutOfOrderTime = new javax.swing.JLabel();
+        Admin = new javax.swing.JPanel();
+        LabAdminTitle = new javax.swing.JLabel();
+        LabAdminInfo = new javax.swing.JLabel();
+        LabAdminTime = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        TextAdminMenu = new javax.swing.JTextArea();
+        LabAdminSelection = new javax.swing.JLabel();
+        InAdminSelection = new javax.swing.JTextField();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        TextAdminLog = new javax.swing.JTextArea();
+        ButAdminOk = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(820, 630));
@@ -228,7 +243,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(InSetup1StartZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11)
                 .addComponent(LabSetup1Error)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 294, Short.MAX_VALUE)
                 .addComponent(ButSetup1Next, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25))
         );
@@ -367,7 +382,7 @@ public class tvmGUI extends javax.swing.JFrame {
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LabSetup2ErrorList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
                 .addGroup(Setup2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButSetup2AddM, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButSetup2Save, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -449,6 +464,16 @@ public class tvmGUI extends javax.swing.JFrame {
 
         ButWelcomeDALang.setText("[LANGUAGE]");
 
+        ButAdminSimulation.setText("Admin Simulation");
+        ButAdminSimulation.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButAdminSimulationActionPerformed(evt);
+            }
+        });
+
+        LabAdminSimulation.setForeground(new java.awt.Color(153, 153, 0));
+        LabAdminSimulation.setText("For simulation purposes only!");
+
         javax.swing.GroupLayout WelcomeDALayout = new javax.swing.GroupLayout(WelcomeDA);
         WelcomeDA.setLayout(WelcomeDALayout);
         WelcomeDALayout.setHorizontalGroup(
@@ -499,9 +524,15 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(ButWelcomeDALang)
                 .addGap(28, 28, 28)
                 .addComponent(ButWelcomeDAHelp)
+                .addGap(180, 180, 180)
+                .addComponent(ButAdminSimulation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ButWelcomeDANext, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WelcomeDALayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LabAdminSimulation)
+                .addGap(326, 326, 326))
         );
         WelcomeDALayout.setVerticalGroup(
             WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -514,7 +545,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(LabWelcomeDATitle)
                 .addGap(18, 18, 18)
                 .addComponent(LabWelcomeDAInstruct)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
                 .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabWelcomeDATypeError)
                     .addComponent(LabWelcomeDAZonesError)
@@ -525,17 +556,20 @@ public class tvmGUI extends javax.swing.JFrame {
                     .addComponent(LabWelcomeDAPricePZ)
                     .addComponent(CBWelcomeDAZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(CBWelcomeDAAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
                 .addComponent(LabWelcomeDAError)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
                 .addComponent(LabWelcomeDATempPrice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LabWelcomeDATotalPrice)
-                .addGap(103, 103, 103)
+                .addGap(83, 83, 83)
+                .addComponent(LabAdminSimulation)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButWelcomeDANext, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButWelcomeDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButWelcomeDALang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ButWelcomeDALang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(ButAdminSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -673,7 +707,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(LabCartDATitle)
                 .addGap(18, 18, 18)
                 .addComponent(LabCartDAInstruct)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
                 .addGroup(CartDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(LabCartDASTK)
                     .addComponent(LabCartDKType)
@@ -804,7 +838,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(ButPayDACard, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(43, 43, 43)
                 .addComponent(ButPayDASMS, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                 .addGroup(PayDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButPayDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ButPayDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -916,7 +950,7 @@ public class tvmGUI extends javax.swing.JFrame {
                     .addComponent(LabCashDAInserted))
                 .addGap(49, 49, 49)
                 .addComponent(ButCashDAPay, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 247, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 250, Short.MAX_VALUE)
                 .addGroup(CashDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButCashDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButCashDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1023,7 +1057,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(LabCardDATotal)
                 .addGap(18, 18, 18)
                 .addComponent(ButCardDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
                 .addGroup(CardDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButCardDAClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButCardDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1127,7 +1161,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(LabSMSDATotal)
                 .addGap(18, 18, 18)
                 .addComponent(ButSMSDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 272, Short.MAX_VALUE)
                 .addGroup(SMSDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(ButSMSDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(ButSMSDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1169,10 +1203,94 @@ public class tvmGUI extends javax.swing.JFrame {
                     .addComponent(LabOutOfOrderTime))
                 .addGap(231, 231, 231)
                 .addComponent(LabOutOfOrderTitle)
-                .addContainerGap(315, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         getContentPane().add(OutOfOrder, "card8");
+
+        LabAdminTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LabAdminTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        LabAdminTitle.setText("Service");
+        LabAdminTitle.setToolTipText("");
+
+        LabAdminInfo.setText(" ");
+
+        LabAdminTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        LabAdminTime.setText(" ");
+
+        TextAdminMenu.setBackground(new java.awt.Color(240, 240, 240));
+        TextAdminMenu.setColumns(20);
+        TextAdminMenu.setRows(5);
+        TextAdminMenu.setFocusable(false);
+        jScrollPane3.setViewportView(TextAdminMenu);
+
+        LabAdminSelection.setText("Valg :");
+
+        TextAdminLog.setColumns(20);
+        TextAdminLog.setRows(5);
+        jScrollPane4.setViewportView(TextAdminLog);
+
+        ButAdminOk.setText("Ok");
+        ButAdminOk.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButAdminOkActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout AdminLayout = new javax.swing.GroupLayout(Admin);
+        Admin.setLayout(AdminLayout);
+        AdminLayout.setHorizontalGroup(
+            AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(AdminLayout.createSequentialGroup()
+                        .addGroup(AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabAdminTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(AdminLayout.createSequentialGroup()
+                                .addComponent(LabAdminInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                                .addComponent(LabAdminTime, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminLayout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminLayout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(218, 218, 218))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminLayout.createSequentialGroup()
+                                .addComponent(LabAdminSelection)
+                                .addGap(18, 18, 18)
+                                .addComponent(InAdminSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(29, 29, 29)
+                                .addComponent(ButAdminOk)
+                                .addGap(293, 293, 293))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, AdminLayout.createSequentialGroup()
+                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(85, 85, 85))))))
+        );
+        AdminLayout.setVerticalGroup(
+            AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(AdminLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(LabAdminInfo)
+                    .addComponent(LabAdminTime))
+                .addGap(26, 26, 26)
+                .addComponent(LabAdminTitle)
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(AdminLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(InAdminSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabAdminSelection)
+                    .addComponent(ButAdminOk))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(56, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(Admin, "card11");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -1308,7 +1426,8 @@ public class tvmGUI extends javax.swing.JFrame {
             } else {
                 // Send the ticket to the statistics module
                 ST.LogSale(SB.getCart().get(index));
-            }      
+            }
+            ST.LogSale(SB.getCart().get(index));
         }
     }
     
@@ -1325,10 +1444,12 @@ public class tvmGUI extends javax.swing.JFrame {
     
     //Variables
     private int hardID;
-    private int startZone;
+    private int startZone;// Enable input from terminal
+    static Scanner terminalInput = new Scanner(System.in);
     private CreatedTickets CT = new CreatedTickets();
-    private Statistics ST = new Statistics();       
+    private Statistics ST = new Statistics();
     private ShoppingBasket SB = new ShoppingBasket(CT, ST);
+    private Service SV = new Service(ST, CT, SB);
     private Cash CH = null;
     private CreditCard CC = null;
     private paySMS SMS = null;
@@ -1364,6 +1485,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 addTicketToListSetup2(PricePZ, TypeDA, TypeENG);
                 switchWindow(Setup2, WelcomeDA);
                 LabWelcomeDAInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
+                LabAdminInfo.setText("Maskin ID: "+hardID+"  Zone: "+startZone);
                 return;
             }
             else
@@ -1972,6 +2094,55 @@ public class tvmGUI extends javax.swing.JFrame {
         // Go back to welcomeing screen
         switchWindow(SMSDA, WelcomeDA);
     }//GEN-LAST:event_ButSMSDAClearActionPerformed
+
+    private void ButAdminSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAdminSimulationActionPerformed
+        // Set text in menu field
+        TextAdminMenu.setText(
+            "Der kan fortages følgende valg:"
+            +"\n"
+            +"\n1 : Vis dagsstatistik "
+            +"\n2 : Skift billetrulle"
+            +"\n3 : Skift blækpatron"
+            +"\n4 : Udskriv og nulstil salgs statestik"
+            +"\n5 : Sæt ud af drift"
+            +"\n6 : Standard service besøg"
+            +"\n7 : Vis total statestik"
+            +"\n0 : Log ud"
+        );
+        // Switch to admin window
+        switchWindow(WelcomeDA, Admin);
+    }//GEN-LAST:event_ButAdminSimulationActionPerformed
+
+    private void ButAdminOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAdminOkActionPerformed
+        int adminSelection;     // Variable to hold menu selection
+        try {       // Make string to int.
+            adminSelection = Integer.parseInt(InAdminSelection.getText());
+        } catch (NumberFormatException e) {
+            return;     // If input is not an integer, do nothing in program.
+        }
+        // Get data from Serice
+        ArrayList<String> data = SV.getData(adminSelection);
+        // Clear text area
+        TextAdminLog.setText(null);
+        //Check String elements in data-list
+        for (String element : data) {
+            // Check for keyword to set out of order
+            switch (element) {
+                case "OOO":
+                    outOfOrder = true;
+                    // Swtich to out-of-order window
+                    switchWindow(Admin, OutOfOrder);
+                    return;
+                case "LO":
+                    // Log out/Switch back to welcomming screen
+                    switchWindow(Admin, WelcomeDA);
+                    return;
+                default:
+                    // Add text to area
+                    TextAdminLog.append(element);
+            }
+        }     
+    }//GEN-LAST:event_ButAdminOkActionPerformed
     
     
     
@@ -2010,6 +2181,9 @@ public class tvmGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Admin;
+    private javax.swing.JButton ButAdminOk;
+    private javax.swing.JButton ButAdminSimulation;
     private javax.swing.JButton ButCardDABack;
     private javax.swing.JButton ButCardDAClear;
     private javax.swing.JButton ButCardDAConfirm;
@@ -2046,6 +2220,7 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JPanel CardDA;
     private javax.swing.JPanel CartDA;
     private javax.swing.JPanel CashDA;
+    private javax.swing.JTextField InAdminSelection;
     private javax.swing.JTextField InCashDAInserted;
     private javax.swing.JTextField InSMSDAPhoneNMB;
     private javax.swing.JTextField InSetup1HardwareID;
@@ -2053,6 +2228,11 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JTextField InSetup2PricePZ;
     private javax.swing.JTextField InSetup2TypeDA;
     private javax.swing.JTextField InSetup2TypeENG;
+    private javax.swing.JLabel LabAdminInfo;
+    private javax.swing.JLabel LabAdminSelection;
+    private javax.swing.JLabel LabAdminSimulation;
+    private javax.swing.JLabel LabAdminTime;
+    private javax.swing.JLabel LabAdminTitle;
     private javax.swing.JLabel LabCardDAInfo;
     private javax.swing.JLabel LabCardDAInstruct;
     private javax.swing.JLabel LabCardDATime;
@@ -2118,8 +2298,12 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JPanel SMSDA;
     private javax.swing.JPanel Setup1;
     private javax.swing.JPanel Setup2;
+    private javax.swing.JTextArea TextAdminLog;
+    private javax.swing.JTextArea TextAdminMenu;
     private javax.swing.JPanel WelcomeDA;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
     // End of variables declaration//GEN-END:variables
 }
