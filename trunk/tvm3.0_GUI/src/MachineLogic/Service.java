@@ -42,7 +42,7 @@ public class Service
         // Menu actions
         switch (menuSelection) {
             case 1:  // 1 : Vis dagsstatistik
-                data.add("Antal biletter solgt : "+ST.TicketSoldDay()+" stk.");        
+                data.add("Antal billetter solgt : "+ST.TicketSoldDay()+" stk.");        
                 data.add("Antal print tilbage : "+Math.min(ST.CheckPaper(),ST.CheckInk())+" stk.");
                 data.add("Omsat for : "+ST.MoneyDay()+" kr.");
                 data.add("Dagens salg:");

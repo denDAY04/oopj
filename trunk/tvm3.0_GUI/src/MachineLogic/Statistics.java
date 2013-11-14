@@ -47,10 +47,10 @@ public Statistics (){}
         */
 	public ArrayList<String> getLog()
 	{
-        ArrayList<String> tempArr = null;
+        ArrayList<String> tempArr = new ArrayList<>();
         for(Ticket t : logStatsArray)
         {
-			tempArr.add(t.getTimeStamp() + "- fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
+            tempArr.add(""+t.getTimeStamp() + " - fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
         }
         return tempArr;
     }
@@ -59,10 +59,10 @@ public Statistics (){}
         */
 	public ArrayList<String> getDayLog()
 	{
-        ArrayList<String> tempArr = null;
+        ArrayList<String> tempArr = new ArrayList<>();
         for(Ticket t : dayStatsArray)
         {
-			tempArr.add(t.getTimeStamp() + "- fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
+			tempArr.add(t.getTimeStamp() + " - fra zone " + t.getStartZone() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
         }
         return tempArr;
         }
