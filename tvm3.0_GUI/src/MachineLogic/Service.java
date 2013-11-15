@@ -88,7 +88,7 @@ public class Service
                 }
                 return data;
             case 8: // 8 : Udskriv test billetter.
-                for (int n=1; n<CT.getArray().size()+1;n++)                                               // get the array of all possibel tickets
+                for (int n=0; n<CT.getArray().size();n++) // get the array of all possibel tickets
                     {
                      SB.addToCart(n,2,1);       // add one of each ticket to the shopping cart
                      SB.printTicket(0,1,8888);  // prints the ticket from the cart in danish
