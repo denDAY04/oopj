@@ -28,16 +28,8 @@ public class tvmGUI extends javax.swing.JFrame {
         LabWelcomeDATypeError.setText(" ");
         LabWelcomeDAZonesError.setText(" ");
         LabWelcomeDAAmountError.setText(" ");
-        // Time labels
-        LabSetup2Time.setText(time.toString().substring(0,19));
-        LabWelcomeDATime.setText(time.toString().substring(0,19));
-        LabCartDATime.setText(time.toString().substring(0,19));
-        LabPayDATime.setText(time.toString().substring(0,19));
-        LabCashDATime.setText(time.toString().substring(0,19));
-        LabOutOfOrderTime.setText(time.toString().substring(0,19));
-        LabCardDATime.setText(time.toString().substring(0,19));
-        LabSMSDATime.setText(time.toString().substring(0,19));
-        LabAdminTime.setText(time.toString().substring(0,19));
+        // Call thread-method to make time labels
+        startTimeThread();  
     }
 
     /**
@@ -1303,6 +1295,29 @@ public class tvmGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     //Variables
+    
+    /**
+     * Starts a thread that updates the time labels. 
+     */
+    private void startTimeThread() {
+        Thread timeLabels = new Thread(){
+            public void run() {
+                while(true) {
+                    Date time = new Date();
+                    LabSetup2Time.setText(time.toString().substring(0,19));
+                    LabWelcomeDATime.setText(time.toString().substring(0,19));
+                    LabCartDATime.setText(time.toString().substring(0,19));
+                    LabPayDATime.setText(time.toString().substring(0,19));
+                    LabCashDATime.setText(time.toString().substring(0,19));
+                    LabOutOfOrderTime.setText(time.toString().substring(0,19));
+                    LabCardDATime.setText(time.toString().substring(0,19));
+                    LabSMSDATime.setText(time.toString().substring(0,19));
+                    LabAdminTime.setText(time.toString().substring(0,19));
+                }
+            }
+        };
+        timeLabels.start();
+    }
     
     /**
      * Checks on a string if it is an integer.
