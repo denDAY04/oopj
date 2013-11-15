@@ -43,8 +43,4 @@ public class CreatedTickets
         ticketList.clear();
     }
     
-    public String isInArrayList(int index)
-    {
-        return ticketList.get(index).getTypeDA();
-    }
 }
