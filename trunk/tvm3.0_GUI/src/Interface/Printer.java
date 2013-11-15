@@ -118,7 +118,7 @@ public class Printer extends JPanel {
         this.typeENG = typeENG;
 
         JFrame frame = new JFrame("BlueJ Trafikselskab"); //Creates a new frame
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         frame.setSize(400, 570);
 
         //Creates a new instance of the object GraphicalTicket to use

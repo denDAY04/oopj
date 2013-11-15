@@ -1,12 +1,14 @@
 import MachineLogic.*;
 import PaymentModule.*;
 import java.awt.Color;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import sun.awt.AppContext;
 
 public class tvmGUI extends javax.swing.JFrame {
 
@@ -161,13 +163,13 @@ public class tvmGUI extends javax.swing.JFrame {
         LabOutOfOrderInfo = new javax.swing.JLabel();
         LabOutOfOrderTime = new javax.swing.JLabel();
         Admin = new javax.swing.JPanel();
+        InAdminSelection = new javax.swing.JTextField();
         LabAdminTitle = new javax.swing.JLabel();
         LabAdminInfo = new javax.swing.JLabel();
         LabAdminTime = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         TextAdminMenu = new javax.swing.JTextArea();
         LabAdminSelection = new javax.swing.JLabel();
-        InAdminSelection = new javax.swing.JTextField();
         jScrollPane4 = new javax.swing.JScrollPane();
         TextAdminLog = new javax.swing.JTextArea();
         ButAdminOk = new javax.swing.JButton();
@@ -1208,6 +1210,12 @@ public class tvmGUI extends javax.swing.JFrame {
 
         getContentPane().add(OutOfOrder, "card8");
 
+        InAdminSelection.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                InAdminSelectionKeyPressed(evt);
+            }
+        });
+
         LabAdminTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabAdminTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabAdminTitle.setText("Service");
@@ -1439,6 +1447,42 @@ public class tvmGUI extends javax.swing.JFrame {
     public void switchWindow(JPanel currentWindow, JPanel nextWindow) {
         currentWindow.setVisible(false);
         nextWindow.setVisible(true);
+    }
+    
+    /**
+     * Used to check input from admin in service window, and print
+     * the appropriate text to the text field. 
+     */
+    public void adminWriteData() {
+        int adminSelection;     // Variable to hold menu selection
+        try {       // Make string to int.
+            adminSelection = Integer.parseInt(InAdminSelection.getText());
+        } catch (NumberFormatException e) {
+            return;     // If input is not an integer, do nothing in program.
+        }
+        // Get data from Serice
+        ArrayList<String> data = SV.getData(adminSelection);
+        // Clear text area
+        TextAdminLog.setText(null);
+        //Check String elements in data-list
+        for (String element : data) {
+            // Check for keyword to set out of order
+            switch (element) {
+                case "OOO":
+                    outOfOrder = true;
+                    // Swtich to out-of-order window
+                    switchWindow(Admin, OutOfOrder);
+                    return;
+                case "LO":
+                    // Log out/Switch back to welcomming screen
+                    switchWindow(Admin, WelcomeDA);
+                    return;
+                default:
+                    // Add text to area
+                    TextAdminLog.append(element);
+                    TextAdminLog.append("\n");      // linebreak
+            }
+        }
     }
     
     //Variables
@@ -2117,36 +2161,14 @@ public class tvmGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_ButAdminSimulationActionPerformed
 
     private void ButAdminOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAdminOkActionPerformed
-        int adminSelection;     // Variable to hold menu selection
-        try {       // Make string to int.
-            adminSelection = Integer.parseInt(InAdminSelection.getText());
-        } catch (NumberFormatException e) {
-            return;     // If input is not an integer, do nothing in program.
-        }
-        // Get data from Serice
-        ArrayList<String> data = SV.getData(adminSelection);
-        // Clear text area
-        TextAdminLog.setText(null);
-        //Check String elements in data-list
-        for (String element : data) {
-            // Check for keyword to set out of order
-            switch (element) {
-                case "OOO":
-                    outOfOrder = true;
-                    // Swtich to out-of-order window
-                    switchWindow(Admin, OutOfOrder);
-                    return;
-                case "LO":
-                    // Log out/Switch back to welcomming screen
-                    switchWindow(Admin, WelcomeDA);
-                    return;
-                default:
-                    // Add text to area
-                    TextAdminLog.append(element);
-                    TextAdminLog.append("\n");      // linebreak
-            }
-        }     
+        adminWriteData();
     }//GEN-LAST:event_ButAdminOkActionPerformed
+
+    private void InAdminSelectionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InAdminSelectionKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {  // Check if key pressed
+            adminWriteData();                         // is ENTER
+        }
+    }//GEN-LAST:event_InAdminSelectionKeyPressed
     
     
     
