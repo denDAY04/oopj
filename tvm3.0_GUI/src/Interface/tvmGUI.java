@@ -1,3 +1,5 @@
+package Interface;
+
 import MachineLogic.*;
 import PaymentModule.*;
 import java.awt.Color;
@@ -5,10 +7,8 @@ import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import sun.awt.AppContext;
 
 public class tvmGUI extends javax.swing.JFrame {
 
@@ -30,6 +30,9 @@ public class tvmGUI extends javax.swing.JFrame {
         LabWelcomeDAAmountError.setText(" ");
         // Call thread-method to make time labels
         startTimeThread();  
+        // Call thread-method to watch terminal for integer inputs
+        // Used for admin login
+        adminLogIn();
     }
 
     /**
@@ -85,8 +88,6 @@ public class tvmGUI extends javax.swing.JFrame {
         ButWelcomeDANext = new javax.swing.JButton();
         ButWelcomeDAHelp = new javax.swing.JButton();
         ButWelcomeDALang = new javax.swing.JButton();
-        ButAdminSimulation = new javax.swing.JButton();
-        LabAdminSimulation = new javax.swing.JLabel();
         CartDA = new javax.swing.JPanel();
         LabCartDAInfo = new javax.swing.JLabel();
         LabCartDATime = new javax.swing.JLabel();
@@ -458,16 +459,6 @@ public class tvmGUI extends javax.swing.JFrame {
 
         ButWelcomeDALang.setText("[LANGUAGE]");
 
-        ButAdminSimulation.setText("Admin Simulation");
-        ButAdminSimulation.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButAdminSimulationActionPerformed(evt);
-            }
-        });
-
-        LabAdminSimulation.setForeground(new java.awt.Color(153, 153, 0));
-        LabAdminSimulation.setText("For simulation purposes only!");
-
         javax.swing.GroupLayout WelcomeDALayout = new javax.swing.GroupLayout(WelcomeDA);
         WelcomeDA.setLayout(WelcomeDALayout);
         WelcomeDALayout.setHorizontalGroup(
@@ -518,15 +509,9 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(ButWelcomeDALang)
                 .addGap(28, 28, 28)
                 .addComponent(ButWelcomeDAHelp)
-                .addGap(180, 180, 180)
-                .addComponent(ButAdminSimulation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(ButWelcomeDANext, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, WelcomeDALayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LabAdminSimulation)
-                .addGap(326, 326, 326))
         );
         WelcomeDALayout.setVerticalGroup(
             WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -556,14 +541,11 @@ public class tvmGUI extends javax.swing.JFrame {
                 .addComponent(LabWelcomeDATempPrice)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(LabWelcomeDATotalPrice)
-                .addGap(83, 83, 83)
-                .addComponent(LabAdminSimulation)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(103, 103, 103)
                 .addGroup(WelcomeDALayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(ButWelcomeDANext, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(ButWelcomeDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButWelcomeDALang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButAdminSimulation, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ButWelcomeDALang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18))
         );
 
@@ -1297,6 +1279,55 @@ public class tvmGUI extends javax.swing.JFrame {
     //Variables
     
     /**
+     * A Thread that keeps checking the terminal for integer inputs. 
+     * If the input equals a specified password the program switches 
+     * to the admin window. But only so if the active window is 
+     * WelcomeDA.
+     * 
+     * If the input does not equal the specified password in the
+     * adminPassword variable, or the active window is not Welcome DA,
+     * error messages/instructions are written to theterminal.
+     */
+    public void adminLogIn() {
+        Thread watchTerminal = new Thread() {
+           public void run() {
+               while (true) {   // Always rin
+                if (terminalInput.nextInt() == adminPassword) {
+                    // Only enable switching to admin if the active 
+                    // screen is WelcomeDA.
+                    if (WelcomeDA.isVisible() == false) {
+                        System.out.println("Skift til Velkomstvindue.");
+                    } else {
+                        // Set text in menu field
+                        TextAdminMenu.setText(
+                            "Der kan fortages følgende valg:"
+                            +"\n"
+                            +"\n1 : Vis dagsstatistik "
+                            +"\n2 : Skift billetrulle"
+                            +"\n3 : Skift blækpatron"
+                            +"\n4 : Udskriv og nulstil salgs statestik"
+                            +"\n5 : Sæt ud af drift"
+                            +"\n6 : Standard service besøg"
+                            +"\n7 : Vis total statestik"
+                            +"\n8 : Print test billet"
+                            +"\n0 : Log ud"
+                        );
+                        // Reset input field in admin window
+                        InAdminSelection.setText(null);
+                        // Switch to admin window
+                        switchWindow(WelcomeDA, Admin);
+                    }
+                } else {
+                    // If input dows not equal the password
+                    System.out.println("Forkert indput.");
+                }
+            }
+           }
+        };
+        watchTerminal.start();
+    }
+    
+    /**
      * Starts a thread that updates the time labels. 
      */
     private void startTimeThread() {
@@ -1501,6 +1532,9 @@ public class tvmGUI extends javax.swing.JFrame {
     }
     
     //Variables
+    private Scanner terminalInput = new Scanner(System.in);
+    private boolean adminPasswordCorret = false;
+    private int adminPassword = 1337;
     private int hardID;
     private int startZone;
     private CreatedTickets CT = new CreatedTickets();
@@ -2152,28 +2186,6 @@ public class tvmGUI extends javax.swing.JFrame {
         switchWindow(SMSDA, WelcomeDA);
     }//GEN-LAST:event_ButSMSDAClearActionPerformed
 
-    //---------------------------------Service-----------------------------------
-    private void ButAdminSimulationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAdminSimulationActionPerformed
-        // Set text in menu field
-        TextAdminMenu.setText(
-            "Der kan fortages følgende valg:"
-            +"\n"
-            +"\n1 : Vis dagsstatistik "
-            +"\n2 : Skift billetrulle"
-            +"\n3 : Skift blækpatron"
-            +"\n4 : Udskriv og nulstil salgs statestik"
-            +"\n5 : Sæt ud af drift"
-            +"\n6 : Standard service besøg"
-            +"\n7 : Vis total statestik"
-            +"\n8 : Print test billet"
-            +"\n0 : Log ud"
-        );
-        // Reset input field in admin window
-        InAdminSelection.setText(null);
-        // Switch to admin window
-        switchWindow(WelcomeDA, Admin);
-    }//GEN-LAST:event_ButAdminSimulationActionPerformed
-
     private void ButAdminOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButAdminOkActionPerformed
         adminWriteData();
     }//GEN-LAST:event_ButAdminOkActionPerformed
@@ -2223,7 +2235,6 @@ public class tvmGUI extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Admin;
     private javax.swing.JButton ButAdminOk;
-    private javax.swing.JButton ButAdminSimulation;
     private javax.swing.JButton ButCardDABack;
     private javax.swing.JButton ButCardDAClear;
     private javax.swing.JButton ButCardDAConfirm;
@@ -2270,7 +2281,6 @@ public class tvmGUI extends javax.swing.JFrame {
     private javax.swing.JTextField InSetup2TypeENG;
     private javax.swing.JLabel LabAdminInfo;
     private javax.swing.JLabel LabAdminSelection;
-    private javax.swing.JLabel LabAdminSimulation;
     private javax.swing.JLabel LabAdminTime;
     private javax.swing.JLabel LabAdminTitle;
     private javax.swing.JLabel LabCardDAInfo;
