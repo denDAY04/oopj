@@ -3,20 +3,48 @@ package Interface;
 import java.awt.*;      //Importing the required classes for this program
 import javax.swing.*;
 
-public class Printer extends JPanel {
-    //Declaration of the various variables used
-    Image image; //Image variable to store the background image
-    String type; //Rest is ticket variables
-    String amountTickets;
-    String startZone;
-    String amountZones;
-    String totalPrice;
-    String timeStamp;
-    String ticketID;
-    String typeENG;
-    int language;
+public class Printer {
+    
+    GraphicalTicket gticket;
 
     //Class responsible of loading up the image
+    /**
+     * Printing method to simulate printing hardware.
+     */
+    public boolean print(String type, String typeENG, String startZone, String amountZones,
+            String amountTickets, String totalPrice,
+            String timeStamp, String ticketID, int language) {
+       
+        /*Calls the printTicket(); method on the object test, which should
+         show a ticket on the screen*/ 
+        JFrame frame = new JFrame("BlueJ Trafikselskab");
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setSize(400, 570);
+        gticket = new GraphicalTicket(type, typeENG, amountTickets, startZone,
+                amountZones, totalPrice, timeStamp, ticketID, language);
+        frame.setContentPane(gticket);
+        frame.setVisible(true);
+        
+        return true;  // can test printer error
+    }
+    
+    
+public class GraphicalTicket extends JPanel
+{
+  //Declaration of the various variables used
+  Image image; //Image variable to store the background image
+  String type; //Rest is ticket variables
+  String amountTickets;
+  String startZone;
+  String amountZones;
+  String totalPrice;
+  String timeStamp;
+  String ticketID;
+  String typeENG;
+  int language;
+  
+  //Class responsible of loading up the image
+
     /**
      * @param type
      * @param amountTickets
@@ -28,22 +56,24 @@ public class Printer extends JPanel {
      * @param language
      * @param typeENG
      */
-    public void GraphicalTicket(String type, String typeENG, String amountTickets, String startZone, String amountZones, String totalPrice, String timeStamp, String ticketID, int language) {
-
-        image = Toolkit.getDefaultToolkit().getImage("background.png");
-        this.type = type;
-        this.amountTickets = amountTickets;
-        this.startZone = startZone;
-        this.amountZones = amountZones;
-        this.totalPrice = totalPrice;
-        this.timeStamp = timeStamp;
-        this.ticketID = ticketID;
-        this.language = language;
-        this.typeENG = typeENG;
-
-        //Image MUST be placed in the root projectfolder, not under src!
-    }
-    //Class responsible of painting text on top of the image
+    public GraphicalTicket(String type,String typeENG, String amountTickets, String startZone, String amountZones, String totalPrice ,String timeStamp,String ticketID,int language)
+  {
+    super();
+    image = Toolkit.getDefaultToolkit().getImage("background.png");
+    this.type=type;
+    this.amountTickets=amountTickets;
+    this.startZone=startZone;
+    this.amountZones=amountZones;
+    this.totalPrice=totalPrice;
+    this.timeStamp=timeStamp;
+    this.ticketID=ticketID;
+    this.language=language;
+    this.typeENG=typeENG;
+        
+    
+    //Image MUST be placed in the root projectfolder, not under src!
+  }
+  //Class responsible of painting text on top of the image
 
     /**
      * @param g
@@ -104,88 +134,6 @@ public class Printer extends JPanel {
         g.dispose();
     }
 
-    //This is the method call to use in the main order to print a ticket     
-    public void printTicket(String type, String typeENG, String amountTickets, String startZone, String amountZones, String totalPrice, String timeStamp, String ticketID, int language)
-        { 
-        this.type = type;
-        this.amountTickets = amountTickets;
-        this.startZone = startZone;
-        this.amountZones = amountZones;
-        this.totalPrice = totalPrice;
-        this.timeStamp = timeStamp;
-        this.ticketID = ticketID;
-        this.language = language;
-        this.typeENG = typeENG;
-
-        JFrame frame = new JFrame("BlueJ Trafikselskab"); //Creates a new frame
-        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        frame.setSize(400, 570);
-
-        //Creates a new instance of the object GraphicalTicket to use
-        this.GraphicalTicket(type, typeENG, amountTickets, startZone, amountZones, totalPrice, timeStamp, ticketID, language);
-        frame.setContentPane(this);
-        frame.setVisible(true);
-    }
-
-    //Creates a new instance of the object UseGraphicalTicket named test
-    /**
-     * Printing method to simulate printing hardware.
-     */
-    public boolean print(String type, String typeENG, String startZone, String amountZones,
-            String amountTickets, String totalPrice,
-            String timeStamp, String ticketID, int language) {
-        if (language == 1) {
-            /*System.out.println("###############################");
-            System.out.println("#-----BlueJ Trafikselskab-----#");
-            System.out.println("#            Billet           #");
-            System.out.println("#                             #");
-            System.out.println("# Type:       " + amountTickets + type + "    #");
-            System.out.println("#                             #");
-            System.out.println("# Fra zone:   " + startZone + "            #");
-            System.out.println("#                             #");
-            System.out.println("# Antal zoner:" + amountZones + "            #");
-            System.out.println("#                             #");
-            System.out.println("#                             #");
-            System.out.println("#        " + totalPrice + " DKK         #");
-            System.out.println("#                             #");
-            System.out.println("#                             #");
-            System.out.println("#          " + timeStamp + "   #");
-            System.out.println("#                             #");
-            System.out.println("#    Gyldig 2 timer fra køb   #");
-            System.out.println("#                             #");
-            System.out.println("# >>" + ticketID + "<<          #");
-            System.out.println("###############################");
-            System.out.println();*/
-        } else if (language == 2) {
-            /*System.out.println("###############################");
-            System.out.println("#-----BlueJ Trafikselskab-----#");
-            System.out.println("#            Ticket           #");
-            System.out.println("#                             #");
-            System.out.println("# Type:         " + amountTickets + typeENG + "  #");
-            System.out.println("#                             #");
-            System.out.println("# From zone:    " + startZone + "          #");
-            System.out.println("#                             #");
-            System.out.println("# Amount zones: " + amountZones + "          #");
-            System.out.println("#                             #");
-            System.out.println("#                             #");
-            System.out.println("#        " + totalPrice + " DKK         #");
-            System.out.println("#                             #");
-            System.out.println("#                             #");
-            System.out.println("#          " + timeStamp + "   #");
-            System.out.println("#                             #");
-            System.out.println("# Valid 2 hours from purchase #");
-            System.out.println("#                             #");
-            System.out.println("# >>" + ticketID + "<<          #");
-            System.out.println("###############################");
-            System.out.println();*/
-
-        } 
-
-        /*Calls the printTicket(); method on the object test, which should
-         show a ticket on the screen*/
-        printTicket(type, typeENG, amountTickets, startZone, amountZones, totalPrice, timeStamp, ticketID, language);
-        
-        return true;  // can test printer error
-
-    }
+}
+    
 }
