@@ -1502,8 +1502,7 @@ public class tvmGUI extends javax.swing.JFrame {
     
     //Variables
     private int hardID;
-    private int startZone;// Enable input from terminal
-    static Scanner terminalInput = new Scanner(System.in);
+    private int startZone;
     private CreatedTickets CT = new CreatedTickets();
     private Statistics ST = new Statistics();
     private ShoppingBasket SB = new ShoppingBasket(CT, ST);
