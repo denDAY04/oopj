@@ -1735,7 +1735,7 @@ public class tvmGUI extends javax.swing.JFrame {
         }
         else 
         {   
-                    languageBundle = ResourceBundle.getBundle("Bundle", new Locale("", "",""));          // set default language (Danish)
+                    languageBundle = ResourceBundle.getBundle("Interface.Bundle", new Locale("", "",""));          // set default language (Danish)
                     language =1;
                     int numberOfItems = CBWelcomeDAType.getItemCount();
                     CBWelcomeDAType.removeItemAt(0);
