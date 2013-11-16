@@ -1,3 +1,5 @@
+package Interface;
+
 import MachineLogic.*;
 import PaymentModule.*;
 import java.awt.Color;
@@ -1547,8 +1549,7 @@ public class tvmGUI extends javax.swing.JFrame {
     private int adminPassword = 1337;
     private int hardID;
     private int startZone;// Enable input from terminal
-    private static ResourceBundle languageBundle =
-    ResourceBundle.getBundle("Bundle");
+    private static ResourceBundle languageBundle =  ResourceBundle.getBundle("Interface.Bundle");
     private CreatedTickets CT = new CreatedTickets();
     private Statistics ST = new Statistics();
     private ShoppingBasket SB = new ShoppingBasket(CT, ST);
@@ -1722,7 +1723,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 
         if (language==1)
         {
-                    languageBundle = ResourceBundle.getBundle("Bundle", new Locale("en", "IE","EURO"));  // set language to English
+                    languageBundle = ResourceBundle.getBundle("Interface.Bundle", new Locale("en", "IE","EURO"));  // set language to English
                     language =2;
                     int numberOfItems = CBWelcomeDAType.getItemCount();
                     CBWelcomeDAType.removeItemAt(0);
