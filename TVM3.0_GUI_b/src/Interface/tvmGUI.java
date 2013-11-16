@@ -1899,15 +1899,28 @@ public class tvmGUI extends javax.swing.JFrame {
         }
         
         
-        for (int m = 0; m<n; m++)
-        {
-            String type = CT.transferTicket(m).getTypeDA();
-            if (type.equals(CBWelcomeDAType.getSelectedItem().toString()))
-            {
-                ticketIndex = m;
-                break;
-            }
-        }       
+        // If langauge selected is danihs, compare to danish ticket-types
+        if (language == 1) {
+            for (int m = 0; m<n; m++)
+                {
+                    String type = CT.transferTicket(m).getTypeDA();
+                    if (type.equals(CBWelcomeDAType.getSelectedItem().toString()))
+                    {
+                        ticketIndex = m;
+                        break;
+                    }
+                }
+        } else if (language == 2) {     // else compare to english ticket-types
+            for (int m = 0; m<n; m++)
+                {
+                    String type = CT.transferTicket(m).getTypeENG();
+                    if (type.equals(CBWelcomeDAType.getSelectedItem().toString()))
+                    {
+                        ticketIndex = m;
+                        break;
+                    }
+                }
+        }
         SB.addToCart(ticketIndex, amountZones, CBWelcomeDAAmount.getSelectedIndex());        
         // add selected ticket to soppingcart
         String toListAmount = amountTickets+languageBundle.getString(" STK.");
