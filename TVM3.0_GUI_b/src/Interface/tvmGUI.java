@@ -1923,9 +1923,15 @@ public class tvmGUI extends javax.swing.JFrame {
         }
         SB.addToCart(ticketIndex, amountZones, CBWelcomeDAAmount.getSelectedIndex());        
         // add selected ticket to soppingcart
+        // Choose type dependant on language
+        String toListType;
+        if (language == 2) {    // english
+            toListType = CT.transferTicket(ticketIndex).getTypeENG();
+        } else { // danish - default
+           toListType = CT.transferTicket(ticketIndex).getTypeDA(); 
+        }
         String toListAmount = amountTickets+languageBundle.getString(" STK.");
-        String toListType = CT.transferTicket(ticketIndex).getTypeDA();
-        String toListZones = amountZones+languageBundle.getString("-ZONER");
+        String toListZones = amountZones+languageBundle.getString("-ZONER"); 
         // Check if last option is selected
         String temp_s = ""+CBWelcomeDAZone.getSelectedItem();
         int selectedAmountZones = 0;
