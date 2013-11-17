@@ -30,10 +30,18 @@ public class JUnit_test_Statistics {
              String timeStamp;
              
              //Creation of ticket
+             //addTicket(int pricePerZone, String typeDA, String typeENG,
+             //int startZone)
              cTickets.addTicket(2, "test", "testENG", 30);
+             //addToCart(int ticketIndex,int amountZones,int ticketAmount)
              sBasket.addToCart(0,3,4);
 
-             //Testing LogSale method
+             //Testing LogSale method and statistic update methods
+             //Expecting 24 in MoneyDay since 2*3*4 is 24.
+             //When logging a sale, there has been a print,
+             //therefor CheckInk and CheckPaper is compared.
+             //Since here has been only one thicket sale,
+             //MoneyTotal is the same as MoneyDay. 
              Stat.LogSale(sBasket.getCart().get(0));
              assertEquals(24,Stat.MoneyDay());
              assertEquals(999,Stat.CheckInk());
@@ -46,16 +54,21 @@ public class JUnit_test_Statistics {
              assertEquals(Stat.getLog(),Stat.getDayLog());
              
              //Test ResetDayStatistics method
+             //Expecting zeros in daily statistics.
              Stat.ResetDayStatistics();
              assertEquals(0,Stat.MoneyDay());
              assertEquals(0,Stat.TicketSoldDay());
              
              //Test testPrint method
+             //Expecting 998 as value because of testPrint.
              Stat.testPrint();
              assertEquals(998,Stat.CheckInk());
              assertEquals(998,Stat.CheckPaper());
              
              //Test ResetInk and ResetPaper method and totals
+             //Expecting 1000 as Ink and Paper is reset.
+             //Expecting same values as earlier since only daily statistics is
+             //reset.
              Stat.ResetInk();
              Stat.ResetPaper();
              assertEquals(1000,Stat.CheckInk());
