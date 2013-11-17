@@ -1,7 +1,6 @@
 package MachineLogic;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  *   +Service() : void
