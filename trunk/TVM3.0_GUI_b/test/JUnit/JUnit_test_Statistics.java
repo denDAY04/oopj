@@ -5,16 +5,12 @@ package JUnit;
  * and open the template in the editor.
  */
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import MachineLogic.CreatedTickets;
 import MachineLogic.ShoppingBasket;
 import MachineLogic.Statistics;
-import Interface.UserInterface;
 
 /**
  *
@@ -22,24 +18,13 @@ import Interface.UserInterface;
  */
 public class JUnit_test_Statistics {
     
-        /**
-     * Default constructor for test class JUnit_test_Statistics
-     */
-    public JUnit_test_Statistics()
-    {
-
-    }
-    
-    
-    
     /**
      *
      */
     @Test
     public void JUnit_test_Statist() {
              CreatedTickets cTickets = new CreatedTickets();
-             UserInterface UserInt = new UserInterface();
-             Statistics Stat = new Statistics(UserInt); 
+             Statistics Stat = new Statistics(); 
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
              
              cTickets.addTicket(2, "test", "testENG", 30);
@@ -62,25 +47,4 @@ public class JUnit_test_Statistics {
              assertEquals(24,Stat.MoneyTotal());
              assertEquals(4,Stat.TicketSoldTotal());
     }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
 }
