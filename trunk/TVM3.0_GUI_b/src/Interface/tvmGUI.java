@@ -9,10 +9,8 @@ import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 import java.util.Scanner;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import sun.awt.AppContext;
 
 public class tvmGUI extends javax.swing.JFrame {
 
@@ -1298,7 +1296,7 @@ public class tvmGUI extends javax.swing.JFrame {
      * 
      * If the input does not equal the specified password in the
      * adminPassword variable, or the active window is not Welcome DA,
-     * error messages/instructions are written to theterminal.
+     * error messages/instructions are written to the terminal.
      */
     public void adminLogIn() {
         Thread watchTerminal = new Thread() {
@@ -1564,8 +1562,8 @@ public class tvmGUI extends javax.swing.JFrame {
     private int typePricePZ = 0;
     private int language = 1;   //1 danish; 2 english
     private boolean outOfOrder = false;
-    //private ResourceBundle languageBundle;
-
+    
+    
 //---------------------------------SETUP2--------------------------------------
     private void ButSetup2AddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2AddMActionPerformed
         String TypeDA = InSetup2TypeDA.getText().trim();
@@ -1723,27 +1721,27 @@ public class tvmGUI extends javax.swing.JFrame {
                 
         if (language==1)
         {
-                    languageBundle = ResourceBundle.getBundle("Interface.Bundle", new Locale("en", "IE","EURO"));  // set language to English
-                    language =2;
-                    int numberOfItems = CBWelcomeDAType.getItemCount();
-                    CBWelcomeDAType.removeItemAt(0);
-                    CBWelcomeDAType.addItem(languageBundle.getString("VÆLG BILLETTYPE..."));
-                    for (int n=1; (numberOfItems > n);n++){
-                        CBWelcomeDAType.removeItemAt(0);
-                        CBWelcomeDAType.addItem(CT.transferTicket(n-1).getTypeENG());
+            languageBundle = ResourceBundle.getBundle("Interface.Bundle", new Locale("en", "IE","EURO"));  // set language to English
+            language =2;
+            int numberOfItems = CBWelcomeDAType.getItemCount();
+            CBWelcomeDAType.removeItemAt(0);
+            CBWelcomeDAType.addItem(languageBundle.getString("VÆLG BILLETTYPE..."));
+            for (int n=1; (numberOfItems > n);n++){
+                CBWelcomeDAType.removeItemAt(0);
+                CBWelcomeDAType.addItem(CT.transferTicket(n-1).getTypeENG());
                     }
         }
         else 
         {   
-                    languageBundle = ResourceBundle.getBundle("Interface.Bundle", new Locale("", "",""));          // set default language (Danish)
-                    language =1;
-                    int numberOfItems = CBWelcomeDAType.getItemCount();
-                    CBWelcomeDAType.removeItemAt(0);
-                    CBWelcomeDAType.addItem(languageBundle.getString("VÆLG BILLETTYPE..."));
-                    for (int n=1; (numberOfItems > n);n++){
-                        CBWelcomeDAType.removeItemAt(0);
-                        CBWelcomeDAType.addItem(CT.transferTicket(n-1).getTypeDA());
-                    }
+            languageBundle = ResourceBundle.getBundle("Interface.Bundle", new Locale("", "",""));          // set default language (Danish)
+            language =1;
+            int numberOfItems = CBWelcomeDAType.getItemCount();
+            CBWelcomeDAType.removeItemAt(0);
+            CBWelcomeDAType.addItem(languageBundle.getString("VÆLG BILLETTYPE..."));
+            for (int n=1; (numberOfItems > n);n++){
+                CBWelcomeDAType.removeItemAt(0);
+                CBWelcomeDAType.addItem(CT.transferTicket(n-1).getTypeDA());
+            }
                         
         }
          // re-write the content of all text in GUI objects
@@ -1768,7 +1766,6 @@ public class tvmGUI extends javax.swing.JFrame {
         CBWelcomeDAZone.addItem(languageBundle.getString("ALLE-ZONER"));
 
 
- //       CBWelcomeDAAmount.removeAllItems();
         CBWelcomeDAAmount.removeItemAt(0);
         CBWelcomeDAAmount.addItem(languageBundle.getString("VÆLG ANTAL BILLETTER..."));
         CBWelcomeDAAmount.removeItemAt(0);
@@ -1829,8 +1826,7 @@ public class tvmGUI extends javax.swing.JFrame {
         ButSMSDABack.setText(languageBundle.getString("TILBAGE"));
         ButSMSDAClear.setText(languageBundle.getString("AFBRYD"));
         LabOutOfOrderTitle.setText(languageBundle.getString("UDE AF DRIFT / OUT OF ORDER"));
-        LabAdminTitle.setText(languageBundle.getString("SERVICE"));
-        LabAdminSelection.setText(languageBundle.getString("VALG :"));
+        LabWelcomeDAInfo.setText(languageBundle.getString("MASKIN ID: ")+hardID+languageBundle.getString("  ZONE: ")+startZone);
 
 
         

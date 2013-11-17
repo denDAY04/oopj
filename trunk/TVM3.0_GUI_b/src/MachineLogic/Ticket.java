@@ -1,6 +1,5 @@
 package MachineLogic;
 import java.sql.Timestamp;
-import java.util.*;
 
 public class Ticket 
 {
