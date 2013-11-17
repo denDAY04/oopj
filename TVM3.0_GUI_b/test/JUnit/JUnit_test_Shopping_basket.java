@@ -1,8 +1,6 @@
 package JUnit;
 
 import static org.junit.Assert.*;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.Assert.*;
 import java.sql.Timestamp;
@@ -91,10 +89,14 @@ public class JUnit_test_Shopping_basket
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
              String timeStamp;
              
-             cTickets.addTicket(2, "test", "testENG", 30);
+             //Creation of ticket
+             cTickets.addTicket(20, "test", "testENG", 2);
              
-             sBasket.addToCart(1,3,4);
-             assertEquals(24,sBasket.getTotalPrice());
+             //Testing addToCart method
+             sBasket.addToCart(1,1,1);
+             
+             
+             assertEquals(34,sBasket.getTotalPrice());
              assertEquals(4,sBasket.getCart().get(0).getAmountTickets());
              assertEquals(3,sBasket.getCart().get(0).getZones());
              assertEquals(30,sBasket.getCart().get(0).getStartZone());
@@ -105,6 +107,8 @@ public class JUnit_test_Shopping_basket
              timeStamp = new Timestamp(date.getTime()).toString().substring(0,16);
              sBasket.getCart().get(0).setTimeStamp();
              assertEquals(timeStamp,sBasket.getCart().get(0).getTimeStamp());
+             
+             //Test clearCart method
              sBasket.clearCart();
              assertEquals(0,sBasket.getCart().size());
     }
