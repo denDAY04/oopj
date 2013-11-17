@@ -11,6 +11,7 @@ import org.junit.Test;
 import MachineLogic.CreatedTickets;
 import MachineLogic.ShoppingBasket;
 import MachineLogic.Statistics;
+import java.sql.Timestamp;
 
 /**
  *
@@ -26,10 +27,11 @@ public class JUnit_test_Statistics {
              CreatedTickets cTickets = new CreatedTickets();
              Statistics Stat = new Statistics(); 
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
+             String timeStamp;
              
              //Creation of ticket
              cTickets.addTicket(2, "test", "testENG", 30);
-             sBasket.addToCart(1,3,4);
+             sBasket.addToCart(0,3,4);
 
              //Testing LogSale method
              Stat.LogSale(sBasket.getCart().get(0));
@@ -40,12 +42,20 @@ public class JUnit_test_Statistics {
              assertEquals(4,Stat.TicketSoldDay());
              assertEquals(4,Stat.TicketSoldTotal());
              
+             //Testing and comparing getLog methods
+             assertEquals(Stat.getLog(),Stat.getDayLog());
+             
              //Test ResetDayStatistics method
              Stat.ResetDayStatistics();
              assertEquals(0,Stat.MoneyDay());
              assertEquals(0,Stat.TicketSoldDay());
              
-             //Test ResetInk and ResetPaper method
+             //Test testPrint method
+             Stat.testPrint();
+             assertEquals(998,Stat.CheckInk());
+             assertEquals(998,Stat.CheckPaper());
+             
+             //Test ResetInk and ResetPaper method and totals
              Stat.ResetInk();
              Stat.ResetPaper();
              assertEquals(1000,Stat.CheckInk());
