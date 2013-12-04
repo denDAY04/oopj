@@ -15,6 +15,10 @@ public class Setup2 extends javax.swing.JPanel {
     Setup1 Setup1Class;
     WelcomeDA WelcomeDAClass;
     Admin AdminClass;
+    int timeoutTime = 10000;    // 10 seconds without mouse movement = timeout 
+    int timoutInitDelay = 10000; // Begin mouse movement check after 10 seconds
+    int timoutCheckPeriod = 60000; // Check timoutTimer every 60 seconds 
+    
     /**
      * Creates new form Setup2
      */
@@ -217,6 +221,7 @@ public class Setup2 extends javax.swing.JPanel {
             {
                 master.addTicketToListSetup2(PricePZ, TypeDA, TypeENG);
                 master.ChangePanel(WelcomeDAClass);
+                master.runTimeOut(timeoutTime, timoutInitDelay, timoutCheckPeriod);    // activate tmeout possibility
                 WelcomeDAClass.LabWelcomeDAInfo.setText("Maskin ID: "+master.hardID+"  Zone: "+master.startZone);
                 AdminClass.LabAdminInfo.setText("Maskin ID: "+master.hardID+"  Zone: "+master.startZone);
                 return;
@@ -236,11 +241,13 @@ public class Setup2 extends javax.swing.JPanel {
             if (PricePZ ==-1 && TypeDA.equals("") && TypeENG.equals(""))
             {
                 master.ChangePanel(WelcomeDAClass);
+                master.runTimeOut(timeoutTime, timoutInitDelay, timoutCheckPeriod);    // activate tmeout possibility
             }
             else if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
             {
                 master.addTicketToListSetup2(PricePZ, TypeDA, TypeENG);
                 master.ChangePanel(WelcomeDAClass);
+                master.runTimeOut(timeoutTime, timoutInitDelay, timoutCheckPeriod);    // activate tmeout possibility
                 WelcomeDAClass.LabWelcomeDAInfo.setText("Maskin ID: "+master.hardID+"  Zone: "+master.startZone);
             }
             else

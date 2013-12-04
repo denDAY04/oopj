@@ -3,9 +3,12 @@ package Interface;
 import MachineLogic.*;
 import PaymentModule.*;
 import java.awt.Color;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -60,6 +63,12 @@ public class tvmGUI extends javax.swing.JFrame {
         // Call thread-method to watch terminal for integer inputs
         // Used for admin login
         adminLogIn();
+        
+        // Add a mouse movement-actionlistener for use to timeout the machine
+        addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                formMouseMoved(evt);
+            }});
     }
 
     /**
@@ -334,11 +343,66 @@ public class tvmGUI extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Clears current contentpane of the <code>JFrame</code>, and add 
+     * the <code>JPanel</code> from the call as the next panel to be shown.
+     * 
+     * @param Next Jpanel that should be shown next. 
+     */
     public void ChangePanel(JPanel Next)
     {
         getContentPane().removeAll();
         add(Next);
         repaint();
+    }
+    
+    /**
+     * Creates a thread that waits for a given set of milliseconds before
+     * executing. When executed, it creates a <code>Date</code> object to
+     * capture the current time. 
+     * 
+     * By comparing it to a Date object in the master
+     * tvmGUI class (updated at each movement of the mouse inside of the 
+     * <code>JFrame</code>)it evaluates whether the difference in time exceeds a
+     * limit given in the method call. If so, the program is returned to the
+     * welcoming-<code>JPanel</code>, the shoppingbasket is cleared, and the
+     * list in the Cart-JPanel is reset.
+     * 
+     * @param timeInactive The number of milliseconds that must have passed,
+     * at the time of the thread execution, since the last mouse movement.
+     * @param initDelay The initial delay (in milliseconds) from the creation
+     * of the object to the first execution of the thread.
+     * @param period  The period (in milliseconds) at which the thread will be
+     * executed. 
+     */
+    public void runTimeOut(final int timeInactive, final int initDelay, final int period) {
+        timeOutTimer.scheduleAtFixedRate(new TimerTask() {
+
+            @Override
+            public void run() {
+                Date currectTime = new Date();
+                if ((currectTime.getTime() - mouseMovedTime.getTime()) > timeInactive 
+                        && !outOfOrder) { // do not timeout if out-of-order
+                    ChangePanel(WelcomeDAClass);
+                    resetSelectionScreen();
+                    SB.clearCart();
+                    CartContent.clear();
+                    CartDAClass.ListCartDATicketList.setListData(CartContent.toArray());
+                }
+            }
+        } // end annonymus TimerTask
+        , initDelay, period);
+    }
+    
+    /**
+     * A mouse movement-listening that captures the current time at which
+     * the mouse was moved inside of the frame, through a <code>Date</code> 
+     * object.
+     * 
+     * @param evt Mouse movement-event
+     */
+    private void formMouseMoved(MouseEvent evt) {
+        mouseMovedTime = new Date();
     }
     
 //---------------------Variables for use in the GUI---------------------------
@@ -361,6 +425,8 @@ public class tvmGUI extends javax.swing.JFrame {
     public int typePricePZ = 0;
     public int language = 1;   //1 danish; 2 english
     public boolean outOfOrder = false;
+    private Date mouseMovedTime;
+    private Timer timeOutTimer = new Timer();
  
     /**
      * @param args the command line arguments
