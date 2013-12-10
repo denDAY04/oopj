@@ -1,5 +1,4 @@
 package MachineLogic;
-import Interface.UserInterface;
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.*;
@@ -22,6 +21,7 @@ public Statistics (){}
      /**
      * Update all variables and arrays for a printed ticket .
      * @param t
+     * @throws java.lang.Exception
      */
 	public void LogSale(Ticket t, int hardID) throws Exception
     {
