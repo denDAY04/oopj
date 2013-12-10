@@ -26,29 +26,29 @@ public class paySMS extends Payment
      */
     public boolean MakePaymentBool(String NUM)
     {
-        String NUMWMinusSpaces = "";
+        String NUMMinusSpaces = "";
         
         // Trim spaces
         for (int i = 0; i < NUM.length(); i++) {
             if (NUM.charAt(i) != ' ') {
-                NUMWMinusSpaces += NUM.charAt(i);
+                NUMMinusSpaces += NUM.charAt(i);
             }
         }
         
         // Check if string is 8 characters long
-        if (NUMWMinusSpaces.length() != 8) {
+        if (NUMMinusSpaces.length() != 8) {
             return false;
         }
         
         // Check if string cntains letters
         try {
-           Integer.parseInt(NUMWMinusSpaces);
+           Integer.parseInt(NUMMinusSpaces);
         } catch (NumberFormatException e) { 
            return false;
         }
         
         // Compare to number for forced error-simulation
-        if (NUMWMinusSpaces.equals(failedNUM)) {
+        if (NUMMinusSpaces.equals(failedNUM)) {
             return false;
         } else {
             return true;
