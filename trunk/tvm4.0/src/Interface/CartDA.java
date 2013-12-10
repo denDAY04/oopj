@@ -227,6 +227,7 @@ public class CartDA extends javax.swing.JPanel {
         master.ChangePanel(WelcomeDAClass);
     }//GEN-LAST:event_ButCartDAClearActionPerformed
 
+    @SuppressWarnings("unchecked")
     private void ButCartDARemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDARemoveActionPerformed
         int TickToDelete = ListCartDATicketList.getSelectedIndex();
         if (TickToDelete == -1) {        // If no item is selected, escape method call.

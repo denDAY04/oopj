@@ -304,6 +304,7 @@ public class WelcomeDA extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_CBWelcomeDAAmountActionPerformed
 
+    @SuppressWarnings("unchecked")
     private void ButWelcomeDANextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButWelcomeDANextActionPerformed
         int ticketIndex = 0;
         int n = master.CT.getArray().size()+2;  //Array begins from 0; ComboWindo begins from 1 with first being unusable
