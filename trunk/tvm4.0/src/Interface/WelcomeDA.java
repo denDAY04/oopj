@@ -232,7 +232,7 @@ public class WelcomeDA extends javax.swing.JPanel {
         {
             LabWelcomeDAError.setText("Fejl - Et eller flere valg er ugyldige");
             LabWelcomeDATypeError.setText("Ugyldigt valg");
-            LabWelcomeDAPricePZ.setVisible(false);
+            LabWelcomeDAPricePZ.setText(" ");
             LabWelcomeDATempPrice.setText("Pris pr. billet: ");
             LabWelcomeDATotalPrice.setText("Total pris: ");
         }
