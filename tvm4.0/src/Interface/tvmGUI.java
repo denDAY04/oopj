@@ -4,13 +4,9 @@ import MachineLogic.*;
 import PaymentModule.*;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
-import java.util.Date;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.Timer;
-import java.util.TimerTask;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import java.io.*;
+import java.util.*;
+import javax.swing.*;
 
 public class tvmGUI extends javax.swing.JFrame {
     Setup1 Setup1Class;
@@ -48,7 +44,9 @@ public class tvmGUI extends javax.swing.JFrame {
         this.ListContent = new ArrayList<>();
         Date time = new Date();
         initComponents();
-        ChangePanel(Setup1Class);
+        // Load setup file
+        boolean newTvm = init(); if (!newTvm) {ChangePanel(WelcomeDAClass);} else {ChangePanel(Setup1Class);}
+        
         // Initialize labels to be invisible
         Setup1Class.LabSetup1Error.setVisible(false);
         Setup2Class.LabSetup2Error.setVisible(false);
@@ -86,6 +84,54 @@ public class tvmGUI extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    
+     private boolean init() 
+       {boolean newTvm = true;
+       try         {
+                  System.out.println("Reading Setup file - setup1");   //TEST
+                
+                    FileInputStream fstream = new FileInputStream("tvm.setup");
+                    DataInputStream in = new DataInputStream(fstream);
+                    BufferedReader br = new BufferedReader(new InputStreamReader(in));
+                    String strLine;
+                    
+                    hardID = Integer.parseInt(br.readLine().trim()); //Read and set MachineID from file
+                    startZone = Integer.parseInt(br.readLine().trim()); //Read and StartZone from file
+                    
+                  System.out.println("Machine ID:"+hardID);      //TEST
+                  System.out.println("Start Zone:"+startZone);   //TEST
+                  System.out.println("<<<<<<<< Start loading tickets into CT array - setup1  >>>>>>>>");  //TEST
+
+                    while ((strLine = br.readLine()) != null)  //Read File Line By Line 
+                              {
+                                String[] words = strLine.split(" ");                  
+                                int PPZ = Integer.parseInt(words[0].trim());          
+                                String TDA = words[1].trim();                         
+                                String TEN = words[2].trim();                         
+                  System.out.println(PPZ+" "+TDA+" "+TEN);  //TEST
+                                CT.addTicket(PPZ, TDA, TEN, startZone);        // -- loading ticket into CT array
+                                WelcomeDAClass.CBWelcomeDAType.addItem(TDA);   // -- loading ticket into list
+                              }
+                  System.out.println("<<<<<<<< End loading tickets into CT array - setup1 >>>>>>>>");   //TEST
+                            in.close();  //Close the input stream
+                            
+                               WelcomeDAClass.LabWelcomeDAInfo.setText("Machine ID: "+hardID+ "  Zone: "+startZone);
+            ///         InSetup1HardwareID.setText(""+hardID);
+            ///         InSetup1StartZone.setText(""+startZone);
+                           
+                     
+                newTvm = false;
+                   }
+      
+            catch (FileNotFoundException fnf){fnf.printStackTrace();System.out.println("No Setup file found!!");}
+            catch (Exception e){System.err.println("Error: " + e.getMessage());} //Catch exception if any
+          return (newTvm);
+       }
+    
+    
+    
+    
     
 //------------------------Methods for use in the GUI--------------------------
     /**

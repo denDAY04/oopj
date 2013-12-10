@@ -4,7 +4,10 @@
  */
 package Interface;
 
+import MachineLogic.Ticket;
 import java.awt.Color;
+import java.io.*;
+import java.util.logging.*;
 
 /**
  *
@@ -21,6 +24,7 @@ public class Setup2 extends javax.swing.JPanel {
     
     /**
      * Creates new form Setup2
+     * @param tvmGUI
      */
     public Setup2(tvmGUI tvmGUI) {
         master = tvmGUI;
@@ -200,7 +204,7 @@ public class Setup2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
     
     private void ButSetup2AddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2AddMActionPerformed
-        String TypeDA = InSetup2TypeDA.getText().trim();
+        String TypeDA = InSetup2TypeDA.getText().trim();                         //Add more tickets
         String TypeENG = InSetup2TypeENG.getText().trim();
         int PricePZ = master.isInteger(InSetup2PricePZ.getText().trim());
         master.checkFieldsSetup2(PricePZ, TypeDA, TypeENG);
@@ -212,7 +216,7 @@ public class Setup2 extends javax.swing.JPanel {
     }//GEN-LAST:event_ButSetup2AddMActionPerformed
 
     private void ButSetup2SaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2SaveActionPerformed
-        String TypeDA = InSetup2TypeDA.getText().trim();
+        String TypeDA = InSetup2TypeDA.getText().trim();                         // Add ticket and exit
         String TypeENG = InSetup2TypeENG.getText().trim();
         int PricePZ = master.isInteger(InSetup2PricePZ.getText());
         if (ListSetup2TicketList.getModel().getSize() == 0)
@@ -220,6 +224,7 @@ public class Setup2 extends javax.swing.JPanel {
             if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
             {
                 master.addTicketToListSetup2(PricePZ, TypeDA, TypeENG);
+                writeConf();
                 master.ChangePanel(WelcomeDAClass);
                 master.runTimeOut(timeoutTime, timoutInitDelay, timoutCheckPeriod);    // activate tmeout possibility
                 WelcomeDAClass.LabWelcomeDAInfo.setText("Maskin ID: "+master.hardID+"  Zone: "+master.startZone);
@@ -246,6 +251,7 @@ public class Setup2 extends javax.swing.JPanel {
             else if (PricePZ !=-1 && !TypeDA.equals("") && !TypeENG.equals(""))
             {
                 master.addTicketToListSetup2(PricePZ, TypeDA, TypeENG);
+                writeConf();
                 master.ChangePanel(WelcomeDAClass);
                 master.runTimeOut(timeoutTime, timoutInitDelay, timoutCheckPeriod);    // activate tmeout possibility
                 WelcomeDAClass.LabWelcomeDAInfo.setText("Maskin ID: "+master.hardID+"  Zone: "+master.startZone);
@@ -279,6 +285,31 @@ public class Setup2 extends javax.swing.JPanel {
         //Change window to previous window
         master.ChangePanel(Setup1Class);
     }//GEN-LAST:event_ButSetup2BackActionPerformed
+
+
+    		 private void writeConf() 
+       {
+                      PrintWriter conf;
+                try  {conf = new PrintWriter(new BufferedWriter(new FileWriter("tvm.setup",false))); //("tvm.setup",true)
+                      conf.println(""+ master.hardID);
+                      conf.println(""+ master.startZone);
+                      
+                      
+                      System.out.println("Writing ticketList array to file - setup2");  //TEST
+                      
+                      for (Ticket t : master.CT.getArray()) 
+                          {
+                              conf.print(""+t.getPricePerZone()+" ");
+                              conf.print(t.getTypeDA()+" ");
+                              conf.println(t.getTypeENG());
+                          }
+                        
+                      conf.close();
+                      System.out.println("Setup file created - setup2");  //TEST
+                     }
+                catch (IOException ex) {Logger.getLogger(tvmGUI.class.getName()).log(Level.SEVERE, null, ex);}
+                
+       } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton ButSetup2AddM;
