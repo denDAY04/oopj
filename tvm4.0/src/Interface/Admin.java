@@ -39,22 +39,29 @@ public class Admin extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         TextAdminLog = new javax.swing.JTextArea();
         ButAdminOk = new javax.swing.JButton();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         InAdminSelection.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 InAdminSelectionKeyPressed(evt);
             }
         });
+        add(InAdminSelection, new org.netbeans.lib.awtextra.AbsoluteConstraints(366, 314, 67, -1));
 
         LabAdminTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabAdminTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabAdminTitle.setText("Service");
         LabAdminTitle.setToolTipText("");
+        add(LabAdminTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 51, 780, -1));
 
         LabAdminInfo.setText(" ");
+        add(LabAdminInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 354, -1));
 
         LabAdminTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabAdminTime.setText(" ");
+        add(LabAdminTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 11, 321, -1));
 
         TextAdminMenu.setBackground(new java.awt.Color(240, 240, 240));
         TextAdminMenu.setColumns(20);
@@ -62,11 +69,16 @@ public class Admin extends javax.swing.JPanel {
         TextAdminMenu.setFocusable(false);
         jScrollPane3.setViewportView(TextAdminMenu);
 
+        add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(223, 98, 359, 197));
+
         LabAdminSelection.setText("Valg :");
+        add(LabAdminSelection, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 317, -1, -1));
 
         TextAdminLog.setColumns(20);
         TextAdminLog.setRows(5);
         jScrollPane4.setViewportView(TextAdminLog);
+
+        add(jScrollPane4, new org.netbeans.lib.awtextra.AbsoluteConstraints(126, 347, 589, 200));
 
         ButAdminOk.setText("Ok");
         ButAdminOk.addActionListener(new java.awt.event.ActionListener() {
@@ -74,59 +86,10 @@ public class Admin extends javax.swing.JPanel {
                 ButAdminOkActionPerformed(evt);
             }
         });
+        add(ButAdminOk, new org.netbeans.lib.awtextra.AbsoluteConstraints(462, 313, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabAdminTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabAdminInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 354, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                                .addComponent(LabAdminTime, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 359, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(218, 218, 218))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(LabAdminSelection)
-                                .addGap(18, 18, 18)
-                                .addComponent(InAdminSelection, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(29, 29, 29)
-                                .addComponent(ButAdminOk)
-                                .addGap(293, 293, 293))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 589, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(85, 85, 85))))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabAdminInfo)
-                    .addComponent(LabAdminTime))
-                .addGap(26, 26, 26)
-                .addComponent(LabAdminTitle)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(InAdminSelection, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabAdminSelection)
-                    .addComponent(ButAdminOk))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
 
     private void InAdminSelectionKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InAdminSelectionKeyPressed
@@ -140,6 +103,7 @@ public class Admin extends javax.swing.JPanel {
     }//GEN-LAST:event_ButAdminOkActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButAdminOk;
     public javax.swing.JTextField InAdminSelection;
     public javax.swing.JLabel LabAdminInfo;

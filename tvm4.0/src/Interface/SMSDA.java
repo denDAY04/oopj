@@ -42,21 +42,29 @@ public class SMSDA extends javax.swing.JPanel {
         ButSMSDAHelp = new javax.swing.JButton();
         ButSMSDABack = new javax.swing.JButton();
         ButSMSDAClear = new javax.swing.JButton();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabSMSDAInfo.setText(" ");
+        add(LabSMSDAInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 348, -1));
 
         LabSMSDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabSMSDATime.setText(" ");
+        add(LabSMSDATime, new org.netbeans.lib.awtextra.AbsoluteConstraints(423, 11, 367, -1));
 
         LabSMSDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabSMSDATitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSMSDATitle.setText("Betaling med SMS");
+        add(LabSMSDATitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 69, 780, -1));
 
         LabSMSDAInstruct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSMSDAInstruct.setText("Indtast telefonnummeret som regningen skal sendes til og tryk herefter på godkend. ");
+        add(LabSMSDAInstruct, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 116, 780, -1));
 
         LabSMSDATotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LabSMSDATotal.setText("Total pris: ");
+        add(LabSMSDATotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 214, 155, -1));
 
         ButSMSDAConfirm.setText("Godkend");
         ButSMSDAConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -64,8 +72,10 @@ public class SMSDA extends javax.swing.JPanel {
                 ButSMSDAConfirmActionPerformed(evt);
             }
         });
+        add(ButSMSDAConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 246, 93, 38));
 
         InSMSDAPhoneNMB.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        add(InSMSDAPhoneNMB, new org.netbeans.lib.awtextra.AbsoluteConstraints(322, 148, 155, 48));
 
         ButSMSDAHelp.setText("?");
         ButSMSDAHelp.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +83,7 @@ public class SMSDA extends javax.swing.JPanel {
                 ButSMSDAHelpActionPerformed(evt);
             }
         });
+        add(ButSMSDAHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 553, 49, 36));
 
         ButSMSDABack.setText("Tilbage");
         ButSMSDABack.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +91,7 @@ public class SMSDA extends javax.swing.JPanel {
                 ButSMSDABackActionPerformed(evt);
             }
         });
+        add(ButSMSDABack, new org.netbeans.lib.awtextra.AbsoluteConstraints(487, 553, 100, 36));
 
         ButSMSDAClear.setText("Afbryd");
         ButSMSDAClear.addActionListener(new java.awt.event.ActionListener() {
@@ -87,63 +99,10 @@ public class SMSDA extends javax.swing.JPanel {
                 ButSMSDAClearActionPerformed(evt);
             }
         });
+        add(ButSMSDAClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 553, 100, 36));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LabSMSDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
-                        .addComponent(LabSMSDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(LabSMSDATitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(LabSMSDAInstruct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(342, 342, 342)
-                                .addComponent(ButSMSDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(312, 312, 312)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LabSMSDATotal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(InSMSDAPhoneNMB, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(ButSMSDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(ButSMSDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(103, 103, 103)
-                        .addComponent(ButSMSDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabSMSDAInfo)
-                    .addComponent(LabSMSDATime))
-                .addGap(44, 44, 44)
-                .addComponent(LabSMSDATitle)
-                .addGap(18, 18, 18)
-                .addComponent(LabSMSDAInstruct)
-                .addGap(18, 18, 18)
-                .addComponent(InSMSDAPhoneNMB, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LabSMSDATotal)
-                .addGap(18, 18, 18)
-                .addComponent(ButSMSDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ButSMSDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButSMSDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButSMSDABack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
     public void setReferences(WelcomeDA refWelcomeDA, CartDA refCartDA, PayDA refPayDA)
     {
@@ -229,6 +188,7 @@ public class SMSDA extends javax.swing.JPanel {
     }//GEN-LAST:event_ButSMSDAClearActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButSMSDABack;
     public javax.swing.JButton ButSMSDAClear;
     public javax.swing.JButton ButSMSDAConfirm;

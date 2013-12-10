@@ -79,9 +79,14 @@ public class tvmGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BackgroundPIC = new javax.swing.JLabel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(820, 630));
         getContentPane().setLayout(new java.awt.CardLayout());
+
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        getContentPane().add(BackgroundPIC, "card2");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -525,5 +530,6 @@ public class tvmGUI extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel BackgroundPIC;
     // End of variables declaration//GEN-END:variables
 }
