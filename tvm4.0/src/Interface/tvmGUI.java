@@ -6,8 +6,6 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.*;
 
 
@@ -108,7 +106,7 @@ public class tvmGUI extends javax.swing.JFrame {
 
                     while ((strLine = br.readLine()) != null)  //Read File Line By Line 
                               {
-                                String[] words = strLine.split(" ");                  
+                                String[] words = strLine.split(":");                  
                                 int PPZ = Integer.parseInt(words[0].trim());          
                                 String TDA = words[1].trim();                         
                                 String TEN = words[2].trim();                         

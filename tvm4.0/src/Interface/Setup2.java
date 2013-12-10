@@ -296,17 +296,17 @@ public class Setup2 extends javax.swing.JPanel {
                       conf.println(""+ master.startZone);
                       
                       
-                      System.out.println("Writing ticketList array to file - setup2");  //TEST
+                      System.out.println("Writing ticketList array to file");  //TEST
                       
                       for (Ticket t : master.CT.getArray()) 
                           {
-                              conf.print(""+t.getPricePerZone()+" ");
-                              conf.print(t.getTypeDA()+" ");
+                              conf.print(+t.getPricePerZone()+":");
+                              conf.print(t.getTypeDA()+":");
                               conf.println(t.getTypeENG());
                           }
                         
                       conf.close();
-                      System.out.println("Setup file created - setup2");  //TEST
+                      System.out.println("Setup file created");  //TEST
                      }
                 catch (IOException ex) {Logger.getLogger(tvmGUI.class.getName()).log(Level.SEVERE, null, ex);}
                 
