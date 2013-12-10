@@ -1,5 +1,7 @@
 package MachineLogic;
 import Interface.UserInterface;
+import java.io.*;
+import java.sql.Timestamp;
 import java.util.*;
 
 public class Statistics
@@ -21,7 +23,7 @@ public Statistics (){}
      * Update all variables and arrays for a printed ticket .
      * @param t
      */
-	public void LogSale(Ticket t)
+	public void LogSale(Ticket t, int hardID) throws Exception
     {
         this.logStatsArray.add(t);
 		ticketsTotal = ticketsTotal + t.getAmountTickets();
@@ -31,7 +33,40 @@ public Statistics (){}
 		ticketsDay = ticketsDay + t.getAmountTickets();
 		--paperLeft;
 		--inkLeft;
+                
+                
+                
+                if (new File("tvm.log").exists() == false) 
+                {
+                   PrintWriter log = new PrintWriter(new BufferedWriter(new FileWriter("tvm.log",true))); 
+                   java.util.Date date = new java.util.Date();
+                   String ts = new Timestamp(date.getTime()).toString().substring(0,16);
+                    log.println("BJ2013LOG");  //magic number
+                    log.println("Log Setup Dato: "+ts);
+                    log.println(" ---------------------------------  ");
+                    log.println("|    ___  __   _  _  ___    __    | ");
+                    log.println(" )  (  ,)(  ) ( )( )(  _)  (  )  ( ");
+                    log.println("|    ) ,\\ )(__ )()(  ) _) __)(    | ");
+                    log.println(" )  (___/(____)\\__/ (___)(___/   ( ");
+                    log.println("|                                 | ");
+                    log.println(" ---------------------------------  ");
+                    log.println("                                  ");
+                    log.println(" BlueJ Salgs Statistik  2013(c)   ");
+                    log.println(" ===============================  ");
+                    log.println("  Maskin ID: " + hardID);
+                    log.println("  Zone: " + t.getStartZone()       );
+                    log.println(" ===============================  ");
+                    log.println("                                  ");
+                    log.println("                                  ");
+                    log.close();
+                 }
+      PrintWriter log = new PrintWriter(new BufferedWriter(new FileWriter("tvm.log",true)));           
+      log.println(""+t.getTimeStamp() + ", " + t.getZones() + "-zoner, " + t.getPricePerZone() + "kr. pr zone. " + t.getTypeDA() + " "+ t.getTypeENG() + " " + t.getAmountTickets()+" stk.");
+        
+      log.close();
+       
     }
+    
     /**
     * Update paper and ink variables for test prints.   .
     */

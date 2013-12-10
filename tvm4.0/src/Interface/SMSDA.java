@@ -165,11 +165,7 @@ public class SMSDA extends javax.swing.JPanel {
                 + "\n"
                 + "\nBlueJ Trakfikselskab","Nummer modtaget",
                 JOptionPane.INFORMATION_MESSAGE);
-            // For each ticket
-            for (int index=0;index<(master.SB.getCart().size());index++) {
-                // Send the ticket to the statistics module
-                master.ST.LogSale(master.SB.getCart().get(index));
-            }
+            master.printTickets(this);
         } else {
             // Show dialog with error
             JOptionPane.showMessageDialog(this,

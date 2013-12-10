@@ -6,7 +6,10 @@ import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+
 
 public class tvmGUI extends javax.swing.JFrame {
     Setup1 Setup1Class;
@@ -85,7 +88,7 @@ public class tvmGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    
+    @SuppressWarnings("unchecked")
      private boolean init() 
        {boolean newTvm = true;
        try         {
@@ -233,6 +236,7 @@ public class tvmGUI extends javax.swing.JFrame {
      * @param TypeDA Name of ticket type in Danish - string.
      * @param TypeENG Name of ticket type in English - string.
      */
+    @SuppressWarnings("unchecked")
     public void addTicketToListSetup2 (int PricePZ, String TypeDA, String TypeENG) {       
         Setup2Class.LabSetup2Error.setVisible(false);
         Setup2Class.LabSetup2ErrorList.setVisible(false);
@@ -336,8 +340,15 @@ public class tvmGUI extends javax.swing.JFrame {
                 ChangePanel(OutOfOrderClass);
                 break;
             } else {
-                // Send the ticket to the statistics module
-                ST.LogSale(SB.getCart().get(index));
+                try {
+                    // Send the ticket to the statistics module
+                    ST.LogSale(SB.getCart().get(index),hardID);
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Der er opstået en fejl"
+                            + "\nAn error has occurred", "ERROR", JOptionPane.ERROR_MESSAGE);
+                    outOfOrder = true;
+                    ChangePanel(OutOfOrderClass);
+                }
             }
         }
     }
@@ -421,6 +432,7 @@ public class tvmGUI extends javax.swing.JFrame {
      * @param period  The period (in milliseconds) at which the thread will be
      * executed. 
      */
+    @SuppressWarnings("unchecked")
     public void runTimeOut(final int timeInactive, final int initDelay, final int period) {
         timeOutTimer.scheduleAtFixedRate(new TimerTask() {
 
@@ -472,7 +484,7 @@ public class tvmGUI extends javax.swing.JFrame {
     public int language = 1;   //1 danish; 2 english
     public boolean outOfOrder = false;
     private Date mouseMovedTime;
-    private Timer timeOutTimer = new Timer();
+    private java.util.Timer timeOutTimer = new java.util.Timer();
  
     /**
      * @param args the command line arguments

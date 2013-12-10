@@ -263,6 +263,7 @@ public class Setup2 extends javax.swing.JPanel {
         }
     }//GEN-LAST:event_ButSetup2SaveActionPerformed
 
+    @SuppressWarnings("unchecked")
     private void ButSetup2BackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2BackActionPerformed
         //Returning all warning labels to default
         LabSetup2TypeENG.setForeground(Color.black);
