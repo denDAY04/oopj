@@ -216,18 +216,13 @@ public class CashDA extends javax.swing.JPanel {
         LabCashDAInserted.setText("Penge indsat: ");
         InCashDAInserted.setText(null);
         
-        master.ChangePanel(WelcomeDAClass);
+        // Go back to previous window
+        master.ChangePanel(PayDAClass);
         //Show dialog box about money returned
         JOptionPane.showMessageDialog(this,
             "\nReturnerer indkasted penge"
             + "\nSe slisken neden under betalingsmodulet"
             + "\nfor at modtage dine indsatte penge.");
-        
-        
-        
-        
-        // Go back to previous window
-        master.ChangePanel(PayDAClass);
     }//GEN-LAST:event_ButCashDABackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
