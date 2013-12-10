@@ -42,23 +42,32 @@ public class CardDA extends javax.swing.JPanel {
         ButCardDAHelp = new javax.swing.JButton();
         ButCardDAClear = new javax.swing.JButton();
         ButCardDABack = new javax.swing.JButton();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabCardDAInfo.setText(" ");
+        add(LabCardDAInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 316, -1));
 
         LabCardDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabCardDATime.setText("  ");
+        add(LabCardDATime, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 11, 350, -1));
 
         LabCardDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabCardDATitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabCardDATitle.setText("Betaling med betalingskort");
+        add(LabCardDATitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 69, 780, -1));
 
         LabCardDAInstruct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabCardDAInstruct.setText("Indsæt betalingskort og indtast din pin-kode i feltet nedenunder. Tryk herefter på godkend.");
+        add(LabCardDAInstruct, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 116, 780, -1));
 
         PwdCardDACode.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        add(PwdCardDACode, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 148, 136, 48));
 
         LabCardDATotal.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LabCardDATotal.setText("Total pris: ");
+        add(LabCardDATotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 214, 155, -1));
 
         ButCardDAConfirm.setText("Godkend");
         ButCardDAConfirm.addActionListener(new java.awt.event.ActionListener() {
@@ -66,6 +75,7 @@ public class CardDA extends javax.swing.JPanel {
                 ButCardDAConfirmActionPerformed(evt);
             }
         });
+        add(ButCardDAConfirm, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 246, 93, 38));
 
         ButCardDAHelp.setText("?");
         ButCardDAHelp.addActionListener(new java.awt.event.ActionListener() {
@@ -73,6 +83,7 @@ public class CardDA extends javax.swing.JPanel {
                 ButCardDAHelpActionPerformed(evt);
             }
         });
+        add(ButCardDAHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 553, 50, 36));
 
         ButCardDAClear.setText("Afbryd");
         ButCardDAClear.addActionListener(new java.awt.event.ActionListener() {
@@ -80,6 +91,7 @@ public class CardDA extends javax.swing.JPanel {
                 ButCardDAClearActionPerformed(evt);
             }
         });
+        add(ButCardDAClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 553, 100, 36));
 
         ButCardDABack.setText("Tilbage");
         ButCardDABack.addActionListener(new java.awt.event.ActionListener() {
@@ -87,66 +99,10 @@ public class CardDA extends javax.swing.JPanel {
                 ButCardDABackActionPerformed(evt);
             }
         });
+        add(ButCardDABack, new org.netbeans.lib.awtextra.AbsoluteConstraints(485, 553, 100, 36));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabCardDATitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabCardDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 114, Short.MAX_VALUE)
-                                .addComponent(LabCardDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(LabCardDAInstruct, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ButCardDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButCardDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(105, 105, 105)
-                                .addComponent(ButCardDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(330, 330, 330)
-                                .addComponent(PwdCardDACode, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(352, 352, 352)
-                                .addComponent(ButCardDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(330, 330, 330)
-                                .addComponent(LabCardDATotal, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabCardDAInfo)
-                    .addComponent(LabCardDATime))
-                .addGap(44, 44, 44)
-                .addComponent(LabCardDATitle)
-                .addGap(18, 18, 18)
-                .addComponent(LabCardDAInstruct)
-                .addGap(18, 18, 18)
-                .addComponent(PwdCardDACode, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LabCardDATotal)
-                .addGap(18, 18, 18)
-                .addComponent(ButCardDAConfirm, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 269, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ButCardDAClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButCardDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButCardDABack, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
     
     public void setReferences(WelcomeDA refWelcomeDA, CartDA refCartDA, PayDA refPayDA)
@@ -235,6 +191,7 @@ public class CardDA extends javax.swing.JPanel {
     }//GEN-LAST:event_ButCardDABackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButCardDABack;
     public javax.swing.JButton ButCardDAClear;
     public javax.swing.JButton ButCardDAConfirm;

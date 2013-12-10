@@ -48,19 +48,27 @@ public class CartDA extends javax.swing.JPanel {
         LabCartDKAmountZones = new javax.swing.JLabel();
         LabCartDKPricePerTicket = new javax.swing.JLabel();
         LabCartDKSubTotal = new javax.swing.JLabel();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabCartDAInfo.setText(" ");
+        add(LabCartDAInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 288, -1));
 
         LabCartDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabCartDATime.setText(" ");
+        add(LabCartDATime, new org.netbeans.lib.awtextra.AbsoluteConstraints(481, 11, 309, -1));
 
         LabCartDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabCartDATitle.setText("Indkøbskurv");
+        add(LabCartDATitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 69, 356, -1));
 
         LabCartDAInstruct.setText("Herunder kan du se dine valgte billetter. Du kan vælge at slette billetter, tilføje flere, rydde alt, eller gå til betaling. ");
+        add(LabCartDAInstruct, new org.netbeans.lib.awtextra.AbsoluteConstraints(44, 116, 642, -1));
 
         LabCartDATotal.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         LabCartDATotal.setText("Total pris: ");
+        add(LabCartDATotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(541, 496, 130, -1));
 
         ButCartDAHelp.setText("?");
         ButCartDAHelp.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +76,7 @@ public class CartDA extends javax.swing.JPanel {
                 ButCartDAHelpActionPerformed(evt);
             }
         });
+        add(ButCartDAHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 548, -1, 32));
 
         ButCartDAClear.setText("Ryd alt");
         ButCartDAClear.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +84,7 @@ public class CartDA extends javax.swing.JPanel {
                 ButCartDAClearActionPerformed(evt);
             }
         });
+        add(ButCartDAClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(186, 548, 82, 32));
 
         ButCartDARemove.setText("Fjern");
         ButCartDARemove.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +92,7 @@ public class CartDA extends javax.swing.JPanel {
                 ButCartDARemoveActionPerformed(evt);
             }
         });
+        add(ButCartDARemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(352, 548, 81, 32));
 
         ButCartDAAddM.setText("Tilføj flere");
         ButCartDAAddM.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +100,7 @@ public class CartDA extends javax.swing.JPanel {
                 ButCartDAAddMActionPerformed(evt);
             }
         });
+        add(ButCartDAAddM, new org.netbeans.lib.awtextra.AbsoluteConstraints(515, 548, 84, 32));
 
         ButCartDAPay.setText("Gå til betaling");
         ButCartDAPay.addActionListener(new java.awt.event.ActionListener() {
@@ -96,109 +108,35 @@ public class CartDA extends javax.swing.JPanel {
                 ButCartDAPayActionPerformed(evt);
             }
         });
+        add(ButCartDAPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 548, 107, 32));
 
         ListCartDATicketList.setFont(new java.awt.Font("Consolas", 0, 15)); // NOI18N
         jScrollPane2.setViewportView(ListCartDATicketList);
 
+        add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 187, 571, 291));
+
         LabCartDASTK.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabCartDASTK.setText("Stk.");
+        add(LabCartDASTK, new org.netbeans.lib.awtextra.AbsoluteConstraints(115, 167, 85, -1));
 
         LabCartDKType.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabCartDKType.setText("Billet type");
+        add(LabCartDKType, new org.netbeans.lib.awtextra.AbsoluteConstraints(218, 167, 86, -1));
 
         LabCartDKAmountZones.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabCartDKAmountZones.setText("Antal zoner");
+        add(LabCartDKAmountZones, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 167, 85, -1));
 
         LabCartDKPricePerTicket.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabCartDKPricePerTicket.setText("Pris pr. stk");
+        add(LabCartDKPricePerTicket, new org.netbeans.lib.awtextra.AbsoluteConstraints(469, 167, 86, -1));
 
         LabCartDKSubTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabCartDKSubTotal.setText("Sub-total");
+        add(LabCartDKSubTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(581, 167, 85, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(LabCartDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LabCartDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(44, 44, 44)
-                        .addComponent(LabCartDATitle, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(270, 390, Short.MAX_VALUE)))
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ButCartDAHelp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButCartDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(84, 84, 84)
-                .addComponent(ButCartDARemove, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(82, 82, 82)
-                .addComponent(ButCartDAAddM, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(71, 71, 71)
-                .addComponent(ButCartDAPay, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23))
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(LabCartDAInstruct, javax.swing.GroupLayout.PREFERRED_SIZE, 642, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(115, 115, 115)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabCartDASTK, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addComponent(LabCartDKType, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(47, 47, 47)
-                                .addComponent(LabCartDKAmountZones, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(33, 33, 33)
-                                .addComponent(LabCartDKPricePerTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(26, 26, 26)
-                                .addComponent(LabCartDKSubTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(114, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(LabCartDATotal, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(129, 129, 129))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabCartDAInfo)
-                    .addComponent(LabCartDATime))
-                .addGap(44, 44, 44)
-                .addComponent(LabCartDATitle)
-                .addGap(18, 18, 18)
-                .addComponent(LabCartDAInstruct)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 37, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabCartDASTK)
-                    .addComponent(LabCartDKType)
-                    .addComponent(LabCartDKAmountZones)
-                    .addComponent(LabCartDKPricePerTicket)
-                    .addComponent(LabCartDKSubTotal))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(LabCartDATotal)
-                .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButCartDAPay, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButCartDAAddM, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButCartDARemove, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButCartDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButCartDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
 
     public void setReferences(WelcomeDA refWelcomeDA, PayDA refPayDA)
@@ -261,6 +199,7 @@ public class CartDA extends javax.swing.JPanel {
     }//GEN-LAST:event_ButCartDAPayActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButCartDAAddM;
     public javax.swing.JButton ButCartDAClear;
     public javax.swing.JButton ButCartDAHelp;

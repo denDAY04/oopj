@@ -63,28 +63,43 @@ public class Setup2 extends javax.swing.JPanel {
         ButSetup2Back = new javax.swing.JButton();
         LabSetup2Error = new javax.swing.JLabel();
         LabSetup2ErrorList = new javax.swing.JLabel();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        add(LabSetup2Info, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         LabSetup2Time.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabSetup2Time.setText(" ");
+        add(LabSetup2Time, new org.netbeans.lib.awtextra.AbsoluteConstraints(594, 11, 196, -1));
 
         LabSetup2Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabSetup2Title.setText("Opret billetter");
+        add(LabSetup2Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(317, 31, -1, -1));
 
         LabSetup2TypeDA.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup2TypeDA.setText("Indtast navnet på billettypen på dansk.");
+        add(LabSetup2TypeDA, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 115, 198, -1));
+        add(InSetup2TypeDA, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 135, 198, -1));
 
         LabSetup2TypeENG.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup2TypeENG.setText("Indtast navnet på billettypen på engelsk.");
+        add(LabSetup2TypeENG, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 173, -1, -1));
+        add(InSetup2TypeENG, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 198, 198, -1));
 
         LabSetup2PricePZ.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup2PricePZ.setText("Indtast pris pr. zone.");
+        add(LabSetup2PricePZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 236, 198, -1));
+        add(InSetup2PricePZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 261, 198, -1));
 
         ListSetup2TicketList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         ListSetup2TicketList.setFocusable(false);
         ListSetup2TicketList.setVisibleRowCount(10);
         jScrollPane1.setViewportView(ListSetup2TicketList);
 
+        add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 135, 302, 171));
+
         LabSetup2TicketList.setText("Oprettede billetter.");
+        add(LabSetup2TicketList, new org.netbeans.lib.awtextra.AbsoluteConstraints(47, 115, 192, -1));
 
         ButSetup2AddM.setText("Tilføj flere");
         ButSetup2AddM.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +107,7 @@ public class Setup2 extends javax.swing.JPanel {
                 ButSetup2AddMActionPerformed(evt);
             }
         });
+        add(ButSetup2AddM, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 545, 85, 31));
 
         ButSetup2Save.setText("Gem og afslut");
         ButSetup2Save.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +115,7 @@ public class Setup2 extends javax.swing.JPanel {
                 ButSetup2SaveActionPerformed(evt);
             }
         });
+        add(ButSetup2Save, new org.netbeans.lib.awtextra.AbsoluteConstraints(573, 545, -1, 31));
 
         ButSetup2Back.setText("Tilbage");
         ButSetup2Back.addActionListener(new java.awt.event.ActionListener() {
@@ -106,101 +123,21 @@ public class Setup2 extends javax.swing.JPanel {
                 ButSetup2BackActionPerformed(evt);
             }
         });
+        add(ButSetup2Back, new org.netbeans.lib.awtextra.AbsoluteConstraints(464, 545, 91, 31));
 
         LabSetup2Error.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabSetup2Error.setForeground(new java.awt.Color(255, 0, 0));
         LabSetup2Error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup2Error.setText("Fejl - Ugyldig indtastning");
+        add(LabSetup2Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(516, 292, -1, -1));
 
         LabSetup2ErrorList.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabSetup2ErrorList.setForeground(new java.awt.Color(255, 0, 0));
         LabSetup2ErrorList.setText("Fejl - Ingen billetter oprettet");
+        add(LabSetup2ErrorList, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 317, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LabSetup2Info)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LabSetup2Time, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(LabSetup2Title)
-                        .addGap(315, 315, 315))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 302, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabSetup2TicketList, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(LabSetup2TypeDA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(InSetup2TypeDA)
-                            .addComponent(LabSetup2TypeENG, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(InSetup2TypeENG)
-                            .addComponent(InSetup2PricePZ)
-                            .addComponent(LabSetup2PricePZ, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(125, 125, 125))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(LabSetup2Error)
-                        .addGap(166, 166, 166))))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButSetup2Back, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(ButSetup2Save)
-                .addGap(18, 18, 18)
-                .addComponent(ButSetup2AddM, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(128, 128, 128)
-                .addComponent(LabSetup2ErrorList)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabSetup2Info)
-                    .addComponent(LabSetup2Time))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(LabSetup2Title)
-                .addGap(55, 55, 55)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabSetup2TypeDA)
-                    .addComponent(LabSetup2TicketList))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(InSetup2TypeDA, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(LabSetup2TypeENG)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(InSetup2TypeENG, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(LabSetup2PricePZ)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(InSetup2PricePZ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(LabSetup2Error))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LabSetup2ErrorList)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 214, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButSetup2AddM, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButSetup2Save, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButSetup2Back, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24))
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
     
     private void ButSetup2AddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup2AddMActionPerformed
@@ -313,6 +250,7 @@ public class Setup2 extends javax.swing.JPanel {
        } 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButSetup2AddM;
     public javax.swing.JButton ButSetup2Back;
     public javax.swing.JButton ButSetup2Save;

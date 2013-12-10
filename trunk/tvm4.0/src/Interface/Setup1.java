@@ -18,7 +18,7 @@ public class Setup1 extends javax.swing.JPanel {
      */
     public Setup1(tvmGUI tvmGUI) {
         master = tvmGUI;
-        initComponents(); 
+        initComponents();
     }
     
     public void setReferences(Setup2 refSetup2)
@@ -41,17 +41,25 @@ public class Setup1 extends javax.swing.JPanel {
         InSetup1StartZone = new javax.swing.JTextField();
         ButSetup1Next = new javax.swing.JButton();
         LabSetup1Error = new javax.swing.JLabel();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabSetup1Title.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabSetup1Title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1Title.setText("Opsæt automat");
         LabSetup1Title.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        add(LabSetup1Title, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 50, 241, -1));
 
         LabSetup1HardwareID.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1HardwareID.setText("Indtast maskinens unikke ID kode");
+        add(LabSetup1HardwareID, new org.netbeans.lib.awtextra.AbsoluteConstraints(258, 129, 287, -1));
+        add(InSetup1HardwareID, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 149, 180, -1));
 
         LabSetup1StartZone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1StartZone.setText("Indtast start zone.");
+        add(LabSetup1StartZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 170, -1));
+        add(InSetup1StartZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 207, 180, -1));
 
         ButSetup1Next.setText("Næste");
         ButSetup1Next.addActionListener(new java.awt.event.ActionListener() {
@@ -59,60 +67,16 @@ public class Setup1 extends javax.swing.JPanel {
                 ButSetup1NextActionPerformed(evt);
             }
         });
+        add(ButSetup1Next, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 543, 95, 32));
 
         LabSetup1Error.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabSetup1Error.setForeground(new java.awt.Color(255, 0, 0));
         LabSetup1Error.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabSetup1Error.setText("Fejl - Ugyldig indtastning");
+        add(LabSetup1Error, new org.netbeans.lib.awtextra.AbsoluteConstraints(307, 238, 170, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(270, 270, 270)
-                        .addComponent(LabSetup1Title, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(InSetup1HardwareID, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(310, 310, 310)
-                        .addComponent(LabSetup1StartZone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(InSetup1StartZone, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(307, 307, 307)
-                        .addComponent(LabSetup1Error, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(289, 289, 289))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(LabSetup1HardwareID, javax.swing.GroupLayout.PREFERRED_SIZE, 287, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(255, 255, 255))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(ButSetup1Next, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(LabSetup1Title)
-                .addGap(50, 50, 50)
-                .addComponent(LabSetup1HardwareID)
-                .addGap(6, 6, 6)
-                .addComponent(InSetup1HardwareID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addComponent(LabSetup1StartZone)
-                .addGap(3, 3, 3)
-                .addComponent(InSetup1StartZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(LabSetup1Error)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 291, Short.MAX_VALUE)
-                .addComponent(ButSetup1Next, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(25, 25, 25))
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
 
     private void ButSetup1NextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSetup1NextActionPerformed
@@ -147,6 +111,7 @@ public class Setup1 extends javax.swing.JPanel {
     }//GEN-LAST:event_ButSetup1NextActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButSetup1Next;
     public javax.swing.JTextField InSetup1HardwareID;
     public javax.swing.JTextField InSetup1StartZone;

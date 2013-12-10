@@ -34,43 +34,27 @@ public class OutOfOrder extends javax.swing.JPanel {
         LabOutOfOrderTitle = new javax.swing.JLabel();
         LabOutOfOrderInfo = new javax.swing.JLabel();
         LabOutOfOrderTime = new javax.swing.JLabel();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabOutOfOrderTitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabOutOfOrderTitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabOutOfOrderTitle.setText("Ude af drift / Out of order");
+        add(LabOutOfOrderTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 256, 780, -1));
 
         LabOutOfOrderInfo.setText(" ");
+        add(LabOutOfOrderInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 361, -1));
 
         LabOutOfOrderTime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabOutOfOrderTime.setText("  ");
+        add(LabOutOfOrderTime, new org.netbeans.lib.awtextra.AbsoluteConstraints(451, 11, 339, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(LabOutOfOrderTitle, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(LabOutOfOrderInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 361, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 80, Short.MAX_VALUE)
-                        .addComponent(LabOutOfOrderTime, javax.swing.GroupLayout.PREFERRED_SIZE, 339, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabOutOfOrderInfo)
-                    .addComponent(LabOutOfOrderTime))
-                .addGap(231, 231, 231)
-                .addComponent(LabOutOfOrderTitle)
-                .addContainerGap(315, Short.MAX_VALUE))
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JLabel LabOutOfOrderInfo;
     public javax.swing.JLabel LabOutOfOrderTime;
     public javax.swing.JLabel LabOutOfOrderTitle;

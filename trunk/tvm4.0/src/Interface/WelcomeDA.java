@@ -47,16 +47,23 @@ public class WelcomeDA extends javax.swing.JPanel {
         ButWelcomeDANext = new javax.swing.JButton();
         ButWelcomeDAHelp = new javax.swing.JButton();
         ButWelcomeDALang = new javax.swing.JButton();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabWelcomeDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabWelcomeDATitle.setText("Velkommen til BlueJ Trafikselskab");
+        add(LabWelcomeDATitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 69, -1, -1));
 
         LabWelcomeDAInstruct.setText("Vælg billettype, antal zoner og antal billetter fra dropdown menuerne herunder og tryk næste.");
+        add(LabWelcomeDAInstruct, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 116, -1, -1));
 
         LabWelcomeDAInfo.setText(" ");
+        add(LabWelcomeDAInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 193, -1));
 
         LabWelcomeDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabWelcomeDATime.setText(" ");
+        add(LabWelcomeDATime, new org.netbeans.lib.awtextra.AbsoluteConstraints(565, 11, 225, -1));
 
         CBWelcomeDAType.setMaximumRowCount(10);
         CBWelcomeDAType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vælg billettype..." }));
@@ -65,8 +72,10 @@ public class WelcomeDA extends javax.swing.JPanel {
                 CBWelcomeDATypeActionPerformed(evt);
             }
         });
+        add(CBWelcomeDAType, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 171, 126, -1));
 
         LabWelcomeDAPricePZ.setText(" ");
+        add(LabWelcomeDAPricePZ, new org.netbeans.lib.awtextra.AbsoluteConstraints(196, 174, 135, -1));
 
         CBWelcomeDAZone.setMaximumRowCount(10);
         CBWelcomeDAZone.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vælg antal zoner...", "2-zoner", "3-zoner", "4-zoner", "5-zoner", "6-zoner", "7-zoner", "Alle-zoner" }));
@@ -75,19 +84,23 @@ public class WelcomeDA extends javax.swing.JPanel {
                 CBWelcomeDAZoneActionPerformed(evt);
             }
         });
+        add(CBWelcomeDAZone, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 171, -1, -1));
 
         LabWelcomeDATypeError.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabWelcomeDATypeError.setForeground(new java.awt.Color(255, 0, 0));
         LabWelcomeDATypeError.setText(" ");
+        add(LabWelcomeDATypeError, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 151, 96, -1));
 
         LabWelcomeDAZonesError.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabWelcomeDAZonesError.setForeground(new java.awt.Color(255, 0, 0));
         LabWelcomeDAZonesError.setText(" ");
+        add(LabWelcomeDAZonesError, new org.netbeans.lib.awtextra.AbsoluteConstraints(337, 151, 110, -1));
 
         LabWelcomeDAError.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabWelcomeDAError.setForeground(new java.awt.Color(255, 0, 0));
         LabWelcomeDAError.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabWelcomeDAError.setText(" ");
+        add(LabWelcomeDAError, new org.netbeans.lib.awtextra.AbsoluteConstraints(288, 341, 242, -1));
 
         CBWelcomeDAAmount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vælg antal billetter...", "1 stk", "2 stk", "3 stk", "4 stk", "5 stk" }));
         CBWelcomeDAAmount.addActionListener(new java.awt.event.ActionListener() {
@@ -95,14 +108,18 @@ public class WelcomeDA extends javax.swing.JPanel {
                 CBWelcomeDAAmountActionPerformed(evt);
             }
         });
+        add(CBWelcomeDAAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 171, -1, -1));
 
         LabWelcomeDATempPrice.setText("Pris pr. billet: ");
+        add(LabWelcomeDATempPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 408, 200, -1));
 
         LabWelcomeDATotalPrice.setText("Total pris:");
+        add(LabWelcomeDATotalPrice, new org.netbeans.lib.awtextra.AbsoluteConstraints(63, 433, 200, -1));
 
         LabWelcomeDAAmountError.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         LabWelcomeDAAmountError.setForeground(new java.awt.Color(255, 0, 0));
         LabWelcomeDAAmountError.setText(" ");
+        add(LabWelcomeDAAmountError, new org.netbeans.lib.awtextra.AbsoluteConstraints(605, 151, 127, -1));
 
         ButWelcomeDANext.setText("Næste");
         ButWelcomeDANext.addActionListener(new java.awt.event.ActionListener() {
@@ -110,6 +127,7 @@ public class WelcomeDA extends javax.swing.JPanel {
                 ButWelcomeDANextActionPerformed(evt);
             }
         });
+        add(ButWelcomeDANext, new org.netbeans.lib.awtextra.AbsoluteConstraints(704, 550, 86, 32));
 
         ButWelcomeDAHelp.setText("?");
         ButWelcomeDAHelp.addActionListener(new java.awt.event.ActionListener() {
@@ -117,98 +135,13 @@ public class WelcomeDA extends javax.swing.JPanel {
                 ButWelcomeDAHelpActionPerformed(evt);
             }
         });
+        add(ButWelcomeDAHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 551, -1, 31));
 
         ButWelcomeDALang.setText("[LANGUAGE]");
+        add(ButWelcomeDALang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, 32));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(LabWelcomeDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(LabWelcomeDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 225, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(63, 63, 63)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(LabWelcomeDATypeError, javax.swing.GroupLayout.DEFAULT_SIZE, 96, Short.MAX_VALUE)
-                                        .addGap(178, 178, 178))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(CBWelcomeDAType, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
-                                        .addComponent(LabWelcomeDAPricePZ, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(CBWelcomeDAZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(LabWelcomeDAZonesError, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(CBWelcomeDAAmount, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(LabWelcomeDAAmountError, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGap(58, 58, 58))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(LabWelcomeDAInstruct)
-                                    .addComponent(LabWelcomeDATitle)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(LabWelcomeDATotalPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(LabWelcomeDATempPrice, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(LabWelcomeDAError, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(270, 270, 270))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(ButWelcomeDALang)
-                .addGap(28, 28, 28)
-                .addComponent(ButWelcomeDAHelp)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(ButWelcomeDANext, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabWelcomeDAInfo)
-                    .addComponent(LabWelcomeDATime))
-                .addGap(44, 44, 44)
-                .addComponent(LabWelcomeDATitle)
-                .addGap(18, 18, 18)
-                .addComponent(LabWelcomeDAInstruct)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabWelcomeDATypeError)
-                    .addComponent(LabWelcomeDAZonesError)
-                    .addComponent(LabWelcomeDAAmountError))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(CBWelcomeDAType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(LabWelcomeDAPricePZ)
-                    .addComponent(CBWelcomeDAZone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(CBWelcomeDAAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 150, Short.MAX_VALUE)
-                .addComponent(LabWelcomeDAError)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 53, Short.MAX_VALUE)
-                .addComponent(LabWelcomeDATempPrice)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LabWelcomeDATotalPrice)
-                .addGap(103, 103, 103)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(ButWelcomeDANext, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButWelcomeDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButWelcomeDALang, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18))
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
     
     public void setReferences(CartDA refCartDA)
@@ -375,6 +308,7 @@ public class WelcomeDA extends javax.swing.JPanel {
     }//GEN-LAST:event_ButWelcomeDAHelpActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButWelcomeDAHelp;
     public javax.swing.JButton ButWelcomeDALang;
     public javax.swing.JButton ButWelcomeDANext;

@@ -45,18 +45,25 @@ public class PayDA extends javax.swing.JPanel {
         ButPayDAClear = new javax.swing.JButton();
         ButPayDABack = new javax.swing.JButton();
         ButPayDAHelp = new javax.swing.JButton();
+        BackgroundPIC = new javax.swing.JLabel();
+
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         LabPayDAInfo.setText(" ");
+        add(LabPayDAInfo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 297, -1));
 
         LabPayDATime.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         LabPayDATime.setText("  ");
+        add(LabPayDATime, new org.netbeans.lib.awtextra.AbsoluteConstraints(477, 11, 313, -1));
 
         LabPayDATitle.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         LabPayDATitle.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabPayDATitle.setText("Betaling");
+        add(LabPayDATitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 69, 199, -1));
 
         LabPayDAInstruct.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         LabPayDAInstruct.setText("Vælg ønsket betalingsform.");
+        add(LabPayDAInstruct, new org.netbeans.lib.awtextra.AbsoluteConstraints(246, 109, 307, -1));
 
         ButPayDACash.setText("Kontant");
         ButPayDACash.addActionListener(new java.awt.event.ActionListener() {
@@ -64,6 +71,7 @@ public class PayDA extends javax.swing.JPanel {
                 ButPayDACashActionPerformed(evt);
             }
         });
+        add(ButPayDACash, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 162, 144, 66));
 
         ButPayDACard.setText("Betalingskort");
         ButPayDACard.addActionListener(new java.awt.event.ActionListener() {
@@ -71,6 +79,7 @@ public class PayDA extends javax.swing.JPanel {
                 ButPayDACardActionPerformed(evt);
             }
         });
+        add(ButPayDACard, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 269, 144, 66));
 
         ButPayDASMS.setText("SMS");
         ButPayDASMS.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +87,7 @@ public class PayDA extends javax.swing.JPanel {
                 ButPayDASMSActionPerformed(evt);
             }
         });
+        add(ButPayDASMS, new org.netbeans.lib.awtextra.AbsoluteConstraints(327, 378, 144, 66));
 
         ButPayDAClear.setText("Afbryd");
         ButPayDAClear.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +95,7 @@ public class PayDA extends javax.swing.JPanel {
                 ButPayDAClearActionPerformed(evt);
             }
         });
+        add(ButPayDAClear, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 549, 100, 40));
 
         ButPayDABack.setText("Tilbage");
         ButPayDABack.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +103,7 @@ public class PayDA extends javax.swing.JPanel {
                 ButPayDABackActionPerformed(evt);
             }
         });
+        add(ButPayDABack, new org.netbeans.lib.awtextra.AbsoluteConstraints(491, 549, 101, 40));
 
         ButPayDAHelp.setText("?");
         ButPayDAHelp.addActionListener(new java.awt.event.ActionListener() {
@@ -99,68 +111,10 @@ public class PayDA extends javax.swing.JPanel {
                 ButPayDAHelpActionPerformed(evt);
             }
         });
+        add(ButPayDAHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 549, 50, 40));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(327, 327, 327)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ButPayDASMS, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButPayDACard, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButPayDACash, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(300, 300, 300)
-                                .addComponent(LabPayDATitle, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(246, 246, 246)
-                                .addComponent(LabPayDAInstruct, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(ButPayDAHelp, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(ButPayDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(98, 98, 98)
-                                .addComponent(ButPayDAClear, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(LabPayDAInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 170, Short.MAX_VALUE)
-                                .addComponent(LabPayDATime, javax.swing.GroupLayout.PREFERRED_SIZE, 313, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(LabPayDAInfo)
-                    .addComponent(LabPayDATime))
-                .addGap(44, 44, 44)
-                .addComponent(LabPayDATitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(LabPayDAInstruct)
-                .addGap(39, 39, 39)
-                .addComponent(ButPayDACash, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
-                .addComponent(ButPayDACard, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(43, 43, 43)
-                .addComponent(ButPayDASMS, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(ButPayDAHelp, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(ButPayDABack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(ButPayDAClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
+        BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
+        add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
     public void setReferences(WelcomeDA refWelcomeDA, CartDA refCartDA, CashDA refCashDA, CardDA refCardDA, SMSDA refSMSDA)
     {
@@ -230,6 +184,7 @@ public class PayDA extends javax.swing.JPanel {
     }//GEN-LAST:event_ButPayDAHelpActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButPayDABack;
     public javax.swing.JButton ButPayDACard;
     public javax.swing.JButton ButPayDACash;
