@@ -154,7 +154,7 @@ public class tvmGUI extends javax.swing.JFrame {
                 if (terminalInput.nextInt() == adminPassword) {
                     // Only enable switching to admin if the active 
                     // screen is WelcomeDA.
-                    if (!getContentPane().equals(WelcomeDAClass) == false) {     //Check om det nye udtryk passer istedet for
+                    if (getContentPane().getComponent(0).equals(WelcomeDAClass) == false) {     //Check om det nye udtryk passer istedet for
                                                                                 //WelcomeDA.isVisible()
                         System.out.println("Skift til Velkomstvindue.");
                     } else {
@@ -174,6 +174,11 @@ public class tvmGUI extends javax.swing.JFrame {
                         );
                         // Reset input field in admin window
                         AdminClass.InAdminSelection.setText(null);
+                        // Clear possible selected Tickets
+                        resetSelectionScreen();
+                        SB.clearCart();
+                        CartContent.clear();
+                        CartDAClass.ListCartDATicketList.setListData(CartContent.toArray());
                         // Switch to admin window
                         ChangePanel(AdminClass);
                     }
@@ -194,16 +199,17 @@ public class tvmGUI extends javax.swing.JFrame {
         Thread timeLabels = new Thread(){
             public void run() {
                 while(true) {
-                    Date time = new Date();
-                    Setup2Class.LabSetup2Time.setText(time.toString().substring(0,19));
-                    WelcomeDAClass.LabWelcomeDATime.setText(time.toString().substring(0,19));
-                    CartDAClass.LabCartDATime.setText(time.toString().substring(0,19));
-                    PayDAClass.LabPayDATime.setText(time.toString().substring(0,19));
-                    CashDAClass.LabCashDATime.setText(time.toString().substring(0,19));
-                    OutOfOrderClass.LabOutOfOrderTime.setText(time.toString().substring(0,19));
-                    CardDAClass.LabCardDATime.setText(time.toString().substring(0,19));
-                    SMSDAClass.LabSMSDATime.setText(time.toString().substring(0,19));
-                    AdminClass.LabAdminTime.setText(time.toString().substring(0,19));
+//                    Date time = new Date();
+                    String time  = new Date().toString().substring(0,19);
+                    Setup2Class.LabSetup2Time.setText(time);
+                    WelcomeDAClass.LabWelcomeDATime.setText(time);
+                    CartDAClass.LabCartDATime.setText(time);
+                    PayDAClass.LabPayDATime.setText(time);
+                    CashDAClass.LabCashDATime.setText(time);
+                    OutOfOrderClass.LabOutOfOrderTime.setText(time);
+                    CardDAClass.LabCardDATime.setText(time);
+                    SMSDAClass.LabSMSDATime.setText(time);
+                    AdminClass.LabAdminTime.setText(time);
                 }
             }
         };
