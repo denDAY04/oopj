@@ -177,9 +177,18 @@ public class CashDA extends javax.swing.JPanel {
                 JOptionPane.INFORMATION_MESSAGE);
             // Print tickets
             master.printTickets(this);
+            
+            LabCashDAInserted.setText("Penge indsat: ");
+            InCashDAInserted.setText(null);
+        
         } else if (missingMoney == 0) {
             // Print tickets
             master.printTickets(this);
+            
+            LabCashDAInserted.setText("Penge indsat: ");
+            InCashDAInserted.setText(null);
+            
+            
             // Show dialog box about ticket printing
             JOptionPane.showMessageDialog(this,
                 "\nBetaling gennemført."
@@ -232,6 +241,11 @@ public class CashDA extends javax.swing.JPanel {
         // Reset selectionscreen's inputs
         master.resetSelectionScreen();
         // Go back to welcomming screen
+        
+        
+        LabCashDAInserted.setText("Penge indsat: ");
+        InCashDAInserted.setText(null);
+        
         master.ChangePanel(WelcomeDAClass);
         //Show dialog box about money returned
         JOptionPane.showMessageDialog(this,
@@ -247,6 +261,20 @@ public class CashDA extends javax.swing.JPanel {
     private void ButCashDABackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCashDABackActionPerformed
         // Set Cash pointer to null
         master.CH = null;
+        
+        LabCashDAInserted.setText("Penge indsat: ");
+        InCashDAInserted.setText(null);
+        
+        master.ChangePanel(WelcomeDAClass);
+        //Show dialog box about money returned
+        JOptionPane.showMessageDialog(this,
+            "\nReturnerer indkasted penge"
+            + "\nSe slisken neden under betalingsmodulet"
+            + "\nfor at modtage dine indsatte penge.");
+        
+        
+        
+        
         // Go back to previous window
         master.ChangePanel(PayDAClass);
     }//GEN-LAST:event_ButCashDABackActionPerformed
