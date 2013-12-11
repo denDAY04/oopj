@@ -14,7 +14,8 @@ import org.junit.Test;
 import MachineLogic.CreatedTickets;
 import MachineLogic.ShoppingBasket;
 import MachineLogic.Statistics;
-import Interface.UserInterface;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,20 +33,24 @@ public class JUnit_test_Statistics {
     
     
     
-    /**
-     *
-     */
+
     @Test
     public void JUnit_test_Statist() {
              CreatedTickets cTickets = new CreatedTickets();
-             UserInterface UserInt = new UserInterface();
-             Statistics Stat = new Statistics(UserInt); 
+             Statistics Stat = new Statistics(); 
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
+             int machineID = 1010;  // Is normally sent from the GUI, hence
+                                    // the need for a dedicated variable due to
+                                    // lack of GUI in testing
              
              cTickets.addTicket(2, "test", "testENG", 30);
-             sBasket.addToCart(1,3,4);
-
-             Stat.LogSale(sBasket.getCart().get(0));
+             sBasket.addToCart(0,3,4);
+            try {
+                Stat.LogSale(sBasket.getCart().get(0), machineID);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return;
+            }
              assertEquals(24,Stat.MoneyDay());
              assertEquals(999,Stat.CheckInk());
              assertEquals(999,Stat.CheckPaper());
