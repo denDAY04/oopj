@@ -119,22 +119,22 @@ public class CardDA extends javax.swing.JPanel {
         // Make payment
         if (master.CC.MakePaymentBool(pinString) == false) {   // If simulation failed.
             JOptionPane.showMessageDialog(this,
-                java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FEJL.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DU HAR INDTASTET EN UGYLDIG PIN.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PRØV IGEN, ELLER AFBRYD.")
+                WelcomeDA.languageBundle.getString("FEJL.")
+                + WelcomeDA.languageBundle.getString("DU HAR INDTASTET EN UGYLDIG PIN.")
+                + WelcomeDA.languageBundle.getString("PRØV IGEN, ELLER AFBRYD.")
                 + "\n"
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FORKERT PIN"),
+                + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("FORKERT PIN"),
                 JOptionPane.ERROR_MESSAGE);
         } else {
             // Print ticket
             master.printTickets(this);
             // Show dialog confirming transaction
             JOptionPane.showMessageDialog(this,
-                java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BETALING GENNEMFØRT.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("SE SLISKEN NEDEN FOR FOR DIN BILLET OG HUSK DIT KORT.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FORTSAT GOD DAG.")
+                WelcomeDA.languageBundle.getString("BETALING GENNEMFØRT.")
+                + WelcomeDA.languageBundle.getString("SE SLISKEN NEDEN FOR FOR DIN BILLET OG HUSK DIT KORT.")
+                + WelcomeDA.languageBundle.getString("FORTSAT GOD DAG.")
                 + "\n"
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BETALING GENNEMFØRT"),
+                + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("BETALING GENNEMFØRT"),
                 JOptionPane.INFORMATION_MESSAGE);
 
             //If not out of order
@@ -148,7 +148,7 @@ public class CardDA extends javax.swing.JPanel {
                 // Clear pin field
                 PwdCardDACode.setText("");
                 // Reset inserted money label
-                LabCardDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: "));
+                LabCardDATotal.setText(WelcomeDA.languageBundle.getString("TOTAL PRIS: "));
                 // Reset selectionscreen's inputs
                 master.resetSelectionScreen();
                 // Go back to welcomeing screen
@@ -159,11 +159,11 @@ public class CardDA extends javax.swing.JPanel {
 
     private void ButCardDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCardDAHelpActionPerformed
         JOptionPane.showMessageDialog(this,
-            java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR HJÆLP RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
+            WelcomeDA.languageBundle.getString("FOR HJÆLP RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
             + "\n"
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HJÆLP OG TEKNISK SUPPORT"),
+            + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("HJÆLP OG TEKNISK SUPPORT"),
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButCardDAHelpActionPerformed
 
@@ -177,7 +177,7 @@ public class CardDA extends javax.swing.JPanel {
         // Clear pin field
         PwdCardDACode.setText("");
         // Reset total price label
-        LabCardDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: "));
+        LabCardDATotal.setText(WelcomeDA.languageBundle.getString("TOTAL PRIS: "));
         // Reset selectionscreen's inputs
         master.resetSelectionScreen();
         // Go back to welcomeing screen

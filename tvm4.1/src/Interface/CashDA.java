@@ -121,38 +121,38 @@ public class CashDA extends javax.swing.JPanel {
         if (missingMoney < 0) {
             // Show dialog box about ticket printing and money-change
             JOptionPane.showMessageDialog(this,
-                java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BETALING GENNEMFØRT.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK DIN BILLET OG BYTTEPENGE.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FORTSAT GOD DAG.")
+                WelcomeDA.languageBundle.getString("BETALING GENNEMFØRT.")
+                + WelcomeDA.languageBundle.getString("HUSK DIN BILLET OG BYTTEPENGE.")
+                + WelcomeDA.languageBundle.getString("FORTSAT GOD DAG.")
                 + "\n"
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BETALING GENNEMFØRT"),
+                + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("BETALING GENNEMFØRT"),
                 JOptionPane.INFORMATION_MESSAGE);
             // Print tickets
             master.printTickets(this);
             
-            LabCashDAInserted.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PENGE INDSAT: "));
+            LabCashDAInserted.setText(WelcomeDA.languageBundle.getString("PENGE INDSAT: "));
             InCashDAInserted.setText(null);
         
         } else if (missingMoney == 0) {
             // Print tickets
             master.printTickets(this);
             
-            LabCashDAInserted.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PENGE INDSAT: "));
+            LabCashDAInserted.setText(WelcomeDA.languageBundle.getString("PENGE INDSAT: "));
             InCashDAInserted.setText(null);
             
             
             // Show dialog box about ticket printing
             JOptionPane.showMessageDialog(this,
-                java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BETALING GENNEMFØRT.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK DIN BILLET.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FORTSAT GOD DAG.")
+                WelcomeDA.languageBundle.getString("BETALING GENNEMFØRT.")
+                + WelcomeDA.languageBundle.getString("HUSK DIN BILLET.")
+                + WelcomeDA.languageBundle.getString("FORTSAT GOD DAG.")
                 + "\n"
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BETALING GENNEMFØRT"),
+                + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("BETALING GENNEMFØRT"),
                 JOptionPane.INFORMATION_MESSAGE);
         } else {
             //Update labes
-            LabCashDAInserted.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PENGE INDSAT: ")+master.CH.getInsertedMoney()+java.util.ResourceBundle.getBundle("Interface/Bundle").getString(" DKK"));
-            LabCashDAMissing.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("MANGLER: ")+missingMoney+java.util.ResourceBundle.getBundle("Interface/Bundle").getString(" DKK"));
+            LabCashDAInserted.setText(WelcomeDA.languageBundle.getString("PENGE INDSAT: ")+master.CH.getInsertedMoney()+WelcomeDA.languageBundle.getString("DKK"));
+            LabCashDAMissing.setText(WelcomeDA.languageBundle.getString("MANGLER: ")+missingMoney+WelcomeDA.languageBundle.getString("DKK"));
             // Return to avoid resetting to welcomming screen
             return;
         }
@@ -165,7 +165,7 @@ public class CashDA extends javax.swing.JPanel {
             master.CartContent.clear();
             master.SB.clearCart();
             // Reset inserted money label
-            LabCashDAInserted.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PENGE INDSAT: "));
+            LabCashDAInserted.setText(WelcomeDA.languageBundle.getString("PENGE INDSAT: "));
             // Reset selectionscreen's inputs
             master.resetSelectionScreen();
             // Go back to welcomeing screen
@@ -175,11 +175,11 @@ public class CashDA extends javax.swing.JPanel {
 
     private void ButCashDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCashDAHelpActionPerformed
         JOptionPane.showMessageDialog(this,
-            java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR HJÆLP RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
+            WelcomeDA.languageBundle.getString("FOR HJÆLP RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
             + "\n"
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HJÆLP OG TEKNISK SUPPORT"),
+            + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("HJÆLP OG TEKNISK SUPPORT"),
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButCashDAHelpActionPerformed
 
@@ -195,18 +195,18 @@ public class CashDA extends javax.swing.JPanel {
         // Go back to welcomming screen
         
         
-        LabCashDAInserted.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PENGE INDSAT: "));
+        LabCashDAInserted.setText(WelcomeDA.languageBundle.getString("PENGE INDSAT: "));
         InCashDAInserted.setText(null);
         
         master.ChangePanel(WelcomeDAClass);
         //Show dialog box about money returned
         JOptionPane.showMessageDialog(this,
-            java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DU HAR VALGT AT AFBRYDE KØBET.")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("SE SLISKEN NEDEN UNDER BETALINGSMODULET")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR AT MODTAGE DINE INDSATTE PENGE.")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FORTSAT GOD DAG.")
+            WelcomeDA.languageBundle.getString("DU HAR VALGT AT AFBRYDE KØBET.")
+            + WelcomeDA.languageBundle.getString("SE SLISKEN NEDEN UNDER BETALINGSMODULET")
+            + WelcomeDA.languageBundle.getString("FOR AT MODTAGE DINE INDSATTE PENGE.")
+            + WelcomeDA.languageBundle.getString("FORTSAT GOD DAG.")
             + "\n"
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("AFBRYD AF KØB"),
+            + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("AFBRYD AF KØB"),
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButCashDAClearActionPerformed
 
@@ -214,16 +214,16 @@ public class CashDA extends javax.swing.JPanel {
         // Set Cash pointer to null
         master.CH = null;
         
-        LabCashDAInserted.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PENGE INDSAT: "));
+        LabCashDAInserted.setText(WelcomeDA.languageBundle.getString("PENGE INDSAT: "));
         InCashDAInserted.setText(null);
         
         // Go back to previous window
         master.ChangePanel(PayDAClass);
         //Show dialog box about money returned
         JOptionPane.showMessageDialog(this,
-            java.util.ResourceBundle.getBundle("Interface/Bundle").getString("RETURNERER INDKASTED PENGE")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("SE SLISKEN NEDEN UNDER BETALINGSMODULET")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR AT MODTAGE DINE INDSATTE PENGE."));
+            WelcomeDA.languageBundle.getString("RETURNERER INDKASTED PENGE")
+            + WelcomeDA.languageBundle.getString("SE SLISKEN NEDEN UNDER BETALINGSMODULET")
+            + WelcomeDA.languageBundle.getString("FOR AT MODTAGE DINE INDSATTE PENGE."));
     }//GEN-LAST:event_ButCashDABackActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -130,16 +130,16 @@ public class PayDA extends javax.swing.JPanel {
         // New instance of Cash simulation
         master.CH = new Cash(master.SB.getTotalPrice());
         // Set labels
-        CashDAClass.LabCashDAInfo.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("MASKIN ID: ")+master.hardID+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("ZONE: ")+master.startZone);
-        CashDAClass.LabCashDAMissing.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("MANGLER: ")+master.SB.getTotalPrice()+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+        CashDAClass.LabCashDAInfo.setText(WelcomeDA.languageBundle.getString("MASKIN ID: ")+master.hardID+WelcomeDA.languageBundle.getString("ZONE: ")+master.startZone);
+        CashDAClass.LabCashDAMissing.setText(WelcomeDA.languageBundle.getString("MANGLER: ")+master.SB.getTotalPrice()+WelcomeDA.languageBundle.getString("DKK"));
         // Go to next window
         master.ChangePanel(CashDAClass);
     }//GEN-LAST:event_ButPayDACashActionPerformed
 
     private void ButPayDACardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDACardActionPerformed
         // Set lables
-        CardDAClass.LabCardDAInfo.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("MASKIN ID: ")+master.hardID+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("ZONE: ")+master.startZone);
-        CardDAClass.LabCardDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+        CardDAClass.LabCardDAInfo.setText(WelcomeDA.languageBundle.getString("MASKIN ID: ")+master.hardID+WelcomeDA.languageBundle.getString("ZONE: ")+master.startZone);
+        CardDAClass.LabCardDATotal.setText(WelcomeDA.languageBundle.getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+WelcomeDA.languageBundle.getString("DKK"));
         String wrongPin = "1337";    // A pin to force simulation of failed pin
         // Make Creditcard instance
         master.CC = new CreditCard(wrongPin);
@@ -149,9 +149,9 @@ public class PayDA extends javax.swing.JPanel {
 
     private void ButPayDASMSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDASMSActionPerformed
         // Set lables
-        SMSDAClass.LabSMSDAInfo.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("MASKIN ID: ")+master.hardID+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("ZONE: ")+master.startZone);
-        SMSDAClass.LabSMSDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
-        String failedNUM = java.util.ResourceBundle.getBundle("Interface/Bundle").getString("88888888");  // number to force error-simulation
+        SMSDAClass.LabSMSDAInfo.setText(WelcomeDA.languageBundle.getString("MASKIN ID: ")+master.hardID+WelcomeDA.languageBundle.getString("ZONE: ")+master.startZone);
+        SMSDAClass.LabSMSDATotal.setText(WelcomeDA.languageBundle.getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+WelcomeDA.languageBundle.getString("DKK"));
+        String failedNUM = WelcomeDA.languageBundle.getString("88888888");  // number to force error-simulation
         // Make SMS instance
         master.SMS = new paySMS(failedNUM);
         // Move to next window
@@ -176,11 +176,11 @@ public class PayDA extends javax.swing.JPanel {
 
     private void ButPayDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButPayDAHelpActionPerformed
         JOptionPane.showMessageDialog(this,
-            java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR HJÆLP RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
+            WelcomeDA.languageBundle.getString("FOR HJÆLP RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
             + "\n"
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HJÆLP OG TEKNISK SUPPORT"),
+            + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("HJÆLP OG TEKNISK SUPPORT"),
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButPayDAHelpActionPerformed
 

@@ -109,7 +109,7 @@ public class CartDA extends javax.swing.JPanel {
                 ButCartDAPayActionPerformed(evt);
             }
         });
-        add(ButCartDAPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 548, 107, 32));
+        add(ButCartDAPay, new org.netbeans.lib.awtextra.AbsoluteConstraints(647, 548, 130, 32));
 
         ListCartDATicketList.setFont(new java.awt.Font("Consolas", 0, 15)); // NOI18N
         jScrollPane2.setViewportView(ListCartDATicketList);
@@ -147,11 +147,11 @@ public class CartDA extends javax.swing.JPanel {
     }
     private void ButCartDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDAHelpActionPerformed
         JOptionPane.showMessageDialog(this,
-            java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR HJÆLP RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
+            WelcomeDA.languageBundle.getString("FOR HJÆLP RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
             + "\n"
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HJÆLP OG TEKNISK SUPPORT"),
+            + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("HJÆLP OG TEKNISK SUPPORT"),
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButCartDAHelpActionPerformed
 
@@ -178,7 +178,7 @@ public class CartDA extends javax.swing.JPanel {
         // Remake list after deletion
         ListCartDATicketList.setListData((String[]) master.CartContent.toArray());
         // Recalculate total price
-        LabCartDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+java.util.ResourceBundle.getBundle("Interface/Bundle").getString(" DKK"));
+        LabCartDATotal.setText(WelcomeDA.languageBundle.getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+WelcomeDA.languageBundle.getString(" DKK"));
     }//GEN-LAST:event_ButCartDARemoveActionPerformed
 
     private void ButCartDAAddMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCartDAAddMActionPerformed
@@ -194,7 +194,7 @@ public class CartDA extends javax.swing.JPanel {
             return;
         }
         // Text for machine info label
-        PayDAClass.LabPayDAInfo.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("MASKIN ID: ")+master.hardID+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("ZONE: ")+master.startZone);
+        PayDAClass.LabPayDAInfo.setText(WelcomeDA.languageBundle.getString("MASKIN ID: ")+master.hardID+WelcomeDA.languageBundle.getString("ZONE: ")+master.startZone);
         // Move to next window
         master.ChangePanel(PayDAClass);
     }//GEN-LAST:event_ButCartDAPayActionPerformed
