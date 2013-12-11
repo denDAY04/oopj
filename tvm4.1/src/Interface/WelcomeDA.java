@@ -15,6 +15,7 @@ import java.util.ResourceBundle;
 public class WelcomeDA extends javax.swing.JPanel {
     tvmGUI master;
     CartDA CartDAClass;
+    private String toListType;
     /**
      * Creates new form WelcomeDA
      */
@@ -249,7 +250,7 @@ public class WelcomeDA extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     private void ButWelcomeDANextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButWelcomeDANextActionPerformed
         int ticketIndex = 0;
-        int n = master.CT.getArray().size();  //Array begins from 0; ComboWindo begins from 1 with first being unusable (Deleted +2 from this line)
+        int n = master.CT.getArray().size()+2;  //Array begins from 0; ComboWindo begins from 1 with first being unusable 
 
         if (CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")) ||
             CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER...")) ||
@@ -258,9 +259,14 @@ public class WelcomeDA extends javax.swing.JPanel {
             return;
         }
 
-        for (int m = 0; m<n; m++)
+        for (int m = 0; m<n; m++) 
         {
-            String type = master.CT.transferTicket(m).getTypeDA();
+            String type;
+            if (master.language==1){
+             type = master.CT.transferTicket(m).getTypeDA();}  // needs to be danish and english
+            
+            else {
+            type = master.CT.transferTicket(m).getTypeENG();    }
             if (type.equals(CBWelcomeDAType.getSelectedItem().toString()))
             {
                 ticketIndex = m;
@@ -270,7 +276,12 @@ public class WelcomeDA extends javax.swing.JPanel {
         master.SB.addToCart(ticketIndex, master.amountZones, CBWelcomeDAAmount.getSelectedIndex());
         // add selected ticket to soppingcart
         String toListAmount = master.amountTickets+languageBundle.getString("STK");
-        String toListType = master.CT.transferTicket(ticketIndex).getTypeDA();
+        if (master.language==1){
+            toListType = master.CT.transferTicket(ticketIndex).getTypeDA();}
+        else {
+            toListType = master.CT.transferTicket(ticketIndex).getTypeENG();
+        }
+
         String toListZones = master.amountZones+languageBundle.getString("-ZONER");
         // Check if last option is selected
         String temp_s = ""+CBWelcomeDAZone.getSelectedItem();
