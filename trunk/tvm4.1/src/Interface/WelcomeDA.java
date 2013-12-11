@@ -4,7 +4,9 @@
  */
 package Interface;
 
+import java.util.Locale;
 import javax.swing.JOptionPane;
+import java.util.ResourceBundle;
 
 /**
  *
@@ -34,13 +36,13 @@ public class WelcomeDA extends javax.swing.JPanel {
         LabWelcomeDAInstruct = new javax.swing.JLabel();
         LabWelcomeDAInfo = new javax.swing.JLabel();
         LabWelcomeDATime = new javax.swing.JLabel();
-        CBWelcomeDAType = new javax.swing.JComboBox();
+        CBWelcomeDAType = new javax.swing.JComboBox<String>();
         LabWelcomeDAPricePZ = new javax.swing.JLabel();
-        CBWelcomeDAZone = new javax.swing.JComboBox();
+        CBWelcomeDAZone = new javax.swing.JComboBox<String>();
         LabWelcomeDATypeError = new javax.swing.JLabel();
         LabWelcomeDAZonesError = new javax.swing.JLabel();
         LabWelcomeDAError = new javax.swing.JLabel();
-        CBWelcomeDAAmount = new javax.swing.JComboBox();
+        CBWelcomeDAAmount = new javax.swing.JComboBox<String>();
         LabWelcomeDATempPrice = new javax.swing.JLabel();
         LabWelcomeDATotalPrice = new javax.swing.JLabel();
         LabWelcomeDAAmountError = new javax.swing.JLabel();
@@ -139,11 +141,17 @@ public class WelcomeDA extends javax.swing.JPanel {
         add(ButWelcomeDAHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(131, 551, -1, 31));
 
         ButWelcomeDALang.setText(bundle.getString("[LANGUAGE]")); // NOI18N
+        ButWelcomeDALang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButWelcomeDALangActionPerformed(evt);
+            }
+        });
         add(ButWelcomeDALang, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 550, -1, 32));
 
         BackgroundPIC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Interface/BackgroundGUI.png"))); // NOI18N
         add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
+    
     
     public void setReferences(CartDA refCartDA)
     {    
@@ -159,42 +167,42 @@ public class WelcomeDA extends javax.swing.JPanel {
             if (type.equals(CBWelcomeDAType.getSelectedItem().toString()))
             {
                 master.typePricePZ = master.CT.transferTicket(m).getPricePerZone();
-                LabWelcomeDAPricePZ.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PRIS PR. ZONE: ")+master.typePricePZ+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+                LabWelcomeDAPricePZ.setText(languageBundle.getString("PRIS PR. ZONE: ")+master.typePricePZ+languageBundle.getString("DKK"));
             }
         }
-        if (CBWelcomeDAType.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG BILLETTYPE...")))
+        if (CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")))
         {
-            LabWelcomeDAError.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FEJL - ET ELLER FLERE VALG ER UGYLDIGE"));
-            LabWelcomeDATypeError.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("UGYLDIGT VALG"));
+            LabWelcomeDAError.setText(languageBundle.getString("FEJL - ET ELLER FLERE VALG ER UGYLDIGE"));
+            LabWelcomeDATypeError.setText(languageBundle.getString("UGYLDIGT VALG"));
             LabWelcomeDAPricePZ.setText(" ");
-            LabWelcomeDATempPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PRIS PR. BILLET: "));
-            LabWelcomeDATotalPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: "));
+            LabWelcomeDATempPrice.setText(languageBundle.getString("PRIS PR. BILLET: "));
+            LabWelcomeDATotalPrice.setText(languageBundle.getString("TOTAL PRIS: "));
         }
         else
         {
             LabWelcomeDAError.setText(" ");
             LabWelcomeDATypeError.setText(" ");
             LabWelcomeDAPricePZ.setVisible(true);
-            if (!CBWelcomeDAType.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG BILLETTYPE...")) &&
-                !CBWelcomeDAZone.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL ZONER...")) &&
-                !CBWelcomeDAAmount.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL BILLETTER..."))
+            if (!CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")) &&
+                !CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER...")) &&
+                !CBWelcomeDAAmount.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL BILLETTER..."))
             ) {
-                LabWelcomeDATotalPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: ")+(master.typePricePZ*master.amountZones*master.amountTickets)+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+                LabWelcomeDATotalPrice.setText(languageBundle.getString("TOTAL PRIS: ")+(master.typePricePZ*master.amountZones*master.amountTickets)+languageBundle.getString("DKK"));
             }
-            if (!CBWelcomeDAType.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG BILLETTYPE...")) &&
-                !CBWelcomeDAZone.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL ZONER..."))
+            if (!CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")) &&
+                !CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER..."))
             ) {
-                LabWelcomeDATempPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PRIS PR. BILLET: ")+(master.typePricePZ*master.amountZones)+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+                LabWelcomeDATempPrice.setText(languageBundle.getString("PRIS PR. BILLET: ")+(master.typePricePZ*master.amountZones)+languageBundle.getString("DKK"));
             }
         }
     }//GEN-LAST:event_CBWelcomeDATypeActionPerformed
 
     private void CBWelcomeDAZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBWelcomeDAZoneActionPerformed
-        if (CBWelcomeDAZone.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL ZONER..."))) {
-            LabWelcomeDAError.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FEJL - ET ELLER FLERE VALG ER UGYLDIGE"));
-            LabWelcomeDAZonesError.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("UGYLDIGT VALG"));
-            LabWelcomeDATempPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PRIS PR. BILLET: "));
-            LabWelcomeDATotalPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: "));
+        if (CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER..."))) {
+            LabWelcomeDAError.setText(languageBundle.getString("FEJL - ET ELLER FLERE VALG ER UGYLDIGE"));
+            LabWelcomeDAZonesError.setText(languageBundle.getString("UGYLDIGT VALG"));
+            LabWelcomeDATempPrice.setText(languageBundle.getString("PRIS PR. BILLET: "));
+            LabWelcomeDATotalPrice.setText(languageBundle.getString("TOTAL PRIS: "));
         } else {
             try {
                 master.amountZones =  Integer.parseInt(CBWelcomeDAZone.getSelectedItem().toString().substring(0, 1));
@@ -203,49 +211,49 @@ public class WelcomeDA extends javax.swing.JPanel {
             }
             LabWelcomeDAError.setText(" ");
             LabWelcomeDAZonesError.setText(" ");
-            if (!CBWelcomeDAType.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG BILLETTYPE...")) &&
-                !CBWelcomeDAZone.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL ZONER...")) &&
-                !CBWelcomeDAAmount.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL BILLETTER..."))
+            if (!CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")) &&
+                !CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER...")) &&
+                !CBWelcomeDAAmount.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL BILLETTER..."))
             ) {
-                LabWelcomeDATotalPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: ")+(master.typePricePZ*master.amountZones*master.amountTickets)+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+                LabWelcomeDATotalPrice.setText(languageBundle.getString("TOTAL PRIS: ")+(master.typePricePZ*master.amountZones*master.amountTickets)+languageBundle.getString("DKK"));
             }
-            if (!CBWelcomeDAType.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG BILLETTYPE...")) &&
-                !CBWelcomeDAZone.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL ZONER..."))
+            if (!CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")) &&
+                !CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER..."))
             ) {
-                LabWelcomeDATempPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PRIS PR. BILLET: ")+(master.typePricePZ*master.amountZones)+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+                LabWelcomeDATempPrice.setText(languageBundle.getString("PRIS PR. BILLET: ")+(master.typePricePZ*master.amountZones)+languageBundle.getString("DKK"));
             }
         }
-        if (!CBWelcomeDAType.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG BILLETTYPE...")) && !CBWelcomeDAZone.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL ZONER..."))) {
-            LabWelcomeDATempPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PRIS PR. BILLET: ")+(master.typePricePZ*master.amountZones)+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+        if (!CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")) && !CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER..."))) {
+            LabWelcomeDATempPrice.setText(languageBundle.getString("PRIS PR. BILLET: ")+(master.typePricePZ*master.amountZones)+languageBundle.getString("DKK"));
         }
     }//GEN-LAST:event_CBWelcomeDAZoneActionPerformed
 
     private void CBWelcomeDAAmountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBWelcomeDAAmountActionPerformed
-        if (CBWelcomeDAAmount.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL BILLETTER..."))) {
-            LabWelcomeDAError.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FEJL - ET ELLER FLERE VALG ER UGYLDIGE"));
-            LabWelcomeDAAmountError.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("UGYLDIGT VALG"));
-            LabWelcomeDATotalPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: "));
+        if (CBWelcomeDAAmount.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL BILLETTER..."))) {
+            LabWelcomeDAError.setText(languageBundle.getString("FEJL - ET ELLER FLERE VALG ER UGYLDIGE"));
+            LabWelcomeDAAmountError.setText(languageBundle.getString("UGYLDIGT VALG"));
+            LabWelcomeDATotalPrice.setText(languageBundle.getString("TOTAL PRIS: "));
         } else {
             master.amountTickets = Integer.parseInt(CBWelcomeDAAmount.getSelectedItem().toString().substring(0, 1));
             LabWelcomeDAError.setText(" ");
             LabWelcomeDAAmountError.setText(" ");
         }
-        if (!CBWelcomeDAType.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG BILLETTYPE...")) &&
-            !CBWelcomeDAZone.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL ZONER...")) &&
-            !CBWelcomeDAAmount.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL BILLETTER..."))
+        if (!CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")) &&
+            !CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER...")) &&
+            !CBWelcomeDAAmount.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL BILLETTER..."))
         ) {
-            LabWelcomeDATotalPrice.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: ")+(master.typePricePZ*master.amountZones*master.amountTickets)+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+            LabWelcomeDATotalPrice.setText(languageBundle.getString("TOTAL PRIS: ")+(master.typePricePZ*master.amountZones*master.amountTickets)+languageBundle.getString("DKK"));
         }
     }//GEN-LAST:event_CBWelcomeDAAmountActionPerformed
 
     @SuppressWarnings("unchecked")
     private void ButWelcomeDANextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButWelcomeDANextActionPerformed
         int ticketIndex = 0;
-        int n = master.CT.getArray().size()+2;  //Array begins from 0; ComboWindo begins from 1 with first being unusable
+        int n = master.CT.getArray().size();  //Array begins from 0; ComboWindo begins from 1 with first being unusable (Deleted +2 from this line)
 
-        if (CBWelcomeDAType.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG BILLETTYPE...")) ||
-            CBWelcomeDAZone.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL ZONER...")) ||
-            CBWelcomeDAAmount.getSelectedItem().toString().equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VÆLG ANTAL BILLETTER..."))
+        if (CBWelcomeDAType.getSelectedItem().toString().equals(languageBundle.getString("VÆLG BILLETTYPE...")) ||
+            CBWelcomeDAZone.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL ZONER...")) ||
+            CBWelcomeDAAmount.getSelectedItem().toString().equals(languageBundle.getString("VÆLG ANTAL BILLETTER..."))
         ) {
             return;
         }
@@ -261,22 +269,22 @@ public class WelcomeDA extends javax.swing.JPanel {
         }
         master.SB.addToCart(ticketIndex, master.amountZones, CBWelcomeDAAmount.getSelectedIndex());
         // add selected ticket to soppingcart
-        String toListAmount = master.amountTickets+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("STK.");
+        String toListAmount = master.amountTickets+languageBundle.getString("STK.");
         String toListType = master.CT.transferTicket(ticketIndex).getTypeDA();
-        String toListZones = master.amountZones+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("-ZONER");
+        String toListZones = master.amountZones+languageBundle.getString("-ZONER");
         // Check if last option is selected
         String temp_s = ""+CBWelcomeDAZone.getSelectedItem();
         int selectedAmountZones = 0;
-        if (temp_s.equals(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("ALLE-ZONER"))) {
+        if (temp_s.equals(languageBundle.getString("ALLE-ZONER"))) {
             selectedAmountZones = 8;       // All zoner
         } else {    // If not, substring to first char to ignore " stk"
             selectedAmountZones = Integer.parseInt(temp_s.substring(0,1));
         }
-        String toListSinglePrice = (master.CT.transferTicket(ticketIndex).getPricePerZone()*selectedAmountZones)+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK");
+        String toListSinglePrice = (master.CT.transferTicket(ticketIndex).getPricePerZone()*selectedAmountZones)+languageBundle.getString("DKK");
 
         // Separate variable to calculate total price
         int subTotalCalc = master.typePricePZ*master.amountZones*master.amountTickets;
-        String toListsubTotal = subTotalCalc+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK");
+        String toListsubTotal = subTotalCalc+languageBundle.getString("DKK");
 
         //Convert type length to maximum 8 characters
         if(toListType.length() > 9) {
@@ -290,32 +298,146 @@ public class WelcomeDA extends javax.swing.JPanel {
 
         // Add selected ticket to an array and display the array on a list on next window
         master.CartContent.add(toListAmount+toListType+toListZones+toListSinglePrice+toListsubTotal);
-        CartDAClass.ListCartDATicketList.setListData(master.CartContent.toArray());
+        CartDAClass.ListCartDATicketList.setListData((String[]) master.CartContent.toArray(new String[0]));
 
         // Show next window
         master.ChangePanel(CartDAClass);
-        CartDAClass.LabCartDAInfo.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("MASKIN ID: ")+master.hardID+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("ZONE: ")+master.startZone);
-        CartDAClass.LabCartDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DKK"));
+        CartDAClass.LabCartDAInfo.setText(languageBundle.getString("MASKIN ID: ")+master.hardID+languageBundle.getString("ZONE: ")+master.startZone);
+        CartDAClass.LabCartDATotal.setText(languageBundle.getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+languageBundle.getString("DKK"));
     }//GEN-LAST:event_ButWelcomeDANextActionPerformed
 
     private void ButWelcomeDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButWelcomeDAHelpActionPerformed
         JOptionPane.showMessageDialog(this,
-            java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR HJÆLP RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
+            languageBundle.getString("FOR HJÆLP RING XX XX XX XX")
+            + languageBundle.getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
+            + languageBundle.getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
             + "\n"
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HJÆLP OG TEKNISK SUPPORT"),
+            + languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),languageBundle.getString("HJÆLP OG TEKNISK SUPPORT"),
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButWelcomeDAHelpActionPerformed
+
+    private void ButWelcomeDALangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButWelcomeDALangActionPerformed
+        // TODO add your handling code here:
+                
+                
+        if (master.language==1)
+        {
+            languageBundle = ResourceBundle.getBundle("Interface.Bundle", new Locale("en", "IE","EURO"));  // set language to English
+            master.language =2;
+            int numberOfItems = CBWelcomeDAType.getItemCount();
+            CBWelcomeDAType.removeItemAt(0);
+            CBWelcomeDAType.addItem(languageBundle.getString("VÆLG BILLETTYPE..."));
+            for (int n=1; (numberOfItems > n);n++){
+                CBWelcomeDAType.removeItemAt(0);
+                CBWelcomeDAType.addItem(master.CT.transferTicket(n-1).getTypeENG());  //gettypeda
+                    }
+        }
+        else 
+        {   
+            languageBundle = ResourceBundle.getBundle("Interface.Bundle", new Locale("", "",""));          // set default language (Danish)
+            master.language =1;
+            int numberOfItems = CBWelcomeDAType.getItemCount();
+            CBWelcomeDAType.removeItemAt(0);
+            CBWelcomeDAType.addItem(languageBundle.getString("VÆLG BILLETTYPE..."));
+            for (int n=1; (numberOfItems > n);n++){
+                CBWelcomeDAType.removeItemAt(0);
+                CBWelcomeDAType.addItem(master.CT.transferTicket(n-1).getTypeDA());
+            }
+                        
+        }
+         // re-write the content of all text in GUI objects
+        LabWelcomeDATitle.setText(languageBundle.getString("VELKOMMEN TIL BLUEJ TRAFIKSELSKAB"));
+        LabWelcomeDAInstruct.setText(languageBundle.getString("VÆLG BILLETTYPE, ANTAL ZONER OG ANTAL BILLETTER FRA DROPDOWN MENUERNE HERUNDER OG TRYK NÆSTE."));
+
+        CBWelcomeDAZone.removeItemAt(0);
+        CBWelcomeDAZone.addItem(languageBundle.getString("VÆLG ANTAL ZONER..."));
+        CBWelcomeDAZone.removeItemAt(0);
+        CBWelcomeDAZone.addItem(languageBundle.getString("2-ZONER"));
+        CBWelcomeDAZone.removeItemAt(0);        
+        CBWelcomeDAZone.addItem(languageBundle.getString("3-ZONER"));
+        CBWelcomeDAZone.removeItemAt(0);        
+        CBWelcomeDAZone.addItem(languageBundle.getString("4-ZONER"));
+        CBWelcomeDAZone.removeItemAt(0);        
+        CBWelcomeDAZone.addItem(languageBundle.getString("5-ZONER"));
+        CBWelcomeDAZone.removeItemAt(0);        
+        CBWelcomeDAZone.addItem(languageBundle.getString("6-ZONER"));
+        CBWelcomeDAZone.removeItemAt(0);
+        CBWelcomeDAZone.addItem(languageBundle.getString("7-ZONER"));
+        CBWelcomeDAZone.removeItemAt(0);
+        CBWelcomeDAZone.addItem(languageBundle.getString("ALLE-ZONER"));
+
+
+        CBWelcomeDAAmount.removeItemAt(0);
+        CBWelcomeDAAmount.addItem(languageBundle.getString("VÆLG ANTAL BILLETTER..."));
+        CBWelcomeDAAmount.removeItemAt(0);
+        CBWelcomeDAAmount.addItem(languageBundle.getString("1-STK"));
+        CBWelcomeDAAmount.removeItemAt(0);
+        CBWelcomeDAAmount.addItem(languageBundle.getString("2-STK"));
+        CBWelcomeDAAmount.removeItemAt(0);
+        CBWelcomeDAAmount.addItem(languageBundle.getString("3-STK"));
+        CBWelcomeDAAmount.removeItemAt(0);
+        CBWelcomeDAAmount.addItem(languageBundle.getString("4-STK"));
+        CBWelcomeDAAmount.removeItemAt(0);
+        CBWelcomeDAAmount.addItem(languageBundle.getString("5-STK")); 
+        LabWelcomeDAError.setText(" ");
+        LabWelcomeDATypeError.setText(" ");
+        LabWelcomeDAZonesError.setText(" ");
+        LabWelcomeDAAmountError.setText(" ");
+        
+        LabWelcomeDATempPrice.setText(languageBundle.getString("PRIS PR. BILLET: "));
+        LabWelcomeDATotalPrice.setText(languageBundle.getString("TOTAL PRIS:"));
+        ButWelcomeDANext.setText(languageBundle.getString("NÆSTE"));
+        ButWelcomeDALang.setText(languageBundle.getString("[LANGUAGE]"));
+        CartDAClass.LabCartDATitle.setText(languageBundle.getString("INDKØBSKURV"));
+        CartDAClass.LabCartDAInstruct.setText(languageBundle.getString("HERUNDER KAN DU SE DINE VALGTE BILLETTER. DU KAN VÆLGE AT SLETTE BILLETTER, TILFØJE FLERE, RYDDE ALT, ELLER GÅ TIL BETALING. "));
+        CartDAClass.LabCartDATotal.setText(languageBundle.getString("TOTAL PRIS: "));
+        CartDAClass.ButCartDAClear.setText(languageBundle.getString("RYD ALT"));
+        CartDAClass.ButCartDARemove.setText(languageBundle.getString("FJERN"));
+        CartDAClass.ButCartDAAddM.setText(languageBundle.getString("TILFØJ FLERE"));
+        CartDAClass.ButCartDAPay.setText(languageBundle.getString("GÅ TIL BETALING"));
+        CartDAClass.LabCartDASTK.setText(languageBundle.getString("STK."));
+        CartDAClass.LabCartDKType.setText(languageBundle.getString("BILLET TYPE"));
+        CartDAClass.LabCartDKAmountZones.setText(languageBundle.getString("ANTAL ZONER"));
+        CartDAClass.LabCartDKPricePerTicket.setText(languageBundle.getString("PRIS PR. STK"));
+        master.CartDAClass.LabCartDKSubTotal.setText(languageBundle.getString("SUB-TOTAL"));
+        master.PayDAClass.LabPayDATitle.setText(languageBundle.getString("BETALING"));
+        master.PayDAClass.LabPayDAInstruct.setText(languageBundle.getString("VÆLG ØNSKET BETALINGSFORM."));
+        master.PayDAClass.ButPayDACash.setText(languageBundle.getString("KONTANT"));
+        master.PayDAClass.ButPayDACard.setText(languageBundle.getString("BETALINGSKORT"));
+        master.PayDAClass.ButPayDASMS.setText(languageBundle.getString("SMS"));
+        master.PayDAClass.ButPayDAClear.setText(languageBundle.getString("AFBRYD"));
+        master.PayDAClass.ButPayDABack.setText(languageBundle.getString("TILBAGE"));
+        master.CashDAClass.LabCashDATitle.setText(languageBundle.getString("KONTANT BETALING"));
+        master.CashDAClass.LabCashDAInstruct.setText(languageBundle.getString("INDSÆT BELØBET TIL BETALING I FELTET OG TRYK INDSÆT PENGE. FOR PENGE TILBAGE, TRYK AFBRYD."));
+        master.CashDAClass.LabCashDAInserted.setText(languageBundle.getString("PENGE INDSAT: "));
+        master.CashDAClass.LabCashDAMissing.setText(languageBundle.getString("MANGLER: "));
+        master.CashDAClass.ButCashDAPay.setText(languageBundle.getString("INDSÆT PENGE"));
+        master.CashDAClass.ButCashDAClear.setText(languageBundle.getString("AFBRYD"));
+        master.CashDAClass.ButCashDABack.setText(languageBundle.getString("TILBAGE"));
+        master.CardDAClass.LabCardDATitle.setText(languageBundle.getString("BETALING MED BETALINGSKORT"));
+        master.CardDAClass.LabCardDAInstruct.setText(languageBundle.getString("INDSÆT BETALINGSKORT OG INDTAST DIN PIN-KODE I FELTET NEDENUNDER. TRYK HEREFTER PÅ GODKEND."));
+        master.CardDAClass.LabCardDATotal.setText(languageBundle.getString("TOTAL PRIS: "));
+        master.CardDAClass.ButCardDAConfirm.setText(languageBundle.getString("GODKEND"));
+        master.CardDAClass.ButCardDAClear.setText(languageBundle.getString("AFBRYD"));
+        master.CardDAClass.ButCardDABack.setText(languageBundle.getString("TILBAGE"));
+        master.SMSDAClass.LabSMSDATitle.setText(languageBundle.getString("BETALING MED SMS"));
+        master.SMSDAClass.LabSMSDAInstruct.setText(languageBundle.getString("INDTAST TELEFONNUMMERET SOM REGNINGEN SKAL SENDES TIL OG TRYK HEREFTER PÅ GODKEND. "));
+        master.SMSDAClass.LabSMSDATotal.setText(languageBundle.getString("TOTAL PRIS: "));
+        master.SMSDAClass.ButSMSDAConfirm.setText(languageBundle.getString("GODKEND"));
+        master.SMSDAClass.ButSMSDABack.setText(languageBundle.getString("TILBAGE"));
+        master.SMSDAClass.ButSMSDAClear.setText(languageBundle.getString("AFBRYD"));
+        LabWelcomeDAInfo.setText(languageBundle.getString("MASKIN ID: ")+master.hardID+languageBundle.getString("ZONE: ")+master.startZone);
+
+    }//GEN-LAST:event_ButWelcomeDALangActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JLabel BackgroundPIC;
     public javax.swing.JButton ButWelcomeDAHelp;
     public javax.swing.JButton ButWelcomeDALang;
     public javax.swing.JButton ButWelcomeDANext;
-    public javax.swing.JComboBox CBWelcomeDAAmount;
-    public javax.swing.JComboBox CBWelcomeDAType;
-    public javax.swing.JComboBox CBWelcomeDAZone;
+    public javax.swing.JComboBox<String> CBWelcomeDAAmount;
+    public javax.swing.JComboBox<String> CBWelcomeDAType;
+    public javax.swing.JComboBox<String> CBWelcomeDAZone;
     public javax.swing.JLabel LabWelcomeDAAmountError;
     public javax.swing.JLabel LabWelcomeDAError;
     public javax.swing.JLabel LabWelcomeDAInfo;
@@ -328,4 +450,5 @@ public class WelcomeDA extends javax.swing.JPanel {
     public javax.swing.JLabel LabWelcomeDATypeError;
     public javax.swing.JLabel LabWelcomeDAZonesError;
     // End of variables declaration//GEN-END:variables
+    public static ResourceBundle languageBundle =  ResourceBundle.getBundle("Interface.Bundle");    //bundle variable
 }
