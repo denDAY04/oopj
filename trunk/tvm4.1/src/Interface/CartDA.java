@@ -176,7 +176,7 @@ public class CartDA extends javax.swing.JPanel {
         master.CartContent.remove(TickToDelete);
         master.SB.removeTicket(TickToDelete);
         // Remake list after deletion
-        ListCartDATicketList.setListData((String[]) master.CartContent.toArray());
+        ListCartDATicketList.setListData((String[]) master.CartContent.toArray(new String[0]));
         // Recalculate total price
         LabCartDATotal.setText(WelcomeDA.languageBundle.getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+WelcomeDA.languageBundle.getString(" DKK"));
     }//GEN-LAST:event_ButCartDARemoveActionPerformed
