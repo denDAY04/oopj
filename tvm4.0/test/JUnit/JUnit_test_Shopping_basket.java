@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 import MachineLogic.CreatedTickets;
 import MachineLogic.ShoppingBasket;
 import MachineLogic.Statistics;
-import Interface.UserInterface;
 
 /**
  * The test class JUnit_test_Shopping_basket.
@@ -57,8 +56,7 @@ public class JUnit_test_Shopping_basket
     public void testIntToFourChar()
     {
              CreatedTickets cTickets = new CreatedTickets();
-             UserInterface UserInt = new UserInterface();
-             Statistics Stat = new Statistics(UserInt); 
+             Statistics Stat = new Statistics(); 
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
              
         assertEquals("   2", sBasket.intToFourChar(2));
@@ -77,8 +75,7 @@ public class JUnit_test_Shopping_basket
     public void testConvertTo8Lenght()
     {
              CreatedTickets cTickets = new CreatedTickets();
-             UserInterface UserInt = new UserInterface();
-             Statistics Stat = new Statistics(UserInt); 
+             Statistics Stat = new Statistics(); 
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
              
         assertEquals("       2", sBasket.convertTo8Lenght("2"));
@@ -99,8 +96,7 @@ public class JUnit_test_Shopping_basket
     public void testConvertTo8Lenght0()
     {
              CreatedTickets cTickets = new CreatedTickets();
-             UserInterface UserInt = new UserInterface();
-             Statistics Stat = new Statistics(UserInt); 
+             Statistics Stat = new Statistics(); 
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
              
         assertEquals("00000002", sBasket.convertTo8Lenght0(2));
@@ -120,13 +116,12 @@ public class JUnit_test_Shopping_basket
     public void testShoppingcartMethods()
     {
              CreatedTickets cTickets = new CreatedTickets();
-             UserInterface UserInt = new UserInterface();
-             Statistics Stat = new Statistics(UserInt); 
+             Statistics Stat = new Statistics(); 
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
              String timeStamp;
              
              cTickets.addTicket(2, "test", "testENG", 30);
-             sBasket.addToCart(1,3,4);
+             sBasket.addToCart(0,3,4);
              assertEquals(24,sBasket.getTotalPrice());
              assertEquals(4,sBasket.getCart().get(0).getAmountTickets());
              assertEquals(3,sBasket.getCart().get(0).getZones());
