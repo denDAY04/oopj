@@ -42,7 +42,7 @@ public class CartDA extends javax.swing.JPanel {
         ButCartDAAddM = new javax.swing.JButton();
         ButCartDAPay = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        ListCartDATicketList = new javax.swing.JList();
+        ListCartDATicketList = new javax.swing.JList<String>();
         LabCartDASTK = new javax.swing.JLabel();
         LabCartDKType = new javax.swing.JLabel();
         LabCartDKAmountZones = new javax.swing.JLabel();
@@ -176,7 +176,7 @@ public class CartDA extends javax.swing.JPanel {
         master.CartContent.remove(TickToDelete);
         master.SB.removeTicket(TickToDelete);
         // Remake list after deletion
-        ListCartDATicketList.setListData(master.CartContent.toArray());
+        ListCartDATicketList.setListData((String[]) master.CartContent.toArray());
         // Recalculate total price
         LabCartDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: ")+master.SB.getTotalPrice()+java.util.ResourceBundle.getBundle("Interface/Bundle").getString(" DKK"));
     }//GEN-LAST:event_ButCartDARemoveActionPerformed
@@ -216,7 +216,7 @@ public class CartDA extends javax.swing.JPanel {
     public javax.swing.JLabel LabCartDKPricePerTicket;
     public javax.swing.JLabel LabCartDKSubTotal;
     public javax.swing.JLabel LabCartDKType;
-    public javax.swing.JList ListCartDATicketList;
+    public javax.swing.JList<String> ListCartDATicketList;
     public javax.swing.JScrollPane jScrollPane2;
     // End of variables declaration//GEN-END:variables
 }
