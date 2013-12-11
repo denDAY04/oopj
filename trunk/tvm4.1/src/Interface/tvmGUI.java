@@ -181,7 +181,7 @@ public class tvmGUI extends javax.swing.JFrame {
                         resetSelectionScreen();
                         SB.clearCart();
                         CartContent.clear();
-                        CartDAClass.ListCartDATicketList.setListData((String[]) CartContent.toArray());
+                        CartDAClass.ListCartDATicketList.setListData((String[]) CartContent.toArray(new String[0]));
                         // Switch to admin window
                         ChangePanel(AdminClass);
                     }
@@ -454,7 +454,7 @@ public class tvmGUI extends javax.swing.JFrame {
                     resetSelectionScreen();
                     SB.clearCart();
                     CartContent.clear();
-                    CartDAClass.ListCartDATicketList.setListData((String[]) CartContent.toArray());
+                    CartDAClass.ListCartDATicketList.setListData((String[]) CartContent.toArray(new String[0]));
                 }
             }
         } // end annonymus TimerTask
