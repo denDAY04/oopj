@@ -269,7 +269,7 @@ public class WelcomeDA extends javax.swing.JPanel {
         }
         master.SB.addToCart(ticketIndex, master.amountZones, CBWelcomeDAAmount.getSelectedIndex());
         // add selected ticket to soppingcart
-        String toListAmount = master.amountTickets+languageBundle.getString("STK.");
+        String toListAmount = master.amountTickets+languageBundle.getString("STK");
         String toListType = master.CT.transferTicket(ticketIndex).getTypeDA();
         String toListZones = master.amountZones+languageBundle.getString("-ZONER");
         // Check if last option is selected

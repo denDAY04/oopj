@@ -332,16 +332,16 @@ public class tvmGUI extends javax.swing.JFrame {
             if (SB.printTicket(index,language,hardID)== false){      //if printing failed
                 // Show dialog box with error message
                 JOptionPane.showMessageDialog(this, 
-                    java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FEJL")
-                   + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DER OPSTOD EN FEJL VED PRINTNING AF EN BILLET.")
-                   + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("KONTAKT TEKNIKER PÅ TLF. XX XX XX XX OG")
-                   + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK DINE RETURPENGE.")
-                   + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VI BEKLAGER ULEGLIGHEDEN.")
+                    WelcomeDA.languageBundle.getString("FEJL")
+                   + WelcomeDA.languageBundle.getString("DER OPSTOD EN FEJL VED PRINTNING AF EN BILLET.")
+                   + WelcomeDA.languageBundle.getString("KONTAKT TEKNIKER PÅ TLF. XX XX XX XX OG")
+                   + WelcomeDA.languageBundle.getString("HUSK DINE RETURPENGE.")
+                   + WelcomeDA.languageBundle.getString("VI BEKLAGER ULEGLIGHEDEN.")
                    + "\n"
-                   + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TEKNISK FEJL"),
+                   + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("TEKNISK FEJL"),
                 JOptionPane.ERROR_MESSAGE);
                 // Set info label and out-of-order variable
-                OutOfOrderClass.LabOutOfOrderInfo.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("MASKIN ID: ")+hardID+java.util.ResourceBundle.getBundle("Interface/Bundle").getString("  ZONE:")+startZone);
+                OutOfOrderClass.LabOutOfOrderInfo.setText(WelcomeDA.languageBundle.getString("MASKIN ID: ")+hardID+WelcomeDA.languageBundle.getString("  ZONE:")+startZone);
                 outOfOrder = true;
                 // Go to out-of-order window
                 //window.setVisible(false);

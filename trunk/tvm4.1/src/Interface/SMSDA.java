@@ -118,23 +118,23 @@ public class SMSDA extends javax.swing.JPanel {
         if (master.SMS.MakePaymentBool(phoneNUM)) {
             // Show dialog refering to a fictional message
             JOptionPane.showMessageDialog(this,
-                java.util.ResourceBundle.getBundle("Interface/Bundle").getString("VI HAR MODTAGET DIT NUMMER.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("EN BESKED VIL BLIVE SENDT TIL NUMMERET INDEN FOR ÉT MINUT.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FØLG VENLIGST INSTRUKTIONERNE I BESKEDEN.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FORTSAT GOD DAG.")
+                WelcomeDA.languageBundle.getString("VI HAR MODTAGET DIT NUMMER.")
+                + WelcomeDA.languageBundle.getString("EN BESKED VIL BLIVE SENDT TIL NUMMERET INDEN FOR ÉT MINUT.")
+                + WelcomeDA.languageBundle.getString("FØLG VENLIGST INSTRUKTIONERNE I BESKEDEN.")
+                + WelcomeDA.languageBundle.getString("FORTSAT GOD DAG.")
                 + "\n"
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("NUMMER MODTAGET"),
+                + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("NUMMER MODTAGET"),
                 JOptionPane.INFORMATION_MESSAGE);
             master.printTickets(this);
         } else {
             // Show dialog with error
             JOptionPane.showMessageDialog(this,
-                java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DER SKETE EN FEJL.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("DET INDTASTEDE NUMMER KUNNE IKKE FINDES.")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("PRØV IGEN, GÅ TILBAGE OG VÆLG ANDEN BETALING,")
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("ELLER AFBRYD.")
+                WelcomeDA.languageBundle.getString("DER SKETE EN FEJL.")
+                + WelcomeDA.languageBundle.getString("DET INDTASTEDE NUMMER KUNNE IKKE FINDES.")
+                + WelcomeDA.languageBundle.getString("PRØV IGEN, GÅ TILBAGE OG VÆLG ANDEN BETALING,")
+                + WelcomeDA.languageBundle.getString("ELLER AFBRYD.")
                 + "\n"
-                + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("NUMMER IKKE FUNDET"),
+                + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("NUMMER IKKE FUNDET"),
                 JOptionPane.ERROR_MESSAGE);
             return;         // To avoid resetting to welcomming screen
         }
@@ -147,7 +147,7 @@ public class SMSDA extends javax.swing.JPanel {
         // Clear phone number field
         InSMSDAPhoneNMB.setText("");
         // Reset total price label
-        LabSMSDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: "));
+        LabSMSDATotal.setText(WelcomeDA.languageBundle.getString("TOTAL PRIS: "));
         // Reset selectionscreen's inputs
         master.resetSelectionScreen();
         // Go back to welcomeing screen
@@ -156,11 +156,11 @@ public class SMSDA extends javax.swing.JPanel {
 
     private void ButSMSDAHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSMSDAHelpActionPerformed
         JOptionPane.showMessageDialog(this,
-            java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR HJÆLP RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
+            WelcomeDA.languageBundle.getString("FOR HJÆLP RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("FOR TEKNISK ASSISTANCE RING XX XX XX XX")
+            + WelcomeDA.languageBundle.getString("HUSK AT OPLYSE MASKINENS ID, SOM KAN FINDES I ØVRE VENSTRE HJØRNE.")
             + "\n"
-            + java.util.ResourceBundle.getBundle("Interface/Bundle").getString("BLUEJ TRAKFIKSELSKAB"),java.util.ResourceBundle.getBundle("Interface/Bundle").getString("HJÆLP OG TEKNISK SUPPORT"),
+            + WelcomeDA.languageBundle.getString("BLUEJ TRAKFIKSELSKAB"),WelcomeDA.languageBundle.getString("HJÆLP OG TEKNISK SUPPORT"),
             JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_ButSMSDAHelpActionPerformed
 
@@ -181,7 +181,7 @@ public class SMSDA extends javax.swing.JPanel {
         // Clear phone number field
         InSMSDAPhoneNMB.setText("");
         // Reset total price label
-        LabSMSDATotal.setText(java.util.ResourceBundle.getBundle("Interface/Bundle").getString("TOTAL PRIS: "));
+        LabSMSDATotal.setText(WelcomeDA.languageBundle.getString("TOTAL PRIS: "));
         // Reset selectionscreen's inputs
         master.resetSelectionScreen();
         // Go back to welcomeing screen
