@@ -51,21 +51,21 @@ public class JUnit_test_Statistics {
                 ex.printStackTrace();
                 return;
             }
-             assertEquals(24,Stat.MoneyDay());
-             assertEquals(999,Stat.CheckInk());
-             assertEquals(999,Stat.CheckPaper());
-             assertEquals(24,Stat.MoneyTotal());
-             assertEquals(4,Stat.TicketSoldDay());
-             assertEquals(4,Stat.TicketSoldTotal());
+             assertEquals(24,Stat.getMoneyDay());
+             assertEquals(999,Stat.getInk());
+             assertEquals(999,Stat.getPaper());
+             assertEquals(24,Stat.getMoneyTotal());
+             assertEquals(4,Stat.getTicketSoldDay());
+             assertEquals(4,Stat.getTicketSoldTotal());
              Stat.ResetDayStatistics();
-             assertEquals(0,Stat.MoneyDay());
-             assertEquals(0,Stat.TicketSoldDay());
+             assertEquals(0,Stat.getMoneyDay());
+             assertEquals(0,Stat.getTicketSoldDay());
              Stat.ResetInk();
              Stat.ResetPaper();
-             assertEquals(1000,Stat.CheckInk());
-             assertEquals(1000,Stat.CheckPaper());
-             assertEquals(24,Stat.MoneyTotal());
-             assertEquals(4,Stat.TicketSoldTotal());
+             assertEquals(1000,Stat.getInk());
+             assertEquals(1000,Stat.getPaper());
+             assertEquals(24,Stat.getMoneyTotal());
+             assertEquals(4,Stat.getTicketSoldTotal());
     }
     
     @BeforeClass
