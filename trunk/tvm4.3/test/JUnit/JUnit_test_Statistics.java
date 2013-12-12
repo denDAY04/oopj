@@ -11,10 +11,11 @@ import static org.junit.Assert.*;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import tvm_project.CreatedTickets;
-import tvm_project.ShoppingBasket;
-import tvm_project.Statistics;
-import tvm_project.UserInterface;
+import MachineLogic.CreatedTickets;
+import MachineLogic.ShoppingBasket;
+import MachineLogic.Statistics;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,35 +33,39 @@ public class JUnit_test_Statistics {
     
     
     
-    /**
-     *
-     */
+
     @Test
     public void JUnit_test_Statist() {
              CreatedTickets cTickets = new CreatedTickets();
-             UserInterface UserInt = new UserInterface();
-             Statistics Stat = new Statistics(UserInt); 
+             Statistics Stat = new Statistics(); 
              ShoppingBasket sBasket = new ShoppingBasket(cTickets,Stat);
+             int machineID = 1010;  // Is normally sent from the GUI, hence
+                                    // the need for a dedicated variable due to
+                                    // lack of GUI in testing
              
              cTickets.addTicket(2, "test", "testENG", 30);
-             sBasket.addToCart(1,3,4);
-
-             Stat.LogSale(sBasket.getCart().get(0));
-             assertEquals(24,Stat.MoneyDay());
-             assertEquals(999,Stat.CheckInk());
-             assertEquals(999,Stat.CheckPaper());
-             assertEquals(24,Stat.MoneyTotal());
-             assertEquals(4,Stat.TicketSoldDay());
-             assertEquals(4,Stat.TicketSoldTotal());
+             sBasket.addToCart(0,3,4);
+            try {
+                Stat.LogSale(sBasket.getCart().get(0), machineID);
+            } catch (Exception ex) {
+                ex.printStackTrace();
+                return;
+            }
+             assertEquals(24,Stat.getMoneyDay());
+             assertEquals(999,Stat.getInk());
+             assertEquals(999,Stat.getPaper());
+             assertEquals(24,Stat.getMoneyTotal());
+             assertEquals(4,Stat.getTicketSoldDay());
+             assertEquals(4,Stat.getTicketSoldTotal());
              Stat.ResetDayStatistics();
-             assertEquals(0,Stat.MoneyDay());
-             assertEquals(0,Stat.TicketSoldDay());
+             assertEquals(0,Stat.getMoneyDay());
+             assertEquals(0,Stat.getTicketSoldDay());
              Stat.ResetInk();
              Stat.ResetPaper();
-             assertEquals(1000,Stat.CheckInk());
-             assertEquals(1000,Stat.CheckPaper());
-             assertEquals(24,Stat.MoneyTotal());
-             assertEquals(4,Stat.TicketSoldTotal());
+             assertEquals(1000,Stat.getInk());
+             assertEquals(1000,Stat.getPaper());
+             assertEquals(24,Stat.getMoneyTotal());
+             assertEquals(4,Stat.getTicketSoldTotal());
     }
     
     @BeforeClass
