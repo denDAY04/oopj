@@ -42,9 +42,9 @@ public class Service
         // Menu actions
         switch (menuSelection) {
             case 1:  // 1 : Vis dagsstatistik
-                data.add("Antal billetter solgt : "+ST.TicketSoldDay()+" stk.");        
-                data.add("Antal print tilbage : "+Math.min(ST.CheckPaper(),ST.CheckInk())+" stk.");
-                data.add("Omsat for : "+ST.MoneyDay()+" kr.");
+                data.add("Antal billetter solgt : "+ST.getTicketSoldDay()+" stk.");        
+                data.add("Antal print tilbage : "+Math.min(ST.getPaper(),ST.getInk())+" stk.");
+                data.add("Omsat for : "+ST.getMoneyDay()+" kr.");
                 data.add("Dagens salg:");
                 for (String element: ST.getDayLog()) {
                     data.add(element);
@@ -63,8 +63,8 @@ public class Service
                     data.add(element);
                 }
                 data.add("Statistik for dagens salg.");
-                data.add("Omsat for "+ST.MoneyDay()+" kr.");
-                data.add("Solgt "+ST.TicketSoldDay()+" billetter"); 
+                data.add("Omsat for "+ST.getMoneyDay()+" kr.");
+                data.add("Solgt "+ST.getTicketSoldDay()+" billetter"); 
                 data.add("Nulstiller statestik... OK.");                               
                 ST.ResetDayStatistics();
                 return data;
@@ -80,8 +80,8 @@ public class Service
                 return data;
             case 7: // 7 : Vis total statestik
                 data.add("Total salg:");                    
-                data.add("Omsat for "+ST.MoneyTotal()+" kr.");
-                data.add("Solgt "+ST.TicketSoldTotal()+" billetter"); 
+                data.add("Omsat for "+ST.getMoneyTotal()+" kr.");
+                data.add("Solgt "+ST.getTicketSoldTotal()+" billetter"); 
                 data.add("Total salg:");
                 for (String element : ST.getLog()) {
                     data.add(element);

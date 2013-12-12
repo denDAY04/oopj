@@ -1,5 +1,6 @@
 package MachineLogic;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * This class denotes a single Ticket object.
@@ -16,7 +17,8 @@ public class Ticket {
     private String timeStamp;
     
     /**
-     * Constructor
+     * Constructor 
+     * <p>
      * Creates a new ticket instance of the class.
      * @param pricePerZone Int denoting the prize of a zone for this ticket. 
      * @param typeDA String denoting the type (name) of the ticket in Danish.
@@ -36,9 +38,12 @@ public class Ticket {
      * Constructor for ShoppingBasket.
      * Used to create an instance of an existing ticket, but with more than
      * one, and with a number of zones for which it should be valid.
-     * @param t
-     * @param amountTickets
-     * @param zones
+     * @param t Ticket object of the ticket that should be added to the cart 
+     * and which will have an added amount of tickets and zones.
+     * @param amountTickets int denoting the amount of tickets that should be 
+     * added to the Ticket.
+     * @param zones int denoting the amount of zones that should be added 
+     * to the Ticket.
      */
     public Ticket(Ticket t, int amountTickets, int zones) {
         this.startZone = t.getStartZone();
@@ -50,68 +55,60 @@ public class Ticket {
         this.zones = zones;
     }
 
-    /**
-    * Timestamping method..
+   /**
+    * Adds a timestamp(accurate down to minutes) to the given
+    * {@link Ticke} instance. 
+    * <p>
+    * The format for the timestamp is <code>yyyy-mm-dd hh:mm</code>
+    * 
     */
-    public void setTimeStamp()                                                  // asks a tiket to timestamp itself.
-    {
-        java.util.Date date = new java.util.Date();
+    public void setTimeStamp() {
+        Date date = new Date();
         timeStamp = new Timestamp(date.getTime()).toString().substring(0,16);
     }
+    
     /**
-     * Timestamping accessor method.
-     * @return
+     * Accessor method for the timestamp of a given {@link Ticket}.
+     * @return String denoting the timestamp in the format
+     * <code>yyyy-mm-dd hh:mm</code>
      */
-    public String getTimeStamp()
-    {
-        return timeStamp;
-    }
+    public String getTimeStamp() {return timeStamp;}
+    
     /**
-     * Type accessor method.
-     * @return
+     * Accessor method for the Danish type/Name.
+     * @return String denoting the type/name of the {@link Ticket} in Danish.
      */
-    public String getTypeDA()
-    {
-        return typeDA;
-    }
+    public String getTypeDA() {return typeDA;}
+    
+   /**
+     * Accessor method for the English type/Name.
+     * @return String denoting the type/name of the {@link Ticket} in English.
+     */
+    public String getTypeENG() {return typeENG;}
+    
     /**
-     * Type English accessor method.
-     * @return
+     * Accessor method for the amount of Zones.
+     * @return Int denoting the amount of zones added to the {@link Ticket}.
      */
-    public String getTypeENG()
-    {
-        return typeENG;
-    }
+    public int getZones() {return zones;}
+    
     /**
-     * Zones accessor method.
-     * @return
+     * Accessor method for the start zone.
+     * @return Int denoting the start zone of the {@link Ticket}.
      */
-    public int getZones()
-    {
-        return zones;
-    }
+    public int getStartZone() {return startZone;}
+    
     /**
-     * Start zone accessor method.
-     * @return
+     * Accessor method for the prize per zone.
+     * @return Int denoting the prize for a single zone of the given
+     * {@link Ticket}.
      */
-    public int getStartZone()
-    {
-        return startZone;
-    }
+    public int getPricePerZone() {return pricePerZone;}
+    
     /**
-     * price per zone accessor method.
-     * @return
+     * Accessor method for the amount of tickets added to the given 
+     * {@link Ticket}.
+     * @return Int denoting the amount of tickets.
      */
-    public int getPricePerZone()
-    {
-        return pricePerZone;
-    }
-    /**
-     * amount of tickets accessor method.
-     * @return
-     */
-    public int getAmountTickets()
-    {
-        return amountTickets;
-    }
+    public int getAmountTickets() {return amountTickets;}
 }
