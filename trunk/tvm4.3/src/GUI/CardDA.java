@@ -121,7 +121,7 @@ public class CardDA extends javax.swing.JPanel {
         String pinString = PwdCardDACode.getText();
         // Make payment//
         // If simulation failed
-        if (master.CC.MakePaymentBool(pinString) == false) { 
+        if (master.CC.makePaymentBool(pinString) == false) { 
             JOptionPane.showMessageDialog(this,
                 WelcomeDA.languageBundle.getString("FEJL.")
                 + WelcomeDA.languageBundle

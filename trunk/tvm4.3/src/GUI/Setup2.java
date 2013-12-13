@@ -3,7 +3,6 @@ package GUI;
 import MachineLogic.Ticket;
 import java.awt.Color;
 import java.io.*;
-import java.util.logging.*;
 
 /**
  * Class for the Setup2 panel in GUI

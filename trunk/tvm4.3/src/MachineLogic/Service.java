@@ -1,12 +1,11 @@
 package MachineLogic;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 /**
  * This class' main function is to communicate with with the other logical 
  * classes ({@link Statistics}, {@link CreatedTickets}, and 
- * {@link ShoppingBasket}) ind order to construct an ArrayList of Strings used
+ * {@link ShoppingBasket}) in order to construct an ArrayList of Strings used
  * to display the statistics in the GUI.
  */
 public class Service {
@@ -15,7 +14,7 @@ public class Service {
     private ShoppingBasket SB;
        
     /**
-     * Costum constructor with references to the other logical classes
+     * Custom constructor with references to the other logical classes
      * @param ST Reference to {@link Statistics}.
      * @param CT Reference to {@link CreatedTickets}.
      * @param SB Reference to {@link ShoppingBasket}.
@@ -28,7 +27,7 @@ public class Service {
     
     /**
      * Collects data from the other logical classes in order to construct an
-     * ArrayList of Strings containing all statisitc data requested by the 
+     * ArrayList of Strings containing all statistics data requested by the 
      * service visit, and send it back to the caller for displaying. 
      * @param menuSelection Int denoting the request that has been made
      * @return An ArrayList of Strings with all the needed data.
@@ -89,7 +88,7 @@ public class Service {
                 }
                 return data;
             case 8: // 8 : Udskriv test billetter.
-                // Get the array of all possibel tickets
+                // Get the array of all possible tickets
                 for (int n=0; n<CT.getArray().size();n++) {
                     // Add one of each ticket to the shopping cart 
                     SB.addToCart(n,2,1);       

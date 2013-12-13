@@ -1,4 +1,5 @@
 package MachineLogic;
+
 import java.io.*;
 import java.sql.Timestamp;
 import java.util.*;
@@ -23,11 +24,11 @@ public class Statistics {
      * Write the statistics of a sale into a log file and also store them
      * in the filed variables.
      * <p>
-     * The log file is found in the same foulder as the program, with the name
+     * The log file is found in the same folder as the program, with the name
      * "tvm.log".
      * @param t The {@link Ticket} object which was sold.
      * @param hardID Int denoting the ID of the machine that sold the ticket(s).
-     * @throws Exception If problems occour during opening of filestreams.
+     * @throws Exception If problems occur during opening of filestreams.
      */
     public void LogSale(Ticket t, int hardID) throws Exception {
         // Update statistics value
@@ -50,7 +51,7 @@ public class Statistics {
             String ts = new Timestamp(date.getTime()).toString().
                                 substring(0,16);
             // Graphics for file header
-            log.println("BJ2013LOG");  //magic number
+            log.println("BJ2013LOG");
             log.println("Log Setup Dato: "+ts);
             log.println(" ---------------------------------  ");
             log.println("|    ___  __   _  _  ___    __    | ");
@@ -134,7 +135,7 @@ public class Statistics {
     public int getInk() {return inkLeft;}
 
     /**
-     * Resets the ink varaible to 1000-tickets capacity.
+     * Resets the ink variable to 1000-tickets capacity.
      */
     public void ResetInk() {inkLeft = 1000;}
 
@@ -151,14 +152,14 @@ public class Statistics {
 
     /**
      * Accessor method for the variable denoting the amount of money the 
-     * machine has recieved since the last service visit.
+     * machine has received since the last service visit.
      * @return Int denoting amount of money the machine currently contains.
      */
     public int getMoneyDay() {return moneyDay;}
 
     /**
      * Accessor method for the variable denoting the amount of money the
-     * machine has recieved in total since the last reboot. 
+     * machine has received in total since the last reboot. 
      * @return Int denoting the amount of money the machine has contained 
      * overall.
      */

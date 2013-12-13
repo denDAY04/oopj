@@ -20,7 +20,7 @@ public class CreditCard extends Payment {
      * doesn't equal the wrong pin specified in the constructor, and it only
      * contains integers. False otherwise. 
      */
-    public boolean MakePaymentBool(String pin) {
+    public boolean makePaymentBool(String pin) {
         //If pin is too short or too long
         if (pin.length() != 4) return false; 
         //Simulate a wrong pin-instance

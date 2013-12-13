@@ -150,7 +150,10 @@ public class WelcomeDA extends javax.swing.JPanel {
         add(BackgroundPIC, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 600));
     }// </editor-fold>//GEN-END:initComponents
     
-    
+    /**
+     * Sets references to other panels
+     * @param refCartDA Reference to CartDA panel.
+     */
     public void setReferences(CartDA refCartDA) {CartDAClass = refCartDA;}
     
     private void CBWelcomeDATypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CBWelcomeDATypeActionPerformed
@@ -306,7 +309,7 @@ public class WelcomeDA extends javax.swing.JPanel {
     @SuppressWarnings("unchecked")
     private void ButWelcomeDANextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButWelcomeDANextActionPerformed
         int ticketIndex = 0;
-        /*Array begins from 0; ComboWindo begins from 1 with first being 
+        /*Array begins from 0; ComboWindow begins from 1 with first being 
         unusable.*/
         int n = master.CT.getArray().size()+2;   
 

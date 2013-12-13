@@ -119,7 +119,7 @@ public class CashDA extends javax.swing.JPanel {
     
     private void ButCashDAPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCashDAPayActionPerformed
         int insertedMoney = Integer.parseInt(InCashDAInserted.getText());
-        int missingMoney = master.CH.MakePaymentInt(insertedMoney);
+        int missingMoney = master.CH.makePaymentInt(insertedMoney);
 
         if (missingMoney < 0) {
             // Show dialog box about ticket printing and money-change
