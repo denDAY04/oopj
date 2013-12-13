@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI;
 
 import PaymentModule.*;
@@ -120,7 +116,7 @@ public class PayDA extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
    
     /**
-     * Setes references to other panels
+     * Sets references to other panels
      * @param refWelcomeDA Reference to WelcomeDA panel.
      * @param refCartDA Reference to CartDA panel. 
      * @param refCashDA Reference to CashDA panel.

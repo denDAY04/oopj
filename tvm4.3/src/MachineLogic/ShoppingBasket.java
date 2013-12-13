@@ -5,7 +5,7 @@ import java.util.*;
 
 /**
  * This class handles communication with {@link Ticket} objects when dealing 
- * with sales functions.
+ * with the sales functions.
  */
 public class ShoppingBasket {
     private final CreatedTickets cTickets;
@@ -32,7 +32,7 @@ public class ShoppingBasket {
      * will be used as a template.
      * @param amountZones Int denoting the amount of zones that should be added
      * to the new Ticket.
-     * @param ticketAmount Int denoting the amount of tickets taht should be 
+     * @param ticketAmount Int denoting the amount of tickets that should be 
      * added to the Ticket object.
      */
     public void addToCart(int ticketIndex, int amountZones, int ticketAmount) {
@@ -41,7 +41,7 @@ public class ShoppingBasket {
     }  
 
     /**
-     * Removes a {@link Ticket} from the Arraylist of Ticket objects that are 
+     * Removes a {@link Ticket} from the ArrayList of Ticket objects that are 
      * in the cart.
      * @param index Int denoting the index at which the given Ticket can be 
      * located.
@@ -58,14 +58,14 @@ public class ShoppingBasket {
      * @return True if the Ticket was successfully printed; false otherwise.
      */
     public boolean printTicket(int index,int language,int hardwareID) {            
-        // Timestap the ticket
+        // Timestamp the ticket
         ShoppingBasket.get(index).setTimeStamp();
         String HardwareString = intToFourChar(hardwareID);
         // Calculate the total price of the Ticket
         int total =  ShoppingBasket.get(index).getPricePerZone()* 
                 ShoppingBasket.get(index).getZones()* 
                 ShoppingBasket.get(index).getAmountTickets();  
-        // Formate the different Strings to fit dimensions of printed ticket.
+        // Format the different Strings to fit dimensions of printed ticket.
         String typeStr =  convertTo8Lenght( ShoppingBasket.get(index)
                 .getTypeDA());             
         String typeENGStr =  convertTo8Lenght( ShoppingBasket.get(index)
@@ -88,9 +88,7 @@ public class ShoppingBasket {
             return false;
         else 
             return true;
-    }
-
-       
+    }    
 
     /**
      * Accessor method for the ArrayList of {@link Ticket} objects denoting 
@@ -145,7 +143,7 @@ public class ShoppingBasket {
      }
 
     /**
-     * Turns an integer in to a four char long string.
+     * Turns an integer into a four char long string.
      * @param input Int to be formatted.
      * @return Formatted String.
      */

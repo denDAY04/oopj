@@ -4,7 +4,7 @@ package PaymentModule;
  * SMS simulation class that extends Payment.
  */
 public class paySMS extends Payment {
-    String failedNUM;
+    private final String failedNUM; //Invalid phone number
 
     /**
      * Constructor with a String argument to create a phone number that will 
@@ -12,8 +12,7 @@ public class paySMS extends Payment {
      * @param failedNUM String that resembles the phone number which will 
      * trigger the error-simulation.
      */
-    public paySMS(String failedNUM) {this.failedNUM = failedNUM;}
-    
+    public paySMS(String failedNUM) {this.failedNUM = failedNUM;} 
     
     /**
      * Make a payment transaction with a phone number as the String in the 
@@ -23,7 +22,7 @@ public class paySMS extends Payment {
      * non-integer characters. False if it equals the number set in the
      * constructor. True otherwise. 
      */
-    public boolean MakePaymentBool(String NUM) {
+    public boolean makePaymentBool(String NUM) {
         // Variable to hold modified NUM-String
         String NUMMinusSpaces = "";
         // Trim spaces inside of String

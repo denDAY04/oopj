@@ -17,7 +17,7 @@ public class Cash extends Payment {
      * Is empty and should not be used.
      * @return False at all time due to empty body.
      */
-    public boolean MakePaymentBool() {
+    public boolean makePaymentBool() {
         System.err.println("Warning! This method call is not costumized and"
                 + "only returns false!");
         return false;
@@ -29,7 +29,7 @@ public class Cash extends Payment {
      * @param insertedMoney The number in integer to be subtracted.
      * @return The new value of money needed to be paid.
      */
-    public int MakePaymentInt(int insertedMoney) {
+    public int makePaymentInt(int insertedMoney) {
         // If negative value, convert to positive
         if (insertedMoney < 0) 
             insertedMoney *= -1;

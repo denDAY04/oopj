@@ -25,7 +25,7 @@ public class Printer {
      * @param ticketID String denoting the unique ID of the ticket. 
      * @param language Int denoting the language that the ticket should be 
      * printed in.
-     * @return True if the ticket is printed successfully; false otherwhise.
+     * @return True if the ticket is printed successfully; false otherwise.
      */
     public boolean print(String typeDA, String typeENG, String startZone
             , String amountZones, String amountTickets, String totalPrice

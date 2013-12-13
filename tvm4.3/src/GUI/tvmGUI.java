@@ -109,6 +109,7 @@ public class tvmGUI extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
+//------------------------Methods for use in the GUI--------------------------
     /**
      * This call tries to open a filestream to a tvm.setup file while will
      * then be used to set up the machine automatically, with predefined 
@@ -158,13 +159,8 @@ public class tvmGUI extends javax.swing.JFrame {
             System.err.println("Error. Initiating manual setup.");
             return true;
         }
-    }
+    }   
     
-    
-    
-    
-    
-//------------------------Methods for use in the GUI--------------------------
     /**
      * A Thread that keeps checking the terminal for integer inputs. 
      * If the input equals a specified password the program switches 

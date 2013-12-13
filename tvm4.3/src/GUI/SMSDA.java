@@ -115,11 +115,12 @@ public class SMSDA extends javax.swing.JPanel {
         CartDAClass = refCartDA;
         PayDAClass = refPayDA;
     }
+    
     private void ButSMSDAConfirmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButSMSDAConfirmActionPerformed
         // Get String from text field
         String phoneNUM = InSMSDAPhoneNMB.getText();
         // Make payment
-        if (master.SMS.MakePaymentBool(phoneNUM)) {
+        if (master.SMS.makePaymentBool(phoneNUM)) {
             // Show dialog refering to a fictional message
             JOptionPane.showMessageDialog(this,
                 WelcomeDA.languageBundle
