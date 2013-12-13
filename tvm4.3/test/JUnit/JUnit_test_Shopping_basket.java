@@ -53,9 +53,7 @@ public class JUnit_test_Shopping_basket
         assertEquals("   2", sBasket.intToFourChar(2));
         assertEquals("1234", sBasket.intToFourChar(12345));
         assertEquals("   0", sBasket.intToFourChar(0));
-        assertEquals("  -1", sBasket.intToFourChar(-1));
-        
-   
+        assertEquals("  -1", sBasket.intToFourChar(-1)); 
     }
     
     /**
@@ -92,9 +90,7 @@ public class JUnit_test_Shopping_basket
         assertEquals("00012345", sBasket.convertTo8Length0(12345));
         assertEquals("12345678", sBasket.convertTo8Length0(1234567890));
         assertEquals("00000000", sBasket.convertTo8Length0(0));
-        assertEquals("-0000001", sBasket.convertTo8Length0(-1));
-        
-   
+        assertEquals("-0000001", sBasket.convertTo8Length0(-1));   
     }
 
      /**
