@@ -66,21 +66,21 @@ public class ShoppingBasket {
                 ShoppingBasket.get(index).getZones()* 
                 ShoppingBasket.get(index).getAmountTickets();  
         // Format the different Strings to fit dimensions of printed ticket.
-        String typeStr =  convertTo8Lenght( ShoppingBasket.get(index)
+        String typeStr =  convertTo8Length( ShoppingBasket.get(index)
                 .getTypeDA());             
-        String typeENGStr =  convertTo8Lenght( ShoppingBasket.get(index)
+        String typeENGStr =  convertTo8Length( ShoppingBasket.get(index)
                 .getTypeENG());
         String startZoneStr = intToFourChar( ShoppingBasket.get(index)
                 .getStartZone());         
         String zonesStr = intToFourChar( ShoppingBasket.get(index).getZones());
         String amountTicketsStr = intToFourChar( ShoppingBasket.get(index)
                 .getAmountTickets());
-        String totalPriceStr =  convertTo8Lenght(Integer.toString(total));
+        String totalPriceStr =  convertTo8Length(Integer.toString(total));
         // Get timestamp for the Ticket
         String timeStamp =  ShoppingBasket.get(index).getTimeStamp();
         // Prepare machine ID and unique ticket code
         String ticketID = HardwareString+">>"
-                +convertTo8Lenght0(Stat.getTicketNumber()); 
+                +convertTo8Length0(Stat.getTicketNumber()); 
         // Print ticket and evaluate if printed successfully.
         if (Print.print(typeStr, typeENGStr, startZoneStr, zonesStr, 
                 amountTicketsStr, totalPriceStr, timeStamp, ticketID, 
@@ -121,7 +121,7 @@ public class ShoppingBasket {
      * @param type String to be formatted.
      * @return Formatted String.
      */
-    public String convertTo8Lenght(String type) {
+    public String convertTo8Length(String type) {
         String output = "";
         output = output.format("%8s", type.replace(' ',' '));
         if (output.length()> 8) 
@@ -134,7 +134,7 @@ public class ShoppingBasket {
      * @param type Int to be formatted.
      * @return Formatted String.
      */
-    public String convertTo8Lenght0(int type) {
+    public String convertTo8Length0(int type) {
         String output = "";
         output = output.format("%1$08d", type);
         if (output.length()> 8) 
