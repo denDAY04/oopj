@@ -1,6 +1,8 @@
 package GUI;
 
-import PaymentModule.*;
+import Payment.paySMS;
+import Payment.Cash;
+import Payment.CreditCard;
 import javax.swing.JOptionPane;
 
 /**

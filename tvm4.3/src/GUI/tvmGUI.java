@@ -1,7 +1,9 @@
 package GUI;
 
+import Payment.paySMS;
+import Payment.Cash;
+import Payment.CreditCard;
 import MachineLogic.*;
-import PaymentModule.*;
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.io.*;
