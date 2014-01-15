@@ -492,9 +492,6 @@ public class tvmGUI extends javax.swing.JFrame {
     public ShoppingBasket SB = new ShoppingBasket(CT, ST);
     public Service SV = new Service(ST, CT, SB);
     public Payment PY = null;
-//    public Cash CH = null;
-//    public CreditCard CC = null;
-//    public paySMS SMS = null;
     public ArrayList<String> ListContent;
     public ArrayList<String> CartContent = new ArrayList<String>();
     public int amountZones = 0;
