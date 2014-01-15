@@ -1,0 +1,62 @@
+package Payment;
+
+/**
+ * Credit card simulation class that extends Payment.
+ */
+public class CreditCard implements Payment {
+    private final String wrongPin;
+    
+    /**
+     * Make a credit card simulation instance. The parameter simulates a
+     * pin that will trigger a wrong-pin simulation.
+     * @param wrongPin Integer to trigger a failed payment instance.
+     */
+    public CreditCard(String wrongPin){this.wrongPin = wrongPin;}
+    
+    /**
+     * Simulate a transaction with credit card.
+     * @param pin String denoting the entered pin-code
+     * @return True if and only if the String is four characters long, it 
+     * doesn't equal the wrong pin specified in the constructor, and it only
+     * contains integers. False otherwise. 
+     */
+    @Override
+    public boolean makePaymentBool(String pin) {
+        //If pin is too short or too long
+        if (pin.length() != 4) return false; 
+        //Simulate a wrong pin-instance
+        if (pin.equals(wrongPin))   
+            return false;
+        else {
+            try {
+                Integer.parseInt(wrongPin);
+            } catch (NumberFormatException e) {     // pin contains non-int
+                return false;
+            }
+            return true;    //Simulate correct pin
+        }
+    }
+
+    /**
+     * Is empty and should not be used!
+     * @param insertedMoney N/A
+     * @return 0 at all time.
+     */
+    @Override
+    public int makePaymentInt(int insertedMoney) {
+        System.err.println("Warning! This method call is not costumized and"
+                + "only returns 0!");
+        return 0;
+    }
+
+    /**
+     * Is empty and should not be used!
+     * @return 0 at all time.
+     */
+    @Override
+    public int getInsertedMoney() {
+        System.err.println("Warning! This method call is not costumized and"
+                + "only returns 0!");
+        return 0;
+    }
+}
