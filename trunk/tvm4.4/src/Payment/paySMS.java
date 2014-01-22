@@ -3,7 +3,7 @@ package Payment;
 /**
  * SMS simulation class that extends Payment.
  */
-public class paySMS implements Payment {
+public class paySMS extends Payment {
     private final String failedNUM; //Invalid phone number
 
     /**

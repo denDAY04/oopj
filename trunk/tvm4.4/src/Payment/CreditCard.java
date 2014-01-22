@@ -3,7 +3,7 @@ package Payment;
 /**
  * Credit card simulation class that extends Payment.
  */
-public class CreditCard implements Payment {
+public class CreditCard extends Payment {
     private final String wrongPin;
     
     /**

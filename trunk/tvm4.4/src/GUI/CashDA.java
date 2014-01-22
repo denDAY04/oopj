@@ -118,7 +118,14 @@ public class CashDA extends javax.swing.JPanel {
     }
     
     private void ButCashDAPayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButCashDAPayActionPerformed
-        int insertedMoney = Integer.parseInt(InCashDAInserted.getText());
+        int insertedMoney; 
+        // Get inserted money from the input field
+        try {
+            insertedMoney = Integer.parseInt(InCashDAInserted.getText());
+        } catch (NumberFormatException | NullPointerException e) {
+            // An error occoured - handle as none inserted
+            insertedMoney = 0;
+        }
         int missingMoney = master.PY.makePaymentInt(insertedMoney);
 
         if (missingMoney < 0) {
