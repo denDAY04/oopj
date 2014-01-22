@@ -1,6 +1,6 @@
 package GUI;
 
-import Payment.paySMS;
+import Payment.PaySMS;
 import Payment.Cash;
 import Payment.CreditCard;
 import javax.swing.JOptionPane;
@@ -173,7 +173,7 @@ public class PayDA extends javax.swing.JPanel {
                 +WelcomeDA.languageBundle.getString("DKK"));
         String failedNUM = "88888888";  // number to force error-simulation
         // Make SMS instance
-        master.PY = new paySMS(failedNUM);
+        master.PY = new PaySMS(failedNUM);
         // Move to next window
         master.ChangePanel(SMSDAClass);
     }//GEN-LAST:event_ButPayDASMSActionPerformed
