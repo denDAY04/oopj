@@ -3,7 +3,7 @@ package Payment;
 /**
  * Cash simulation class that extends Payment.
  */
-public class Cash implements Payment {
+public class Cash extends Payment {
     int moneyNeeded = 0;
     int totalInsertedMoney = 0;
     

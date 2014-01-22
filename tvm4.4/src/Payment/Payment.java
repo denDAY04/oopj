@@ -1,13 +1,13 @@
 package Payment;
 
 /**
- * Interface class used as superclass for inheritance and polymorphing 
- * with payment simulations
+ * Abstract class used as superclass for inheritance and polymorphing 
+ * for payment simulation modules. All methods are abstract. 
  */
-public interface Payment {
-    // Interface method calls
-    public boolean makePaymentBool(String s);
-    public int makePaymentInt(int insertedMoney);
-    public int getInsertedMoney();
+public abstract class Payment {
+    // Abstract methods for inheritance
+    public abstract boolean makePaymentBool(String s);
+    public abstract int makePaymentInt(int insertedMoney);
+    public abstract int getInsertedMoney();
     
 }
