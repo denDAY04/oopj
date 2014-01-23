@@ -61,7 +61,7 @@ public class PaySMS extends Payment {
                 + "only returns 0!");
         return 0;
     }
-
+ 
     /**
      * Is empty and should not be used!
      * @return 0 at all time.
