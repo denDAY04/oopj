@@ -62,7 +62,6 @@ public class tvmGUI extends javax.swing.JFrame {
             corruption, clear the existing tickets, and diactivate
             timeout timer.*/
             CT.ClearArray();
-            timeOutTimer.cancel();
             // Initiate manual setup
             ChangePanel(Setup1Class);
         } else ChangePanel(WelcomeDAClass);
