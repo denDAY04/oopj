@@ -1,4 +1,4 @@
-package Payment;
+package Payment; 
 
 /**
  * SMS simulation class that extends Payment.
