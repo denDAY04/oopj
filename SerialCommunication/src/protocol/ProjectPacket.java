@@ -185,7 +185,14 @@ public final class ProjectPacket extends Packet {
      */
     @Override
     public void generateChecksum() {
-        setChecksum(123); //TO DO
+        
+                
+   byte sum = 0;  
+   for (byte b : bytePacket) {  
+   sum ^= b;  
+   }  
+                   
+      setChecksum(sum);
     }
 
 
