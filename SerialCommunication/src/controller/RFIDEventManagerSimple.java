@@ -22,12 +22,16 @@ import protocol.Packet;
 public class RFIDEventManagerSimple implements FrameEventListener {
 
     private SerialTransceiver transmitter;
-    private String portNumber = "COM4";             // Windows port
+    private String portNumber;             // Windows port
     private String source = "34";
     private String destination = "12";
     private Packet packet;
 
+    /**
+     * Default constructor which automatically detects port name.
+     */
     public RFIDEventManagerSimple() {
+        portNumber = PortDetection.getPorts().get(0);
     }
 
     /**

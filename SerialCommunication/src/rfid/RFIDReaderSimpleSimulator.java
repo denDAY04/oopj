@@ -4,6 +4,7 @@
  */
 package rfid;
 
+import controller.PortDetection;
 import protocol.ProjectPacket;
 import serial.FrameEvent;
 import serial.FrameEventListener;
@@ -20,12 +21,16 @@ import protocol.Packet;
 public class RFIDReaderSimpleSimulator implements FrameEventListener {
 
     private SerialTransceiver transmitter;
-    private String portNumber = "COM5";             // Windows port
+    private String portNumber;             // Windows port
     private String source = "12";
     private String destination = "34";
     private Packet packet;
 
+    /**
+     * Default constructor which automatically detects port name.
+     */
     public RFIDReaderSimpleSimulator() {
+        portNumber = PortDetection.getPorts().get(1);
     }
 
     /**
