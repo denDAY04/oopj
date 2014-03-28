@@ -22,8 +22,7 @@ import protocol.Packet;
 public class RFIDEventManagerSimple implements FrameEventListener {
 
     private SerialTransceiver transmitter;
-    //private String portNumber = "COM3"; // Windows
-    private String portNumber = "/dev/cu.PL2303-0040121A"; // Mac OS X
+    private String portNumber = "COM4";             // Windows port
     private String source = "34";
     private String destination = "12";
     private Packet packet;

@@ -20,8 +20,7 @@ import protocol.Packet;
 public class RFIDReaderSimpleSimulator implements FrameEventListener {
 
     private SerialTransceiver transmitter;
-    //private String portNumber = "COM4"; // Windows
-    private String portNumber = "/dev/cu.PL2303-0030121A"; // Mac OS X
+    private String portNumber = "COM5";             // Windows port
     private String source = "12";
     private String destination = "34";
     private Packet packet;
