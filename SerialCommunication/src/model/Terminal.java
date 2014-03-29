@@ -11,14 +11,15 @@ import java.io.Serializable;
  * @author ibr
  */
 public class Terminal implements Serializable {
-
+    private String hardwareNumb;
     private String road;
     private String zipCode;
     private String ipAddress;
     private String installStatus;
     private String chargingStatus;
 
-    public Terminal(String road, String zipCode, String ipAddress, String installStatus, String chargingStatus) {
+    public Terminal(String hardwareNumb, String road, String zipCode, String ipAddress, String installStatus, String chargingStatus) {
+        this.hardwareNumb = hardwareNumb;
         this.road = road;
         this.zipCode = zipCode;
         this.ipAddress = ipAddress;
@@ -27,7 +28,13 @@ public class Terminal implements Serializable {
 
     }
 
-  
+      public String getHardwareNumb() {
+        return hardwareNumb;
+    }
+
+    public void setHardwareNumb(String hardwareNumb) {
+        this.hardwareNumb = hardwareNumb;
+    }
     public String getRoad() {
         return road;
     }
@@ -71,16 +78,19 @@ public class Terminal implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 43 * hash + (this.road != null ? this.road.hashCode() : 0);
-        hash = 43 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
         hash =
-                43 * hash +
+                71 * hash +
+                (this.hardwareNumb != null ? this.hardwareNumb.hashCode() : 0);
+        hash = 71 * hash + (this.road != null ? this.road.hashCode() : 0);
+        hash = 71 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
+        hash =
+                71 * hash +
                 (this.ipAddress != null ? this.ipAddress.hashCode() : 0);
         hash =
-                43 * hash +
+                71 * hash +
                 (this.installStatus != null ? this.installStatus.hashCode() : 0);
         hash =
-                43 * hash +
+                71 * hash +
                 (this.chargingStatus != null ? this.chargingStatus.hashCode() : 0);
         return hash;
     }
@@ -94,6 +104,10 @@ public class Terminal implements Serializable {
             return false;
         }
         final Terminal other = (Terminal) obj;
+        if ((this.hardwareNumb == null) ? (other.hardwareNumb != null)
+                : !this.hardwareNumb.equals(other.hardwareNumb)) {
+            return false;
+        }
         if ((this.road == null) ? (other.road != null)
                 : !this.road.equals(other.road)) {
             return false;
@@ -110,11 +124,8 @@ public class Terminal implements Serializable {
                 : !this.installStatus.equals(other.installStatus)) {
             return false;
         }
-        if ((this.chargingStatus == null) ? (other.chargingStatus != null)
-                : !this.chargingStatus.equals(other.chargingStatus)) {
-            return false;
-        }
         return true;
     }
+
     
 }

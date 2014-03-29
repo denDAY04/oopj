@@ -9,14 +9,14 @@ public class Billing implements Serializable {
     private String StartCharge;
     private String EndCharge;
     private String Recieved;
-    private String BillingAmount;
-    private String BillingRate;
-    private String BillingKWH;
-    private String NewBalanceBilling;
+    private double BillingAmount;
+    private double BillingRate;
+    private double BillingKWH;
+    private double NewBalanceBilling;
     
 
     public Billing(String TransactionNumb, String CustomerNumb, String HardwareNumb, String StartCharge, String EndCharge, String Recieved,
-                   String BillingAmount,String BillingRate, String BillingKWH, String NewBalanceBilling) {
+                   double BillingAmount,double BillingRate, double BillingKWH, double NewBalanceBilling) {
         this.TransactionNumb = TransactionNumb;
         this.CustomerNumb = CustomerNumb;
         this.HardwareNumb = HardwareNumb;
@@ -77,73 +77,76 @@ public class Billing implements Serializable {
         this.Recieved = Recieved;
     }
 
-    public String getBillingAmount() {
+    public double getBillingAmount() {
         return BillingAmount;
     }
 
-    public void setBillingAmount(String BillingAmount) {
+    public void setBillingAmount(double BillingAmount) {
         this.BillingAmount = BillingAmount;
     }
 
-    public String getBillingRate() {
+    public double getBillingRate() {
         return BillingRate;
     }
 
-    public void setBillingRate(String BillingRate) {
+    public void setBillingRate(double BillingRate) {
         this.BillingRate = BillingRate;
     }
 
-    public String getBillingKWH() {
+    public double getBillingKWH() {
         return BillingKWH;
     }
 
-    public void setBillingKWH(String BillingKWH) {
+    public void setBillingKWH(double BillingKWH) {
         this.BillingKWH = BillingKWH;
     }
 
-    public String getNewBalanceBilling() {
+    public double getNewBalanceBilling() {
         return NewBalanceBilling;
     }
 
-    public void setNewBalanceBilling(String NewBalanceBilling) {
+    public void setNewBalanceBilling(double NewBalanceBilling) {
         this.NewBalanceBilling = NewBalanceBilling;
     }
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 7;
         hash =
-                53 * hash +
+                37 * hash +
                 (this.TransactionNumb != null ? this.TransactionNumb.hashCode()
                 : 0);
         hash =
-                53 * hash +
+                37 * hash +
                 (this.CustomerNumb != null ? this.CustomerNumb.hashCode() : 0);
         hash =
-                53 * hash +
+                37 * hash +
                 (this.HardwareNumb != null ? this.HardwareNumb.hashCode() : 0);
         hash =
-                53 * hash +
+                37 * hash +
                 (this.StartCharge != null ? this.StartCharge.hashCode() : 0);
         hash =
-                53 * hash +
+                37 * hash +
                 (this.EndCharge != null ? this.EndCharge.hashCode() : 0);
         hash =
-                53 * hash +
+                37 * hash +
                 (this.Recieved != null ? this.Recieved.hashCode() : 0);
         hash =
-                53 * hash +
-                (this.BillingAmount != null ? this.BillingAmount.hashCode() : 0);
+                37 * hash +
+                (int) (Double.doubleToLongBits(this.BillingAmount) ^
+                (Double.doubleToLongBits(this.BillingAmount) >>> 32));
         hash =
-                53 * hash +
-                (this.BillingRate != null ? this.BillingRate.hashCode() : 0);
+                37 * hash +
+                (int) (Double.doubleToLongBits(this.BillingRate) ^
+                (Double.doubleToLongBits(this.BillingRate) >>> 32));
         hash =
-                53 * hash +
-                (this.BillingKWH != null ? this.BillingKWH.hashCode() : 0);
+                37 * hash +
+                (int) (Double.doubleToLongBits(this.BillingKWH) ^
+                (Double.doubleToLongBits(this.BillingKWH) >>> 32));
         hash =
-                53 * hash +
-                (this.NewBalanceBilling != null
-                ? this.NewBalanceBilling.hashCode() : 0);
+                37 * hash +
+                (int) (Double.doubleToLongBits(this.NewBalanceBilling) ^
+                (Double.doubleToLongBits(this.NewBalanceBilling) >>> 32));
         return hash;
     }
 
@@ -180,24 +183,24 @@ public class Billing implements Serializable {
                 : !this.Recieved.equals(other.Recieved)) {
             return false;
         }
-        if ((this.BillingAmount == null) ? (other.BillingAmount != null)
-                : !this.BillingAmount.equals(other.BillingAmount)) {
+        if (Double.doubleToLongBits(this.BillingAmount) !=
+                Double.doubleToLongBits(other.BillingAmount)) {
             return false;
         }
-        if ((this.BillingRate == null) ? (other.BillingRate != null)
-                : !this.BillingRate.equals(other.BillingRate)) {
+        if (Double.doubleToLongBits(this.BillingRate) !=
+                Double.doubleToLongBits(other.BillingRate)) {
             return false;
         }
-        if ((this.BillingKWH == null) ? (other.BillingKWH != null)
-                : !this.BillingKWH.equals(other.BillingKWH)) {
+        if (Double.doubleToLongBits(this.BillingKWH) != Double.doubleToLongBits(other.BillingKWH)) {
             return false;
         }
-        if ((this.NewBalanceBilling == null) ? (other.NewBalanceBilling != null)
-                : !this.NewBalanceBilling.equals(other.NewBalanceBilling)) {
+        if (Double.doubleToLongBits(this.NewBalanceBilling) !=
+                Double.doubleToLongBits(other.NewBalanceBilling)) {
             return false;
         }
         return true;
     }
+    
     
     
 }

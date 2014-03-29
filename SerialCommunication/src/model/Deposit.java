@@ -6,13 +6,13 @@ public class Deposit implements Serializable {
     private String DepositsNumb;
     private String CustomerNumb; // forgin key
     private String DepositsDate;
-    private String DepositAmount;
-    private String NewBalanceDeposit;
+    private double DepositAmount;
+    private double NewBalanceDeposit;
     private String ExternalRefNumb;
     private String last4CardNumb;
     //
 
-    public Deposit(String DepositsNumb, String CustomerNumb, String DepositsDate, String DepositAmount, String NewBalanceDeposit, String ExternalRefNumb,
+    public Deposit(String DepositsNumb, String CustomerNumb, String DepositsDate, double DepositAmount, double NewBalanceDeposit, String ExternalRefNumb,
                     String last4CardNumb) {
         this.DepositsNumb = DepositsNumb;
         this.CustomerNumb = CustomerNumb;
@@ -49,19 +49,19 @@ public class Deposit implements Serializable {
         this.DepositsDate = DepositsDate;
     }
 
-    public String getDepositAmount() {
+    public double getDepositAmount() {
         return DepositAmount;
     }
 
-    public void setDepositAmount(String DepositAmount) {
+    public void setDepositAmount(double DepositAmount) {
         this.DepositAmount = DepositAmount;
     }
 
-    public String getNewBalanceDeposit() {
+    public double getNewBalanceDeposit() {
         return NewBalanceDeposit;
     }
 
-    public void setNewBalanceDeposit(String NewBalanceDeposit) {
+    public void setNewBalanceDeposit(double NewBalanceDeposit) {
         this.NewBalanceDeposit = NewBalanceDeposit;
     }
 
@@ -83,29 +83,30 @@ public class Deposit implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 5;
+        int hash = 3;
         hash =
-                89 * hash +
+                61 * hash +
                 (this.DepositsNumb != null ? this.DepositsNumb.hashCode() : 0);
         hash =
-                89 * hash +
+                61 * hash +
                 (this.CustomerNumb != null ? this.CustomerNumb.hashCode() : 0);
         hash =
-                89 * hash +
+                61 * hash +
                 (this.DepositsDate != null ? this.DepositsDate.hashCode() : 0);
         hash =
-                89 * hash +
-                (this.DepositAmount != null ? this.DepositAmount.hashCode() : 0);
+                61 * hash +
+                (int) (Double.doubleToLongBits(this.DepositAmount) ^
+                (Double.doubleToLongBits(this.DepositAmount) >>> 32));
         hash =
-                89 * hash +
-                (this.NewBalanceDeposit != null
-                ? this.NewBalanceDeposit.hashCode() : 0);
+                61 * hash +
+                (int) (Double.doubleToLongBits(this.NewBalanceDeposit) ^
+                (Double.doubleToLongBits(this.NewBalanceDeposit) >>> 32));
         hash =
-                89 * hash +
+                61 * hash +
                 (this.ExternalRefNumb != null ? this.ExternalRefNumb.hashCode()
                 : 0);
         hash =
-                89 * hash +
+                61 * hash +
                 (this.last4CardNumb != null ? this.last4CardNumb.hashCode() : 0);
         return hash;
     }
@@ -131,12 +132,12 @@ public class Deposit implements Serializable {
                 : !this.DepositsDate.equals(other.DepositsDate)) {
             return false;
         }
-        if ((this.DepositAmount == null) ? (other.DepositAmount != null)
-                : !this.DepositAmount.equals(other.DepositAmount)) {
+        if (Double.doubleToLongBits(this.DepositAmount) !=
+                Double.doubleToLongBits(other.DepositAmount)) {
             return false;
         }
-        if ((this.NewBalanceDeposit == null) ? (other.NewBalanceDeposit != null)
-                : !this.NewBalanceDeposit.equals(other.NewBalanceDeposit)) {
+        if (Double.doubleToLongBits(this.NewBalanceDeposit) !=
+                Double.doubleToLongBits(other.NewBalanceDeposit)) {
             return false;
         }
         if ((this.ExternalRefNumb == null) ? (other.ExternalRefNumb != null)

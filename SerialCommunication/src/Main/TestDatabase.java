@@ -19,7 +19,7 @@ import Library.SQLLibrary;
  *
  * @author hbe
  */
-public class Main {
+public class TestDatabase {
     public static void main(String[] args) {
         ArrayList<Terminal> terminalList;
 

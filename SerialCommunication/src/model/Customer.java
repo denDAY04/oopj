@@ -11,11 +11,11 @@ public class Customer implements Serializable {
     private String zipCode;
     private String email;
     private String phoneNumb;
-    private String balance;
+    private double balance;
     private String accountStatus;
 
     public Customer(String customerNumb,String password, String firstname, String lastname, String road, String zipCode, String email,
-                    String phoneNumb, String balance, String accountStatus) {
+                    String phoneNumb, double balance, String accountStatus) {
         this.customerNumb = customerNumb;
         this.password = password;
         this.firstName = firstname;
@@ -94,11 +94,11 @@ public class Customer implements Serializable {
         this.phoneNumb = phoneNumb;
     }
 
-    public String getBalance() {
+    public double getBalance() {
         return balance;
     }
 
-    public void setBalance(String balance) {
+    public void setBalance(double balance) {
         this.balance = balance;
     }
 
@@ -112,28 +112,31 @@ public class Customer implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash =
-                67 * hash +
+                17 * hash +
                 (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
         hash =
-                67 * hash +
+                17 * hash +
                 (this.password != null ? this.password.hashCode() : 0);
         hash =
-                67 * hash +
+                17 * hash +
                 (this.firstName != null ? this.firstName.hashCode() : 0);
         hash =
-                67 * hash +
+                17 * hash +
                 (this.lastName != null ? this.lastName.hashCode() : 0);
-        hash = 67 * hash + (this.road != null ? this.road.hashCode() : 0);
-        hash = 67 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
-        hash = 67 * hash + (this.email != null ? this.email.hashCode() : 0);
+        hash = 17 * hash + (this.road != null ? this.road.hashCode() : 0);
+        hash = 17 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
+        hash = 17 * hash + (this.email != null ? this.email.hashCode() : 0);
         hash =
-                67 * hash +
+                17 * hash +
                 (this.phoneNumb != null ? this.phoneNumb.hashCode() : 0);
-        hash = 67 * hash + (this.balance != null ? this.balance.hashCode() : 0);
         hash =
-                67 * hash +
+                17 * hash +
+                (int) (Double.doubleToLongBits(this.balance) ^
+                (Double.doubleToLongBits(this.balance) >>> 32));
+        hash =
+                17 * hash +
                 (this.accountStatus != null ? this.accountStatus.hashCode() : 0);
         return hash;
     }
@@ -150,7 +153,7 @@ public class Customer implements Serializable {
         if ((this.customerNumb == null) ? (other.customerNumb != null)
                 : !this.customerNumb.equals(other.customerNumb)) {
             return false;
-        }        
+        }
         if ((this.password == null) ? (other.password != null)
                 : !this.password.equals(other.password)) {
             return false;
@@ -179,8 +182,8 @@ public class Customer implements Serializable {
                 : !this.phoneNumb.equals(other.phoneNumb)) {
             return false;
         }
-        if ((this.balance == null) ? (other.balance != null)
-                : !this.balance.equals(other.balance)) {
+        if (Double.doubleToLongBits(this.balance) !=
+                Double.doubleToLongBits(other.balance)) {
             return false;
         }
         if ((this.accountStatus == null) ? (other.accountStatus != null)
