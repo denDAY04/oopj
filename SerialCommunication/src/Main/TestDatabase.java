@@ -22,19 +22,17 @@ import Library.SQLLibrary;
 public class TestDatabase {
     public static void main(String[] args) {
         ArrayList<Terminal> terminalList;
-
         DatabaseDAO databaseDAO = new DatabaseDerbyDAO();
-        
-        //Lookup Java How to Program
+
         System.out.println("---");
         System.out.println("Modify terminal:");
-        //Terminal terminal1;
-        int terminal1;
+        int row;
         ArrayList<String> parameters = new ArrayList();
         parameters.add("seethis");        // status
         parameters.add("2");              // hardwareID
-        terminal1 = databaseDAO.updateQuery(SQLLibrary.ADMIN_CHANGE_TERMINAL_INSTALLSTATUS,parameters);
-        System.out.println("Found book:");
+        row = databaseDAO.updateQuery(SQLLibrary.ADMIN_CHANGE_TERMINAL_INSTALLSTATUS,parameters);
+        System.out.println("update done");
+
        //System.out.println("ISBN: " + terminal1.getIsbn() +
        //         ", Title: " + terminal1.getTitle() +
         //        ", Ed.: " + terminal1.getEditionNumber() +

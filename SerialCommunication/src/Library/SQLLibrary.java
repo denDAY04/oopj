@@ -31,7 +31,7 @@ public class SQLLibrary {
                                              + "where CustomerNumb = ?";
 // USER  get Billing & Terminals - (on click)
 //ArrayList: 1, TransactionNumb
- public static final String DBQuery = "select TransactionNumb, StartCharge, EndCharge, Recieved, BillingAmount, " 
+ public static final String USER_GET_BILLING_N_TERMINAL = "select TransactionNumb, StartCharge, EndCharge, Recieved, BillingAmount, " 
                                      +"BillingRate, BillingKWH, NewBalanceBilling, Road, ZipCode " 
                                      + "from Billing "
                                      + "inner join Terminals "
