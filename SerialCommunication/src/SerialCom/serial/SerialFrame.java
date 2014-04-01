@@ -12,7 +12,7 @@ import gnu.io.*;
 /**
  * Wrapper class for Java serial classes.
  * Uses the Strategy pattern to specify the <code>FrameProtocol</code>
- * Baudrate = 19200 bits/sec.
+ * Baud_rate = 19200 bits/sec.
  * @author lmo, oc, ibr, hbe
  * @version 29/10/10
  */
@@ -24,7 +24,7 @@ public class SerialFrame implements SerialPortEventListener {
     private SerialPort serialPort;
     private InputStream inputStream;
     private OutputStream outputStream;
-    private final int BAUDRATE = 19200;
+    private final int BAUD_RATE = 19200;
     private ArrayList<Byte> byteFrameList = new ArrayList<Byte>();
     private Packet packet;
 
@@ -47,7 +47,7 @@ public class SerialFrame implements SerialPortEventListener {
                     try {
                         serialPort = (SerialPort) portId.open("", 500);
                         serialPort.setSerialPortParams(
-                                BAUDRATE,
+                                BAUD_RATE,
                                 SerialPort.DATABITS_8,
                                 SerialPort.STOPBITS_1,
                                 SerialPort.PARITY_NONE);
