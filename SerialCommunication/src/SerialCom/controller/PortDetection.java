@@ -15,7 +15,7 @@ import java.util.Enumeration;
  * @author hbe
  */
 public class PortDetection {
-    static String getPortTypeName(int portType) {
+    public static String getPortTypeName(int portType) {
         // konvertér porttype til tekststreng
         switch (portType) {
             case CommPortIdentifier.PORT_I2C:

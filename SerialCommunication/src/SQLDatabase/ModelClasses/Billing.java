@@ -3,128 +3,128 @@ package SQLDatabase.ModelClasses;
 import java.io.Serializable;
 
 public class Billing implements Serializable {
-    private String TransactionNumb;
-    private String CustomerNumb;  // forgin key
-    private String HardwareNumb; // forgin key
-    private String StartCharge;
-    private String EndCharge;
-    private String Recieved;
-    private double BillingAmount;
-    private double BillingRate;
-    private double BillingKWH;
-    private double NewBalanceBilling;
+    private String transactionNumb;
+    private String customerNumb;  // forgin key
+    private String hardwareNumb; // forgin key
+    private String startCharge;
+    private String endCharge;
+    private String recieved;
+    private double billingAmount;
+    private double billingRate;
+    private double billingKWH;
+    private double newBalanceBilling;
     Customer costumer=null;
     Terminal terminal=null;
     
 
-    public Billing(String TransactionNumb, String CustomerNumb, String HardwareNumb, String StartCharge, String EndCharge, String Recieved,
-                   double BillingAmount,double BillingRate, double BillingKWH, double NewBalanceBilling) {
-        this.TransactionNumb = TransactionNumb;
-        this.CustomerNumb = CustomerNumb;
-        this.HardwareNumb = HardwareNumb;
-        this.StartCharge = StartCharge;
-        this.EndCharge = EndCharge;
-        this.Recieved = Recieved;
-        this.BillingAmount = BillingAmount;
-        this.BillingRate = BillingRate;
-        this.BillingKWH = BillingKWH;
-        this.NewBalanceBilling = NewBalanceBilling;
+    public Billing(String transactionNumb, String customerNumb, String hardwareNumb, String startCharge, String endCharge, String recieved,
+                   double billingAmount,double billingRate, double billingKWH, double newBalanceBilling) {
+        this.transactionNumb = transactionNumb;
+        this.customerNumb = customerNumb;
+        this.hardwareNumb = hardwareNumb;
+        this.startCharge = startCharge;
+        this.endCharge = endCharge;
+        this.recieved = recieved;
+        this.billingAmount = billingAmount;
+        this.billingRate = billingRate;
+        this.billingKWH = billingKWH;
+        this.newBalanceBilling = newBalanceBilling;
     }
-    
-        public Billing(String TransactionNumb, String CustomerNumb, String HardwareNumb, String StartCharge, String EndCharge, String Recieved,
-                   double BillingAmount,double BillingRate, double BillingKWH, double NewBalanceBilling, Customer costumer,Terminal terminal) {
-        this.TransactionNumb = TransactionNumb;
-        this.CustomerNumb = CustomerNumb;
-        this.HardwareNumb = HardwareNumb;
-        this.StartCharge = StartCharge;
-        this.EndCharge = EndCharge;
-        this.Recieved = Recieved;
-        this.BillingAmount = BillingAmount;
-        this.BillingRate = BillingRate;
-        this.BillingKWH = BillingKWH;
-        this.NewBalanceBilling = NewBalanceBilling;
+        // Detailed Billing constructor 
+        public Billing(String transactionNumb, String customerNumb, String hardwareNumb, String startCharge, String endCharge, String Recieved,
+        double billingAmount,double billingRate, double billingKWH, double newBalanceBilling, Customer costumer,Terminal terminal) {
+        this.transactionNumb = transactionNumb;
+        this.customerNumb = customerNumb;
+        this.hardwareNumb = hardwareNumb;
+        this.startCharge = startCharge;
+        this.endCharge = endCharge;
+        this.recieved = Recieved;
+        this.billingAmount = billingAmount;
+        this.billingRate = billingRate;
+        this.billingKWH = billingKWH;
+        this.newBalanceBilling = newBalanceBilling;
         this.costumer = costumer;
         this.terminal = terminal;
     }
 
     public String getTransactionNumb() {
-        return TransactionNumb;
+        return transactionNumb;
     }
 
     public void setTransactionNumb(String TransactionNumb) {
-        this.TransactionNumb = TransactionNumb;
+        this.transactionNumb = TransactionNumb;
     }
 
     public String getCustomerNumb() {
-        return CustomerNumb;
+        return customerNumb;
     }
 
     public void setCustomerNumb(String CustomerNumb) {
-        this.CustomerNumb = CustomerNumb;
+        this.customerNumb = CustomerNumb;
     }
 
     public String getHardwareNumb() {
-        return HardwareNumb;
+        return hardwareNumb;
     }
 
     public void setHardwareNumb(String HardwareNumb) {
-        this.HardwareNumb = HardwareNumb;
+        this.hardwareNumb = HardwareNumb;
     }
 
     public String getStartCharge() {
-        return StartCharge;
+        return startCharge;
     }
 
     public void setStartCharge(String StartCharge) {
-        this.StartCharge = StartCharge;
+        this.startCharge = StartCharge;
     }
 
     public String getEndCharge() {
-        return EndCharge;
+        return endCharge;
     }
 
     public void setEndCharge(String EndCharge) {
-        this.EndCharge = EndCharge;
+        this.endCharge = EndCharge;
     }
 
     public String getRecieved() {
-        return Recieved;
+        return recieved;
     }
 
     public void setRecieved(String Recieved) {
-        this.Recieved = Recieved;
+        this.recieved = Recieved;
     }
 
     public double getBillingAmount() {
-        return BillingAmount;
+        return billingAmount;
     }
 
     public void setBillingAmount(double BillingAmount) {
-        this.BillingAmount = BillingAmount;
+        this.billingAmount = BillingAmount;
     }
 
     public double getBillingRate() {
-        return BillingRate;
+        return billingRate;
     }
 
     public void setBillingRate(double BillingRate) {
-        this.BillingRate = BillingRate;
+        this.billingRate = BillingRate;
     }
 
     public double getBillingKWH() {
-        return BillingKWH;
+        return billingKWH;
     }
 
     public void setBillingKWH(double BillingKWH) {
-        this.BillingKWH = BillingKWH;
+        this.billingKWH = BillingKWH;
     }
 
     public double getNewBalanceBilling() {
-        return NewBalanceBilling;
+        return newBalanceBilling;
     }
 
     public void setNewBalanceBilling(double NewBalanceBilling) {
-        this.NewBalanceBilling = NewBalanceBilling;
+        this.newBalanceBilling = NewBalanceBilling;
     }
 
     @Override
@@ -132,39 +132,39 @@ public class Billing implements Serializable {
         int hash = 7;
         hash =
                 37 * hash +
-                (this.TransactionNumb != null ? this.TransactionNumb.hashCode()
+                (this.transactionNumb != null ? this.transactionNumb.hashCode()
                 : 0);
         hash =
                 37 * hash +
-                (this.CustomerNumb != null ? this.CustomerNumb.hashCode() : 0);
+                (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
         hash =
                 37 * hash +
-                (this.HardwareNumb != null ? this.HardwareNumb.hashCode() : 0);
+                (this.hardwareNumb != null ? this.hardwareNumb.hashCode() : 0);
         hash =
                 37 * hash +
-                (this.StartCharge != null ? this.StartCharge.hashCode() : 0);
+                (this.startCharge != null ? this.startCharge.hashCode() : 0);
         hash =
                 37 * hash +
-                (this.EndCharge != null ? this.EndCharge.hashCode() : 0);
+                (this.endCharge != null ? this.endCharge.hashCode() : 0);
         hash =
                 37 * hash +
-                (this.Recieved != null ? this.Recieved.hashCode() : 0);
+                (this.recieved != null ? this.recieved.hashCode() : 0);
         hash =
                 37 * hash +
-                (int) (Double.doubleToLongBits(this.BillingAmount) ^
-                (Double.doubleToLongBits(this.BillingAmount) >>> 32));
+                (int) (Double.doubleToLongBits(this.billingAmount) ^
+                (Double.doubleToLongBits(this.billingAmount) >>> 32));
         hash =
                 37 * hash +
-                (int) (Double.doubleToLongBits(this.BillingRate) ^
-                (Double.doubleToLongBits(this.BillingRate) >>> 32));
+                (int) (Double.doubleToLongBits(this.billingRate) ^
+                (Double.doubleToLongBits(this.billingRate) >>> 32));
         hash =
                 37 * hash +
-                (int) (Double.doubleToLongBits(this.BillingKWH) ^
-                (Double.doubleToLongBits(this.BillingKWH) >>> 32));
+                (int) (Double.doubleToLongBits(this.billingKWH) ^
+                (Double.doubleToLongBits(this.billingKWH) >>> 32));
         hash =
                 37 * hash +
-                (int) (Double.doubleToLongBits(this.NewBalanceBilling) ^
-                (Double.doubleToLongBits(this.NewBalanceBilling) >>> 32));
+                (int) (Double.doubleToLongBits(this.newBalanceBilling) ^
+                (Double.doubleToLongBits(this.newBalanceBilling) >>> 32));
         return hash;
     }
 
@@ -177,43 +177,43 @@ public class Billing implements Serializable {
             return false;
         }
         final Billing other = (Billing) obj;
-        if ((this.TransactionNumb == null) ? (other.TransactionNumb != null)
-                : !this.TransactionNumb.equals(other.TransactionNumb)) {
+        if ((this.transactionNumb == null) ? (other.transactionNumb != null)
+                : !this.transactionNumb.equals(other.transactionNumb)) {
             return false;
         }
-        if ((this.CustomerNumb == null) ? (other.CustomerNumb != null)
-                : !this.CustomerNumb.equals(other.CustomerNumb)) {
+        if ((this.customerNumb == null) ? (other.customerNumb != null)
+                : !this.customerNumb.equals(other.customerNumb)) {
             return false;
         }
-        if ((this.HardwareNumb == null) ? (other.HardwareNumb != null)
-                : !this.HardwareNumb.equals(other.HardwareNumb)) {
+        if ((this.hardwareNumb == null) ? (other.hardwareNumb != null)
+                : !this.hardwareNumb.equals(other.hardwareNumb)) {
             return false;
         }
-        if ((this.StartCharge == null) ? (other.StartCharge != null)
-                : !this.StartCharge.equals(other.StartCharge)) {
+        if ((this.startCharge == null) ? (other.startCharge != null)
+                : !this.startCharge.equals(other.startCharge)) {
             return false;
         }
-        if ((this.EndCharge == null) ? (other.EndCharge != null)
-                : !this.EndCharge.equals(other.EndCharge)) {
+        if ((this.endCharge == null) ? (other.endCharge != null)
+                : !this.endCharge.equals(other.endCharge)) {
             return false;
         }
-        if ((this.Recieved == null) ? (other.Recieved != null)
-                : !this.Recieved.equals(other.Recieved)) {
+        if ((this.recieved == null) ? (other.recieved != null)
+                : !this.recieved.equals(other.recieved)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.BillingAmount) !=
-                Double.doubleToLongBits(other.BillingAmount)) {
+        if (Double.doubleToLongBits(this.billingAmount) !=
+                Double.doubleToLongBits(other.billingAmount)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.BillingRate) !=
-                Double.doubleToLongBits(other.BillingRate)) {
+        if (Double.doubleToLongBits(this.billingRate) !=
+                Double.doubleToLongBits(other.billingRate)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.BillingKWH) != Double.doubleToLongBits(other.BillingKWH)) {
+        if (Double.doubleToLongBits(this.billingKWH) != Double.doubleToLongBits(other.billingKWH)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.NewBalanceBilling) !=
-                Double.doubleToLongBits(other.NewBalanceBilling)) {
+        if (Double.doubleToLongBits(this.newBalanceBilling) !=
+                Double.doubleToLongBits(other.newBalanceBilling)) {
             return false;
         }
         return true;

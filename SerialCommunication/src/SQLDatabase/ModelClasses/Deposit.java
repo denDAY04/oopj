@@ -3,74 +3,74 @@ package SQLDatabase.ModelClasses;
 import java.io.Serializable;
 
 public class Deposit implements Serializable {
-    private String DepositsNumb;
-    private String CustomerNumb; // forgin key
-    private String DepositsDate;
-    private double DepositAmount;
-    private double NewBalanceDeposit;
-    private String ExternalRefNumb;
+    private String depositsNumb;
+    private String customerNumb; // forgin key
+    private String depositsDate;
+    private double depositAmount;
+    private double newBalanceDeposit;
+    private String externalRefNumb;
     private String last4CardNumb;
     //
 
-    public Deposit(String DepositsNumb, String CustomerNumb, String DepositsDate, double DepositAmount, double NewBalanceDeposit, String ExternalRefNumb,
+    public Deposit(String depositsNumb, String customerNumb, String depositsDate, double depositAmount, double newBalanceDeposit, String externalRefNumb,
                     String last4CardNumb) {
-        this.DepositsNumb = DepositsNumb;
-        this.CustomerNumb = CustomerNumb;
-        this.DepositsDate = DepositsDate;
-        this.DepositAmount = DepositAmount;
-        this.NewBalanceDeposit = NewBalanceDeposit;
-        this.ExternalRefNumb = ExternalRefNumb;
+        this.depositsNumb = depositsNumb;
+        this.customerNumb = customerNumb;
+        this.depositsDate = depositsDate;
+        this.depositAmount = depositAmount;
+        this.newBalanceDeposit = newBalanceDeposit;
+        this.externalRefNumb = externalRefNumb;
         this.last4CardNumb = last4CardNumb;
 
 
     }
 
     public String getDepositsNumb() {
-        return DepositsNumb;
+        return depositsNumb;
     }
 
     public void setDepositsNumb(String DepositsNumb) {
-        this.DepositsNumb = DepositsNumb;
+        this.depositsNumb = DepositsNumb;
     }
 
     public String getCustomerNumb() {
-        return CustomerNumb;
+        return customerNumb;
     }
 
     public void setCustomerNumb(String CustomerNumb) {
-        this.CustomerNumb = CustomerNumb;
+        this.customerNumb = CustomerNumb;
     }
 
     public String getDepositsDate() {
-        return DepositsDate;
+        return depositsDate;
     }
 
     public void setDepositsDate(String DepositsDate) {
-        this.DepositsDate = DepositsDate;
+        this.depositsDate = DepositsDate;
     }
 
     public double getDepositAmount() {
-        return DepositAmount;
+        return depositAmount;
     }
 
     public void setDepositAmount(double DepositAmount) {
-        this.DepositAmount = DepositAmount;
+        this.depositAmount = DepositAmount;
     }
 
     public double getNewBalanceDeposit() {
-        return NewBalanceDeposit;
+        return newBalanceDeposit;
     }
 
     public void setNewBalanceDeposit(double NewBalanceDeposit) {
-        this.NewBalanceDeposit = NewBalanceDeposit;
+        this.newBalanceDeposit = NewBalanceDeposit;
     }
 
     public String getExternalRefNumb() {
-        return ExternalRefNumb;
+        return externalRefNumb;
     }
 
     public void setExternalRefNumb(String ExternalRefNumb) {
-        this.ExternalRefNumb = ExternalRefNumb;
+        this.externalRefNumb = ExternalRefNumb;
     }
 
     public String getLast4CardNumb() {
@@ -86,24 +86,24 @@ public class Deposit implements Serializable {
         int hash = 3;
         hash =
                 61 * hash +
-                (this.DepositsNumb != null ? this.DepositsNumb.hashCode() : 0);
+                (this.depositsNumb != null ? this.depositsNumb.hashCode() : 0);
         hash =
                 61 * hash +
-                (this.CustomerNumb != null ? this.CustomerNumb.hashCode() : 0);
+                (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
         hash =
                 61 * hash +
-                (this.DepositsDate != null ? this.DepositsDate.hashCode() : 0);
+                (this.depositsDate != null ? this.depositsDate.hashCode() : 0);
         hash =
                 61 * hash +
-                (int) (Double.doubleToLongBits(this.DepositAmount) ^
-                (Double.doubleToLongBits(this.DepositAmount) >>> 32));
+                (int) (Double.doubleToLongBits(this.depositAmount) ^
+                (Double.doubleToLongBits(this.depositAmount) >>> 32));
         hash =
                 61 * hash +
-                (int) (Double.doubleToLongBits(this.NewBalanceDeposit) ^
-                (Double.doubleToLongBits(this.NewBalanceDeposit) >>> 32));
+                (int) (Double.doubleToLongBits(this.newBalanceDeposit) ^
+                (Double.doubleToLongBits(this.newBalanceDeposit) >>> 32));
         hash =
                 61 * hash +
-                (this.ExternalRefNumb != null ? this.ExternalRefNumb.hashCode()
+                (this.externalRefNumb != null ? this.externalRefNumb.hashCode()
                 : 0);
         hash =
                 61 * hash +
@@ -120,28 +120,28 @@ public class Deposit implements Serializable {
             return false;
         }
         final Deposit other = (Deposit) obj;
-        if ((this.DepositsNumb == null) ? (other.DepositsNumb != null)
-                : !this.DepositsNumb.equals(other.DepositsNumb)) {
+        if ((this.depositsNumb == null) ? (other.depositsNumb != null)
+                : !this.depositsNumb.equals(other.depositsNumb)) {
             return false;
         }
-        if ((this.CustomerNumb == null) ? (other.CustomerNumb != null)
-                : !this.CustomerNumb.equals(other.CustomerNumb)) {
+        if ((this.customerNumb == null) ? (other.customerNumb != null)
+                : !this.customerNumb.equals(other.customerNumb)) {
             return false;
         }
-        if ((this.DepositsDate == null) ? (other.DepositsDate != null)
-                : !this.DepositsDate.equals(other.DepositsDate)) {
+        if ((this.depositsDate == null) ? (other.depositsDate != null)
+                : !this.depositsDate.equals(other.depositsDate)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.DepositAmount) !=
-                Double.doubleToLongBits(other.DepositAmount)) {
+        if (Double.doubleToLongBits(this.depositAmount) !=
+                Double.doubleToLongBits(other.depositAmount)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.NewBalanceDeposit) !=
-                Double.doubleToLongBits(other.NewBalanceDeposit)) {
+        if (Double.doubleToLongBits(this.newBalanceDeposit) !=
+                Double.doubleToLongBits(other.newBalanceDeposit)) {
             return false;
         }
-        if ((this.ExternalRefNumb == null) ? (other.ExternalRefNumb != null)
-                : !this.ExternalRefNumb.equals(other.ExternalRefNumb)) {
+        if ((this.externalRefNumb == null) ? (other.externalRefNumb != null)
+                : !this.externalRefNumb.equals(other.externalRefNumb)) {
             return false;
         }
         if ((this.last4CardNumb == null) ? (other.last4CardNumb != null)

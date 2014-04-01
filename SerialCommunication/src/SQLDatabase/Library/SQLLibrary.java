@@ -160,7 +160,6 @@ public class SQLLibrary {
  public static final String SYSTEM_TERMINALS_CHARGE_STATUS = "update Terminals " 
                                                            + "set ChargingStatus = ? "
                                                            + "where HardwareNumb = ?";      
-         
 }
 
 
