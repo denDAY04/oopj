@@ -71,7 +71,7 @@ public class SQLLibrary {
                                               + "where CustomerNumb = ?";
 // ADMIN get Billing & terminal - on click
 //ArrayList: 1, TransactionNumb
- public static final String ADMIN_GET_BILLING_N_TERMINAL = "select *" 
+ public static final String ADMIN_GET_BILLING_AND_TERMINAL = "select *" 
                 + "from Billing"
                 + "inner join Terminal"
                 + "on Billing.HardwareNumb = Terminal.HardwareNumb"

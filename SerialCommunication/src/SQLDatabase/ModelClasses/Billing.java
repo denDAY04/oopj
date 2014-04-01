@@ -13,6 +13,8 @@ public class Billing implements Serializable {
     private double BillingRate;
     private double BillingKWH;
     private double NewBalanceBilling;
+    Customer costumer=null;
+    Terminal terminal=null;
     
 
     public Billing(String TransactionNumb, String CustomerNumb, String HardwareNumb, String StartCharge, String EndCharge, String Recieved,
@@ -27,6 +29,22 @@ public class Billing implements Serializable {
         this.BillingRate = BillingRate;
         this.BillingKWH = BillingKWH;
         this.NewBalanceBilling = NewBalanceBilling;
+    }
+    
+        public Billing(String TransactionNumb, String CustomerNumb, String HardwareNumb, String StartCharge, String EndCharge, String Recieved,
+                   double BillingAmount,double BillingRate, double BillingKWH, double NewBalanceBilling, Customer costumer,Terminal terminal) {
+        this.TransactionNumb = TransactionNumb;
+        this.CustomerNumb = CustomerNumb;
+        this.HardwareNumb = HardwareNumb;
+        this.StartCharge = StartCharge;
+        this.EndCharge = EndCharge;
+        this.Recieved = Recieved;
+        this.BillingAmount = BillingAmount;
+        this.BillingRate = BillingRate;
+        this.BillingKWH = BillingKWH;
+        this.NewBalanceBilling = NewBalanceBilling;
+        this.costumer = costumer;
+        this.terminal = terminal;
     }
 
     public String getTransactionNumb() {

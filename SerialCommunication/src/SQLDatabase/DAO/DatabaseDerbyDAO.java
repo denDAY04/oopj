@@ -48,10 +48,9 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
 // but would require analasys of metadata to determine type of data (which constructor to call)
 
 @Override
-    public Customer getCustomer(String getQuery,ArrayList<String> parameters) {
-        Customer customer = null;
-       // int rowCount = 0; //Return value from executeUpdate()
+    public ArrayList<Customer> getCustomers(String getQuery,ArrayList<String> parameters) {
         Connection con = null;
+        ArrayList<Customer> customerList = new ArrayList();
         try {
             con = DerbyDAOFactory.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
@@ -59,8 +58,8 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
             preparedStatement.setString(i+1, parameters.get(i));
             }
             ResultSet resultSet = preparedStatement.executeQuery();
-             if (resultSet.next()) {
-                customer = createCustomer(resultSet);
+             while (resultSet.next()) {
+                customerList.add(createCustomer(resultSet));
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -73,11 +72,70 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
                 }
             }
         }
-        return customer;
+        return customerList;
     }
 
-@Override  // needs to be able to be linked with a billing
-    public Terminal getTerminal(String getQuery,ArrayList<String> parameters) {
+@Override  
+    public ArrayList<Terminal> getTerminals(String getQuery,ArrayList<String> parameters) {
+        ArrayList<Terminal> terminalList = new ArrayList();
+        Connection con = null;
+        try {
+            con = DerbyDAOFactory.createConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(getQuery);
+            for (int i=0; i<parameters.size();++i){
+            preparedStatement.setString(i+1, parameters.get(i));
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+             if (resultSet.next()) {
+                terminalList.add(createTerminal(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return terminalList;
+    }
+
+@Override  // needs to be able to return an arraylist of Deposits
+    public ArrayList<Deposit> getDeposits(String getQuery,ArrayList<String> parameters) {
+        ArrayList<Deposit> depositList = new ArrayList();
+        Connection con = null;
+        try {
+            con = DerbyDAOFactory.createConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(getQuery);
+            for (int i=0; i<parameters.size();++i){
+            preparedStatement.setString(i+1, parameters.get(i));
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+             if (resultSet.next()) {
+                depositList.add(createDeposit(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return depositList;
+    }
+
+@Override  // 
+            // Method for returning a billing on click, with refrences.
+    public Billing getDetailedBilling(String getQuery,ArrayList<String> parameters) {
+        Billing billing = null;
+        Customer customer = null;
         Terminal terminal = null;
        // int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
@@ -89,65 +147,9 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
             }
             ResultSet resultSet = preparedStatement.executeQuery();
              if (resultSet.next()) {
+                customer = createCustomer(resultSet);
                 terminal = createTerminal(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        }
-        return terminal;
-    }
-
-@Override  // needs to be able to return an arraylist of Deposits
-    public Deposit getDeposit(String getQuery,ArrayList<String> parameters) {
-        Deposit deposit = null;
-       // int rowCount = 0; //Return value from executeUpdate()
-        Connection con = null;
-        try {
-            con = DerbyDAOFactory.createConnection();
-            PreparedStatement preparedStatement = con.prepareStatement(getQuery);
-            for (int i=0; i<parameters.size();++i){
-            preparedStatement.setString(i+1, parameters.get(i));
-            }
-            ResultSet resultSet = preparedStatement.executeQuery();
-             if (resultSet.next()) {
-                deposit = createDeposit(resultSet);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        }
-        return deposit;
-    }
-
-@Override  // needs to be able to return an arraylist of Deposits
-    public Billing getBilling(String getQuery,ArrayList<String> parameters) {
-        Billing billing = null;
-       // int rowCount = 0; //Return value from executeUpdate()
-        Connection con = null;
-        try {
-            con = DerbyDAOFactory.createConnection();
-            PreparedStatement preparedStatement = con.prepareStatement(getQuery);
-            for (int i=0; i<parameters.size();++i){
-            preparedStatement.setString(i+1, parameters.get(i));
-            }
-            ResultSet resultSet = preparedStatement.executeQuery();
-             if (resultSet.next()) {
-                billing = createBilling(resultSet);
+                billing = createBilling(resultSet,customer,terminal);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -161,6 +163,36 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
             }
         }
         return billing;
+    }
+
+@Override  // needs to be able to return an arraylist of Deposits
+            // a billing could have a customer object and terminal object, but only neccesary for on click
+    public ArrayList<Billing> getBillings(String getQuery,ArrayList<String> parameters) {
+        ArrayList<Billing> billingList = new ArrayList();
+       // int rowCount = 0; //Return value from executeUpdate()
+        Connection con = null;
+        try {
+            con = DerbyDAOFactory.createConnection();
+            PreparedStatement preparedStatement = con.prepareStatement(getQuery);
+            for (int i=0; i<parameters.size();++i){
+            preparedStatement.setString(i+1, parameters.get(i));
+            }
+            ResultSet resultSet = preparedStatement.executeQuery();
+             while (resultSet.next()) {  // while add to arraylist
+                billingList.add(createBilling(resultSet));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return billingList; 
     }
 
     
@@ -205,6 +237,21 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
         }
     
         private Billing createBilling(ResultSet resultSet) throws SQLException {
+        String transactionNumb = resultSet.getString("TransactionNumb");
+        String customerNumb = resultSet.getString("CustomerNumb");
+        String hardwareNumb = resultSet.getString("HardwareNumb");
+        String startCharge =  resultSet.getString("StartCharge"); 
+        String endCharge =  resultSet.getString("EndCharge");  
+        String recieved = resultSet.getString("Recieved");
+        double billingAmount = Double.parseDouble(resultSet.getString("BillingAmount")); // parse to double
+        double billingRate = Double.parseDouble(resultSet.getString("BillingRate"));    // parse to double
+        double billingKWH = Double.parseDouble(resultSet.getString("BillingKWH"));     // parse to double
+        double newBalanceBilling = Double.parseDouble(resultSet.getString("NewBalanceBilling")); // parse to double
+        return new Billing(transactionNumb,customerNumb, hardwareNumb, startCharge, endCharge,recieved,billingAmount, billingRate, billingKWH,newBalanceBilling);
+    }    
+        
+        // Create billing with refrence to a terminal and costomer object, to display all information.
+        private Billing createBilling(ResultSet resultSet,Customer costumer,Terminal terminal) throws SQLException {
         String transactionNumb = resultSet.getString("TransactionNumb");
         String customerNumb = resultSet.getString("CustomerNumb");
         String hardwareNumb = resultSet.getString("HardwareNumb");

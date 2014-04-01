@@ -19,10 +19,11 @@ public interface DatabaseDAO {
     
     
     public int updateQuery(String updateQuery,ArrayList<String> parameters);
-    public Billing getBilling(String updateQuery,ArrayList<String> parameters);
-    public Customer getCustomer(String getQuery,ArrayList<String> parameters);
-    public Deposit getDeposit(String getQuery,ArrayList<String> parameters);
-    public Terminal getTerminal(String getQuery,ArrayList<String> parameters);
+    public Billing getDetailedBilling(String updateQuery,ArrayList<String> parameters);
+    public ArrayList<Billing> getBillings(String getQuery,ArrayList<String> parameters);
+    public ArrayList<Customer> getCustomers(String getQuery,ArrayList<String> parameters);
+    public ArrayList<Deposit> getDeposits(String getQuery,ArrayList<String> parameters);
+    public ArrayList<Terminal> getTerminals(String getQuery,ArrayList<String> parameters);
 
     
 

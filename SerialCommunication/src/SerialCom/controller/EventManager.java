@@ -187,7 +187,7 @@ public class EventManager implements FrameEventListener {
             // do query in database (ArrayList: 1, CardNumb,2, Pin)
             try {
                 System.out.println("Fire SQL statement");
-                costumer = databaseDAO.getCustomer(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer);
+                costumer = databaseDAO.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer).get(0);
             } catch (Exception e) {
                 System.out.println("no customer found");
                 sendResponse("RA", "VOID");
