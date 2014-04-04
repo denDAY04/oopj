@@ -33,8 +33,9 @@ public class EventManager implements FrameEventListener {
     private String destination = "12";
     private Packet packet;
     private CustomerManager customerManager;
-    private Timer timer;
-    private boolean packetSucessfullySent = false;
+    private Timer timer=new Timer(100, new TimerListener());  // resend request timer
+    private int maxSendAttempt = 4;
+    private int currentSendAttempt = 0;
     private String currentStatus;
     private String currentData;
 
@@ -135,8 +136,8 @@ public class EventManager implements FrameEventListener {
         /* Send packet first time */
         ProjectPacket responsePacket = new ProjectPacket(source, destination, status, data);
         transmitter.transmit(responsePacket.getBytes());
-        /* Create timer to periodically transmit packet until recieved acknowledge */
-        timer = new Timer(10, new TimerListener());
+        /* start timer to periodically transmit packet until recieved acknowledge */
+        currentSendAttempt=0;
         timer.start();
     }
 
@@ -178,10 +179,11 @@ public class EventManager implements FrameEventListener {
         packet.generateChecksum();           // generate the actual checksum
         int checksum2 =  packet.getChecksum(); // get the new generated checksum fom the package
         if (checksum  == checksum2) {
-        System.err.println("checksum ok:" +checksum);
+            System.err.println("checksum ok:" +checksum+ ", Stopping resend timer");
+            timer.stop();
         }
-        else{
-        System.err.println("checksum failed:" +checksum + " " + checksum2);  // should send resend command
+        else{  // else statement should be under all command statements to loop sending while wrong checksum
+            System.err.println("checksum failed:" +checksum + " " + checksum2);  // should send resend command
         }
         
         //check checksum - if invalid return RS - Resend. 
@@ -229,24 +231,31 @@ public class EventManager implements FrameEventListener {
 //            
             
         else if(command.equals("OP")){
-            
+            System.err.println("EventManager processRequest, OP revieced");
         }
         else if (command.equals("01")) {
-            System.err.println("EventManager processRequest, if 01, send 12-Accept");
+            System.err.println("EventManager processRequest, if 01 revieced, send 12-Accept");
             sendResponse("12", "Accept");
         }
         else if (command.equals("RA")) {
-            System.err.println("EventManager processRequest, RA recieved, timer stop.");
-            timer.stop();
+            System.err.println("EventManager processRequest, RA recieved.");
         }
-            
+        else{
+            System.err.println("EventManager processRequest: Unproccessed command revieced: "+command);
+        }
     }
     
-    class TimerListener implements ActionListener {
-        public void actionPerformed(ActionEvent e) {
+    class TimerListener implements ActionListener {  // Resend request Timelistener. Is stopped on verification of checksum.
+        public void actionPerformed(ActionEvent e) {         
+            if (currentSendAttempt == maxSendAttempt+1){  // Needs to implement exception.
+                    System.err.println("EventManager TimeListener, Should throw connection lost exeption");
+                    timer.stop();
+            }
             System.err.println("Resending packet");
             ProjectPacket responsePacket = new ProjectPacket(source, destination, currentStatus, currentData);
             transmitter.transmit(responsePacket.getBytes());   
+            currentSendAttempt++;
+
         }
     }
 }

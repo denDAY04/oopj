@@ -92,7 +92,7 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
      * and transmits the packet through the serial port.
      */
     public synchronized void sendRFIDRequest(String command, String data) {
-        System.out.println("Simulator sendRFIDRequest");
+        System.err.println("Simulator sendRFIDRequest");
         ProjectPacket packet = new ProjectPacket(source, destination, command, data);
         transmitter.transmit(packet.getBytes());
     }
@@ -105,12 +105,12 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
      * @param frameEvent the event
      */
     public synchronized void frameReady(FrameEvent frameEvent) {
-        System.out.print("Simulator frameReady");
-        System.out.print("\nReceived at Client: [");
-        System.out.println(new String(frameEvent.getData()) + "]");
+        System.err.print("Simulator frameReady");
+        System.err.print("\nReceived at Client: [");
+        System.err.println(new String(frameEvent.getData()) + "]");
         packet = new ProjectPacket(frameEvent.getData());
-        System.out.println("            status: [" + packet.getCommandStatus() + "]");
-        System.out.println("            data:   [" + packet.getData() + "]");
+        System.err.println("            status: [" + packet.getCommandStatus() + "]");
+        System.err.println("            data:   [" + packet.getData() + "]");
         processRequest(packet.getCommandStatus());
       }
 
@@ -119,15 +119,17 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
         //IT IS DIFFICULT TO MAINTAIN AND TEST.
         //IT SHOULD BE REPLACED BY EG. COMMAND PATTERN IN THE LATER DESIGN
         // Simulation of RFID for J-unit testing
-        System.out.println("Simulator processRequest");
+        System.err.println("Simulator processRequest");
         if (command.equals("VC")) { 
             sendRFIDRequest("03", "AcceptAck");
-            System.out.println("sent 03 AcceptAck from simulator");
+            System.err.println("Simulator processRequest:03 AcceptAck revieced");
         }
         else if (command.equals("12")) {
             sendRFIDRequest("03", "AcceptAck");
-            System.out.println("sent 03 AcceptAck from simulator");
-        
+            System.err.println("Simulator processRequest: 03 AcceptAck revieced");
+        }
+        else{
+            System.err.println("Simulator processRequest: Unproccessed command revieced: "+command);
         }
     }
 
@@ -137,7 +139,7 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
      */
     public void connect() throws TooManyListenersException {
         if (transmitter != null) {
-            System.out.println("Simulator connect, sending 01");
+            System.err.println("Simulator connect, sending 01");
             transmitter.openPort(portNumber);
             sendRFIDRequest("01", "connect");
 

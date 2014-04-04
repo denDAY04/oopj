@@ -194,7 +194,7 @@ public final class ProjectPacket extends Packet {
           String ChecksumString =this.getSource()+this.getDestination()+   // Create a string to calculate the checksum on
                                  this.getCommandStatus()+paddedDataLength+this.getData();
           byte[] ChecksumBytePacket  = new byte[ChecksumString.length()];    // create a byte array to store the byte values from the string
-          System.out.println("generateChecksum string : "+ChecksumString);  // display string
+          System.err.println("ProjectPacket generateChecksum, string : "+ChecksumString);  // display string
           for (int i=0; i<ChecksumBytePacket.length;i++){
           ChecksumBytePacket[i] = ChecksumString.getBytes()[i];             // Add the bytes value for each char to the array.
           }

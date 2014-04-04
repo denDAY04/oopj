@@ -77,13 +77,13 @@ public class RFIDReaderSimpleSimulatorTest {
         
         
         //We expect the RFIDEventManager to have received a "03" message
-        System.out.println("j-unit: Expect to receive 03"); // 03 is end of handshake
+        System.out.println("j-unit: Expect RFIDEventManager to receive 03 (end of handshake)"); // 03 is end of handshake
         String expectedRequest = "03";
-        System.out.println("j-unit: rFIDEventManagerSimple.getPacket");
         ProjectPacket packet = (ProjectPacket) rFIDEventManagerSimple.getPacket();
-        System.out.println("j-unit: packet.getCommandStatus");
+        System.out.print("j-unit: rFIDEventManagerSimple.getPacket.getCommandStatus =");
         String req = packet.getCommandStatus();
         String actualRequest = rFIDEventManagerSimple.getPacket().getCommandStatus();
+        System.out.println(actualRequest);
 
         //We expect the RFIDManager to have sent a "12" response
         System.out.println("j-unit: Expect to receive 12");
