@@ -97,7 +97,7 @@ public class RFIDReaderSimpleSimulatorTest {
         assertTrue(expectedResponse.equals(actualResponse));
 
         //Now we try to send an RFID and RFID Reader ID
-        rFIDReaderSimpleSimulator.sendRFIDRequest("VC", "13370001");
+        rFIDReaderSimpleSimulator.sendRFIDRequest("VC", "13370001"); //13370001
 
         //Wait for transmission to complete
         Thread.sleep(500);

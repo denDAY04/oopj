@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package SQLDatabase.DAO;
+package SQLDatabase.Managers;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,14 +18,14 @@ import SQLDatabase.ModelClasses.Billing;
  *
  * @author ibr
  */
-public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert in to statement
+public class DatabaseManager {// implements DatabaseInterface {   // any update or insert in to statement
     
-@Override
-    public int updateQuery(String updateQuery,ArrayList<String> parameters) {
+//@Override
+ static public int updateQuery(String updateQuery,ArrayList<String> parameters) {
         int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
         try {
-            con = DerbyDAOFactory.createConnection();
+            con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(updateQuery);
             for (int i=0; i<parameters.size();++i){
             preparedStatement.setString(i+1, parameters.get(i));
@@ -47,12 +47,12 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
 // possible to join the below 4 mothodcalls using polymorphy of a parent class, 
 // but would require analasys of metadata to determine type of data (which constructor to call)
 
-@Override
-    public ArrayList<Customer> getCustomers(String getQuery,ArrayList<String> parameters) {
+//@Override
+  static public ArrayList<Customer> getCustomers(String getQuery,ArrayList<String> parameters) {
         Connection con = null;
         ArrayList<Customer> customerList = new ArrayList();
         try {
-            con = DerbyDAOFactory.createConnection();
+            con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
             preparedStatement.setString(i+1, parameters.get(i));
@@ -75,12 +75,12 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
         return customerList;
     }
 
-@Override  
-    public ArrayList<Terminal> getTerminals(String getQuery,ArrayList<String> parameters) {
+//@Override  
+  static public ArrayList<Terminal> getTerminals(String getQuery,ArrayList<String> parameters) {
         ArrayList<Terminal> terminalList = new ArrayList();
         Connection con = null;
         try {
-            con = DerbyDAOFactory.createConnection();
+            con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
             preparedStatement.setString(i+1, parameters.get(i));
@@ -103,12 +103,12 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
         return terminalList;
     }
 
-@Override  // needs to be able to return an arraylist of Deposits
-    public ArrayList<Deposit> getDeposits(String getQuery,ArrayList<String> parameters) {
+//@Override  // needs to be able to return an arraylist of Deposits
+  static public ArrayList<Deposit> getDeposits(String getQuery,ArrayList<String> parameters) {
         ArrayList<Deposit> depositList = new ArrayList();
         Connection con = null;
         try {
-            con = DerbyDAOFactory.createConnection();
+            con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
             preparedStatement.setString(i+1, parameters.get(i));
@@ -131,16 +131,16 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
         return depositList;
     }
 
-@Override  // 
+//@Override  // 
             // Method for returning a billing on click, with refrences.
-    public Billing getDetailedBilling(String getQuery,ArrayList<String> parameters) {
+    static public Billing getDetailedBilling(String getQuery,ArrayList<String> parameters) {
         Billing billing = null;
         Customer customer = null;
         Terminal terminal = null;
        // int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
         try {
-            con = DerbyDAOFactory.createConnection();
+            con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
             preparedStatement.setString(i+1, parameters.get(i));
@@ -165,14 +165,14 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
         return billing;
     }
 
-@Override  // needs to be able to return an arraylist of Deposits
+//@Override  // needs to be able to return an arraylist of Deposits
             // a billing could have a customer object and terminal object, but only neccesary for on click
-    public ArrayList<Billing> getBillings(String getQuery,ArrayList<String> parameters) {
+    static public ArrayList<Billing> getBillings(String getQuery,ArrayList<String> parameters) {
         ArrayList<Billing> billingList = new ArrayList();
        // int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
         try {
-            con = DerbyDAOFactory.createConnection();
+            con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
             preparedStatement.setString(i+1, parameters.get(i));
@@ -196,7 +196,7 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
     }
 
     
-        private Customer createCustomer(ResultSet resultSet) throws SQLException {
+        static private Customer createCustomer(ResultSet resultSet) throws SQLException {
         String customerNumb = resultSet.getString("CustomerNumb");
         String pin = resultSet.getString("Pin");
         String password = resultSet.getString("Password");
@@ -215,7 +215,7 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
         
         
     
-        private Terminal createTerminal(ResultSet resultSet) throws SQLException {
+        static private Terminal createTerminal(ResultSet resultSet) throws SQLException {
         String hardwareNumb = resultSet.getString("hardwareNumb");
         String road = resultSet.getString("road");
         String zipCode = resultSet.getString("zipCode");
@@ -225,7 +225,7 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
         return new Terminal(hardwareNumb,road, zipCode, ipAddress, installStatus,chargingStatus);
         }
 
-        private Deposit createDeposit(ResultSet resultSet) throws SQLException {
+        static private Deposit createDeposit(ResultSet resultSet) throws SQLException {
         String depositsNumb = resultSet.getString("DepositsNumb");
         String customerNumb = resultSet.getString("CustomerNumb");
         String depositsDate = resultSet.getString("DepositsDate");
@@ -236,7 +236,7 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
         return new Deposit(depositsNumb,customerNumb, depositsDate, depositAmount, newBalanceDeposit,externalRefNumb,last4CardNumb);
         }
     
-        private Billing createBilling(ResultSet resultSet) throws SQLException {
+        static private Billing createBilling(ResultSet resultSet) throws SQLException {
         String transactionNumb = resultSet.getString("TransactionNumb");
         String customerNumb = resultSet.getString("CustomerNumb");
         String hardwareNumb = resultSet.getString("HardwareNumb");
@@ -251,7 +251,7 @@ public class DatabaseDerbyDAO implements DatabaseDAO {   // any update or insert
     }    
         
         // Create billing with refrence to a terminal and costomer object, to display all information.
-        private Billing createBilling(ResultSet resultSet,Customer costumer,Terminal terminal) throws SQLException {
+        static private Billing createBilling(ResultSet resultSet,Customer costumer,Terminal terminal) throws SQLException {
         String transactionNumb = resultSet.getString("TransactionNumb");
         String customerNumb = resultSet.getString("CustomerNumb");
         String hardwareNumb = resultSet.getString("HardwareNumb");

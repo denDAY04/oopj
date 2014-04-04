@@ -13,7 +13,7 @@ public class Billing implements Serializable {
     private double billingRate;
     private double billingKWH;
     private double newBalanceBilling;
-    Customer costumer=null;
+    Customer custumer=null;
     Terminal terminal=null;
     
 
@@ -32,7 +32,7 @@ public class Billing implements Serializable {
     }
         // Detailed Billing constructor 
         public Billing(String transactionNumb, String customerNumb, String hardwareNumb, String startCharge, String endCharge, String Recieved,
-        double billingAmount,double billingRate, double billingKWH, double newBalanceBilling, Customer costumer,Terminal terminal) {
+        double billingAmount,double billingRate, double billingKWH, double newBalanceBilling, Customer custumer,Terminal terminal) {
         this.transactionNumb = transactionNumb;
         this.customerNumb = customerNumb;
         this.hardwareNumb = hardwareNumb;
@@ -43,7 +43,7 @@ public class Billing implements Serializable {
         this.billingRate = billingRate;
         this.billingKWH = billingKWH;
         this.newBalanceBilling = newBalanceBilling;
-        this.costumer = costumer;
+        this.custumer = custumer;
         this.terminal = terminal;
     }
 
