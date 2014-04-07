@@ -166,13 +166,17 @@ public static final String SYSTEM_TERMINALS_GET_TERMINAL = "select * "
                                                                + "where HardwareNumb = ?";  
 
 
- public static final String SYSTEM_TERMINALS_SET_OFFLINESINCE = "update Terminals  " 
-                                                               + "set OfflineSince = CURRENT_TIMESTAMP "
-                                                               + "where HardwareNumb = ?";  
- 
   public static final String SYSTEM_TERMINALS_RESET_OFFLINESINCE = "update Terminals  " 
                                                                + "set OfflineSince = 'Online' "
                                                                + "where HardwareNumb = ?"; 
+
+  public static final String SYSTEM_TERMINALS_SET_OFFLINESINCE =   "UPDATE Terminals " +
+                                                                    "SET OfflineSince = CASE " +
+                                                                    "WHEN OfflineSince='Online' " +
+                                                                    "THEN CURRENT_TIMESTAMP "+ 
+                                                                    "ELSE OfflineSince " +
+                                                                    "END " + 
+                                                                    "WHERE HardwareNumb = ?";
 }
 
 

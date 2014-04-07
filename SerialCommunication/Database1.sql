@@ -104,3 +104,5 @@ VALUES
 
 
 -- update Terminals set OfflineSince = CURRENT_TIMESTAMP where HardwareNumb = 1;
+
+UPDATE Terminals SET OfflineSince = CASE WHEN OfflineSince='Online' THEN CURRENT_TIMESTAMP END WHERE HardwareNumb = 1;
