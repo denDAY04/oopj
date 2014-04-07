@@ -17,14 +17,16 @@ public class Terminal implements Serializable {
     private String ipAddress;
     private String installStatus;
     private String chargingStatus;
+    private String offlineSince;
 
-    public Terminal(String hardwareNumb, String road, String zipCode, String ipAddress, String installStatus, String chargingStatus) {
+    public Terminal(String hardwareNumb, String road, String zipCode, String ipAddress, String installStatus, String chargingStatus, String offlineSince) {
         this.hardwareNumb = hardwareNumb;
         this.road = road;
         this.zipCode = zipCode;
         this.ipAddress = ipAddress;
         this.installStatus = installStatus;
         this.chargingStatus = chargingStatus;
+        this.offlineSince = offlineSince;
 
     }
 
@@ -75,23 +77,34 @@ public class Terminal implements Serializable {
         this.chargingStatus = chargingStatus;
     }
 
+        public String getOfflineSince() {
+        return offlineSince;
+    }
+
+    public void setOfflineSince(String offlineSince) {
+        this.offlineSince = offlineSince;
+    }
+
     @Override
     public int hashCode() {
         int hash = 7;
         hash =
-                71 * hash +
+                67 * hash +
                 (this.hardwareNumb != null ? this.hardwareNumb.hashCode() : 0);
-        hash = 71 * hash + (this.road != null ? this.road.hashCode() : 0);
-        hash = 71 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
+        hash = 67 * hash + (this.road != null ? this.road.hashCode() : 0);
+        hash = 67 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
         hash =
-                71 * hash +
+                67 * hash +
                 (this.ipAddress != null ? this.ipAddress.hashCode() : 0);
         hash =
-                71 * hash +
+                67 * hash +
                 (this.installStatus != null ? this.installStatus.hashCode() : 0);
         hash =
-                71 * hash +
+                67 * hash +
                 (this.chargingStatus != null ? this.chargingStatus.hashCode() : 0);
+        hash =
+                67 * hash +
+                (this.offlineSince != null ? this.offlineSince.hashCode() : 0);
         return hash;
     }
 
@@ -122,6 +135,14 @@ public class Terminal implements Serializable {
         }
         if ((this.installStatus == null) ? (other.installStatus != null)
                 : !this.installStatus.equals(other.installStatus)) {
+            return false;
+        }
+        if ((this.chargingStatus == null) ? (other.chargingStatus != null)
+                : !this.chargingStatus.equals(other.chargingStatus)) {
+            return false;
+        }
+        if ((this.offlineSince == null) ? (other.offlineSince != null)
+                : !this.offlineSince.equals(other.offlineSince)) {
             return false;
         }
         return true;

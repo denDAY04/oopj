@@ -19,10 +19,15 @@ public class CustomerManager {
             parameterscostumer.add(CardNumb);   // add the cardnumber parameter
             parameterscostumer.add(pin);        // add the pin parameter
             // do query in database (ArrayList: 1, CardNumb,2, Pin)
-                System.out.println("Fire SQL statement");
-                costumer = DatabaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer).get(0);
-return costumer;
+            System.out.println("CustomerManager verifyCustomer, Fire SQL statement");
+            costumer = DatabaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer).get(0);
+            return costumer;
         
     }
+    // add costumer
+    
+    // find costumer
+    
+    // update costumer
     
 }

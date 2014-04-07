@@ -221,8 +221,9 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         String zipCode = resultSet.getString("zipCode");
         String ipAddress = resultSet.getString("ipAddress");
         String installStatus = resultSet.getString("installStatus");
-        String chargingStatus = resultSet.getString("chargingStatus");        
-        return new Terminal(hardwareNumb,road, zipCode, ipAddress, installStatus,chargingStatus);
+        String chargingStatus = resultSet.getString("chargingStatus");   
+        String OfflineSince = resultSet.getString("OfflineSince");
+        return new Terminal(hardwareNumb,road, zipCode, ipAddress, installStatus,chargingStatus,OfflineSince);
         }
 
         static private Deposit createDeposit(ResultSet resultSet) throws SQLException {

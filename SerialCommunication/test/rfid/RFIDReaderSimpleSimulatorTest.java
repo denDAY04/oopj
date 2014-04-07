@@ -55,16 +55,16 @@ public class RFIDReaderSimpleSimulatorTest {
 
         //Now create a server, that responds to and handles messages from the
         //AVR Card reader simulator
-        EventManager rFIDEventManagerSimple = new EventManager();
+        EventManager eventManager = new EventManager();
         //Construct another SerialTransceiver for the RFIDEventManager
-        SerialTransceiver rFIDEventManagerTransceiver = new SerialTransceiver(new ProjectPacket(), rFIDEventManagerSimple);
+        SerialTransceiver transceiver = new SerialTransceiver(new ProjectPacket(), eventManager);
         //Set the transmitter for the RFIDManagerSimple
-        rFIDEventManagerSimple.setTransmitter(rFIDEventManagerTransceiver);
+        eventManager.setTransmitter(transceiver);
 
         //Open the RFIDEventManager server port - it waits for messages from
         //the Card Reader
         System.out.println("j-unit: open port:");
-        rFIDEventManagerSimple.openPort();
+        eventManager.openPort();
 
         //Let the Card Reader simulator connect to the RFIDEventManager server
         System.out.println("j-unit: connect:");
@@ -79,10 +79,10 @@ public class RFIDReaderSimpleSimulatorTest {
         //We expect the RFIDEventManager to have received a "03" message
         System.out.println("j-unit: Expect RFIDEventManager to receive 03 (end of handshake)"); // 03 is end of handshake
         String expectedRequest = "03";
-        ProjectPacket packet = (ProjectPacket) rFIDEventManagerSimple.getPacket();
+        ProjectPacket packet = (ProjectPacket) eventManager.getPacket();
         System.out.print("j-unit: rFIDEventManagerSimple.getPacket.getCommandStatus =");
         String req = packet.getCommandStatus();
-        String actualRequest = rFIDEventManagerSimple.getPacket().getCommandStatus();
+        String actualRequest = eventManager.getPacket().getCommandStatus();
         System.out.println(actualRequest);
 
         //We expect the RFIDManager to have sent a "12" response
@@ -97,24 +97,42 @@ public class RFIDReaderSimpleSimulatorTest {
         assertTrue(expectedResponse.equals(actualResponse));
 
         //Now we try to send an RFID and RFID Reader ID
-        rFIDReaderSimpleSimulator.sendRFIDRequest("VC", "13370001"); //13370001
+        eventManager.sendResponse("VC", "13370001"); //13370001
 
         //Wait for transmission to complete
         Thread.sleep(500);
-        rFIDEventManagerSimple.closePort();
-        rFIDReaderSimpleSimulator.closePort();
+      //  rFIDEventManagerSimple.closePort();
+      //  rFIDReaderSimpleSimulator.closePort();
 
-        expectedRequest = "03";
-        actualRequest = rFIDEventManagerSimple.getPacket().getCommandStatus();
+        expectedRequest = "RA";
+        actualRequest = eventManager.getPacket().getCommandStatus();
 
-
-
-        String expectedData = "AcceptAck";
-        ProjectPacket actualPacket = (ProjectPacket) rFIDEventManagerSimple.getPacket();
+        String expectedData = "Receive Acknowledged";
+        ProjectPacket actualPacket = (ProjectPacket) eventManager.getPacket();
         String actualData = actualPacket.getData();
         System.out.println("actualRequest: "+actualRequest);
         System.out.println("expectedRequest: "+ expectedRequest);
         assertTrue(expectedRequest.equals(actualRequest));
         assertTrue(expectedData.equals(actualData));
+        
+       // test Ping Pong
+        eventManager.sendResponse("PI", "PING"); 
+        
+                //Wait for transmission to complete
+        Thread.sleep(500);
+        eventManager.closePort();
+        rFIDReaderSimpleSimulator.closePort();
+        
+                expectedRequest = "PO";
+        actualRequest = eventManager.getPacket().getCommandStatus();
+        
+         expectedData = "PONG";
+         actualPacket = (ProjectPacket) eventManager.getPacket();
+         actualData = actualPacket.getData();
+        System.out.println("actualRequest: "+actualRequest);
+        System.out.println("expectedRequest: "+ expectedRequest);
+        assertTrue(expectedRequest.equals(actualRequest));
+        assertTrue(expectedData.equals(actualData));
+        
     }
 }

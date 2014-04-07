@@ -53,6 +53,7 @@ public final class ProjectPacket extends Packet {
         bytePacket = new byte[packetLength];
         initializeArray();
     }
+    
 
     /**
      * Constructs a new <code>ProjectPacket</code> from the byte array supplied.

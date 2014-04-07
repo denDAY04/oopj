@@ -33,11 +33,16 @@ public class EventManager implements FrameEventListener {
     private String destination = "12";
     private Packet packet;
     private CustomerManager customerManager;
-    private Timer timer=new Timer(100, new TimerListener());  // resend request timer
+    private TerminalManager terminalManager;    
+    private Timer timer=new Timer(100, new TimerListener());  // resend request timer. Set hardware dependent timeout here.
     private int maxSendAttempt = 4;
     private int currentSendAttempt = 0;
     private String currentStatus;
     private String currentData;
+    private final int DATAPININDEX = 0;
+    private final int DATAPINSIZE = 4; //number of bytes
+    private final int DATACARDNUMBINDEX = 4;
+    private final int DATACARDNUMBSIZE = 4; //needs to be changed to actual length of card number
 
     /**
      * Default constructor which automatically detects port name.
@@ -45,6 +50,7 @@ public class EventManager implements FrameEventListener {
     public EventManager() {
         portNumber = PortDetection.getPorts().get(0);
         customerManager = new CustomerManager();
+        terminalManager = new TerminalManager();
     }
 
     /**
@@ -173,28 +179,29 @@ public class EventManager implements FrameEventListener {
 //   - PI - Ping 
 //   - PO - Pong 
         
-        
+     
         String command = packet.getCommandStatus();
-        int checksum = packet.getChecksum(); // get the checksum from the package
+        int checksum = packet.getChecksum(); // get the checksum from the revieced package
         packet.generateChecksum();           // generate the actual checksum
         int checksum2 =  packet.getChecksum(); // get the new generated checksum fom the package
-        if (checksum  == checksum2) {
+        if (checksum  != checksum2) {
+            System.err.println("Checksum failed! Found:" +checksum + " Expected: " + checksum2);  // should send resend command
+            if (!timer.isRunning()){ // the message recieved was a new message, not a response, and a resend command must be sent. 
+                                     //Should check specifically for the new message commands instead, for increased stability.
+                sendResponse("RS", "VOID");
+            }
+        }
+        else{
             System.err.println("checksum ok:" +checksum+ ", Stopping resend timer");
-            timer.stop();
-        }
-        else{  // else statement should be under all command statements to loop sending while wrong checksum
-            System.err.println("checksum failed:" +checksum + " " + checksum2);  // should send resend command
-        }
+            timer.stop(); // stop resending timer, as an anwser has been recieved.
         
-        //check checksum - if invalid return RS - Resend. 
-          //else
-        
+
         //   - Verify Customer (pin and card number)
         if (command.equals("VC")) {  
             System.err.println("command = VC");
-            String pin = packet.getData().substring(0, 4);  
+            String pin = packet.getData().substring(DATAPININDEX, DATAPININDEX+DATAPINSIZE);  
             System.err.println("Pin: " + pin);
-            String cardNumb = packet.getData().substring(4, 8); // needs to be changed to actual cardNumb length!!!
+            String cardNumb = packet.getData().substring(DATACARDNUMBINDEX, DATACARDNUMBINDEX+DATACARDNUMBSIZE);
             System.err.println("Cardnumber: " + cardNumb);
             Customer costumer = customerManager.verifyCustomer(cardNumb,pin);
             if (costumer != null) {
@@ -203,17 +210,16 @@ public class EventManager implements FrameEventListener {
             }
             else {System.err.println("customer object is NULL");
                 System.err.println("no customer found");
-                sendResponse("RA", "VOID");      
+                sendResponse("VC", "VOID");      
             }
         }
-            // get Pin cardNumb Balance AccountStatus and UseStatus for customer, or empty result set.
-               //if resultset empty, reply with sendResponse("RA", "VOID");
-
+        // pong was sent back from terminal.
+        if (command.equals("PO")){
+            System.err.println("command = PO");
+            terminalManager.connectionSuccessful(packet.getSource()); // should this call be made on all revieved packages?
+        }
             
-               //else reply with Pin cardNumb Balance AccountStatus and UseStatus for customer
-
-            // respond with query to serial
-            
+         
             
 //            sendResponse("RA", "Accept");
 //            ArrayList<Terminal> terminalList;
@@ -240,22 +246,33 @@ public class EventManager implements FrameEventListener {
         else if (command.equals("RA")) {
             System.err.println("EventManager processRequest, RA recieved.");
         }
+        
+        
+        
+        
         else{
             System.err.println("EventManager processRequest: Unproccessed command revieced: "+command);
         }
+        }
     }
+    
+    
+    
+    
     
     class TimerListener implements ActionListener {  // Resend request Timelistener. Is stopped on verification of checksum.
         public void actionPerformed(ActionEvent e) {         
-            if (currentSendAttempt == maxSendAttempt+1){  // Needs to implement exception.
-                    System.err.println("EventManager TimeListener, Should throw connection lost exeption");
+            if (currentSendAttempt == maxSendAttempt){  // Needs to implement connection lost. Setting the terminal offline time if unset.
+                    terminalManager.connectionFailed(destination);
+                    System.err.println("EventManager TimeListener, maxSendAttempt reached");
                     timer.stop();
             }
-            System.err.println("Resending packet");
-            ProjectPacket responsePacket = new ProjectPacket(source, destination, currentStatus, currentData);
-            transmitter.transmit(responsePacket.getBytes());   
-            currentSendAttempt++;
-
+            else {
+                System.err.println("Resending packet");
+                ProjectPacket responsePacket = new ProjectPacket(source, destination, currentStatus, currentData);
+                transmitter.transmit(responsePacket.getBytes());   
+                currentSendAttempt++;
+            }
         }
     }
 }

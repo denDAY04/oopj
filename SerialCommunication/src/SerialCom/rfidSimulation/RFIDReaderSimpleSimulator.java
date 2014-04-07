@@ -97,6 +97,7 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
         transmitter.transmit(packet.getBytes());
     }
 
+
     /**
      * The <code>FrameEventListener</code> method called when a
      * <code>FrameEvent</code> occurs.
@@ -120,14 +121,21 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
         //IT SHOULD BE REPLACED BY EG. COMMAND PATTERN IN THE LATER DESIGN
         // Simulation of RFID for J-unit testing
         System.err.println("Simulator processRequest");
-        if (command.equals("VC")) { 
-            sendRFIDRequest("03", "AcceptAck");
-            System.err.println("Simulator processRequest:03 AcceptAck revieced");
+        if (command.equals("VC")) {   // revieves customer data
+            sendRFIDRequest("RA", "Receive Acknowledged");  // skips checksum check and acknoleges recieved.
+            System.err.println("Simulator processRequest: RA Receive Acknowledged sent");
         }
         else if (command.equals("12")) {
             sendRFIDRequest("03", "AcceptAck");
-            System.err.println("Simulator processRequest: 03 AcceptAck revieced");
+            System.err.println("Simulator processRequest: 03 AcceptAck sent");
         }
+        else if (command.equals("PI")){
+            sendRFIDRequest("PO", "PONG");
+            System.err.println("Simulator processRequest: PO PONG sent");
+        
+        }
+        
+        
         else{
             System.err.println("Simulator processRequest: Unproccessed command revieced: "+command);
         }

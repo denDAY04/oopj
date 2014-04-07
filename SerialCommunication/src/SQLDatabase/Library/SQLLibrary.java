@@ -160,6 +160,20 @@ public class SQLLibrary {
  public static final String SYSTEM_TERMINALS_CHARGE_STATUS = "update Terminals " 
                                                            + "set ChargingStatus = ? "
                                                            + "where HardwareNumb = ?";      
+ 
+public static final String SYSTEM_TERMINALS_GET_TERMINAL = "select * " 
+                                                               + "from Terminals = ? "
+                                                               + "where HardwareNumb = ?";  
+
+
+ public static final String SYSTEM_TERMINALS_SET_OFFLINESINCE = "update Terminals  " 
+                                                               + "set OfflineSince = CURRENT_TIMESTAMP "
+                                                               + "where HardwareNumb = ?";  
+ 
+  public static final String SYSTEM_TERMINALS_RESET_OFFLINESINCE = "update Terminals  " 
+                                                               + "set OfflineSince = 'Online' "
+                                                               + "where HardwareNumb = ?"; 
 }
+
 
 

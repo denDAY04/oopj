@@ -34,6 +34,7 @@ CREATE TABLE Terminals (
    IPAddress varchar (15) NOT NULL,
    InstallStatus varchar (18) NOT NULL, -- Enable - Disabl - Pendep
    ChargingStatus varchar (18) NOT NULL,-- Waitin - Charge
+   OfflineSince varchar (25) DEFAULT 'Online',
    PRIMARY KEY (HardwareNumb)
 );
 
@@ -102,3 +103,4 @@ VALUES
 
 
 
+-- update Terminals set OfflineSince = CURRENT_TIMESTAMP where HardwareNumb = 1;
