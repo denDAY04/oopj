@@ -6,7 +6,15 @@ package SQLDatabase.Managers;
 
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.*;
+import SerialCom.controller.EventManager;
+import SerialCom.protocol.ProjectPacket;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.TooManyListenersException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -14,6 +22,8 @@ import java.util.ArrayList;
  */
 public class TerminalManager {
 
+
+    EventManager eventManager; // OBS Should get a refrence to this from the main class
     // add terminal
     // edit terminal
     // find terminal
@@ -26,6 +36,7 @@ public class TerminalManager {
     }
 
     public void connectionSuccessful(String destination) {
+        System.out.println("enter connectionSuccessful");
         // Set OfflineSince to Online, when connection is established.
         ArrayList<String> parametersTerminal = new ArrayList();
         parametersTerminal.add(destination);
@@ -33,4 +44,6 @@ public class TerminalManager {
         System.out.println("TerminalManager connectionSuccessful, Fire SQL statement");
         System.out.println("result: " + result);
     }
-}
+
+    }
+    

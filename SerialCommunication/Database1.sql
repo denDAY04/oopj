@@ -78,9 +78,9 @@ VALUES
 
 INSERT INTO Terminals (Road ,ZipCode,IPAddress,InstallStatus,ChargingStatus)
 VALUES
-   ('vejen 4','2750','111.111.111.111','enabled','charging'),
-   ('vejen 5','2200','111.111.111.112','disabled','idle'),
-   ('vejen 6','1234','111.111.111.113','pending deployment','idle');
+   ('vejen 4','2750','12','enabled','charging'),
+   ('vejen 5','2200','12','disabled','idle'),
+   ('vejen 6','1234','12','pending deployment','idle');
 
 INSERT INTO Deposits (CustomerNumb,DepositAmount,NewBalanceDeposit,ExternalRefNumb,last4CardNumb )
 VALUES

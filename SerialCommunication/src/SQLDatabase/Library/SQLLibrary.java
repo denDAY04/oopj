@@ -161,9 +161,12 @@ public class SQLLibrary {
                                                            + "set ChargingStatus = ? "
                                                            + "where HardwareNumb = ?";      
  
-public static final String SYSTEM_TERMINALS_GET_TERMINAL = "select * " 
-                                                               + "from Terminals = ? "
+public static final String SYSTEM_GET_TERMINAL = "select * " 
+                                                               + "from Terminals "
                                                                + "where HardwareNumb = ?";  
+public static final String SYSTEM_GET_ALL_TERMINALS = "select * " 
+                                                      + "from Terminals";  
+
 
 
   public static final String SYSTEM_TERMINALS_RESET_OFFLINESINCE = "update Terminals  " 

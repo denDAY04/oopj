@@ -13,6 +13,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.TooManyListenersException;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
 
 
@@ -43,6 +45,8 @@ public class EventManager implements FrameEventListener {
     private final int DATAPINSIZE = 4; //number of bytes
     private final int DATACARDNUMBINDEX = 4;
     private final int DATACARDNUMBSIZE = 4; //needs to be changed to actual length of card number
+    Timer timer2 =new Timer(5000, new TimerListener2());  // resend request timer. Set hardware dependent timeout here.
+    static int i=0;
 
     /**
      * Default constructor which automatically detects port name.
@@ -135,7 +139,7 @@ public class EventManager implements FrameEventListener {
      * @param status The status response to send
      * @param data The specific data for the status response
      */
-    public synchronized void sendResponse(String status, String data) {
+    public synchronized void sendResponse(String status, String data,String destination) {
         System.err.println("EventManager sendResponse");
         currentData = data;
         currentStatus = status;
@@ -188,7 +192,7 @@ public class EventManager implements FrameEventListener {
             System.err.println("Checksum failed! Found:" +checksum + " Expected: " + checksum2);  // should send resend command
             if (!timer.isRunning()){ // the message recieved was a new message, not a response, and a resend command must be sent. 
                                      //Should check specifically for the new message commands instead, for increased stability.
-                sendResponse("RS", "VOID");
+                sendResponse("RS", "VOID",destination);
             }
         }
         else{
@@ -206,11 +210,11 @@ public class EventManager implements FrameEventListener {
             Customer costumer = customerManager.verifyCustomer(cardNumb,pin);
             if (costumer != null) {
                 System.err.println("customer found, sending response");
-                sendResponse("VC", padAmount(costumer.getBalance())+costumer.getUseStatus()+costumer.getAccountStatus()+costumer.getFirstName());
+                sendResponse("VC", padAmount(costumer.getBalance())+costumer.getUseStatus()+costumer.getAccountStatus()+costumer.getFirstName(),destination);
             }
             else {System.err.println("customer object is NULL");
                 System.err.println("no customer found");
-                sendResponse("VC", "VOID");      
+                sendResponse("VC", "VOID",destination);      
             }
         }
         // pong was sent back from terminal.
@@ -241,7 +245,7 @@ public class EventManager implements FrameEventListener {
         }
         else if (command.equals("01")) {
             System.err.println("EventManager processRequest, if 01 revieced, send 12-Accept");
-            sendResponse("12", "Accept");
+            sendResponse("12", "Accept",destination);
         }
         else if (command.equals("RA")) {
             System.err.println("EventManager processRequest, RA recieved.");
@@ -257,7 +261,7 @@ public class EventManager implements FrameEventListener {
     }
     
     
-    
+    public void testsendresponce(){}
     
     
     class TimerListener implements ActionListener {  // Resend request Timelistener. Is stopped on verification of checksum.
@@ -275,4 +279,34 @@ public class EventManager implements FrameEventListener {
             }
         }
     }
+    
+    
+         public void startTimer() {
+    System.out.println("testmethod");
+    timer2.start();
+    
+    }
+      // Should be moved
+      public  class TimerListener2 implements ActionListener {  // Resend request Timelistener. Is stopped on verification of checksum.
+        public synchronized void actionPerformed(ActionEvent e) {  
+            ArrayList<Terminal> terminals;
+            ArrayList<String> Parameter = new ArrayList();
+                   terminals = DatabaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS,Parameter);
+                   System.err.println("size of array"+terminals.size());
+                   System.err.println("EventManager TimerListener FireSQL PING!");
+                   try {
+                        openPort();
+                   } catch (TooManyListenersException ex) {
+                        System.err.println("TimerListener2 TooManyListenersException");
+                   }
+                   sendResponse("PI", "PING", terminals.get(i).getIpAddress()); // could implement sending time and date to the terminal.
+                   System.err.println("EventManager TimerListener2, PI, PING, "+terminals.get(i).getIpAddress()+" i: "+i);
+                      // closePort();
+                 i++;
+                if (i >= terminals.size()){ i=0;}
+               // if last element:  timer.stop();
+
+        }
+      }
+    
 }

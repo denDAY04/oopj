@@ -86,7 +86,8 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             preparedStatement.setString(i+1, parameters.get(i));
             }
             ResultSet resultSet = preparedStatement.executeQuery();
-             if (resultSet.next()) {
+             while (resultSet.next()) {
+                 System.err.println("added terminal to resultset");
                 terminalList.add(createTerminal(resultSet));
             }
         } catch (SQLException e) {
@@ -114,7 +115,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             preparedStatement.setString(i+1, parameters.get(i));
             }
             ResultSet resultSet = preparedStatement.executeQuery();
-             if (resultSet.next()) {
+             while (resultSet.next()) {
                 depositList.add(createDeposit(resultSet));
             }
         } catch (SQLException e) {
