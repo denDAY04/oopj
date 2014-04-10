@@ -97,7 +97,7 @@ public class RFIDReaderSimpleSimulatorTest {
         assertTrue(expectedResponse.equals(actualResponse));
 
         //Now we try to send an RFID and RFID Reader ID
-        eventManager.sendResponse("VC", "13370001","12"); //13370001
+        eventManager.sendResponse("VC", "13370001","34"); //13370001
 
         //Wait for transmission to complete
         Thread.sleep(500);
@@ -116,7 +116,7 @@ public class RFIDReaderSimpleSimulatorTest {
         assertTrue(expectedData.equals(actualData));
         
        // test Ping Pong
-        eventManager.sendResponse("PI", "PING","12");
+        eventManager.sendResponse("PI", "PING","34");
         
                 //Wait for transmission to complete
         Thread.sleep(500);

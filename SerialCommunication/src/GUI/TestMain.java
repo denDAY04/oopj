@@ -34,14 +34,17 @@ public class TestMain {
         //AVR Card reader simulator
 
         EventManager eventManager = new EventManager();  
-        TerminalManager terminalManager = new TerminalManager();
         CustomerManager customerManager = new CustomerManager();
         
-        eventManager.startTimer();
+        
+        
         //Construct another SerialTransceiver for the RFIDEventManager
         SerialTransceiver transceiver = new SerialTransceiver(new ProjectPacket(), eventManager);
         //Set the transmitter for the RFIDManagerSimple
         eventManager.setTransmitter(transceiver);
+        
+        TerminalManager terminalManager = new TerminalManager(eventManager);
+       // terminalManager.startPingTimer();
 
         //Open the RFIDEventManager server port - it waits for messages from
         //the Card Reader
@@ -92,12 +95,10 @@ public class TestMain {
         System.out.println("expResp: " + expectedResponse + " actResp: " + actualResponse);
 
         //Now we try to send an RFID and RFID Reader ID
-        eventManager.sendResponse("VC", "13370001","12"); //13370001 destination 12
+        eventManager.sendResponse("VC", "13370001","12"); //13370001 destination 34
         try {
             //Wait for transmission to complete
             Thread.sleep(500);
-          //  rFIDEventManagerSimple.closePort();
-          //  rFIDReaderSimpleSimulator.closePort();
         } catch (InterruptedException ex) {
             Logger.getLogger(TestMain.class.getName()).log(Level.SEVERE, null,
                     ex);
@@ -122,8 +123,7 @@ public class TestMain {
             Logger.getLogger(TestMain.class.getName()).log(Level.SEVERE, null,
                     ex);
         }
-//        eventManager.closePort();
-//        rFIDReaderSimpleSimulator.closePort();
+
         
                 expectedRequest = "PO";
         actualRequest = eventManager.getPacket().getCommandStatus();
@@ -134,6 +134,9 @@ public class TestMain {
         System.out.println("actualRequest: "+actualRequest);
         System.out.println("expectedRequest: "+ expectedRequest);
     
-        while (true) {}
+     //   while (true) {}  // can test ping terminals function
+        
+       eventManager.closePort();
+       rFIDReaderSimpleSimulator.closePort();
     }
 }

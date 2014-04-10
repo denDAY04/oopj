@@ -96,7 +96,13 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
         ProjectPacket packet = new ProjectPacket(source, destination, command, data);
         transmitter.transmit(packet.getBytes());
     }
-
+    public synchronized void sendRFIDRequest(String command, String data,String destination) {
+        source = "12";
+        System.err.println("Simulator sendRFIDRequest");
+        ProjectPacket packet = new ProjectPacket(source, destination, command, data);
+        transmitter.transmit(packet.getBytes());
+    }
+    
 
     /**
      * The <code>FrameEventListener</code> method called when a
@@ -116,6 +122,12 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
       }
 
     private void processRequest(String command) {
+        //System.err.println("Simulator destination :"+destination+" source: "+source);
+        if (packet.getDestination().equals("12")){
+        destination = ""+packet.getSource(); // reply to the sender
+        //source = "12";           // send from this database
+        //System.err.println("Simulator swapped destination :"+destination+" source: "+source);
+        
         //THIS CODE IS FOR SIMPLE DEMONSTRATION ONLY.
         //IT IS DIFFICULT TO MAINTAIN AND TEST.
         //IT SHOULD BE REPLACED BY EG. COMMAND PATTERN IN THE LATER DESIGN
@@ -139,6 +151,7 @@ public class RFIDReaderSimpleSimulator implements FrameEventListener {
         else{
             System.err.println("Simulator processRequest: Unproccessed command revieced: "+command);
         }
+        } else { System.err.println("Simulator, expected destination 12 found: "+packet.getDestination());}
     }
 
     /**

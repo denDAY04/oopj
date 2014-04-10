@@ -79,8 +79,8 @@ VALUES
 INSERT INTO Terminals (Road ,ZipCode,IPAddress,InstallStatus,ChargingStatus)
 VALUES
    ('vejen 4','2750','12','enabled','charging'),
-   ('vejen 5','2200','12','disabled','idle'),
-   ('vejen 6','1234','12','pending deployment','idle');
+   ('vejen 5','2200','13','disabled','idle'),
+   ('vejen 6','1234','14','pending deployment','idle');
 
 INSERT INTO Deposits (CustomerNumb,DepositAmount,NewBalanceDeposit,ExternalRefNumb,last4CardNumb )
 VALUES
@@ -103,6 +103,6 @@ VALUES
 
 
 
--- update Terminals set OfflineSince = CURRENT_TIMESTAMP where HardwareNumb = 1;
+ update Terminals set OfflineSince = CURRENT_TIMESTAMP where HardwareNumb = 1;
 
-UPDATE Terminals SET OfflineSince = CASE WHEN OfflineSince='Online' THEN CURRENT_TIMESTAMP END WHERE HardwareNumb = 1;
+--UPDATE Terminals SET OfflineSince = CASE WHEN OfflineSince='Online' THEN CURRENT_TIMESTAMP END WHERE HardwareNumb = 1;

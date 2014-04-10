@@ -45,16 +45,15 @@ public class EventManager implements FrameEventListener {
     private final int DATAPINSIZE = 4; //number of bytes
     private final int DATACARDNUMBINDEX = 4;
     private final int DATACARDNUMBSIZE = 4; //needs to be changed to actual length of card number
-    Timer timer2 =new Timer(5000, new TimerListener2());  // resend request timer. Set hardware dependent timeout here.
-    static int i=0;
+
 
     /**
      * Default constructor which automatically detects port name.
      */
     public EventManager() {
         portNumber = PortDetection.getPorts().get(0);
-        customerManager = new CustomerManager();
-        terminalManager = new TerminalManager();
+       // customerManager = new CustomerManager();
+       // terminalManager = new TerminalManager();
     }
 
     /**
@@ -72,7 +71,10 @@ public class EventManager implements FrameEventListener {
      * @param source new value of source
      */
     public synchronized void setSource(String source) {
+        System.err.print("EventManager setSource, was: "+ this.source);
+
         this.source = source;
+        System.err.println(" is now: "+source);
     }
 
     /**
@@ -99,7 +101,9 @@ public class EventManager implements FrameEventListener {
      * @param destination new value of destination
      */
     public synchronized void setDestination(String destination) {
+        System.err.print("EventManager setDestinaton, was: "+ this.destination);      
         this.destination = destination;
+        System.err.println(" is now: "+destination);
     }
 
     /**
@@ -151,6 +155,8 @@ public class EventManager implements FrameEventListener {
         timer.start();
     }
 
+    
+    
     /**
      * The method called by the <code>SerialFrame</code> when a complete 
      * data packet is received.
@@ -163,13 +169,12 @@ public class EventManager implements FrameEventListener {
         System.err.println(new String(received) + "]");
         packet = new ProjectPacket(received);
         System.err.println("           command: [" + packet.getCommandStatus() + "]");
-        System.err.println("           data:    [" + packet.getData() + "]");
+        System.err.println("           data:    [" + packet.getData() + "]");       
         //TO DO Process request and send response
         processRequest(packet);
     }
 
     private void processRequest(Packet packet) {
-        System.err.println("EventManager processRequest");
         //THIS CODE IS FOR SIMPLE DEMONSTRATION ONLY.
         //IT IS DIFFICULT TO MAINTAIN AND TEST.
         //IT SHOULD BE REPLACED BY EG. COMMAND PATTERN IN THE LATER DESIGN
@@ -183,8 +188,12 @@ public class EventManager implements FrameEventListener {
 //   - PI - Ping 
 //   - PO - Pong 
         
-     
-        String command = packet.getCommandStatus();
+        if (packet.getDestination().equals("34")){
+        System.err.println("EventManager destination :"+destination+" source: "+source);
+        destination = ""+packet.getSource(); // reply to the sender
+        //source = "34";           // send from this database
+        System.err.println("EventManager swapped destination :"+destination+" source: "+source);
+            String command = packet.getCommandStatus();
         int checksum = packet.getChecksum(); // get the checksum from the revieced package
         packet.generateChecksum();           // generate the actual checksum
         int checksum2 =  packet.getChecksum(); // get the new generated checksum fom the package
@@ -220,7 +229,8 @@ public class EventManager implements FrameEventListener {
         // pong was sent back from terminal.
         if (command.equals("PO")){
             System.err.println("command = PO");
-            terminalManager.connectionSuccessful(packet.getSource()); // should this call be made on all revieved packages?
+            TerminalManager.connectionSuccessful(packet.getSource()); // should this call be made on all revieved packages?
+            System.err.println("Source was: "+packet.getSource());
         }
             
          
@@ -258,18 +268,32 @@ public class EventManager implements FrameEventListener {
             System.err.println("EventManager processRequest: Unproccessed command revieced: "+command);
         }
         }
+        }else { System.err.println("EventManager, expected destination 32 found: "+packet.getDestination());
+
+        }
     }
     
     
-    public void testsendresponce(){}
+    public void pingEvent(String IpAddress){
+//    try {
+//                        openPort();
+//                   } catch (TooManyListenersException ex) {
+//                        System.err.println("TimerListener2 TooManyListenersException");
+//                   }
+                   sendResponse("PI", "PING", IpAddress); // could implement sending time and date to the terminal.
+                   setDestination(IpAddress);
+                   System.err.println("EventManager TimerListener2, PI, PING, "+IpAddress);
+                   
+    
+    }
     
     
     class TimerListener implements ActionListener {  // Resend request Timelistener. Is stopped on verification of checksum.
         public void actionPerformed(ActionEvent e) {         
             if (currentSendAttempt == maxSendAttempt){  // Needs to implement connection lost. Setting the terminal offline time if unset.
-                    terminalManager.connectionFailed(destination);
-                    System.err.println("EventManager TimeListener, maxSendAttempt reached");
-                    timer.stop();
+                System.err.println("EventManager TimeListener, maxSendAttempt reached");
+                TerminalManager.connectionFailed(destination);
+                timer.stop();
             }
             else {
                 System.err.println("Resending packet");
@@ -281,32 +305,6 @@ public class EventManager implements FrameEventListener {
     }
     
     
-         public void startTimer() {
-    System.out.println("testmethod");
-    timer2.start();
-    
-    }
-      // Should be moved
-      public  class TimerListener2 implements ActionListener {  // Resend request Timelistener. Is stopped on verification of checksum.
-        public synchronized void actionPerformed(ActionEvent e) {  
-            ArrayList<Terminal> terminals;
-            ArrayList<String> Parameter = new ArrayList();
-                   terminals = DatabaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS,Parameter);
-                   System.err.println("size of array"+terminals.size());
-                   System.err.println("EventManager TimerListener FireSQL PING!");
-                   try {
-                        openPort();
-                   } catch (TooManyListenersException ex) {
-                        System.err.println("TimerListener2 TooManyListenersException");
-                   }
-                   sendResponse("PI", "PING", terminals.get(i).getIpAddress()); // could implement sending time and date to the terminal.
-                   System.err.println("EventManager TimerListener2, PI, PING, "+terminals.get(i).getIpAddress()+" i: "+i);
-                      // closePort();
-                 i++;
-                if (i >= terminals.size()){ i=0;}
-               // if last element:  timer.stop();
 
-        }
-      }
     
 }

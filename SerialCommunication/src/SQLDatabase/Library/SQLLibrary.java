@@ -171,7 +171,7 @@ public static final String SYSTEM_GET_ALL_TERMINALS = "select * "
 
   public static final String SYSTEM_TERMINALS_RESET_OFFLINESINCE = "update Terminals  " 
                                                                + "set OfflineSince = 'Online' "
-                                                               + "where HardwareNumb = ?"; 
+                                                               + "where IPAddress = ?"; 
 
   public static final String SYSTEM_TERMINALS_SET_OFFLINESINCE =   "UPDATE Terminals " +
                                                                     "SET OfflineSince = CASE " +
@@ -179,7 +179,7 @@ public static final String SYSTEM_GET_ALL_TERMINALS = "select * "
                                                                     "THEN CURRENT_TIMESTAMP "+ 
                                                                     "ELSE OfflineSince " +
                                                                     "END " + 
-                                                                    "WHERE HardwareNumb = ?";
+                                                                    "WHERE IPAddress = ?";
 }
 
 
