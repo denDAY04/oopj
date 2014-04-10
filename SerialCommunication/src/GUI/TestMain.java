@@ -44,7 +44,7 @@ public class TestMain {
         eventManager.setTransmitter(transceiver);
         
         TerminalManager terminalManager = new TerminalManager(eventManager);
-       // terminalManager.startPingTimer();
+        terminalManager.startPingTimer();
 
         //Open the RFIDEventManager server port - it waits for messages from
         //the Card Reader
