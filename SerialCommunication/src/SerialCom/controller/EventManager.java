@@ -16,6 +16,8 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
+import java.sql.Timestamp;
+import java.util.Date;
 
 
 
@@ -45,6 +47,7 @@ public class EventManager implements FrameEventListener {
     private final int DATAPINSIZE = 4; //number of bytes
     private final int DATACARDNUMBINDEX = 4;
     private final int DATACARDNUMBSIZE = 4; //needs to be changed to actual length of card number
+    private java.util.Date date= new java.util.Date();
 
 
     /**
@@ -275,16 +278,9 @@ public class EventManager implements FrameEventListener {
     
     
     public void pingEvent(String IpAddress){
-//    try {
-//                        openPort();
-//                   } catch (TooManyListenersException ex) {
-//                        System.err.println("TimerListener2 TooManyListenersException");
-//                   }
-                   sendResponse("PI", "PING", IpAddress); // could implement sending time and date to the terminal.
+                   sendResponse("PI", new Timestamp(date.getTime()).toString(), IpAddress); // or new Timestamp(System.currentTimeMillis());
                    setDestination(IpAddress);
-                   System.err.println("EventManager TimerListener2, PI, PING, "+IpAddress);
-                   
-    
+                   System.err.println("EventManager TimerListener2, PI, PING, "+IpAddress);    
     }
     
     
@@ -302,9 +298,5 @@ public class EventManager implements FrameEventListener {
                 currentSendAttempt++;
             }
         }
-    }
-    
-    
-
-    
+    }    
 }

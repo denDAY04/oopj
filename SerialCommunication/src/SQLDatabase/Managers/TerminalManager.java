@@ -16,12 +16,14 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Timer;
 
+
 /**
  *
  * @author Qess
  */
 public class TerminalManager {
-    Timer pingTimer =new Timer(20000, new TimerListener());  // resend request pingTimer. Set hardware dependent timeout here.
+    Timer pingTimer =new Timer(500, new TimerListener());  // resend request pingTimer. Set hardware dependent timeout here.
+    Timer pingSchedule =new Timer(60000, new TimerListener2()); // delay between pings. Should be 8 hours. Is one minute
     static int i=0;
 
     EventManager eventManager; // OBS Should get a refrence to this from the main class
@@ -50,26 +52,33 @@ public class TerminalManager {
         System.out.println("result: " + result);
     }
 
-             public void startPingTimer() {
-    System.out.println("testmethod");
-    pingTimer.start();
-    
+   public void startPingSchedule() {
+    System.err.println("Terminal Manager startPingSchedule, Starting first Ping cycle.");       
+    pingTimer.start();         // pings stations on start of system
+    pingSchedule.start();      // schedules ping timer to run in 6 hours.
     }
-      // Should be moved
-      public  class TimerListener implements ActionListener {  // Resend request Timelistener. Is stopped on verification of checksum.
+
+         public  class TimerListener2 implements ActionListener {  // ping schedule timer, ping all terminals every 6 hours
+        public synchronized void actionPerformed(ActionEvent e) {
+        System.err.println("Terminal Manager TimerListener2, Starting Ping cycle.");
+        pingTimer.start();
+        }}
+   
+      public  class TimerListener implements ActionListener {  // ping delay timer, ping one terminal at a time
         public synchronized void actionPerformed(ActionEvent e) {  
             ArrayList<Terminal> terminals;
             ArrayList<String> Parameter = new ArrayList();
                    terminals = DatabaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS,Parameter);
                    System.err.println("size of array"+terminals.size());
                    System.err.println("TerminalManager TimerListener FireSQL PING!");
-                   eventManager.pingEvent(terminals.get(i).getIpAddress()); // could implement sending time and date to the terminal.
+                   eventManager.pingEvent(terminals.get(i).getIpAddress()); 
                    System.err.println("TerminalManager TimerListener, PI, PING, "+terminals.get(i).getIpAddress()+" i: "+i);
                       // closePort();
                  i++;
-                if (i >= terminals.size()){ i=0;}
-               // if last element:  pingTimer.stop();
-
+                if (i >= terminals.size()){ 
+                    i=0;
+                    pingTimer.stop();
+                }
         }
       }
     }

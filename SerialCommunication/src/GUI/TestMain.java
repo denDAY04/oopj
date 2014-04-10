@@ -44,7 +44,7 @@ public class TestMain {
         eventManager.setTransmitter(transceiver);
         
         TerminalManager terminalManager = new TerminalManager(eventManager);
-        terminalManager.startPingTimer();
+
 
         //Open the RFIDEventManager server port - it waits for messages from
         //the Card Reader
@@ -134,9 +134,11 @@ public class TestMain {
         System.out.println("actualRequest: "+actualRequest);
         System.out.println("expectedRequest: "+ expectedRequest);
     
-     //   while (true) {}  // can test ping terminals function
+        terminalManager.startPingSchedule();
         
-       eventManager.closePort();
-       rFIDReaderSimpleSimulator.closePort();
+        while (true) {}  // can test ping terminals function
+        
+       //eventManager.closePort();
+       //rFIDReaderSimpleSimulator.closePort();
     }
 }
