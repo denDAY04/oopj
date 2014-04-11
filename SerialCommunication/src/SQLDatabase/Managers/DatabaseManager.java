@@ -21,7 +21,7 @@ import SQLDatabase.ModelClasses.Billing;
 public class DatabaseManager {// implements DatabaseInterface {   // any update or insert in to statement
     
 //@Override
- static public int updateQuery(String updateQuery,ArrayList<String> parameters) {
+ public int updateQuery(String updateQuery,ArrayList<String> parameters) {
         int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
         try {
@@ -48,7 +48,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
 // but would require analasys of metadata to determine type of data (which constructor to call)
 
 //@Override
-  static public ArrayList<Customer> getCustomers(String getQuery,ArrayList<String> parameters) {
+  public ArrayList<Customer> getCustomers(String getQuery,ArrayList<String> parameters) {
         Connection con = null;
         ArrayList<Customer> customerList = new ArrayList();
         try {
@@ -76,7 +76,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
     }
 
 //@Override  
-  static public ArrayList<Terminal> getTerminals(String getQuery,ArrayList<String> parameters) {
+  public ArrayList<Terminal> getTerminals(String getQuery,ArrayList<String> parameters) {
         ArrayList<Terminal> terminalList = new ArrayList();
         Connection con = null;
         try {
@@ -105,7 +105,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
     }
 
 //@Override  // needs to be able to return an arraylist of Deposits
-  static public ArrayList<Deposit> getDeposits(String getQuery,ArrayList<String> parameters) {
+  public ArrayList<Deposit> getDeposits(String getQuery,ArrayList<String> parameters) {
         ArrayList<Deposit> depositList = new ArrayList();
         Connection con = null;
         try {
@@ -134,7 +134,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
 
 //@Override  // 
             // Method for returning a billing on click, with refrences.
-    static public Billing getDetailedBilling(String getQuery,ArrayList<String> parameters) {
+    public Billing getDetailedBilling(String getQuery,ArrayList<String> parameters) {
         Billing billing = null;
         Customer customer = null;
         Terminal terminal = null;
@@ -168,7 +168,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
 
 //@Override  // needs to be able to return an arraylist of Deposits
             // a billing could have a customer object and terminal object, but only neccesary for on click
-    static public ArrayList<Billing> getBillings(String getQuery,ArrayList<String> parameters) {
+    public ArrayList<Billing> getBillings(String getQuery,ArrayList<String> parameters) {
         ArrayList<Billing> billingList = new ArrayList();
        // int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
@@ -197,7 +197,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
     }
 
     
-        static private Customer createCustomer(ResultSet resultSet) throws SQLException {
+        private Customer createCustomer(ResultSet resultSet) throws SQLException {
         String customerNumb = resultSet.getString("CustomerNumb");
         String pin = resultSet.getString("Pin");
         String password = resultSet.getString("Password");
@@ -216,7 +216,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         
         
     
-        static private Terminal createTerminal(ResultSet resultSet) throws SQLException {
+        private Terminal createTerminal(ResultSet resultSet) throws SQLException {
         String hardwareNumb = resultSet.getString("hardwareNumb");
         String road = resultSet.getString("road");
         String zipCode = resultSet.getString("zipCode");
@@ -227,7 +227,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         return new Terminal(hardwareNumb,road, zipCode, ipAddress, installStatus,chargingStatus,OfflineSince);
         }
 
-        static private Deposit createDeposit(ResultSet resultSet) throws SQLException {
+        private Deposit createDeposit(ResultSet resultSet) throws SQLException {
         String depositsNumb = resultSet.getString("DepositsNumb");
         String customerNumb = resultSet.getString("CustomerNumb");
         String depositsDate = resultSet.getString("DepositsDate");
@@ -238,7 +238,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         return new Deposit(depositsNumb,customerNumb, depositsDate, depositAmount, newBalanceDeposit,externalRefNumb,last4CardNumb);
         }
     
-        static private Billing createBilling(ResultSet resultSet) throws SQLException {
+        private Billing createBilling(ResultSet resultSet) throws SQLException {
         String transactionNumb = resultSet.getString("TransactionNumb");
         String customerNumb = resultSet.getString("CustomerNumb");
         String hardwareNumb = resultSet.getString("HardwareNumb");
@@ -253,7 +253,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
     }    
         
         // Create billing with refrence to a terminal and costomer object, to display all information.
-        static private Billing createBilling(ResultSet resultSet,Customer costumer,Terminal terminal) throws SQLException {
+        private Billing createBilling(ResultSet resultSet,Customer costumer,Terminal terminal) throws SQLException {
         String transactionNumb = resultSet.getString("TransactionNumb");
         String customerNumb = resultSet.getString("CustomerNumb");
         String hardwareNumb = resultSet.getString("HardwareNumb");

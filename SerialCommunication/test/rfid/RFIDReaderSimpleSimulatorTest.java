@@ -4,10 +4,16 @@
  */
 package rfid;
 
+import SQLDatabase.Managers.CustomerManager;
+import SQLDatabase.Managers.DatabaseManager;
+import SQLDatabase.Managers.TerminalManager;
 import SerialCom.rfidSimulation.RFIDReaderSimpleSimulator;
 import SerialCom.protocol.ProjectPacket;
 import SerialCom.controller.EventManager;
 import SerialCom.serial.SerialTransceiver;
+import java.util.TooManyListenersException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -21,15 +27,38 @@ import static org.junit.Assert.*;
  */
 public class RFIDReaderSimpleSimulatorTest {
 
+    static EventManager eventManager = new EventManager();
+    static CustomerManager customerManager = new CustomerManager();
+    static DatabaseManager databaseManager = new DatabaseManager();
+    static TerminalManager terminalManager = new TerminalManager();
+    static RFIDReaderSimpleSimulator rFIDReaderSimpleSimulator =
+            new RFIDReaderSimpleSimulator();
+    static SerialTransceiver aVRTransceiver = new SerialTransceiver(
+            new ProjectPacket(), rFIDReaderSimpleSimulator);
+    static SerialTransceiver transceiver = new SerialTransceiver(
+            new ProjectPacket(), eventManager);
+
     public RFIDReaderSimpleSimulatorTest() {
     }
 
     @BeforeClass
     public static void setUpClass() throws Exception {
+        rFIDReaderSimpleSimulator.setTransmitter(aVRTransceiver);
+        customerManager.setDatabaseManager(databaseManager);         // customer needs databasemanager
+        terminalManager.setDatabaseManager(databaseManager);         // terminal manager needs EventManager & DatabaseManager
+        terminalManager.setEventManager(eventManager);
+        eventManager.setCustomerManager(customerManager);         // event manager needs customerManager & terminalManager
+        eventManager.setTerminalManager(terminalManager);
+        eventManager.setTransmitter(transceiver);
+        System.out.println("j-unit: open port:");
+        eventManager.openPort();
     }
 
     @AfterClass
     public static void tearDownClass() throws Exception {
+        eventManager.closePort();
+        rFIDReaderSimpleSimulator.closePort();
+
     }
 
     @Before
@@ -45,28 +74,7 @@ public class RFIDReaderSimpleSimulatorTest {
      */
     @Test
     public void testConnect() throws Exception {
-        //Construct an RFIDReaderSimpleSimulator object to simulate the RFID Card Reader board
-        RFIDReaderSimpleSimulator rFIDReaderSimpleSimulator = new RFIDReaderSimpleSimulator();
-        //Construct a SerialTransceiver object, setting the packet protocol and frameEventListener
-        //This SerialTransceiver object is for the aVRReaderSimple simulator
-        SerialTransceiver aVRTransceiver = new SerialTransceiver(new ProjectPacket(), rFIDReaderSimpleSimulator);
-        //Set the transmitter for the AVRReader simulator
-        rFIDReaderSimpleSimulator.setTransmitter(aVRTransceiver);
 
-        //Now create a server, that responds to and handles messages from the
-        //AVR Card reader simulator
-        EventManager eventManager = new EventManager();
-        //Construct another SerialTransceiver for the RFIDEventManager
-        SerialTransceiver transceiver = new SerialTransceiver(new ProjectPacket(), eventManager);
-        //Set the transmitter for the RFIDManagerSimple
-        eventManager.setTransmitter(transceiver);
-
-        //Open the RFIDEventManager server port - it waits for messages from
-        //the Card Reader
-        System.out.println("j-unit: open port:");
-        eventManager.openPort();
-
-        //Let the Card Reader simulator connect to the RFIDEventManager server
         System.out.println("j-unit: connect:");
         rFIDReaderSimpleSimulator.connect();
 
@@ -74,13 +82,15 @@ public class RFIDReaderSimpleSimulatorTest {
         System.out.println("j-unit: sleep thread:");
         Thread.sleep(200);
         System.out.println("j-unit: wakeup thread:");
-        
-        
+
+
         //We expect the RFIDEventManager to have received a "03" message
-        System.out.println("j-unit: Expect RFIDEventManager to receive 03 (end of handshake)"); // 03 is end of handshake
+        System.out.println(
+                "j-unit: Expect RFIDEventManager to receive 03 (end of handshake)"); // 03 is end of handshake
         String expectedRequest = "03";
         ProjectPacket packet = (ProjectPacket) eventManager.getPacket();
-        System.out.print("j-unit: rFIDEventManagerSimple.getPacket.getCommandStatus =");
+        System.out.print(
+                "j-unit: rFIDEventManagerSimple.getPacket.getCommandStatus =");
         String req = packet.getCommandStatus();
         String actualRequest = eventManager.getPacket().getCommandStatus();
         System.out.println(actualRequest);
@@ -89,50 +99,68 @@ public class RFIDReaderSimpleSimulatorTest {
         System.out.println("j-unit: Expect to receive 12");
         String expectedResponse = "12";
         System.out.println("j-unit: getPacket().getCommandStatus()");
-        String actualResponse = rFIDReaderSimpleSimulator.getPacket().getCommandStatus();
+        String actualResponse = rFIDReaderSimpleSimulator.getPacket().
+                getCommandStatus();
 
-        System.out.println("expReq: " + expectedRequest + " actReq: " + actualRequest);
+        System.out.println("expReq: " + expectedRequest + " actReq: "
+                + actualRequest);
         assertTrue(expectedRequest.equals(actualRequest));
-        System.out.println("expResp: " + expectedResponse + " actResp: " + actualResponse);
+        System.out.println("expResp: " + expectedResponse + " actResp: "
+                + actualResponse);
         assertTrue(expectedResponse.equals(actualResponse));
+    }
 
+    @Test
+    public void testVerifyCustomer() throws Exception {
         //Now we try to send an RFID and RFID Reader ID
-        eventManager.sendResponse("VC", "13370001","34"); //13370001
+        rFIDReaderSimpleSimulator.sendRFIDRequest("VC", "13370001", "34"); //13370001
 
         //Wait for transmission to complete
         Thread.sleep(500);
-      //  rFIDEventManagerSimple.closePort();
-      //  rFIDReaderSimpleSimulator.closePort();
+        String expectedRequest = "VC";
+        String actualRequest = rFIDReaderSimpleSimulator.getPacket().
+                getCommandStatus();
+
+        String expectedData = "000100chargingactiveHans";
+        String actualData = rFIDReaderSimpleSimulator.getPacket().getData();
+
+        System.out.println("actualRequest: " + actualRequest);
+        System.out.println("expectedRequest: " + expectedRequest);
+        System.out.println("actualData: " + actualData);
+        System.out.println("expectedData: " + expectedData);
+        assertTrue(expectedRequest.equals(actualRequest));
+        assertTrue(expectedData.equals(actualData));
 
         expectedRequest = "RA";
         actualRequest = eventManager.getPacket().getCommandStatus();
 
-        String expectedData = "Receive Acknowledged";
+        expectedData = "Receive Acknowledged";
         ProjectPacket actualPacket = (ProjectPacket) eventManager.getPacket();
-        String actualData = actualPacket.getData();
-        System.out.println("actualRequest: "+actualRequest);
-        System.out.println("expectedRequest: "+ expectedRequest);
+        actualData = actualPacket.getData();
+        System.out.println("actualRequest: " + actualRequest);
+        System.out.println("expectedRequest: " + expectedRequest);
         assertTrue(expectedRequest.equals(actualRequest));
         assertTrue(expectedData.equals(actualData));
-        
-       // test Ping Pong
-        eventManager.sendResponse("PI", "PING","34");
-        
-                //Wait for transmission to complete
+    }
+
+    @Test
+    public void testPingPong() throws Exception {
+        // test Ping Pong
+        eventManager.sendResponse("PI", "PING", "34");
+
+        //Wait for transmission to complete
         Thread.sleep(500);
-        eventManager.closePort();
-        rFIDReaderSimpleSimulator.closePort();
-        
-                expectedRequest = "PO";
-        actualRequest = eventManager.getPacket().getCommandStatus();
-        
-         expectedData = "PONG";
-         actualPacket = (ProjectPacket) eventManager.getPacket();
-         actualData = actualPacket.getData();
-        System.out.println("actualRequest: "+actualRequest);
-        System.out.println("expectedRequest: "+ expectedRequest);
+
+
+        String expectedRequest = "PO";
+        String actualRequest = eventManager.getPacket().getCommandStatus();
+
+        String expectedData = "PONG";
+        String actualData = eventManager.getPacket().getData();
+
+        System.out.println("actualRequest: " + actualRequest);
+        System.out.println("expectedRequest: " + expectedRequest);
         assertTrue(expectedRequest.equals(actualRequest));
         assertTrue(expectedData.equals(actualData));
-        
     }
 }

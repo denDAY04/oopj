@@ -27,27 +27,36 @@ public class TerminalManager {
     static int i=0;
 
     EventManager eventManager; // OBS Should get a refrence to this from the main class
+    DatabaseManager databaseManager;
 
-    public TerminalManager(EventManager eventManager) {
-        this.eventManager = eventManager;
+    public TerminalManager() {
     }
+    
+  public void setDatabaseManager(DatabaseManager databaseManager){
+  this.databaseManager = databaseManager;
+  }
+    public void setEventManager(EventManager eventManager){
+  this.eventManager = eventManager;
+  }
+  
+    
     // add terminal
     // edit terminal
     // find terminal
-    public static void connectionFailed(String destination) {
+    public void connectionFailed(String destination) {
         ArrayList<String> parametersTerminal = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
         parametersTerminal.add(destination);   // add the cardnumber parameter
             System.out.println("TerminalManager connectionFailed, Fire SQL statement");
-            int result = DatabaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINALS_SET_OFFLINESINCE,parametersTerminal);
+            int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINALS_SET_OFFLINESINCE,parametersTerminal);
             System.out.println("result: " + result);
     }
 
-    public static void connectionSuccessful(String destination) {
+    public void connectionSuccessful(String destination) {
         System.out.println("enter connectionSuccessful");
         // Set OfflineSince to Online, when connection is established.
         ArrayList<String> parametersTerminal = new ArrayList();
         parametersTerminal.add(destination);
-        int result = DatabaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINALS_RESET_OFFLINESINCE,parametersTerminal);
+        int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINALS_RESET_OFFLINESINCE,parametersTerminal);
         System.out.println("TerminalManager connectionSuccessful, Fire SQL statement");
         System.out.println("result: " + result);
     }
@@ -68,7 +77,7 @@ public class TerminalManager {
         public synchronized void actionPerformed(ActionEvent e) {  
             ArrayList<Terminal> terminals;
             ArrayList<String> Parameter = new ArrayList();
-                   terminals = DatabaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS,Parameter);
+                   terminals = databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS,Parameter);
                    System.err.println("size of array"+terminals.size());
                    System.err.println("TerminalManager TimerListener FireSQL PING!");
                    eventManager.pingEvent(terminals.get(i).getIpAddress()); 

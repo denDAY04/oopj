@@ -12,15 +12,20 @@ import java.util.ArrayList;
  * @author Qess
  */
 public class CustomerManager {
+DatabaseManager databaseManager;
+
+  public void setDatabaseManager(DatabaseManager databaseManager){
+  this.databaseManager = databaseManager;
+  }
     
-    public Customer verifyCustomer (String CardNumb,String pin){
+   public Customer verifyCustomer (String CardNumb,String pin){
             Customer costumer = null;
             ArrayList<String> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parameterscostumer.add(CardNumb);   // add the cardnumber parameter
             parameterscostumer.add(pin);        // add the pin parameter
             // do query in database (ArrayList: 1, CardNumb,2, Pin)
             System.out.println("CustomerManager verifyCustomer, Fire SQL statement");
-            costumer = DatabaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer).get(0);
+            costumer = databaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer).get(0);
             return costumer;
         
     }

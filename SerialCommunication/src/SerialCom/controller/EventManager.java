@@ -58,7 +58,15 @@ public class EventManager implements FrameEventListener {
        // customerManager = new CustomerManager();
        // terminalManager = new TerminalManager();
     }
-
+//customerManager & TerminalManager
+  public void setCustomerManager(CustomerManager customerManager){
+  this.customerManager = customerManager;
+  }
+  
+  public void setTerminalManager(TerminalManager terminalManager){
+  this.terminalManager = terminalManager;
+  }
+    
     /**
      * Get the value of source
      *
@@ -226,13 +234,13 @@ public class EventManager implements FrameEventListener {
             }
             else {System.err.println("customer object is NULL");
                 System.err.println("no customer found");
-                sendResponse("VC", "VOID",destination);      
+                sendResponse("VC", "NULL",destination);      
             }
         }
         // pong was sent back from terminal.
         if (command.equals("PO")){
             System.err.println("command = PO");
-            TerminalManager.connectionSuccessful(packet.getSource()); // should this call be made on all revieved packages?
+            terminalManager.connectionSuccessful(packet.getSource()); // should this call be made on all revieved packages?
             System.err.println("Source was: "+packet.getSource());
         }
             
@@ -288,7 +296,7 @@ public class EventManager implements FrameEventListener {
         public void actionPerformed(ActionEvent e) {         
             if (currentSendAttempt == maxSendAttempt){  // Needs to implement connection lost. Setting the terminal offline time if unset.
                 System.err.println("EventManager TimeListener, maxSendAttempt reached");
-                TerminalManager.connectionFailed(destination);
+                terminalManager.connectionFailed(destination);
                 timer.stop();
             }
             else {

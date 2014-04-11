@@ -4,6 +4,7 @@
  */
 package GUI;
 import SQLDatabase.Managers.CustomerManager;
+import SQLDatabase.Managers.DatabaseManager;
 import SQLDatabase.Managers.TerminalManager;
 import SerialCom.rfidSimulation.RFIDReaderSimpleSimulator;
 import SerialCom.protocol.ProjectPacket;
@@ -35,7 +36,17 @@ public class TestMain {
 
         EventManager eventManager = new EventManager();  
         CustomerManager customerManager = new CustomerManager();
+        DatabaseManager databaseManager = new DatabaseManager();
+        TerminalManager terminalManager = new TerminalManager();
         
+        customerManager.setDatabaseManager(databaseManager);         // customer needs databasemanager
+ 
+        terminalManager.setDatabaseManager(databaseManager);         // terminal manager needs EventManager & DatabaseManager
+        terminalManager.setEventManager(eventManager); 
+
+        eventManager.setCustomerManager(customerManager);         // event manager needs customerManager & terminalManager
+        eventManager.setTerminalManager(terminalManager);
+
         
         
         //Construct another SerialTransceiver for the RFIDEventManager
@@ -43,12 +54,10 @@ public class TestMain {
         //Set the transmitter for the RFIDManagerSimple
         eventManager.setTransmitter(transceiver);
         
-        TerminalManager terminalManager = new TerminalManager(eventManager);
-
 
         //Open the RFIDEventManager server port - it waits for messages from
         //the Card Reader
-        System.out.println("j-unit: open port:");
+        System.out.println("TestMain: open port:");
         try {
             eventManager.openPort();
         } catch (TooManyListenersException ex) {
@@ -57,7 +66,7 @@ public class TestMain {
         }
 
         //Let the Card Reader simulator connect to the RFIDEventManager server
-        System.out.println("j-unit: connect:");
+        System.out.println("TestMain: connect:");
         try {
             rFIDReaderSimpleSimulator.connect();
         } catch (TooManyListenersException ex) {
@@ -66,36 +75,36 @@ public class TestMain {
         }
 
         //Wait for transmission to complete
-        System.out.println("j-unit: sleep thread:");
+        System.out.println("TestMain: sleep thread:");
         try {
             Thread.sleep(200);
         } catch (InterruptedException ex) {
             Logger.getLogger(TestMain.class.getName()).log(Level.SEVERE, null,
                     ex);
         }
-        System.out.println("j-unit: wakeup thread:");
+        System.out.println("TestMain: wakeup thread:");
         
         
         //We expect the RFIDEventManager to have received a "03" message
-        System.out.println("j-unit: Expect RFIDEventManager to receive 03 (end of handshake)"); // 03 is end of handshake
+        System.out.println("TestMain: Expect RFIDEventManager to receive 03 (end of handshake)"); // 03 is end of handshake
         String expectedRequest = "03";
         ProjectPacket packet = (ProjectPacket) eventManager.getPacket();
-        System.out.print("j-unit: rFIDEventManagerSimple.getPacket.getCommandStatus =");
+        System.out.print("TestMain: rFIDEventManagerSimple.getPacket.getCommandStatus =");
         String req = packet.getCommandStatus();
         String actualRequest = eventManager.getPacket().getCommandStatus();
         System.out.println(actualRequest);
 
         //We expect the RFIDManager to have sent a "12" response
-        System.out.println("j-unit: Expect to receive 12");
+        System.out.println("TestMain: Expect to receive 12");
         String expectedResponse = "12";
-        System.out.println("j-unit: getPacket().getCommandStatus()");
+        System.out.println("TestMain: getPacket().getCommandStatus()");
         String actualResponse = rFIDReaderSimpleSimulator.getPacket().getCommandStatus();
 
         System.out.println("expReq: " + expectedRequest + " actReq: " + actualRequest);
         System.out.println("expResp: " + expectedResponse + " actResp: " + actualResponse);
 
         //Now we try to send an RFID and RFID Reader ID
-        eventManager.sendResponse("VC", "13370001","12"); //13370001 destination 34
+        rFIDReaderSimpleSimulator.sendRFIDRequest("VC", "13370001","34"); //13370001 destination 34
         try {
             //Wait for transmission to complete
             Thread.sleep(500);
