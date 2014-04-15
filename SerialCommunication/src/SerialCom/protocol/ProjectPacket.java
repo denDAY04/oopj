@@ -203,6 +203,7 @@ public final class ProjectPacket extends Packet {
    byte sum = 0;  
    for (byte b : ChecksumBytePacket) {    
    sum ^= b;     // xor of the sum and the current byte element 
+   //System.err.println("sum: "+sum);
    }  
                    
       setChecksum((int)sum);  // set the checksum

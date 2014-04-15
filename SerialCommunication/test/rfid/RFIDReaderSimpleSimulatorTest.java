@@ -143,7 +143,7 @@ public class RFIDReaderSimpleSimulatorTest {
         eventManager.closePort();
         rFIDReaderSimpleSimulator.closePort();
         
-                expectedRequest = "PO";
+        expectedRequest = "PO";
         actualRequest = eventManager.getPacket().getCommandStatus();
         
          expectedData = "PONG";
