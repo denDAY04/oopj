@@ -145,9 +145,9 @@ public class TestMain {
     
         terminalManager.startPingSchedule();
         
-        while (true) {}  // can test ping terminals function
+       while (true) {}  // can test ping terminals function
         
-       //eventManager.closePort();
-       //rFIDReaderSimpleSimulator.closePort();
+     //  eventManager.closePort();
+     //  rFIDReaderSimpleSimulator.closePort();
     }
 }

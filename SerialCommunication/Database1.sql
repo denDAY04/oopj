@@ -70,8 +70,8 @@ CREATE TABLE Billing (
 
 INSERT INTO Customer (Pin,Password,CardNumb,FirstName,LastName,Road,ZipCode,Email,PhoneNumb,Balance,AccountStatus,UseStatus)
 VALUES 
-   ('1337','password','0001','Hans','Hansen','vej 4','2730','hans@hansen.dk','25302308',100.0,'active','charging'),
-   ('1234','password1','0002','Jens','Jensen','vej 5','4530','Jens@hotmail.com','44596871',0.0,'pending approval','Idle'), 
+   ('1337','password','9bfa0ee8','Hans','Hansen','vej 4','2730','hans@hansen.dk','25302308',100.0,'active','charging'), // CARD 1
+   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','Jens@hotmail.com','44596871',0.0,'pending approval','Idle'), 
    ('1338','mor','0003','Niels','Nielsen','vej 6','3310','FunkyTown@gmail.com','88888888',500.0,'pending activation','Idle'),
    ('9999','andreas','0004','Anders','Andersen','vej 7','2400','Anders@tdc.dk','33108891',600.0,'disabled','Idle');
 
