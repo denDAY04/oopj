@@ -116,6 +116,10 @@ public class SQLLibrary {
                                                      + "from Customer "
                                                      + "where CardNumb = ? and Pin = ?";
 
+  public static final String SYSTEM_VALIDATE_CUSTOMER_LOGIN = "select * " 
+                                                     + "from Customer "
+                                                     + "where Email = ? and Password = ?";
+ 
  // SYSTEM create deposit
     //---Get old balance
  //ArrayList: 1, CustomerNumb

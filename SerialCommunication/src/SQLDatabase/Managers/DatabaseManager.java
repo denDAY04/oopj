@@ -266,5 +266,11 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         double newBalanceBilling = Double.parseDouble(resultSet.getString("NewBalanceBilling")); // parse to double
         return new Billing(transactionNumb,customerNumb, hardwareNumb, startCharge, endCharge,recieved,billingAmount, billingRate, billingKWH,newBalanceBilling);
     }    
+        
+        public void test(){
+        System.out.println("test!");
+        }
+        
+        
 }
 
