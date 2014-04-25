@@ -23,18 +23,14 @@ public class Main {
     public static void main(String[] args) {
         
         
-        CustomerManager customerManager = new CustomerManager();
-        DatabaseManager databaseManager = new DatabaseManager();
-
-        customerManager.setDatabaseManager(databaseManager);         // customer needs databasemanager
-
-        //////////////////////////////////
         GUIFrame view;
-        CustomerManager model;
+        CustomerManager model = new CustomerManager();
+        DatabaseManager databaseManager = new DatabaseManager();
+        model.setDatabaseManager(databaseManager);         // customer needs databasemanager
         Controller controller;
         
         view = new GUIFrame();
-        model = new CustomerManager();
+//        model = new CustomerManager();
         controller = new Controller();
         
         controller.setCustomerModel(model);
