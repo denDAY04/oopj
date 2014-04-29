@@ -41,7 +41,7 @@ public class EventManager implements FrameEventListener {
     private final int DATAPININDEX = 0;
     private final int DATAPINSIZE = 4; //number of bytes
     private final int DATACARDNUMBINDEX = 4;
-    private final int DATACARDNUMBSIZE = 4; //needs to be changed to actual length of card number
+    private final int DATACARDNUMBSIZE = 8; //fx. 9bfa0ee8
     private java.util.Date date = new java.util.Date();
 
     /**
@@ -233,10 +233,12 @@ public class EventManager implements FrameEventListener {
                     Customer costumer = customerManager.verifyCustomer(cardNumb,
                             pin);
                     if (costumer != null) {
+                        // get rate from database
                         System.err.println("customer found, sending response");
-                        sendResponse("VC", padAmount(costumer.getBalance())
+                        sendResponse("VC", padAmount(500) // rate simulation.
+                                +padAmount(costumer.getBalance())
                                 + costumer.getUseStatus() + costumer.
-                                getAccountStatus() + costumer.getFirstName(),
+                                getAccountStatus() + costumer.getFirstName().substring(0, Math.min(costumer.getFirstName().length(), 9)), //9 first letters of first name. Magic number, consider making variable. 
                                 destination);
                     } else {
                         System.err.println("customer object is NULL");

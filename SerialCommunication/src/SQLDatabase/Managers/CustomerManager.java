@@ -24,8 +24,9 @@ DatabaseManager databaseManager;
             parameterscostumer.add(cardNumb);   // add the cardnumber parameter
             parameterscostumer.add(pin);        // add the pin parameter
             // do query in database (ArrayList: 1, CardNumb,2, Pin)
-            System.out.println("CustomerManager verifyCustomer, Fire SQL statement");
+            System.out.println("CustomerManager verifyCustomer, Fire SQL statement cardNumb:'"+cardNumb+"' pin: '"+pin+"'");
             costumer = databaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer).get(0);
+            System.out.println("found: '"+costumer.getFirstName()+"'");
             return costumer;
     }
    

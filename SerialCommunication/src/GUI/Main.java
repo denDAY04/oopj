@@ -6,13 +6,6 @@ package GUI;
 
 import SQLDatabase.Managers.CustomerManager;
 import SQLDatabase.Managers.DatabaseManager;
-import SQLDatabase.Managers.TerminalManager;
-import SerialCom.controller.EventManager;
-import SerialCom.protocol.ProjectPacket;
-import SerialCom.serial.SerialTransceiver;
-import java.util.TooManyListenersException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -30,7 +23,7 @@ public class Main {
         Controller controller;
         
         view = new GUIFrame();
-//        model = new CustomerManager();
+
         controller = new Controller();
         
         controller.setCustomerModel(model);

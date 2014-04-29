@@ -8,7 +8,7 @@ DROP TABLE Billing;
 DROP TABLE Deposits;
 DROP TABLE Customer;
 DROP TABLE Terminals;
-
+DROP TABLE Rate;
 
 CREATE TABLE Customer (
    CustomerNumb INT NOT NULL GENERATED ALWAYS AS IDENTITY,
@@ -21,7 +21,7 @@ CREATE TABLE Customer (
    ZipCode varchar (4) NOT NULL,
    Email varchar (100) NOT NULL,
    PhoneNumb varchar (10) NOT NULL,
-   Balance double NOT NULL,
+   Balance INT NOT NULL,
    AccountStatus varchar (18) NOT NULL, --- PenApp - PenAct (card sent) - Disabl - Active
    UseStatus varchar (10), --Char - Idle
    PRIMARY KEY (CustomerNumb)
@@ -57,30 +57,33 @@ CREATE TABLE Billing (
    StartCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
    EndCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
    Recieved TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-   BillingAmount double NOT NULL,
-   BillingRate double NOT NULL,
-   BillingKWH  double NOT NULL,
-   NewBalanceBilling double NOT NULL,
+   BillingAmount INT NOT NULL,
+   BillingRate INT NOT NULL,
+   BillingKWH  INT NOT NULL,
+   NewBalanceBilling INT NOT NULL,
    constraint fk_CustomerNumb2 FOREIGN KEY (CustomerNumb) REFERENCES Customer (CustomerNumb),
    constraint fk_HardwareNumb FOREIGN KEY (HardwareNumb) REFERENCES Terminals (HardwareNumb),
    PRIMARY KEY (TransactionNumb)
 );
 
-
+CREATE TABLE Rate (
+   CurrentRate INT NOT NULL,
+   PRIMARY KEY (CurrentRate)
+);
 
 INSERT INTO Customer (Pin,Password,CardNumb,FirstName,LastName,Road,ZipCode,Email,PhoneNumb,Balance,AccountStatus,UseStatus)
 VALUES 
-   ('1337','password','9bfa0ee8','Hans','Hansen','vej 4','2730','hans@hansen.dk','25302308',100.0,'active','charging'), // CARD 1
-   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','Jens@hotmail.com','44596871',0.0,'pending approval','Idle'), 
-   ('1338','mor','0003','Niels','Nielsen','vej 6','3310','FunkyTown@gmail.com','88888888',500.0,'pending activation','Idle'),
-   ('9999','andreas','0004','Anders','Andersen','vej 7','2400','Anders@tdc.dk','33108891',600.0,'disabled','Idle');
+   ('1337','password','9bfa0ee8','Hans','Hansen','vej 4','2730','hans@hansen.dk','25302308',10000,'active','idle'), -- CARD 1
+   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','Jens@hotmail.com','44596871',0,'penapp','idle'), 
+   ('1338','mor','0003','Niels','Nielsen','vej 6','3310','FunkyTown@gmail.com','88888888',50000,'penact','char'),
+   ('9999','andreas','0004','Anders','Andersen','vej 7','2400','Anders@tdc.dk','33108891',60000,'disabl','idle');
 
 
 INSERT INTO Terminals (Road ,ZipCode,IPAddress,InstallStatus,ChargingStatus)
 VALUES
-   ('vejen 4','2750','12','enabled','charging'),
-   ('vejen 5','2200','13','disabled','idle'),
-   ('vejen 6','1234','14','pending deployment','idle');
+   ('vejen 4','2750','12','enable','charge'),
+   ('vejen 5','2200','13','disabl','waitin'),
+   ('vejen 6','1234','14','pendep','waitin');
 
 INSERT INTO Deposits (CustomerNumb,DepositAmount,NewBalanceDeposit,ExternalRefNumb,last4CardNumb )
 VALUES
@@ -92,9 +95,13 @@ VALUES
 
 INSERT INTO Billing (CustomerNumb,HardwareNumb,StartCharge,EndCharge,BillingAmount,BillingRate,BillingKWH,NewBalanceBilling)
 VALUES
-   (1,2,'2014-03-24 13:10:02.047','2014-03-24 16:10:02.047',100.0,10.5,75.3,50.4),
-   (2,3,'2014-03-25 13:10:02.047','2014-03-25 17:10:02.047',200.1,10.6,80.4,75.8),
-   (3,1,'2014-03-26 13:10:02.047','2014-03-26 18:10:02.047',502.3,10.8,17.3,39.7);
+   (1,2,'2014-03-24 13:10:02.047','2014-03-24 16:10:02.047',10000,1050,7530,5040),
+   (2,3,'2014-03-25 13:10:02.047','2014-03-25 17:10:02.047',20010,1060,8040,7580),
+   (3,1,'2014-03-26 13:10:02.047','2014-03-26 18:10:02.047',50230,1080,1730,3970);
+
+INSERT INTO Rate (CurrentRate)
+VALUES
+   (500);
 
 --select * from Customer
 --select * from Terminals
@@ -103,6 +110,6 @@ VALUES
 
 
 
- update Terminals set OfflineSince = CURRENT_TIMESTAMP where HardwareNumb = 1;
+ --update Terminals set OfflineSince = CURRENT_TIMESTAMP where HardwareNumb = 1;
 
 --UPDATE Terminals SET OfflineSince = CASE WHEN OfflineSince='Online' THEN CURRENT_TIMESTAMP END WHERE HardwareNumb = 1;

@@ -104,7 +104,7 @@ public class TestMain {
         System.out.println("expResp: " + expectedResponse + " actResp: " + actualResponse);
 
         //Now we try to send an RFID and RFID Reader ID
-        rFIDReaderSimpleSimulator.sendRFIDRequest("VC", "13370001","34"); //13370001 destination 34
+        rFIDReaderSimpleSimulator.sendRFIDRequest("VC", "13379bfa0ee8","34"); //13379bfa0ee8 destination 34
         try {
             //Wait for transmission to complete
             Thread.sleep(500);
