@@ -72,9 +72,23 @@ public class CustomerManager {
         }
     }
    
+    /**
+     * Add a new customer to the database.
+     * CONSTRAINT: The order in which the different customer informations are
+     * placed in the array parameter must follow the order specified in the SQL
+     * call. See SQLLIbrary, SYSTEM_CREATE_NEW_CUSTOMER.
+     * 
+     * @param information Array of the new customer's information. See 
+     * constraint above!
+     */
+   public void addNewCustomer(String[] information) {
+       ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+       for (int i = 0; i < 9; ++i) {
+           parameters.add(information[i]);
+       }
+       databaseManager.updateQuery(SQLLibrary.SYSTEM_CREATE_NEW_CUSTOMER, parameters);
+   }
    
-   
-    // add costumer
     
     // find costumer
     
