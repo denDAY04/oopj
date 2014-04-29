@@ -4,8 +4,6 @@
  */
 package SQLDatabase.Library;
 
-import java.sql.PreparedStatement;
-
 /**
  *
  * @author Qess
@@ -157,8 +155,8 @@ public class SQLLibrary {
     //--- Set customer use status
 // 1, UseStatus,2, CustomerNumb
  public static final String SYSTEM_SET_CUSTOMER_USE_STATUS = "update Customer " 
-                                                           + "set UseStatus = ? "
-                                                           + "where CustomerNumb = ?";
+                                                           + "set usestatus = ? "
+                                                           + "where CardNumb = ? ";
     //--- Set Terminals charge status
 //1, ChargingStatus,2, HardwareNumb         
  public static final String SYSTEM_TERMINALS_CHARGE_STATUS = "update Terminals " 

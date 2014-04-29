@@ -42,6 +42,8 @@ public class EventManager implements FrameEventListener {
     private final int DATAPINSIZE = 4; //number of bytes
     private final int DATACARDNUMBINDEX = 4;
     private final int DATACARDNUMBSIZE = 8; //fx. 9bfa0ee8
+    private final int DATATERMINALNUMBSIZE = 4;
+    private final int DATATERMINALNUMBINDEX = 0;
     private java.util.Date date = new java.util.Date();
 
     /**
@@ -184,13 +186,13 @@ public class EventManager implements FrameEventListener {
     private void processRequest(Packet packet) {
 // list of possible commands, not final
 //   - RS - resend
-//   - RA - receive acknowledge
-//   - VC - Verify Customer (pin and card number)
-//   - CS - Charging started ( set charger to charging and customer to locked)
-//   - CI - Customer information (customer found, status, name, amount …. )
-//   - CC - Charge completed (amount, rate ….)
-//   - PI - Ping 
-//   - PO - Pong 
+//   [done] - RA - receive acknowledge
+//   [done] - VC - Verify Customer (pin and card number)
+//   [done] - CS - Charging started ( set charger to charging and customer to locked)
+//  [redundant due to VC] - CI - Customer information (customer found, status, name, amount …. )
+//   [done] - CC - Charge completed (amount, rate ….)
+//   [done] - PI - Ping 
+//   [done] - PO - Pong 
         System.err.println("EventManeger source: " + source + " destination: "
                 + destination);
         System.err.println("Packet source: " + packet.getSource()
@@ -230,15 +232,15 @@ public class EventManager implements FrameEventListener {
                             DATACARDNUMBINDEX, DATACARDNUMBINDEX
                             + DATACARDNUMBSIZE);
                     System.err.println("Cardnumber: " + cardNumb);
-                    Customer costumer = customerManager.verifyCustomer(cardNumb,
+                    Customer customer = customerManager.verifyCustomer(cardNumb,
                             pin);
-                    if (costumer != null) {
+                    if (customer != null) {
                         // get rate from database
                         System.err.println("customer found, sending response");
                         sendResponse("VC", padAmount(500) // rate simulation.
-                                +padAmount(costumer.getBalance())
-                                + costumer.getUseStatus() + costumer.
-                                getAccountStatus() + costumer.getFirstName().substring(0, Math.min(costumer.getFirstName().length(), 9)), //9 first letters of first name. Magic number, consider making variable. 
+                                +padAmount(customer.getBalance())
+                                + customer.getUseStatus() + customer.
+                                getAccountStatus() + customer.getFirstName().substring(0, Math.min(customer.getFirstName().length(), 9)), //9 first letters of first name. Magic number, consider making variable. 
                                 destination);
                     } else {
                         System.err.println("customer object is NULL");
@@ -250,9 +252,27 @@ public class EventManager implements FrameEventListener {
                     System.err.println("command = PO");
                     terminalManager.connectionSuccessful(packet.getSource()); // should this call be made on all revieved packages?
                     System.err.println("Source was: " + packet.getSource());
-                } else if (command.equals("OP")) {
-                    System.err.println(
-                            "EventManager processRequest, OP revieced");
+//                } else if (command.equals("OP")) {
+//                    System.err.println(
+//                            "EventManager processRequest, OP revieced");
+                } else if (command.equals("CS") || command.equals("CC")) {      // Charging started
+                    System.err.println("EventManager processRequest: Charging started or completed");
+                    String terminalID = packet.getData().substring(DATATERMINALNUMBINDEX, DATATERMINALNUMBINDEX + DATATERMINALNUMBSIZE);
+                    String cardNum = packet.getData().substring(DATACARDNUMBINDEX, DATACARDNUMBINDEX + DATACARDNUMBSIZE);
+                    System.err.println("TerminalID: " + terminalID);
+                    System.err.println("cardNum: " + cardNum);
+                    
+                    String[] newStatus = new String[1];
+                    if (command.equals("CS")) {
+                        newStatus[0] = "Charging";
+                    } else {
+                        newStatus[0] = "Idle";
+                    }
+                    
+                    /* Update customer's use status */
+                    customerManager.updateCustomerInformation(cardNum, 1, newStatus);
+                    /* Update charging station's charging status */
+                    terminalManager.setTerminalChargingStatus(terminalID, newStatus[0]);
                 } else if (command.equals("01")) {
                     System.err.println(
                             "EventManager processRequest, if 01 revieced, send 12-Accept");

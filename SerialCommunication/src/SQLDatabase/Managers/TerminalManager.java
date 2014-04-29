@@ -7,13 +7,9 @@ package SQLDatabase.Managers;
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.*;
 import SerialCom.controller.EventManager;
-import SerialCom.protocol.ProjectPacket;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.TooManyListenersException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Timer;
 
 
@@ -32,7 +28,7 @@ public class TerminalManager {
     public TerminalManager() {
     }
     
-  public void setDatabaseManager(DatabaseManager databaseManager){
+    public void setDatabaseManager(DatabaseManager databaseManager){
   this.databaseManager = databaseManager;
   }
     public void setEventManager(EventManager eventManager){
@@ -61,19 +57,20 @@ public class TerminalManager {
         System.out.println("result: " + result);
     }
 
-   public void startPingSchedule() {
+    public void startPingSchedule() {
     System.err.println("Terminal Manager startPingSchedule, Starting first Ping cycle.");       
     pingTimer.start();         // pings stations on start of system
     pingSchedule.start();      // schedules ping timer to run in 6 hours.
     }
 
-         public  class TimerListener2 implements ActionListener {  // ping schedule timer, ping all terminals every 6 hours
+    public  class TimerListener2 implements ActionListener {  // ping schedule timer, ping all terminals every 6 hours
         public synchronized void actionPerformed(ActionEvent e) {
         System.err.println("Terminal Manager TimerListener2, Starting Ping cycle.");
         pingTimer.start();
-        }}
+        }
+    }
    
-      public  class TimerListener implements ActionListener {  // ping delay timer, ping one terminal at a time
+    public  class TimerListener implements ActionListener {  // ping delay timer, ping one terminal at a time
         public synchronized void actionPerformed(ActionEvent e) {  
             ArrayList<Terminal> terminals;
             ArrayList<String> Parameter = new ArrayList();
@@ -89,6 +86,20 @@ public class TerminalManager {
                     pingTimer.stop();
                 }
         }
-      }
     }
+    
+    /**
+     * Set the charging status of a terminal.
+     * 
+     * @param terminalID The Hardware number of the terminal.
+     * @param status The new status of the terminal.
+     */
+    public void setTerminalChargingStatus(String terminalID, String status) {
+        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+        parameters.add(status);
+        parameters.add(terminalID);
+        System.err.println("TerminalManager setTerminalChargingStatus: fire SQL");
+        databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINALS_CHARGE_STATUS, parameters);
+    }
+}
     
