@@ -235,7 +235,7 @@ public class EventManager implements FrameEventListener {
                     Customer customer = customerManager.verifyCustomer(cardNumb,
                             pin);
                     if (customer != null) {
-                        // get rate from database
+                        //TODO get rate from database
                         System.err.println("customer found, sending response");
                         sendResponse("VC", padAmount(500) // rate simulation.
                                 +padAmount(customer.getBalance())
@@ -258,21 +258,41 @@ public class EventManager implements FrameEventListener {
                 } else if (command.equals("CS") || command.equals("CC")) {      // Charging started
                     System.err.println("EventManager processRequest: Charging started or completed");
                     String terminalID = packet.getData().substring(DATATERMINALNUMBINDEX, DATATERMINALNUMBINDEX + DATATERMINALNUMBSIZE);
+                    // ^^Server knows the terminalID allready from the source of the package.^^
                     String cardNum = packet.getData().substring(DATACARDNUMBINDEX, DATACARDNUMBINDEX + DATACARDNUMBSIZE);
                     System.err.println("TerminalID: " + terminalID);
                     System.err.println("cardNum: " + cardNum);
                     
                     String[] newStatus = new String[1];
+
+                    
                     if (command.equals("CS")) {
-                        newStatus[0] = "Charging";
+                        newStatus[0] = "char";
                     } else {
-                        newStatus[0] = "Idle";
+                        newStatus[0] = "idle";
                     }
                     
                     /* Update customer's use status */
                     customerManager.updateCustomerInformation(cardNum, 1, newStatus);
                     /* Update charging station's charging status */
                     terminalManager.setTerminalChargingStatus(terminalID, newStatus[0]);
+                    // ^^Server knows the terminalID allready from the source of the package.^^
+
+                    //TODO get the rate, amount of kKh, amount of kr, start time, end time, and create a billing:
+                    
+                    // Should the TransactionNumb be a "nets" ref number, or just generated as identety?
+                        /*
+                        CustomerNumb INT,
+                        HardwareNumb  INT,
+                        StartCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
+                        EndCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
+                        BillingAmount INT NOT NULL,
+                        BillingRate INT NOT NULL,
+                        BillingKWH  INT NOT NULL,
+                        NewBalanceBilling INT NOT NULL,
+                        */
+                    
+                    
                 } else if (command.equals("01")) {
                     System.err.println(
                             "EventManager processRequest, if 01 revieced, send 12-Accept");

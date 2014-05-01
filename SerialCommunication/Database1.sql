@@ -22,8 +22,8 @@ CREATE TABLE Customer (
    Email varchar (100) NOT NULL,
    PhoneNumb varchar (10) NOT NULL,
    Balance INT NOT NULL,
-   AccountStatus varchar (18) NOT NULL, --- PenApp - PenAct (card sent) - Disabl - Active
-   UseStatus varchar (10), --Char - Idle
+   AccountStatus varchar (6) NOT NULL, --- PenApp - PenAct (card sent) - Disabl - Active
+   UseStatus varchar (4), --Char - Idle
    PRIMARY KEY (CustomerNumb)
 );
 
@@ -32,8 +32,8 @@ CREATE TABLE Terminals (
    Road varchar (100) NOT NULL,
    ZipCode varchar (4) NOT NULL,
    IPAddress varchar (15) NOT NULL,
-   InstallStatus varchar (18) NOT NULL, -- Enable - Disabl - Pendep
-   ChargingStatus varchar (18) NOT NULL,-- Waitin - Charge
+   InstallStatus varchar (6) NOT NULL, -- Enable - Disabl - Pendep
+   ChargingStatus varchar (4) NOT NULL,-- Idle - Char
    OfflineSince varchar (25) DEFAULT 'Online',
    PRIMARY KEY (HardwareNumb)
 );
