@@ -113,10 +113,15 @@ public class CustomerManager {
     * desired found.
     * @return A Customer object with all the information of the customer.
     */
-   public Customer findCustomer(String cardNumb) {
+   public Customer getCustomer(String cardNumb) {
        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        parameters.add(cardNumb);
-       return databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER, parameters).get(0);
+       Customer customer = null;
+       ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER, parameters);
+       if (arr.isEmpty() == false) {
+           customer = arr.get(0);
+       }
+       return customer;
    }
    
    /**
@@ -138,6 +143,12 @@ public class CustomerManager {
    public void registerBilling(String[] data) {
        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        parameters.addAll(Arrays.asList(data));
+       /* Create new billing entry in database, and edit customer's balance */
        databaseManager.updateQuery(SQLLibrary.SYSTEM_LOG_NEW_BILLING, parameters);
+       ArrayList<String> arr = new ArrayList();
+       arr.add(data[7]);                        // New balance
+       arr.add(data[0]);                        // Customer ID
+       databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, arr);
+       
    }
 }

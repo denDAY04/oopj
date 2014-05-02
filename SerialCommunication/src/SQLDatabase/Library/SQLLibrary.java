@@ -163,7 +163,7 @@ public class SQLLibrary {
                                                            + "where CardNumb = ? ";
     //--- Set Terminals charge status
 //1, ChargingStatus,2, HardwareNumb         
- public static final String SYSTEM_TERMINALS_CHARGE_STATUS = "update Terminals " 
+ public static final String SYSTEM_TERMINAL_CHARGE_STATUS = "update Terminals " 
                                                            + "set ChargingStatus = ? "
                                                            + "where HardwareNumb = ?";      
  
@@ -175,11 +175,11 @@ public static final String SYSTEM_GET_ALL_TERMINALS = "select * "
 
 
 
-  public static final String SYSTEM_TERMINALS_RESET_OFFLINESINCE = "update Terminals  " 
+  public static final String SYSTEM_TERMINAL_RESET_OFFLINESINCE = "update Terminals  " 
                                                                + "set OfflineSince = 'Online' "
                                                                + "where IPAddress = ?"; 
 
-  public static final String SYSTEM_TERMINALS_SET_OFFLINESINCE =   "UPDATE Terminals " +
+  public static final String SYSTEM_TERMINAL_SET_OFFLINESINCE =   "UPDATE Terminals " +
                                                                     "SET OfflineSince = CASE " +
                                                                     "WHEN OfflineSince='Online' " +
                                                                     "THEN CURRENT_TIMESTAMP "+ 

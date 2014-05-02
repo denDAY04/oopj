@@ -36,14 +36,91 @@ public class TerminalManager {
   }
   
     
-    // add terminal
-    // edit terminal
-    // find terminal
+    /**
+     * Add a new terminal to the database.
+     * The terminal's install status and charging status will be 'Pending 
+     * deployment' and 'idle' respectively, when initially added. These values 
+     * will have to be changed separately. See editTerminal.
+     * <p>
+     * Note that no checks are made on the strings as to their values.
+     * 
+     * @param road The road address of the terminal.
+     * @param zipCode The zipcode of its area.
+     * @param ipAddress The ip address used for communication to and from the 
+     * terminal.
+     */
+    public void addTerminal(String road, String zipCode, String ipAddress) {
+        ArrayList<String> parameters = new ArrayList();
+        parameters.add(road);
+        parameters.add(zipCode);
+        parameters.add(ipAddress);
+        databaseManager.updateQuery(SQLLibrary.ADMIN_ADD_NEW_TERMINAL, parameters);
+    }
+    
+    /**
+     * Edit the information of a terminal on the database. 
+     * Depending on the command parameter, not all of the parameters are used,
+     * and can therefore potentially be left as NULL. 
+     * 
+     * @param terminalID ID number of the terminal to be edited. Must always be 
+     * supplied.
+     * @param command Specifies what data needs to be changed through its value.
+     * See list below:
+     * <br>1: Set terminal offline (install and charging can be NULL)
+     * <br>2: Set terminal online (install and charging can be NULL)
+     * <br>3: Set charging status (install can be NULL)
+     * <br>4: Set install status (charging can be NULL)
+     * <br>
+     * @param installStatus Accepted values: "Enable", "Disabl", and "Pendep".
+     * @param chargingStatus Accepted values: "Char", "Idle"
+     */
+    public void editTerminal(String terminalID, int command, String installStatus, String chargingStatus) {
+        ArrayList<String> parameters = new ArrayList();
+        
+        switch(command) {
+            case 1:     // Set offline
+                parameters.add(terminalID);
+                databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_SET_OFFLINESINCE, parameters);
+                break;
+            case 2:     // Set online
+                parameters.add(terminalID);
+                databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_RESET_OFFLINESINCE, parameters);
+                break;
+            case 3:     // Set charging status
+                parameters.add(chargingStatus);
+                parameters.add(terminalID);
+                databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_CHARGE_STATUS, parameters);
+                break;
+            case 4:     // Set install status
+                parameters.add(installStatus);
+                parameters.add(terminalID);
+                databaseManager.updateQuery(SQLLibrary.ADMIN_CHANGE_TERMINAL_INSTALLSTATUS, parameters);
+                break;
+            default:
+                System.err.println("TerminalManager editTerminal: No suitible command found.");
+        }
+    }
+
+    public Terminal getTerminal(String terminalID) {
+        ArrayList<String> parameter = new ArrayList();
+        parameter.add(terminalID);
+        Terminal terminal = null;
+        ArrayList<Terminal> arr = databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_TERMINAL, parameter);
+        if (arr.isEmpty() == false) {
+            terminal = arr.get(0);
+        }
+        return terminal;
+    }
+    
+    public ArrayList<Terminal> getAllTerminals() {
+        return databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS, new ArrayList<String>());
+    }
+
     public void connectionFailed(String destination) {
         ArrayList<String> parametersTerminal = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
         parametersTerminal.add(destination);   // add the cardnumber parameter
             System.out.println("TerminalManager connectionFailed, Fire SQL statement");
-            int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINALS_SET_OFFLINESINCE,parametersTerminal);
+            int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_SET_OFFLINESINCE,parametersTerminal);
             System.out.println("result: " + result);
     }
 
@@ -52,7 +129,7 @@ public class TerminalManager {
         // Set OfflineSince to Online, when connection is established.
         ArrayList<String> parametersTerminal = new ArrayList();
         parametersTerminal.add(destination);
-        int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINALS_RESET_OFFLINESINCE,parametersTerminal);
+        int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_RESET_OFFLINESINCE,parametersTerminal);
         System.out.println("TerminalManager connectionSuccessful, Fire SQL statement");
         System.out.println("result: " + result);
     }
@@ -99,7 +176,7 @@ public class TerminalManager {
         parameters.add(status);
         parameters.add(terminalID);
         System.err.println("TerminalManager setTerminalChargingStatus: fire SQL");
-        databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINALS_CHARGE_STATUS, parameters);
+        databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_CHARGE_STATUS, parameters);
     }
 }
     

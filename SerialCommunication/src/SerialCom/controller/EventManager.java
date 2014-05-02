@@ -291,6 +291,7 @@ public class EventManager implements FrameEventListener {
                         /* Extract the billing data from the packet and log it in the database. */
                         String[] dataArr = exstractBillingData(cardNum, terminalID);
                         customerManager.registerBilling(dataArr);
+
                     }
                     
                     /* Update customer's use status */
@@ -349,7 +350,7 @@ public class EventManager implements FrameEventListener {
      */
     private String[] exstractBillingData(String cardNum, String terminalID) {
         /* Find a customer's ID and old balance through the transfered card number */
-        Customer billedCustomer = customerManager.findCustomer(cardNum);
+        Customer billedCustomer = customerManager.getCustomer(cardNum);
         String customerID = billedCustomer.getCustomerNumb();
         double oldBalance = billedCustomer.getBalance();
 

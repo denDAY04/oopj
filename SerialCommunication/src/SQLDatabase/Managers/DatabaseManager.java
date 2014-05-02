@@ -20,7 +20,15 @@ import SQLDatabase.ModelClasses.Billing;
  */
 public class DatabaseManager {// implements DatabaseInterface {   // any update or insert in to statement
     
-//@Override
+/**
+ * Update the information of existing data on the database. 
+ * Use also this method for addding new data objects to the database.
+ * 
+ * @param updateQuery SQL command. See SQLLibrary. 
+ * @param parameters Data to be updated or added in the database.
+ * 
+ * @return The index number of the row that was edited or added.
+ */
  public int updateQuery(String updateQuery,ArrayList<String> parameters) {
         int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
