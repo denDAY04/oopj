@@ -30,9 +30,14 @@ public class GUIFrame extends javax.swing.JFrame {
         
         loginControllerPanel.setFrame(this);
         accountViewPanel.setFrame(this);
+        signupPanel.setFrame(this);
+        addFundsPanel.setFrame(this);
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountViewPanel, "card2");
+        cards.add(signupPanel, "card3");
+        cards.add(addFundsPanel, "card4");
+        
     }
     
     
@@ -53,47 +58,28 @@ public class GUIFrame extends javax.swing.JFrame {
         cards = new javax.swing.JPanel();
         loginControllerPanel = new GUI.Test.LoginControllerPanel();
         accountViewPanel = new GUI.Test.AccountViewPanel();
+        signupPanel = new GUI.Test.SignupPanel();
+        addFundsPanel = new GUI.Test.AddFundsPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        javax.swing.GroupLayout cardsLayout = new javax.swing.GroupLayout(cards);
-        cards.setLayout(cardsLayout);
-        cardsLayout.setHorizontalGroup(
-            cardsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cardsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(accountViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(341, Short.MAX_VALUE))
-            .addGroup(cardsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(cardsLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(loginControllerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 249, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(299, Short.MAX_VALUE)))
-        );
-        cardsLayout.setVerticalGroup(
-            cardsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(cardsLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(accountViewPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
-            .addGroup(cardsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(cardsLayout.createSequentialGroup()
-                    .addContainerGap()
-                    .addComponent(loginControllerPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(49, Short.MAX_VALUE)))
-        );
+        cards.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        cards.add(loginControllerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 249, -1));
+        cards.add(accountViewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 207, -1));
+        cards.add(signupPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(addFundsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(cards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 34, Short.MAX_VALUE))
+                .addGap(0, 39, Short.MAX_VALUE))
         );
 
         pack();
@@ -140,8 +126,10 @@ public class GUIFrame extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.Test.AccountViewPanel accountViewPanel;
+    private GUI.Test.AddFundsPanel addFundsPanel;
     private javax.swing.JPanel cards;
     private GUI.Test.LoginControllerPanel loginControllerPanel;
+    private GUI.Test.SignupPanel signupPanel;
     // End of variables declaration//GEN-END:variables
 
 }

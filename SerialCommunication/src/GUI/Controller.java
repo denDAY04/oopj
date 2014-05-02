@@ -30,7 +30,7 @@ public class Controller {
     
         public void findCustomer(String email, String password){
         
-       customer = customerModel.verifyCustomerLogin(email, password);
+       //customer = customerModel.verifyCustomerLogin(email, password);
        
        if (customer!= null)
        {
