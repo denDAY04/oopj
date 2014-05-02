@@ -24,15 +24,20 @@ public class CustomerManager {
     
     
     public Customer verifyCustomer (String cardNumb,String pin){
-            Customer costumer = null;
+            Customer customer = null;
             ArrayList<String> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parameterscostumer.add(cardNumb);   // add the cardnumber parameter
             parameterscostumer.add(pin);        // add the pin parameter
             // do query in database (ArrayList: 1, CardNumb,2, Pin)
             System.out.println("CustomerManager verifyCustomer, Fire SQL statement cardNumb:'"+cardNumb+"' pin: '"+pin+"'");
-            costumer = databaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer).get(0);
-            System.out.println("found: '"+costumer.getFirstName()+"'");
-            return costumer;
+            ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parameterscostumer);
+            if (arr.isEmpty() == false) {
+                customer = arr.get(0);
+                System.out.println("found: '"+customer.getFirstName()+"'");
+            } else {
+                System.err.println("No customers found.");
+            }
+            return customer;
     }
    
     public boolean loggedInAs (String email,String password){
