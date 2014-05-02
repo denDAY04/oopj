@@ -3,6 +3,7 @@
  * and open the template in the editor.
  */
 package SQLDatabase.Managers;
+import GUI.Test.LoggedIn;
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.*;
 import java.util.ArrayList;
@@ -13,10 +14,13 @@ import java.util.ArrayList;
  */
 public class CustomerManager {
     DatabaseManager databaseManager;
+    LoggedIn loggedInUser = new LoggedIn();
 
     public void setDatabaseManager(DatabaseManager databaseManager){
   this.databaseManager = databaseManager;
   }
+    
+    
     
     public Customer verifyCustomer (String cardNumb,String pin){
             Customer costumer = null;
@@ -30,8 +34,8 @@ public class CustomerManager {
             return costumer;
     }
    
-    public Customer verifyCustomerLogin (String email,String password){
-            Customer costumer = null;
+    public boolean loggedInAs (String email,String password){
+            Customer customer = null;
             ArrayList<String> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parameterscostumer.add(email);   // add the cardnumber parameter
             parameterscostumer.add(password);        // add the pin parameter
@@ -39,9 +43,16 @@ public class CustomerManager {
             System.out.println("CustomerManager verifyCustomerLogin, Fire SQL statement");
             System.out.println("email: "+email+" password: "+password);
             
-            costumer = databaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER_LOGIN, parameterscostumer).get(0);
+            try {
+                customer = databaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER_LOGIN, parameterscostumer).get(0);
+                loggedInUser.setCustomer(customer);
+                return true;
+            } catch (IndexOutOfBoundsException e) {
+                loggedInUser.setCustomer(null);
+                return false;
+            }
           //  databaseManager.test();
-            return costumer;
+            //return costumer;
     }       
     
     /**

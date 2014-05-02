@@ -268,15 +268,15 @@ public class EventManager implements FrameEventListener {
                     
                     if (command.equals("CS")) {
                         newStatus[0] = "char";
-                    } else {
+                    } else {                            // Charging complete. 
                         newStatus[0] = "idle";
+                        String 
                     }
                     
                     /* Update customer's use status */
                     customerManager.updateCustomerInformation(cardNum, 1, newStatus);
                     /* Update charging station's charging status */
-                    terminalManager.setTerminalChargingStatus(terminalID, newStatus[0]);
-                    // ^^Server knows the terminalID allready from the source of the package.^^
+                    terminalManager.setTerminalChargingStatus(packet.getSource(), newStatus[0]);
 
                     //TODO get the rate, amount of kKh, amount of kr, start time, end time, and create a billing:
                     

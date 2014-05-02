@@ -1,7 +1,7 @@
 
 alter table Deposits drop constraint fk_CustomerNumb;
-
-alter table Billing drop constraint fk_CustomerNumb2;
+alter table Billing drop constraint fk_CardNumb;
+--alter table Billing drop constraint fk_CustomerNumb2;
 alter table Billing drop constraint fk_HardwareNumb;
 
 DROP TABLE Billing;
@@ -52,7 +52,8 @@ CREATE TABLE Deposits (
 
 CREATE TABLE Billing (
    TransactionNumb  INT GENERATED ALWAYS AS IDENTITY,
-   CustomerNumb INT,
+--   CustomerNumb INT,
+   CardNumb varchar (30),
    HardwareNumb  INT,
    StartCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
    EndCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
@@ -61,7 +62,8 @@ CREATE TABLE Billing (
    BillingRate INT NOT NULL,
    BillingKWH  INT NOT NULL,
    NewBalanceBilling INT NOT NULL,
-   constraint fk_CustomerNumb2 FOREIGN KEY (CustomerNumb) REFERENCES Customer (CustomerNumb),
+   --constraint fk_CustomerNumb2 FOREIGN KEY (CustomerNumb) REFERENCES Customer (CustomerNumb),
+   constraint fk_CardNumb FOREIGN KEY (CardNumb) REFERENCES Customer (CardNumb),
    constraint fk_HardwareNumb FOREIGN KEY (HardwareNumb) REFERENCES Terminals (HardwareNumb),
    PRIMARY KEY (TransactionNumb)
 );
