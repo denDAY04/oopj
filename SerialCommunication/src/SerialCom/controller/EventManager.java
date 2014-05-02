@@ -38,13 +38,28 @@ public class EventManager implements FrameEventListener {
     private int currentSendAttempt = 0;
     private String currentStatus;
     private String currentData;
+    private java.util.Date date = new java.util.Date();
+    
+    /* For data index values there exists a naming convention if the index 
+    changes between different implementations (commands). It is as follows:
+        XX_DATAY(..)YINDEX
+    Where XX is the abbriviation of the command and Y(..)Y  is the data name.
+    */
     private final int DATAPININDEX = 0;
     private final int DATAPINSIZE = 4; //number of bytes
-    private final int DATACARDNUMBINDEX = 4;
+    private final int CS_CC_DATACARDNUMBINDEX = 0;
+    private final int VC_DATACARDNUMBINDEX = 3;
     private final int DATACARDNUMBSIZE = 8; //fx. 9bfa0ee8
-    private final int DATATERMINALNUMBSIZE = 4;
-    private final int DATATERMINALNUMBINDEX = 0;
-    private java.util.Date date = new java.util.Date();
+    private final int DATAKWHRATEINDEX = 8;
+    private final int DATAKWHRATESIZE = 6;
+    private final int DATAKWHAMOUNTINDEX = 14;
+    private final int DATAKWHAMOUNTSIZE = 6;
+    private final int DATADKKAMOUNTINDEX = 20;
+    private final int DATADKKAMOUNTSIZE = 6;
+    private final int DATASTARTTIMEINDEX = 26;
+    private final int DATASTARTTIMESIZE = 19;
+    private final int DATAENDTIMEINDEX = 45;
+    private final int DATAENDTIMESIZE = 19;
 
     /**
      * Default constructor which automatically detects port name.
@@ -229,7 +244,7 @@ public class EventManager implements FrameEventListener {
                             DATAPININDEX + DATAPINSIZE);
                     System.err.println("Pin: " + pin);
                     String cardNumb = packet.getData().substring(
-                            DATACARDNUMBINDEX, DATACARDNUMBINDEX
+                            VC_DATACARDNUMBINDEX, VC_DATACARDNUMBINDEX
                             + DATACARDNUMBSIZE);
                     System.err.println("Cardnumber: " + cardNumb);
                     Customer customer = customerManager.verifyCustomer(cardNumb,
@@ -257,42 +272,31 @@ public class EventManager implements FrameEventListener {
 //                            "EventManager processRequest, OP revieced");
                 } else if (command.equals("CS") || command.equals("CC")) {      // Charging started
                     System.err.println("EventManager processRequest: Charging started or completed");
-                    String terminalID = packet.getData().substring(DATATERMINALNUMBINDEX, DATATERMINALNUMBINDEX + DATATERMINALNUMBSIZE);
+                    String terminalID = packet.getSource();
                     // ^^Server knows the terminalID allready from the source of the package.^^
-                    String cardNum = packet.getData().substring(DATACARDNUMBINDEX, DATACARDNUMBINDEX + DATACARDNUMBSIZE);
+                    String cardNum = packet.getData().substring(CS_CC_DATACARDNUMBINDEX, CS_CC_DATACARDNUMBINDEX + DATACARDNUMBSIZE);
                     System.err.println("TerminalID: " + terminalID);
                     System.err.println("cardNum: " + cardNum);
                     
                     String[] newStatus = new String[1];
 
-                    
+                    /* Validate the command for 'charging started', else the 
+                    charging must be complete. If complete, log the billing in 
+                    the database.
+                    */
                     if (command.equals("CS")) {
                         newStatus[0] = "char";
-                    } else {                            // Charging complete. 
+                    } else {                          
                         newStatus[0] = "idle";
-                        String 
+                        /* Extract the billing data from the packet and log it in the database. */
+                        String[] dataArr = exstractBillingData(cardNum, terminalID);
+                        customerManager.registerBilling(dataArr);
                     }
                     
                     /* Update customer's use status */
                     customerManager.updateCustomerInformation(cardNum, 1, newStatus);
                     /* Update charging station's charging status */
-                    terminalManager.setTerminalChargingStatus(packet.getSource(), newStatus[0]);
-
-                    //TODO get the rate, amount of kKh, amount of kr, start time, end time, and create a billing:
-                    
-                    // Should the TransactionNumb be a "nets" ref number, or just generated as identety?
-                        /*
-                        CustomerNumb INT,
-                        HardwareNumb  INT,
-                        StartCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
-                        EndCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
-                        BillingAmount INT NOT NULL,
-                        BillingRate INT NOT NULL,
-                        BillingKWH  INT NOT NULL,
-                        NewBalanceBilling INT NOT NULL,
-                        */
-                    
-                    
+                    terminalManager.setTerminalChargingStatus(packet.getSource(), newStatus[0]);                    
                 } else if (command.equals("01")) {
                     System.err.println(
                             "EventManager processRequest, if 01 revieced, send 12-Accept");
@@ -332,5 +336,34 @@ public class EventManager implements FrameEventListener {
                 currentSendAttempt++;
             }
         }
+    }
+    
+    /**
+     * Extracts the data needed for registering a billing, to an array.
+     * 
+     * @param cardNum The card number of the use being billed.
+     * @param terminalID The ID number of the terminal that was used.
+     * 
+     * @return An array of Strings containing the data in the correct sequence, 
+     * as dictated by the SQL template in SQLLibrary.SYSTEM_LOG_NEW_BILLING.
+     */
+    private String[] exstractBillingData(String cardNum, String terminalID) {
+        /* Find a customer's ID and old balance through the transfered card number */
+        Customer billedCustomer = customerManager.findCustomer(cardNum);
+        String customerID = billedCustomer.getCustomerNumb();
+        double oldBalance = billedCustomer.getBalance();
+
+        /* Extract billing data from packet */
+        String kWhRate = packet.getData().substring(DATAKWHRATEINDEX, DATAKWHRATEINDEX + DATAKWHRATESIZE);
+        String kwHAmount = packet.getData().substring(DATAKWHAMOUNTINDEX, DATAKWHAMOUNTINDEX + DATAKWHAMOUNTSIZE);
+        String DKKAmount = packet.getData().substring(DATADKKAMOUNTINDEX, DATADKKAMOUNTINDEX + DATADKKAMOUNTSIZE);
+        String startTime = packet.getData().substring(DATASTARTTIMEINDEX, DATASTARTTIMEINDEX + DATASTARTTIMESIZE);
+        String endTime = packet.getData().substring(DATAENDTIMEINDEX, DATAENDTIMEINDEX + DATAENDTIMESIZE);
+
+        /* Calcualte new balance after billing */
+        String newBalanceString = "" + (oldBalance - Double.parseDouble(DKKAmount));
+
+        String[] arr = {customerID, terminalID, startTime, endTime, DKKAmount, kWhRate, kwHAmount, newBalanceString};
+        return arr;
     }
 }

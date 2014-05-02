@@ -7,6 +7,7 @@ import GUI.Test.LoggedIn;
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -100,7 +101,38 @@ public class CustomerManager {
        databaseManager.updateQuery(SQLLibrary.SYSTEM_CREATE_NEW_CUSTOMER, parameters);
    }
    
-    
-    // find costumer
-    
+   /**
+    * Find the customer in the database associated with a given card number.
+    * 
+    * @param cardNumb The card number associated with the customer that is 
+    * desired found.
+    * @return A Customer object with all the information of the customer.
+    */
+   public Customer findCustomer(String cardNumb) {
+       ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+       parameters.add(cardNumb);
+       return databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER, parameters).get(0);
+   }
+   
+   /**
+    * Register a billing when a car has been charged.
+    * 
+    * CONSTRAINT: The order of the data in the parameter must follow a certain 
+    * pattern:
+    * <li>Customer number
+    * <li>Terminal number
+    * <li>Start time of charging
+    * <li>End time of charging
+    * <li>The amount of DKK to be billed
+    * <li>The rate to which he is billed (DKK/kwH)
+    * <li>The amount of kWh that was charged
+    * <li>The new balance of the the customer after being billed
+    * <br> <br>
+    * @param data See constraint above.
+    */
+   public void registerBilling(String[] data) {
+       ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+       parameters.addAll(Arrays.asList(data));
+       databaseManager.updateQuery(SQLLibrary.SYSTEM_LOG_NEW_BILLING, parameters);
+   }
 }

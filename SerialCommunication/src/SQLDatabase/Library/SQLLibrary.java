@@ -117,6 +117,10 @@ public class SQLLibrary {
   public static final String SYSTEM_VALIDATE_CUSTOMER_LOGIN = "select * " 
                                                      + "from Customer "
                                                      + "where Email = ? and Password = ?";
+  
+    public static final String SYSTEM_GET_CUSTOMER = "select * " 
+                                                     + "from Customer "
+                                                     + "where CardNumb = ?";
  
  // SYSTEM create deposit
     //---Get old balance
