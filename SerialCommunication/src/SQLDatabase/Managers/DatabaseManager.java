@@ -52,15 +52,21 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         Connection con = null;
         ArrayList<Customer> customerList = new ArrayList();
         try {
+            System.err.println("DatabaseManager getCustomers 1");
             con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
+            System.err.println("DatabaseManager getCustomers 2");                
             preparedStatement.setString(i+1, parameters.get(i));
             }
             ResultSet resultSet = preparedStatement.executeQuery();
-             while (resultSet.next()) {
-                customerList.add(createCustomer(resultSet));
+            System.err.println("DatabaseManager getCustomers 3");
+            while (resultSet.next()) {
+                 System.err.println("DatabaseManager getCustomers 4");
+                 customerList.add(createCustomer(resultSet));
             }
+            System.err.println("DatabaseManager getCustomers 5");
+
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {

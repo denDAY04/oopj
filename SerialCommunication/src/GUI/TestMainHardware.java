@@ -49,7 +49,7 @@ public class TestMainHardware {
                     null,
                     ex);
         }
-        terminalManager.startPingSchedule();
+      //  terminalManager.startPingSchedule();
         while (true) {}  // can test ping terminals function
 
         //eventManager.closePort();

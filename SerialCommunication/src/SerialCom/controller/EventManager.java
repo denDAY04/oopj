@@ -48,7 +48,7 @@ public class EventManager implements FrameEventListener {
     private final int DATAPININDEX = 0;
     private final int DATAPINSIZE = 4; //number of bytes
     private final int CS_CC_DATACARDNUMBINDEX = 0;
-    private final int VC_DATACARDNUMBINDEX = 3;
+    private final int VC_DATACARDNUMBINDEX = 4;
     private final int DATACARDNUMBSIZE = 8; //fx. 9bfa0ee8
     private final int DATAKWHRATEINDEX = 8;
     private final int DATAKWHRATESIZE = 6;
