@@ -1,7 +1,7 @@
 
 alter table Deposits drop constraint fk_CustomerNumb;
-alter table Billing drop constraint fk_CardNumb;
---alter table Billing drop constraint fk_CustomerNumb2;
+
+alter table Billing drop constraint fk_CustomerNumb2;
 alter table Billing drop constraint fk_HardwareNumb;
 
 DROP TABLE Billing;
@@ -52,8 +52,7 @@ CREATE TABLE Deposits (
 
 CREATE TABLE Billing (
    TransactionNumb  INT GENERATED ALWAYS AS IDENTITY,
---   CustomerNumb INT,
-   CardNumb varchar (30),
+   CustomerNumb INT,
    HardwareNumb  INT,
    StartCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
    EndCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
@@ -62,8 +61,7 @@ CREATE TABLE Billing (
    BillingRate INT NOT NULL,
    BillingKWH  INT NOT NULL,
    NewBalanceBilling INT NOT NULL,
-   --constraint fk_CustomerNumb2 FOREIGN KEY (CustomerNumb) REFERENCES Customer (CustomerNumb),
-   constraint fk_CardNumb FOREIGN KEY (CardNumb) REFERENCES Customer (CardNumb),
+   constraint fk_CustomerNumb2 FOREIGN KEY (CustomerNumb) REFERENCES Customer (CustomerNumb),
    constraint fk_HardwareNumb FOREIGN KEY (HardwareNumb) REFERENCES Terminals (HardwareNumb),
    PRIMARY KEY (TransactionNumb)
 );
@@ -83,9 +81,9 @@ VALUES
 
 INSERT INTO Terminals (Road ,ZipCode,IPAddress,InstallStatus,ChargingStatus)
 VALUES
-   ('vejen 4','2750','12','enable','charge'),
-   ('vejen 5','2200','13','disabl','waitin'),
-   ('vejen 6','1234','14','pendep','waitin');
+   ('vejen 4','2750','12','enable','char'),
+   ('vejen 5','2200','13','disabl','idle'),
+   ('vejen 6','1234','14','pendep','idle');
 
 INSERT INTO Deposits (CustomerNumb,DepositAmount,NewBalanceDeposit,ExternalRefNumb,last4CardNumb )
 VALUES
