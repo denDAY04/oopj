@@ -32,11 +32,17 @@ public class GUIFrame extends javax.swing.JFrame {
         accountViewPanel.setFrame(this);
         signupPanel.setFrame(this);
         addFundsPanel.setFrame(this);
+        signupCongratulationsPanel.setFrame(this);
+        forgotPassPanel.setFrame(this);
+        passwordFoundPanel.setFrame(this);
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountViewPanel, "card2");
         cards.add(signupPanel, "card3");
         cards.add(addFundsPanel, "card4");
+        cards.add(signupCongratulationsPanel, "card5");
+        cards.add(forgotPassPanel, "card6");
+        cards.add(passwordFoundPanel, "card7");
         
     }
     
@@ -60,14 +66,20 @@ public class GUIFrame extends javax.swing.JFrame {
         accountViewPanel = new GUI.Test.AccountViewPanel();
         signupPanel = new GUI.Test.SignupPanel();
         addFundsPanel = new GUI.Test.AddFundsPanel();
+        signupCongratulationsPanel = new GUI.Test.SignupCongratulationsPanel();
+        forgotPassPanel = new GUI.Test.ForgotPassPanel();
+        passwordFoundPanel = new GUI.Test.PasswordFoundPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         cards.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        cards.add(loginControllerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 249, -1));
+        cards.add(loginControllerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 430));
         cards.add(accountViewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 207, -1));
         cards.add(signupPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(addFundsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(signupCongratulationsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
+        cards.add(forgotPassPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 440));
+        cards.add(passwordFoundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 440));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -79,7 +91,7 @@ public class GUIFrame extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(cards, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 39, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -128,7 +140,10 @@ public class GUIFrame extends javax.swing.JFrame {
     private GUI.Test.AccountViewPanel accountViewPanel;
     private GUI.Test.AddFundsPanel addFundsPanel;
     private javax.swing.JPanel cards;
+    private GUI.Test.ForgotPassPanel forgotPassPanel;
     private GUI.Test.LoginControllerPanel loginControllerPanel;
+    private GUI.Test.PasswordFoundPanel passwordFoundPanel;
+    private GUI.Test.SignupCongratulationsPanel signupCongratulationsPanel;
     private GUI.Test.SignupPanel signupPanel;
     // End of variables declaration//GEN-END:variables
 

@@ -4,19 +4,26 @@
  * and open the template in the editor.
  */
 
-package GUI;
+package GUI.Test;
+
+import GUI.*;
 
 /**
  *
  * @author Jonas
  */
-public class SignupCongratulationsViewPanel extends javax.swing.JPanel {
+public class SignupCongratulationsPanel extends javax.swing.JPanel {
 
+    private GUIFrame frame;
     /**
      * Creates new form SignupCongratulationsPanel
      */
-    public SignupCongratulationsViewPanel() {
+    public SignupCongratulationsPanel() {
         initComponents();
+    }
+
+    public void setFrame(GUI.Test.GUIFrame frame) {
+        this.frame = frame;
     }
 
     /**
@@ -54,44 +61,50 @@ public class SignupCongratulationsViewPanel extends javax.swing.JPanel {
         labWelcomeText.setFocusable(false);
 
         btnOK.setText("OK");
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labCongratulations, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(307, 307, 307))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 173, Short.MAX_VALUE)
-                    .addComponent(labWelcomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 173, Short.MAX_VALUE)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(84, 84, 84)
+                        .addComponent(labWelcomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(labCongratulations, javax.swing.GroupLayout.PREFERRED_SIZE, 471, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(212, 212, 212)
+                        .addComponent(btnOK, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(90, 90, 90)
-                .addComponent(labCongratulations, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, Short.MAX_VALUE)
+                .addGap(97, 97, 97)
+                .addComponent(labCongratulations)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(labWelcomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
                 .addComponent(btnOK)
-                .addGap(33, 33, 33))
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 145, Short.MAX_VALUE)
-                    .addComponent(labWelcomeText, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 145, Short.MAX_VALUE)))
+                .addGap(35, 35, 35))
         );
 
         labWelcomeText.setText("You have sucessfully completed your account registration.\n"
-            + "An email has been sent to the specified email adress with \n"
-            + "your account details. Funds can be added at any time when \n"
-            + "you have logged in with your email and self chosen password. \n");
+            + "An email has been sent to the specified email adress with "
+            + "your account details. Funds can be added at any time when "
+            + "you have logged in with your email and self chosen password.\n");
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        frame.changePanel("card1");
+    }//GEN-LAST:event_btnOKActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

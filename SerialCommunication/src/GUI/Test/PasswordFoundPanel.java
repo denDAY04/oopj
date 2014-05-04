@@ -2,19 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package GUI;
+package GUI.Test;
+
+import GUI.*;
 
 /**
  *
  * @author Qess
  */
-public class PasswordViewPanel extends javax.swing.JPanel {
-
+public class PasswordFoundPanel extends javax.swing.JPanel {
+    
+    private GUIFrame frame;
     /**
      * Creates new form PasswordViewPanel
      */
-    public PasswordViewPanel() {
+    public PasswordFoundPanel() {
         initComponents();
+    }
+
+    public void setFrame(GUI.Test.GUIFrame frame) {
+        this.frame = frame;
     }
 
     /**
@@ -41,19 +48,24 @@ public class PasswordViewPanel extends javax.swing.JPanel {
         labPasswordFound.setText(" ");
 
         btnOK.setText("OK");
+        btnOK.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOKActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labPassword)
                     .addComponent(labInformation)
                     .addComponent(btnOK)
                     .addComponent(labPasswordFound, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(296, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -64,11 +76,16 @@ public class PasswordViewPanel extends javax.swing.JPanel {
                 .addComponent(labInformation)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(labPasswordFound)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnOK)
                 .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        frame.changePanel("card1");
+    }//GEN-LAST:event_btnOKActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JLabel labInformation;

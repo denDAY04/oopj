@@ -35,6 +35,7 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jButton1 = new javax.swing.JButton();
         labWelcome = new javax.swing.JLabel();
         labInformation = new javax.swing.JLabel();
         labEmail = new javax.swing.JLabel();
@@ -46,50 +47,8 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         btnSignup = new javax.swing.JButton();
         labSignup = new javax.swing.JLabel();
         labError = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
 
-        labWelcome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        labWelcome.setText("Welcome to TA Charging");
-
-        labInformation.setText("Enter your credentials to login.");
-
-        labEmail.setText("Email");
-
-        textEmail.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textEmailActionPerformed(evt);
-            }
-        });
-
-        labPassword.setText("Password");
-
-        textPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textPasswordActionPerformed(evt);
-            }
-        });
-
-        btnLogin.setText("Login");
-        btnLogin.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnLoginActionPerformed(evt);
-            }
-        });
-
-        btnForgot.setText("Forgot Password");
-
-        btnSignup.setText("Sign up");
-        btnSignup.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSignupActionPerformed(evt);
-            }
-        });
-
-        labSignup.setText("New User?");
-
-        labError.setForeground(new java.awt.Color(255, 0, 51));
-        labError.setText("Wrong email or password");
-        labError.setVisible(false);
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jButton1.setText("jButton1");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -97,71 +56,66 @@ public class LoginControllerPanel extends javax.swing.JPanel {
                 jButton1ActionPerformed(evt);
             }
         });
+        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 253, -1, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labPassword)
-                            .addComponent(labEmail)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labSignup)
-                                .addGap(67, 67, 67)
-                                .addComponent(labError))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(labInformation, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(btnLogin)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnForgot))
-                                .addComponent(textPassword, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(textEmail, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(labWelcome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                        .addContainerGap(18, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnSignup)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(38, 38, 38))))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(labWelcome)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labInformation)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(labEmail)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(labPassword)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(textPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(btnLogin)
-                            .addComponent(btnForgot))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labSignup)
-                            .addComponent(labError))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnSignup)
-                        .addGap(28, 28, 28))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addContainerGap())))
-        );
+        labWelcome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        labWelcome.setText("Welcome to TA Charging");
+        add(labWelcome, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
+
+        labInformation.setText("Enter your credentials to login.");
+        add(labInformation, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 44, 197, -1));
+
+        labEmail.setText("Email");
+        add(labEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 69, -1, -1));
+
+        textEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textEmailActionPerformed(evt);
+            }
+        });
+        add(textEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 89, 197, -1));
+
+        labPassword.setText("Password");
+        add(labPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
+
+        textPassword.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textPasswordActionPerformed(evt);
+            }
+        });
+        add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 145, 197, -1));
+
+        btnLogin.setText("Login");
+        btnLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnLoginActionPerformed(evt);
+            }
+        });
+        add(btnLogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 176, -1, -1));
+
+        btnForgot.setText("Forgot Password");
+        btnForgot.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnForgotActionPerformed(evt);
+            }
+        });
+        add(btnForgot, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 176, -1, -1));
+
+        btnSignup.setText("Sign up");
+        btnSignup.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSignupActionPerformed(evt);
+            }
+        });
+        add(btnSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 236, -1, -1));
+
+        labSignup.setText("New User?");
+        add(labSignup, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 216, -1, -1));
+
+        labError.setForeground(new java.awt.Color(255, 0, 51));
+        labError.setText("Wrong email or password");
+        labError.setVisible(false);
+        add(labError, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 216, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void textEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEmailActionPerformed
@@ -197,6 +151,10 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         frame.changePanel("card4");
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnForgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotActionPerformed
+        frame.changePanel("card6");
+    }//GEN-LAST:event_btnForgotActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnForgot;
