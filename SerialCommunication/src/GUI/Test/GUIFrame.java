@@ -37,6 +37,7 @@ public class GUIFrame extends javax.swing.JFrame {
         passwordFoundPanel.setFrame(this);
         editAccountPanel.setFrame(this);
         changePasswordPanel.setFrame(this);
+        transactionHistoryPanel.setFrame(this);
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountPanel, "card2");
@@ -47,6 +48,7 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(passwordFoundPanel, "card7");
         cards.add(editAccountPanel, "card8");
         cards.add(changePasswordPanel, "card9");
+        cards.add(transactionHistoryPanel, "card10");
     }
     
     
@@ -79,6 +81,7 @@ public class GUIFrame extends javax.swing.JFrame {
         passwordFoundPanel = new GUI.Test.PasswordFoundPanel();
         editAccountPanel = new GUI.Test.EditAccountPanel();
         changePasswordPanel = new GUI.Test.ChangePasswordPanel();
+        transactionHistoryPanel = new GUI.Test.TransactionHistoryPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -92,6 +95,7 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(passwordFoundPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 440));
         cards.add(editAccountPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(changePasswordPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(transactionHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,6 +163,7 @@ public class GUIFrame extends javax.swing.JFrame {
     private GUI.Test.PasswordFoundPanel passwordFoundPanel;
     private GUI.Test.SignupCongratulationsPanel signupCongratulationsPanel;
     private GUI.Test.SignupPanel signupPanel;
+    private GUI.Test.TransactionHistoryPanel transactionHistoryPanel;
     // End of variables declaration//GEN-END:variables
 
 }
