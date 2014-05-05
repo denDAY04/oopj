@@ -43,7 +43,7 @@ public class AccountPanel extends javax.swing.JPanel {
         btnEdit = new javax.swing.JButton();
         btnChangePass = new javax.swing.JButton();
         btnAddFunds = new javax.swing.JButton();
-        btnBillingHistory = new javax.swing.JButton();
+        btnTransactionHistory = new javax.swing.JButton();
         labName = new javax.swing.JLabel();
         labCName = new javax.swing.JLabel();
         labEmail = new javax.swing.JLabel();
@@ -73,7 +73,12 @@ public class AccountPanel extends javax.swing.JPanel {
 
         btnAddFunds.setText("Add funds");
 
-        btnBillingHistory.setText("Billing history");
+        btnTransactionHistory.setText("Transaction history");
+        btnTransactionHistory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTransactionHistoryActionPerformed(evt);
+            }
+        });
 
         labName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labName.setText("Name");
@@ -112,7 +117,7 @@ public class AccountPanel extends javax.swing.JPanel {
                     .addComponent(labTitle)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnBillingHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTransactionHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnAddFunds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
@@ -160,7 +165,7 @@ public class AccountPanel extends javax.swing.JPanel {
                         .addComponent(labCCardNumber)))
                 .addGap(6, 6, 6)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnBillingHistory)
+                    .addComponent(btnTransactionHistory)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labBalance)
                         .addGap(6, 6, 6)
@@ -184,12 +189,16 @@ public class AccountPanel extends javax.swing.JPanel {
         frame.changePanel("card9");
     }//GEN-LAST:event_btnChangePassActionPerformed
 
+    private void btnTransactionHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionHistoryActionPerformed
+        frame.changePanel("card10");
+    }//GEN-LAST:event_btnTransactionHistoryActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddFunds;
-    private javax.swing.JButton btnBillingHistory;
     private javax.swing.JButton btnChangePass;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnTransactionHistory;
     private javax.swing.JLabel labBalance;
     private javax.swing.JLabel labCBalance;
     private javax.swing.JLabel labCCardNumber;

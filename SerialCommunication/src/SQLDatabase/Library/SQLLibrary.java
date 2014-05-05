@@ -26,7 +26,12 @@ public class SQLLibrary {
 //ArrayList: 1, CustomerNumb
  public static final String USER_GET_BILLING = "select Recieved, TransactionNumb, BillingAmount, NewBalanceBilling " 
                                              + "from Billing "
+                                             + "inner join Customer"
+                                             + "on Billing.CustomerNumb = Customer.CustomerNumb"
                                              + "where CustomerNumb = ?";
+//  public static final String USER_GET_BILLING = "select Recieved, TransactionNumb, BillingAmount, NewBalanceBilling " 
+//                                             + "from Billing "
+//                                             + "where CustomerNumb = ?";
 // USER  get Billing & Terminals - (on click)
 //ArrayList: 1, TransactionNumb
  public static final String USER_GET_BILLING_N_TERMINAL = "select TransactionNumb, StartCharge, EndCharge, Recieved, BillingAmount, " 

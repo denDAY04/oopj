@@ -194,8 +194,8 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
 
 //@Override  // needs to be able to return an arraylist of Deposits
             // a billing could have a customer object and terminal object, but only neccesary for on click
-    public ArrayList<Billing> getBillings(String getQuery,ArrayList<String> parameters) {
-        ArrayList<Billing> billingList = new ArrayList();
+    public ResultSet getBillings(String getQuery,ArrayList<String> parameters) {
+        //ArrayList<Billing> billingList = new ArrayList();
        // int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
         try {
@@ -205,9 +205,10 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             preparedStatement.setString(i+1, parameters.get(i));
             }
             ResultSet resultSet = preparedStatement.executeQuery();
-             while (resultSet.next()) {  // while add to arraylist
-                billingList.add(createBilling(resultSet));
-            }
+            return resultSet;
+//             while (resultSet.next()) {  // while add to arraylist
+//                billingList.add(createBilling(resultSet));
+//            }
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -219,7 +220,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
                 }
             }
         }
-        return billingList; 
+        return null;
     }
 
     

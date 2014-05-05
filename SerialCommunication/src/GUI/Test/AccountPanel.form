@@ -22,7 +22,7 @@
                   <Component id="labTitle" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnBillingHistory" max="32767" attributes="0"/>
+                          <Component id="btnTransactionHistory" max="32767" attributes="0"/>
                           <Component id="btnAddFunds" max="32767" attributes="0"/>
                           <Component id="btnChangePass" max="32767" attributes="0"/>
                           <Component id="btnEdit" pref="134" max="32767" attributes="0"/>
@@ -83,7 +83,7 @@
               </Group>
               <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnBillingHistory" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnTransactionHistory" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
                       <Component id="labBalance" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
@@ -127,10 +127,13 @@
         <Property name="text" type="java.lang.String" value="Add funds"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btnBillingHistory">
+    <Component class="javax.swing.JButton" name="btnTransactionHistory">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Billing history"/>
+        <Property name="text" type="java.lang.String" value="Transaction history"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTransactionHistoryActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="labName">
       <Properties>
