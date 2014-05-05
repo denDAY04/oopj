@@ -29,7 +29,7 @@ public class GUIFrame extends javax.swing.JFrame {
         cManager.setDatabaseManager(dbManager);
         
         loginControllerPanel.setFrame(this);
-        accountViewPanel.setFrame(this);
+        accountPanel.setFrame(this);
         signupPanel.setFrame(this);
         addFundsPanel.setFrame(this);
         signupCongratulationsPanel.setFrame(this);
@@ -37,19 +37,21 @@ public class GUIFrame extends javax.swing.JFrame {
         passwordFoundPanel.setFrame(this);
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
-        cards.add(accountViewPanel, "card2");
+        cards.add(accountPanel, "card2");
         cards.add(signupPanel, "card3");
         cards.add(addFundsPanel, "card4");
         cards.add(signupCongratulationsPanel, "card5");
         cards.add(forgotPassPanel, "card6");
         cards.add(passwordFoundPanel, "card7");
-        
     }
     
     
     
     public void changePanel(String panel){
         cardLayout.show(cards, panel);
+        if(panel.equals("card2")){
+            
+        }
     }
 
     /**
@@ -63,7 +65,7 @@ public class GUIFrame extends javax.swing.JFrame {
 
         cards = new javax.swing.JPanel();
         loginControllerPanel = new GUI.Test.LoginControllerPanel();
-        accountViewPanel = new GUI.Test.AccountViewPanel();
+        accountPanel = new GUI.Test.AccountPanel();
         signupPanel = new GUI.Test.SignupPanel();
         addFundsPanel = new GUI.Test.AddFundsPanel();
         signupCongratulationsPanel = new GUI.Test.SignupCongratulationsPanel();
@@ -74,7 +76,7 @@ public class GUIFrame extends javax.swing.JFrame {
 
         cards.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         cards.add(loginControllerPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, 430));
-        cards.add(accountViewPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 207, -1));
+        cards.add(accountPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 207, -1));
         cards.add(signupPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(addFundsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(signupCongratulationsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 520, -1));
@@ -137,7 +139,7 @@ public class GUIFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private GUI.Test.AccountViewPanel accountViewPanel;
+    private GUI.Test.AccountPanel accountPanel;
     private GUI.Test.AddFundsPanel addFundsPanel;
     private javax.swing.JPanel cards;
     private GUI.Test.ForgotPassPanel forgotPassPanel;

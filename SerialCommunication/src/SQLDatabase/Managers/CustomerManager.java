@@ -21,7 +21,9 @@ public class CustomerManager {
   this.databaseManager = databaseManager;
   }
     
-    
+    public Customer getLoggedInUser(){
+        return loggedInUser.getCustomer();
+    }
     
     public Customer verifyCustomer (String cardNumb,String pin){
             Customer customer = null;
