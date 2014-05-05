@@ -118,9 +118,13 @@ public class SQLLibrary {
                                                      + "from Customer "
                                                      + "where Email = ? and Password = ?";
   
-    public static final String SYSTEM_GET_CUSTOMER = "select * " 
+    public static final String SYSTEM_GET_CUSTOMER_BY_CARD = "select * " 
                                                      + "from Customer "
                                                      + "where CardNumb = ?";
+    
+    public static final String SYSTEM_GET_CUSTOMER_BY_EMAIL = "select * " 
+                                                     + "from Customer "
+                                                     + "where Email = ?";
  
  // SYSTEM create deposit
     //---Get old balance

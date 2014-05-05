@@ -130,7 +130,7 @@ public class CustomerManager {
        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        parameters.add(cardNumb);
        Customer customer = null;
-       ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER, parameters);
+       ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_CARD, parameters);
        if (arr.isEmpty() == false) {
            customer = arr.get(0);
        }
