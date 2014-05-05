@@ -6,6 +6,7 @@ package GUI.Test;
 
 import GUI.*;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,15 +16,26 @@ public class EditAccountPanel extends javax.swing.JPanel {
     
     private GUIFrame frame;
     private boolean inputError;
+    private int errors;
     /**
      * Creates new form LoginControllerPanel
      */
     public EditAccountPanel() {
         initComponents();
+        errors = 6;
     }
 
     public void setFrame(GUI.Test.GUIFrame frame) {
         this.frame = frame;
+    }
+    
+    protected void loadCustomerDetails(){
+        textFirstName.setText(frame.cManager.getLoggedInUser().getFirstName());
+        textLastName.setText(frame.cManager.getLoggedInUser().getLastName());
+        textRoad.setText(frame.cManager.getLoggedInUser().getRoad());
+        textZip.setText(frame.cManager.getLoggedInUser().getZipCode());
+        textPhoneNBR.setText(frame.cManager.getLoggedInUser().getPhoneNumb());
+        textEmail.setText(frame.cManager.getLoggedInUser().getEmail());
     }
     
     /**
@@ -49,7 +61,7 @@ public class EditAccountPanel extends javax.swing.JPanel {
         labZip = new javax.swing.JLabel();
         textPhoneNBR = new javax.swing.JTextField();
         labPhoneNBR = new javax.swing.JLabel();
-        btnSubmit = new javax.swing.JButton();
+        btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         labErrorEmail = new javax.swing.JLabel();
         labError1 = new javax.swing.JLabel();
@@ -99,13 +111,13 @@ public class EditAccountPanel extends javax.swing.JPanel {
         labPhoneNBR.setText("Phone number (8 digits)");
         add(labPhoneNBR, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
 
-        btnSubmit.setText("Submit");
-        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+        btnSave.setText("Save changes");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSubmitActionPerformed(evt);
+                btnSaveActionPerformed(evt);
             }
         });
-        add(btnSubmit, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -133,129 +145,86 @@ public class EditAccountPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        frame.changePanel("card1");
-        resetPage();
+        int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to go back?\n"
+                                         + "All changes will be discarded.", 
+                                         "choose one", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+          frame.changePanel("card2");
+        }
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         inputCheck();
-        if (inputError == false){
-            frame.changePanel("card4");
+        if (errors == 0){
+            JOptionPane.showMessageDialog(null, "Your account information has been updated.", "Account information change successfull", JOptionPane.INFORMATION_MESSAGE);
+            frame.changePanel("card2");
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
         } else{
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
         }
-    }//GEN-LAST:event_btnSubmitActionPerformed
+        errors = 6;
+    }//GEN-LAST:event_btnSaveActionPerformed
     
-    private void resetPage(){
-        textFirstName.setText("");
-        textLastName.setText("");
-        textRoad.setText("");
-        textZip.setText("");
-        textPhoneNBR.setText("");
-        textEmail.setText("");
-        textPassword.setText("");
-        textConfirmPassword.setText("");
-        labFirstName.setForeground(Color.BLACK);
-        labLastName.setForeground(Color.BLACK);
-        labRoad.setForeground(Color.BLACK);
-        labZip.setForeground(Color.BLACK);
-        labPhoneNBR.setForeground(Color.BLACK);
-        labEmail.setForeground(Color.BLACK);
-        labPassword.setForeground(Color.BLACK);
-        labConfirmPassword.setForeground(Color.BLACK);
-        labErrorConfirmPassword.setVisible(false);
-        labErrorEmail.setVisible(false);
-        labError1.setVisible(false);
-        labError2.setVisible(false);
-    }
     private void inputCheck() {
         if (!textFirstName.getText().equals("")){
             labFirstName.setForeground(Color.BLACK);
-            inputError = false;
+            errors--;
         } else{
             labFirstName.setForeground(Color.RED);
-            inputError = true;
         }
         
         if (!textLastName.getText().equals("")){
             labLastName.setForeground(Color.BLACK);  
-            inputError = false;
+            errors--;
         } else{
             labLastName.setForeground(Color.RED);
-            inputError = true;
         }
         
         if (!textRoad.getText().equals("")){
             labRoad.setForeground(Color.BLACK);
-            inputError = false;
+            errors--;
         } else{
             labRoad.setForeground(Color.RED);
-            inputError = true;
         }
         
         if (!textZip.getText().equals("") && textZip.getText().length() == 4){
             try {
                 int zipcode = Integer.parseInt(textZip.getText());
                 labZip.setForeground(Color.BLACK);
-                inputError = false;
+                errors--;
             } catch(NumberFormatException e){
                 labZip.setForeground(Color.RED);
-                inputError = true;
             }
         } else{
             labZip.setForeground(Color.RED);
-            inputError = true;
         }
         
         if (!textPhoneNBR.getText().equals("") && textPhoneNBR.getText().length() == 8){
             try {
                 int phoneNBR = Integer.parseInt(textPhoneNBR.getText());
                 labPhoneNBR.setForeground(Color.BLACK);
-                inputError = false;
+                errors--;
             } catch(NumberFormatException e){
                 labPhoneNBR.setForeground(Color.RED);
-                inputError = true;
             }
         } else{
             labPhoneNBR.setForeground(Color.RED);
-            inputError = true;
         }
         
         if(!textEmail.getText().equals("")){
             if (isValidEmailAddress(textEmail.getText()) == true){
                 labEmail.setForeground(Color.BLACK);
                 labErrorEmail.setVisible(false);
-                inputError = false;
+                errors--;
             } else{
                 labEmail.setForeground(Color.RED);
                 labErrorEmail.setVisible(true);
-                inputError = true;
             }
         } else{
             labEmail.setForeground(Color.RED);
             labErrorEmail.setVisible(true);
-            inputError = true;
-        }
-        
-        if(!textPassword.getText().equals("") && textPassword.getText().length() >= 4) {
-            labPassword.setForeground(Color.BLACK);
-            inputError = false;
-        } else{
-            labPassword.setForeground(Color.RED);
-            inputError = true;
-        }
-        
-        if((!textConfirmPassword.getText().equals("")) && textConfirmPassword.getText().equals(textPassword.getText())) {
-            labConfirmPassword.setForeground(Color.BLACK);
-            labErrorConfirmPassword.setVisible(false);
-            inputError = false;
-        } else{
-            labConfirmPassword.setForeground(Color.RED);
-            labErrorConfirmPassword.setVisible(true);
-            inputError = true;
         }
     }
     
@@ -268,7 +237,7 @@ public class EditAccountPanel extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnSubmit;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel labEmail;
     private javax.swing.JLabel labError1;
     private javax.swing.JLabel labError2;

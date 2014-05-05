@@ -131,6 +131,8 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     if(frame.cManager.loggedInAs(textEmail.getText(), textPassword.getText()) == true){
         labError.setVisible(false);
         frame.changePanel("card2");
+        textEmail.setText("");
+        textPassword.setText("");
     } else {
         labError.setVisible(true);
     }

@@ -58,8 +58,18 @@ public class AccountPanel extends javax.swing.JPanel {
         labTitle.setText("Account Information");
 
         btnEdit.setText("Edit account details");
+        btnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditActionPerformed(evt);
+            }
+        });
 
         btnChangePass.setText("Change password");
+        btnChangePass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnChangePassActionPerformed(evt);
+            }
+        });
 
         btnAddFunds.setText("Add funds");
 
@@ -163,8 +173,16 @@ public class AccountPanel extends javax.swing.JPanel {
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         frame.changePanel("card1");
-        //frame.cManager.setLoggedInUser(null);
+        frame.cManager.setLoggedInUser(null);
     }//GEN-LAST:event_btnLogoutActionPerformed
+
+    private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
+        frame.changePanel("card8");
+    }//GEN-LAST:event_btnEditActionPerformed
+
+    private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
+        frame.changePanel("card9");
+    }//GEN-LAST:event_btnChangePassActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddFunds;
