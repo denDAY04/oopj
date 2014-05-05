@@ -29,14 +29,26 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
  * 
  * @return The index number of the row that was edited or added.
  */
- public int updateQuery(String updateQuery,ArrayList<String> parameters) {
+ public int updateQuery(String updateQuery,ArrayList<Object> parameters) {
         int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
         try {
             con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(updateQuery);
             for (int i=0; i<parameters.size();++i){
-            preparedStatement.setString(i+1, parameters.get(i));
+                Class indexedClass = parameters.get(i).getClass();
+                if(indexedClass == String.class) {
+                    System.err.println("DatabaseManager, updateQuery: Found String.");
+                    preparedStatement.setString(i+1, (String) parameters.get(i));
+                } else if (indexedClass == Integer.class) {
+                    System.err.println("DatabaseManager, updateQuery: Found Integer.");
+                    preparedStatement.setInt(i+1, (Integer) parameters.get(i));
+                } else {
+                    System.err.println("Error in DatabaseManager, updateQuery. No suitable class found!");
+                    System.err.println("Found class: " + indexedClass.toString());
+                    System.exit(-1);
+                }
+                
             }
             rowCount = preparedStatement.executeUpdate();
         } catch (SQLException e) {

@@ -84,8 +84,8 @@ public class CustomerManager {
      * @param newValues the new values that should be put into the database. 
      * See constraints above!
      */
-    public void updateCustomerInformation (String customerID, int command, String[] newValues) {
-        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+    public void updateCustomerInformation (String customerID, int command, Object[] newValues) {
+        ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
         switch (command) {
             case 1:         // Set use status
                 parameters.add(newValues[0]);
@@ -110,8 +110,8 @@ public class CustomerManager {
      * @param information Array of the new customer's information. See 
      * constraint above!
      */
-   public void addNewCustomer(String[] information) {
-       ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+   public void addNewCustomer(Object[] information) {
+       ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        int length = information.length;
        for (int i = 0; i < length; ++i) {
            parameters.add(information[i]);
@@ -154,11 +154,11 @@ public class CustomerManager {
     * @param data See constraint above.
     */
    public void registerBilling(String[] data) {
-       ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+       ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        parameters.addAll(Arrays.asList(data));
        /* Create new billing entry in database, and edit customer's balance */
        databaseManager.updateQuery(SQLLibrary.SYSTEM_LOG_NEW_BILLING, parameters);
-       ArrayList<String> arr = new ArrayList();
+       ArrayList<Object> arr = new ArrayList();
        arr.add(data[7]);                        // New balance
        arr.add(data[0]);                        // Customer ID
        databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, arr);
@@ -178,12 +178,12 @@ public class CustomerManager {
     * <br><br>
     * @param data See constraints above.
     */
-   public void registerDeposit(String[] data) {
-        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+   public void registerDeposit(Object[] data) {
+        ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
         parameters.addAll(Arrays.asList(data));
         /* Create new deposit entry in database, and edit customer's balance */
         databaseManager.updateQuery(SQLLibrary.SYSTEM_LOG_DEPOSIT, parameters);
-        ArrayList<String> arr = new ArrayList();
+        ArrayList<Object> arr = new ArrayList();
         arr.add(data[2]);                        // New balance
         arr.add(data[0]);                        // Customer ID
         databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, arr);

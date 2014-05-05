@@ -287,7 +287,7 @@ public class SignupPanel extends javax.swing.JPanel {
         }
     }
     private void registerUser() {
-        String[] userData = new String[8];
+        Object[] userData = new Object[8];
         userData[0] = textConfirmPassword.getText();
         userData[1] = textFirstName.getText();
         userData[2] = textLastName.getText();
@@ -295,7 +295,7 @@ public class SignupPanel extends javax.swing.JPanel {
         userData[4] = textZip.getText();
         userData[5] = textEmail.getText().toLowerCase();
         userData[6] = textPhoneNBR.getText();
-        userData[7] = "0.00";           // Is set in next panel
+        userData[7] = 0;           // Is set in next panel
         
         /* Create customer in database */
         frame.cManager.addNewCustomer(userData);
