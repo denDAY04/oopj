@@ -205,12 +205,16 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             preparedStatement.setString(i+1, parameters.get(i));
             }
             ResultSet resultSet = preparedStatement.executeQuery();
+            preparedStatement.close();
+            System.err.println("ResultSet found");
             return resultSet;
 //             while (resultSet.next()) {  // while add to arraylist
 //                billingList.add(createBilling(resultSet));
-//            }
+//            }         
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.err.println("ResultSet error");
+            e.printStackTrace();   
+            return null;
         } finally {
             if (con != null) {
                 try {
@@ -220,7 +224,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
                 }
             }
         }
-        return null;
+        //return null;
     }
 
     

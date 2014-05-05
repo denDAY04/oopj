@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package SQLDatabase.Managers;
-import GUI.Test.LoggedIn;
+import GUI.Test.ResultSetTableModel;
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.*;
 import java.sql.ResultSet;
@@ -16,24 +16,30 @@ import java.util.Arrays;
  */
 public class BillingManager {
     DatabaseManager databaseManager;
+    ResultSetTableModel tableModel;
 
     public void setDatabaseManager(DatabaseManager databaseManager){
         this.databaseManager = databaseManager;
     }
+
+    public void setTableModel(ResultSetTableModel tableModel) {
+        this.tableModel = tableModel;
+    }
     
-    public ResultSet getBillings (String customerNumb){
+    public void getBillings (String customerNumb){
             ResultSet rs = null;
             ArrayList<String> parametersbilling = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parametersbilling.add(customerNumb);   // add the customerNumb parameter
             // do query in database (ArrayList: 1, CardNumb)
-            System.out.println("BillingManager getBillings, Fire SQL statement customerNumb:'"+customerNumb);
+            System.out.println("BillingManager getBillings, Fire SQL statement customerNumb: "+customerNumb);
             try{
-                rs = databaseManager.getBillings(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER, parametersbilling);
-                return rs;
+                rs = databaseManager.getBillings(SQLLibrary.USER_GET_BILLING, parametersbilling);
+                System.err.println("test");
+                tableModel.setResultSet(rs);
             } catch(NullPointerException e){
-                e.printStackTrace();
+                System.err.println("test5");
+                e.printStackTrace(); 
             }
-            return null;
     }     
     
     /**

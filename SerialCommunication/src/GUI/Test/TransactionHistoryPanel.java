@@ -16,11 +16,15 @@ import GUI.*;
 public class TransactionHistoryPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
+    private ResultSetTableModel tableModel;
     /**
      * Creates new form ChargingStationListViewPanel
      */
     public TransactionHistoryPanel() {
         initComponents();
+        tableModel = new ResultSetTableModel();
+        tableSalesHistory.setModel(tableModel);
+        //frame.bManager.setTableModel(tableModel);
     }
 
     public void setFrame(GUI.Test.GUIFrame frame) {
@@ -43,6 +47,7 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         labInformation2 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
+        btnUpdate = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(402, 302));
 
@@ -76,6 +81,13 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         btnDetails.setText("Details");
         btnDetails.setEnabled(false);
 
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -89,12 +101,14 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGap(18, 18, 18)
+                            .addComponent(btnUpdate)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnDetails))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                             .addGap(7, 7, 7)
                             .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(44, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -110,8 +124,9 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
                 .addGap(37, 37, 37)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnDetails))
-                .addContainerGap())
+                    .addComponent(btnDetails)
+                    .addComponent(btnUpdate))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
         btnDetails.setVisible(false);
@@ -121,10 +136,17 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         frame.changePanel("card2");
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        System.out.println(frame.cManager.getLoggedInUser().getCustomerNumb());
+        frame.bManager.getBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
+        frame.bManager.setTableModel(tableModel);
+    }//GEN-LAST:event_btnUpdateActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDetails;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel labInformation;
     private javax.swing.JLabel labInformation2;
     private javax.swing.JLabel labTransactionHistory;

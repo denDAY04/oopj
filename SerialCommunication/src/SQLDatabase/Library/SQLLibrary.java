@@ -28,7 +28,7 @@ public class SQLLibrary {
                                              + "from Billing "
                                              + "inner join Customer"
                                              + "on Billing.CustomerNumb = Customer.CustomerNumb"
-                                             + "where CustomerNumb = ?";
+                                             + "where Customer.CustomerNumb = ?";
 //  public static final String USER_GET_BILLING = "select Recieved, TransactionNumb, BillingAmount, NewBalanceBilling " 
 //                                             + "from Billing "
 //                                             + "where CustomerNumb = ?";
