@@ -6,18 +6,10 @@
 
 package GUI.Test;
 
-import GUI.*;
 import java.awt.Color;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.text.ParseException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
-import javax.swing.text.PlainDocument;
 
 /**
  *
@@ -44,6 +36,25 @@ public class AddFundsPanel extends javax.swing.JPanel {
 
     public void setFrame(GUI.Test.GUIFrame frame) {
         this.frame = frame;
+    }
+    
+    private void registerDeposit() {
+        String customerID = frame.cManager.getLoggedInUser().getCustomerNumb();
+        double oldBalance  = frame.cManager.getLoggedInUser().getBalance();
+        double depositAmount = Double.parseDouble(textAmount.toString());
+        String newBalance = "" + (oldBalance + depositAmount);
+        String lastFourDigits = textCardNumber4.getText();
+        
+        /* External reference number is for simulation purposes only. 
+        Originally this numbers would be supplied by the 3rd-party banking 
+        instituts. 
+        */
+        long randomNum = System.currentTimeMillis() * 13 * 29;
+        String externalRefNumb = ("" + randomNum).substring(0, 6);
+        
+        /* Log deposit on database (also changes customer's balance) */
+        String[] depositData = {customerID, ("" + depositAmount), newBalance, externalRefNumb, lastFourDigits};
+        frame.cManager.registerDeposit(depositData);
     }
 
     /**
@@ -185,6 +196,7 @@ public class AddFundsPanel extends javax.swing.JPanel {
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         inputCheck();
         if (inputError == false){
+            registerDeposit();
             frame.changePanel("card5");
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);

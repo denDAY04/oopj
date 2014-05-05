@@ -76,9 +76,10 @@ public class CustomerManager {
      * @param customerID This will be the card number of the customer if the 
      * command is coming from a charging station. If coming from the web-based
      * client this should be the customer's ID. 
-     * @param command Denotes the command to be executed. See Table for values:
+     * @param command Denotes the command to be executed. See list for values:
      * <br>1: Set use status (when charging)
-     * <br>2: ... [add as they come]
+     * <br>2: Set new balance
+     * <br>N: ... [add as they come]
      * <br>
      * @param newValues the new values that should be put into the database. 
      * See constraints above!
@@ -92,6 +93,11 @@ public class CustomerManager {
                 System.out.println("CustomerManager updateInformation, Fire SQL statement");
                 databaseManager.updateQuery(SQLLibrary.SYSTEM_SET_CUSTOMER_USE_STATUS, parameters);
                 break;
+            case 2:         // Set new balance
+                parameters.add(newValues[0]);
+                parameters.add(customerID);
+                System.out.println("CustomerManager updateInformation, Fire SQL statement");
+                databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, parameters);
         }
     }
    
@@ -157,5 +163,29 @@ public class CustomerManager {
        arr.add(data[0]);                        // Customer ID
        databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, arr);
        
+   }
+   
+   /**
+    * Register a deposit. 
+    * 
+    * CONSTRAINT: The order of the data in the parameter must follow a certain 
+    * pattern:
+    * <li>Customer number
+    * <li>Amount of DKK deposited
+    * <li>New balance after deposit
+    * <li>External reference number
+    * <li>Last four digits of credit card
+    * <br><br>
+    * @param data See constraints above.
+    */
+   public void registerDeposit(String[] data) {
+        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+        parameters.addAll(Arrays.asList(data));
+        /* Create new deposit entry in database, and edit customer's balance */
+        databaseManager.updateQuery(SQLLibrary.SYSTEM_LOG_DEPOSIT, parameters);
+        ArrayList<String> arr = new ArrayList();
+        arr.add(data[2]);                        // New balance
+        arr.add(data[0]);                        // Customer ID
+        databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, arr);
    }
 }
