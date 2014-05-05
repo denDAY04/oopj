@@ -50,7 +50,7 @@ public class GUIFrame extends javax.swing.JFrame {
     public void changePanel(String panel){
         cardLayout.show(cards, panel);
         if(panel.equals("card2")){
-            
+            accountPanel.loadCustomerDetails();
         }
     }
 
