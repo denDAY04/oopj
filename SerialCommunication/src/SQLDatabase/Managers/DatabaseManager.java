@@ -234,7 +234,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         String zipCode = resultSet.getString("ZipCode");
         String email = resultSet.getString("Email");
         String phoneNumb = resultSet.getString("PhoneNumb");
-        double balance = Double.parseDouble(resultSet.getString("Balance")); // parse to double
+        int balance = Integer.parseInt(resultSet.getString("Balance")); // parse to double
         String accountStatus = resultSet.getString("AccountStatus");        
         String useStatus = resultSet.getString("UseStatus");        
         return new Customer(customerNumb, pin, password, cardNumb, firstName,lastName,road,zipCode,email,phoneNumb,balance,accountStatus, useStatus);
@@ -257,8 +257,8 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         String depositsNumb = resultSet.getString("DepositsNumb");
         String customerNumb = resultSet.getString("CustomerNumb");
         String depositsDate = resultSet.getString("DepositsDate");
-        double depositAmount = Double.parseDouble(resultSet.getString("DepositAmount"));          // parse to double
-        double newBalanceDeposit = Double.parseDouble(resultSet.getString("NewBalanceDeposit"));  // parse to double
+        int depositAmount = Integer.parseInt(resultSet.getString("DepositAmount"));          // parse to double
+        int newBalanceDeposit = Integer.parseInt(resultSet.getString("NewBalanceDeposit"));  // parse to double
         String externalRefNumb = resultSet.getString("ExternalRefNumb");
         String last4CardNumb = resultSet.getString("Last4CardNumb");
         return new Deposit(depositsNumb,customerNumb, depositsDate, depositAmount, newBalanceDeposit,externalRefNumb,last4CardNumb);
@@ -271,10 +271,10 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         String startCharge =  resultSet.getString("StartCharge"); 
         String endCharge =  resultSet.getString("EndCharge");  
         String recieved = resultSet.getString("Recieved");
-        double billingAmount = Double.parseDouble(resultSet.getString("BillingAmount")); // parse to double
-        double billingRate = Double.parseDouble(resultSet.getString("BillingRate"));    // parse to double
-        double billingKWH = Double.parseDouble(resultSet.getString("BillingKWH"));     // parse to double
-        double newBalanceBilling = Double.parseDouble(resultSet.getString("NewBalanceBilling")); // parse to double
+        int billingAmount = Integer.parseInt(resultSet.getString("BillingAmount")); // parse to double
+        int billingRate = Integer.parseInt(resultSet.getString("BillingRate"));    // parse to double
+        int billingKWH = Integer.parseInt(resultSet.getString("BillingKWH"));     // parse to double
+        int newBalanceBilling = Integer.parseInt(resultSet.getString("NewBalanceBilling")); // parse to double
         return new Billing(transactionNumb,customerNumb, hardwareNumb, startCharge, endCharge,recieved,billingAmount, billingRate, billingKWH,newBalanceBilling);
     }    
         
@@ -286,10 +286,10 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         String startCharge =  resultSet.getString("StartCharge"); 
         String endCharge =  resultSet.getString("EndCharge");  
         String recieved = resultSet.getString("Recieved");
-        double billingAmount = Double.parseDouble(resultSet.getString("BillingAmount")); // parse to double
-        double billingRate = Double.parseDouble(resultSet.getString("BillingRate"));    // parse to double
-        double billingKWH = Double.parseDouble(resultSet.getString("BillingKWH"));     // parse to double
-        double newBalanceBilling = Double.parseDouble(resultSet.getString("NewBalanceBilling")); // parse to double
+        int billingAmount = Integer.parseInt(resultSet.getString("BillingAmount")); // parse to double
+        int billingRate = Integer.parseInt(resultSet.getString("BillingRate"));    // parse to double
+        int billingKWH = Integer.parseInt(resultSet.getString("BillingKWH"));     // parse to double
+        int newBalanceBilling = Integer.parseInt(resultSet.getString("NewBalanceBilling")); // parse to double
         return new Billing(transactionNumb,customerNumb, hardwareNumb, startCharge, endCharge,recieved,billingAmount, billingRate, billingKWH,newBalanceBilling);
     }    
         

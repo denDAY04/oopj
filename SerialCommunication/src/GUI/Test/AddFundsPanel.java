@@ -39,21 +39,22 @@ public class AddFundsPanel extends javax.swing.JPanel {
     }
     
     private void registerDeposit() {
-        String customerID = frame.cManager.getLoggedInUser().getCustomerNumb();
-        double oldBalance  = frame.cManager.getLoggedInUser().getBalance();
-        double depositAmount = Double.parseDouble(textAmount.toString());
-        String newBalance = "" + (oldBalance + depositAmount);
-        String lastFourDigits = textCardNumber4.getText();
+        int customerID = Integer.parseInt(frame.cManager.getLoggedInUser().getCustomerNumb());
+        int oldBalance  = frame.cManager.getLoggedInUser().getBalance();
+        int depositAmount = Integer.parseInt(textAmount.toString());
+        int newBalance = oldBalance + depositAmount;
+        int lastFourDigits = Integer.parseInt(textCardNumber4.getText());
         
         /* External reference number is for simulation purposes only. 
         Originally this numbers would be supplied by the 3rd-party banking 
         instituts. 
         */
         long randomNum = System.currentTimeMillis() * 13 * 29;
-        String externalRefNumb = ("" + randomNum).substring(0, 6);
+        String randomNumString = ("" + randomNum).substring(0, 6);
+        int externalRefNumb = Integer.parseInt(randomNumString);
         
         /* Log deposit on database (also changes customer's balance) */
-        String[] depositData = {customerID, ("" + depositAmount), newBalance, externalRefNumb, lastFourDigits};
+        Object[] depositData = {customerID, ("" + depositAmount), newBalance, externalRefNumb, lastFourDigits};
         frame.cManager.registerDeposit(depositData);
     }
 

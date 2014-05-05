@@ -142,18 +142,18 @@ public class CustomerManager {
     * 
     * CONSTRAINT: The order of the data in the parameter must follow a certain 
     * pattern:
-    * <li>Customer number
-    * <li>Terminal number
-    * <li>Start time of charging
-    * <li>End time of charging
-    * <li>The amount of DKK to be billed
-    * <li>The rate to which he is billed (DKK/kwH)
-    * <li>The amount of kWh that was charged
-    * <li>The new balance of the the customer after being billed
+    * <li>Customer number (int)
+    * <li>Terminal number (int)
+    * <li>Start time of charging (String length 25)
+    * <li>End time of charging (String length 25)
+    * <li>The amount of DKK to be billed (int)
+    * <li>The rate to which he is billed (DKK/kWh) (int)
+    * <li>The amount of kWh that was charged (int)
+    * <li>The new balance of the the customer after being billed (int)
     * <br> <br>
     * @param data See constraint above.
     */
-   public void registerBilling(String[] data) {
+   public void registerBilling(Object[] data) {
        ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        parameters.addAll(Arrays.asList(data));
        /* Create new billing entry in database, and edit customer's balance */
@@ -170,11 +170,11 @@ public class CustomerManager {
     * 
     * CONSTRAINT: The order of the data in the parameter must follow a certain 
     * pattern:
-    * <li>Customer number
-    * <li>Amount of DKK deposited
-    * <li>New balance after deposit
-    * <li>External reference number
-    * <li>Last four digits of credit card
+    * <li>Customer number (int)
+    * <li>Amount of DKK deposited (int)
+    * <li>New balance after deposit (int)
+    * <li>External reference number (int)
+    * <li>Last four digits of credit card (int)
     * <br><br>
     * @param data See constraints above.
     */

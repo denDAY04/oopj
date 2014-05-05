@@ -13,12 +13,12 @@ public class Customer implements Serializable {
     private String zipCode;
     private String email;
     private String phoneNumb;
-    private double balance;
+    private int balance;
     private String accountStatus;
     private String useStatus;
 
     public Customer(String customerNumb, String pin, String password, String cardNumb, String firstname, String lastname, String road, String zipCode, String email,
-                    String phoneNumb, double balance, String accountStatus, String useStatus) {
+                    String phoneNumb, int balance, String accountStatus, String useStatus) {
         this.customerNumb = customerNumb;
         this.pin = pin;
         this.password = password;
@@ -117,11 +117,11 @@ public class Customer implements Serializable {
         this.phoneNumb = phoneNumb;
     }
 
-    public double getBalance() {
+    public int getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(int balance) {
         this.balance = balance;
     }
 

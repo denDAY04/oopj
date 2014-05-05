@@ -168,6 +168,9 @@ public class SignupPanel extends javax.swing.JPanel {
         inputCheck();
         if (inputError == false){
             registerUser();
+            
+            
+            
             frame.changePanel("card4");
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
