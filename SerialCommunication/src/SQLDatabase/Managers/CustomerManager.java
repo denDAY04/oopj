@@ -25,6 +25,10 @@ public class CustomerManager {
         return loggedInUser.getCustomer();
     }
     
+    public void setLoggedInUser(Customer user) {
+        loggedInUser.setCustomer(user);
+    }
+    
     public Customer verifyCustomer (String cardNumb,String pin){
             Customer customer = null;
             ArrayList<String> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
@@ -102,7 +106,8 @@ public class CustomerManager {
      */
    public void addNewCustomer(String[] information) {
        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
-       for (int i = 0; i < 9; ++i) {
+       int length = information.length;
+       for (int i = 0; i < length; ++i) {
            parameters.add(information[i]);
        }
        databaseManager.updateQuery(SQLLibrary.SYSTEM_CREATE_NEW_CUSTOMER, parameters);

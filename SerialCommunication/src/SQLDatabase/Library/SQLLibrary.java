@@ -152,8 +152,8 @@ public class SQLLibrary {
 
   // System Create new customer
 //1, Password,2, FirstName,3, LastName,4, Road,5, ZipCode,6, Email,7, PhoneNumb,8, Balance,9, AccountStatus
- public static final String SYSTEM_CREATE_NEW_CUSTOMER = "insert into Customer (Password, FirstName, LastName, Road, ZipCode, Email, PhoneNumb, Balance, AccountStatus) "
-                                                       + "values (?,?,?,?,?,?,?,?,?)";
+ public static final String SYSTEM_CREATE_NEW_CUSTOMER = "insert into Customer (Password, FirstName, LastName, Road, ZipCode, Email, PhoneNumb, Balance, AccountStatus, UseStatus) "
+                                                       + "values (?,?,?,?,?,?,?,?,'PenApp', 'Idle')";
 
  // System Set charging status (customer and Terminals)
     //--- Set customer use status

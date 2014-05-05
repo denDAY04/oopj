@@ -4,7 +4,6 @@
  */
 package GUI.Test;
 
-import GUI.*;
 import java.awt.Color;
 
 /**
@@ -168,6 +167,7 @@ public class SignupPanel extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         inputCheck();
         if (inputError == false){
+            registerUser();
             frame.changePanel("card4");
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
@@ -285,6 +285,20 @@ public class SignupPanel extends javax.swing.JPanel {
             labErrorConfirmPassword.setVisible(true);
             inputError = true;
         }
+    }
+    private void registerUser() {
+        String[] userData = new String[8];
+        userData[0] = textConfirmPassword.getText();
+        userData[1] = textFirstName.getText();
+        userData[2] = textLastName.getText();
+        userData[3] = textRoad.getText();
+        userData[4] = textZip.getText();
+        userData[5] = textEmail.getText().toLowerCase();
+        userData[6] = textPhoneNBR.getText();
+        userData[7] = "0.00";           // Is set in next panel
+        
+        /* Create customer in database */
+        frame.cManager.addNewCustomer(userData);
     }
     
     // Metod found at StackOverflow.com, which validates the syntax of an emailadress
