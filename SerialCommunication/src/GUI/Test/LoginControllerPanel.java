@@ -14,6 +14,8 @@ public class LoginControllerPanel extends javax.swing.JPanel {
 
     //private CustomerManager cManager;
     private GUIFrame frame;
+    private String adminEmail = "admin@ta.dk";
+    private String adminPassword = "teamawesome";
     
     /**
      * Creates new form LoginControllerPanel
@@ -127,8 +129,12 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_textPasswordActionPerformed
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-    
-    if(frame.cManager.loggedInAs(textEmail.getText(), textPassword.getText()) == true){
+    if(textEmail.getText().equals(adminEmail) && textPassword.getText().equals(adminPassword)){
+        labError.setVisible(false);
+        frame.changePanel("card11");
+        textEmail.setText("");
+        textPassword.setText("");
+    } else if(frame.cManager.loggedInAs(textEmail.getText(), textPassword.getText()) == true){
         labError.setVisible(false);
         frame.changePanel("card2");
         textEmail.setText("");

@@ -43,6 +43,10 @@ public class GUIFrame extends javax.swing.JFrame {
         editAccountPanel.setFrame(this);
         changePasswordPanel.setFrame(this);
         transactionHistoryPanel.setFrame(this);
+        controlPanel.setFrame(this);
+        editAccountAdminPanel.setFrame(this);
+        accountAdminPanel.setFrame(this);
+        creditDebitAccountPanel.setFrame(this);
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountPanel, "card2");
@@ -54,6 +58,10 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(editAccountPanel, "card8");
         cards.add(changePasswordPanel, "card9");
         cards.add(transactionHistoryPanel, "card10");
+        cards.add(controlPanel, "card11");
+        cards.add(editAccountAdminPanel, "card12");
+        cards.add(accountAdminPanel, "card13");
+        cards.add(creditDebitAccountPanel, "card14");
     }
     
     
@@ -64,7 +72,15 @@ public class GUIFrame extends javax.swing.JFrame {
             accountPanel.loadCustomerDetails();
         } else if(panel.equals("card8")){
             editAccountPanel.loadCustomerDetails();
+        } else if(panel.equals("card13")){
+            updateUser();
+            accountAdminPanel.loadCustomerDetails();
         }
+    }
+    
+    private void updateUser(){
+        String email = cManager.getLoggedInUser().getEmail();
+        cManager.updateLoggedInCustomer(email);
     }
 
     /**
@@ -87,6 +103,10 @@ public class GUIFrame extends javax.swing.JFrame {
         editAccountPanel = new GUI.Test.EditAccountPanel();
         changePasswordPanel = new GUI.Test.ChangePasswordPanel();
         transactionHistoryPanel = new GUI.Test.TransactionHistoryPanel();
+        controlPanel = new GUI.Test.ControlPanel();
+        editAccountAdminPanel = new GUI.Test.EditAccountAdminPanel();
+        accountAdminPanel = new GUI.Test.AccountAdminPanel();
+        creditDebitAccountPanel = new GUI.Test.CreditDebitAccountPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -101,6 +121,10 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(editAccountPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(changePasswordPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(transactionHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(controlPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(editAccountAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(accountAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(creditDebitAccountPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -158,10 +182,14 @@ public class GUIFrame extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private GUI.Test.AccountAdminPanel accountAdminPanel;
     private GUI.Test.AccountPanel accountPanel;
     private GUI.Test.AddFundsPanel addFundsPanel;
     private javax.swing.JPanel cards;
     private GUI.Test.ChangePasswordPanel changePasswordPanel;
+    private GUI.Test.ControlPanel controlPanel;
+    private GUI.Test.CreditDebitAccountPanel creditDebitAccountPanel;
+    private GUI.Test.EditAccountAdminPanel editAccountAdminPanel;
     private GUI.Test.EditAccountPanel editAccountPanel;
     private GUI.Test.ForgotPassPanel forgotPassPanel;
     private GUI.Test.LoginControllerPanel loginControllerPanel;

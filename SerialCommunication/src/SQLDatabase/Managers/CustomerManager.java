@@ -49,9 +49,9 @@ public class CustomerManager {
     public boolean loggedInAs (String email,String password){
             Customer customer = null;
             ArrayList<Object> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
-            parameterscostumer.add(email);   // add the cardnumber parameter
-            parameterscostumer.add(password);        // add the pin parameter
-            // do query in database (ArrayList: 1, CardNumb,2, Pin)
+            parameterscostumer.add(email);   // add the email parameter
+            parameterscostumer.add(password);        // add the password parameter
+            // do query in database (ArrayList: 1, email,2, password)
             System.out.println("CustomerManager loggedInAs email: "+email+" password: "+password);
             try {
                 customer = databaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER_LOGIN, parameterscostumer).get(0);
@@ -64,6 +64,38 @@ public class CustomerManager {
           //  databaseManager.test();
             //return costumer;
     }       
+    
+    public boolean admLoggedInAs (String email){
+            Customer customer = null;
+            ArrayList<Object> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+            parameterscostumer.add(email);   // add the email parameter
+            // do query in database (ArrayList: 1, email)
+            System.out.println("CustomerManager adminLoggedInAs email: "+email);
+            try {
+                customer = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_EMAIL, parameterscostumer).get(0);
+                loggedInUser.setCustomer(customer);
+                return true;
+            } catch (IndexOutOfBoundsException e) {
+                loggedInUser.setCustomer(null);
+                return false;
+            }
+    } 
+    
+    public boolean updateLoggedInCustomer (String email){
+            Customer customer = null;
+            ArrayList<Object> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+            parameterscostumer.add(email);   // add the email parameter
+            // do query in database (ArrayList: 1, email)
+            System.out.println("CustomerManager adminLoggedInAs email: "+email);
+            try {
+                customer = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_EMAIL, parameterscostumer).get(0);
+                loggedInUser.setCustomer(customer);
+                return true;
+            } catch (IndexOutOfBoundsException e) {
+                loggedInUser.setCustomer(null);
+                return false;
+            }
+    }
     
     /**
      * Update information on a customer in the database.
