@@ -6,8 +6,6 @@
 
 package GUI.Test;
 
-import GUI.*;
-
 
 /**
  *
@@ -138,8 +136,8 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         System.out.println(frame.cManager.getLoggedInUser().getCustomerNumb());
-        frame.bManager.getBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
         frame.bManager.setTableModel(tableModel);
+        frame.bManager.getBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 

@@ -194,7 +194,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
 
 //@Override  // needs to be able to return an arraylist of Deposits
             // a billing could have a customer object and terminal object, but only neccesary for on click
-    public ResultSet getBillings(String getQuery,ArrayList<String> parameters) {
+    public ResultSet getBillings(String getQuery,ArrayList<Object> parameters) {
         //ArrayList<Billing> billingList = new ArrayList();
        // int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
@@ -202,7 +202,16 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
-            preparedStatement.setString(i+1, parameters.get(i));
+            Class indexedClass = parameters.get(i).getClass();
+                if(indexedClass == String.class) {
+                    preparedStatement.setString(i+1, (String) parameters.get(i));
+                } else if (indexedClass == Integer.class) {
+                    preparedStatement.setInt(i+1, (Integer) parameters.get(i));
+                } else {
+                    System.err.println("Error in DatabaseManager. No suitable class found!");
+                    System.err.println("Found class: " + indexedClass.toString());
+                    System.exit(-1);
+                }
             }
             ResultSet resultSet = preparedStatement.executeQuery();
             preparedStatement.close();

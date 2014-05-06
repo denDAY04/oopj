@@ -168,8 +168,9 @@ public class SignupPanel extends javax.swing.JPanel {
         inputCheck();
         if (inputError == false){
             registerUser();
-            
-            
+            /* Set the user as logged in */
+            String email = textEmail.getText();
+            frame.cManager.setLoggedInUser(frame.cManager.getCustomerByEmail(email));
             
             frame.changePanel("card4");
             labError1.setVisible(inputError);

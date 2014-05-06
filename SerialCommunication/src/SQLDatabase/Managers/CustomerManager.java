@@ -124,6 +124,7 @@ public class CustomerManager {
     * 
     * @param cardNumb The card number associated with the customer that is 
     * desired found.
+    * 
     * @return A Customer object with all the information of the customer.
     */
    public Customer getCustomer(String cardNumb) {
@@ -131,6 +132,24 @@ public class CustomerManager {
        parameters.add(cardNumb);
        Customer customer = null;
        ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_CARD, parameters);
+       if (arr.isEmpty() == false) {
+           customer = arr.get(0);
+       }
+       return customer;
+   }
+   
+   /**
+    * Find the customer in the database associated with a given email.
+    * 
+    * @param email The email associated with the customer that is desired found.
+    * 
+    * @return A Customer object with all the information of the customer.
+    */
+   public Customer getCustomerByEmail(String email) {
+       ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+       parameters.add(email);
+       Customer customer = null;
+       ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_EMAIL, parameters);
        if (arr.isEmpty() == false) {
            customer = arr.get(0);
        }

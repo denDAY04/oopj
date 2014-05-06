@@ -28,7 +28,7 @@ public class BillingManager {
     
     public void getBillings (String customerNumb){
             ResultSet rs = null;
-            ArrayList<String> parametersbilling = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+            ArrayList<Object> parametersbilling = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parametersbilling.add(customerNumb);   // add the customerNumb parameter
             // do query in database (ArrayList: 1, CardNumb)
             System.out.println("BillingManager getBillings, Fire SQL statement customerNumb: "+customerNumb);
