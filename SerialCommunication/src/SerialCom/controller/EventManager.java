@@ -38,7 +38,7 @@ public class EventManager implements FrameEventListener {
     private int currentSendAttempt = 0;
     private String currentStatus;
     private String currentData;
-    private java.util.Date date = new java.util.Date();
+    private java.util.Date date;
     
     /* For data index values there exists a naming convention if the index 
     changes between different implementations (commands). It is as follows:
@@ -315,6 +315,7 @@ public class EventManager implements FrameEventListener {
     }
 
     public void pingEvent(String IpAddress) {
+        date = new java.util.Date();
         sendResponse("PI", new Timestamp(date.getTime()).toString(), IpAddress); // or new Timestamp(System.currentTimeMillis());
         setDestination(IpAddress);
         System.err.
