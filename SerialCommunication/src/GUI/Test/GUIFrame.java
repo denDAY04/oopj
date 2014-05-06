@@ -4,10 +4,7 @@
  */
 package GUI.Test;
 
-import SQLDatabase.Managers.BillingManager;
-import SQLDatabase.Managers.CustomerManager;
-import SQLDatabase.Managers.DatabaseManager;
-import SQLDatabase.ModelClasses.Customer;
+import SQLDatabase.Managers.*;
 import java.awt.CardLayout;
 
 /**
@@ -20,6 +17,7 @@ public class GUIFrame extends javax.swing.JFrame {
     protected CustomerManager cManager;
     protected DatabaseManager dbManager;
     protected BillingManager bManager;
+    protected DepositManager depManager;
     /**
      * Creates new form GUIFrame
      */
@@ -29,8 +27,10 @@ public class GUIFrame extends javax.swing.JFrame {
         dbManager = new DatabaseManager();
         cManager = new CustomerManager();
         bManager = new BillingManager();
+        depManager = new DepositManager();
         cManager.setDatabaseManager(dbManager);
         bManager.setDatabaseManager(dbManager);
+        depManager.setDatabaseManager(dbManager);
         
         
         loginControllerPanel.setFrame(this);

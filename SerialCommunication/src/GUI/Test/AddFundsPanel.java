@@ -54,7 +54,7 @@ public class AddFundsPanel extends javax.swing.JPanel {
         int externalRefNumb = Integer.parseInt(randomNumString);
         
         /* Log deposit on database (also changes customer's balance) */
-        Object[] depositData = {customerID, ("" + depositAmount), newBalance, externalRefNumb, lastFourDigits};
+        Object[] depositData = {customerID, depositAmount, newBalance, externalRefNumb, lastFourDigits};
         frame.cManager.registerDeposit(depositData);
     }
 

@@ -3,8 +3,8 @@
  * and open the template in the editor.
  */
 package SQLDatabase.Managers;
-import GUI.Test.ResultSetTableModel;
 import SQLDatabase.Library.SQLLibrary;
+import SQLDatabase.ModelClasses.Billing;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,30 +15,33 @@ import java.util.Arrays;
  */
 public class BillingManager {
     DatabaseManager databaseManager;
-    ResultSetTableModel tableModel;
 
     public void setDatabaseManager(DatabaseManager databaseManager){
         this.databaseManager = databaseManager;
     }
-
-    public void setTableModel(ResultSetTableModel tableModel) {
-        this.tableModel = tableModel;
-    }
     
-    public void getBillings (String customerNumb){
+    public ArrayList<String[]> getSimpleBillings (String customerNumb){
             ResultSet rs = null;
             ArrayList<Object> parametersbilling = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parametersbilling.add(customerNumb);   // add the customerNumb parameter
-            // do query in database (ArrayList: 1, CardNumb)
-            System.out.println("BillingManager getBillings, Fire SQL statement customerNumb: "+customerNumb);
+            ArrayList<Billing> arr;                             // Temp ArrayList for holding all billings with full data
+            ArrayList<String[]> result = new ArrayList();       // ArrayList for results containing only desired data
+            System.out.println("BillingManager getSimpleBillings, Fire SQL statement customerNumb: "+customerNumb);
             try{
-                rs = databaseManager.getBillings(SQLLibrary.USER_GET_BILLING, parametersbilling);
-                System.err.println("test");
-                tableModel.setResultSet(rs);
+                arr = databaseManager.getBillings(SQLLibrary.USER_GET_BILLING, parametersbilling);
+                Billing activeBilling; 
+                for (int i = 0; i < arr.size(); ++i) {
+                    activeBilling = arr.get(i);
+                    String a = activeBilling.getTransactionNumb();
+                    String b = activeBilling.getRecieved();
+                    String c = "" + (activeBilling.getBillingAmount() / 100.0);
+                    String d = "" + (activeBilling.getNewBalanceBilling() / 100.0);
+                    result.add(new String[]{a, b, c, d});
+                }
             } catch(NullPointerException e){
-                System.err.println("test5");
                 e.printStackTrace(); 
             }
+            return result;
     }     
    
    /**

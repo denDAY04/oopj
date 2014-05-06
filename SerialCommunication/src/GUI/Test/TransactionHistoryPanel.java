@@ -6,6 +6,10 @@
 
 package GUI.Test;
 
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
+
 
 /**
  *
@@ -13,16 +17,31 @@ package GUI.Test;
  */
 public class TransactionHistoryPanel extends javax.swing.JPanel {
 
+    DefaultTableModel tableModel;
+    
     private GUIFrame frame;
-    private ResultSetTableModel tableModel;
+    //private ResultSetTableModel tableModel;
     /**
      * Creates new form ChargingStationListViewPanel
      */
     public TransactionHistoryPanel() {
         initComponents();
-        tableModel = new ResultSetTableModel();
-        tableSalesHistory.setModel(tableModel);
-        //frame.bManager.setTableModel(tableModel);
+        
+        /* Set column headers and special width on tables */
+        tableBillingHistory.getColumnModel().getColumn(0).setHeaderValue("Transaction number");
+        tableBillingHistory.getColumnModel().getColumn(1).setHeaderValue("Recieved at server");
+        tableBillingHistory.getColumnModel().getColumn(2).setHeaderValue("Amount (DKK)");
+        tableBillingHistory.getColumnModel().getColumn(3).setHeaderValue("New balance (DKK)");
+        
+        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue("Reference number");
+        tableDepositHistory.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tableDepositHistory.getColumnModel().getColumn(1).setHeaderValue("Date");
+        tableDepositHistory.getColumnModel().getColumn(2).setHeaderValue("Amount (DKK)");
+        tableDepositHistory.getColumnModel().getColumn(2).setPreferredWidth(15);
+        tableDepositHistory.getColumnModel().getColumn(3).setHeaderValue("New balance (DKK)");
+        tableDepositHistory.getColumnModel().getColumn(3).setPreferredWidth(15);
+        tableDepositHistory.getColumnModel().getColumn(4).setHeaderValue("Card number");
+        tableDepositHistory.getColumnModel().getColumn(4).setPreferredWidth(20);
     }
 
     public void setFrame(GUI.Test.GUIFrame frame) {
@@ -41,11 +60,15 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         labTransactionHistory = new javax.swing.JLabel();
         labInformation = new javax.swing.JLabel();
         tableScrollPane = new javax.swing.JScrollPane();
-        tableSalesHistory = new javax.swing.JTable();
+        tableBillingHistory = new javax.swing.JTable();
         labInformation2 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+        tableScrollPane1 = new javax.swing.JScrollPane();
+        tableDepositHistory = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(402, 302));
 
@@ -54,18 +77,15 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
 
         labInformation.setText("Below you will see a history of all billings and deposits for your account.");
 
-        tableSalesHistory.setModel(new javax.swing.table.DefaultTableModel(
+        tableBillingHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tableScrollPane.setViewportView(tableSalesHistory);
+        tableScrollPane.setViewportView(tableBillingHistory);
 
         labInformation2.setText("To see more details about a specific history, click on it and click Details.");
 
@@ -77,7 +97,6 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         });
 
         btnDetails.setText("Details");
-        btnDetails.setEnabled(false);
 
         btnUpdate.setText("Update");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
@@ -86,6 +105,22 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
             }
         });
 
+        tableDepositHistory.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
+            }
+        ));
+        tableScrollPane1.setViewportView(tableDepositHistory);
+
+        jLabel1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel1.setText("Deposits");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        jLabel2.setText("Billings");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -93,20 +128,25 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labTransactionHistory)
-                    .addComponent(labInformation)
-                    .addComponent(labInformation2)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(btnUpdate)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDetails))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                            .addGap(7, 7, 7)
-                            .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(btnUpdate))
+                            .addComponent(labTransactionHistory, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labInformation, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(labInformation2, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnDetails)
+                        .addGap(30, 30, 30))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(tableScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
+                            .addComponent(tableScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addContainerGap(30, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -117,14 +157,20 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
                 .addComponent(labInformation, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labInformation2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addGap(11, 11, 11)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tableScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(13, 13, 13)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnDetails)
-                    .addComponent(btnUpdate))
-                .addContainerGap(20, Short.MAX_VALUE))
+                    .addComponent(btnUpdate)
+                    .addComponent(btnDetails))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         btnDetails.setVisible(false);
@@ -135,9 +181,21 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        System.out.println(frame.cManager.getLoggedInUser().getCustomerNumb());
-        frame.bManager.setTableModel(tableModel);
-        frame.bManager.getBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
+        System.out.println("Getting transactions from customerNumb:" + frame.cManager.getLoggedInUser().getCustomerNumb());
+        
+        System.err.println("Billing table");
+        tableModel = (DefaultTableModel) tableBillingHistory.getModel();
+        ArrayList<String[]> billingList = frame.bManager.getSimpleBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
+        for (int i = 0; i < billingList.size(); ++i) {
+            tableModel.insertRow(i, billingList.get(i));
+        }
+        
+        System.err.println("Deposit table");
+        tableModel = (DefaultTableModel) tableDepositHistory.getModel();
+        ArrayList<String[]> depositList = frame.depManager.getSimpleDeposits(frame.cManager.getLoggedInUser().getCustomerNumb());
+        for(int i = 0; i < depositList.size(); ++i) {
+            tableModel.insertRow(i, depositList.get(i));
+        }
     }//GEN-LAST:event_btnUpdateActionPerformed
 
 
@@ -145,10 +203,14 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDetails;
     private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labInformation;
     private javax.swing.JLabel labInformation2;
     private javax.swing.JLabel labTransactionHistory;
-    private javax.swing.JTable tableSalesHistory;
+    private javax.swing.JTable tableBillingHistory;
+    private javax.swing.JTable tableDepositHistory;
     private javax.swing.JScrollPane tableScrollPane;
+    private javax.swing.JScrollPane tableScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

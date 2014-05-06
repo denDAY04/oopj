@@ -19,13 +19,19 @@ public class SQLLibrary {
                                                + "where CustomerNumb = ?";
 // USER  Get deposits
 //ArrayList: 1, CustomerNumb
- public static final String USER_GET_DEPOSITS = "select DepositsNumb, DepositsDate, DepositAmount, NewBalanceDeposit, last4CardNumb " 
+// public static final String USER_GET_DEPOSITS = "select DepositsNumb, DepositsDate, DepositAmount, NewBalanceDeposit, last4CardNumb " 
+//                                              + "from Deposits "
+//                                              + "where CustomerNumb = ?";
+  public static final String USER_GET_DEPOSITS = "select * " 
                                               + "from Deposits "
                                               + "where CustomerNumb = ?";
 // USER  Get Billing
 //ArrayList: 1, CustomerNumb
 
-public static final String USER_GET_BILLING = "select Recieved, TransactionNumb, BillingAmount, NewBalanceBilling " 
+//public static final String USER_GET_BILLING = "select Recieved, TransactionNumb, BillingAmount, NewBalanceBilling " 
+//                                             + "from Billing "
+//                                             + "where CustomerNumb = ?";
+ public static final String USER_GET_BILLING = "select * " 
                                              + "from Billing "
                                              + "where CustomerNumb = ?";
 // USER  get Billing & Terminals - (on click)
