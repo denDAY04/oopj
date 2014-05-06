@@ -38,10 +38,8 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             for (int i=0; i<parameters.size();++i){
                 Class indexedClass = parameters.get(i).getClass();
                 if(indexedClass == String.class) {
-                    System.err.println("DatabaseManager, updateQuery: Found String.");
                     preparedStatement.setString(i+1, (String) parameters.get(i));
                 } else if (indexedClass == Integer.class) {
-                    System.err.println("DatabaseManager, updateQuery: Found Integer.");
                     preparedStatement.setInt(i+1, (Integer) parameters.get(i));
                 } else {
                     System.err.println("Error in DatabaseManager, updateQuery. No suitable class found!");
@@ -68,25 +66,28 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
 // but would require analasys of metadata to determine type of data (which constructor to call)
 
 //@Override
-  public ArrayList<Customer> getCustomers(String getQuery,ArrayList<String> parameters) {
+  public ArrayList<Customer> getCustomers(String getQuery,ArrayList<Object> parameters) {
         Connection con = null;
         ArrayList<Customer> customerList = new ArrayList();
         try {
-            System.err.println("DatabaseManager getCustomers 1");
             con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
-            System.err.println("DatabaseManager getCustomers 2");                
-            preparedStatement.setString(i+1, parameters.get(i));
+                Class indexedClass = parameters.get(i).getClass();
+                if(indexedClass == String.class) {
+                    preparedStatement.setString(i+1, (String) parameters.get(i));
+                } else if (indexedClass == Integer.class) {
+                    preparedStatement.setInt(i+1, (Integer) parameters.get(i));
+                } else {
+                    System.err.println("Error in DatabaseManager. No suitable class found!");
+                    System.err.println("Found class: " + indexedClass.toString());
+                    System.exit(-1);
+                }
             }
             ResultSet resultSet = preparedStatement.executeQuery();
-            System.err.println("DatabaseManager getCustomers 3");
             while (resultSet.next()) {
-                 System.err.println("DatabaseManager getCustomers 4");
                  customerList.add(createCustomer(resultSet));
             }
-            System.err.println("DatabaseManager getCustomers 5");
-
         } catch (SQLException e) {
             e.printStackTrace();
         } finally {
@@ -102,14 +103,23 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
     }
 
 //@Override  
-  public ArrayList<Terminal> getTerminals(String getQuery,ArrayList<String> parameters) {
+  public ArrayList<Terminal> getTerminals(String getQuery,ArrayList<Object> parameters) {
         ArrayList<Terminal> terminalList = new ArrayList();
         Connection con = null;
         try {
             con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
-            preparedStatement.setString(i+1, parameters.get(i));
+                Class indexedClass = parameters.get(i).getClass();
+                if(indexedClass == String.class) {
+                    preparedStatement.setString(i+1, (String) parameters.get(i));
+                } else if (indexedClass == Integer.class) {
+                    preparedStatement.setInt(i+1, (Integer) parameters.get(i));
+                } else {
+                    System.err.println("Error in DatabaseManager. No suitable class found!");
+                    System.err.println("Found class: " + indexedClass.toString());
+                    System.exit(-1);
+                }
             }
             ResultSet resultSet = preparedStatement.executeQuery();
              while (resultSet.next()) {
@@ -131,14 +141,23 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
     }
 
 //@Override  // needs to be able to return an arraylist of Deposits
-  public ArrayList<Deposit> getDeposits(String getQuery,ArrayList<String> parameters) {
+  public ArrayList<Deposit> getDeposits(String getQuery,ArrayList<Object> parameters) {
         ArrayList<Deposit> depositList = new ArrayList();
         Connection con = null;
         try {
             con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
-            preparedStatement.setString(i+1, parameters.get(i));
+                Class indexedClass = parameters.get(i).getClass();
+                if(indexedClass == String.class) {
+                    preparedStatement.setString(i+1, (String) parameters.get(i));
+                } else if (indexedClass == Integer.class) {
+                    preparedStatement.setInt(i+1, (Integer) parameters.get(i));
+                } else {
+                    System.err.println("Error in DatabaseManager. No suitable class found!");
+                    System.err.println("Found class: " + indexedClass.toString());
+                    System.exit(-1);
+                }
             }
             ResultSet resultSet = preparedStatement.executeQuery();
              while (resultSet.next()) {
@@ -160,7 +179,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
 
 //@Override  // 
             // Method for returning a billing on click, with refrences.
-    public Billing getDetailedBilling(String getQuery,ArrayList<String> parameters) {
+    public Billing getDetailedBilling(String getQuery,ArrayList<Object> parameters) {
         Billing billing = null;
         Customer customer = null;
         Terminal terminal = null;
@@ -170,7 +189,16 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
-            preparedStatement.setString(i+1, parameters.get(i));
+                Class indexedClass = parameters.get(i).getClass();
+                if(indexedClass == String.class) {
+                    preparedStatement.setString(i+1, (String) parameters.get(i));
+                } else if (indexedClass == Integer.class) {
+                    preparedStatement.setInt(i+1, (Integer) parameters.get(i));
+                } else {
+                    System.err.println("Error in DatabaseManager. No suitable class found!");
+                    System.err.println("Found class: " + indexedClass.toString());
+                    System.exit(-1);
+                }
             }
             ResultSet resultSet = preparedStatement.executeQuery();
              if (resultSet.next()) {
@@ -202,7 +230,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             con = ConnectionManager.createConnection();
             PreparedStatement preparedStatement = con.prepareStatement(getQuery);
             for (int i=0; i<parameters.size();++i){
-            Class indexedClass = parameters.get(i).getClass();
+                Class indexedClass = parameters.get(i).getClass();
                 if(indexedClass == String.class) {
                     preparedStatement.setString(i+1, (String) parameters.get(i));
                 } else if (indexedClass == Integer.class) {

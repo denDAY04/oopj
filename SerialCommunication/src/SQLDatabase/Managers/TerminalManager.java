@@ -50,7 +50,7 @@ public class TerminalManager {
      * terminal.
      */
     public void addTerminal(String road, String zipCode, String ipAddress) {
-        ArrayList<String> parameters = new ArrayList();
+        ArrayList<Object> parameters = new ArrayList();
         parameters.add(road);
         parameters.add(zipCode);
         parameters.add(ipAddress);
@@ -75,7 +75,7 @@ public class TerminalManager {
      * @param chargingStatus Accepted values: "Char", "Idle"
      */
     public void editTerminal(String terminalID, int command, String installStatus, String chargingStatus) {
-        ArrayList<String> parameters = new ArrayList();
+        ArrayList<Object> parameters = new ArrayList();
         
         switch(command) {
             case 1:     // Set offline
@@ -102,7 +102,7 @@ public class TerminalManager {
     }
 
     public Terminal getTerminal(String terminalID) {
-        ArrayList<String> parameter = new ArrayList();
+        ArrayList<Object> parameter = new ArrayList();
         parameter.add(terminalID);
         Terminal terminal = null;
         ArrayList<Terminal> arr = databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_TERMINAL, parameter);
@@ -113,11 +113,11 @@ public class TerminalManager {
     }
     
     public ArrayList<Terminal> getAllTerminals() {
-        return databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS, new ArrayList<String>());
+        return databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS, new ArrayList<Object>());
     }
 
     public void connectionFailed(String destination) {
-        ArrayList<String> parametersTerminal = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+        ArrayList<Object> parametersTerminal = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
         parametersTerminal.add(destination);   // add the cardnumber parameter
             System.out.println("TerminalManager connectionFailed, Fire SQL statement");
             int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_SET_OFFLINESINCE,parametersTerminal);
@@ -127,7 +127,7 @@ public class TerminalManager {
     public void connectionSuccessful(String destination) {
         System.out.println("enter connectionSuccessful");
         // Set OfflineSince to Online, when connection is established.
-        ArrayList<String> parametersTerminal = new ArrayList();
+        ArrayList<Object> parametersTerminal = new ArrayList();
         parametersTerminal.add(destination);
         int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_RESET_OFFLINESINCE,parametersTerminal);
         System.out.println("TerminalManager connectionSuccessful, Fire SQL statement");
@@ -150,18 +150,17 @@ public class TerminalManager {
     public  class TimerListener implements ActionListener {  // ping delay timer, ping one terminal at a time
         public synchronized void actionPerformed(ActionEvent e) {  
             ArrayList<Terminal> terminals;
-            ArrayList<String> Parameter = new ArrayList();
-                   terminals = databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS,Parameter);
-                   System.err.println("size of array"+terminals.size());
-                   System.err.println("TerminalManager TimerListener FireSQL PING!");
-                   eventManager.pingEvent(terminals.get(i).getIpAddress()); 
-                   System.err.println("TerminalManager TimerListener, PI, PING, "+terminals.get(i).getIpAddress()+" i: "+i);
-                      // closePort();
-                 i++;
-                if (i >= terminals.size()){ 
-                    i=0;
-                    pingTimer.stop();
-                }
+            terminals = databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS, new ArrayList<Object>());
+            System.err.println("size of array"+terminals.size());
+            System.err.println("TerminalManager TimerListener FireSQL PING!");
+            eventManager.pingEvent(terminals.get(i).getIpAddress()); 
+            System.err.println("TerminalManager TimerListener, PI, PING, "+terminals.get(i).getIpAddress()+" i: "+i);
+               // closePort();
+            i++;
+            if (i >= terminals.size()){ 
+                i=0;
+                pingTimer.stop();
+            }
         }
     }
     
@@ -172,7 +171,7 @@ public class TerminalManager {
      * @param status The new status of the terminal.
      */
     public void setTerminalChargingStatus(String terminalID, String status) {
-        ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+        ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
         parameters.add(status);
         parameters.add(terminalID);
         System.err.println("TerminalManager setTerminalChargingStatus: fire SQL");

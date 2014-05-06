@@ -31,7 +31,7 @@ public class CustomerManager {
     
     public Customer verifyCustomer (String cardNumb,String pin){
             Customer customer = null;
-            ArrayList<String> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+            ArrayList<Object> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parameterscostumer.add(cardNumb);   // add the cardnumber parameter
             parameterscostumer.add(pin);        // add the pin parameter
             // do query in database (ArrayList: 1, CardNumb,2, Pin)
@@ -48,13 +48,11 @@ public class CustomerManager {
    
     public boolean loggedInAs (String email,String password){
             Customer customer = null;
-            ArrayList<String> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+            ArrayList<Object> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parameterscostumer.add(email);   // add the cardnumber parameter
             parameterscostumer.add(password);        // add the pin parameter
             // do query in database (ArrayList: 1, CardNumb,2, Pin)
-            System.out.println("CustomerManager verifyCustomerLogin, Fire SQL statement");
-            System.out.println("email: "+email+" password: "+password);
-            
+            System.out.println("CustomerManager loggedInAs email: "+email+" password: "+password);
             try {
                 customer = databaseManager.getCustomers(SQLLibrary.SYSTEM_VALIDATE_CUSTOMER_LOGIN, parameterscostumer).get(0);
                 loggedInUser.setCustomer(customer);
@@ -128,7 +126,7 @@ public class CustomerManager {
     * @return A Customer object with all the information of the customer.
     */
    public Customer getCustomer(String cardNumb) {
-       ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+       ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        parameters.add(cardNumb);
        Customer customer = null;
        ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_CARD, parameters);
@@ -146,7 +144,7 @@ public class CustomerManager {
     * @return A Customer object with all the information of the customer.
     */
    public Customer getCustomerByEmail(String email) {
-       ArrayList<String> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+       ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        parameters.add(email);
        Customer customer = null;
        ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_EMAIL, parameters);
