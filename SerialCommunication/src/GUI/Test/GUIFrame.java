@@ -14,6 +14,7 @@ import java.awt.CardLayout;
 public class GUIFrame extends javax.swing.JFrame {
 
     private CardLayout cardLayout;
+    private boolean isAdmin = false;
     protected CustomerManager cManager;
     protected DatabaseManager dbManager;
     protected BillingManager bManager;
@@ -67,15 +68,27 @@ public class GUIFrame extends javax.swing.JFrame {
     
     
     public void changePanel(String panel){
-        cardLayout.show(cards, panel);
+        
         if(panel.equals("card2")){
             accountPanel.loadCustomerDetails();
+            cardLayout.show(cards, panel);
         } else if(panel.equals("card8")){
             editAccountPanel.loadCustomerDetails();
+            cardLayout.show(cards, panel);
         } else if(panel.equals("card13")){
             updateUser();
             accountAdminPanel.loadCustomerDetails();
+            cardLayout.show(cards, panel);
+        } else if(panel.equals("card5") && cManager.getLoggedInUser() != null){
+            System.out.println("Test");
+            cardLayout.show(cards, "card2");
+        } else{
+            cardLayout.show(cards, panel);
         }
+    }
+    
+    public void setAdmin(boolean isAdmin){
+        this.isAdmin = isAdmin;
     }
     
     private void updateUser(){

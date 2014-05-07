@@ -41,7 +41,7 @@ public class AddFundsPanel extends javax.swing.JPanel {
     private void registerDeposit() {
         int customerID = Integer.parseInt(frame.cManager.getLoggedInUser().getCustomerNumb());
         int oldBalance  = frame.cManager.getLoggedInUser().getBalance();
-        int depositAmount = Integer.parseInt(textAmount.toString());
+        int depositAmount = Integer.parseInt(textAmount.getText())*100;
         int newBalance = oldBalance + depositAmount;
         int lastFourDigits = Integer.parseInt(textCardNumber4.getText());
         
@@ -198,6 +198,7 @@ public class AddFundsPanel extends javax.swing.JPanel {
         inputCheck();
         if (inputError == false){
             registerDeposit();
+            JOptionPane.showMessageDialog(this, "The following amount has been added to your account balance.\n"+textAmount.getText()+" DKK");
             frame.changePanel("card5");
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);

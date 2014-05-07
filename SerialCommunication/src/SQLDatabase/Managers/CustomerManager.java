@@ -26,6 +26,7 @@ public class CustomerManager {
     }
     
     public void setLoggedInUser(Customer user) {
+        System.out.println("Dummy");
         loggedInUser.setCustomer(user);
     }
     

@@ -27,7 +27,7 @@ public class AccountPanel extends javax.swing.JPanel {
                          frame.cManager.getLoggedInUser().getLastName());
         labCEmail.setText(frame.cManager.getLoggedInUser().getEmail());
         labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb());
-        labCBalance.setText(frame.cManager.getLoggedInUser().getBalance()+"");
+        labCBalance.setText(frame.cManager.getLoggedInUser().getBalance()*0.01+"");
     }
     
     /**
@@ -72,6 +72,11 @@ public class AccountPanel extends javax.swing.JPanel {
         });
 
         btnAddFunds.setText("Add funds");
+        btnAddFunds.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddFundsActionPerformed(evt);
+            }
+        });
 
         btnTransactionHistory.setText("Transaction history");
         btnTransactionHistory.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +197,10 @@ public class AccountPanel extends javax.swing.JPanel {
     private void btnTransactionHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionHistoryActionPerformed
         frame.changePanel("card10");
     }//GEN-LAST:event_btnTransactionHistoryActionPerformed
+
+    private void btnAddFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFundsActionPerformed
+        frame.changePanel("card4");
+    }//GEN-LAST:event_btnAddFundsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddFunds;
