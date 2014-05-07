@@ -33,7 +33,7 @@ public class EventManager implements FrameEventListener {
     private Packet packet;
     private CustomerManager customerManager;
     private TerminalManager terminalManager;
-    private Timer resendTimer = new Timer(100, new TimerListener());  // resend request timer. Set hardware dependent timeout here.
+    private Timer resendTimer = new Timer(300, new TimerListener());  // resend request timer. Set hardware dependent timeout here.
     private int maxSendAttempt = 4;
     private int currentSendAttempt = 0;
     private String currentStatus;
@@ -201,7 +201,7 @@ public class EventManager implements FrameEventListener {
     private void processRequest(Packet packet) {
 // list of possible commands, not final
 //   - RS - resend
-//   [done] - RA - receive acknowledge
+//   [done] - RA - receive acknowledged
 //   [done] - VC - Verify Customer (pin and card number)
 //   [done] - CS - Charging started ( set charger to charging and customer to locked)
 //  [redundant due to VC] - CI - Customer information (customer found, status, name, amount …. )
@@ -297,7 +297,8 @@ public class EventManager implements FrameEventListener {
                     /* Update customer's use status */
                     customerManager.updateCustomerInformation(cardNum, 1, newStatus);
                     /* Update charging station's charging status */
-                    terminalManager.setTerminalChargingStatus(packet.getSource(), newStatus[0]);                    
+                    terminalManager.setTerminalChargingStatus(packet.getSource(), newStatus[0]);     
+                    sendResponse("RA", "Receive Acknowledged", destination);
                 } else if (command.equals("01")) {
                     System.err.println(
                             "EventManager processRequest, if 01 revieced, send 12-Accept");
