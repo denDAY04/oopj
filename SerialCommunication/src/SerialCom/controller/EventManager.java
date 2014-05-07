@@ -271,6 +271,8 @@ public class EventManager implements FrameEventListener {
 //                    System.err.println(
 //                            "EventManager processRequest, OP revieced");
                 } else if (command.equals("CS") || command.equals("CC")) {      // Charging started
+                    sendResponse("RA", "Receive Acknowledged", destination);
+                    resendTimer.stop();
                     System.err.println("EventManager processRequest: Charging started or completed");
                     String terminalID = packet.getSource();
                     // ^^Server knows the terminalID allready from the source of the package.^^
@@ -298,7 +300,7 @@ public class EventManager implements FrameEventListener {
                     customerManager.updateCustomerInformation(cardNum, 1, newStatus);
                     /* Update charging station's charging status */
                     terminalManager.setTerminalChargingStatus(packet.getSource(), newStatus[0]);     
-                    sendResponse("RA", "Receive Acknowledged", destination);
+
                 } else if (command.equals("01")) {
                     System.err.println(
                             "EventManager processRequest, if 01 revieced, send 12-Accept");
