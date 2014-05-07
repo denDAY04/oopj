@@ -6,26 +6,38 @@ package GUI.Test;
 
 import GUI.*;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Qess
  */
 public class EditAccountAdminPanel extends javax.swing.JPanel {
+    
     private GUIFrame frame;
     private boolean inputError;
-    private int errors = 1;
+    private int errors;
     /**
-     * Creates new form ForgotPassControllerPanel
+     * Creates new form LoginControllerPanel
      */
     public EditAccountAdminPanel() {
         initComponents();
+        errors = 6;
     }
 
     public void setFrame(GUI.Test.GUIFrame frame) {
         this.frame = frame;
     }
-
+    
+    protected void loadCustomerDetails(){
+        textFirstName.setText(frame.cManager.getLoggedInUser().getFirstName());
+        textLastName.setText(frame.cManager.getLoggedInUser().getLastName());
+        textRoad.setText(frame.cManager.getLoggedInUser().getRoad());
+        textZip.setText(frame.cManager.getLoggedInUser().getZipCode());
+        textPhoneNBR.setText(frame.cManager.getLoggedInUser().getPhoneNumb());
+        textEmail.setText(frame.cManager.getLoggedInUser().getEmail());
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,20 +47,76 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        labTitle = new javax.swing.JLabel();
-        labEmail = new javax.swing.JLabel();
-        labInformation1 = new javax.swing.JLabel();
+        labSignUp = new javax.swing.JLabel();
+        labInformation = new javax.swing.JLabel();
+        labFirstName = new javax.swing.JLabel();
+        textFirstName = new javax.swing.JTextField();
+        textRoad = new javax.swing.JTextField();
         textEmail = new javax.swing.JTextField();
+        labEmail = new javax.swing.JLabel();
+        labRoad = new javax.swing.JLabel();
+        textLastName = new javax.swing.JTextField();
+        labLastName = new javax.swing.JLabel();
+        textZip = new javax.swing.JTextField();
+        labZip = new javax.swing.JLabel();
+        textPhoneNBR = new javax.swing.JTextField();
+        labPhoneNBR = new javax.swing.JLabel();
+        btnSave = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         labErrorEmail = new javax.swing.JLabel();
-        btnNext = new javax.swing.JButton();
+        labError1 = new javax.swing.JLabel();
+        labError2 = new javax.swing.JLabel();
 
-        labTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        labTitle.setText("Edit Customer Account");
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labSignUp.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        labSignUp.setText("Edit Account Information");
+        add(labSignUp, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 200, -1));
+
+        labInformation.setText("Edit the desired account information below.");
+        add(labInformation, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 210, -1));
+
+        labFirstName.setText("First Name");
+        add(labFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
+
+        textFirstName.setNextFocusableComponent(textLastName);
+        add(textFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 187, -1));
+
+        textRoad.setNextFocusableComponent(textZip);
+        add(textRoad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 187, -1));
+        add(textEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 187, -1));
 
         labEmail.setText("Email");
+        add(labEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
 
-        labInformation1.setText("Enter the customers email to get access to their account. ");
+        labRoad.setText("Address and number");
+        add(labRoad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
+
+        textLastName.setNextFocusableComponent(textRoad);
+        add(textLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 187, -1));
+
+        labLastName.setText("Last Name");
+        add(labLastName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
+
+        textZip.setNextFocusableComponent(textPhoneNBR);
+        add(textZip, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 290, 187, -1));
+
+        labZip.setText("Zip/Postal code");
+        add(labZip, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, -1, -1));
+
+        textPhoneNBR.setNextFocusableComponent(textEmail);
+        add(textPhoneNBR, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 187, -1));
+
+        labPhoneNBR.setText("Phone number (8 digits)");
+        add(labPhoneNBR, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
+
+        btnSave.setText("Save changes");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -56,80 +124,95 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 60, -1));
 
         labErrorEmail.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         labErrorEmail.setForeground(new java.awt.Color(255, 0, 0));
-        labErrorEmail.setText("- No customer with this email found");
-
-        btnNext.setText("Next");
-        btnNext.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNextActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labInformation1)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnNext)
-                        .addGap(26, 26, 26)
-                        .addComponent(btnBack))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labEmail)
-                        .addGap(18, 18, 18)
-                        .addComponent(labErrorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labTitle))
-                .addContainerGap(90, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addComponent(labTitle)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labInformation1)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labEmail)
-                    .addComponent(labErrorEmail))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnBack)
-                    .addComponent(btnNext))
-                .addContainerGap(82, Short.MAX_VALUE))
-        );
-
+        labErrorEmail.setText("- not a valid email adress");
+        add(labErrorEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 130, -1));
         labErrorEmail.setVisible(false);
+
+        labError1.setForeground(new java.awt.Color(255, 0, 0));
+        labError1.setText("Some of the fields are not filled in correctly.");
+        add(labError1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 230, -1));
+        labError1.setVisible(false);
+
+        labError2.setForeground(new java.awt.Color(255, 0, 0));
+        labError2.setText("Please revise, and then try again.");
+        add(labError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 240, -1));
+        labError2.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-       frame.changePanel("card11");
-       labEmail.setForeground(Color.BLACK);
-       textEmail.setText("");
-       labErrorEmail.setVisible(false);
+        int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to go back?\n"
+                                         + "All changes will be discarded.", 
+                                         "Are you sure?", JOptionPane.YES_NO_OPTION);
+        if (reply == JOptionPane.YES_OPTION) {
+          frame.changePanel("card13");
+        }
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         inputCheck();
         if (errors == 0){
-            frame.cManager.admLoggedInAs(textEmail.getText());
+            JOptionPane.showMessageDialog(null, "Your account information has been updated.", "Account information change successfull", JOptionPane.INFORMATION_MESSAGE);
             frame.changePanel("card13");
-            textEmail.setText("");
+            labError1.setVisible(inputError);
+            labError2.setVisible(inputError);
+        } else{
+            labError1.setVisible(inputError);
+            labError2.setVisible(inputError);
         }
-        errors = 1;
-    }//GEN-LAST:event_btnNextActionPerformed
-
-    private void inputCheck(){
-       if(!textEmail.getText().equals("")){
+        errors = 6;
+    }//GEN-LAST:event_btnSaveActionPerformed
+    
+    private void inputCheck() {
+        if (!textFirstName.getText().equals("")){
+            labFirstName.setForeground(Color.BLACK);
+            errors--;
+        } else{
+            labFirstName.setForeground(Color.RED);
+        }
+        
+        if (!textLastName.getText().equals("")){
+            labLastName.setForeground(Color.BLACK);  
+            errors--;
+        } else{
+            labLastName.setForeground(Color.RED);
+        }
+        
+        if (!textRoad.getText().equals("")){
+            labRoad.setForeground(Color.BLACK);
+            errors--;
+        } else{
+            labRoad.setForeground(Color.RED);
+        }
+        
+        if (!textZip.getText().equals("") && textZip.getText().length() == 4){
+            try {
+                int zipcode = Integer.parseInt(textZip.getText());
+                labZip.setForeground(Color.BLACK);
+                errors--;
+            } catch(NumberFormatException e){
+                labZip.setForeground(Color.RED);
+            }
+        } else{
+            labZip.setForeground(Color.RED);
+        }
+        
+        if (!textPhoneNBR.getText().equals("") && textPhoneNBR.getText().length() == 8){
+            try {
+                int phoneNBR = Integer.parseInt(textPhoneNBR.getText());
+                labPhoneNBR.setForeground(Color.BLACK);
+                errors--;
+            } catch(NumberFormatException e){
+                labPhoneNBR.setForeground(Color.RED);
+            }
+        } else{
+            labPhoneNBR.setForeground(Color.RED);
+        }
+        
+        if(!textEmail.getText().equals("")){
             if (isValidEmailAddress(textEmail.getText()) == true){
                 labEmail.setForeground(Color.BLACK);
                 labErrorEmail.setVisible(false);
@@ -143,6 +226,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
             labErrorEmail.setVisible(true);
         }
     }
+    
     // Metod found at StackOverflow.com, which validates the syntax of an emailadress
     // http://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
     private boolean isValidEmailAddress(String email) {
@@ -152,11 +236,23 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel labEmail;
+    private javax.swing.JLabel labError1;
+    private javax.swing.JLabel labError2;
     private javax.swing.JLabel labErrorEmail;
-    private javax.swing.JLabel labInformation1;
-    private javax.swing.JLabel labTitle;
+    private javax.swing.JLabel labFirstName;
+    private javax.swing.JLabel labInformation;
+    private javax.swing.JLabel labLastName;
+    private javax.swing.JLabel labPhoneNBR;
+    private javax.swing.JLabel labRoad;
+    private javax.swing.JLabel labSignUp;
+    private javax.swing.JLabel labZip;
     private javax.swing.JTextField textEmail;
+    private javax.swing.JTextField textFirstName;
+    private javax.swing.JTextField textLastName;
+    private javax.swing.JTextField textPhoneNBR;
+    private javax.swing.JTextField textRoad;
+    private javax.swing.JTextField textZip;
     // End of variables declaration//GEN-END:variables
 }

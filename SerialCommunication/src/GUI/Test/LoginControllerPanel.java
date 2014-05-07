@@ -132,12 +132,12 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     if(textEmail.getText().equals(adminEmail) && textPassword.getText().equals(adminPassword)){
         labError.setVisible(false);
         frame.changePanel("card11");
-        //frame.setAdmin(true);
         textEmail.setText("");
         textPassword.setText("");
     } else if(frame.cManager.loggedInAs(textEmail.getText(), textPassword.getText()) == true){
         labError.setVisible(false);
         frame.changePanel("card2");
+        frame.setLoggedIn(true);
         textEmail.setText("");
         textPassword.setText("");
     } else {

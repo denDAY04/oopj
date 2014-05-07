@@ -14,7 +14,7 @@ import java.awt.CardLayout;
 public class GUIFrame extends javax.swing.JFrame {
 
     private CardLayout cardLayout;
-    private boolean isAdmin = false;
+    private boolean isLoggedIn = false;
     protected CustomerManager cManager;
     protected DatabaseManager dbManager;
     protected BillingManager bManager;
@@ -45,9 +45,13 @@ public class GUIFrame extends javax.swing.JFrame {
         changePasswordPanel.setFrame(this);
         transactionHistoryPanel.setFrame(this);
         controlPanel.setFrame(this);
-        editAccountAdminPanel.setFrame(this);
+        loginAsPanel.setFrame(this);
         accountAdminPanel.setFrame(this);
         creditDebitAccountPanel.setFrame(this);
+        addFundsUserPanel.setFrame(this);
+        editAccountAdminPanel.setFrame(this);
+        changePasswordAdminPanel.setFrame(this);
+        transactionHistoryAdminPanel.setFrame(this);
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountPanel, "card2");
@@ -60,9 +64,13 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(changePasswordPanel, "card9");
         cards.add(transactionHistoryPanel, "card10");
         cards.add(controlPanel, "card11");
-        cards.add(editAccountAdminPanel, "card12");
+        cards.add(loginAsPanel, "card12");
         cards.add(accountAdminPanel, "card13");
         cards.add(creditDebitAccountPanel, "card14");
+        cards.add(addFundsUserPanel, "card15");
+        cards.add(editAccountAdminPanel, "card16");
+        cards.add(changePasswordAdminPanel, "card17");
+        cards.add(transactionHistoryAdminPanel, "card18");
     }
     
     
@@ -75,20 +83,26 @@ public class GUIFrame extends javax.swing.JFrame {
         } else if(panel.equals("card8")){
             editAccountPanel.loadCustomerDetails();
             cardLayout.show(cards, panel);
+        } else if(panel.equals("card16")){
+            editAccountAdminPanel.loadCustomerDetails();
+            cardLayout.show(cards, panel);
         } else if(panel.equals("card13")){
             updateUser();
             accountAdminPanel.loadCustomerDetails();
             cardLayout.show(cards, panel);
-        } else if(panel.equals("card5") && cManager.getLoggedInUser() != null){
-            System.out.println("Test");
+        } else if(panel.equals("card5") && isLoggedIn == true){
+            updateUser();
+            accountPanel.loadCustomerDetails();
             cardLayout.show(cards, "card2");
+        } else if(panel.equals("card5") && isLoggedIn == false){
+            cardLayout.show(cards, panel);
         } else{
             cardLayout.show(cards, panel);
         }
     }
     
-    public void setAdmin(boolean isAdmin){
-        this.isAdmin = isAdmin;
+    public void setLoggedIn(boolean isLoggedIn){
+        this.isLoggedIn = isLoggedIn;
     }
     
     private void updateUser(){
@@ -117,9 +131,13 @@ public class GUIFrame extends javax.swing.JFrame {
         changePasswordPanel = new GUI.Test.ChangePasswordPanel();
         transactionHistoryPanel = new GUI.Test.TransactionHistoryPanel();
         controlPanel = new GUI.Test.ControlPanel();
-        editAccountAdminPanel = new GUI.Test.EditAccountAdminPanel();
+        loginAsPanel = new GUI.Test.LoginAsPanel();
         accountAdminPanel = new GUI.Test.AccountAdminPanel();
         creditDebitAccountPanel = new GUI.Test.CreditDebitAccountPanel();
+        addFundsUserPanel = new GUI.Test.AddFundsUserPanel();
+        editAccountAdminPanel = new GUI.Test.EditAccountAdminPanel();
+        changePasswordAdminPanel = new GUI.Test.ChangePasswordAdminPanel();
+        transactionHistoryAdminPanel = new GUI.Test.TransactionHistoryAdminPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -135,15 +153,19 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(changePasswordPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(transactionHistoryPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(controlPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-        cards.add(editAccountAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(loginAsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(accountAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(creditDebitAccountPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(addFundsUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(editAccountAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(changePasswordAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(transactionHistoryAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(cards, javax.swing.GroupLayout.DEFAULT_SIZE, 521, Short.MAX_VALUE)
+            .addComponent(cards, javax.swing.GroupLayout.PREFERRED_SIZE, 521, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -198,17 +220,21 @@ public class GUIFrame extends javax.swing.JFrame {
     private GUI.Test.AccountAdminPanel accountAdminPanel;
     private GUI.Test.AccountPanel accountPanel;
     private GUI.Test.AddFundsPanel addFundsPanel;
+    private GUI.Test.AddFundsUserPanel addFundsUserPanel;
     private javax.swing.JPanel cards;
+    private GUI.Test.ChangePasswordAdminPanel changePasswordAdminPanel;
     private GUI.Test.ChangePasswordPanel changePasswordPanel;
     private GUI.Test.ControlPanel controlPanel;
     private GUI.Test.CreditDebitAccountPanel creditDebitAccountPanel;
     private GUI.Test.EditAccountAdminPanel editAccountAdminPanel;
     private GUI.Test.EditAccountPanel editAccountPanel;
     private GUI.Test.ForgotPassPanel forgotPassPanel;
+    private GUI.Test.LoginAsPanel loginAsPanel;
     private GUI.Test.LoginControllerPanel loginControllerPanel;
     private GUI.Test.PasswordFoundPanel passwordFoundPanel;
     private GUI.Test.SignupCongratulationsPanel signupCongratulationsPanel;
     private GUI.Test.SignupPanel signupPanel;
+    private GUI.Test.TransactionHistoryAdminPanel transactionHistoryAdminPanel;
     private GUI.Test.TransactionHistoryPanel transactionHistoryPanel;
     // End of variables declaration//GEN-END:variables
 

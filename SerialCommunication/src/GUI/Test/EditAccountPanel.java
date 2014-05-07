@@ -147,7 +147,7 @@ public class EditAccountPanel extends javax.swing.JPanel {
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to go back?\n"
                                          + "All changes will be discarded.", 
-                                         "choose one", JOptionPane.YES_NO_OPTION);
+                                         "Are you sure?", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
           frame.changePanel("card2");
         }

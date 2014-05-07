@@ -191,18 +191,19 @@ public class AccountAdminPanel extends javax.swing.JPanel {
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         frame.changePanel("card1");
         frame.cManager.setLoggedInUser(null);
+        //frame.setLoggedIn(false);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
-        frame.changePanel("card8");
+        frame.changePanel("card16");
     }//GEN-LAST:event_btnEditActionPerformed
 
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
-        frame.changePanel("card9");
+        frame.changePanel("card17");
     }//GEN-LAST:event_btnChangePassActionPerformed
 
     private void btnTransactionHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionHistoryActionPerformed
-        frame.changePanel("card10");
+        frame.changePanel("card18");
     }//GEN-LAST:event_btnTransactionHistoryActionPerformed
 
     private void btnCreditDebitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditDebitActionPerformed

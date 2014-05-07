@@ -184,6 +184,7 @@ public class AccountPanel extends javax.swing.JPanel {
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         frame.changePanel("card1");
         frame.cManager.setLoggedInUser(null);
+        frame.setLoggedIn(false);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -199,7 +200,7 @@ public class AccountPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTransactionHistoryActionPerformed
 
     private void btnAddFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFundsActionPerformed
-        frame.changePanel("card4");
+        frame.changePanel("card15");
     }//GEN-LAST:event_btnAddFundsActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -138,7 +138,6 @@ public class ControlPanel extends javax.swing.JPanel {
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         frame.changePanel("card1");
         frame.cManager.setLoggedInUser(null);
-        frame.setAdmin(false);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnAccManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccManageActionPerformed

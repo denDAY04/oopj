@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  *
  * @author AndreasStensig
  */
-public class AddFundsPanel extends javax.swing.JPanel {
+public class AddFundsUserPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
     private String wrongCardNBR = "9999999999999999";
@@ -24,7 +24,7 @@ public class AddFundsPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddFundsViewPanel
      */
-    public AddFundsPanel() {
+    public AddFundsUserPanel() {
         initComponents();
         textCardNumber1.setDocument(new JTextFieldLimit(4));
         textCardNumber2.setDocument(new JTextFieldLimit(4));
@@ -75,7 +75,6 @@ public class AddFundsPanel extends javax.swing.JPanel {
         spinYear = new javax.swing.JSpinner();
         labCSC = new javax.swing.JLabel();
         textCSC = new javax.swing.JTextField();
-        labProcessing = new javax.swing.JLabel();
         btnHelp = new javax.swing.JButton();
         textAmount = new javax.swing.JTextField();
         labAmount = new javax.swing.JLabel();
@@ -88,43 +87,30 @@ public class AddFundsPanel extends javax.swing.JPanel {
         labError1 = new javax.swing.JLabel();
         labError2 = new javax.swing.JLabel();
         labValue = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(402, 302));
-        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labPayment.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labPayment.setText("Add funds");
-        add(labPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 90, 32));
 
         labCardNumber.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         labCardNumber.setText("Card number");
-        add(labCardNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 81, -1, -1));
 
         labMonth.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         labMonth.setText("Month");
-        add(labMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 143, -1, -1));
 
         spinMonth.setModel(new javax.swing.SpinnerNumberModel(1, 1, 12, 1));
-        add(spinMonth, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 169, 49, -1));
 
         labYear.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         labYear.setText("Year");
-        add(labYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 143, -1, -1));
 
         spinYear.setModel(new javax.swing.SpinnerNumberModel(14, 14, 30, 1));
-        add(spinYear, new org.netbeans.lib.awtextra.AbsoluteConstraints(69, 169, 57, -1));
 
         labCSC.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         labCSC.setText("CSC");
-        add(labCSC, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 143, -1, -1));
 
         textCSC.setText(" ");
-        add(textCSC, new org.netbeans.lib.awtextra.AbsoluteConstraints(153, 169, 47, -1));
-
-        labProcessing.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        labProcessing.setText("Processing...");
-        labProcessing.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        add(labProcessing, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 373, -1));
 
         btnHelp.setText("?");
         btnHelp.addActionListener(new java.awt.event.ActionListener() {
@@ -132,14 +118,11 @@ public class AddFundsPanel extends javax.swing.JPanel {
                 btnHelpActionPerformed(evt);
             }
         });
-        add(btnHelp, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, -1, -1));
 
         textAmount.setText(" ");
-        add(textAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 100, 90, -1));
 
         labAmount.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         labAmount.setText("Amount (DKK)");
-        add(labAmount, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 80, -1, -1));
 
         btnAccept.setText("Accept/OK");
         btnAccept.addActionListener(new java.awt.event.ActionListener() {
@@ -147,10 +130,8 @@ public class AddFundsPanel extends javax.swing.JPanel {
                 btnAcceptActionPerformed(evt);
             }
         });
-        add(btnAccept, new org.netbeans.lib.awtextra.AbsoluteConstraints(163, 268, -1, -1));
 
         labInformation1.setText("Enter your billing information to add funds to your account.");
-        add(labInformation1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 360, -1));
 
         textCardNumber1.setText(" ");
         textCardNumber1.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -158,7 +139,6 @@ public class AddFundsPanel extends javax.swing.JPanel {
                 textCardNumber1KeyPressed(evt);
             }
         });
-        add(textCardNumber1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 100, 50, -1));
 
         textCardNumber2.setText(" ");
         textCardNumber2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -166,7 +146,6 @@ public class AddFundsPanel extends javax.swing.JPanel {
                 textCardNumber2KeyPressed(evt);
             }
         });
-        add(textCardNumber2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 50, -1));
 
         textCardNumber3.setText(" ");
         textCardNumber3.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -174,24 +153,136 @@ public class AddFundsPanel extends javax.swing.JPanel {
                 textCardNumber3KeyPressed(evt);
             }
         });
-        add(textCardNumber3, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 50, -1));
 
         textCardNumber4.setText(" ");
-        add(textCardNumber4, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 100, 50, -1));
 
         labError1.setForeground(new java.awt.Color(255, 0, 51));
         labError1.setText("The informations given does not match that of a valid credit card.");
-        add(labError1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 360, -1));
-        labError1.setVisible(false);
 
         labError2.setForeground(new java.awt.Color(255, 0, 51));
         labError2.setText("Please try again.");
-        add(labError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 310, -1));
-        labError2.setVisible(false);
 
         labValue.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         labValue.setText("Enter value between 100-2000");
-        add(labValue, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 130, 170, -1));
+
+        btnBack.setText("Back");
+        btnBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBackActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(labPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(labInformation1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(labCardNumber)
+                        .addGap(197, 197, 197)
+                        .addComponent(labAmount))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(textCardNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(textCardNumber2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(textCardNumber3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(textCardNumber4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(textAmount, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(labMonth)
+                        .addGap(24, 24, 24)
+                        .addComponent(labYear)
+                        .addGap(59, 59, 59)
+                        .addComponent(labCSC)
+                        .addGap(4, 4, 4)
+                        .addComponent(btnHelp)
+                        .addGap(63, 63, 63)
+                        .addComponent(labValue, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(spinMonth, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addComponent(spinYear, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
+                        .addComponent(textCSC, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(labError1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(labError2, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(80, 80, 80)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnAccept)))
+                .addGap(62, 62, 62))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addComponent(labPayment, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(labInformation1)
+                .addGap(16, 16, 16)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(labCardNumber))
+                    .addComponent(labAmount))
+                .addGap(4, 4, 4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(textCardNumber1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCardNumber2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCardNumber3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCardNumber4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(labMonth))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(labYear))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
+                        .addComponent(labCSC))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(btnHelp))
+                    .addComponent(labValue))
+                .addGap(6, 6, 6)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(spinMonth, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(spinYear, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textCSC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addComponent(labError1)
+                .addGap(6, 6, 6)
+                .addComponent(labError2)
+                .addGap(34, 34, 34)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnAccept)
+                    .addComponent(btnBack)))
+        );
+
+        labError1.setVisible(false);
+        labError2.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
@@ -199,7 +290,7 @@ public class AddFundsPanel extends javax.swing.JPanel {
         if (inputError == false){
             registerDeposit();
             JOptionPane.showMessageDialog(this, "The following amount has been added to your account balance.\n"+textAmount.getText()+" DKK");
-            frame.changePanel("card5");
+            frame.changePanel("card2");
             resetFields();
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
@@ -257,9 +348,13 @@ public class AddFundsPanel extends javax.swing.JPanel {
         icon = new ImageIcon(".\\CreditCardCVV.gif");
         JOptionPane.showMessageDialog(null, "", "CSC Help", JOptionPane.INFORMATION_MESSAGE, icon);
     }//GEN-LAST:event_btnHelpActionPerformed
+
+    private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        resetFields();
+        frame.changePanel("card2");
+    }//GEN-LAST:event_btnBackActionPerformed
     
     private void inputCheck(){
-       
         String cardNumber = textCardNumber1.getText()+textCardNumber2.getText()+
                             textCardNumber3.getText()+textCardNumber4.getText();
         if (cardNumber.equals(wrongCardNBR)){
@@ -314,11 +409,15 @@ public class AddFundsPanel extends javax.swing.JPanel {
         textCardNumber4.setText("");
         textAmount.setText("");
         textCSC.setText("");
-        spinMonth.setValue(3);
-        spinYear.setValue(15);
+        spinMonth.setValue(1);
+        spinYear.setValue(14);
+        labValue.setForeground(Color.BLACK);
+        labError1.setVisible(false);
+        labError2.setVisible(false);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
+    private javax.swing.JButton btnBack;
     private javax.swing.JButton btnHelp;
     private javax.swing.JLabel labAmount;
     private javax.swing.JLabel labCSC;
@@ -328,7 +427,6 @@ public class AddFundsPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labInformation1;
     private javax.swing.JLabel labMonth;
     private javax.swing.JLabel labPayment;
-    private javax.swing.JLabel labProcessing;
     private javax.swing.JLabel labValue;
     private javax.swing.JLabel labYear;
     private javax.swing.JSpinner spinMonth;
