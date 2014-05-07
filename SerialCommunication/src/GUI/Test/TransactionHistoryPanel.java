@@ -47,6 +47,14 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
     public void setFrame(GUI.Test.GUIFrame frame) {
         this.frame = frame;
     }
+    
+    private void clearTable(DefaultTableModel tableModle) {
+        if (tableModle != null) {
+            while (tableModle.getRowCount() != 0) {
+                tableModle.removeRow(0);
+            }
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -177,21 +185,24 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        clearTable((DefaultTableModel) tableBillingHistory.getModel());
+        clearTable((DefaultTableModel) tableDepositHistory.getModel());
+        
         frame.changePanel("card2");
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        System.out.println("Getting transactions from customerNumb:" + frame.cManager.getLoggedInUser().getCustomerNumb());
-        
-        System.err.println("Billing table");
         tableModel = (DefaultTableModel) tableBillingHistory.getModel();
+        /* Clear table and insert values */
+        clearTable(tableModel);
         ArrayList<String[]> billingList = frame.bManager.getSimpleBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
         for (int i = 0; i < billingList.size(); ++i) {
             tableModel.insertRow(i, billingList.get(i));
         }
         
-        System.err.println("Deposit table");
         tableModel = (DefaultTableModel) tableDepositHistory.getModel();
+        /* Clear table and insert values */
+        clearTable(tableModel);
         ArrayList<String[]> depositList = frame.depManager.getSimpleDeposits(frame.cManager.getLoggedInUser().getCustomerNumb());
         for(int i = 0; i < depositList.size(); ++i) {
             tableModel.insertRow(i, depositList.get(i));
