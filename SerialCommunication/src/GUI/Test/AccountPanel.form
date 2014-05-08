@@ -21,14 +21,13 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labTitle" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="btnTransactionHistory" max="32767" attributes="0"/>
-                              <Component id="btnAddFunds" max="32767" attributes="0"/>
-                              <Component id="btnChangePass" max="32767" attributes="0"/>
-                              <Component id="btnEdit" pref="134" max="32767" attributes="0"/>
-                          </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="btnTransactionHistory" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnAddFunds" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnChangePass" alignment="1" max="32767" attributes="0"/>
+                          <Component id="btnEdit" alignment="1" pref="134" max="32767" attributes="0"/>
                           <Component id="btnLogout" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnDeleteAccount" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -41,19 +40,19 @@
                           <Component id="labBalance" min="-2" max="-2" attributes="0"/>
                           <Component id="labCBalance" min="-2" pref="60" max="-2" attributes="0"/>
                           <Component id="labAccStatus" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                          <Component id="labCAccStatus" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                           <Component id="labUseStatus" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
                           <Component id="labCUseStatus" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                          <Component id="labCAccStatus" min="-2" pref="125" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="11" pref="11" max="-2" attributes="0"/>
               <Component id="labTitle" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="47" pref="47" max="-2" attributes="0"/>
@@ -93,17 +92,24 @@
                   </Group>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="labAccStatus" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="labCAccStatus" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="labUseStatus" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labCUseStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnLogout" alignment="3" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="btnDeleteAccount" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="labAccStatus" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labCAccStatus" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
+                      <Component id="labUseStatus" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="labCUseStatus" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace pref="1" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -234,6 +240,14 @@
         </Property>
         <Property name="text" type="java.lang.String" value="Account status"/>
       </Properties>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnDeleteAccount">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Delete account"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteAccountActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

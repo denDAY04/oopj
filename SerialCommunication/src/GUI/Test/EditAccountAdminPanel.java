@@ -22,7 +22,8 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
      */
     public EditAccountAdminPanel() {
         initComponents();
-        errors = 6;
+        textPin.setDocument(new JTextFieldLimit(4));
+        errors = 8;
     }
 
     public void setFrame(GUI.Test.GUIFrame frame) {
@@ -38,6 +39,21 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         textEmail.setText(frame.cManager.getLoggedInUser().getEmail());
         textCardNBR.setText(frame.cManager.getLoggedInUser().getCardNumb());
         textPin.setText(frame.cManager.getLoggedInUser().getPin());
+        if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PenApp")){
+            cbAccountStatus.setSelectedItem("Pending Application");
+        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PenAct")){
+            cbAccountStatus.setSelectedItem("Pending Activation");
+        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("Disabl")){
+            cbAccountStatus.setSelectedItem("Disabled");
+        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("Active")){
+            cbAccountStatus.setSelectedItem("Activated");
+        }
+        
+        if(frame.cManager.getLoggedInUser().getUseStatus().equals("Char")){
+            cbUseStatus.setSelectedItem("Charging");
+        } else if(frame.cManager.getLoggedInUser().getUseStatus().equals("Idle")){
+            cbUseStatus.setSelectedItem("Idle");
+        }
     }
     
     /**
@@ -68,9 +84,9 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         labErrorEmail = new javax.swing.JLabel();
         labError1 = new javax.swing.JLabel();
         labError2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        cbAccountStatus = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        cbUseStatus = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         textCardNBR = new javax.swing.JTextField();
         labCardNBR = new javax.swing.JLabel();
@@ -152,14 +168,14 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         add(labError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 240, -1));
         labError2.setVisible(false);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pending Approval", "Pending Activation", "Disabled", "Activated" }));
-        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
+        cbAccountStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pending Approval", "Pending Activation", "Disabled", "Activated" }));
+        add(cbAccountStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
 
         jLabel2.setText("Account status ");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Charging", "Idle" }));
-        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
+        cbUseStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Charging", "Idle" }));
+        add(cbUseStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
 
         jLabel3.setText("Use status ");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
@@ -179,13 +195,36 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
                                          "Are you sure?", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
           frame.changePanel("card13");
+            System.out.println(""+cbAccountStatus.getSelectedItem());
         }
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
         inputCheck();
         if (errors == 0){
-            JOptionPane.showMessageDialog(null, "Your account information has been updated.", "Account information change successfull", JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Account information has been updated.", "Account information change successfull", JOptionPane.INFORMATION_MESSAGE);
+//            String[] newValues = new String[6];
+//            newValues[0] = textFirstName.getText();
+//            newValues[1] = textLastName.getText();
+//            newValues[2] = textRoad.getText();
+//            newValues[3] = textZip.getText();
+//            newValues[4] = textPhoneNBR.getText();
+//            newValues[5] = textEmail.getText();
+//            newValues[6] = textCardNBR.getText();
+//            newValues[7] = textPin.getText();
+//            if(cbAccountStatus.getSelectedItem().equals("Pending Approval")){
+//                newValues[8] = "PenApp";
+//            } else if(cbAccountStatus.getSelectedItem().equals("Pending Activation")){
+//                newValues[8] = "PenAct";
+//            } else if(cbAccountStatus.getSelectedItem().equals("Disabled")){
+//                newValues[8] = "Disabl";
+//            } else if (cbAccountStatus.getSelectedItem().equals("Activated")){
+//                newValues[8] = "Active";
+//            }
+            
+            
+            //frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 3, newValues);
+            updateCustomerInfo();
             frame.changePanel("card13");
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
@@ -193,7 +232,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
         }
-        errors = 6;
+        errors = 8;
     }//GEN-LAST:event_btnSaveActionPerformed
     
     private void inputCheck() {
@@ -255,6 +294,28 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
             labEmail.setForeground(Color.RED);
             labErrorEmail.setVisible(true);
         }
+        
+        if(textCardNBR.getText().equals("")&&cbAccountStatus.getSelectedIndex() == 0){
+            System.out.println("this runs");
+            labCardNBR.setForeground(Color.BLACK);
+            errors--;
+        } else if(!textCardNBR.getText().equals("")&&cbAccountStatus.getSelectedIndex() != 0){
+            System.out.println("no this runs");
+            labCardNBR.setForeground(Color.BLACK);
+            errors--;
+        } else{
+            labCardNBR.setForeground(Color.RED);
+        }
+        
+        if(textPin.getText().equals("")&&cbAccountStatus.getSelectedIndex() == 0){
+            labPin.setForeground(Color.BLACK);
+            errors--;
+        } else if(textPin.getText().matches("\\d\\d\\d\\d")&&cbAccountStatus.getSelectedIndex() != 0){
+            labPin.setForeground(Color.BLACK);
+            errors--;
+        } else{
+            labPin.setForeground(Color.RED);
+        }
     }
     
     // Metod found at StackOverflow.com, which validates the syntax of an emailadress
@@ -264,11 +325,40 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
        java.util.regex.Matcher m = p.matcher(email);
        return m.matches();
     }
+    
+    private void updateCustomerInfo(){
+        String[] newValues = new String[10];
+            newValues[0] = textFirstName.getText();
+            newValues[1] = textLastName.getText();
+            newValues[2] = textRoad.getText();
+            newValues[3] = textZip.getText();
+            newValues[4] = textPhoneNBR.getText();
+            newValues[5] = textEmail.getText();
+            newValues[6] = textCardNBR.getText();
+            newValues[7] = textPin.getText();
+            if(cbAccountStatus.getSelectedItem().equals("Pending Approval")){
+                newValues[8] = "PenApp";
+            } else if(cbAccountStatus.getSelectedItem().equals("Pending Activation")){
+                newValues[8] = "PenAct";
+            } else if(cbAccountStatus.getSelectedItem().equals("Disabled")){
+                newValues[8] = "Disabl";
+            } else if (cbAccountStatus.getSelectedItem().equals("Activated")){
+                newValues[8] = "Active";
+            }
+            
+            if(cbUseStatus.getSelectedItem().equals("Charging")){
+                newValues[9] = "Char";
+            } else if(cbUseStatus.getSelectedItem().equals("Idle")){
+                newValues[9] = "Idle";
+            }
+            
+            frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 5, newValues);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox cbAccountStatus;
+    private javax.swing.JComboBox cbUseStatus;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel labCardNBR;

@@ -87,22 +87,36 @@ ArrayList: 1, Password*/
                 + "on Billing.HardwareNumb = Terminal.HardwareNumb"
                 + "where TransactionNumb= ?"; 
 
-// ADMIN Set user data
-    //- ADMIN Get user data
-  //ArrayList: 1, Pin,2, Password,3, CardNumb,4, FirstName,5, LastName,6, Road,7, ZipCode,8, Email,9, PhoneNumb,10, AccountStatus,11, CustomerNumb
+/** ADMIN Set user data
+    - ADMIN Get user data
+  ArrayList: 1, FirstName, 2, LastName, 3, Road, 4, ZipCode, 5, PhoneNumb, 6, Email, 7, CardNumb, 8, Pin, 9, AccountStatus, 10, UseStatus*/
  public static final String ADMIN_SET_USER_DATA = "update Customer "
-                                                + "set Pin      = ?,"
-                                                + "Password     = ?,"
-                                                + "CardNumb     = ?,"
-                                                + "FirstName    = ?," 
-                                                + "LastName     = ?,"
-                                                + "Road         = ?,"
-                                                + "ZipCode      = ?,"
-                                                + "Email        = ?,"
-                                                + "PhoneNumb    = ?,"
-                                                + "AccountStatus= ? "
+                                                + "set FirstName= ?, "
+                                                + "LastName     = ?, "
+                                                + "Road         = ?, "
+                                                + "ZipCode      = ?, "
+                                                + "PhoneNumb    = ?, "
+                                                + "Email        = ?, "
+                                                + "CardNumb     = ?, "
+                                                + "Pin          = ?, "
+                                                + "AccountStatus= ?, "
+                                                + "UseStatus = ? "
                                                 + "where CustomerNumb = ?";
+ 
+ /** ADMIN Set user password
+    - ADMIN Get user data
+  ArrayList: 1, Password*/
+ public static final String ADMIN_SET_USER_PASSWORD = "update Customer "
+                                                    + "set Password= ? "
+                                                    + "where CustomerNumb = ?";
 
+ /** ADMIN Set user AccountStatus
+    - ADMIN Get user data
+  ArrayList: 1, AccountStatus*/
+ public static final String ADMIN_SET_USER_ACCOUNTSTATUS = "update Customer "
+                                                         + "set AccountStatus= ? "
+                                                         + "where CustomerNumb = ?";
+ 
 // ADMIN add new terminal                   
 //ArrayList: 1,Road,2, ZipCode,3, IPAddress         
  public static final String ADMIN_ADD_NEW_TERMINAL = "insert into Terminals (Road, ZipCode, IPAddress, InstallStatus, ChargingStatus) " 

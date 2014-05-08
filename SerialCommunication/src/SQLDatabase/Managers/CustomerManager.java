@@ -140,6 +140,25 @@ public class CustomerManager {
                 parameters.add(customerID);
                 System.out.println("CustomerManager updateInformation, Fire SQL statement, Case 4");
                 databaseManager.updateQuery(SQLLibrary.USER_SET_USER_PASSWORD, parameters);
+                break;
+            case 5:
+                parameters.addAll(Arrays.asList(newValues));
+                parameters.add(customerID);
+                System.out.println("CustomerManager updateInformation, Fire SQL statement, Case 5");
+                databaseManager.updateQuery(SQLLibrary.ADMIN_SET_USER_DATA, parameters);
+                break;
+            case 6:
+                parameters.add(newValues[0]);
+                parameters.add(customerID);
+                System.out.println("CustomerManager updateInformation, Fire SQL statement, Case 6");
+                databaseManager.updateQuery(SQLLibrary.ADMIN_SET_USER_PASSWORD, parameters);
+                break;
+            case 7:
+                parameters.add(newValues[0]);
+                parameters.add(customerID);
+                System.out.println("CustomerManager updateInformation, Fire SQL statement, Case 7");
+                databaseManager.updateQuery(SQLLibrary.ADMIN_SET_USER_ACCOUNTSTATUS, parameters);
+                break;
                 
         }
     }

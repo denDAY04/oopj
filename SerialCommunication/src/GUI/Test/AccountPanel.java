@@ -5,6 +5,7 @@
 package GUI.Test;
 
 import SQLDatabase.Managers.CustomerManager;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -72,6 +73,7 @@ public class AccountPanel extends javax.swing.JPanel {
         labUseStatus = new javax.swing.JLabel();
         labCAccStatus = new javax.swing.JLabel();
         labAccStatus = new javax.swing.JLabel();
+        btnDeleteAccount = new javax.swing.JButton();
 
         labTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labTitle.setText("Account Information");
@@ -141,6 +143,13 @@ public class AccountPanel extends javax.swing.JPanel {
         labAccStatus.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labAccStatus.setText("Account status");
 
+        btnDeleteAccount.setText("Delete account");
+        btnDeleteAccount.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteAccountActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -150,13 +159,13 @@ public class AccountPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(labTitle)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnTransactionHistory, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAddFunds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnChangePass, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEdit, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
-                            .addComponent(btnLogout))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnTransactionHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnAddFunds, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnChangePass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
+                            .addComponent(btnLogout)
+                            .addComponent(btnDeleteAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(36, 36, 36)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labName)
@@ -168,14 +177,14 @@ public class AccountPanel extends javax.swing.JPanel {
                             .addComponent(labBalance)
                             .addComponent(labCBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labCAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labUseStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labCUseStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(45, 45, 45))
+                            .addComponent(labCUseStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(labCAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(88, 88, 88))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(11, 11, 11)
                 .addComponent(labTitle)
                 .addGap(47, 47, 47)
@@ -207,23 +216,27 @@ public class AccountPanel extends javax.swing.JPanel {
                         .addGap(6, 6, 6)
                         .addComponent(labCBalance)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labAccStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labCAccStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labUseStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labCUseStatus)
-                    .addComponent(btnLogout))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnDeleteAccount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(labAccStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labCAccStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labUseStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labCUseStatus)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1, Short.MAX_VALUE)))
+                .addComponent(btnLogout)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         frame.changePanel("card1");
         frame.cManager.setLoggedInUser(null);
-        frame.setLoggedIn(false);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -242,9 +255,35 @@ public class AccountPanel extends javax.swing.JPanel {
         frame.changePanel("card15");
     }//GEN-LAST:event_btnAddFundsActionPerformed
 
+    private void btnDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAccountActionPerformed
+        if(frame.cManager.getLoggedInUser().getBalance() != 0){
+            JOptionPane.showMessageDialog(this, "Sorry, you can not delete your account\n"
+                                             + "as you still have some funds available.\n"
+                                             + "You will either have to use the remaining\n"
+                                             + "funds, or you can contact customers support.");
+        } else{
+            int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete your account?\n"
+                                                          + "If you choose to delete your account, you will\n"
+                                                          + "be logged out and you will not be able to login\n"
+                                                          + "or reenable your account unless you contact\n"
+                                                          + "customers support.\n "
+                                                          + "Are you sure you want to proceed deleting your "
+                                                          + "account\n","Are you sure?", JOptionPane.YES_NO_OPTION);
+            if (reply == JOptionPane.YES_OPTION) {
+                frame.changePanel("card1");
+                String[] newValues = new String[1];
+                newValues[0] = "Disabl";
+                frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 7, newValues);
+                frame.cManager.setLoggedInUser(null);
+            }
+        }
+          
+    }//GEN-LAST:event_btnDeleteAccountActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddFunds;
     private javax.swing.JButton btnChangePass;
+    private javax.swing.JButton btnDeleteAccount;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLogout;
     private javax.swing.JButton btnTransactionHistory;

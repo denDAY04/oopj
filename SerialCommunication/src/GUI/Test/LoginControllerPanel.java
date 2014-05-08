@@ -135,11 +135,16 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         textEmail.setText("");
         textPassword.setText("");
     } else if(frame.cManager.loggedInAs(textEmail.getText(), textPassword.getText()) == true){
-        labError.setVisible(false);
-        frame.changePanel("card2");
-        frame.setLoggedIn(true);
-        textEmail.setText("");
-        textPassword.setText("");
+        if(frame.cManager.getLoggedInUser().getAccountStatus().equals("Disabl")){
+            System.err.println("Account is disabled");
+            labError.setVisible(true);
+        } else{
+            labError.setVisible(false);
+            frame.changePanel("card2");
+            frame.setLoggedIn(true);
+            textEmail.setText("");
+            textPassword.setText("");
+        }
     } else {
         labError.setVisible(true);
     }
