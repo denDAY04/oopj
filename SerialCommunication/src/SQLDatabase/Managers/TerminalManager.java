@@ -112,8 +112,24 @@ public class TerminalManager {
         return terminal;
     }
     
-    public ArrayList<Terminal> getAllTerminals() {
-        return databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS, new ArrayList<Object>());
+    public ArrayList<String[]> getAllTerminals() {
+        ArrayList<Terminal> terminals;
+        ArrayList<String[]> result = new ArrayList<String[]>();
+        System.err.println("TerminalManager getAllTerminals : Fire SQL");
+        terminals =  databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_ALL_TERMINALS, new ArrayList<Object>());
+        if (terminals.isEmpty() == false) {
+            for (int i = 0; i < terminals.size(); ++i) {
+                String a = terminals.get(i).getHardwareNumb();
+                String b = terminals.get(i).getRoad();
+                String c = terminals.get(i).getZipCode();
+                String d = terminals.get(i).getIpAddress();
+                String e = terminals.get(i).getInstallStatus();
+                String f = terminals.get(i).getChargingStatus();
+                String g = terminals.get(i).getOfflineSince();
+                result.add(new String[]{a, b, c, d, e, f, g});
+            }
+        }
+        return result;
     }
 
     public void connectionFailed(String destination) {

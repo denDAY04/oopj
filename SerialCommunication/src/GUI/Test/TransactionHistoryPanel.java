@@ -17,7 +17,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class TransactionHistoryPanel extends javax.swing.JPanel {
 
-    DefaultTableModel tableModel;
+    private DefaultTableModel tableModel;
     
     private GUIFrame frame;
     //private ResultSetTableModel tableModel;
@@ -48,6 +48,24 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         this.frame = frame;
     }
     
+    public void loadTransactionsDetails() {
+        tableModel = (DefaultTableModel) tableBillingHistory.getModel();
+        /* Clear table and insert values */
+        clearTable(tableModel);
+        ArrayList<String[]> billingList = frame.bManager.getSimpleBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
+        for (String[] iter : billingList) {
+            tableModel.addRow(iter);
+        }
+        
+        tableModel = (DefaultTableModel) tableDepositHistory.getModel();
+        /* Clear table and insert values */
+        clearTable(tableModel);
+        ArrayList<String[]> depositList = frame.depManager.getSimpleDeposits(frame.cManager.getLoggedInUser().getCustomerNumb());
+        for(String[] iter : depositList) {
+            tableModel.addRow(iter);
+        }
+    }
+    
     private void clearTable(DefaultTableModel tableModle) {
         if (tableModle != null) {
             while (tableModle.getRowCount() != 0) {
@@ -72,7 +90,6 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         labInformation2 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
         btnDetails = new javax.swing.JButton();
-        btnUpdate = new javax.swing.JButton();
         tableScrollPane1 = new javax.swing.JScrollPane();
         tableDepositHistory = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
@@ -106,13 +123,6 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
 
         btnDetails.setText("Details");
 
-        btnUpdate.setText("Update");
-        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateActionPerformed(evt);
-            }
-        });
-
         tableDepositHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -138,10 +148,7 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(btnUpdate))
+                            .addComponent(btnBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(labTransactionHistory, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labInformation, javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labInformation2, javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,7 +161,7 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(tableScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
                             .addComponent(tableScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                        .addContainerGap(30, Short.MAX_VALUE))))
+                        .addContainerGap(20, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -176,9 +183,8 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnUpdate)
                     .addComponent(btnDetails))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnDetails.setVisible(false);
@@ -191,29 +197,10 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         frame.changePanel("card2");
     }//GEN-LAST:event_btnBackActionPerformed
 
-    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        tableModel = (DefaultTableModel) tableBillingHistory.getModel();
-        /* Clear table and insert values */
-        clearTable(tableModel);
-        ArrayList<String[]> billingList = frame.bManager.getSimpleBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
-        for (int i = 0; i < billingList.size(); ++i) {
-            tableModel.insertRow(i, billingList.get(i));
-        }
-        
-        tableModel = (DefaultTableModel) tableDepositHistory.getModel();
-        /* Clear table and insert values */
-        clearTable(tableModel);
-        ArrayList<String[]> depositList = frame.depManager.getSimpleDeposits(frame.cManager.getLoggedInUser().getCustomerNumb());
-        for(int i = 0; i < depositList.size(); ++i) {
-            tableModel.insertRow(i, depositList.get(i));
-        }
-    }//GEN-LAST:event_btnUpdateActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnDetails;
-    private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labInformation;

@@ -5,7 +5,6 @@
 package SQLDatabase.Managers;
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.Deposit;
-import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,26 +20,21 @@ public class DepositManager {
     }
     
     public ArrayList<String[]> getSimpleDeposits (String customerNumb){
-            ResultSet rs = null;
             ArrayList<Object> parametersbilling = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
             parametersbilling.add(customerNumb);   // add the customerNumb parameter
             ArrayList<Deposit> arr;                             // Temp ArrayList for holding all billings with full data
             ArrayList<String[]> result = new ArrayList();       // ArrayList for results containing only desired data
             System.out.println("DepositManager getDeposits, Fire SQL statement customerNumb: "+customerNumb);
-            try{
-                arr = databaseManager.getDeposits(SQLLibrary.USER_GET_DEPOSITS,parametersbilling);
-                Deposit activeDeposit; 
+            arr = databaseManager.getDeposits(SQLLibrary.USER_GET_DEPOSITS,parametersbilling);
+            if (arr.isEmpty() == false) {
                 for (int i = 0; i < arr.size(); ++i) {
-                    activeDeposit = arr.get(i);
-                    String a = activeDeposit.getDepositsNumb();
-                    String b = activeDeposit.getDepositsDate();
-                    String c = "" + (activeDeposit.getDepositAmount() / 100.0);
-                    String d = "" + (activeDeposit.getNewBalanceDeposit() / 100.0);
-                    String e = "**** **** **** " + activeDeposit.getLast4CardNumb();
+                    String a = arr.get(i).getDepositsNumb();
+                    String b = arr.get(i).getDepositsDate();
+                    String c = "" + (arr.get(i).getDepositAmount() / 100.0);
+                    String d = "" + (arr.get(i).getNewBalanceDeposit() / 100.0);
+                    String e = "**** **** **** " + arr.get(i).getLast4CardNumb();
                     result.add(new String[]{a, b, c, d, e});
                 }
-            } catch(NullPointerException e){
-                e.printStackTrace(); 
             }
             return result;
     }     

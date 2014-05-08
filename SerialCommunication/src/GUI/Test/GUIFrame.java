@@ -19,6 +19,8 @@ public class GUIFrame extends javax.swing.JFrame {
     protected DatabaseManager dbManager;
     protected BillingManager bManager;
     protected DepositManager depManager;
+    protected TerminalManager tManager; 
+    
     /**
      * Creates new form GUIFrame
      */
@@ -29,9 +31,11 @@ public class GUIFrame extends javax.swing.JFrame {
         cManager = new CustomerManager();
         bManager = new BillingManager();
         depManager = new DepositManager();
+        tManager = new TerminalManager();
         cManager.setDatabaseManager(dbManager);
         bManager.setDatabaseManager(dbManager);
         depManager.setDatabaseManager(dbManager);
+        tManager.setDatabaseManager(dbManager);
         
         
         loginControllerPanel.setFrame(this);
@@ -52,6 +56,7 @@ public class GUIFrame extends javax.swing.JFrame {
         editAccountAdminPanel.setFrame(this);
         changePasswordAdminPanel.setFrame(this);
         transactionHistoryAdminPanel.setFrame(this);
+        terminalListPanel.setFrame(this);
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountPanel, "card2");
@@ -71,6 +76,7 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(editAccountAdminPanel, "card16");
         cards.add(changePasswordAdminPanel, "card17");
         cards.add(transactionHistoryAdminPanel, "card18");
+        cards.add(terminalListPanel, "card19");
     }
     
     
@@ -96,6 +102,12 @@ public class GUIFrame extends javax.swing.JFrame {
             accountPanel.loadCustomerDetails();
             cardLayout.show(cards, "card2");
         } else if(panel.equals("card5") && isLoggedIn == false){
+            cardLayout.show(cards, panel);
+        }else if (panel.equals("card19")){
+            terminalListPanel.loadTerminalDetails();
+            cardLayout.show(cards, panel);
+        }else if (panel.equals("card10")){
+            transactionHistoryPanel.loadTransactionsDetails();
             cardLayout.show(cards, panel);
         } else{
             cardLayout.show(cards, panel);
@@ -139,6 +151,7 @@ public class GUIFrame extends javax.swing.JFrame {
         editAccountAdminPanel = new GUI.Test.EditAccountAdminPanel();
         changePasswordAdminPanel = new GUI.Test.ChangePasswordAdminPanel();
         transactionHistoryAdminPanel = new GUI.Test.TransactionHistoryAdminPanel();
+        terminalListPanel = new GUI.Test.TerminalListPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,6 +174,7 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(editAccountAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(changePasswordAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(transactionHistoryAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(terminalListPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -235,6 +249,7 @@ public class GUIFrame extends javax.swing.JFrame {
     private GUI.Test.PasswordFoundPanel passwordFoundPanel;
     private GUI.Test.SignupCongratulationsPanel signupCongratulationsPanel;
     private GUI.Test.SignupPanel signupPanel;
+    private GUI.Test.TerminalListPanel terminalListPanel;
     private GUI.Test.TransactionHistoryAdminPanel transactionHistoryAdminPanel;
     private GUI.Test.TransactionHistoryPanel transactionHistoryPanel;
     // End of variables declaration//GEN-END:variables

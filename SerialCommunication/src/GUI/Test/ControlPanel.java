@@ -4,8 +4,6 @@
  */
 package GUI.Test;
 
-import SQLDatabase.Managers.CustomerManager;
-
 /**
  *
  * @author Qess
@@ -79,6 +77,11 @@ public class ControlPanel extends javax.swing.JPanel {
         labTermManage.setText("Manage terminal statuses.");
 
         btnTermManage.setText("Terminal Manager");
+        btnTermManage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTermManageActionPerformed(evt);
+            }
+        });
 
         labFundsManage.setText("Add or withdraw funds from an account.");
 
@@ -147,6 +150,10 @@ public class ControlPanel extends javax.swing.JPanel {
     private void btnTransManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransManageActionPerformed
         frame.changePanel("card9");
     }//GEN-LAST:event_btnTransManageActionPerformed
+
+    private void btnTermManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTermManageActionPerformed
+        frame.changePanel("card19");
+    }//GEN-LAST:event_btnTermManageActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccManage;
