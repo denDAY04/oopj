@@ -44,16 +44,15 @@ public class SQLLibrary {
                                      + "where TransactionNumb= ?"; 
 
 
-// USER Set user data
-//ArrayList: 1, Password, 2, FirstName, 3, LastName, 4, Road, 5, ZipCode, 6, Email, 7, PhoneNumb, 8, CustomerNumb
- public static final String USER_SET_USER_DATA = "update Customer" 
-                                               + "set Password = ?," 
-                                               + "FirstName = ?," 
-                                               + "LastName  = ?,"
-                                               + "Road      = ?,"
-                                               + "ZipCode   = ?,"
-                                               + "Email     = ?,"
-                                               + "PhoneNumb = ?"
+/** USER Set user data
+ArrayList: 1, FirstName, 2, LastName, 3, Road, 4, ZipCode, 5, PhoneNumb, 6, Email*/
+ public static final String USER_SET_USER_DATA = "update Customer " 
+                                               + "set FirstName = ?, " 
+                                               + "LastName  = ?, "
+                                               + "Road      = ?, "
+                                               + "ZipCode   = ?, "                                
+                                               + "PhoneNumb = ?, "
+                                               + "Email     = ? "
                                                + "where CustomerNumb = ?";
 
     //       ****************************************************ADMIN QUERYS****************************************************    

@@ -157,6 +157,14 @@ public class EditAccountPanel extends javax.swing.JPanel {
         inputCheck();
         if (errors == 0){
             JOptionPane.showMessageDialog(null, "Your account information has been updated.", "Account information change successfull", JOptionPane.INFORMATION_MESSAGE);
+            String[] newValues = new String[6];
+            newValues[0] = textFirstName.getText();
+            newValues[1] = textLastName.getText();
+            newValues[2] = textRoad.getText();
+            newValues[3] = textZip.getText();
+            newValues[4] = textPhoneNBR.getText();
+            newValues[5] = textEmail.getText();
+            frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 3, newValues);
             frame.changePanel("card2");
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);

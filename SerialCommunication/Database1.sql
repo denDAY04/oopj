@@ -73,10 +73,10 @@ CREATE TABLE Rate (
 
 INSERT INTO Customer (Pin,Password,CardNumb,FirstName,LastName,Road,ZipCode,Email,PhoneNumb,Balance,AccountStatus,UseStatus)
 VALUES 
-   ('1337','password','9bfa0ee8','Hans','Hansen','vej 4','2730','hans@hansen.dk','25302308',10000,'active','idle'), -- CARD 1
-   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','Jens@hotmail.com','44596871',0,'penapp','idle'), 
-   ('1338','mor','0003','Niels','Nielsen','vej 6','3310','FunkyTown@gmail.com','88888888',50000,'penact','char'),
-   ('9999','andreas','0004','Anders','Andersen','vej 7','2400','Anders@tdc.dk','33108891',60000,'disabl','idle');
+   ('1337','password','9bfa0ee8','Hans','Hansen','vej 4','2730','hans@hansen.dk','25302308',10000,'Active','Idle'), -- CARD 1
+   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','Jens@hotmail.com','44596871',0,'PenApp','Idle'), 
+   ('1338','mor','0003','Niels','Nielsen','vej 6','3310','FunkyTown@gmail.com','88888888',50000,'PenAct','Char'),
+   ('9999','andreas','0004','Anders','Andersen','vej 7','2400','Anders@tdc.dk','33108891',60000,'Disabl','Idle');
 
 
 INSERT INTO Terminals (Road ,ZipCode,IPAddress,InstallStatus,ChargingStatus)

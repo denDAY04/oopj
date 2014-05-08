@@ -21,13 +21,16 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labTitle" min="-2" max="-2" attributes="0"/>
                   <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="btnTransactionHistory" max="32767" attributes="0"/>
-                          <Component id="btnAddFunds" max="32767" attributes="0"/>
-                          <Component id="btnChangePass" max="32767" attributes="0"/>
-                          <Component id="btnEdit" pref="134" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="btnTransactionHistory" max="32767" attributes="0"/>
+                              <Component id="btnAddFunds" max="32767" attributes="0"/>
+                              <Component id="btnChangePass" max="32767" attributes="0"/>
+                              <Component id="btnEdit" pref="134" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="btnLogout" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labName" min="-2" max="-2" attributes="0"/>
                           <Component id="labCName" min="-2" pref="181" max="-2" attributes="0"/>
@@ -37,15 +40,14 @@
                           <Component id="labCEmail" min="-2" pref="170" max="-2" attributes="0"/>
                           <Component id="labBalance" min="-2" max="-2" attributes="0"/>
                           <Component id="labCBalance" min="-2" pref="60" max="-2" attributes="0"/>
+                          <Component id="labAccStatus" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                          <Component id="labCAccStatus" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
+                          <Component id="labUseStatus" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
+                          <Component id="labCUseStatus" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
-              <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -90,9 +92,18 @@
                       <Component id="labCBalance" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="32" max="32767" attributes="0"/>
-              <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
+              <Component id="labAccStatus" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="labCAccStatus" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="labUseStatus" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="labCUseStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnLogout" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -197,6 +208,32 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnLogoutActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labCUseStatus">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labUseStatus">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Use status"/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labCAccStatus">
+      <Properties>
+        <Property name="text" type="java.lang.String" value=" "/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labAccStatus">
+      <Properties>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Tahoma" size="11" style="1"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="Account status"/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>

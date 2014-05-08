@@ -78,6 +78,7 @@ public class GUIFrame extends javax.swing.JFrame {
     public void changePanel(String panel){
         
         if(panel.equals("card2")){
+            updateUser();
             accountPanel.loadCustomerDetails();
             cardLayout.show(cards, panel);
         } else if(panel.equals("card8")){

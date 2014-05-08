@@ -66,6 +66,10 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         labErrorEmail = new javax.swing.JLabel();
         labError1 = new javax.swing.JLabel();
         labError2 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jComboBox2 = new javax.swing.JComboBox();
+        jLabel3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -141,6 +145,18 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         labError2.setText("Please revise, and then try again.");
         add(labError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 240, -1));
         labError2.setVisible(false);
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pending Approval", "Pending Activation", "Disabled", "Activated" }));
+        add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, -1, -1));
+
+        jLabel2.setText("Account status ");
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, -1, -1));
+
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Charging", "Idle" }));
+        add(jComboBox2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, -1, -1));
+
+        jLabel3.setText("Use status ");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -237,6 +253,10 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSave;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel labEmail;
     private javax.swing.JLabel labError1;
     private javax.swing.JLabel labError2;
