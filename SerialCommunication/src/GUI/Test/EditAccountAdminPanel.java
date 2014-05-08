@@ -36,6 +36,8 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         textZip.setText(frame.cManager.getLoggedInUser().getZipCode());
         textPhoneNBR.setText(frame.cManager.getLoggedInUser().getPhoneNumb());
         textEmail.setText(frame.cManager.getLoggedInUser().getEmail());
+        textCardNBR.setText(frame.cManager.getLoggedInUser().getCardNumb());
+        textPin.setText(frame.cManager.getLoggedInUser().getPin());
     }
     
     /**
@@ -70,6 +72,10 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         jComboBox2 = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
+        textCardNBR = new javax.swing.JTextField();
+        labCardNBR = new javax.swing.JLabel();
+        textPin = new javax.swing.JTextField();
+        labPin = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -120,7 +126,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
                 btnSaveActionPerformed(evt);
             }
         });
-        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 350, -1, -1));
+        add(btnSave, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 390, -1, -1));
 
         btnBack.setText("Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +134,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
                 btnBackActionPerformed(evt);
             }
         });
-        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 350, 60, -1));
+        add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 390, 60, -1));
 
         labErrorEmail.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         labErrorEmail.setForeground(new java.awt.Color(255, 0, 0));
@@ -138,12 +144,12 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
 
         labError1.setForeground(new java.awt.Color(255, 0, 0));
         labError1.setText("Some of the fields are not filled in correctly.");
-        add(labError1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 290, 230, -1));
+        add(labError1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 350, 230, -1));
         labError1.setVisible(false);
 
         labError2.setForeground(new java.awt.Color(255, 0, 0));
         labError2.setText("Please revise, and then try again.");
-        add(labError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 310, 240, -1));
+        add(labError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 370, 240, -1));
         labError2.setVisible(false);
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pending Approval", "Pending Activation", "Disabled", "Activated" }));
@@ -157,6 +163,14 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
 
         jLabel3.setText("Use status ");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 210, -1, -1));
+        add(textCardNBR, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 290, 80, -1));
+
+        labCardNBR.setText("Card number");
+        add(labCardNBR, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 270, -1, -1));
+        add(textPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 290, 70, -1));
+
+        labPin.setText("Pin code");
+        add(labPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -257,6 +271,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
     private javax.swing.JComboBox jComboBox2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel labCardNBR;
     private javax.swing.JLabel labEmail;
     private javax.swing.JLabel labError1;
     private javax.swing.JLabel labError2;
@@ -265,13 +280,16 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labInformation;
     private javax.swing.JLabel labLastName;
     private javax.swing.JLabel labPhoneNBR;
+    private javax.swing.JLabel labPin;
     private javax.swing.JLabel labRoad;
     private javax.swing.JLabel labSignUp;
     private javax.swing.JLabel labZip;
+    private javax.swing.JTextField textCardNBR;
     private javax.swing.JTextField textEmail;
     private javax.swing.JTextField textFirstName;
     private javax.swing.JTextField textLastName;
     private javax.swing.JTextField textPhoneNBR;
+    private javax.swing.JTextField textPin;
     private javax.swing.JTextField textRoad;
     private javax.swing.JTextField textZip;
     // End of variables declaration//GEN-END:variables

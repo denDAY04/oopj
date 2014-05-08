@@ -30,20 +30,22 @@
                                       <Component id="btnChangePass" max="32767" attributes="0"/>
                                       <Component id="btnEdit" pref="134" max="32767" attributes="0"/>
                                   </Group>
-                                  <EmptySpace min="36" pref="36" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="labName" min="-2" max="-2" attributes="0"/>
                                       <Component id="labCName" min="-2" pref="181" max="-2" attributes="0"/>
                                       <Component id="labCardNumber" min="-2" max="-2" attributes="0"/>
-                                      <Component id="labCCardNumber" min="-2" pref="60" max="-2" attributes="0"/>
                                       <Component id="labEmail" min="-2" max="-2" attributes="0"/>
                                       <Component id="labCEmail" min="-2" pref="170" max="-2" attributes="0"/>
                                       <Component id="labBalance" min="-2" max="-2" attributes="0"/>
                                       <Component id="labCBalance" min="-2" pref="60" max="-2" attributes="0"/>
                                       <Component id="labAccStatus" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
-                                      <Component id="labCAccStatus" alignment="0" min="-2" pref="125" max="-2" attributes="0"/>
                                       <Component id="labUseStatus" alignment="0" min="-2" pref="93" max="-2" attributes="0"/>
                                       <Component id="labCUseStatus" alignment="0" min="-2" pref="102" max="-2" attributes="0"/>
+                                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="labCCardNumber" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="labCAccStatus" alignment="0" pref="125" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
@@ -113,7 +115,7 @@
               <Component id="labUseStatus" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="labCUseStatus" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="11" max="32767" attributes="0"/>
+              <EmptySpace pref="15" max="32767" attributes="0"/>
               <Component id="btnLogout" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -192,7 +194,7 @@
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="11" style="1"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Card number"/>
+        <Property name="text" type="java.lang.String" value="Card number and pin"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="labCCardNumber">

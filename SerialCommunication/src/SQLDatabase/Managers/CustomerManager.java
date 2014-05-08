@@ -135,6 +135,12 @@ public class CustomerManager {
                 System.out.println("CustomerManager updateInformation, Fire SQL statement, Case 3");
                 databaseManager.updateQuery(SQLLibrary.USER_SET_USER_DATA, parameters);
                 break;
+            case 4:
+                parameters.add(newValues[0]);
+                parameters.add(customerID);
+                System.out.println("CustomerManager updateInformation, Fire SQL statement, Case 4");
+                databaseManager.updateQuery(SQLLibrary.USER_SET_USER_PASSWORD, parameters);
+                
         }
     }
    

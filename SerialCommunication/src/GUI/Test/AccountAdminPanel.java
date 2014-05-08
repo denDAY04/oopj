@@ -26,7 +26,7 @@ public class AccountAdminPanel extends javax.swing.JPanel {
         labCName.setText(frame.cManager.getLoggedInUser().getFirstName()+" "+
                          frame.cManager.getLoggedInUser().getLastName());
         labCEmail.setText(frame.cManager.getLoggedInUser().getEmail());
-        labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb());
+        labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb()+" , "+frame.cManager.getLoggedInUser().getPin());
         labCBalance.setText(frame.cManager.getLoggedInUser().getBalance()*0.01+"");
         if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PenApp")){
             labCAccStatus.setText("Pending Approval");
@@ -117,7 +117,7 @@ public class AccountAdminPanel extends javax.swing.JPanel {
         labCEmail.setText(" ");
 
         labCardNumber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        labCardNumber.setText("Card number");
+        labCardNumber.setText("Card number and pin");
 
         labCCardNumber.setText(" ");
 
@@ -167,15 +167,16 @@ public class AccountAdminPanel extends javax.swing.JPanel {
                                         .addComponent(labName)
                                         .addComponent(labCName, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(labCardNumber)
-                                        .addComponent(labCCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(labEmail)
                                         .addComponent(labCEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(labBalance)
                                         .addComponent(labCBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(labAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(labCAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(labUseStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(labCUseStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(labCUseStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(labCCardNumber, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(labCAccStatus, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE))))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)))))
@@ -227,7 +228,7 @@ public class AccountAdminPanel extends javax.swing.JPanel {
                 .addComponent(labUseStatus)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labCUseStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
                 .addComponent(btnLogout)
                 .addContainerGap())
         );

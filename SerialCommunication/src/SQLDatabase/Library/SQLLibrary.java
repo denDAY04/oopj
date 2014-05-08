@@ -54,6 +54,12 @@ ArrayList: 1, FirstName, 2, LastName, 3, Road, 4, ZipCode, 5, PhoneNumb, 6, Emai
                                                + "PhoneNumb = ?, "
                                                + "Email     = ? "
                                                + "where CustomerNumb = ?";
+ 
+ /** USER Set user data
+ArrayList: 1, Password*/
+ public static final String USER_SET_USER_PASSWORD = "update Customer " 
+                                               + "set Password = ? "
+                                               + "where CustomerNumb = ?";
 
     //       ****************************************************ADMIN QUERYS****************************************************    
  // ADMIN Get user data
