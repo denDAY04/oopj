@@ -150,6 +150,15 @@ public class EditAccountPanel extends javax.swing.JPanel {
                                          "Are you sure?", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
           frame.changePanel("card2");
+          labError1.setVisible(false);
+          labError2.setVisible(false);
+          labErrorEmail.setVisible(false);
+          labFirstName.setForeground(Color.BLACK);
+          labLastName.setForeground(Color.BLACK);
+          labRoad.setForeground(Color.BLACK);
+          labZip.setForeground(Color.BLACK);
+          labPhoneNBR.setForeground(Color.BLACK);
+          labEmail.setForeground(Color.BLACK);
         }
     }//GEN-LAST:event_btnBackActionPerformed
 
