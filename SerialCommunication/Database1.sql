@@ -74,7 +74,8 @@ CREATE TABLE Rate (
 INSERT INTO Customer (Pin,Password,CardNumb,FirstName,LastName,Road,ZipCode,Email,PhoneNumb,Balance,AccountStatus,UseStatus)
 VALUES 
    ('1337','password','9bfa0ee8','Hans','Hansen','vej 4','2730','hans@hansen.dk','25302308',10000,'Active','Idle'), -- CARD 1
-   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','Jens@hotmail.com','44596871',0,'PenApp','Idle'), 
+   ('1235','password','cba6a213','Hans','Jensen','vej 8','5530','hansemand@hotmail.com','44592271',0,'Active','Idle'),   
+   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','Jens@hotmail.com','44596871',0,'PenApp','Idle'),    
    ('1338','mor','0003','Niels','Nielsen','vej 6','3310','FunkyTown@gmail.com','88888888',50000,'PenAct','Char'),
    ('9999','andreas','0004','Anders','Andersen','vej 7','2400','Anders@tdc.dk','33108891',60000,'Disabl','Idle');
 

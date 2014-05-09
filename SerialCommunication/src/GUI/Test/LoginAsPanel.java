@@ -6,6 +6,8 @@ package GUI.Test;
 
 import GUI.*;
 import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
 
 /**
  *
@@ -15,11 +17,13 @@ public class LoginAsPanel extends javax.swing.JPanel {
     private GUIFrame frame;
     private boolean inputError;
     private int errors = 1;
+    private DefaultListModel listModel;
     /**
      * Creates new form ForgotPassControllerPanel
      */
     public LoginAsPanel() {
         initComponents();
+        listModel = new DefaultListModel();
     }
 
     public void setFrame(GUI.Test.GUIFrame frame) {
@@ -42,6 +46,11 @@ public class LoginAsPanel extends javax.swing.JPanel {
         btnBack = new javax.swing.JButton();
         labErrorEmail = new javax.swing.JLabel();
         btnNext = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listCustomers = new javax.swing.JList();
+        btnUpdate = new javax.swing.JButton();
+        textSearch = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
 
         labTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labTitle.setText("Edit Customer Account");
@@ -68,25 +77,45 @@ public class LoginAsPanel extends javax.swing.JPanel {
             }
         });
 
+        jScrollPane1.setViewportView(listCustomers);
+
+        btnUpdate.setText("Update");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Search (First name)");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labInformation1)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnNext)
                         .addGap(26, 26, 26)
-                        .addComponent(btnBack))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(labEmail)
+                        .addComponent(btnBack)
                         .addGap(18, 18, 18)
-                        .addComponent(labErrorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labTitle))
-                .addContainerGap(90, Short.MAX_VALUE))
+                        .addComponent(btnUpdate))
+                    .addComponent(labTitle)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(labEmail)
+                                .addGap(18, 18, 18)
+                                .addComponent(labErrorEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addComponent(textSearch)))
+                    .addComponent(jScrollPane1))
+                .addContainerGap(159, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,14 +127,20 @@ public class LoginAsPanel extends javax.swing.JPanel {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labEmail)
-                    .addComponent(labErrorEmail))
+                    .addComponent(labErrorEmail)
+                    .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(32, 32, 32)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(textEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(textSearch, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnBack)
-                    .addComponent(btnNext))
-                .addContainerGap(82, Short.MAX_VALUE))
+                    .addComponent(btnNext)
+                    .addComponent(btnUpdate))
+                .addContainerGap())
         );
 
         labErrorEmail.setVisible(false);
@@ -120,13 +155,33 @@ public class LoginAsPanel extends javax.swing.JPanel {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         inputCheck();
-        if (errors == 0){
-            frame.cManager.admLoggedInAs(textEmail.getText());
+        if (errors == 0 && frame.cManager.admLoggedInAs(textEmail.getText()) == true){
+            labEmail.setForeground(Color.BLACK);
+            labErrorEmail.setVisible(false);
+            //frame.cManager.admLoggedInAs(textEmail.getText());
             frame.changePanel("card13");
             textEmail.setText("");
+        } else {
+            labEmail.setForeground(Color.RED);
+            labErrorEmail.setVisible(true);
         }
         errors = 1;
     }//GEN-LAST:event_btnNextActionPerformed
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        ArrayList<String> arr = frame.cManager.getCustomersByFirstName("%"+textSearch.getText()+"%");
+        listModel.clear();
+        if(arr.isEmpty() == false){
+            for (String customer : arr) {
+                listModel.addElement(customer);
+            }
+            listCustomers.setModel(listModel);
+        } else{
+            listModel.add(0, "No customer found - Try again");
+            listCustomers.setModel(listModel);
+        }
+        System.out.println(textSearch.getText());
+    }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void inputCheck(){
        if(!textEmail.getText().equals("")){
@@ -153,10 +208,15 @@ public class LoginAsPanel extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNext;
+    private javax.swing.JButton btnUpdate;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labEmail;
     private javax.swing.JLabel labErrorEmail;
     private javax.swing.JLabel labInformation1;
     private javax.swing.JLabel labTitle;
+    private javax.swing.JList listCustomers;
     private javax.swing.JTextField textEmail;
+    private javax.swing.JTextField textSearch;
     // End of variables declaration//GEN-END:variables
 }

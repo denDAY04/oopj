@@ -117,6 +117,13 @@ ArrayList: 1, Password*/
                                                          + "set AccountStatus= ? "
                                                          + "where CustomerNumb = ?";
  
+ /** ADMIN Search user FirstName
+  * ArrayList: 1, FirstName*/
+ public static final String ADMIN_SEARCH_USER_FIRSTNAME = "select * "
+                                                        + "from Customer "
+                                                        + "where UPPER(FirstName) "
+                                                        + "like UPPER(?)";
+ 
 // ADMIN add new terminal                   
 //ArrayList: 1,Road,2, ZipCode,3, IPAddress         
  public static final String ADMIN_ADD_NEW_TERMINAL = "insert into Terminals (Road, ZipCode, IPAddress, InstallStatus, ChargingStatus) " 

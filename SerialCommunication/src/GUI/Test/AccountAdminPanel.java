@@ -235,7 +235,7 @@ public class AccountAdminPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
-        frame.changePanel("card1");
+        frame.changePanel("card12");
         frame.cManager.setLoggedInUser(null);
         //frame.setLoggedIn(false);
     }//GEN-LAST:event_btnLogoutActionPerformed

@@ -219,6 +219,31 @@ public class CustomerManager {
    }
    
    /**
+    * Find the customer in the database associated with a given FirstName.
+    * 
+    * @param FirstName The firstname associated with the customer that is desired found.
+    * 
+    * @return An ArrayList of String[] containing FirstName,LastName and Email for each
+    * customer found.
+    */
+   public ArrayList<String> getCustomersByFirstName(String firstname) {
+       ArrayList<Customer> customers;
+       ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+       parameters.add(firstname);
+       ArrayList<String> result = new ArrayList();
+       customers = databaseManager.getCustomers(SQLLibrary.ADMIN_SEARCH_USER_FIRSTNAME, parameters);
+       if (customers.isEmpty() == false) {
+            for (int i = 0; i < customers.size(); ++i) {
+                String a = customers.get(i).getFirstName();
+                String b = customers.get(i).getLastName();
+                String c = customers.get(i).getEmail();
+                result.add(a+" "+b+", "+c);
+            }
+        }
+       return result;
+   }
+   
+   /**
     * Register a billing when a car has been charged.
     * 
     * CONSTRAINT: The order of the data in the parameter must follow a certain 
