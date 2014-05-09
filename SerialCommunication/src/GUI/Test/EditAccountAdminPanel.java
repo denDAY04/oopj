@@ -39,19 +39,19 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         textEmail.setText(frame.cManager.getLoggedInUser().getEmail());
         textCardNBR.setText(frame.cManager.getLoggedInUser().getCardNumb());
         textPin.setText(frame.cManager.getLoggedInUser().getPin());
-        if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PenApp")){
+        if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PENAPP")){
             cbAccountStatus.setSelectedItem("Pending Application");
-        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PenAct")){
+        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PENACT")){
             cbAccountStatus.setSelectedItem("Pending Activation");
-        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("Disabl")){
+        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("DISABL")){
             cbAccountStatus.setSelectedItem("Disabled");
-        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("Active")){
+        } else if(frame.cManager.getLoggedInUser().getAccountStatus().equals("ACTIVE")){
             cbAccountStatus.setSelectedItem("Activated");
         }
         
-        if(frame.cManager.getLoggedInUser().getUseStatus().equals("Char")){
+        if(frame.cManager.getLoggedInUser().getUseStatus().equals("CHAR")){
             cbUseStatus.setSelectedItem("Charging");
-        } else if(frame.cManager.getLoggedInUser().getUseStatus().equals("Idle")){
+        } else if(frame.cManager.getLoggedInUser().getUseStatus().equals("IDLE")){
             cbUseStatus.setSelectedItem("Idle");
         }
     }
@@ -337,19 +337,19 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
             newValues[6] = textCardNBR.getText();
             newValues[7] = textPin.getText();
             if(cbAccountStatus.getSelectedItem().equals("Pending Approval")){
-                newValues[8] = "PenApp";
+                newValues[8] = "PENAPP";
             } else if(cbAccountStatus.getSelectedItem().equals("Pending Activation")){
-                newValues[8] = "PenAct";
+                newValues[8] = "PENACT";
             } else if(cbAccountStatus.getSelectedItem().equals("Disabled")){
-                newValues[8] = "Disabl";
+                newValues[8] = "DISABL";
             } else if (cbAccountStatus.getSelectedItem().equals("Activated")){
-                newValues[8] = "Active";
+                newValues[8] = "ACTIVE";
             }
             
             if(cbUseStatus.getSelectedItem().equals("Charging")){
-                newValues[9] = "Char";
+                newValues[9] = "CHAR";
             } else if(cbUseStatus.getSelectedItem().equals("Idle")){
-                newValues[9] = "Idle";
+                newValues[9] = "IDLE";
             }
             
             frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 5, newValues);

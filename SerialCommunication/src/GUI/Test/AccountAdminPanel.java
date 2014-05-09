@@ -28,19 +28,19 @@ public class AccountAdminPanel extends javax.swing.JPanel {
         labCEmail.setText(frame.cManager.getLoggedInUser().getEmail());
         labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb()+" , "+frame.cManager.getLoggedInUser().getPin());
         labCBalance.setText(frame.cManager.getLoggedInUser().getBalance()*0.01+"");
-        if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PenApp")){
+        if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PENAPP")){
             labCAccStatus.setText("Pending Approval");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("PenAct")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("PENACT")){
             labCAccStatus.setText("Pending Activation");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("Disabl")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("DISABL")){
             labCAccStatus.setText("Disabled");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("Active")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("ACTIVE")){
             labCAccStatus.setText("Activated");
         }
         
-        if(frame.cManager.getLoggedInUser().getUseStatus().equals("Char")){
+        if(frame.cManager.getLoggedInUser().getUseStatus().equals("CHAR")){
             labCUseStatus.setText("Charging");
-        } else if (frame.cManager.getLoggedInUser().getUseStatus().equals("Idle")){
+        } else if (frame.cManager.getLoggedInUser().getUseStatus().equals("IDLE")){
             labCUseStatus.setText("Idle");
         }
         
