@@ -29,60 +29,17 @@
                           <Component id="labChargingStationList" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="labInformation" alignment="0" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="387" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Component id="btnBack" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnAddNewTerminal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnEditTerminal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
           <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="tableScrollPane" alignment="0" min="-2" pref="656" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" attributes="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="textAddress" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
-                                  <Component id="labAddress" alignment="0" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="separate" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="labZipCode" max="32767" attributes="0"/>
-                                  <Component id="textZipCode" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="labChargingStatus" max="32767" attributes="0"/>
-                                  <Component id="textChargingStatus" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="labOfflineSince" max="32767" attributes="0"/>
-                                  <Component id="textOfflineSince" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="labIPAddress" max="32767" attributes="0"/>
-                                  <Component id="textIPAddress" max="32767" attributes="0"/>
-                              </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="labInstallStatus" max="32767" attributes="0"/>
-                                  <Component id="textInstallStatus" max="32767" attributes="0"/>
-                              </Group>
-                          </Group>
-                          <Component id="labNewTerminalInstructions" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-              </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <Component id="tableScrollPane" min="-2" pref="656" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -95,32 +52,8 @@
               <Component id="labInformation" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="tableScrollPane" min="-2" pref="182" max="-2" attributes="0"/>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
-              <Component id="labNewTerminalInstructions" min="-2" max="-2" attributes="0"/>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="labAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="labZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="labChargingStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="labOfflineSince" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="labIPAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="labInstallStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="textAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textChargingStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textOfflineSince" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textIPAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textInstallStatus" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnEditTerminal" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnAddNewTerminal" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <EmptySpace pref="32" max="32767" attributes="0"/>
+              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -150,7 +83,7 @@
         <Component class="javax.swing.JTable" name="tableTerminalList">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.RADConnectionPropertyEditor">
-              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Title 1&quot;, &quot;Title 2&quot;, &quot;Title 3&quot;, &quot;Title 4&quot;, &quot;Title 5&quot;, &quot;Title 6&quot;, &quot;Title 7&quot;&#xa;    }&#xa;)&#xa;{public boolean isCellEditable(int row, int column){&#xa;    return false;&#xa; }&#xa;}&#xa;" type="code"/>
+              <Connection code="new javax.swing.table.DefaultTableModel(&#xa;    new Object [][] {&#xa;&#xa;    },&#xa;    new String [] {&#xa;        &quot;Title 1&quot;, &quot;Title 2&quot;, &quot;Title 3&quot;, &quot;Title 4&quot;, &quot;Title 5&quot; &#xa;    }&#xa;)&#xa;{public boolean isCellEditable(int row, int column){&#xa;    return false;&#xa; }&#xa;}&#xa;" type="code"/>
             </Property>
             <Property name="selectionModel" type="javax.swing.ListSelectionModel" editor="org.netbeans.modules.form.editors2.JTableSelectionModelEditor">
               <JTableSelectionModel selectionMode="0"/>
@@ -166,69 +99,6 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBackActionPerformed"/>
       </Events>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnEditTerminal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Edit selection"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditTerminalActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textAddress">
-    </Component>
-    <Component class="javax.swing.JLabel" name="labAddress">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Address"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textZipCode">
-    </Component>
-    <Component class="javax.swing.JLabel" name="labZipCode">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Zip code"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textChargingStatus">
-    </Component>
-    <Component class="javax.swing.JLabel" name="labChargingStatus">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Charging status"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textOfflineSince">
-    </Component>
-    <Component class="javax.swing.JLabel" name="labOfflineSince">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Offline since"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textIPAddress">
-    </Component>
-    <Component class="javax.swing.JLabel" name="labIPAddress">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="IP address"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JTextField" name="textInstallStatus">
-    </Component>
-    <Component class="javax.swing.JLabel" name="labInstallStatus">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Install status"/>
-      </Properties>
-    </Component>
-    <Component class="javax.swing.JButton" name="btnAddNewTerminal">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="Add new terminal"/>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddNewTerminalActionPerformed"/>
-      </Events>
-    </Component>
-    <Component class="javax.swing.JLabel" name="labNewTerminalInstructions">
-      <Properties>
-        <Property name="text" type="java.lang.String" value="If you wish to add a new terminal to the list fill in the fields &apos;Address&apos;, &apos;Zip Code&apos;, and &apos;IP address&apos;. Leave the others blank."/>
-      </Properties>
     </Component>
   </SubComponents>
 </Form>

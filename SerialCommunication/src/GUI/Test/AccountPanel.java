@@ -4,7 +4,6 @@
  */
 package GUI.Test;
 
-import SQLDatabase.Managers.CustomerManager;
 import javax.swing.JOptionPane;
 
 /**
@@ -74,6 +73,7 @@ public class AccountPanel extends javax.swing.JPanel {
         labCAccStatus = new javax.swing.JLabel();
         labAccStatus = new javax.swing.JLabel();
         btnDeleteAccount = new javax.swing.JButton();
+        btnTerminalList = new javax.swing.JButton();
 
         labTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labTitle.setText("Account Information");
@@ -150,6 +150,13 @@ public class AccountPanel extends javax.swing.JPanel {
             }
         });
 
+        btnTerminalList.setText("View all terminals");
+        btnTerminalList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTerminalListActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -165,8 +172,9 @@ public class AccountPanel extends javax.swing.JPanel {
                             .addComponent(btnChangePass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                             .addComponent(btnLogout)
-                            .addComponent(btnDeleteAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(36, 36, 36)
+                            .addComponent(btnDeleteAccount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnTerminalList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(labName)
                             .addComponent(labCName, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -219,6 +227,8 @@ public class AccountPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnDeleteAccount)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnTerminalList)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(labAccStatus)
@@ -280,12 +290,17 @@ public class AccountPanel extends javax.swing.JPanel {
           
     }//GEN-LAST:event_btnDeleteAccountActionPerformed
 
+    private void btnTerminalListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminalListActionPerformed
+        frame.changePanel("card20");
+    }//GEN-LAST:event_btnTerminalListActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddFunds;
     private javax.swing.JButton btnChangePass;
     private javax.swing.JButton btnDeleteAccount;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnLogout;
+    private javax.swing.JButton btnTerminalList;
     private javax.swing.JButton btnTransactionHistory;
     private javax.swing.JLabel labAccStatus;
     private javax.swing.JLabel labBalance;

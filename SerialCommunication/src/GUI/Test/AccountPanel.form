@@ -28,8 +28,9 @@
                           <Component id="btnEdit" alignment="1" pref="134" max="32767" attributes="0"/>
                           <Component id="btnLogout" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="btnDeleteAccount" alignment="0" max="32767" attributes="0"/>
+                          <Component id="btnTerminalList" alignment="0" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                      <EmptySpace pref="36" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Component id="labName" min="-2" max="-2" attributes="0"/>
                           <Component id="labCName" min="-2" pref="181" max="-2" attributes="0"/>
@@ -95,6 +96,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btnDeleteAccount" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="btnTerminalList" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
@@ -247,6 +250,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteAccountActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="btnTerminalList">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="View all terminals"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnTerminalListActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
