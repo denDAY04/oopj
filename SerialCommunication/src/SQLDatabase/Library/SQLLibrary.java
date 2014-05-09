@@ -127,13 +127,23 @@ ArrayList: 1, Password*/
 // ADMIN add new terminal                   
 //ArrayList: 1,Road,2, ZipCode,3, IPAddress         
  public static final String ADMIN_ADD_NEW_TERMINAL = "insert into Terminals (Road, ZipCode, IPAddress, InstallStatus, ChargingStatus) " 
-                                                   + "Values (?,?,?,'Pending deployment','Idle')";
+                                                   + "Values (?,?,?,'PENDEP','IDLE')";
 
 //ADMIN change terminal InstallStatus           
 //ArrayList: 1, InstallStatus, 2, HardwareNumb
- public static final String ADMIN_CHANGE_TERMINAL_INSTALLSTATUS  = "update Terminals "  
+ public static final String ADMIN_SET_TERMINAL_INSTALLSTATUS  = "update Terminals "  
                                                                  + "set InstallStatus  = ? "
                                                                  + "where HardwareNumb = ?";
+ 
+ public static final String ADMIN_SET_TERMINAL_ALL_DETAILS = "update Terminals "
+                                                                + "set Road = ?, "
+                                                                + "ZipCode = ?, "
+                                                                + "ChargingStatus = ?, "
+                                                                + "OfflineSince = ?, "
+                                                                + "IPAddress = ?, "
+                                                                + "InstallStatus = ? "
+                                                                + "where HardwareNumb = ?";
+         
 
     //       ****************************************************SYSTEM QUERYS****************************************************                
 // SYSTEM Validate customer   
@@ -190,7 +200,7 @@ ArrayList: 1, Password*/
   // System Create new customer
 //1, Password,2, FirstName,3, LastName,4, Road,5, ZipCode,6, Email,7, PhoneNumb,8, Balance,9, AccountStatus
  public static final String SYSTEM_CREATE_NEW_CUSTOMER = "insert into Customer (Password, FirstName, LastName, Road, ZipCode, Email, PhoneNumb, Balance, AccountStatus, UseStatus) "
-                                                       + "values (?,?,?,?,?,?,?,?,'PenApp', 'Idle')";
+                                                       + "values (?,?,?,?,?,?,?,?,'PENAPP', 'IDLE')";
 
  // System Set charging status (customer and Terminals)
     //--- Set customer use status
@@ -213,12 +223,12 @@ public static final String SYSTEM_GET_ALL_TERMINALS = "select * "
 
 
   public static final String SYSTEM_TERMINAL_RESET_OFFLINESINCE = "update Terminals  " 
-                                                               + "set OfflineSince = 'Online' "
+                                                               + "set OfflineSince = 'ONLINE' "
                                                                + "where IPAddress = ?"; 
 
   public static final String SYSTEM_TERMINAL_SET_OFFLINESINCE =   "UPDATE Terminals " +
                                                                     "SET OfflineSince = CASE " +
-                                                                    "WHEN OfflineSince='Online' " +
+                                                                    "WHEN OfflineSince='ONLINE' " +
                                                                     "THEN CURRENT_TIMESTAMP "+ 
                                                                     "ELSE OfflineSince " +
                                                                     "END " + 

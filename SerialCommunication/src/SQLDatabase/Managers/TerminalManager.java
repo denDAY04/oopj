@@ -10,6 +10,7 @@ import SerialCom.controller.EventManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.swing.Timer;
 
 
@@ -94,11 +95,36 @@ public class TerminalManager {
             case 4:     // Set install status
                 parameters.add(installStatus);
                 parameters.add(terminalID);
-                databaseManager.updateQuery(SQLLibrary.ADMIN_CHANGE_TERMINAL_INSTALLSTATUS, parameters);
+                databaseManager.updateQuery(SQLLibrary.ADMIN_SET_TERMINAL_INSTALLSTATUS, parameters);
                 break;
             default:
                 System.err.println("TerminalManager editTerminal: No suitible command found.");
         }
+    }
+    
+    /**
+     * Edit all information of a terminal except its ID number. 
+     * This is used from the admin's view of the list of terminals. 
+     * <p>
+     * CONSTRAINT: the order of the new values must follow as the list.
+     * <li>Address
+     * <li>Zip code
+     * <li>Charging status
+     * <li>OfflineSince
+     * <li>IP address
+     * <li>Install status
+     * <br><br>
+     * 
+     * @param newValues Array of Strings with all the new values. See constraint
+     * above. 
+     * @param terminalID ID number of the terminal to be edited. 
+     */
+    public void editFullTerminal(String[] newValues, int terminalID) {
+         ArrayList<Object> parameters = new ArrayList<Object>();
+         parameters.addAll(Arrays.asList(newValues));
+         parameters.add(terminalID);
+         databaseManager.updateQuery(SQLLibrary.ADMIN_SET_TERMINAL_ALL_DETAILS, parameters);
+         
     }
 
     public Terminal getTerminal(String terminalID) {
@@ -122,10 +148,10 @@ public class TerminalManager {
                 String a = terminals.get(i).getHardwareNumb();
                 String b = terminals.get(i).getRoad();
                 String c = terminals.get(i).getZipCode();
-                String d = terminals.get(i).getIpAddress();
-                String e = terminals.get(i).getInstallStatus();
-                String f = terminals.get(i).getChargingStatus();
-                String g = terminals.get(i).getOfflineSince();
+                String d = terminals.get(i).getChargingStatus();
+                String e = terminals.get(i).getOfflineSince();
+                String f = terminals.get(i).getIpAddress();
+                String g = terminals.get(i).getInstallStatus();
                 result.add(new String[]{a, b, c, d, e, f, g});
             }
         }

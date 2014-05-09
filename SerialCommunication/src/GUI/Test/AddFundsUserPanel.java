@@ -55,7 +55,7 @@ public class AddFundsUserPanel extends javax.swing.JPanel {
         
         /* Log deposit on database (also changes customer's balance) */
         Object[] depositData = {customerID, depositAmount, newBalance, externalRefNumb, lastFourDigits};
-        frame.cManager.registerDeposit(depositData);
+        frame.depManager.registerDeposit(depositData);
     }
 
     /**

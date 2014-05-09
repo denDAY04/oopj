@@ -33,6 +33,7 @@ public class EventManager implements FrameEventListener {
     private Packet packet;
     private CustomerManager customerManager;
     private TerminalManager terminalManager;
+    private BillingManager billingManager;
     private Timer resendTimer = new Timer(300, new TimerListener());  // resend request timer. Set hardware dependent timeout here.
     private int maxSendAttempt = 4;
     private int currentSendAttempt = 0;
@@ -74,6 +75,10 @@ public class EventManager implements FrameEventListener {
 
     public void setTerminalManager(TerminalManager terminalManager) {
         this.terminalManager = terminalManager;
+    }
+    
+    public void setBillingManager(BillingManager billingManager) {
+        this.billingManager = billingManager; 
     }
 
     /**
@@ -287,12 +292,12 @@ public class EventManager implements FrameEventListener {
                     the database.
                     */
                     if (command.equals("CS")) {
-                        newStatus[0] = "char";
+                        newStatus[0] = "CHAR";
                     } else {                          
-                        newStatus[0] = "idle";
+                        newStatus[0] = "IDLE";
                         /* Extract the billing data from the packet and log it in the database. */
                         String[] dataArr = exstractBillingData(cardNum, terminalID);
-                        customerManager.registerBilling(dataArr);
+                        billingManager.registerBilling(dataArr);
 
                     }
                     

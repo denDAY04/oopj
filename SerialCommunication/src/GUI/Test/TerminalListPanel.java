@@ -7,6 +7,9 @@
 package GUI.Test;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -27,12 +30,20 @@ public class TerminalListPanel extends javax.swing.JPanel {
         initComponents();
         tableModel = (DefaultTableModel) tableTerminalList.getModel();
         tableTerminalList.getColumnModel().getColumn(0).setHeaderValue("ID number");
+        tableTerminalList.getColumnModel().getColumn(0).setPreferredWidth(20);
         tableTerminalList.getColumnModel().getColumn(1).setHeaderValue("Address");
+        tableTerminalList.getColumnModel().getColumn(1).setPreferredWidth(20);
         tableTerminalList.getColumnModel().getColumn(2).setHeaderValue("Zip code");
-        tableTerminalList.getColumnModel().getColumn(3).setHeaderValue("IP address");
-        tableTerminalList.getColumnModel().getColumn(4).setHeaderValue("Install satus");
-        tableTerminalList.getColumnModel().getColumn(5).setHeaderValue("Charging status");
-        tableTerminalList.getColumnModel().getColumn(6).setHeaderValue("Offline since");
+        tableTerminalList.getColumnModel().getColumn(2).setPreferredWidth(20);
+        tableTerminalList.getColumnModel().getColumn(3).setHeaderValue("Charging status");
+        tableTerminalList.getColumnModel().getColumn(3).setPreferredWidth(35);
+        tableTerminalList.getColumnModel().getColumn(4).setHeaderValue("Offline since");
+        tableTerminalList.getColumnModel().getColumn(4).setPreferredWidth(30);
+        tableTerminalList.getColumnModel().getColumn(5).setHeaderValue("IP address");
+        tableTerminalList.getColumnModel().getColumn(5).setPreferredWidth(20);
+        tableTerminalList.getColumnModel().getColumn(6).setHeaderValue("Install status");
+        tableTerminalList.getColumnModel().getColumn(6).setPreferredWidth(30);
+        tableTerminalList.getSelectionModel().addListSelectionListener(new CustomSelectionListener());
     }
     
     public void setFrame(GUI.Test.GUIFrame frame) {
@@ -48,8 +59,39 @@ public class TerminalListPanel extends javax.swing.JPanel {
     }
     
     private void clearTable() {
+        /* First clear the selection in order to ensure that no erros occour due
+        to selection listener.
+        */
+        tableTerminalList.clearSelection();
         while(tableModel.getRowCount() != 0) {
             tableModel.removeRow(0);
+        }
+    }
+
+    private void clearIputFields() {
+        textAddress.setText("");
+        textZipCode.setText("");
+        textChargingStatus.setText("");
+        textOfflineSince.setText("");
+        textIPAddress.setText("");
+        textInstallStatus.setText("");
+    }
+    
+    class CustomSelectionListener implements ListSelectionListener {
+        public void valueChanged(ListSelectionEvent e) {
+            int row = tableTerminalList.getSelectedRow();
+            /* If no rows are selected, it is likely because they are being 
+            removed, so it should not try and collect data.
+            */
+            if(row == -1) {
+                return;
+            }
+            textAddress.setText((String)tableTerminalList.getValueAt(row, 1));
+            textZipCode.setText((String)tableTerminalList.getValueAt(row, 2));
+            textChargingStatus.setText((String)tableTerminalList.getValueAt(row, 3));
+            textOfflineSince.setText((String)tableTerminalList.getValueAt(row, 4));
+            textIPAddress.setText((String)tableTerminalList.getValueAt(row, 5));
+            textInstallStatus.setText((String)tableTerminalList.getValueAt(row, 6));
         }
     }
 
@@ -67,6 +109,21 @@ public class TerminalListPanel extends javax.swing.JPanel {
         tableScrollPane = new javax.swing.JScrollPane();
         tableTerminalList = new javax.swing.JTable();
         btnBack = new javax.swing.JButton();
+        btnEditTerminal = new javax.swing.JButton();
+        textAddress = new javax.swing.JTextField();
+        labAddress = new javax.swing.JLabel();
+        textZipCode = new javax.swing.JTextField();
+        labZipCode = new javax.swing.JLabel();
+        textChargingStatus = new javax.swing.JTextField();
+        labChargingStatus = new javax.swing.JLabel();
+        textOfflineSince = new javax.swing.JTextField();
+        labOfflineSince = new javax.swing.JLabel();
+        textIPAddress = new javax.swing.JTextField();
+        labIPAddress = new javax.swing.JLabel();
+        textInstallStatus = new javax.swing.JTextField();
+        labInstallStatus = new javax.swing.JLabel();
+        btnAddNewTerminal = new javax.swing.JButton();
+        labNewTerminalInstructions = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(402, 302));
 
@@ -88,6 +145,7 @@ public class TerminalListPanel extends javax.swing.JPanel {
         }
     }
     );
+    tableTerminalList.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
     tableScrollPane.setViewportView(tableTerminalList);
 
     btnBack.setText("Back");
@@ -97,6 +155,34 @@ public class TerminalListPanel extends javax.swing.JPanel {
         }
     });
 
+    btnEditTerminal.setText("Edit selection");
+    btnEditTerminal.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnEditTerminalActionPerformed(evt);
+        }
+    });
+
+    labAddress.setText("Address");
+
+    labZipCode.setText("Zip code");
+
+    labChargingStatus.setText("Charging status");
+
+    labOfflineSince.setText("Offline since");
+
+    labIPAddress.setText("IP address");
+
+    labInstallStatus.setText("Install status");
+
+    btnAddNewTerminal.setText("Add new terminal");
+    btnAddNewTerminal.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnAddNewTerminalActionPerformed(evt);
+        }
+    });
+
+    labNewTerminalInstructions.setText("If you wish to add a new terminal to the list fill in the fields 'Address', 'Zip Code', and 'IP address'. Leave the others blank.");
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -105,15 +191,49 @@ public class TerminalListPanel extends javax.swing.JPanel {
             .addContainerGap()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(tableScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                        .addComponent(btnBack))
-                    .addGap(39, 39, 39))
-                .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(labChargingStationList)
                         .addComponent(labInformation))
-                    .addContainerGap(117, Short.MAX_VALUE))))
+                    .addContainerGap(387, Short.MAX_VALUE))
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addComponent(btnBack)
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnAddNewTerminal)
+                    .addGap(18, 18, 18)
+                    .addComponent(btnEditTerminal)
+                    .addGap(73, 73, 73))))
+        .addGroup(layout.createSequentialGroup()
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(textAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(labAddress))
+                            .addGap(18, 18, 18)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labZipCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textZipCode))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labChargingStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textChargingStatus))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labOfflineSince, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textOfflineSince))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labIPAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textIPAddress))
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(labInstallStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(textInstallStatus)))
+                        .addComponent(labNewTerminalInstructions))))
+            .addGap(0, 0, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -124,23 +244,96 @@ public class TerminalListPanel extends javax.swing.JPanel {
             .addComponent(labInformation)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 64, Short.MAX_VALUE)
-            .addComponent(btnBack)
-            .addContainerGap())
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+            .addComponent(labNewTerminalInstructions)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(labAddress)
+                .addComponent(labZipCode)
+                .addComponent(labChargingStatus)
+                .addComponent(labOfflineSince)
+                .addComponent(labIPAddress)
+                .addComponent(labInstallStatus))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(textAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textChargingStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textOfflineSince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(textInstallStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(21, 21, 21)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnBack)
+                .addComponent(btnEditTerminal)
+                .addComponent(btnAddNewTerminal))
+            .addGap(20, 20, 20))
     );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
+        clearIputFields();
         clearTable();
         frame.changePanel("card11");
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnEditTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditTerminalActionPerformed
+        if(tableTerminalList.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this, "No terminal was selected for editing. ");
+            return;
+        }
+        int terminalID = Integer.parseInt((String)tableModel.getValueAt(tableTerminalList.getSelectedRow(), 0));
+        System.err.println("" + terminalID);
+        String address = textAddress.getText();
+        String zipCode = textZipCode.getText();
+        String chargingStatus = textChargingStatus.getText().toUpperCase();
+        String offlineSince = textOfflineSince.getText().toUpperCase();
+        String ipAddress = textIPAddress.getText();
+        String installStatus = textInstallStatus.getText().toUpperCase();
+        String[] arr = {address, zipCode, chargingStatus, offlineSince, ipAddress, installStatus};
+        for (String element : arr) {
+            if (element.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "One or more fields are empty. Could not edit data.");
+                return;
+            }
+        }
+        frame.tManager.editFullTerminal(arr, terminalID);
+        loadTerminalDetails();
+    }//GEN-LAST:event_btnEditTerminalActionPerformed
+
+    private void btnAddNewTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewTerminalActionPerformed
+        String address = textAddress.getText();
+        String zipCode = textZipCode.getText();
+        String ipAddress = textIPAddress.getText();
+        if (address.isEmpty() || zipCode.isEmpty() || ipAddress.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "One or more of the required fiels are empty.\n Could not create ne terminal.");
+            return;
+        }
+        frame.tManager.addTerminal(address, zipCode, ipAddress);
+        loadTerminalDetails();
+    }//GEN-LAST:event_btnAddNewTerminalActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAddNewTerminal;
     private javax.swing.JButton btnBack;
+    private javax.swing.JButton btnEditTerminal;
+    private javax.swing.JLabel labAddress;
     private javax.swing.JLabel labChargingStationList;
+    private javax.swing.JLabel labChargingStatus;
+    private javax.swing.JLabel labIPAddress;
     private javax.swing.JLabel labInformation;
+    private javax.swing.JLabel labInstallStatus;
+    private javax.swing.JLabel labNewTerminalInstructions;
+    private javax.swing.JLabel labOfflineSince;
+    private javax.swing.JLabel labZipCode;
     private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JTable tableTerminalList;
+    private javax.swing.JTextField textAddress;
+    private javax.swing.JTextField textChargingStatus;
+    private javax.swing.JTextField textIPAddress;
+    private javax.swing.JTextField textInstallStatus;
+    private javax.swing.JTextField textOfflineSince;
+    private javax.swing.JTextField textZipCode;
     // End of variables declaration//GEN-END:variables
 }

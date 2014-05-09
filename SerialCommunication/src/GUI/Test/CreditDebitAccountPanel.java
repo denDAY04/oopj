@@ -4,7 +4,6 @@
  */
 package GUI.Test;
 
-import GUI.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -179,7 +178,7 @@ public class CreditDebitAccountPanel extends javax.swing.JPanel {
         
         /* Log deposit on database (also changes customer's balance) */
         Object[] data = {customerNumb, amount, newBalance, externalRefNumb, lastFourDigits};
-        frame.cManager.registerDeposit(data);
+        frame.depManager.registerDeposit(data);
     }
     
     private void debitAccount() {
@@ -198,7 +197,7 @@ public class CreditDebitAccountPanel extends javax.swing.JPanel {
         
         /* Log deposit on database (also changes customer's balance) */
         Object[] data = {customerNumb, amount, newBalance, externalRefNumb, lastFourDigits};
-        frame.cManager.registerDeposit(data);
+        frame.depManager.registerDeposit(data);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

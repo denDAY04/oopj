@@ -221,15 +221,15 @@ public class CustomerManager {
    /**
     * Find the customer in the database associated with a given FirstName.
     * 
-    * @param FirstName The firstname associated with the customer that is desired found.
+    * @param firstName The firstname associated with the customer that is desired found.
     * 
     * @return An ArrayList of String[] containing FirstName,LastName and Email for each
     * customer found.
     */
-   public ArrayList<String> getCustomersByFirstName(String firstname) {
+   public ArrayList<String> getCustomersByFirstName(String firstName) {
        ArrayList<Customer> customers;
        ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
-       parameters.add(firstname);
+       parameters.add(firstName);
        ArrayList<String> result = new ArrayList();
        customers = databaseManager.getCustomers(SQLLibrary.ADMIN_SEARCH_USER_FIRSTNAME, parameters);
        if (customers.isEmpty() == false) {
@@ -241,57 +241,5 @@ public class CustomerManager {
             }
         }
        return result;
-   }
-   
-   /**
-    * Register a billing when a car has been charged.
-    * 
-    * CONSTRAINT: The order of the data in the parameter must follow a certain 
-    * pattern:
-    * <li>Customer number (int)
-    * <li>Terminal number (int)
-    * <li>Start time of charging (String length 25)
-    * <li>End time of charging (String length 25)
-    * <li>The amount of DKK to be billed (int)
-    * <li>The rate to which he is billed (DKK/kWh) (int)
-    * <li>The amount of kWh that was charged (int)
-    * <li>The new balance of the the customer after being billed (int)
-    * <br> <br>
-    * @param data See constraint above.
-    */
-   public void registerBilling(Object[] data) {
-       ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
-       parameters.addAll(Arrays.asList(data));
-       /* Create new billing entry in database, and edit customer's balance */
-       databaseManager.updateQuery(SQLLibrary.SYSTEM_LOG_NEW_BILLING, parameters);
-       ArrayList<Object> arr = new ArrayList();
-       arr.add(data[7]);                        // New balance
-       arr.add(data[0]);                        // Customer ID
-       databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, arr);
-       
-   }
-   
-   /**
-    * Register a deposit. 
-    * 
-    * CONSTRAINT: The order of the data in the parameter must follow a certain 
-    * pattern:
-    * <li>Customer number (int)
-    * <li>Amount of DKK deposited (int)
-    * <li>New balance after deposit (int)
-    * <li>External reference number (int)
-    * <li>Last four digits of credit card (int)
-    * <br><br>
-    * @param data See constraints above.
-    */
-   public void registerDeposit(Object[] data) {
-        ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
-        parameters.addAll(Arrays.asList(data));
-        /* Create new deposit entry in database, and edit customer's balance */
-        databaseManager.updateQuery(SQLLibrary.SYSTEM_LOG_DEPOSIT, parameters);
-        ArrayList<Object> arr = new ArrayList();
-        arr.add(data[2]);                        // New balance
-        arr.add(data[0]);                        // Customer ID
-        databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, arr);
    }
 }
