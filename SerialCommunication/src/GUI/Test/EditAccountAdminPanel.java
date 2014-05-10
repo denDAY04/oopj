@@ -92,6 +92,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         labCardNBR = new javax.swing.JLabel();
         textPin = new javax.swing.JTextField();
         labPin = new javax.swing.JLabel();
+        labErrorExistingEmail = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -110,6 +111,12 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
 
         textRoad.setNextFocusableComponent(textZip);
         add(textRoad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 187, -1));
+
+        textEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textEmailFocusLost(evt);
+            }
+        });
         add(textEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 187, -1));
 
         labEmail.setText("Email");
@@ -154,7 +161,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
 
         labErrorEmail.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         labErrorEmail.setForeground(new java.awt.Color(255, 0, 0));
-        labErrorEmail.setText("- not a valid email adress");
+        labErrorEmail.setText("- not a valid email address");
         add(labErrorEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 130, -1));
         labErrorEmail.setVisible(false);
 
@@ -187,6 +194,12 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
 
         labPin.setText("Pin code");
         add(labPin, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, -1, -1));
+
+        labErrorExistingEmail.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        labErrorExistingEmail.setForeground(new java.awt.Color(255, 0, 0));
+        labErrorExistingEmail.setText("- email is already in use");
+        add(labErrorExistingEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 130, -1));
+        labErrorExistingEmail.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -244,6 +257,28 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         }
         errors = 8;
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void textEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailFocusLost
+        if(isValidEmailAddress(textEmail.getText()) == true){
+           labErrorEmail.setVisible(false);
+           try{
+               if(frame.cManager.getCustomerByEmail(textEmail.getText()).getEmail().equals(frame.cManager.getLoggedInUser().getEmail())){
+                    labEmail.setForeground(Color.BLACK);
+                    labErrorExistingEmail.setVisible(false);
+               } else{
+                    labEmail.setForeground(Color.RED);
+                    labErrorExistingEmail.setVisible(true);
+               }
+           } catch(NullPointerException e){
+               System.out.println(e);
+               labEmail.setForeground(Color.BLACK);
+               labErrorExistingEmail.setVisible(false);
+           }
+       } else{
+           labErrorEmail.setVisible(true);
+           labEmail.setForeground(Color.RED);
+       }
+    }//GEN-LAST:event_textEmailFocusLost
     
     private void inputCheck() {
         if (!textFirstName.getText().equals("")){
@@ -291,19 +326,28 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
             labPhoneNBR.setForeground(Color.RED);
         }
         
-        if(!textEmail.getText().equals("")){
-            if (isValidEmailAddress(textEmail.getText()) == true){
-                labEmail.setForeground(Color.BLACK);
-                labErrorEmail.setVisible(false);
+        if(isValidEmailAddress(textEmail.getText()) == true){
+            try{
+                if(frame.cManager.getCustomerByEmail(textEmail.getText()).getEmail().equals(frame.cManager.getLoggedInUser().getEmail())){
+                    errors--;
+                }
+            } catch(NullPointerException e){
                 errors--;
-            } else{
-                labEmail.setForeground(Color.RED);
-                labErrorEmail.setVisible(true);
             }
-        } else{
-            labEmail.setForeground(Color.RED);
-            labErrorEmail.setVisible(true);
         }
+//        if(!textEmail.getText().equals("")){
+//            if (isValidEmailAddress(textEmail.getText()) == true){
+//                labEmail.setForeground(Color.BLACK);
+//                labErrorEmail.setVisible(false);
+//                errors--;
+//            } else{
+//                labEmail.setForeground(Color.RED);
+//                labErrorEmail.setVisible(true);
+//            }
+//        } else{
+//            labEmail.setForeground(Color.RED);
+//            labErrorEmail.setVisible(true);
+//        }
         
         if(textCardNBR.getText().equals("")&&cbAccountStatus.getSelectedIndex() == 0){
             System.out.println("this runs");
@@ -376,6 +420,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labError1;
     private javax.swing.JLabel labError2;
     private javax.swing.JLabel labErrorEmail;
+    private javax.swing.JLabel labErrorExistingEmail;
     private javax.swing.JLabel labFirstName;
     private javax.swing.JLabel labInformation;
     private javax.swing.JLabel labLastName;

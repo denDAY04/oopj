@@ -14,11 +14,13 @@ public class SignupPanel extends javax.swing.JPanel {
     
     private GUIFrame frame;
     private boolean inputError;
+    private int errors;
     /**
      * Creates new form LoginControllerPanel
      */
     public SignupPanel() {
         initComponents();
+        errors = 8;
     }
 
     public void setFrame(GUI.Test.GUIFrame frame) {
@@ -59,6 +61,7 @@ public class SignupPanel extends javax.swing.JPanel {
         labErrorConfirmPassword = new javax.swing.JLabel();
         labError1 = new javax.swing.JLabel();
         labError2 = new javax.swing.JLabel();
+        labErrorExistingEmail = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -85,6 +88,11 @@ public class SignupPanel extends javax.swing.JPanel {
         add(labCredentials, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 70, 150, -1));
 
         textEmail.setNextFocusableComponent(textPassword);
+        textEmail.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                textEmailFocusLost(evt);
+            }
+        });
         add(textEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 110, 187, -1));
 
         labEmail.setText("Email");
@@ -138,7 +146,7 @@ public class SignupPanel extends javax.swing.JPanel {
 
         labErrorEmail.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         labErrorEmail.setForeground(new java.awt.Color(255, 0, 0));
-        labErrorEmail.setText("- not a valid email adress");
+        labErrorEmail.setText("- not a valid email address");
         add(labErrorEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 130, -1));
         labErrorEmail.setVisible(false);
 
@@ -157,6 +165,12 @@ public class SignupPanel extends javax.swing.JPanel {
         labError2.setText("Please revise, and then try again.");
         add(labError2, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 310, 240, -1));
         labError2.setVisible(false);
+
+        labErrorExistingEmail.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
+        labErrorExistingEmail.setForeground(new java.awt.Color(255, 0, 0));
+        labErrorExistingEmail.setText("- email is already in use");
+        add(labErrorExistingEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 130, -1));
+        labErrorExistingEmail.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -166,20 +180,42 @@ public class SignupPanel extends javax.swing.JPanel {
 
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         inputCheck();
-        if (inputError == false){
+        if (errors == 0){
             registerUser();
             /* Set the user as logged in */
             String email = textEmail.getText();
+            System.out.println(frame.cManager.getCustomerByEmail(email).toString());
             frame.cManager.setLoggedInUser(frame.cManager.getCustomerByEmail(email));
             
             frame.changePanel("card4");
+            resetPage();
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
         } else{
             labError1.setVisible(inputError);
             labError2.setVisible(inputError);
         }
+        errors = 8;
     }//GEN-LAST:event_btnSubmitActionPerformed
+
+    private void textEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailFocusLost
+        System.err.println(errors);
+        if(isValidEmailAddress(textEmail.getText()) == true){
+           labErrorEmail.setVisible(false);
+           try{
+               frame.cManager.getCustomerByEmail(textEmail.getText());
+               labEmail.setForeground(Color.RED);
+               labErrorExistingEmail.setVisible(true);
+           } catch(NullPointerException e){
+               System.out.println(e);
+               labEmail.setForeground(Color.BLACK);
+               labErrorExistingEmail.setVisible(false);
+           }
+       } else{
+           labErrorEmail.setVisible(true);
+           labEmail.setForeground(Color.RED);
+       }
+    }//GEN-LAST:event_textEmailFocusLost
     
     private void resetPage(){
         textFirstName.setText("");
@@ -203,93 +239,91 @@ public class SignupPanel extends javax.swing.JPanel {
         labError1.setVisible(false);
         labError2.setVisible(false);
     }
+    
     private void inputCheck() {
         if (!textFirstName.getText().equals("")){
             labFirstName.setForeground(Color.BLACK);
-            inputError = false;
+            errors--;
         } else{
             labFirstName.setForeground(Color.RED);
-            inputError = true;
         }
         
         if (!textLastName.getText().equals("")){
             labLastName.setForeground(Color.BLACK);  
-            inputError = false;
+            errors--;
         } else{
             labLastName.setForeground(Color.RED);
-            inputError = true;
         }
         
         if (!textRoad.getText().equals("")){
             labRoad.setForeground(Color.BLACK);
-            inputError = false;
+            errors--;
         } else{
             labRoad.setForeground(Color.RED);
-            inputError = true;
         }
         
         if (!textZip.getText().equals("") && textZip.getText().length() == 4){
             try {
                 int zipcode = Integer.parseInt(textZip.getText());
                 labZip.setForeground(Color.BLACK);
-                inputError = false;
+                errors--;
             } catch(NumberFormatException e){
                 labZip.setForeground(Color.RED);
-                inputError = true;
             }
         } else{
             labZip.setForeground(Color.RED);
-            inputError = true;
         }
         
         if (!textPhoneNBR.getText().equals("") && textPhoneNBR.getText().length() == 8){
             try {
                 int phoneNBR = Integer.parseInt(textPhoneNBR.getText());
                 labPhoneNBR.setForeground(Color.BLACK);
-                inputError = false;
+                errors--;
             } catch(NumberFormatException e){
                 labPhoneNBR.setForeground(Color.RED);
-                inputError = true;
             }
         } else{
             labPhoneNBR.setForeground(Color.RED);
-            inputError = true;
         }
         
-        if(!textEmail.getText().equals("")){
-            if (isValidEmailAddress(textEmail.getText()) == true){
-                labEmail.setForeground(Color.BLACK);
-                labErrorEmail.setVisible(false);
-                inputError = false;
-            } else{
-                labEmail.setForeground(Color.RED);
-                labErrorEmail.setVisible(true);
-                inputError = true;
+        if(isValidEmailAddress(textEmail.getText()) == true){
+            try{
+                frame.cManager.getCustomerByEmail(textEmail.getText());
+            } catch(NullPointerException e){
+                errors--;
             }
-        } else{
-            labEmail.setForeground(Color.RED);
-            labErrorEmail.setVisible(true);
-            inputError = true;
         }
+//        if(!textEmail.getText().equals("")){
+//            if (isValidEmailAddress(textEmail.getText()) == true){
+//                labEmail.setForeground(Color.BLACK);
+//                labErrorEmail.setVisible(false);
+//                errors--;
+//            } else{
+//                labEmail.setForeground(Color.RED);
+//                labErrorEmail.setVisible(true);
+//            }
+//        } else{
+//            labEmail.setForeground(Color.RED);
+//            labErrorEmail.setVisible(true);
+//        }
         
         if(!textPassword.getText().equals("") && textPassword.getText().length() >= 4) {
             labPassword.setForeground(Color.BLACK);
-            inputError = false;
+            errors--;
         } else{
             labPassword.setForeground(Color.RED);
-            inputError = true;
         }
         
         if((!textConfirmPassword.getText().equals("")) && textConfirmPassword.getText().equals(textPassword.getText())) {
             labConfirmPassword.setForeground(Color.BLACK);
             labErrorConfirmPassword.setVisible(false);
-            inputError = false;
+            errors--;
         } else{
             labConfirmPassword.setForeground(Color.RED);
             labErrorConfirmPassword.setVisible(true);
-            inputError = true;
         }
     }
+    
     private void registerUser() {
         Object[] userData = new Object[8];
         userData[0] = textConfirmPassword.getText();
@@ -322,6 +356,7 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labError2;
     private javax.swing.JLabel labErrorConfirmPassword;
     private javax.swing.JLabel labErrorEmail;
+    private javax.swing.JLabel labErrorExistingEmail;
     private javax.swing.JLabel labFirstName;
     private javax.swing.JLabel labInformation;
     private javax.swing.JLabel labLastName;

@@ -142,6 +142,11 @@ public class Customer implements Serializable {
     }
 
     @Override
+    public String toString(){
+        String s = firstName+", "+lastName+", "+email;
+        return s;
+    }
+    @Override
     public int hashCode() {
         int hash = 3;
         hash =

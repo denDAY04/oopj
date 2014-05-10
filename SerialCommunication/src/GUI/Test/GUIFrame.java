@@ -124,8 +124,8 @@ public class GUIFrame extends javax.swing.JFrame {
     }
     
     private void updateUser(){
-        String email = cManager.getLoggedInUser().getEmail();
-        cManager.updateLoggedInCustomer(email);
+        String customerNumb = cManager.getLoggedInUser().getCustomerNumb();
+        cManager.updateLoggedInCustomer(customerNumb);
     }
 
     /**

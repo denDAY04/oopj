@@ -81,14 +81,14 @@ public class CustomerManager {
             }
     } 
     
-    public boolean updateLoggedInCustomer (String email){
+    public boolean updateLoggedInCustomer (String customerNumb){
             Customer customer = null;
             ArrayList<Object> parameterscostumer = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
-            parameterscostumer.add(email);   // add the email parameter
+            parameterscostumer.add(customerNumb);   // add the email parameter
             // do query in database (ArrayList: 1, email)
-            System.out.println("CustomerManager adminLoggedInAs email: "+email);
+            System.out.println("CustomerManager updateLoggedInCustomer customerNumb: "+customerNumb);
             try {
-                customer = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_EMAIL, parameterscostumer).get(0);
+                customer = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_CUSTOMERNUMB, parameterscostumer).get(0);
                 loggedInUser.setCustomer(customer);
                 return true;
             } catch (IndexOutOfBoundsException e) {
@@ -214,6 +214,8 @@ public class CustomerManager {
        ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_EMAIL, parameters);
        if (arr.isEmpty() == false) {
            customer = arr.get(0);
+       } else{
+           throw new NullPointerException("No customer found with this emailaddress");
        }
        return customer;
    }

@@ -141,7 +141,7 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         } else{
             labError.setVisible(false);
             frame.changePanel("card2");
-            frame.setLoggedIn(true);
+            //frame.setLoggedIn(true);
             textEmail.setText("");
             textPassword.setText("");
         }

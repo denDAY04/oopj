@@ -168,6 +168,10 @@ ArrayList: 1, Password*/
     public static final String SYSTEM_GET_CUSTOMER_BY_EMAIL = "select * " 
                                                      + "from Customer "
                                                      + "where Email = ?";
+    
+    public static final String SYSTEM_GET_CUSTOMER_BY_CUSTOMERNUMB = "select * " 
+                                                                   + "from Customer "
+                                                                   + "where CustomerNumb = ?";
  
  // SYSTEM create deposit
     //---Get old balance

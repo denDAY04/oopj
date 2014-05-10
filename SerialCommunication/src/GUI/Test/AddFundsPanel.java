@@ -8,6 +8,9 @@ package GUI.Test;
 
 import java.awt.Color;
 import java.awt.event.KeyEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -21,11 +24,23 @@ public class AddFundsPanel extends javax.swing.JPanel {
     private String wrongCardNBR = "9999999999999999";
     private ImageIcon icon;
     private boolean inputError;
+    private int errors;
+    private DateFormat dateFormat;
+    private Date date;
+    private int month;
+    private int year;
     /**
      * Creates new form AddFundsViewPanel
      */
     public AddFundsPanel() {
         initComponents();
+        errors = 5;
+        dateFormat = new SimpleDateFormat("MMyyyy");
+        date = new Date();
+        String monthYear = dateFormat.format(date);
+        month = Integer.parseInt(monthYear.substring(0, 2));
+        year = Integer.parseInt(monthYear.substring(3, 6));
+        
         textCardNumber1.setDocument(new JTextFieldLimit(4));
         textCardNumber2.setDocument(new JTextFieldLimit(4));
         textCardNumber3.setDocument(new JTextFieldLimit(4));
@@ -39,6 +54,9 @@ public class AddFundsPanel extends javax.swing.JPanel {
     }
     
     private void registerDeposit() {
+        //For debugging unexpected nullpointerexception
+        System.out.println(frame.cManager.getLoggedInUser().toString());
+        
         int customerID = Integer.parseInt(frame.cManager.getLoggedInUser().getCustomerNumb());
         int oldBalance  = frame.cManager.getLoggedInUser().getBalance();
         int depositAmount = Integer.parseInt(textAmount.getText())*100;
@@ -196,7 +214,7 @@ public class AddFundsPanel extends javax.swing.JPanel {
 
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         inputCheck();
-        if (inputError == false){
+        if (errors == 0){
             registerDeposit();
             JOptionPane.showMessageDialog(this, "The following amount has been added to your account balance.\n"+textAmount.getText()+" DKK");
             frame.changePanel("card5");
@@ -207,6 +225,7 @@ public class AddFundsPanel extends javax.swing.JPanel {
             //labError1.setVisible(inputError);
             //labError2.setVisible(inputError);
         }
+        errors = 5;
     }//GEN-LAST:event_btnAcceptActionPerformed
 
     private void textCardNumber1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCardNumber1KeyPressed
@@ -265,46 +284,48 @@ public class AddFundsPanel extends javax.swing.JPanel {
         if (cardNumber.equals(wrongCardNBR)){
             labError1.setVisible(true);
             labError2.setVisible(true);
-            inputError = true;
-            return;
         } else{
             labError1.setVisible(false);
             labError2.setVisible(false);
-            inputError = false;
+            errors--;
         }
             
         if (!cardNumber.matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
             labError1.setVisible(true);
             labError2.setVisible(true);
-            inputError = true;
-            return;
         } else{
             labError1.setVisible(false);
             labError2.setVisible(false);
-            inputError = false;
-      
+            errors--;  
         }
         
         if (!textCSC.getText().matches("\\d\\d\\d")){
             labError1.setVisible(true);
             labError2.setVisible(true);
-            inputError = true;
-            return;
         } else{
             labError1.setVisible(false);
             labError2.setVisible(false);
-            inputError = false;
+            errors--;
         }
         
         //                                 Regex: 100-999 or 1000-1999 or 2000
         if (!textAmount.getText().matches("[1-9][0-9][0-9]|[1][0-9][0-9][0-9]|[2][0][0][0]")){
             labValue.setForeground(Color.RED);
-            inputError = true;
-            return;
         } else{
             labValue.setForeground(Color.BLACK);
-            inputError = false;
-        }        
+            errors--;
+        } 
+     
+        int monthValue = (Integer) spinMonth.getValue();
+        int yearValue = (Integer) spinYear.getValue();
+        if(monthValue > month && yearValue >= year){
+            labMonth.setForeground(Color.BLACK);
+            labYear.setForeground(Color.BLACK);
+            errors--;
+        } else{
+            labMonth.setForeground(Color.RED);
+            labYear.setForeground(Color.RED);
+        }
     }
     
     private void resetFields(){
@@ -314,8 +335,8 @@ public class AddFundsPanel extends javax.swing.JPanel {
         textCardNumber4.setText("");
         textAmount.setText("");
         textCSC.setText("");
-        spinMonth.setValue(3);
-        spinYear.setValue(15);
+        spinMonth.setValue(month);
+        spinYear.setValue(year);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
