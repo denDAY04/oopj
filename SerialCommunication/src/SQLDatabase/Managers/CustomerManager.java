@@ -211,6 +211,7 @@ public class CustomerManager {
        ArrayList<Object> parameters = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
        parameters.add(email);
        Customer customer = null;
+       System.out.println("CustomerManager getCustomerByEmail Email: "+email);
        ArrayList<Customer> arr = databaseManager.getCustomers(SQLLibrary.SYSTEM_GET_CUSTOMER_BY_EMAIL, parameters);
        if (arr.isEmpty() == false) {
            customer = arr.get(0);

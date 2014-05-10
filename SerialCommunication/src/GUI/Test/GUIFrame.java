@@ -89,6 +89,9 @@ public class GUIFrame extends javax.swing.JFrame {
             updateUser();
             accountPanel.loadCustomerDetails();
             cardLayout.show(cards, panel);
+        } else if(panel.equals("card7")){
+            passwordFoundPanel.loadCustomerDetails();
+            cardLayout.show(cards, panel);
         } else if(panel.equals("card8")){
             editAccountPanel.loadCustomerDetails();
             cardLayout.show(cards, panel);

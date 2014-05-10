@@ -129,6 +129,7 @@ public class ForgotPassPanel extends javax.swing.JPanel {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         inputCheck();
         if (inputError == false){
+            frame.cManager.setLoggedInUser(frame.cManager.getCustomerByEmail(textEmail.getText().toLowerCase()));
             frame.changePanel("card7");
         }
     }//GEN-LAST:event_btnSubmitActionPerformed

@@ -226,26 +226,25 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         inputCheck();
         if (errors == 0){
             JOptionPane.showMessageDialog(null, "Account information has been updated.", "Account information change successfull", JOptionPane.INFORMATION_MESSAGE);
-//            String[] newValues = new String[6];
-//            newValues[0] = textFirstName.getText();
-//            newValues[1] = textLastName.getText();
-//            newValues[2] = textRoad.getText();
-//            newValues[3] = textZip.getText();
-//            newValues[4] = textPhoneNBR.getText();
-//            newValues[5] = textEmail.getText();
-//            newValues[6] = textCardNBR.getText();
-//            newValues[7] = textPin.getText();
-//            if(cbAccountStatus.getSelectedItem().equals("Pending Approval")){
-//                newValues[8] = "PenApp";
-//            } else if(cbAccountStatus.getSelectedItem().equals("Pending Activation")){
-//                newValues[8] = "PenAct";
-//            } else if(cbAccountStatus.getSelectedItem().equals("Disabled")){
-//                newValues[8] = "Disabl";
-//            } else if (cbAccountStatus.getSelectedItem().equals("Activated")){
-//                newValues[8] = "Active";
-//            }
-            
-            
+            String[] newValues = new String[6];
+            newValues[0] = textFirstName.getText();
+            newValues[1] = textLastName.getText();
+            newValues[2] = textRoad.getText();
+            newValues[3] = textZip.getText();
+            newValues[4] = textPhoneNBR.getText();
+            newValues[5] = textEmail.getText().toLowerCase();
+            newValues[6] = textCardNBR.getText();
+            newValues[7] = textPin.getText();
+            if(cbAccountStatus.getSelectedItem().equals("Pending Approval")){
+                newValues[8] = "PENAPP";
+            } else if(cbAccountStatus.getSelectedItem().equals("Pending Activation")){
+                newValues[8] = "PENACT";
+            } else if(cbAccountStatus.getSelectedItem().equals("Disabled")){
+                newValues[8] = "DISABL";
+            } else if (cbAccountStatus.getSelectedItem().equals("Activated")){
+                newValues[8] = "ACTIVE";
+            }
+                     
             //frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 3, newValues);
             updateCustomerInfo();
             frame.changePanel("card13");

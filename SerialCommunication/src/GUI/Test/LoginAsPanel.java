@@ -155,7 +155,7 @@ public class LoginAsPanel extends javax.swing.JPanel {
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         inputCheck();
-        if (errors == 0 && frame.cManager.admLoggedInAs(textEmail.getText()) == true){
+        if (errors == 0 && frame.cManager.admLoggedInAs(textEmail.getText().toLowerCase()) == true){
             labEmail.setForeground(Color.BLACK);
             labErrorEmail.setVisible(false);
             //frame.cManager.admLoggedInAs(textEmail.getText());

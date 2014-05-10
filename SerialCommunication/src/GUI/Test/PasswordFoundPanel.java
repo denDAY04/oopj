@@ -24,6 +24,9 @@ public class PasswordFoundPanel extends javax.swing.JPanel {
         this.frame = frame;
     }
 
+    public void loadCustomerDetails(){
+        labPasswordFound.setText(frame.cManager.getLoggedInUser().getPassword());
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -83,9 +86,14 @@ public class PasswordFoundPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
+        frame.cManager.setLoggedInUser(null);
         frame.changePanel("card1");
+        resetPage();
     }//GEN-LAST:event_btnOKActionPerformed
-
+    
+    private void resetPage(){
+        labPasswordFound.setText("");
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JLabel labInformation;
