@@ -65,7 +65,7 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labPassword">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Password (min. 4 characters)"/>
+        <Property name="text" type="java.lang.String" value="Password (4 - 30 characters)"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">

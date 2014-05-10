@@ -281,26 +281,48 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_textEmailFocusLost
     
     private void inputCheck() {
-        if (!textFirstName.getText().equals("")){
-            labFirstName.setForeground(Color.BLACK);
+        /*
+         * (?i) = Case Insensitive, [a-å] = any letter from a to å
+         * "+" = any combination of the previous, [a-å\\-\\s] = any letter from a-å incl "-" and " "
+         * "?" = the previous can appear once or none*/
+        if (textFirstName.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+")){
+           labFirstName.setForeground(Color.BLACK);
             errors--;
         } else{
             labFirstName.setForeground(Color.RED);
         }
-        
-        if (!textLastName.getText().equals("")){
+//        if (!textFirstName.getText().equals("")){
+//            labFirstName.setForeground(Color.BLACK);
+//            errors--;
+//        } else{
+//            labFirstName.setForeground(Color.RED);
+//        }
+
+        if (textLastName.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+")){
             labLastName.setForeground(Color.BLACK);  
             errors--;
         } else{
             labLastName.setForeground(Color.RED);
         }
-        
-        if (!textRoad.getText().equals("")){
+//        if (!textLastName.getText().equals("")){
+//            labLastName.setForeground(Color.BLACK);  
+//            errors--;
+//        } else{
+//            labLastName.setForeground(Color.RED);
+//        }
+
+        if (textRoad.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å\\d]+")){
             labRoad.setForeground(Color.BLACK);
             errors--;
         } else{
             labRoad.setForeground(Color.RED);
         }
+//        if (!textRoad.getText().equals("")){
+//            labRoad.setForeground(Color.BLACK);
+//            errors--;
+//        } else{
+//            labRoad.setForeground(Color.RED);
+//        }
         
         if (!textZip.getText().equals("") && textZip.getText().length() == 4){
             try {

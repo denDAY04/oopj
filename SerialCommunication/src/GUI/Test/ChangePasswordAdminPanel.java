@@ -111,7 +111,7 @@ public class ChangePasswordAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChangePassActionPerformed
     
     private void inputCheck() {
-        if(!textNewPass.getText().equals("") && textNewPass.getText().length() >= 4 && textNewPass.getText().length() <= 30) {
+        if(textNewPass.getText().matches("^\\S*") && textNewPass.getText().length() >= 4 && textNewPass.getText().length() <= 30) {
             labNewPass.setForeground(Color.BLACK);
             errors--;
         } else{

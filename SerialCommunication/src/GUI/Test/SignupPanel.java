@@ -78,7 +78,7 @@ public class SignupPanel extends javax.swing.JPanel {
         textFirstName.setNextFocusableComponent(textLastName);
         add(textFirstName, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 187, -1));
 
-        labPassword.setText("Password (min. 4 characters)");
+        labPassword.setText("Password (4 - 30 characters)");
         add(labPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 150, 180, -1));
 
         textRoad.setNextFocusableComponent(textZip);
@@ -241,26 +241,46 @@ public class SignupPanel extends javax.swing.JPanel {
     }
     
     private void inputCheck() {
-        if (!textFirstName.getText().equals("")){
-            labFirstName.setForeground(Color.BLACK);
+        /*
+         * (?i) = Case Insensitive, [a-å] = any letter from a to å
+         * "+" = any combination of the previous, [a-å\\-\\s] = any letter from a-å incl "-" and " "
+         * "?" = the previous can appear once or none*/
+        if (textFirstName.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+")){
+           labFirstName.setForeground(Color.BLACK);
             errors--;
         } else{
             labFirstName.setForeground(Color.RED);
         }
-        
-        if (!textLastName.getText().equals("")){
+//        if (!textFirstName.getText().equals("")){
+//            labFirstName.setForeground(Color.BLACK);
+//            errors--;
+//        } else{
+//            labFirstName.setForeground(Color.RED);
+//        }
+        if (textLastName.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+")){
             labLastName.setForeground(Color.BLACK);  
             errors--;
         } else{
             labLastName.setForeground(Color.RED);
         }
-        
-        if (!textRoad.getText().equals("")){
+//        if (!textLastName.getText().equals("")){
+//            labLastName.setForeground(Color.BLACK);  
+//            errors--;
+//        } else{
+//            labLastName.setForeground(Color.RED);
+//        }
+        if (textRoad.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å\\d]+")){
             labRoad.setForeground(Color.BLACK);
             errors--;
         } else{
             labRoad.setForeground(Color.RED);
         }
+//        if (!textRoad.getText().equals("")){
+//            labRoad.setForeground(Color.BLACK);
+//            errors--;
+//        } else{
+//            labRoad.setForeground(Color.RED);
+//        }
         
         if (!textZip.getText().equals("") && textZip.getText().length() == 4){
             try {
@@ -306,13 +326,18 @@ public class SignupPanel extends javax.swing.JPanel {
 //            labEmail.setForeground(Color.RED);
 //            labErrorEmail.setVisible(true);
 //        }
-        
-        if(!textPassword.getText().equals("") && textPassword.getText().length() >= 4) {
+        if(textPassword.getText().matches("^\\S*") && textPassword.getText().length() >= 4 && textPassword.getText().length() <= 30) {
             labPassword.setForeground(Color.BLACK);
             errors--;
         } else{
             labPassword.setForeground(Color.RED);
         }
+//        if(!textPassword.getText().equals("") && textPassword.getText().length() >= 4) {
+//            labPassword.setForeground(Color.BLACK);
+//            errors--;
+//        } else{
+//            labPassword.setForeground(Color.RED);
+//        }
         
         if((!textConfirmPassword.getText().equals("")) && textConfirmPassword.getText().equals(textPassword.getText())) {
             labConfirmPassword.setForeground(Color.BLACK);

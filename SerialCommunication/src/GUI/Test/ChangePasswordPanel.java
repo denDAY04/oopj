@@ -135,7 +135,7 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
             labErrorWrongPass.setVisible(true);
         }
         
-        if(!textNewPass.getText().equals("") && textNewPass.getText().length() >= 4 && textNewPass.getText().length() <= 30) {
+        if(textNewPass.getText().matches("^\\S*") && textNewPass.getText().length() >= 4 && textNewPass.getText().length() <= 30) {
             labNewPass.setForeground(Color.BLACK);
             errors--;
         } else{
