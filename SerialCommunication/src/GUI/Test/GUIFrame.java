@@ -75,6 +75,9 @@ public class GUIFrame extends javax.swing.JFrame {
         terminalListPanel.setFrame(this);
         transactHisDepositDetailsPanel.setFrame(this);
         transactHisBillingDetailsPanel.setFrame(this);
+        transactHisDepositDetailsAdminPanel.setFrame(this);
+        transactHisBillingDetailsAdminPanel.setFrame(this);
+        
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountPanel, "card2");
@@ -98,6 +101,8 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(terminalListPanel, "card20");
         cards.add(transactHisDepositDetailsPanel, "card21");
         cards.add(transactHisBillingDetailsPanel, "card22");
+        cards.add(transactHisDepositDetailsAdminPanel, "card23");
+        cards.add(transactHisBillingDetailsAdminPanel, "card24");
     }
     
     
@@ -134,6 +139,9 @@ public class GUIFrame extends javax.swing.JFrame {
         }else if (panel.equals("card10")){
             transactionHistoryPanel.loadTransactionsDetails();
             //cardLayout.show(cards, panel);
+        }else if (panel.equals("card18")){
+            transactionHistoryAdminPanel.loadTransactionsDetails();
+            //cardLayout.show(cards, panel);
         }else if(panel.equals("card20")) {
             terminalListPanel.loadTerminalDetails();
             //cardLayout.show(cards, panel);
@@ -142,6 +150,12 @@ public class GUIFrame extends javax.swing.JFrame {
             //cardLayout.show(cards, panel);
         }else if (panel.equals("card22")) {
             transactHisBillingDetailsPanel.loadBillingDetails(activeBillingNumber);
+            //cardLayout.show(cards, panel);
+        }else if (panel.equals("card23")) {
+            transactHisDepositDetailsAdminPanel.loadDepositDetails(activeDepositNumber);
+            //cardLayout.show(cards, panel);
+        }else if (panel.equals("card24")) {
+            transactHisBillingDetailsAdminPanel.loadBillingDetails(activeBillingNumber);
             //cardLayout.show(cards, panel);
         }
 //        } else{
@@ -194,11 +208,13 @@ public class GUIFrame extends javax.swing.JFrame {
         addFundsUserPanel = new GUI.Test.AddFundsUserPanel();
         editAccountAdminPanel = new GUI.Test.EditAccountAdminPanel();
         changePasswordAdminPanel = new GUI.Test.ChangePasswordAdminPanel();
-        transactionHistoryAdminPanel = new GUI.Test.TransactionHistoryAdminPanel();
         terminalListAdminPanel = new GUI.Test.TerminalListAdminPanel();
         terminalListPanel = new GUI.Test.TerminalListPanel();
         transactHisDepositDetailsPanel = new GUI.Test.TransactHisDepositDetailsPanel();
         transactHisBillingDetailsPanel = new GUI.Test.TransactHisBillingDetailsPanel();
+        transactionHistoryAdminPanel = new GUI.Test.TransactionHistoryAdminPanel();
+        transactHisBillingDetailsAdminPanel = new GUI.Test.TransactHisBillingDetailsAdminPanel();
+        transactHisDepositDetailsAdminPanel = new GUI.Test.TransactHisDepositDetailsAdminPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -220,11 +236,13 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(addFundsUserPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(editAccountAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(changePasswordAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
-        cards.add(transactionHistoryAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(terminalListAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(terminalListPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(transactHisDepositDetailsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(transactHisBillingDetailsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(transactionHistoryAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(transactHisBillingDetailsAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(transactHisDepositDetailsAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -301,7 +319,9 @@ public class GUIFrame extends javax.swing.JFrame {
     private GUI.Test.SignupPanel signupPanel;
     private GUI.Test.TerminalListAdminPanel terminalListAdminPanel;
     private GUI.Test.TerminalListPanel terminalListPanel;
+    private GUI.Test.TransactHisBillingDetailsAdminPanel transactHisBillingDetailsAdminPanel;
     private GUI.Test.TransactHisBillingDetailsPanel transactHisBillingDetailsPanel;
+    private GUI.Test.TransactHisDepositDetailsAdminPanel transactHisDepositDetailsAdminPanel;
     private GUI.Test.TransactHisDepositDetailsPanel transactHisDepositDetailsPanel;
     private GUI.Test.TransactionHistoryAdminPanel transactionHistoryAdminPanel;
     private GUI.Test.TransactionHistoryPanel transactionHistoryPanel;
