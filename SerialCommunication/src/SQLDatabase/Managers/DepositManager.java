@@ -38,6 +38,24 @@ public class DepositManager {
             }
             return result;
     }     
+    
+    public ArrayList<String> getDetailedDeposit(int depositNumb) {
+        ArrayList<Object> parameter = new ArrayList<Object>();
+        ArrayList<Deposit> deposit = new ArrayList<Deposit>();
+        ArrayList<String> result = new ArrayList<String>();
+        parameter.add(depositNumb);
+        deposit = databaseManager.getDeposits(SQLLibrary.USER_GET_DEPOSIT_DETAILS, parameter);
+        if (deposit.isEmpty() == false) {
+            Deposit activeDeposit = deposit.get(0);
+            result.add(activeDeposit.getDepositsNumb());
+            result.add(activeDeposit.getDepositsDate());
+            result.add("" + activeDeposit.getDepositAmount());
+            result.add("" + activeDeposit.getNewBalanceDeposit());
+            result.add(activeDeposit.getLast4CardNumb());
+            result.add(activeDeposit.getExternalRefNumb());   
+        }
+        return result;
+    }
    
    /**
     * Register a deposit. 

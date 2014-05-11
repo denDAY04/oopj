@@ -15,6 +15,21 @@ public class GUIFrame extends javax.swing.JFrame {
 
     private CardLayout cardLayout;
     private boolean isLoggedIn = false;
+    
+    /**
+     * Used for detailed view of a despoit instance. The history panel needs to
+     * change this field before calling changePanel, in order to collect the 
+     * correct data.
+     */
+    private String activeDepositNumber;
+    
+    /**
+     * Used for detailed view of a billing instance. The history panel needs to
+     * change this field before calling changePanel, in order to collect the 
+     * correct data.
+     */
+    private String activeBillingNumber;
+    
     protected CustomerManager cManager;
     protected DatabaseManager dbManager;
     protected BillingManager bManager;
@@ -58,6 +73,8 @@ public class GUIFrame extends javax.swing.JFrame {
         transactionHistoryAdminPanel.setFrame(this);
         terminalListAdminPanel.setFrame(this);
         terminalListPanel.setFrame(this);
+        transactHisDepositDetailsPanel.setFrame(this);
+        transactHisBillingDetailsPanel.setFrame(this);
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountPanel, "card2");
@@ -79,6 +96,8 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(transactionHistoryAdminPanel, "card18");
         cards.add(terminalListAdminPanel, "card19");
         cards.add(terminalListPanel, "card20");
+        cards.add(transactHisDepositDetailsPanel, "card21");
+        cards.add(transactHisBillingDetailsPanel, "card22");
     }
     
     
@@ -88,42 +107,59 @@ public class GUIFrame extends javax.swing.JFrame {
         if(panel.equals("card2")){
             updateUser();
             accountPanel.loadCustomerDetails();
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
         } else if(panel.equals("card7")){
             passwordFoundPanel.loadCustomerDetails();
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
         } else if(panel.equals("card8")){
             editAccountPanel.loadCustomerDetails();
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
         } else if(panel.equals("card16")){
             editAccountAdminPanel.loadCustomerDetails();
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
         } else if(panel.equals("card13")){
             updateUser();
             accountAdminPanel.loadCustomerDetails();
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
         } else if(panel.equals("card5") && isLoggedIn == true){
             updateUser();
             accountPanel.loadCustomerDetails();
             cardLayout.show(cards, "card2");
+            return;
         } else if(panel.equals("card5") && isLoggedIn == false){
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
         }else if (panel.equals("card19")){
             terminalListAdminPanel.loadTerminalDetails();
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
         }else if (panel.equals("card10")){
             transactionHistoryPanel.loadTransactionsDetails();
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
         }else if(panel.equals("card20")) {
             terminalListPanel.loadTerminalDetails();
-            cardLayout.show(cards, panel);
-        } else{
-            cardLayout.show(cards, panel);
+            //cardLayout.show(cards, panel);
+        }else if (panel.equals("card21")) {
+            transactHisDepositDetailsPanel.loadDepositDetails(activeDepositNumber);
+            //cardLayout.show(cards, panel);
+        }else if (panel.equals("card22")) {
+            transactHisBillingDetailsPanel.loadBillingDetails(activeBillingNumber);
+            //cardLayout.show(cards, panel);
         }
+//        } else{
+//            cardLayout.show(cards, panel);
+//        }
+        cardLayout.show(cards, panel);
     }
     
     public void setLoggedIn(boolean isLoggedIn){
         this.isLoggedIn = isLoggedIn;
+    }
+    
+    public void setActiveDepositNumber(String newNumber) {
+        activeDepositNumber = newNumber;
+    }
+    
+    public void setActiveBillingNumber(String newNumber) {
+        activeBillingNumber = newNumber;
     }
     
     private void updateUser(){
@@ -161,6 +197,8 @@ public class GUIFrame extends javax.swing.JFrame {
         transactionHistoryAdminPanel = new GUI.Test.TransactionHistoryAdminPanel();
         terminalListAdminPanel = new GUI.Test.TerminalListAdminPanel();
         terminalListPanel = new GUI.Test.TerminalListPanel();
+        transactHisDepositDetailsPanel = new GUI.Test.TransactHisDepositDetailsPanel();
+        transactHisBillingDetailsPanel = new GUI.Test.TransactHisBillingDetailsPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -185,6 +223,8 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(transactionHistoryAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(terminalListAdminPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
         cards.add(terminalListPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(transactHisDepositDetailsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+        cards.add(transactHisBillingDetailsPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -261,6 +301,8 @@ public class GUIFrame extends javax.swing.JFrame {
     private GUI.Test.SignupPanel signupPanel;
     private GUI.Test.TerminalListAdminPanel terminalListAdminPanel;
     private GUI.Test.TerminalListPanel terminalListPanel;
+    private GUI.Test.TransactHisBillingDetailsPanel transactHisBillingDetailsPanel;
+    private GUI.Test.TransactHisDepositDetailsPanel transactHisDepositDetailsPanel;
     private GUI.Test.TransactionHistoryAdminPanel transactionHistoryAdminPanel;
     private GUI.Test.TransactionHistoryPanel transactionHistoryPanel;
     // End of variables declaration//GEN-END:variables

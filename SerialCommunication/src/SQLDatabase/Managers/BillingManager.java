@@ -5,6 +5,7 @@
 package SQLDatabase.Managers;
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.Billing;
+import SQLDatabase.ModelClasses.Customer;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -43,6 +44,32 @@ public class BillingManager {
             }
             return result;
     }     
+    
+    public ArrayList<String> getDetailedBilling(int transactionNumber) {
+        ArrayList<Object> parameter = new ArrayList<Object>();
+        ArrayList<Object> temp;
+        ArrayList<String> result = new ArrayList<String>();
+        
+        parameter.add(transactionNumber);
+        temp = databaseManager.getDetailedBilling(SQLLibrary.USER_GET_BILLING_N_TERMINAL, parameter);
+        Billing billing = (Billing) temp.get(0);
+        String address = (String) temp.get(1);
+        String zipCode = (String) temp.get(2);
+        
+        if (billing != null && address != null && zipCode != null) {
+            result.add(billing.getTransactionNumb());
+            result.add(billing.getStartCharge());
+            result.add(billing.getEndCharge());
+            result.add(billing.getRecieved());
+            result.add("" + billing.getBillingAmount() / 100.0);
+            result.add("" + billing.getBillingRate() / 100.0);
+            result.add("" + billing.getBillingKWH());
+            result.add("" + billing.getNewBalanceBilling() / 100.0);
+            result.add(address);
+            result.add(zipCode);
+        }
+        return result;
+    }
    
    /**
     * Register a billing when a car has been charged.

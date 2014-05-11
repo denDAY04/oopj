@@ -177,12 +177,18 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         return depositList;
     }
 
-//@Override  // 
-            // Method for returning a billing on click, with refrences.
-    public Billing getDetailedBilling(String getQuery,ArrayList<Object> parameters) {
+
+  /**
+   * 
+   * @param getQuery
+   * @param parameters
+   * @return 
+   */
+    public ArrayList<Object> getDetailedBilling(String getQuery,ArrayList<Object> parameters) {
+        ArrayList<Object> result = new ArrayList<Object>();
         Billing billing = null;
-        Customer customer = null;
-        Terminal terminal = null;
+//        Customer customer = null;
+//        Terminal terminal = null;
        // int rowCount = 0; //Return value from executeUpdate()
         Connection con = null;
         try {
@@ -202,9 +208,14 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             }
             ResultSet resultSet = preparedStatement.executeQuery();
              if (resultSet.next()) {
-                customer = createCustomer(resultSet);
-                terminal = createTerminal(resultSet);
-                billing = createBilling(resultSet,customer,terminal);
+                //customer = createCustomer(resultSet);
+                String address = resultSet.getString("Road");
+                String zipCode = resultSet.getString("ZipCode");
+                //terminal = createTerminal(resultSet);
+                billing = createBilling(resultSet);
+                result.add(billing);
+                result.add(address);
+                result.add(zipCode);
             }
         } catch (SQLException e) {
             e.printStackTrace();
@@ -217,7 +228,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
                 }
             }
         }
-        return billing;
+        return result;
     }
 
 //@Override  // needs to be able to return an arraylist of Deposits

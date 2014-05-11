@@ -25,6 +25,10 @@ public class SQLLibrary {
   public static final String USER_GET_DEPOSITS = "select * " 
                                               + "from Deposits "
                                               + "where CustomerNumb = ?";
+  
+  public static final String USER_GET_DEPOSIT_DETAILS = "select * "
+                                                       + "from Deposits "
+                                                       + "where DepositsNumb = ? ";
 // USER  Get Billing
 //ArrayList: 1, CustomerNumb
 
@@ -37,7 +41,7 @@ public class SQLLibrary {
 // USER  get Billing & Terminals - (on click)
 //ArrayList: 1, TransactionNumb
  public static final String USER_GET_BILLING_N_TERMINAL = "select TransactionNumb, StartCharge, EndCharge, Recieved, BillingAmount, " 
-                                     +"BillingRate, BillingKWH, NewBalanceBilling, Road, ZipCode " 
+                                     +"BillingRate, BillingKWH, NewBalanceBilling, Road, ZipCode, CustomerNumb, Terminals.HardwareNumb " 
                                      + "from Billing "
                                      + "inner join Terminals "
                                      + "on Billing.HardwareNumb = Terminals.HardwareNumb "

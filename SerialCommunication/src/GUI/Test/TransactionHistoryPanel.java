@@ -7,6 +7,7 @@
 package GUI.Test;
 
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -33,7 +34,7 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         tableBillingHistory.getColumnModel().getColumn(2).setHeaderValue("Amount (DKK)");
         tableBillingHistory.getColumnModel().getColumn(3).setHeaderValue("New balance (DKK)");
         
-        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue("Reference number");
+        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue("Deposit number");
         tableDepositHistory.getColumnModel().getColumn(0).setPreferredWidth(20);
         tableDepositHistory.getColumnModel().getColumn(1).setHeaderValue("Date");
         tableDepositHistory.getColumnModel().getColumn(2).setHeaderValue("Amount (DKK)");
@@ -88,12 +89,13 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         tableScrollPane = new javax.swing.JScrollPane();
         tableBillingHistory = new javax.swing.JTable();
         labInformation2 = new javax.swing.JLabel();
-        btnBack = new javax.swing.JButton();
-        btnDetails = new javax.swing.JButton();
         tableScrollPane1 = new javax.swing.JScrollPane();
         tableDepositHistory = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        btnBack = new javax.swing.JButton();
+        btnDepositDetails = new javax.swing.JButton();
+        btnBillingDetails = new javax.swing.JButton();
 
         setPreferredSize(new java.awt.Dimension(402, 302));
 
@@ -119,15 +121,6 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
 
     labInformation2.setText("To see more details about a specific history, click on it and click Details.");
 
-    btnBack.setText("Back");
-    btnBack.addActionListener(new java.awt.event.ActionListener() {
-        public void actionPerformed(java.awt.event.ActionEvent evt) {
-            btnBackActionPerformed(evt);
-        }
-    });
-
-    btnDetails.setText("Details");
-
     tableDepositHistory.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {
 
@@ -149,29 +142,51 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
     jLabel2.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
     jLabel2.setText("Billings");
 
+    btnBack.setText("Back");
+    btnBack.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnBackActionPerformed(evt);
+        }
+    });
+
+    btnDepositDetails.setText("Deposit details");
+    btnDepositDetails.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnDepositDetailsActionPerformed(evt);
+        }
+    });
+
+    btnBillingDetails.setText("Billing details");
+    btnBillingDetails.addActionListener(new java.awt.event.ActionListener() {
+        public void actionPerformed(java.awt.event.ActionEvent evt) {
+            btnBillingDetailsActionPerformed(evt);
+        }
+    });
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
         .addGroup(layout.createSequentialGroup()
-            .addContainerGap()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                 .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(btnBack, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(labTransactionHistory, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(labInformation, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(labInformation2, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addContainerGap()
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(labTransactionHistory)
+                        .addComponent(labInformation)
+                        .addComponent(labInformation2)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tableScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(35, 35, 35)
+                    .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 69, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnDetails)
-                    .addGap(30, 30, 30))
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(tableScrollPane, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 679, Short.MAX_VALUE)
-                        .addComponent(tableScrollPane1, javax.swing.GroupLayout.Alignment.LEADING))
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(btnBillingDetails)
+                    .addGap(190, 190, 190)
+                    .addComponent(btnDepositDetails)))
+            .addContainerGap(37, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -186,18 +201,17 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
             .addComponent(jLabel1)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(tableScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addGap(13, 13, 13)
-            .addComponent(jLabel2)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-            .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGap(18, 18, 18)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                .addComponent(btnBack)
-                .addComponent(btnDetails))
-            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnDepositDetails)
+                .addComponent(btnBillingDetails)
+                .addComponent(btnBack))
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
+            .addComponent(jLabel2)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+            .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGap(81, 81, 81))
     );
-
-    btnDetails.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -207,10 +221,35 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
         frame.changePanel("card2");
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void btnDepositDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositDetailsActionPerformed
+        int rowSelected = tableDepositHistory.getSelectedRow();
+        if (rowSelected == -1) {
+            JOptionPane.showMessageDialog(this, "No deposit selected.");
+            return;
+        }
+        
+        String depositNumber = (String) tableDepositHistory.getValueAt(rowSelected, 0);
+        frame.setActiveDepositNumber(depositNumber);
+        frame.changePanel("card21");
+    }//GEN-LAST:event_btnDepositDetailsActionPerformed
+
+    private void btnBillingDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBillingDetailsActionPerformed
+        int rowSelected = tableBillingHistory.getSelectedRow();
+        if (rowSelected == -1) {
+            JOptionPane.showMessageDialog(this, "No billing selected.");
+            return;
+        }
+        
+        String billingNumber = (String) tableBillingHistory.getValueAt(rowSelected, 0);
+        frame.setActiveBillingNumber(billingNumber);
+        frame.changePanel("card22");
+    }//GEN-LAST:event_btnBillingDetailsActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDetails;
+    private javax.swing.JButton btnBillingDetails;
+    private javax.swing.JButton btnDepositDetails;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labInformation;
