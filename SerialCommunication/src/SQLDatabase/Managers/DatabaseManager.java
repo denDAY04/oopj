@@ -328,22 +328,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
         int newBalanceBilling = Integer.parseInt(resultSet.getString("NewBalanceBilling")); // parse to double
         return new Billing(transactionNumb,customerNumb, hardwareNumb, startCharge, endCharge,recieved,billingAmount, billingRate, billingKWH,newBalanceBilling);
     }    
-        
-        // Create billing with refrence to a terminal and costomer object, to display all information.
-        private Billing createBilling(ResultSet resultSet,Customer costumer,Terminal terminal) throws SQLException {
-        String transactionNumb = resultSet.getString("TransactionNumb");
-        String customerNumb = resultSet.getString("CustomerNumb");
-        String hardwareNumb = resultSet.getString("HardwareNumb");
-        String startCharge =  resultSet.getString("StartCharge"); 
-        String endCharge =  resultSet.getString("EndCharge");  
-        String recieved = resultSet.getString("Recieved");
-        int billingAmount = Integer.parseInt(resultSet.getString("BillingAmount")); // parse to double
-        int billingRate = Integer.parseInt(resultSet.getString("BillingRate"));    // parse to double
-        int billingKWH = Integer.parseInt(resultSet.getString("BillingKWH"));     // parse to double
-        int newBalanceBilling = Integer.parseInt(resultSet.getString("NewBalanceBilling")); // parse to double
-        return new Billing(transactionNumb,customerNumb, hardwareNumb, startCharge, endCharge,recieved,billingAmount, billingRate, billingKWH,newBalanceBilling);
-    }    
-        
+         
         public void test(){
         System.out.println("test!");
         }
