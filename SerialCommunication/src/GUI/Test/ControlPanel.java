@@ -148,7 +148,7 @@ public class ControlPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAccManageActionPerformed
 
     private void btnTransManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransManageActionPerformed
-        frame.changePanel("card9");
+        frame.changePanel("card25");
     }//GEN-LAST:event_btnTransManageActionPerformed
 
     private void btnTermManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTermManageActionPerformed

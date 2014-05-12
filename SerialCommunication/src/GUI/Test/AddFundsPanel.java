@@ -68,7 +68,8 @@ public class AddFundsPanel extends javax.swing.JPanel {
         instituts. 
         */
         long randomNum = System.currentTimeMillis() * 13 * 29;
-        String randomNumString = ("" + randomNum).substring(0, 6);
+        String randomNumString = "" + randomNum;
+        randomNumString = randomNumString.substring(randomNumString.length() - 6);
         int externalRefNumb = Integer.parseInt(randomNumString);
         
         /* Log deposit on database (also changes customer's balance) */

@@ -45,6 +45,34 @@ public class BillingManager {
             return result;
     }     
     
+    public ArrayList<String[]> getAllBillings (){
+            ResultSet rs = null;
+            ArrayList<Object> parametersbilling = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+            //parametersbilling.add(customerNumb);   // add the customerNumb parameter
+            ArrayList<Billing> arr;                             // Temp ArrayList for holding all billings with full data
+            ArrayList<String[]> result = new ArrayList();       // ArrayList for results containing only desired data
+            System.out.println("BillingManager getAllBillings, Fire SQL statement");
+            try{
+                arr = databaseManager.getBillings(SQLLibrary.SYSTEM_GET_ALL_BILLINGS, parametersbilling);
+                Billing activeBilling; 
+                for (int i = 0; i < arr.size(); ++i) {
+                    activeBilling = arr.get(i);
+                    String a = ""+activeBilling.getTransactionNumb();
+                    String b = ""+activeBilling.getCustomerNumb();
+                    String c = ""+activeBilling.getHardwareNumb();
+                    String d = activeBilling.getStartCharge().substring(0, 19);
+                    String e = "" + (activeBilling.getBillingAmount() / 100.0);
+                    String f = "" + (activeBilling.getBillingRate() / 100.0);
+                    String g = "" + (activeBilling.getBillingKWH() / 100.0);
+                    String h = "" + (activeBilling.getNewBalanceBilling() / 100.0);
+                    result.add(new String[]{a, b, c, d, e, f, g, h});
+                }
+            } catch(NullPointerException e){
+                e.printStackTrace(); 
+            }
+            return result;
+    }
+    
     public ArrayList<String> getDetailedBilling(int transactionNumber) {
         ArrayList<Object> parameter = new ArrayList<Object>();
         ArrayList<Object> temp;

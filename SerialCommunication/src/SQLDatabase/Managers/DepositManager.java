@@ -37,7 +37,29 @@ public class DepositManager {
                 }
             }
             return result;
-    }     
+    }
+    
+    public ArrayList<String[]> getAllDeposits (){
+            ArrayList<Object> parametersbilling = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+            //parametersbilling.add(customerNumb);   // add the customerNumb parameter
+            ArrayList<Deposit> arr;                             // Temp ArrayList for holding all billings with full data
+            ArrayList<String[]> result = new ArrayList();       // ArrayList for results containing only desired data
+            System.out.println("DepositManager getAllDeposits, Fire SQL statement");
+            arr = databaseManager.getDeposits(SQLLibrary.SYSTEM_GET_ALL_DEPOSITS,parametersbilling);
+            if (arr.isEmpty() == false) {
+                for (int i = 0; i < arr.size(); ++i) {
+                    String a = ""+arr.get(i).getDepositsNumb();
+                    String b = ""+arr.get(i).getCustomerNumb();
+                    String c = arr.get(i).getDepositsDate();
+                    String d = "" + (arr.get(i).getDepositAmount() / 100.0);
+                    String e = "" + (arr.get(i).getNewBalanceDeposit() / 100.0);
+                    String f = arr.get(i).getExternalRefNumb();
+                    String g = "**** **** **** " + arr.get(i).getLast4CardNumb();
+                    result.add(new String[]{a, b, c, d, e, f, g});
+                }
+            }
+            return result;
+    }
     
     public ArrayList<String> getDetailedDeposit(int depositNumb) {
         ArrayList<Object> parameter = new ArrayList<Object>();

@@ -220,8 +220,14 @@ ArrayList: 1, Password*/
 //1, ChargingStatus,2, HardwareNumb         
  public static final String SYSTEM_TERMINAL_CHARGE_STATUS = "update Terminals " 
                                                            + "set ChargingStatus = ? "
-                                                           + "where HardwareNumb = ?";      
+                                                           + "where HardwareNumb = ?";
  
+public static final String SYSTEM_GET_ALL_BILLINGS = "select * " 
+                                                   + "from Billing"; 
+
+public static final String SYSTEM_GET_ALL_DEPOSITS = "select * " 
+                                                   + "from Deposits"; 
+
 public static final String SYSTEM_GET_TERMINAL = "select * " 
                                                                + "from Terminals "
                                                                + "where HardwareNumb = ?";  
