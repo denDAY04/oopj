@@ -99,7 +99,7 @@ public class ChangePasswordAdminPanel extends javax.swing.JPanel {
         if (errors ==0){
             JOptionPane.showMessageDialog(null, "Users password has been changed.", "Password change successfull", JOptionPane.INFORMATION_MESSAGE);
             String[] newValues = new String[1];
-            newValues[0] = textNewPass.getText();
+            newValues[0] = new StringBuilder().append(textConfirmPass.getPassword()).toString();
             frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 6, newValues);
             frame.changePanel("card13");
             resetFields();
