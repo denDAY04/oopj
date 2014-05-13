@@ -4,7 +4,6 @@
  */
 package GUI.Test;
 
-import GUI.*;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 
@@ -40,15 +39,15 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
         labSignUp = new javax.swing.JLabel();
         labInformation = new javax.swing.JLabel();
         labCurrentPass = new javax.swing.JLabel();
-        textCurrentPass = new javax.swing.JTextField();
-        textConfirmPass = new javax.swing.JTextField();
         labConfirmPass = new javax.swing.JLabel();
-        textNewPass = new javax.swing.JTextField();
         labNewPass = new javax.swing.JLabel();
         btnChangePass = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         labErrorWrongPass = new javax.swing.JLabel();
         labErrorMatch = new javax.swing.JLabel();
+        textCurrentPass = new javax.swing.JPasswordField();
+        textNewPass = new javax.swing.JPasswordField();
+        textConfirmPass = new javax.swing.JPasswordField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -62,16 +61,8 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
         labCurrentPass.setText("Current password");
         add(labCurrentPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 90, -1, -1));
 
-        textCurrentPass.setNextFocusableComponent(textNewPass);
-        add(textCurrentPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 187, -1));
-
-        add(textConfirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 187, -1));
-
         labConfirmPass.setText("Confirm new password");
         add(labConfirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
-
-        textNewPass.setNextFocusableComponent(textConfirmPass);
-        add(textNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 187, -1));
 
         labNewPass.setText("New password (4 - 30 characters)");
         add(labNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, -1, -1));
@@ -101,6 +92,9 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
         labErrorMatch.setText("Passwords do not match. Please try again.");
         add(labErrorMatch, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 240, -1));
         labErrorMatch.setVisible(false);
+        add(textCurrentPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 110, 190, -1));
+        add(textNewPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 170, 190, -1));
+        add(textConfirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 190, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -115,10 +109,10 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
         inputCheck();
         if (errors ==0){
-            JOptionPane.showMessageDialog(null, "Your password has been changed.", "Password change successfull", JOptionPane.INFORMATION_MESSAGE);
             String[] newValues = new String[1];
-            newValues[0] = textNewPass.getText();
+            newValues[0] = new StringBuilder().append(textConfirmPass.getPassword()).toString();
             frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 4, newValues);
+            JOptionPane.showMessageDialog(null, "Your password has been changed.", "Password change successfull", JOptionPane.INFORMATION_MESSAGE);
             frame.changePanel("card2");
             resetFields();
         }
@@ -126,7 +120,8 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChangePassActionPerformed
     
     private void inputCheck() {
-        if(textCurrentPass.getText().equals(frame.cManager.getLoggedInUser().getPassword())){
+        String currentPassword = new StringBuilder().append(textCurrentPass.getPassword()).toString();
+        if(currentPassword.equals(frame.cManager.getLoggedInUser().getPassword())){
             labCurrentPass.setForeground(Color.BLACK);
             labErrorWrongPass.setVisible(false);
             errors--;
@@ -135,14 +130,16 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
             labErrorWrongPass.setVisible(true);
         }
         
-        if(textNewPass.getText().matches("^\\S*") && textNewPass.getText().length() >= 4 && textNewPass.getText().length() <= 30) {
+        String newPassword = new StringBuilder().append(textNewPass.getPassword()).toString();
+        if(newPassword.matches("^\\S*") && newPassword.length() >= 4 && newPassword.length() <= 30) {
             labNewPass.setForeground(Color.BLACK);
             errors--;
         } else{
             labNewPass.setForeground(Color.RED);
         }
         
-        if((!textConfirmPass.getText().equals("")) && textConfirmPass.getText().equals(textNewPass.getText())) {
+        String confirmPassword = new StringBuilder().append(textConfirmPass.getPassword()).toString();
+        if((!confirmPassword.equals("")) && confirmPassword.equals(textNewPass.getText())) {
             labConfirmPass.setForeground(Color.BLACK);
             labErrorMatch.setVisible(false);
             errors--;
@@ -176,8 +173,8 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labInformation;
     private javax.swing.JLabel labNewPass;
     private javax.swing.JLabel labSignUp;
-    private javax.swing.JTextField textConfirmPass;
-    private javax.swing.JTextField textCurrentPass;
-    private javax.swing.JTextField textNewPass;
+    private javax.swing.JPasswordField textConfirmPass;
+    private javax.swing.JPasswordField textCurrentPass;
+    private javax.swing.JPasswordField textNewPass;
     // End of variables declaration//GEN-END:variables
 }

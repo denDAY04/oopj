@@ -4,8 +4,6 @@
  */
 package GUI.Test;
 
-import SQLDatabase.ModelClasses.Customer;
-
 /**
  *
  * @author Qess
@@ -43,12 +41,12 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         labEmail = new javax.swing.JLabel();
         textEmail = new javax.swing.JTextField();
         labPassword = new javax.swing.JLabel();
-        textPassword = new javax.swing.JTextField();
         btnLogin = new javax.swing.JButton();
         btnForgot = new javax.swing.JButton();
         btnSignup = new javax.swing.JButton();
         labSignup = new javax.swing.JLabel();
         labError = new javax.swing.JLabel();
+        textPassword = new javax.swing.JPasswordField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -79,13 +77,6 @@ public class LoginControllerPanel extends javax.swing.JPanel {
 
         labPassword.setText("Password");
         add(labPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, -1));
-
-        textPassword.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textPasswordActionPerformed(evt);
-            }
-        });
-        add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 145, 197, -1));
 
         btnLogin.setText("Login");
         btnLogin.addActionListener(new java.awt.event.ActionListener() {
@@ -118,23 +109,23 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         labError.setText("Wrong email or password");
         labError.setVisible(false);
         add(labError, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 216, -1, -1));
+        add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void textEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_textEmailActionPerformed
 
-    private void textPasswordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPasswordActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textPasswordActionPerformed
-
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
-    if(textEmail.getText().equals(adminEmail) && textPassword.getText().equals(adminPassword)){
+    StringBuilder sb = new StringBuilder();
+    String password =  sb.append(textPassword.getPassword()).toString();
+    
+    if(textEmail.getText().equals(adminEmail) && password.equals(adminPassword)){
         labError.setVisible(false);
         frame.changePanel("card11");
         textEmail.setText("");
         textPassword.setText("");
-    } else if(frame.cManager.loggedInAs(textEmail.getText().toLowerCase(), textPassword.getText().toLowerCase()) == true){
+    } else if(frame.cManager.loggedInAs(textEmail.getText().toLowerCase(), password.toLowerCase()) == true){
         if(frame.cManager.getLoggedInUser().getAccountStatus().equals("Disabl")){
             System.err.println("Account is disabled");
             labError.setVisible(true);
@@ -182,6 +173,6 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labSignup;
     private javax.swing.JLabel labWelcome;
     private javax.swing.JTextField textEmail;
-    private javax.swing.JTextField textPassword;
+    private javax.swing.JPasswordField textPassword;
     // End of variables declaration//GEN-END:variables
 }

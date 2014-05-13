@@ -45,7 +45,6 @@ public class SignupPanel extends javax.swing.JPanel {
         labCredentials = new javax.swing.JLabel();
         textEmail = new javax.swing.JTextField();
         labEmail = new javax.swing.JLabel();
-        textConfirmPassword = new javax.swing.JTextField();
         labRoad = new javax.swing.JLabel();
         labConfirmPassword = new javax.swing.JLabel();
         textLastName = new javax.swing.JTextField();
@@ -54,7 +53,6 @@ public class SignupPanel extends javax.swing.JPanel {
         labZip = new javax.swing.JLabel();
         textPhoneNBR = new javax.swing.JTextField();
         labPhoneNBR = new javax.swing.JLabel();
-        textPassword = new javax.swing.JTextField();
         btnSubmit = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         labErrorEmail = new javax.swing.JLabel();
@@ -62,6 +60,8 @@ public class SignupPanel extends javax.swing.JPanel {
         labError1 = new javax.swing.JLabel();
         labError2 = new javax.swing.JLabel();
         labErrorExistingEmail = new javax.swing.JLabel();
+        textPassword = new javax.swing.JPasswordField();
+        textConfirmPassword = new javax.swing.JPasswordField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -98,9 +98,6 @@ public class SignupPanel extends javax.swing.JPanel {
         labEmail.setText("Email");
         add(labEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 90, -1, -1));
 
-        textConfirmPassword.setNextFocusableComponent(textFirstName);
-        add(textConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 187, -1));
-
         labRoad.setText("Address and number");
         add(labRoad, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 210, -1, -1));
 
@@ -124,9 +121,6 @@ public class SignupPanel extends javax.swing.JPanel {
 
         labPhoneNBR.setText("Phone number (8 digits)");
         add(labPhoneNBR, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, -1, -1));
-
-        textPassword.setNextFocusableComponent(textConfirmPassword);
-        add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 187, -1));
 
         btnSubmit.setText("Submit");
         btnSubmit.addActionListener(new java.awt.event.ActionListener() {
@@ -171,6 +165,12 @@ public class SignupPanel extends javax.swing.JPanel {
         labErrorExistingEmail.setText("- email is already in use");
         add(labErrorExistingEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 90, 130, -1));
         labErrorExistingEmail.setVisible(false);
+
+        textPassword.setNextFocusableComponent(textConfirmPassword);
+        add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 170, 190, -1));
+
+        textConfirmPassword.setNextFocusableComponent(textFirstName);
+        add(textConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 190, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -326,7 +326,8 @@ public class SignupPanel extends javax.swing.JPanel {
 //            labEmail.setForeground(Color.RED);
 //            labErrorEmail.setVisible(true);
 //        }
-        if(textPassword.getText().matches("^\\S*") && textPassword.getText().length() >= 4 && textPassword.getText().length() <= 30) {
+        String password =  new StringBuilder().append(textPassword.getPassword()).toString();
+        if(password.matches("^\\S*") && password.length() >= 4 && password.length() <= 30) {
             labPassword.setForeground(Color.BLACK);
             errors--;
         } else{
@@ -338,8 +339,8 @@ public class SignupPanel extends javax.swing.JPanel {
 //        } else{
 //            labPassword.setForeground(Color.RED);
 //        }
-        
-        if((!textConfirmPassword.getText().equals("")) && textConfirmPassword.getText().equals(textPassword.getText())) {
+        String passwordConfirm =  new StringBuilder().append(textPassword.getPassword()).toString();
+        if((!passwordConfirm.equals("")) && passwordConfirm.equals(password)) {
             labConfirmPassword.setForeground(Color.BLACK);
             labErrorConfirmPassword.setVisible(false);
             errors--;
@@ -351,7 +352,7 @@ public class SignupPanel extends javax.swing.JPanel {
     
     private void registerUser() {
         Object[] userData = new Object[8];
-        userData[0] = textConfirmPassword.getText();
+        userData[0] = new StringBuilder().append(textConfirmPassword.getPassword()).toString();
         userData[1] = textFirstName.getText();
         userData[2] = textLastName.getText();
         userData[3] = textRoad.getText();
@@ -390,11 +391,11 @@ public class SignupPanel extends javax.swing.JPanel {
     private javax.swing.JLabel labRoad;
     private javax.swing.JLabel labSignUp;
     private javax.swing.JLabel labZip;
-    private javax.swing.JTextField textConfirmPassword;
+    private javax.swing.JPasswordField textConfirmPassword;
     private javax.swing.JTextField textEmail;
     private javax.swing.JTextField textFirstName;
     private javax.swing.JTextField textLastName;
-    private javax.swing.JTextField textPassword;
+    private javax.swing.JPasswordField textPassword;
     private javax.swing.JTextField textPhoneNBR;
     private javax.swing.JTextField textRoad;
     private javax.swing.JTextField textZip;
