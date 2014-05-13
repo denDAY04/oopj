@@ -5,6 +5,7 @@
 package SQLDatabase.Managers;
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.Deposit;
+import java.sql.SQLDataException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -77,6 +78,28 @@ public class DepositManager {
             result.add(activeDeposit.getExternalRefNumb());   
         }
         return result;
+    }
+    
+    public ArrayList<String[]> getDepositsByRefNumber (String refNumber){
+            ArrayList<Object> parametersbilling = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
+            parametersbilling.add(refNumber);   // add the reference number parameter
+            ArrayList<Deposit> arr;                             // Temp ArrayList for holding all billings with full data
+            ArrayList<String[]> result = new ArrayList();       // ArrayList for results containing only desired data
+            System.out.println("DepositManager getDepositsByRefNumber, Fire SQL statement: RefNumber: "+refNumber);
+            arr = databaseManager.getDeposits(SQLLibrary.ADMIN_SEARCH_DEPOSITS_REFNUMBER,parametersbilling);
+            if (arr.isEmpty() == false) {
+                for (int i = 0; i < arr.size(); ++i) {
+                    String a = ""+arr.get(i).getDepositsNumb();
+                    String b = ""+arr.get(i).getCustomerNumb();
+                    String c = arr.get(i).getDepositsDate();
+                    String d = "" + (arr.get(i).getDepositAmount() / 100.0);
+                    String e = "" + (arr.get(i).getNewBalanceDeposit() / 100.0);
+                    String f = arr.get(i).getExternalRefNumb();
+                    String g = "**** **** **** " + arr.get(i).getLast4CardNumb();
+                    result.add(new String[]{a, b, c, d, e, f, g});
+                }
+            }                
+            return result;
     }
    
    /**

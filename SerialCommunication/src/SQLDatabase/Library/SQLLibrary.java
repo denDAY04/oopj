@@ -127,6 +127,18 @@ ArrayList: 1, Password*/
                                                         + "from Customer "
                                                         + "where UPPER(FirstName) "
                                                         + "like UPPER(?)";
+
+  /** ADMIN Search deposits RefNumber
+  * ArrayList: 1, RefNumber*/
+ public static final String ADMIN_SEARCH_DEPOSITS_REFNUMBER = "select * "
+                                                            + "from Deposits "
+                                                            + "where ExternalRefNumb = ?";
+ 
+   /** ADMIN Search billings transactionNumber
+  * ArrayList: 1, transactionNumber*/
+ public static final String ADMIN_SEARCH_BILLINGS_TRANSNUMB = "select * "
+                                                            + "from Billing "
+                                                            + "where TransactionNumb = ?";
  
 // ADMIN add new terminal                   
 //ArrayList: 1,Road,2, ZipCode,3, IPAddress         

@@ -35,7 +35,6 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
         labWelcome = new javax.swing.JLabel();
         labInformation = new javax.swing.JLabel();
         labEmail = new javax.swing.JLabel();
@@ -49,14 +48,6 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         textPassword = new javax.swing.JPasswordField();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(176, 253, -1, -1));
 
         labWelcome.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labWelcome.setText("Welcome to TA Charging");
@@ -153,10 +144,6 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         frame.changePanel("card3");
     }//GEN-LAST:event_btnSignupActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        frame.changePanel("card4");
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     private void btnForgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotActionPerformed
         frame.changePanel("card6");
     }//GEN-LAST:event_btnForgotActionPerformed
@@ -165,7 +152,6 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnForgot;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSignup;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel labEmail;
     private javax.swing.JLabel labError;
     private javax.swing.JLabel labInformation;

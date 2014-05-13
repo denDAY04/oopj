@@ -21,6 +21,8 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
     private DefaultTableModel tableModel;
     
     private GUIFrame frame;
+    private ArrayList<String[]> billingList;
+    private ArrayList<String[]> depositList;
     //private ResultSetTableModel tableModel;
     /**
      * Creates new form ChargingStationListViewPanel
@@ -70,15 +72,15 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
         tableModel = (DefaultTableModel) tableBillingHistory.getModel();
         /* Clear table and insert values */
         clearTable(tableModel);
-        ArrayList<String[]> billingList = frame.bManager.getAllBillings();
+        billingList = frame.bManager.getAllBillings();
         for (String[] iter : billingList) {
             tableModel.addRow(iter);
         }
-        
+
         tableModel = (DefaultTableModel) tableDepositHistory.getModel();
         /* Clear table and insert values */
         clearTable(tableModel);
-        ArrayList<String[]> depositList = frame.depManager.getAllDeposits();
+        depositList = frame.depManager.getAllDeposits();
         for(String[] iter : depositList) {
             tableModel.addRow(iter);
         }
@@ -111,7 +113,10 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         btnBack = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        textSearchDep = new javax.swing.JTextField();
+        labSearchDep = new javax.swing.JLabel();
+        textSearchBil = new javax.swing.JTextField();
+        labSearchBil = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(402, 302));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -176,8 +181,25 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
     });
     add(btnBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 484, 69, -1));
 
-    jButton1.setText("jButton1");
-    add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 490, -1, -1));
+    textSearchDep.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            textSearchDepKeyReleased(evt);
+        }
+    });
+    add(textSearchDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 80, 90, -1));
+
+    labSearchDep.setText("Search deposits");
+    add(labSearchDep, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 60, -1, -1));
+
+    textSearchBil.addKeyListener(new java.awt.event.KeyAdapter() {
+        public void keyReleased(java.awt.event.KeyEvent evt) {
+            textSearchBilKeyReleased(evt);
+        }
+    });
+    add(textSearchBil, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 90, -1));
+
+    labSearchBil.setText("Search billings");
+    add(labSearchBil, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -187,18 +209,79 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
         frame.changePanel("card11");
     }//GEN-LAST:event_btnBackActionPerformed
 
+    private void textSearchDepKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchDepKeyReleased
+
+        if(textSearchDep.getText().length() == 5){
+            try{
+                int ExternalReferenceNumb = Integer.parseInt(textSearchDep.getText());
+                if (ExternalReferenceNumb <= 0){
+                    return;
+                }
+            } catch(NumberFormatException e){
+                System.err.println("Catch");
+                return;
+            }
+            tableModel = (DefaultTableModel) tableDepositHistory.getModel();
+            /* Clear table and insert values */
+            clearTable(tableModel);
+            depositList = frame.depManager.getDepositsByRefNumber(textSearchDep.getText());
+            for(String[] iter : depositList) {
+                tableModel.addRow(iter);
+            }
+        } else if(textSearchDep.getText().length() == 0){
+            tableModel = (DefaultTableModel) tableDepositHistory.getModel();
+            /* Clear table and insert values */
+            clearTable(tableModel);
+            depositList = frame.depManager.getAllDeposits();
+            for(String[] iter : depositList) {
+                tableModel.addRow(iter);
+            }
+        }
+    }//GEN-LAST:event_textSearchDepKeyReleased
+
+    private void textSearchBilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchBilKeyReleased
+        if(textSearchBil.getText().length() != 0){
+            try{
+                int transactionNumb = Integer.parseInt(textSearchBil.getText());
+                if (transactionNumb <= 0){
+                    return;
+                }
+            } catch(NumberFormatException e){
+                return;
+            }
+            tableModel = (DefaultTableModel) tableBillingHistory.getModel();
+            /* Clear table and insert values */
+            clearTable(tableModel);
+            billingList = frame.bManager.getBillingsByTransactionNumb(textSearchBil.getText());
+            for(String[] iter : billingList) {
+                tableModel.addRow(iter);
+            }
+        } else if(textSearchBil.getText().length() == 0){
+            tableModel = (DefaultTableModel) tableBillingHistory.getModel();
+            /* Clear table and insert values */
+            clearTable(tableModel);
+            billingList = frame.bManager.getAllBillings();
+            for(String[] iter : billingList) {
+                tableModel.addRow(iter);
+            }
+        }
+    }//GEN-LAST:event_textSearchBilKeyReleased
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labInformation;
     private javax.swing.JLabel labInformation2;
+    private javax.swing.JLabel labSearchBil;
+    private javax.swing.JLabel labSearchDep;
     private javax.swing.JLabel labTransactionHistory;
     private javax.swing.JTable tableBillingHistory;
     private javax.swing.JTable tableDepositHistory;
     private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JScrollPane tableScrollPane1;
+    private javax.swing.JTextField textSearchBil;
+    private javax.swing.JTextField textSearchDep;
     // End of variables declaration//GEN-END:variables
 }
