@@ -124,6 +124,9 @@ public class GUIFrame extends javax.swing.JFrame {
         } else if(panel.equals("card16")){
             editAccountAdminPanel.loadCustomerDetails();
             //cardLayout.show(cards, panel);
+        } else if(panel.equals("card12")){
+            loginAsPanel.loadPage();
+            //cardLayout.show(cards, panel);
         } else if(panel.equals("card13")){
             updateUser();
             accountAdminPanel.loadCustomerDetails();

@@ -8,6 +8,8 @@ import GUI.*;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 
 /**
  *
@@ -24,6 +26,22 @@ public class LoginAsPanel extends javax.swing.JPanel {
     public LoginAsPanel() {
         initComponents();
         listModel = new DefaultListModel();
+        listCustomers.addListSelectionListener(new ListSelectionListener() {
+
+            public void valueChanged(ListSelectionEvent e) {
+                if (!e.getValueIsAdjusting()) {
+                   //Check for null to avoid nullpointerexception when clearing list
+                   if(listCustomers.getSelectedValue() == null){
+                       return;
+                   } else{
+                    String item =(listCustomers.getSelectedValue().toString());
+                    //Make array of substrings by splitting on whitespace
+                    String substrings[] = item.split("\\s+");
+                    textEmail.setText(substrings[substrings.length-1]);
+                   }
+                }
+            }
+        });
     }
 
     public void setFrame(GUI.Test.GUIFrame frame) {
@@ -83,6 +101,18 @@ public class LoginAsPanel extends javax.swing.JPanel {
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateActionPerformed(evt);
+            }
+        });
+
+        textSearch.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textSearchKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                textSearchKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                textSearchKeyTyped(evt);
             }
         });
 
@@ -146,21 +176,32 @@ public class LoginAsPanel extends javax.swing.JPanel {
         labErrorEmail.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void loadPage(){
+        //Loads JList with all the customers
+        ArrayList<String> arr = frame.cManager.getCustomersByFirstName("%"+textSearch.getText()+"%");
+        listModel.clear();
+        if(arr.isEmpty() == false){
+            for (String customer : arr) {
+                listModel.addElement(customer);
+            }
+            listCustomers.setModel(listModel);
+        }
+    }
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
        frame.changePanel("card11");
-       labEmail.setForeground(Color.BLACK);
-       textEmail.setText("");
-       labErrorEmail.setVisible(false);
+       //labEmail.setForeground(Color.BLACK);
+       resetPage();
+       //labErrorEmail.setVisible(false);
     }//GEN-LAST:event_btnBackActionPerformed
 
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         inputCheck();
         if (errors == 0 && frame.cManager.admLoggedInAs(textEmail.getText().toLowerCase()) == true){
-            labEmail.setForeground(Color.BLACK);
-            labErrorEmail.setVisible(false);
+            //labEmail.setForeground(Color.BLACK);
+            //labErrorEmail.setVisible(false);
             //frame.cManager.admLoggedInAs(textEmail.getText());
             frame.changePanel("card13");
-            textEmail.setText("");
+            resetPage();
         } else {
             labEmail.setForeground(Color.RED);
             labErrorEmail.setVisible(true);
@@ -183,6 +224,59 @@ public class LoginAsPanel extends javax.swing.JPanel {
         System.out.println(textSearch.getText());
     }//GEN-LAST:event_btnUpdateActionPerformed
 
+    private void textSearchKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyPressed
+        //if(textSearch.getText().matches("[a-å]+")){
+        //System.err.println(evt.getKeyChar());
+//            ArrayList<String> arr = frame.cManager.getCustomersByFirstName("%"+textSearch.getText()+"%");
+//        listModel.clear();
+//        if(arr.isEmpty() == false){
+//            for (String customer : arr) {
+//                listModel.addElement(customer);
+//            }
+//            listCustomers.setModel(listModel);
+//        } else{
+//            listModel.add(0, "No customer found - Try again");
+//            listCustomers.setModel(listModel);
+//        }
+        
+        //System.err.println(textSearch.getText());
+        //}
+
+    }//GEN-LAST:event_textSearchKeyPressed
+
+    private void textSearchKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyTyped
+  
+//        ArrayList<String> arr = frame.cManager.getCustomersByFirstName("%"+textSearch.getText()+"%");
+//            System.err.println(textSearch.getText());
+//        listModel.clear();
+//        if(arr.isEmpty() == false){
+//            for (String customer : arr) {
+//                listModel.addElement(customer);
+//            }
+//            listCustomers.setModel(listModel);
+//        } else{
+//            listModel.add(0, "No customer found - Try again");
+//            listCustomers.setModel(listModel);
+//        }
+//        System.err.println(textSearch.getText());
+    }//GEN-LAST:event_textSearchKeyTyped
+
+    private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
+        ArrayList<String> arr = frame.cManager.getCustomersByFirstName("%"+textSearch.getText()+"%");
+            System.err.println(textSearch.getText());
+        listModel.clear();
+        if(arr.isEmpty() == false){
+            for (String customer : arr) {
+                listModel.addElement(customer);
+            }
+            listCustomers.setModel(listModel);
+        } else{
+            listModel.add(0, "No customer found - Try again");
+            listCustomers.setModel(listModel);
+        }
+        System.err.println(textSearch.getText());
+    }//GEN-LAST:event_textSearchKeyReleased
+
     private void inputCheck(){
        if(!textEmail.getText().equals("")){
             if (isValidEmailAddress(textEmail.getText()) == true){
@@ -198,12 +292,22 @@ public class LoginAsPanel extends javax.swing.JPanel {
             labErrorEmail.setVisible(true);
         }
     }
+    
     // Metod found at StackOverflow.com, which validates the syntax of an emailadress
     // http://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
     private boolean isValidEmailAddress(String email) {
        java.util.regex.Pattern p = java.util.regex.Pattern.compile(".+@.+\\.[a-z]+");
        java.util.regex.Matcher m = p.matcher(email);
        return m.matches();
+    }
+    
+    public void resetPage(){
+        textEmail.setText("");
+        textSearch.setText("");
+        listCustomers.clearSelection();
+        listModel.clear();
+        labErrorEmail.setVisible(false);
+        labEmail.setForeground(Color.BLACK);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

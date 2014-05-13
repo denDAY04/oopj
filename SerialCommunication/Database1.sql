@@ -77,7 +77,7 @@ VALUES
    ('1235','password','cba6a213','Hans','Jensen','vej 8','5530','hansemand@hotmail.com','44592271',0,'ACTIVE','IDLE'),   
    ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','jens@hotmail.com','44596871',0,'PENAPP','IDLE'),    
    ('1338','mor','0003','Niels','Nielsen','vej 6','3310','funkytown@gmail.com','88888888',50000,'PENACT','CHAR'),
-   ('9999','andreas','0004','Anders','Andersen','vej 7','2400','anders@tdc.dk','33108891',60000,'DISBL','IDLE');
+   ('9999','andreas','0004','Anders','Andersen','vej 7','2400','anders@tdc.dk','33108891',60000,'DISABL','IDLE');
 
 
 INSERT INTO Terminals (Road ,ZipCode,IPAddress,InstallStatus,ChargingStatus)
