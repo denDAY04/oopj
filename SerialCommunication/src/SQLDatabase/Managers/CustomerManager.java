@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 package SQLDatabase.Managers;
-import GUI.Test.LoggedIn;
+import SQLDatabase.ModelClasses.LoggedIn;
 import SQLDatabase.Library.SQLLibrary;
 import SQLDatabase.ModelClasses.*;
 import java.util.ArrayList;
