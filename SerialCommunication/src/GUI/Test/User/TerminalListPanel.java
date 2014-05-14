@@ -90,10 +90,10 @@ public class TerminalListPanel extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5"
             }
         )
-        //{public boolean isCellEditable(int row, int column){
-            //    return false;
-            //}
-        //}
+        {public boolean isCellEditable(int row, int column){
+            return false;
+        }
+    }
     );
     tableTerminalList.setFocusable(false);
     tableTerminalList.setRowSelectionAllowed(false);
@@ -118,7 +118,7 @@ public class TerminalListPanel extends javax.swing.JPanel {
                 .addComponent(labInformation)
                 .addComponent(btnBack)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addContainerGap(92, Short.MAX_VALUE))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -127,7 +127,7 @@ public class TerminalListPanel extends javax.swing.JPanel {
             .addComponent(labChargingStationList)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addComponent(labInformation)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+            .addGap(13, 13, 13)
             .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(btnBack)

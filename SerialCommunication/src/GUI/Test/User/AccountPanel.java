@@ -76,8 +76,11 @@ public class AccountPanel extends javax.swing.JPanel {
         btnDeleteAccount = new javax.swing.JButton();
         btnTerminalList = new javax.swing.JButton();
 
+        setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         labTitle.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         labTitle.setText("Account Information");
+        add(labTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
         btnEdit.setText("Edit account details");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
@@ -85,6 +88,7 @@ public class AccountPanel extends javax.swing.JPanel {
                 btnEditActionPerformed(evt);
             }
         });
+        add(btnEdit, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 80, 140, -1));
 
         btnChangePass.setText("Change password");
         btnChangePass.addActionListener(new java.awt.event.ActionListener() {
@@ -92,6 +96,7 @@ public class AccountPanel extends javax.swing.JPanel {
                 btnChangePassActionPerformed(evt);
             }
         });
+        add(btnChangePass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 140, -1));
 
         btnAddFunds.setText("Add funds");
         btnAddFunds.addActionListener(new java.awt.event.ActionListener() {
@@ -99,6 +104,7 @@ public class AccountPanel extends javax.swing.JPanel {
                 btnAddFundsActionPerformed(evt);
             }
         });
+        add(btnAddFunds, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 160, 140, -1));
 
         btnTransactionHistory.setText("Transaction history");
         btnTransactionHistory.addActionListener(new java.awt.event.ActionListener() {
@@ -106,26 +112,35 @@ public class AccountPanel extends javax.swing.JPanel {
                 btnTransactionHistoryActionPerformed(evt);
             }
         });
+        add(btnTransactionHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 140, -1));
 
         labName.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labName.setText("Name");
+        add(labName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, -1, -1));
 
         labCName.setText(" ");
+        add(labCName, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 181, -1));
 
         labEmail.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labEmail.setText("Email");
+        add(labEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, -1, -1));
 
         labCEmail.setText(" ");
+        add(labCEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 170, -1));
 
         labCardNumber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labCardNumber.setText("Card Number");
+        add(labCardNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 160, -1, -1));
 
         labCCardNumber.setText(" ");
+        add(labCCardNumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 60, -1));
 
         labBalance.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labBalance.setText("Balance (DKK)");
+        add(labBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 200, -1, -1));
 
         labCBalance.setText(" ");
+        add(labCBalance, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 60, -1));
 
         btnLogout.setText("Logout");
         btnLogout.addActionListener(new java.awt.event.ActionListener() {
@@ -133,16 +148,21 @@ public class AccountPanel extends javax.swing.JPanel {
                 btnLogoutActionPerformed(evt);
             }
         });
+        add(btnLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 332, -1, -1));
 
         labCUseStatus.setText(" ");
+        add(labCUseStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 300, 102, -1));
 
         labUseStatus.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labUseStatus.setText("Use status");
+        add(labUseStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 280, 93, -1));
 
         labCAccStatus.setText(" ");
+        add(labCAccStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 125, -1));
 
         labAccStatus.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         labAccStatus.setText("Account status");
+        add(labAccStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 240, 102, -1));
 
         btnDeleteAccount.setText("Delete account");
         btnDeleteAccount.addActionListener(new java.awt.event.ActionListener() {
@@ -150,6 +170,7 @@ public class AccountPanel extends javax.swing.JPanel {
                 btnDeleteAccountActionPerformed(evt);
             }
         });
+        add(btnDeleteAccount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 283, 140, -1));
 
         btnTerminalList.setText("View all terminals");
         btnTerminalList.addActionListener(new java.awt.event.ActionListener() {
@@ -157,98 +178,7 @@ public class AccountPanel extends javax.swing.JPanel {
                 btnTerminalListActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(btnTransactionHistory, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnAddFunds, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnChangePass, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnEdit, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
-                            .addComponent(btnTerminalList, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnDeleteAccount, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labName)
-                            .addComponent(labCName, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labCardNumber)
-                            .addComponent(labCCardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labEmail)
-                            .addComponent(labCEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labBalance)
-                            .addComponent(labCBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labUseStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labCUseStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(labCAccStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labTitle)
-                            .addComponent(btnLogout))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addGap(88, 88, 88))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addComponent(labTitle)
-                        .addGap(47, 47, 47)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnEdit)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labName)
-                                .addGap(6, 6, 6)
-                                .addComponent(labCName)))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnChangePass)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labEmail)
-                                .addGap(6, 6, 6)
-                                .addComponent(labCEmail)))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnAddFunds)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labCardNumber)
-                                .addGap(6, 6, 6)
-                                .addComponent(labCCardNumber)))
-                        .addGap(6, 6, 6)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTransactionHistory)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labBalance)
-                                .addGap(6, 6, 6)
-                                .addComponent(labCBalance)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnTerminalList)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(labAccStatus)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(labCAccStatus)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(labUseStatus)
-                        .addGap(12, 12, 12))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnDeleteAccount)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(labCUseStatus)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnLogout)
-                .addContainerGap())
-        );
+        add(btnTerminalList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed

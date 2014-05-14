@@ -121,8 +121,8 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
         labTransactionHistory.setText("Transaction History");
         add(labTransactionHistory, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
 
-        labInformation.setText("Below you will see a history of all billings and deposits for your account.");
-        add(labInformation, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 39, -1, 23));
+        labInformation.setText("Below you will see a history of all billings and deposits currently in the system.");
+        add(labInformation, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 39, 430, 23));
 
         tableBillingHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -141,8 +141,8 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
 
     add(tableScrollPane, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 312, 679, 161));
 
-    labInformation2.setText("To see more details about a specific history, click on it and click Details.");
-    add(labInformation2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, -1, -1));
+    labInformation2.setText("You can search for deposits by Ref. number, or search billings by transaction number.");
+    add(labInformation2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 68, 460, -1));
 
     tableDepositHistory.setModel(new javax.swing.table.DefaultTableModel(
         new Object [][] {

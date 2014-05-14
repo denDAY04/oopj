@@ -10,7 +10,7 @@ package SQLDatabase.ModelClasses;
 import SQLDatabase.ModelClasses.Customer;
 
 public class LoggedIn {
-    public Customer customer;
+    private Customer customer;
 
     public void setCustomer(Customer customer) {
         this.customer = customer;

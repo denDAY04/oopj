@@ -38,11 +38,11 @@
     </Component>
     <Component class="javax.swing.JLabel" name="labInformation">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Below you will see a history of all billings and deposits for your account."/>
+        <Property name="text" type="java.lang.String" value="Below you will see a history of all billings and deposits currently in the system."/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="39" width="-1" height="23"/>
+          <AbsoluteConstraints x="10" y="39" width="430" height="23"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -69,11 +69,11 @@
     </Container>
     <Component class="javax.swing.JLabel" name="labInformation2">
       <Properties>
-        <Property name="text" type="java.lang.String" value="To see more details about a specific history, click on it and click Details."/>
+        <Property name="text" type="java.lang.String" value="You can search for deposits by Ref. number, or search billings by transaction number."/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="10" y="68" width="-1" height="-1"/>
+          <AbsoluteConstraints x="10" y="68" width="460" height="-1"/>
         </Constraint>
       </Constraints>
     </Component>
