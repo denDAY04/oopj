@@ -24,29 +24,17 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labChargingStationList" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labInformation" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="387" max="32767" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnAddNewTerminal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnEditTerminal" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="73" max="-2" attributes="0"/>
-                  </Group>
-              </Group>
-          </Group>
-          <Group type="102" attributes="0">
-              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="labChargingStationList" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="labInformation" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Component id="labNewTerminalInstructions" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="tableScrollPane" alignment="0" min="-2" pref="656" max="-2" attributes="0"/>
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
+                              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="btnAddNewTerminal" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="textAddress" alignment="0" min="-2" pref="80" max="-2" attributes="0"/>
@@ -67,7 +55,11 @@
                                   <Component id="labOfflineSince" max="32767" attributes="0"/>
                                   <Component id="textOfflineSince" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="labIPAddress" max="32767" attributes="0"/>
                                   <Component id="textIPAddress" max="32767" attributes="0"/>
@@ -78,11 +70,11 @@
                                   <Component id="textInstallStatus" max="32767" attributes="0"/>
                               </Group>
                           </Group>
-                          <Component id="labNewTerminalInstructions" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Component id="btnEditTerminal" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -95,7 +87,7 @@
               <Component id="labInformation" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="tableScrollPane" min="-2" pref="182" max="-2" attributes="0"/>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="labNewTerminalInstructions" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">

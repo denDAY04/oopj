@@ -11,8 +11,6 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-
-
 /**
  *
  * @author AndreasStensig
@@ -20,18 +18,31 @@ import javax.swing.table.DefaultTableModel;
 public class TransactionManagementPanel extends javax.swing.JPanel {
 
     private DefaultTableModel tableModel;
-    
     private GUIFrame frame;
     private ArrayList<String[]> billingList;
     private ArrayList<String[]> depositList;
+    
     //private ResultSetTableModel tableModel;
     /**
      * Creates new form ChargingStationListViewPanel
      */
     public TransactionManagementPanel() {
-        initComponents();
+        initComponents();  
+        /* Set column headers and special width on tables */         
+        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue("Number");
+        tableDepositHistory.getColumnModel().getColumn(0).setPreferredWidth(20);
+        tableDepositHistory.getColumnModel().getColumn(1).setHeaderValue("Customer");
+        tableDepositHistory.getColumnModel().getColumn(1).setPreferredWidth(20);
+        tableDepositHistory.getColumnModel().getColumn(2).setHeaderValue("Deposit Date");
+        tableDepositHistory.getColumnModel().getColumn(2).setPreferredWidth(15);
+        tableDepositHistory.getColumnModel().getColumn(3).setHeaderValue("Amount(DKK)");
+        tableDepositHistory.getColumnModel().getColumn(3).setPreferredWidth(15);
+        tableDepositHistory.getColumnModel().getColumn(4).setHeaderValue("Balance(DKK)");
+        tableDepositHistory.getColumnModel().getColumn(4).setPreferredWidth(20);
+        tableDepositHistory.getColumnModel().getColumn(5).setHeaderValue("Ref. number");
+        tableDepositHistory.getColumnModel().getColumn(5).setPreferredWidth(15);
+        tableDepositHistory.getColumnModel().getColumn(6).setHeaderValue("Card number");
         
-        /* Set column headers and special width on tables */
         tableBillingHistory.getColumnModel().getColumn(0).setHeaderValue("Number");
         tableBillingHistory.getColumnModel().getColumn(0).setPreferredWidth(15);
         tableBillingHistory.getColumnModel().getColumn(1).setHeaderValue("Customer");
@@ -47,29 +58,13 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
         tableBillingHistory.getColumnModel().getColumn(6).setHeaderValue("kWh");
         tableBillingHistory.getColumnModel().getColumn(6).setPreferredWidth(10);
         tableBillingHistory.getColumnModel().getColumn(7).setHeaderValue("Balance(DKK)");
-        
-        
-        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue("Number");
-        tableDepositHistory.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tableDepositHistory.getColumnModel().getColumn(1).setHeaderValue("Customer");
-        tableDepositHistory.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tableDepositHistory.getColumnModel().getColumn(2).setHeaderValue("Deposit Date");
-        tableDepositHistory.getColumnModel().getColumn(2).setPreferredWidth(15);
-        tableDepositHistory.getColumnModel().getColumn(3).setHeaderValue("Amount(DKK)");
-        tableDepositHistory.getColumnModel().getColumn(3).setPreferredWidth(15);
-        tableDepositHistory.getColumnModel().getColumn(4).setHeaderValue("Balance(DKK)");
-        tableDepositHistory.getColumnModel().getColumn(4).setPreferredWidth(20);
-        tableDepositHistory.getColumnModel().getColumn(5).setHeaderValue("Ref. number");
-        tableDepositHistory.getColumnModel().getColumn(5).setPreferredWidth(15);
-        tableDepositHistory.getColumnModel().getColumn(6).setHeaderValue("Card number");
-        //tableDepositHistory.getColumnModel().getColumn().setPreferredWidth(20);
     }
 
     public void setFrame(GUI.Test.System.GUIFrame frame) {
         this.frame = frame;
     }
     
-    public void loadTransactionsDetails() {
+    public void loadPage() {
         tableModel = (DefaultTableModel) tableBillingHistory.getModel();
         /* Clear table and insert values */
         clearTable(tableModel);
@@ -205,8 +200,7 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         clearTable((DefaultTableModel) tableBillingHistory.getModel());
-        clearTable((DefaultTableModel) tableDepositHistory.getModel());
-        
+        clearTable((DefaultTableModel) tableDepositHistory.getModel()); 
         frame.changePanel("card11");
     }//GEN-LAST:event_btnBackActionPerformed
 
@@ -267,7 +261,6 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
             }
         }
     }//GEN-LAST:event_textSearchBilKeyReleased
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

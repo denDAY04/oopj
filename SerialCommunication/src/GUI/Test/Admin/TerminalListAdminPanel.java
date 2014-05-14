@@ -51,7 +51,7 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
         this.frame = frame;
     }
     
-    public void loadTerminalDetails() {
+    public void loadPage() {
         clearTable();
         ArrayList<String[]> list = frame.tManager.getAllTerminals();
         for (String[] iter : list) {
@@ -69,7 +69,7 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
         }
     }
 
-    private void clearIputFields() {
+    private void resetPage() {
         textAddress.setText("");
         textZipCode.setText("");
         textChargingStatus.setText("");
@@ -191,24 +191,16 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
         .addGroup(layout.createSequentialGroup()
             .addContainerGap()
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(labChargingStationList)
-                        .addComponent(labInformation))
-                    .addContainerGap(387, Short.MAX_VALUE))
-                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                    .addComponent(btnBack)
-                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAddNewTerminal)
-                    .addGap(18, 18, 18)
-                    .addComponent(btnEditTerminal)
-                    .addGap(73, 73, 73))))
-        .addGroup(layout.createSequentialGroup()
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addComponent(labChargingStationList)
+                .addComponent(labInformation)
+                .addComponent(labNewTerminalInstructions)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createSequentialGroup()
-                    .addContainerGap()
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(btnBack)
+                            .addGap(123, 123, 123)
+                            .addComponent(btnAddNewTerminal))
                         .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(textAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -224,8 +216,10 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(labOfflineSince, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textOfflineSince))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(textOfflineSince))))
+                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(labIPAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(textIPAddress))
@@ -233,8 +227,8 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(labInstallStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(textInstallStatus)))
-                        .addComponent(labNewTerminalInstructions))))
-            .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(btnEditTerminal))))
+            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
         layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,7 +239,7 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
             .addComponent(labInformation)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
             .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 182, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(labNewTerminalInstructions)
             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -273,7 +267,7 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        clearIputFields();
+        resetPage();
         clearTable();
         frame.changePanel("card11");
     }//GEN-LAST:event_btnBackActionPerformed
@@ -299,7 +293,7 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
             }
         }
         frame.tManager.editFullTerminal(arr, terminalID);
-        loadTerminalDetails();
+        loadPage();
     }//GEN-LAST:event_btnEditTerminalActionPerformed
 
     private void btnAddNewTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewTerminalActionPerformed
@@ -311,9 +305,8 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
             return;
         }
         frame.tManager.addTerminal(address, zipCode, ipAddress);
-        loadTerminalDetails();
+        loadPage();
     }//GEN-LAST:event_btnAddNewTerminalActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddNewTerminal;

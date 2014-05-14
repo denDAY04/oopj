@@ -21,30 +21,33 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" attributes="0">
               <Group type="103" groupAlignment="1" max="-2" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="labTransactionHistory" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labInformation" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="labInformation2" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
-                          <Component id="tableScrollPane1" min="-2" pref="679" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="0" min="-2" pref="54" max="-2" attributes="0"/>
-                          <Component id="tableScrollPane" alignment="0" min="-2" pref="679" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                      <Component id="btnBack" min="-2" pref="69" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnBillingDetails" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="190" max="-2" attributes="0"/>
                       <Component id="btnDepositDetails" min="-2" max="-2" attributes="0"/>
                   </Group>
+                  <Group type="102" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" alignment="1" groupAlignment="0" attributes="0">
+                              <Component id="labTransactionHistory" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labInformation" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labInformation2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="jLabel1" alignment="0" min="-2" pref="70" max="-2" attributes="0"/>
+                              <Component id="tableScrollPane1" min="-2" pref="679" max="-2" attributes="0"/>
+                              <Component id="jLabel2" alignment="0" min="-2" pref="54" max="-2" attributes="0"/>
+                              <Component id="tableScrollPane" alignment="0" min="-2" pref="679" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="btnBack" min="-2" pref="69" max="-2" attributes="0"/>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="btnBillingDetails" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="22" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -62,16 +65,17 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="tableScrollPane1" min="-2" pref="125" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btnDepositDetails" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBillingDetails" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
-              </Group>
+              <Component id="btnDepositDetails" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="tableScrollPane" min="-2" pref="125" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="81" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnBillingDetails" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>

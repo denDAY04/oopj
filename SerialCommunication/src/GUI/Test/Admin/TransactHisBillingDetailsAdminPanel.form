@@ -22,17 +22,47 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" attributes="0">
-              <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="labBillingDetails" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="labInformation" alignment="0" min="-2" max="-2" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="btnBack" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="labBillingAmount" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="textBillingAmount" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="labBillingRate" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labkWhBilled" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labNewBalance" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="textBillingRate" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="textkWhBilled" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
+                                      <Component id="textNewBalance" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Component id="labDKK2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labkWh" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labDKKkWh" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="labDKK1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                              <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
+                                  <Component id="textBillingZip" alignment="0" max="32767" attributes="0"/>
+                                  <Component id="labBillingZip" alignment="0" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="labBillingDetails" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="labInformation" alignment="0" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
               </Group>
-              <EmptySpace pref="92" max="32767" attributes="0"/>
-          </Group>
-          <Group type="102" alignment="1" attributes="0">
-              <EmptySpace max="32767" attributes="0"/>
-              <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+              <EmptySpace pref="108" max="32767" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
@@ -49,33 +79,7 @@
                       <Component id="textBillingAddress" alignment="0" max="32767" attributes="0"/>
                       <Component id="textChargingEnd" alignment="0" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="116" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="labBillingAmount" alignment="0" max="32767" attributes="0"/>
-                              <Component id="textBillingAmount" alignment="0" max="32767" attributes="0"/>
-                              <Component id="labBillingRate" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labkWhBilled" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labNewBalance" alignment="0" max="32767" attributes="0"/>
-                              <Component id="textBillingRate" alignment="0" max="32767" attributes="0"/>
-                              <Component id="textkWhBilled" alignment="0" min="-2" pref="77" max="-2" attributes="0"/>
-                              <Component id="textNewBalance" alignment="0" min="-2" pref="79" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="labDKK2" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labkWh" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labDKKkWh" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="labDKK1" alignment="0" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="textBillingZip" alignment="0" max="32767" attributes="0"/>
-                          <Component id="labBillingZip" alignment="0" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                  <EmptySpace min="-2" pref="36" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="301" max="-2" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -87,67 +91,65 @@
               <Component id="labBillingDetails" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="labInformation" min="-2" pref="23" max="-2" attributes="0"/>
-              <EmptySpace pref="292" max="32767" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="labBillingAmount" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="textBillingAmount" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labDKK1" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="labBillingRate" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="textBillingRate" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labDKKkWh" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="labkWhBilled" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="textkWhBilled" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labkWh" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="labNewBalance" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="textNewBalance" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="labDKK2" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
+              <Component id="labBillingZip" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="textBillingZip" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
               <Component id="btnBack" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="26" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labTransactionNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labBillingAmount" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="labTransactionNumber" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textTransactionNumber" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textBillingAmount" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labDKK1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="textTransactionNumber" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labBillingRate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labChargingStart" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="labChargingStart" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textBillingRate" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textChargingStart" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labDKKkWh" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="textChargingStart" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labChargingEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labkWhBilled" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="labChargingEnd" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textChargingEnd" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textkWhBilled" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labkWh" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="textChargingEnd" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labRecieved" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labNewBalance" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="labRecieved" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textRecieved" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textNewBalance" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labDKK2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="textRecieved" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="labBillingAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="labBillingZip" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
+                  <Component id="labBillingAddress" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="textBillingAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="textBillingZip" alignment="3" min="-2" max="-2" attributes="0"/>
-                  </Group>
-                  <EmptySpace pref="79" max="32767" attributes="0"/>
+                  <Component id="textBillingAddress" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace pref="49" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>

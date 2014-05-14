@@ -11,14 +11,13 @@ import GUI.Test.System.GUIFrame;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
-
 /**
  *
  * @author AndreasStensig
  */
 public class TransactHisDepositDetailsAdminPanel extends javax.swing.JPanel {
 
-    GUIFrame frame;
+    private GUIFrame frame;
     
     /**
      * Creates new form ChargingStationListViewPanel
@@ -31,7 +30,7 @@ public class TransactHisDepositDetailsAdminPanel extends javax.swing.JPanel {
         this.frame = frame;
     }
     
-    public void loadDepositDetails(String depositNumber) {
+    public void loadPage(String depositNumber) {
         int depositNumb;
         try {
             depositNumb = Integer.parseInt(depositNumber);
@@ -54,7 +53,7 @@ public class TransactHisDepositDetailsAdminPanel extends javax.swing.JPanel {
         textExternalRefNumb.setText(data.get(5));
     }
     
-    private void clearFields() {
+    private void resetPage() {
         textDepositNumber.setText("");
         textDepositDate.setText("");
         textDepositAmount.setText("");
@@ -175,12 +174,9 @@ public class TransactHisDepositDetailsAdminPanel extends javax.swing.JPanel {
                                 .addComponent(labDKK2))
                             .addComponent(labLast4CardNumber)
                             .addComponent(textLast4CardNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(textExternalRefNumb, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(83, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnBack)
-                .addGap(28, 28, 28))
+                            .addComponent(textExternalRefNumb, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnBack))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -215,17 +211,16 @@ public class TransactHisDepositDetailsAdminPanel extends javax.swing.JPanel {
                     .addComponent(textDepositAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textExternalRefNumb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(labDKK1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(btnBack)
-                .addGap(26, 26, 26))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        clearFields();
+        resetPage();
         frame.changePanel("card18");
     }//GEN-LAST:event_btnBackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

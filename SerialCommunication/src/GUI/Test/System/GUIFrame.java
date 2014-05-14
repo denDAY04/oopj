@@ -123,11 +123,11 @@ public class GUIFrame extends javax.swing.JFrame {
             updateUser();
             accountAdminPanel.loadPage();
         }else if (panel.equals("card19")){
-            terminalListAdminPanel.loadTerminalDetails();
+            terminalListAdminPanel.loadPage();
         }else if (panel.equals("card10")){
             transactionHistoryPanel.loadPage();
         }else if (panel.equals("card18")){
-            transactionHistoryAdminPanel.loadTransactionsDetails();
+            transactionHistoryAdminPanel.loadPage();
         }else if(panel.equals("card20")) {
             terminalListPanel.loadPage();
         }else if (panel.equals("card21")) {
@@ -135,13 +135,12 @@ public class GUIFrame extends javax.swing.JFrame {
         }else if (panel.equals("card22")) {
             transactHisBillingDetailsPanel.loadPage(activeBillingNumber);
         }else if (panel.equals("card23")) {
-            transactHisDepositDetailsAdminPanel.loadDepositDetails(activeDepositNumber);
+            transactHisDepositDetailsAdminPanel.loadPage(activeDepositNumber);
         }else if (panel.equals("card24")) {
-            transactHisBillingDetailsAdminPanel.loadBillingDetails(activeBillingNumber);
+            transactHisBillingDetailsAdminPanel.loadPage(activeBillingNumber);
         }else if (panel.equals("card25")) {
-            transactionManagementPanel.loadTransactionsDetails();
+            transactionManagementPanel.loadPage();
         }
-
         cardLayout.show(cards, panel);
     }
     
