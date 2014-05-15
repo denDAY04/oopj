@@ -79,7 +79,7 @@ public class BillingManager {
         ArrayList<String> result = new ArrayList<String>();
         
         parameter.add(transactionNumber);
-        temp = databaseManager.getDetailedBilling(SQLLibrary.USER_GET_BILLING_N_TERMINAL, parameter);
+        temp = databaseManager.getDetailedBilling(SQLLibrary.USER_GET_BILLING_AND_TERMINAL, parameter);
         Billing billing = (Billing) temp.get(0);
         String address = (String) temp.get(1);
         String zipCode = (String) temp.get(2);

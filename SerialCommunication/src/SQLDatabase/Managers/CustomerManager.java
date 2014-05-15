@@ -121,7 +121,7 @@ public class CustomerManager {
                 parameters.add(newValues[0]);
                 parameters.add(customerID);
                 System.out.println("CustomerManager updateInformation, Fire SQL statement, Case 1");
-                databaseManager.updateQuery(SQLLibrary.SYSTEM_SET_CUSTOMER_USE_STATUS, parameters); 
+                databaseManager.updateQuery(SQLLibrary.SYSTEM_SET_CUSTOMER_USE_STATUS, parameters);
                 break;
             case 2:         // Set new balance
                 parameters.add(newValues[0]);

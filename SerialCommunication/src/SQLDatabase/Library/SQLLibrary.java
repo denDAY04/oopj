@@ -18,7 +18,7 @@ public class SQLLibrary {
                                              + "from Billing "
                                              + "where CustomerNumb = ?";
 
-    public static final String USER_GET_BILLING_N_TERMINAL = "select TransactionNumb, StartCharge, EndCharge, Recieved, BillingAmount, " 
+    public static final String USER_GET_BILLING_AND_TERMINAL = "select TransactionNumb, StartCharge, EndCharge, Recieved, BillingAmount, " 
                                      +"BillingRate, BillingKWH, NewBalanceBilling, Road, ZipCode, CustomerNumb, Terminals.HardwareNumb " 
                                      + "from Billing "
                                      + "inner join Terminals "
