@@ -7,7 +7,6 @@ package rfid;
 import SQLDatabase.Managers.CustomerManager;
 import SQLDatabase.Managers.DatabaseManager;
 import SQLDatabase.Managers.TerminalManager;
-import SerialCom.rfidSimulation.RFIDReaderSimpleSimulator;
 import SerialCom.protocol.ProjectPacket;
 import SerialCom.controller.EventManager;
 import SerialCom.serial.SerialTransceiver;

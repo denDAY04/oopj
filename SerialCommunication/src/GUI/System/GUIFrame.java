@@ -41,15 +41,15 @@ public class GUIFrame extends javax.swing.JFrame {
     public GUIFrame() {
         initComponents();
         cardLayout = new CardLayout();
-        dbManager = new DatabaseManager();
-        cManager = new CustomerManager();
-        bManager = new BillingManager();
-        depManager = new DepositManager();
-        tManager = new TerminalManager();
-        cManager.setDatabaseManager(dbManager);
-        bManager.setDatabaseManager(dbManager);
-        depManager.setDatabaseManager(dbManager);
-        tManager.setDatabaseManager(dbManager);
+//        dbManager = new DatabaseManager();
+//        cManager = new CustomerManager();
+//        bManager = new BillingManager();
+//        depManager = new DepositManager();
+//        tManager = new TerminalManager();
+//        cManager.setDatabaseManager(dbManager);
+//        bManager.setDatabaseManager(dbManager);
+//        depManager.setDatabaseManager(dbManager);
+//        tManager.setDatabaseManager(dbManager);
         
         
         loginControllerPanel.setFrame(this);
@@ -105,6 +105,26 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(transactHisBillingDetailsAdminPanel, "card24");
         cards.add(transactionManagementPanel, "card25");
     }    
+
+    public void setCustomerManager(CustomerManager cManager) {
+        this.cManager = cManager;
+    }
+
+    public void setDatabaseManager(DatabaseManager dbManager) {
+        this.dbManager = dbManager;
+    }
+
+    public void setBillingManager(BillingManager bManager) {
+        this.bManager = bManager;
+    }
+
+    public void setDepositManager(DepositManager depManager) {
+        this.depManager = depManager;
+    }
+
+    public void setTerminalManager(TerminalManager tManager) {
+        this.tManager = tManager;
+    }
     
     public void changePanel(String panel){
         
