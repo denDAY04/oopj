@@ -2,6 +2,12 @@ package SQLDatabase.Main;
 
 import GUI.System.GUIFrame;
 import SQLDatabase.Managers.*;
+import SerialCom.controller.EventManager;
+import SerialCom.protocol.ProjectPacket;
+import SerialCom.serial.SerialTransceiver;
+import java.util.TooManyListenersException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 
 
@@ -16,21 +22,25 @@ import javax.swing.JFrame;
  */
 public class Main {
     public static void main(String[] args) {
+        
+        
+        
+        
         /* Create managers */
         DatabaseManager databaseManager = new DatabaseManager();
-//        EventManager eventManager = new EventManager();  
+        EventManager eventManager = new EventManager();  
         CustomerManager customerManager = new CustomerManager();
         TerminalManager terminalManager = new TerminalManager();
         BillingManager billingManager = new BillingManager();
         DepositManager depositManager = new DepositManager();
         
         /* Set the references between the managers */
-//        eventManager.setBillingManager(billingManager);
-//        eventManager.setCustomerManager(customerManager);
-//        eventManager.setTerminalManager(terminalManager);
+        eventManager.setBillingManager(billingManager);
+        eventManager.setCustomerManager(customerManager);
+        eventManager.setTerminalManager(terminalManager);
         customerManager.setDatabaseManager(databaseManager);
         terminalManager.setDatabaseManager(databaseManager);
-//        terminalManager.setEventManager(eventManager);
+        terminalManager.setEventManager(eventManager);
         billingManager.setDatabaseManager(databaseManager);
         depositManager.setDatabaseManager(databaseManager);
         
@@ -72,6 +82,24 @@ public class Main {
         gui.setTerminalManager(terminalManager);
         
         gui.setVisible(true);
+        
+         //Construct another SerialTransceiver for the RFIDEventManager
+        SerialTransceiver transceiver = new SerialTransceiver(
+                new ProjectPacket(), eventManager);
+        //Set the transmitter for the RFIDManagerSimple
+        eventManager.setTransmitter(transceiver);
+
+        System.out.println("TestMain: open port:");
+        try {
+            eventManager.openPort();
+        } catch (TooManyListenersException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE,
+                    null,
+                    ex);
+        }
+        
+        terminalManager.startPingSchedule();
+                
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 }
