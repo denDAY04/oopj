@@ -37,6 +37,7 @@ public class DatabaseManager {// implements DatabaseInterface {   // any update 
             PreparedStatement preparedStatement = con.prepareStatement(updateQuery);
             for (int i=0; i<parameters.size();++i){
                 Class indexedClass = parameters.get(i).getClass();
+             //   System.err.println(parameters.get(i).toString());
                 if(indexedClass == String.class) {
                     preparedStatement.setString(i+1, (String) parameters.get(i));
                 } else if (indexedClass == Integer.class) {

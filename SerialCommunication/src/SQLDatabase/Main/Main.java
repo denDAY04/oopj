@@ -98,7 +98,7 @@ public class Main {
                     ex);
         }
         
-        terminalManager.startPingSchedule();
+      //  terminalManager.startPingSchedule();
                 
         gui.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }

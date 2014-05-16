@@ -293,10 +293,13 @@ public class EventManager implements FrameEventListener {
                     */
                     if (command.equals("CS")) {
                         newStatus[0] = "CHAR";
+                        System.err.println("Process request: command is CS");
                     } else {                          
                         newStatus[0] = "IDLE";
+                        System.err.println("Process request: command is NOT CS "+cardNum +" " + terminalID);
                         /* Extract the billing data from the packet and log it in the database. */
                         String[] dataArr = exstractBillingData(cardNum, terminalID);
+                        System.err.println("Process request: before register billing method call");
                         billingManager.registerBilling(dataArr);
 
                     }
@@ -357,11 +360,12 @@ public class EventManager implements FrameEventListener {
      * @return An array of Strings containing the data in the correct sequence, 
      * as dictated by the SQL template in SQLLibrary.SYSTEM_LOG_NEW_BILLING.
      */
-    private String[] exstractBillingData(String cardNum, String terminalID) {
+    private String[] exstractBillingData(String cardNum, String terminal) {
         /* Find a customer's ID and old balance through the transfered card number */
         Customer billedCustomer = customerManager.getCustomer(cardNum);
+        Terminal usedTerminal = terminalManager.getTerminalByIP(terminal);
         String customerID = billedCustomer.getCustomerNumb();
-        double oldBalance = billedCustomer.getBalance();
+        int oldBalance = billedCustomer.getBalance();
 
         /* Extract billing data from packet */
         String kWhRate = packet.getData().substring(DATAKWHRATEINDEX, DATAKWHRATEINDEX + DATAKWHRATESIZE);
@@ -369,11 +373,12 @@ public class EventManager implements FrameEventListener {
         String DKKAmount = packet.getData().substring(DATADKKAMOUNTINDEX, DATADKKAMOUNTINDEX + DATADKKAMOUNTSIZE);
         String startTime = packet.getData().substring(DATASTARTTIMEINDEX, DATASTARTTIMEINDEX + DATASTARTTIMESIZE);
         String endTime = packet.getData().substring(DATAENDTIMEINDEX, DATAENDTIMEINDEX + DATAENDTIMESIZE);
-
+        String terminalID = usedTerminal.getHardwareNumb();
         /* Calcualte new balance after billing */
-        String newBalanceString = "" + (oldBalance - Double.parseDouble(DKKAmount));
+        String newBalanceString = "" + (oldBalance - Integer.parseInt(DKKAmount));
 
         String[] arr = {customerID, terminalID, startTime, endTime, DKKAmount, kWhRate, kwHAmount, newBalanceString};
+        //System.err.println("Event manager exstract billing data " +customerID+" "+ terminalID+" "+ startTime+" "+endTime+" "+DKKAmount+" "+kWhRate+" "+kwHAmount+" "+newBalanceString);
         return arr;
     }
 }

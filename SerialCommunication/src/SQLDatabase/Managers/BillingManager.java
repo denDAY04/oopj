@@ -152,7 +152,6 @@ public class BillingManager {
        arr.add(data[7]);                        // New balance
        arr.add(data[0]);                        // Customer ID
        databaseManager.updateQuery(SQLLibrary.SYSTEM_WRITE_NEW_BALANCE, arr);
-       
    }
 }
 

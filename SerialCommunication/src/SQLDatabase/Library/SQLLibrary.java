@@ -139,6 +139,11 @@ public class SQLLibrary {
                                                                + "from Terminals "
                                                                + "where HardwareNumb = ?";  
     
+        public static final String SYSTEM_GET_TERMINAL_BY_IP = "select * " 
+                                                               + "from Terminals "
+                                                               + "where IPAddress = ?";  
+    
+    
     public static final String SYSTEM_GET_ALL_TERMINALS = "select * " 
                                                       + "from Terminals";  
 

@@ -138,6 +138,17 @@ public class TerminalManager {
         return terminal;
     }
     
+        public Terminal getTerminalByIP(String terminalIP) {
+        ArrayList<Object> parameter = new ArrayList();
+        parameter.add(terminalIP);
+        Terminal terminal = null;
+        ArrayList<Terminal> arr = databaseManager.getTerminals(SQLLibrary.SYSTEM_GET_TERMINAL_BY_IP, parameter);
+        if (arr.isEmpty() == false) {
+            terminal = arr.get(0);
+        }
+        return terminal;
+    }
+    
     public ArrayList<String[]> getAllTerminals() {
         ArrayList<Terminal> terminals;
         ArrayList<String[]> result = new ArrayList<String[]>();
