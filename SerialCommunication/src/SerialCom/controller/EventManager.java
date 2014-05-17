@@ -266,6 +266,7 @@ public class EventManager implements FrameEventListener {
                         System.err.println("customer object is NULL");
                         System.err.println("no customer found");
                         sendResponse("VC", "NULL", destination);
+                        resendTimer.stop();
                     }
                 } // pong was sent back from terminal.
                 else if (command.equals("PO")) {
@@ -299,7 +300,6 @@ public class EventManager implements FrameEventListener {
                         System.err.println("Process request: command is NOT CS "+cardNum +" " + terminalID);
                         /* Extract the billing data from the packet and log it in the database. */
                         String[] dataArr = exstractBillingData(cardNum, terminalID);
-                        System.err.println("Process request: before register billing method call");
                         billingManager.registerBilling(dataArr);
 
                     }
