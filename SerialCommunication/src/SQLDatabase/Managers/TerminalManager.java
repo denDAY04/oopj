@@ -124,7 +124,11 @@ public class TerminalManager {
          parameters.addAll(Arrays.asList(newValues));
          parameters.add(terminalID);
          databaseManager.updateQuery(SQLLibrary.ADMIN_SET_TERMINAL_ALL_DETAILS, parameters);
-         
+         if (newValues[5].equals("DISABL")) {
+             eventManager.sendResponse("DA", "", newValues[4]);
+         } else if (newValues[5].equals("ENABLE")) {
+             eventManager.sendResponse("EA", "", newValues[4]);
+         }
     }
 
     public Terminal getTerminal(String terminalID) {
