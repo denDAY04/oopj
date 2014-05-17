@@ -72,10 +72,10 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
     private void resetPage() {
         textAddress.setText("");
         textZipCode.setText("");
-        textChargingStatus.setText("");
+        comboChargingStatus.setSelectedIndex(0);
         textOfflineSince.setText("");
         textIPAddress.setText("");
-        textInstallStatus.setText("");
+        comboInstallStatus.setSelectedIndex(0);
     }
     
     class CustomSelectionListener implements ListSelectionListener {
@@ -89,10 +89,22 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
             }
             textAddress.setText((String)tableTerminalList.getValueAt(row, 1));
             textZipCode.setText((String)tableTerminalList.getValueAt(row, 2));
-            textChargingStatus.setText((String)tableTerminalList.getValueAt(row, 3));
+            String chargingStatus = (String)tableTerminalList.getValueAt(row, 3);
+            if (chargingStatus.equals("IDLE")) {
+                comboChargingStatus.setSelectedIndex(0);
+            } else {
+                comboChargingStatus.setSelectedIndex(1);
+            }
             textOfflineSince.setText((String)tableTerminalList.getValueAt(row, 4));
-            textIPAddress.setText((String)tableTerminalList.getValueAt(row, 5));
-            textInstallStatus.setText((String)tableTerminalList.getValueAt(row, 6));
+            textIPAddress.setText((String)tableTerminalList.getValueAt(row, 5));        
+            String installStatus = (String)tableTerminalList.getValueAt(row, 6);
+            if (installStatus.equals("PENDEP")) {
+                comboInstallStatus.setSelectedIndex(0);
+            } else if (installStatus.equals("ENABLE")) {
+                comboInstallStatus.setSelectedIndex(1);
+            } else {
+                comboInstallStatus.setSelectedIndex(2);
+            }
         }
     }
 
@@ -115,16 +127,16 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
         labAddress = new javax.swing.JLabel();
         textZipCode = new javax.swing.JTextField();
         labZipCode = new javax.swing.JLabel();
-        textChargingStatus = new javax.swing.JTextField();
         labChargingStatus = new javax.swing.JLabel();
         textOfflineSince = new javax.swing.JTextField();
         labOfflineSince = new javax.swing.JLabel();
         textIPAddress = new javax.swing.JTextField();
         labIPAddress = new javax.swing.JLabel();
-        textInstallStatus = new javax.swing.JTextField();
         labInstallStatus = new javax.swing.JLabel();
         btnAddNewTerminal = new javax.swing.JButton();
         labNewTerminalInstructions = new javax.swing.JLabel();
+        comboInstallStatus = new javax.swing.JComboBox();
+        comboChargingStatus = new javax.swing.JComboBox();
 
         setPreferredSize(new java.awt.Dimension(402, 302));
 
@@ -184,6 +196,10 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
 
     labNewTerminalInstructions.setText("If you wish to add a new terminal to the list fill in the fields 'Address', 'Zip Code', and 'IP address'. Leave the others blank.");
 
+    comboInstallStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "PENDEP", "ENABLE", "DISABL" }));
+
+    comboChargingStatus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "IDLE", "CHAR" }));
+
     javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
     this.setLayout(layout);
     layout.setHorizontalGroup(
@@ -193,7 +209,6 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(labChargingStationList)
                 .addComponent(labInformation)
-                .addComponent(labNewTerminalInstructions)
                 .addComponent(tableScrollPane, javax.swing.GroupLayout.PREFERRED_SIZE, 656, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createSequentialGroup()
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -210,9 +225,9 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
                                 .addComponent(labZipCode, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(textZipCode))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(labChargingStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textChargingStatus))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(labChargingStatus)
+                                .addComponent(comboChargingStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                 .addComponent(labOfflineSince, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -224,10 +239,11 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
                                 .addComponent(labIPAddress, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(textIPAddress))
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(labInstallStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(textInstallStatus)))
-                        .addComponent(btnEditTerminal))))
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(labInstallStatus)
+                                .addComponent(comboInstallStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEditTerminal)))
+                .addComponent(labNewTerminalInstructions))
             .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
     );
     layout.setVerticalGroup(
@@ -253,11 +269,11 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(textAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(textZipCode, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(textChargingStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(textOfflineSince, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addComponent(textIPAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addComponent(textInstallStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGap(21, 21, 21)
+                .addComponent(comboInstallStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboChargingStatus, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(19, 19, 19)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                 .addComponent(btnBack)
                 .addComponent(btnEditTerminal)
@@ -281,10 +297,24 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
         System.err.println("" + terminalID);
         String address = textAddress.getText();
         String zipCode = textZipCode.getText();
-        String chargingStatus = textChargingStatus.getText().toUpperCase();
+        String chargingStatus;
+        int chargingSelect = comboInstallStatus.getSelectedIndex();
+        if (chargingSelect == 0) {
+            chargingStatus = "IDLE";
+        } else {
+            chargingStatus = "CHAR";
+        }
         String offlineSince = textOfflineSince.getText().toUpperCase();
         String ipAddress = textIPAddress.getText();
-        String installStatus = textInstallStatus.getText().toUpperCase();
+        String installStatus;
+        int installSelect = comboInstallStatus.getSelectedIndex();
+        if (installSelect == 0) {
+            installStatus = "PENDEP";
+        } else if (installSelect == 1) {
+            installStatus = "ENABLE";
+        } else {
+            installStatus = "DISABL";
+        }
         String[] arr = {address, zipCode, chargingStatus, offlineSince, ipAddress, installStatus};
         for (String element : arr) {
             if (element.isEmpty()) {
@@ -312,6 +342,8 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnAddNewTerminal;
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnEditTerminal;
+    private javax.swing.JComboBox comboChargingStatus;
+    private javax.swing.JComboBox comboInstallStatus;
     private javax.swing.JLabel labAddress;
     private javax.swing.JLabel labChargingStationList;
     private javax.swing.JLabel labChargingStatus;
@@ -324,9 +356,7 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
     private javax.swing.JScrollPane tableScrollPane;
     private javax.swing.JTable tableTerminalList;
     private javax.swing.JTextField textAddress;
-    private javax.swing.JTextField textChargingStatus;
     private javax.swing.JTextField textIPAddress;
-    private javax.swing.JTextField textInstallStatus;
     private javax.swing.JTextField textOfflineSince;
     private javax.swing.JTextField textZipCode;
     // End of variables declaration//GEN-END:variables

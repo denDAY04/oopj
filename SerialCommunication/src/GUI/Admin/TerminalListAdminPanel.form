@@ -26,7 +26,6 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="labChargingStationList" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="labInformation" alignment="0" min="-2" max="-2" attributes="0"/>
-                  <Component id="labNewTerminalInstructions" alignment="0" min="-2" max="-2" attributes="0"/>
                   <Component id="tableScrollPane" alignment="0" min="-2" pref="656" max="-2" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="1" attributes="0">
@@ -46,9 +45,9 @@
                                   <Component id="textZipCode" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="labChargingStatus" max="32767" attributes="0"/>
-                                  <Component id="textChargingStatus" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labChargingStatus" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comboChargingStatus" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -65,14 +64,15 @@
                                   <Component id="textIPAddress" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="labInstallStatus" max="32767" attributes="0"/>
-                                  <Component id="textInstallStatus" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="labInstallStatus" min="-2" max="-2" attributes="0"/>
+                                  <Component id="comboInstallStatus" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Component id="btnEditTerminal" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <Component id="labNewTerminalInstructions" alignment="0" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
@@ -102,12 +102,12 @@
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="textAddress" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textZipCode" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textChargingStatus" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textOfflineSince" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="textIPAddress" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="textInstallStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboInstallStatus" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="comboChargingStatus" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="btnBack" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="btnEditTerminal" alignment="3" min="-2" max="-2" attributes="0"/>
@@ -181,8 +181,6 @@
         <Property name="text" type="java.lang.String" value="Zip code"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textChargingStatus">
-    </Component>
     <Component class="javax.swing.JLabel" name="labChargingStatus">
       <Properties>
         <Property name="text" type="java.lang.String" value="Charging status"/>
@@ -202,8 +200,6 @@
         <Property name="text" type="java.lang.String" value="IP address"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="textInstallStatus">
-    </Component>
     <Component class="javax.swing.JLabel" name="labInstallStatus">
       <Properties>
         <Property name="text" type="java.lang.String" value="Install status"/>
@@ -220,6 +216,27 @@
     <Component class="javax.swing.JLabel" name="labNewTerminalInstructions">
       <Properties>
         <Property name="text" type="java.lang.String" value="If you wish to add a new terminal to the list fill in the fields &apos;Address&apos;, &apos;Zip Code&apos;, and &apos;IP address&apos;. Leave the others blank."/>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboInstallStatus">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="3">
+            <StringItem index="0" value="PENDEP"/>
+            <StringItem index="1" value="ENABLE"/>
+            <StringItem index="2" value="DISABL"/>
+          </StringArray>
+        </Property>
+      </Properties>
+    </Component>
+    <Component class="javax.swing.JComboBox" name="comboChargingStatus">
+      <Properties>
+        <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+          <StringArray count="2">
+            <StringItem index="0" value="IDLE"/>
+            <StringItem index="1" value="CHAR"/>
+          </StringArray>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

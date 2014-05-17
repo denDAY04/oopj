@@ -119,8 +119,8 @@ public class TerminalManager {
      * above. 
      * @param terminalID ID number of the terminal to be edited. 
      */
-    public void editFullTerminal(String[] newValues, int terminalID) {
-         ArrayList<Object> parameters = new ArrayList<Object>();
+    public void editFullTerminal(String[] newValues, int terminalID) {       
+        ArrayList<Object> parameters = new ArrayList<Object>();
          parameters.addAll(Arrays.asList(newValues));
          parameters.add(terminalID);
          databaseManager.updateQuery(SQLLibrary.ADMIN_SET_TERMINAL_ALL_DETAILS, parameters);
