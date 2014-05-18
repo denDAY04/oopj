@@ -176,11 +176,21 @@ public class CustomerManagerTest {
     @Test
     public void testAddNewCustomer() {
         System.out.println("addNewCustomer");
-        Object[] information = null;
-        CustomerManager instance = new CustomerManager();
-        instance.addNewCustomer(information);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String[] information = new String[8];
+        information[0] = "test";
+        information[1] = "Test";
+        information[2] = "Tester";
+        information[3] = "testvej";
+        information[4] = "1234";
+        information[5] = "test@test.dk";
+        information[6] = "12345678";
+        information[7] = "2000";        
+        cManager.addNewCustomer(information);
+        String resultName = cManager.getCustomerByEmail("test@test.dk").getFirstName();
+        String resultName2 = cManager.getCustomerByEmail("test@test.dk").getLastName();
+        String expName = "Test";
+        String expName2 = "Tester";
+        assertTrue(expName.equals(resultName) && expName2.equals(resultName2));
     }
 
     /**
@@ -189,13 +199,10 @@ public class CustomerManagerTest {
     @Test
     public void testGetCustomer() {
         System.out.println("getCustomer");
-        String cardNumb = "";
-        CustomerManager instance = new CustomerManager();
-        Customer expResult = null;
-        Customer result = instance.getCustomer(cardNumb);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String cardNumb = "9bfa0ee8";
+        Customer expResult = customer;
+        Customer result = cManager.getCustomer(cardNumb);
+        assertTrue(expResult.equals(result));
     }
 
     /**
@@ -204,13 +211,10 @@ public class CustomerManagerTest {
     @Test
     public void testGetCustomerByEmail() {
         System.out.println("getCustomerByEmail");
-        String email = "";
-        CustomerManager instance = new CustomerManager();
-        Customer expResult = null;
-        Customer result = instance.getCustomerByEmail(email);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String email = "hans@hansen.dk";
+        Customer expResult = customer;
+        Customer result = cManager.getCustomerByEmail(email);
+        assertTrue(expResult.equals(result));
     }
 
     /**
@@ -219,13 +223,11 @@ public class CustomerManagerTest {
     @Test
     public void testGetCustomersByFirstName() {
         System.out.println("getCustomersByFirstName");
-        String firstName = "";
-        CustomerManager instance = new CustomerManager();
-        ArrayList expResult = null;
-        ArrayList result = instance.getCustomersByFirstName(firstName);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        String firstName = "Hans";
+        String expResult = "Hans Hansen, hans@hansen.dk";
+        String expResult2 = "Hans Jensen, hansemand@hotmail.com";
+        ArrayList result = cManager.getCustomersByFirstName(firstName);
+        assertTrue(expResult.equals(result.get(0)) && expResult2.equals(result.get(1)));
     }
 
 }
