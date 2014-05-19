@@ -245,12 +245,29 @@ public class EventManager implements FrameEventListener {
                 //   - Verify Customer (pin and card number)
                 if (command.equals("VC")) {
                     System.err.println("command = VC");
+                    
+                    /* Decrypt pin */
                     String pin = packet.getData().substring(DATAPININDEX,
                             DATAPININDEX + DATAPINSIZE);
+                    char[] pinArr = new char[DATAPINSIZE];
+                    for (int i = 0; i < DATAPINSIZE; ++i) {
+                        pinArr[i] = pin.charAt(i);
+                        pinArr[i] -= 15;            // Encryption number
+                    }
+                    pin = new StringBuilder().append(pinArr).toString();
                     System.err.println("Pin: " + pin);
+                    
+                    /* Decrypt card numder */
                     String cardNumb = packet.getData().substring(
                             VC_DATACARDNUMBINDEX, VC_DATACARDNUMBINDEX
                             + DATACARDNUMBSIZE);
+                    char[] cardNumArr = new char[DATACARDNUMBSIZE];
+                    for (int i = 0; i < DATACARDNUMBSIZE; ++i) {
+                        cardNumArr[i] = cardNumb.charAt(i);
+                        cardNumArr[i] -= 15;            // Encryption number
+                    }
+                    cardNumb = new StringBuilder().append(cardNumArr).toString();
+                    
                     System.err.println("Cardnumber: " + cardNumb);
                     Customer customer = customerManager.verifyCustomer(cardNumb,
                             pin);
