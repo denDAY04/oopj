@@ -46,6 +46,9 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         labSignup = new javax.swing.JLabel();
         labError = new javax.swing.JLabel();
         textPassword = new javax.swing.JPasswordField();
+        labAdminInfo1 = new javax.swing.JLabel();
+        labAdminInfo2 = new javax.swing.JLabel();
+        labAdminInfo3 = new javax.swing.JLabel();
 
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -95,6 +98,19 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         labError.setVisible(false);
         add(labError, new org.netbeans.lib.awtextra.AbsoluteConstraints(128, 216, -1, -1));
         add(textPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 200, -1));
+
+        labAdminInfo1.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
+        labAdminInfo1.setForeground(new java.awt.Color(0, 0, 153));
+        labAdminInfo1.setText("To log in as admin:");
+        add(labAdminInfo1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 70, -1, -1));
+
+        labAdminInfo2.setForeground(new java.awt.Color(0, 0, 153));
+        labAdminInfo2.setText("Email: admin@ta.dk");
+        add(labAdminInfo2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 90, -1, -1));
+
+        labAdminInfo3.setForeground(new java.awt.Color(0, 0, 153));
+        labAdminInfo3.setText("Password: teamawesome");
+        add(labAdminInfo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
@@ -134,6 +150,9 @@ public class LoginControllerPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnForgot;
     private javax.swing.JButton btnLogin;
     private javax.swing.JButton btnSignup;
+    private javax.swing.JLabel labAdminInfo1;
+    private javax.swing.JLabel labAdminInfo2;
+    private javax.swing.JLabel labAdminInfo3;
     private javax.swing.JLabel labEmail;
     private javax.swing.JLabel labError;
     private javax.swing.JLabel labInformation;
