@@ -1,4 +1,4 @@
-package ProjectMain.Main;
+package ProjectMain;
 
 import GUI.System.GUIFrame;
 import SQLDatabase.Managers.*;
