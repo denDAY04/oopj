@@ -30,11 +30,11 @@ public class TerminalManager {
     }
     
     public void setDatabaseManager(DatabaseManager databaseManager){
-  this.databaseManager = databaseManager;
-  }
+    this.databaseManager = databaseManager;
+    }
     public void setEventManager(EventManager eventManager){
-  this.eventManager = eventManager;
-  }
+    this.eventManager = eventManager;
+    }
   
     
     /**
@@ -63,7 +63,7 @@ public class TerminalManager {
      * Depending on the command parameter, not all of the parameters are used,
      * and can therefore potentially be left as NULL. 
      * 
-     * @param terminalID ID number of the terminal to be edited. Must always be 
+     * @param terminalID ID hardwareNumber of the terminal to be edited. Must always be 
      * supplied.
      * @param command Specifies what data needs to be changed through its value.
      * See list below:
@@ -173,19 +173,19 @@ public class TerminalManager {
         return result;
     }
 
-    public void connectionFailed(String destination) {
+    public void connectionFailed(String terminalIP) {
         ArrayList<Object> parametersTerminal = new ArrayList();  // make an ArrayList of the parameters for the sql statement.
-        parametersTerminal.add(destination);   // add the cardnumber parameter
+        parametersTerminal.add(terminalIP);   // add the cardnumber parameter
             System.out.println("TerminalManager connectionFailed, Fire SQL statement");
             int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_SET_OFFLINESINCE,parametersTerminal);
             System.out.println("result: " + result);
     }
 
-    public void connectionSuccessful(String destination) {
+    public void connectionSuccessful(String terminalIP) {
         System.out.println("enter connectionSuccessful");
         // Set OfflineSince to Online, when connection is established.
         ArrayList<Object> parametersTerminal = new ArrayList();
-        parametersTerminal.add(destination);
+        parametersTerminal.add(terminalIP);
         int result = databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_RESET_OFFLINESINCE,parametersTerminal);
         System.out.println("TerminalManager connectionSuccessful, Fire SQL statement");
         System.out.println("result: " + result);

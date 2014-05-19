@@ -202,6 +202,7 @@ public class CustomerManagerTest {
         String cardNumb = "9bfa0ee8";
         Customer expResult = customer;
         Customer result = cManager.getCustomer(cardNumb);
+        System.err.println("**************************************** "+result.getUseStatus());
         assertTrue(expResult.equals(result));
     }
 
@@ -214,6 +215,7 @@ public class CustomerManagerTest {
         String email = "hans@hansen.dk";
         Customer expResult = customer;
         Customer result = cManager.getCustomerByEmail(email);
+        System.err.println("**************************************** "+result.getUseStatus());
         assertTrue(expResult.equals(result));
     }
 

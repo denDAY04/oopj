@@ -72,8 +72,8 @@ public class DepositManager {
             Deposit activeDeposit = deposit.get(0);
             result.add(activeDeposit.getDepositsNumb());
             result.add(activeDeposit.getDepositsDate());
-            result.add("" + activeDeposit.getDepositAmount());
-            result.add("" + activeDeposit.getNewBalanceDeposit());
+            result.add("" + activeDeposit.getDepositAmount() / 100.0);
+            result.add("" + activeDeposit.getNewBalanceDeposit() / 100.0);
             result.add(activeDeposit.getLast4CardNumb());
             result.add(activeDeposit.getExternalRefNumb());   
         }

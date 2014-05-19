@@ -63,7 +63,7 @@ public class BillingManager {
                     String d = activeBilling.getStartCharge().substring(0, 19);
                     String e = "" + (activeBilling.getBillingAmount() / 100.0);
                     String f = "" + (activeBilling.getBillingRate() / 100.0);
-                    String g = "" + (activeBilling.getBillingKWH() / 100.0);
+                    String g = "" + (activeBilling.getBillingKWH());
                     String h = "" + (activeBilling.getNewBalanceBilling() / 100.0);
                     result.add(new String[]{a, b, c, d, e, f, g, h});
                 }
@@ -117,7 +117,7 @@ public class BillingManager {
                     String d = activeBilling.getStartCharge().substring(0, 19);
                     String e = "" + (activeBilling.getBillingAmount() / 100.0);
                     String f = "" + (activeBilling.getBillingRate() / 100.0);
-                    String g = "" + (activeBilling.getBillingKWH() / 100.0);
+                    String g = "" + (activeBilling.getBillingKWH());
                     String h = "" + (activeBilling.getNewBalanceBilling() / 100.0);
                     result.add(new String[]{a, b, c, d, e, f, g, h});
                 }
