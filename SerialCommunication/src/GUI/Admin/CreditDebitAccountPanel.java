@@ -15,12 +15,13 @@ import javax.swing.JOptionPane;
 public class CreditDebitAccountPanel extends javax.swing.JPanel {
     
     private GUIFrame frame;
-    private int errors = 1;
+    private int errors;
     /**
      * Creates new form ForgotPassControllerPanel
      */
     public CreditDebitAccountPanel() {
         initComponents();
+        errors = 1;
     }
 
     public void setFrame(GUI.System.GUIFrame frame) {
