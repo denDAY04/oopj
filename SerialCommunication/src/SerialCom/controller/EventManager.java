@@ -324,7 +324,8 @@ public class EventManager implements FrameEventListener {
                     /* Update customer's use status */
                     customerManager.updateCustomerInformation(cardNum, 1, newStatus);
                     /* Update charging station's charging status */
-                    terminalManager.setTerminalChargingStatus(packet.getSource(), newStatus[0]);     
+                    Terminal TerminalID = terminalManager.getTerminalByIP(packet.getSource());
+                    terminalManager.setTerminalChargingStatus(TerminalID.getHardwareNumb(), newStatus[0]);     
 
                 } else if (command.equals("01")) {
                     System.err.println(
