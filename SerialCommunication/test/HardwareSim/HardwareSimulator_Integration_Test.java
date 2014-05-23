@@ -25,7 +25,7 @@ import static org.junit.Assert.*;
  *
  * @author ibr
  */
-public class HardwareSimulator_J_Unit_Test {
+public class HardwareSimulator_Integration_Test {
 
         EventManager eventManager = new EventManager();  
         CustomerManager customerManager = new CustomerManager();
@@ -40,7 +40,7 @@ public class HardwareSimulator_J_Unit_Test {
         SerialTransceiver transceiver = new SerialTransceiver(new ProjectPacket(), eventManager);
         
     
-    public HardwareSimulator_J_Unit_Test() {
+    public HardwareSimulator_Integration_Test() {
     }
 
     @BeforeClass
@@ -60,7 +60,11 @@ public class HardwareSimulator_J_Unit_Test {
     }
 
     /**
-     * Test of connect method, of class HardwareSimulator.
+     * This method is a simulation of the hardware integration test.
+     * It was designed to allow the Java programmer to do continuous testing. 
+     * The test method tests all the communication between the server and the 
+     * hardware. All the methods are implemented sequentially as to ensure the 
+     * port is not already in use. 
      */
     @Test
     public void testConnect() throws Exception {
