@@ -16,12 +16,13 @@ import javax.swing.Timer;
 public class TerminalManager {
 
     /* Resend request pingTimer. Set hardware dependent timeout here. */
-    Timer pingTimer = new Timer(500, new TimerListener());
+    Timer pingTimer = new Timer(1800, new PingTimerListener());
 
     /* Delay between pings. Should be 8 hours. Is one minute */
-    Timer pingSchedule = new Timer(60000, new TimerListener2());
+    Timer pingSchedule = new Timer(60000, new PingScheduleListener());
 
-    static int i = 0;
+    static int i = 0; // ping terminal counter
+    static ArrayList<Terminal> terminals; // all terminals to be pinged
     EventManager eventManager;
     DatabaseManager databaseManager;
 
@@ -275,17 +276,18 @@ public class TerminalManager {
     }
     
     /**
-     * This TimeListener ensures that only one terminal is pinged at a time,
+     * This PingTimerListener ensures that only one terminal is pinged at a time,
      * with the field of the outer class.
-     * Approximately 500 ms 
+     * Approximately 1800 ms 
      */
-    public class TimerListener implements ActionListener {
+    public class PingTimerListener implements ActionListener {
 
         public synchronized void actionPerformed(ActionEvent e) {
-            ArrayList<Terminal> terminals;
+            if (i==0){
             terminals = databaseManager.getTerminals(
                     SQLLibrary.SYSTEM_GET_ALL_TERMINALS, new ArrayList<Object>());
             System.err.println("size of array" + terminals.size());
+            }
             System.err.println("TerminalManager TimerListener FireSQL PING!");
             eventManager.pingEvent(terminals.get(i).getIpAddress());
             System.err.println("TerminalManager TimerListener, PI, PING, "
@@ -302,7 +304,7 @@ public class TerminalManager {
     /**
      * Starts the ping timer which then runs the 
      */
-    public class TimerListener2 implements ActionListener {  // ping schedule timer, ping all terminals every 6 hours
+    public class PingScheduleListener implements ActionListener {  // ping schedule timer, ping all terminals every 6 hours
 
         public synchronized void actionPerformed(ActionEvent e) {
             System.err.println(
