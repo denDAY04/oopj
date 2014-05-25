@@ -276,22 +276,18 @@ public class TerminalManager {
     }
 
     /**
-     * This PingTimerListener ensures that only one terminal is pinged at a time,
-<<<<<<< .mine
-     * with the field of the outer class. Approximately 500 ms elapses between
-     * two terminals are pinged when this timer is running.
-=======
-     * with the field of the outer class.
-     * Approximately 1800 ms 
->>>>>>> .r246
+     * This PingTimerListener ensures that only one terminal is pinged at a
+     * time, with the field of the outer class. Approximately 1800 ms elapses
+     * between two terminals are pinged when this timer is running.
      */
     public class PingTimerListener implements ActionListener {
 
         public synchronized void actionPerformed(ActionEvent e) {
-            if (i==0){
-            terminals = databaseManager.getTerminals(
-                    SQLLibrary.SYSTEM_GET_ALL_TERMINALS, new ArrayList<Object>());
-            System.err.println("size of array" + terminals.size());
+            if (i == 0) {
+                terminals = databaseManager.getTerminals(
+                        SQLLibrary.SYSTEM_GET_ALL_TERMINALS,
+                        new ArrayList<Object>());
+                System.err.println("size of array" + terminals.size());
             }
             System.err.println("TerminalManager TimerListener FireSQL PING!");
             eventManager.pingEvent(terminals.get(i).getIpAddress());
@@ -306,10 +302,10 @@ public class TerminalManager {
     }
 
     /**
-     * Starts the ping timer which then pings the terminals. This trimer
-     * currently runs ever 6 hours.
+     * Starts the ping timer, which then pings the terminals. This trimer
+     * currently runs every 6 hours.
      */
-    public class PingScheduleListener implements ActionListener {  
+    public class PingScheduleListener implements ActionListener {
 
         public synchronized void actionPerformed(ActionEvent e) {
             System.err.println(
