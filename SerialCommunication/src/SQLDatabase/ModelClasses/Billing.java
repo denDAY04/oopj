@@ -94,7 +94,7 @@ public class Billing implements Serializable {
         this.billingRate = BillingRate;
     }
 
-    public double getBillingKWH() {
+    public double getBillingWH() {
         return billingKWH;
     }
 

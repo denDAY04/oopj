@@ -1,18 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This class was presented by the project supervisor/course lector, and is not
+ * made by the group.
  */
 package SQLDatabase.Managers;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
  * Class <code>ConnectionManager</code> uses the Factory Method design pattern
  * to create a connection to a specific Java Derby database.
  *
  * NB Add derbyclient.jar to project
+ *
  * @version 16/02/10
  * @author ibr
  */
@@ -24,7 +23,9 @@ public class ConnectionManager {
 
     /**
      * Factory method to return a connection to a specific Java Derby database.
+     *
      * @return the Java Derby database connection
+     *
      * @throws SQLException
      */
     public static Connection createConnection() throws SQLException {

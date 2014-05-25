@@ -4,7 +4,6 @@
  */
 package GUI.Admin;
 
-import GUI.*;
 import GUI.System.GUIFrame;
 import GUI.System.JTextFieldLimit;
 import java.awt.Color;
@@ -217,7 +216,7 @@ public class EditAccountAdminPanel extends javax.swing.JPanel {
         inputCheck();
         if (errors == 0){
             JOptionPane.showMessageDialog(null, "Account information has been updated.", "Account information change successfull", JOptionPane.INFORMATION_MESSAGE);
-            String[] newValues = new String[8];
+            String[] newValues = new String[9];
             newValues[0] = textFirstName.getText();
             newValues[1] = textLastName.getText();
             newValues[2] = textRoad.getText();

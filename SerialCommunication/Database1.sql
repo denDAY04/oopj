@@ -59,7 +59,7 @@ CREATE TABLE Billing (
    Recieved TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
    BillingAmount INT NOT NULL,
    BillingRate INT NOT NULL,
-   BillingKWH  INT NOT NULL,
+   BillingWH  INT NOT NULL,
    NewBalanceBilling INT NOT NULL,
    constraint fk_CustomerNumb2 FOREIGN KEY (CustomerNumb) REFERENCES Customer (CustomerNumb),
    constraint fk_HardwareNumb FOREIGN KEY (HardwareNumb) REFERENCES Terminals (HardwareNumb),
@@ -94,7 +94,7 @@ VALUES
    (1,100,200,0015701,4587);
    
 
-INSERT INTO Billing (CustomerNumb,HardwareNumb,StartCharge,EndCharge,BillingAmount,BillingRate,BillingKWH,NewBalanceBilling)
+INSERT INTO Billing (CustomerNumb,HardwareNumb,StartCharge,EndCharge,BillingAmount,BillingRate,BillingWH,NewBalanceBilling)
 VALUES
    (1,2,'2014-03-24 13:10:02.047','2014-03-24 16:10:02.047',10000,1050,7530,5040),
    (1,2,'2014-03-24 13:10:02.047','2014-03-24 16:10:02.047',10000,1050,7530,5040),

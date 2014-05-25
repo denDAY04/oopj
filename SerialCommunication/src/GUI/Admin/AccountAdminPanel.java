@@ -1,51 +1,67 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.Admin;
 
 import GUI.System.GUIFrame;
-import SQLDatabase.Managers.CustomerManager;
 
 /**
- *
- * @author Qess
+ * Account panel, for an administrator posing as a customer, to edit the
+ * customer information.
  */
 public class AccountAdminPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
-    
+
+    /**
+     * Constructor for initializing components.
+     */
     public AccountAdminPanel() {
         initComponents();
     }
 
+    /**
+     * Setter for reference to the framing containing this panel.
+     *
+     * @param frame GUIFrame controller.
+     */
     public void setFrame(GUIFrame frame) {
         this.frame = frame;
     }
 
-    public void loadPage(){
-        labCName.setText(frame.cManager.getLoggedInUser().getFirstName()+" "+
-                         frame.cManager.getLoggedInUser().getLastName());
+    /**
+     * Acquire the needed information from the database and load it into the
+     * components of the panel.
+     */
+    public void loadPage() {
+        labCName.setText(frame.cManager.getLoggedInUser().getFirstName() + " "
+                + frame.cManager.getLoggedInUser().getLastName());
         labCEmail.setText(frame.cManager.getLoggedInUser().getEmail());
-        labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb()+" , "+frame.cManager.getLoggedInUser().getPin());
-        labCBalance.setText(frame.cManager.getLoggedInUser().getBalance()*0.01+"");
-        if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PENAPP")){
+        labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb() 
+                                + " , " 
+                                + frame.cManager.getLoggedInUser().getPin());
+        labCBalance.setText(frame.cManager.getLoggedInUser().getBalance() 
+                            * 0.01 + "");
+        
+        if (frame.cManager.getLoggedInUser().getAccountStatus().
+                equals("PENAPP")) {
             labCAccStatus.setText("Pending Approval");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("PENACT")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().
+                equals("PENACT")) {
             labCAccStatus.setText("Pending Activation");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("DISABL")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().
+                equals("DISABL")) {
             labCAccStatus.setText("Disabled");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("ACTIVE")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().
+                equals("ACTIVE")) {
             labCAccStatus.setText("Activated");
         }
-        
-        if(frame.cManager.getLoggedInUser().getUseStatus().equals("CHAR")){
+
+        if (frame.cManager.getLoggedInUser().getUseStatus().equals("CHAR")) {
             labCUseStatus.setText("Charging");
-        } else if (frame.cManager.getLoggedInUser().getUseStatus().equals("IDLE")){
+        } else if (frame.cManager.getLoggedInUser().getUseStatus().
+                equals("IDLE")) {
             labCUseStatus.setText("Idle");
-        }   
+        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -234,23 +250,44 @@ public class AccountAdminPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Log out as a given customer and return to screen for logging in as customer.
+     * 
+     * @param evt ActionEvent
+     */
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         frame.cManager.setLoggedInUser(null);
         frame.changePanel("card12");
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    /**
+     * Change panel to allow administrator to edit customer's details.
+     * @param evt ActionEvent
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         frame.changePanel("card16");
     }//GEN-LAST:event_btnEditActionPerformed
 
+    /**
+     * Change panel to allow administrator to edit customer's password.
+     * @param evt ActionEvent
+     */
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
         frame.changePanel("card17");
     }//GEN-LAST:event_btnChangePassActionPerformed
 
+    /**
+     * Chance panel to administrator view of customer's transaction history. 
+     * @param evt ActionEvent
+     */
     private void btnTransactionHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionHistoryActionPerformed
         frame.changePanel("card18");
     }//GEN-LAST:event_btnTransactionHistoryActionPerformed
 
+    /**
+     * Change panel to allow administrator to perform a deposit to customer's account.
+     * @param evt 
+     */
     private void btnCreditDebitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditDebitActionPerformed
         frame.changePanel("card14");
     }//GEN-LAST:event_btnCreditDebitActionPerformed
