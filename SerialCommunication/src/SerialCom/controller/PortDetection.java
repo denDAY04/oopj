@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package SerialCom.controller;
 
 import gnu.io.CommPortIdentifier;
@@ -11,12 +5,28 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 
 /**
- *
- * @author hbe
+ * Use this class for detecting the PORTS active on the PC on which the program
+ * is running.
  */
 public class PortDetection {
+
+    /**
+     * Looks up the PORT type denoted by the argument, as specified by the
+     * ComPortIdentifier class, and returns a string with its name.
+     *
+     * @param portType int denoting a PORT.
+     *
+     * @return one of the following:
+     * <li>I2C
+     * <li>IEEE 1284
+     * <li>Raw
+     * <li>RS485
+     * <li>RS232
+     * <li>or "Unknown" if the integer does not match any of the previous PORT
+     * types.
+     */
     public static String getPortTypeName(int portType) {
-        // konvertér porttype til tekststreng
+        /* Convert PORT types to strings */
         switch (portType) {
             case CommPortIdentifier.PORT_I2C:
                 return "I2C";
@@ -32,13 +42,22 @@ public class PortDetection {
                 return "Unknown";
         }
     }
-    
+
+    /**
+     * Get a list of all the ports that are currently active in the PC.
+     *
+     * @return an ArrayList of Strings with the PORT names, as determined by
+     *         PortDetection.getPortTypeName.
+     *
+     * @see getPortTypeName(int portType)
+     */
     public static ArrayList<String> getPorts() {
         ArrayList<String> list = new ArrayList();
-        Enumeration portEnum =
-                CommPortIdentifier.getPortIdentifiers();
+        Enumeration portEnum
+                = CommPortIdentifier.getPortIdentifiers();
         while (portEnum.hasMoreElements()) {
-            CommPortIdentifier portID = (CommPortIdentifier)portEnum.nextElement();
+            CommPortIdentifier portID = (CommPortIdentifier) portEnum.
+                    nextElement();
             String name = portID.getName();
             String type = getPortTypeName(portID.getPortType());
             if (type.equals("RS232")) {

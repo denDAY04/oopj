@@ -2,10 +2,16 @@ package SQLDatabase.ModelClasses;
 
 import java.io.Serializable;
 
+/**
+ * Model class with the purpose of containing the data that constitutes a
+ * billing instance in the database. This class only has standard getters and
+ * setters, and thus there are not written Jdoc to them.
+ */
 public class Billing implements Serializable {
+
     private String transactionNumb;
-    private String customerNumb;  // forgin key
-    private String hardwareNumb; // forgin key
+    private String customerNumb;
+    private String hardwareNumb;
     private String startCharge;
     private String endCharge;
     private String recieved;
@@ -14,10 +20,25 @@ public class Billing implements Serializable {
     private double billingKWH;
     private double newBalanceBilling;
 
-    
-
-    public Billing(String transactionNumb, String customerNumb, String hardwareNumb, String startCharge, String endCharge, String recieved,
-                   double billingAmount,double billingRate, double billingKWH, double newBalanceBilling) {
+    /**
+     * Custom constructor that simple assigns every field. 
+     * 
+     * @param transactionNumb
+     * @param customerNumb
+     * @param hardwareNumb
+     * @param startCharge
+     * @param endCharge
+     * @param recieved
+     * @param billingAmount
+     * @param billingRate
+     * @param billingKWH
+     * @param newBalanceBilling 
+     */
+    public Billing(String transactionNumb, String customerNumb,
+            String hardwareNumb, String startCharge, String endCharge,
+            String recieved,
+            double billingAmount, double billingRate, double billingKWH,
+            double newBalanceBilling) {
         this.transactionNumb = transactionNumb;
         this.customerNumb = customerNumb;
         this.hardwareNumb = hardwareNumb;
@@ -113,41 +134,42 @@ public class Billing implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash =
-                37 * hash +
-                (this.transactionNumb != null ? this.transactionNumb.hashCode()
+        hash
+                = 37 * hash
+                + (this.transactionNumb != null ? this.transactionNumb.
+                hashCode()
                 : 0);
-        hash =
-                37 * hash +
-                (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.hardwareNumb != null ? this.hardwareNumb.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.startCharge != null ? this.startCharge.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.endCharge != null ? this.endCharge.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.recieved != null ? this.recieved.hashCode() : 0);
-        hash =
-                37 * hash +
-                (int) (Double.doubleToLongBits(this.billingAmount) ^
-                (Double.doubleToLongBits(this.billingAmount) >>> 32));
-        hash =
-                37 * hash +
-                (int) (Double.doubleToLongBits(this.billingRate) ^
-                (Double.doubleToLongBits(this.billingRate) >>> 32));
-        hash =
-                37 * hash +
-                (int) (Double.doubleToLongBits(this.billingKWH) ^
-                (Double.doubleToLongBits(this.billingKWH) >>> 32));
-        hash =
-                37 * hash +
-                (int) (Double.doubleToLongBits(this.newBalanceBilling) ^
-                (Double.doubleToLongBits(this.newBalanceBilling) >>> 32));
+        hash
+                = 37 * hash
+                + (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.hardwareNumb != null ? this.hardwareNumb.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.startCharge != null ? this.startCharge.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.endCharge != null ? this.endCharge.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.recieved != null ? this.recieved.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (int) (Double.doubleToLongBits(this.billingAmount)
+                ^ (Double.doubleToLongBits(this.billingAmount) >>> 32));
+        hash
+                = 37 * hash
+                + (int) (Double.doubleToLongBits(this.billingRate)
+                ^ (Double.doubleToLongBits(this.billingRate) >>> 32));
+        hash
+                = 37 * hash
+                + (int) (Double.doubleToLongBits(this.billingKWH)
+                ^ (Double.doubleToLongBits(this.billingKWH) >>> 32));
+        hash
+                = 37 * hash
+                + (int) (Double.doubleToLongBits(this.newBalanceBilling)
+                ^ (Double.doubleToLongBits(this.newBalanceBilling) >>> 32));
         return hash;
     }
 
@@ -184,24 +206,22 @@ public class Billing implements Serializable {
                 : !this.recieved.equals(other.recieved)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.billingAmount) !=
-                Double.doubleToLongBits(other.billingAmount)) {
+        if (Double.doubleToLongBits(this.billingAmount)
+                != Double.doubleToLongBits(other.billingAmount)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.billingRate) !=
-                Double.doubleToLongBits(other.billingRate)) {
+        if (Double.doubleToLongBits(this.billingRate)
+                != Double.doubleToLongBits(other.billingRate)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.billingKWH) != Double.doubleToLongBits(other.billingKWH)) {
+        if (Double.doubleToLongBits(this.billingKWH) != Double.doubleToLongBits(
+                other.billingKWH)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.newBalanceBilling) !=
-                Double.doubleToLongBits(other.newBalanceBilling)) {
+        if (Double.doubleToLongBits(this.newBalanceBilling)
+                != Double.doubleToLongBits(other.newBalanceBilling)) {
             return false;
         }
         return true;
     }
-    
-    
-    
 }

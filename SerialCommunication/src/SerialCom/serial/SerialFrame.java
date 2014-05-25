@@ -1,18 +1,17 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This class has been distributed by the project supervisor/course lector.
  */
 package SerialCom.serial;
 
 import SerialCom.protocol.Packet;
+import gnu.io.*;
 import java.io.*;
 import java.util.*;
-import gnu.io.*;
 
 /**
- * Wrapper class for Java serial classes.
- * Uses the Strategy pattern to specify the <code>FrameProtocol</code>
- * Baud_rate = 19200 bits/sec.
+ * Wrapper class for Java serial classes. Uses the Strategy pattern to specify
+ * the <code>FrameProtocol</code> Baud_rate = 19200 bits/sec.
+ *
  * @author lmo, oc, ibr, hbe
  * @version 29/10/10
  */
@@ -30,14 +29,16 @@ public class SerialFrame implements SerialPortEventListener {
 
     /**
      * Constructs a new SerialFrame instance and opens the port given in the
-     * argument port.
-     * If an initial attempt to attach a listener succeeds,
+     * argument port. If an initial attempt to attach a listener succeeds,
      * subsequent attempts will throw TooManyListenersException without
-     * effecting the first listener. 
+     * effecting the first listener.
+     *
      * @param port The port to use for communication (COM1, COM2 etc.)
+     *
      * @throws java.util.TooManyListenersException
      */
-    public SerialFrame(String port, Packet packet) throws TooManyListenersException {
+    public SerialFrame(String port, Packet packet) throws
+            TooManyListenersException {
         this.packet = packet;
         portList = CommPortIdentifier.getPortIdentifiers();
         while (portList.hasMoreElements()) {
@@ -76,9 +77,11 @@ public class SerialFrame implements SerialPortEventListener {
     }
 
     /**
-     * Adds a FrameEventListener to this instance.
-     * Only one listener is allowed per port.
+     * Adds a FrameEventListener to this instance. Only one listener is allowed
+     * per port.
+     *
      * @param fel the listener
+     *
      * @throws TooManyListenersException
      */
     public void addFrameEventListener(FrameEventListener fel) throws
@@ -94,11 +97,12 @@ public class SerialFrame implements SerialPortEventListener {
     }
 
     /**
-     * Implementation of the SerialPortEventListener method.
-     * This method receives data from the serial port and sends the received
-     * byte Array in a FrameEvent to a FrameEventListener that has registered
-     * using addFrameEventListener.
-     * The <code>FrameProtocol</code> is specified using the Strategy design pattern.
+     * Implementation of the SerialPortEventListener method. This method
+     * receives data from the serial port and sends the received byte Array in a
+     * FrameEvent to a FrameEventListener that has registered using
+     * addFrameEventListener. The <code>FrameProtocol</code> is specified using
+     * the Strategy design pattern.
+     *
      * @param event Event object.
      */
     public void serialEvent(SerialPortEvent event) {
@@ -110,32 +114,26 @@ public class SerialFrame implements SerialPortEventListener {
                     while (inputStream.available() > 0) {
                         numBytes = inputStream.read(readBuffer);
 
-                        //extract bytes received from readBuffer and store in arrayList
+                        /* extract bytes received from readBuffer and store in 
+                        arrayList */
                         for (int i = 0; i < numBytes; i++) {
                             byteFrameList.add(readBuffer[i]);
                         }
                     }
-                    //convert Byte arraylist to byte[]
+                    /* convert Byte arraylist to byte[] */
                     byte[] byteFrame = new byte[byteFrameList.size()];
                     for (int i = 0; i < byteFrameList.size(); i++) {
                         byteFrame[i] = (Byte) byteFrameList.get(i).byteValue();
                     }
 
-                    //String str = new String(readBuffer);
-                    // check for 0 when the transmitter is closed.
-                    //if (str.charAt(0) == '\u0000') {
-                    //    break;
-                    //}
-
-                    //Strategy pattern
                     if (this.packet.isPacketComplete(byteFrame)) {
-                        //Remove packet data from byteFrameList
+                        /* Remove packet data from byteFrameList*/
                         int packetSize = this.packet.getPacketSize(byteFrame);
                         byteFrameList.subList(0, packetSize).clear();
 
-                        //Send FrameEvent to frameEventListener
                         if (frameEventListener != null) {
-                            FrameEvent responseEvent = new FrameEvent(this, byteFrame);
+                            FrameEvent responseEvent = new FrameEvent(this,
+                                    byteFrame);
                             frameEventListener.frameReady(responseEvent);
                             break;
                         }
@@ -152,13 +150,14 @@ public class SerialFrame implements SerialPortEventListener {
     }
 
     /**
-     * Sends a byte array frame to the serial port.
-     * Does not add a termination char to the byyte array
+     * Sends a byte array frame to the serial port. Does not add a termination
+     * char to the byte array
+     *
      * @param byteArray the array to be sent.
      */
     public synchronized void transmit(byte[] byteArray) {
-        //Debug output
-        System.out.println("Send:               [" + new String(byteArray) + "]");
+        System.out.
+                println("Send:               [" + new String(byteArray) + "]");
         try {
             outputStream = serialPort.getOutputStream();
             outputStream.write(byteArray);

@@ -1,6 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * This class has been distributed by the project supervisor/course lector.
  */
 package SerialCom.serial;
 
@@ -8,9 +7,10 @@ import SerialCom.protocol.Packet;
 import java.util.TooManyListenersException;
 
 /**
- * The <code>SerialTransceiver</code> class represents a serial transmitter
- * and receiver. When a complete data packet is received the
+ * The <code>SerialTransceiver</code> class represents a serial transmitter and
+ * receiver. When a complete data packet is received the
  * <code>FrameEventListener</code> is notified.
+ *
  * @version 16/02/10
  * @author ibr
  */
@@ -21,21 +21,25 @@ public class SerialTransceiver {
     private FrameEventListener frameEventListener;
 
     /**
-     * Constructs <code>SerialTransceiver</code> object specifying
-     * the packet protocol and frameEventListener.
-     * @param packet the packet protocol
+     * Constructs <code>SerialTransceiver</code> object specifying the packet
+     * protocol and frameEventListener.
+     *
+     * @param packet             the packet protocol
      * @param frameEventListener the listener
      */
-    public SerialTransceiver(Packet packet, FrameEventListener frameEventListener) {
+    public SerialTransceiver(Packet packet,
+            FrameEventListener frameEventListener) {
         this.packet = packet;
         this.frameEventListener = frameEventListener;
     }
 
     /**
-     * Opens the specificied serial port.
-     * If the corresponding <code>SerialFrame</code> already has a listener
-     * registered a <code>TooManyListenersException</code> is thrown.
+     * Opens the specificied serial port. If the corresponding
+     * <code>SerialFrame</code> already has a listener registered a
+     * <code>TooManyListenersException</code> is thrown.
+     *
      * @param port the serial port
+     *
      * @throws TooManyListenersException
      */
     public void openPort(String port) throws TooManyListenersException {
@@ -47,6 +51,7 @@ public class SerialTransceiver {
 
     /**
      * Transmits the specified byte array through the opened serial port.
+     *
      * @param bytePacket the byte array to transmit
      */
     public synchronized void transmit(byte[] bytePacket) {
@@ -54,7 +59,7 @@ public class SerialTransceiver {
     }
 
     /**
-     * Clloses the serial port.
+     * Closes the serial port.
      */
     public void closePort() {
         serialFrame.closePort();

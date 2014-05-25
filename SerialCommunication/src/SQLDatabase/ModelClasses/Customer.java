@@ -2,7 +2,13 @@ package SQLDatabase.ModelClasses;
 
 import java.io.Serializable;
 
+/**
+ * Model class with the purpose of containing the data that constitutes a
+ * customer instance in the database. Note that the standard getters and setters
+ * are not documented with Jdoc.
+ */
 public class Customer implements Serializable {
+
     private String customerNumb;
     private String pin;
     private String password;
@@ -17,8 +23,28 @@ public class Customer implements Serializable {
     private String accountStatus;
     private String useStatus;
 
-    public Customer(String customerNumb, String pin, String password, String cardNumb, String firstname, String lastname, String road, String zipCode, String email,
-                    String phoneNumb, int balance, String accountStatus, String useStatus) {
+    /**
+     * Custom constructor that simple assign the values to all the fields.
+     *
+     * @param customerNumb
+     * @param pin
+     * @param password
+     * @param cardNumb
+     * @param firstname
+     * @param lastname
+     * @param road
+     * @param zipCode
+     * @param email
+     * @param phoneNumb
+     * @param balance
+     * @param accountStatus
+     * @param useStatus
+     */
+    public Customer(String customerNumb, String pin, String password,
+            String cardNumb, String firstname, String lastname, String road,
+            String zipCode, String email,
+            String phoneNumb, int balance, String accountStatus,
+            String useStatus) {
         this.customerNumb = customerNumb;
         this.pin = pin;
         this.password = password;
@@ -32,10 +58,8 @@ public class Customer implements Serializable {
         this.balance = balance;
         this.accountStatus = accountStatus;
         this.useStatus = useStatus;
-        
-        
-    
-}
+
+    }
 
     public String getCustomerNumb() {
         return customerNumb;
@@ -141,46 +165,53 @@ public class Customer implements Serializable {
         this.useStatus = useStatus;
     }
 
+    /**
+     * Pass the Customer object to a formated string. Format: "FIRSTNAME,
+     * LASTNAME, EMAIL"
+     *
+     * @return the formated string.
+     */
     @Override
-    public String toString(){
-        String s = firstName+", "+lastName+", "+email;
+    public String toString() {
+        String s = firstName + ", " + lastName + ", " + email;
         return s;
     }
+
     @Override
     public int hashCode() {
         int hash = 3;
-        hash =
-                37 * hash +
-                (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
         hash = 37 * hash + (this.pin != null ? this.pin.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.password != null ? this.password.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.cardNumb != null ? this.cardNumb.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.firstName != null ? this.firstName.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.lastName != null ? this.lastName.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.password != null ? this.password.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.cardNumb != null ? this.cardNumb.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.firstName != null ? this.firstName.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.lastName != null ? this.lastName.hashCode() : 0);
         hash = 37 * hash + (this.road != null ? this.road.hashCode() : 0);
         hash = 37 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
         hash = 37 * hash + (this.email != null ? this.email.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.phoneNumb != null ? this.phoneNumb.hashCode() : 0);
-        hash =
-                37 * hash +
-                (int) (Double.doubleToLongBits(this.balance) ^
-                (Double.doubleToLongBits(this.balance) >>> 32));
-        hash =
-                37 * hash +
-                (this.accountStatus != null ? this.accountStatus.hashCode() : 0);
-        hash =
-                37 * hash +
-                (this.useStatus != null ? this.useStatus.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.phoneNumb != null ? this.phoneNumb.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (int) (Double.doubleToLongBits(this.balance)
+                ^ (Double.doubleToLongBits(this.balance) >>> 32));
+        hash
+                = 37 * hash
+                + (this.accountStatus != null ? this.accountStatus.hashCode() : 0);
+        hash
+                = 37 * hash
+                + (this.useStatus != null ? this.useStatus.hashCode() : 0);
         return hash;
     }
 
@@ -233,8 +264,8 @@ public class Customer implements Serializable {
                 : !this.phoneNumb.equals(other.phoneNumb)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.balance) !=
-                Double.doubleToLongBits(other.balance)) {
+        if (Double.doubleToLongBits(this.balance)
+                != Double.doubleToLongBits(other.balance)) {
             return false;
         }
         if ((this.accountStatus == null) ? (other.accountStatus != null)
@@ -248,7 +279,4 @@ public class Customer implements Serializable {
         return true;
     }
 
-    
-    
-    
 }

@@ -274,11 +274,16 @@ public class TerminalManager {
         databaseManager.updateQuery(SQLLibrary.SYSTEM_TERMINAL_CHARGE_STATUS,
                 parameters);
     }
-    
+
     /**
      * This PingTimerListener ensures that only one terminal is pinged at a time,
+<<<<<<< .mine
+     * with the field of the outer class. Approximately 500 ms elapses between
+     * two terminals are pinged when this timer is running.
+=======
      * with the field of the outer class.
      * Approximately 1800 ms 
+>>>>>>> .r246
      */
     public class PingTimerListener implements ActionListener {
 
@@ -300,11 +305,11 @@ public class TerminalManager {
         }
     }
 
-    
     /**
-     * Starts the ping timer which then runs the 
+     * Starts the ping timer which then pings the terminals. This trimer
+     * currently runs ever 6 hours.
      */
-    public class PingScheduleListener implements ActionListener {  // ping schedule timer, ping all terminals every 6 hours
+    public class PingScheduleListener implements ActionListener {  
 
         public synchronized void actionPerformed(ActionEvent e) {
             System.err.println(

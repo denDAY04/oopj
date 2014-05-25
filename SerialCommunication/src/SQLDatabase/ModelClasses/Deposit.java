@@ -2,18 +2,36 @@ package SQLDatabase.ModelClasses;
 
 import java.io.Serializable;
 
+/**
+ * Model class with the purpose of containing the data that constitutes a
+ * deposit instance in the database. This class only has standard getters and
+ * setters, and thus there are not written Jdoc to them.
+ */
 public class Deposit implements Serializable {
+
     private String depositsNumb;
-    private String customerNumb; // forgin key
+    private String customerNumb;
     private String depositsDate;
     private double depositAmount;
     private double newBalanceDeposit;
     private String externalRefNumb;
     private String last4CardNumb;
-    //
 
-    public Deposit(String depositsNumb, String customerNumb, String depositsDate, double depositAmount, double newBalanceDeposit, String externalRefNumb,
-                    String last4CardNumb) {
+    /**
+     * Custom constructor that simply assigns the values to each field.
+     *
+     * @param depositsNumb
+     * @param customerNumb
+     * @param depositsDate
+     * @param depositAmount
+     * @param newBalanceDeposit
+     * @param externalRefNumb
+     * @param last4CardNumb
+     */
+    public Deposit(String depositsNumb, String customerNumb, String depositsDate,
+            double depositAmount, double newBalanceDeposit,
+            String externalRefNumb,
+            String last4CardNumb) {
         this.depositsNumb = depositsNumb;
         this.customerNumb = customerNumb;
         this.depositsDate = depositsDate;
@@ -21,7 +39,6 @@ public class Deposit implements Serializable {
         this.newBalanceDeposit = newBalanceDeposit;
         this.externalRefNumb = externalRefNumb;
         this.last4CardNumb = last4CardNumb;
-
 
     }
 
@@ -84,30 +101,31 @@ public class Deposit implements Serializable {
     @Override
     public int hashCode() {
         int hash = 3;
-        hash =
-                61 * hash +
-                (this.depositsNumb != null ? this.depositsNumb.hashCode() : 0);
-        hash =
-                61 * hash +
-                (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
-        hash =
-                61 * hash +
-                (this.depositsDate != null ? this.depositsDate.hashCode() : 0);
-        hash =
-                61 * hash +
-                (int) (Double.doubleToLongBits(this.depositAmount) ^
-                (Double.doubleToLongBits(this.depositAmount) >>> 32));
-        hash =
-                61 * hash +
-                (int) (Double.doubleToLongBits(this.newBalanceDeposit) ^
-                (Double.doubleToLongBits(this.newBalanceDeposit) >>> 32));
-        hash =
-                61 * hash +
-                (this.externalRefNumb != null ? this.externalRefNumb.hashCode()
+        hash
+                = 61 * hash
+                + (this.depositsNumb != null ? this.depositsNumb.hashCode() : 0);
+        hash
+                = 61 * hash
+                + (this.customerNumb != null ? this.customerNumb.hashCode() : 0);
+        hash
+                = 61 * hash
+                + (this.depositsDate != null ? this.depositsDate.hashCode() : 0);
+        hash
+                = 61 * hash
+                + (int) (Double.doubleToLongBits(this.depositAmount)
+                ^ (Double.doubleToLongBits(this.depositAmount) >>> 32));
+        hash
+                = 61 * hash
+                + (int) (Double.doubleToLongBits(this.newBalanceDeposit)
+                ^ (Double.doubleToLongBits(this.newBalanceDeposit) >>> 32));
+        hash
+                = 61 * hash
+                + (this.externalRefNumb != null ? this.externalRefNumb.
+                hashCode()
                 : 0);
-        hash =
-                61 * hash +
-                (this.last4CardNumb != null ? this.last4CardNumb.hashCode() : 0);
+        hash
+                = 61 * hash
+                + (this.last4CardNumb != null ? this.last4CardNumb.hashCode() : 0);
         return hash;
     }
 
@@ -132,12 +150,12 @@ public class Deposit implements Serializable {
                 : !this.depositsDate.equals(other.depositsDate)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.depositAmount) !=
-                Double.doubleToLongBits(other.depositAmount)) {
+        if (Double.doubleToLongBits(this.depositAmount)
+                != Double.doubleToLongBits(other.depositAmount)) {
             return false;
         }
-        if (Double.doubleToLongBits(this.newBalanceDeposit) !=
-                Double.doubleToLongBits(other.newBalanceDeposit)) {
+        if (Double.doubleToLongBits(this.newBalanceDeposit)
+                != Double.doubleToLongBits(other.newBalanceDeposit)) {
             return false;
         }
         if ((this.externalRefNumb == null) ? (other.externalRefNumb != null)
@@ -151,5 +169,4 @@ public class Deposit implements Serializable {
         return true;
     }
 
-    
 }

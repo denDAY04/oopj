@@ -1,16 +1,14 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package SQLDatabase.ModelClasses;
 
 import java.io.Serializable;
 
 /**
- *
- * @author ibr
+ * Model class with the purpose of containing the data that constitutes a
+ * Terminal instance in the database. This class only has standard getters and
+ * setters, and thus there are not written Jdoc to them.
  */
 public class Terminal implements Serializable {
+
     private String hardwareNumb;
     private String road;
     private String zipCode;
@@ -19,7 +17,20 @@ public class Terminal implements Serializable {
     private String chargingStatus;
     private String offlineSince;
 
-    public Terminal(String hardwareNumb, String road, String zipCode, String ipAddress, String installStatus, String chargingStatus, String offlineSince) {
+    /**
+     * Custom constructor that simply assigns the values to each field.
+     *
+     * @param hardwareNumb
+     * @param road
+     * @param zipCode
+     * @param ipAddress
+     * @param installStatus
+     * @param chargingStatus
+     * @param offlineSince
+     */
+    public Terminal(String hardwareNumb, String road, String zipCode,
+            String ipAddress, String installStatus, String chargingStatus,
+            String offlineSince) {
         this.hardwareNumb = hardwareNumb;
         this.road = road;
         this.zipCode = zipCode;
@@ -30,13 +41,14 @@ public class Terminal implements Serializable {
 
     }
 
-      public String getHardwareNumb() {
+    public String getHardwareNumb() {
         return hardwareNumb;
     }
 
     public void setHardwareNumb(String hardwareNumb) {
         this.hardwareNumb = hardwareNumb;
     }
+
     public String getRoad() {
         return road;
     }
@@ -51,8 +63,8 @@ public class Terminal implements Serializable {
 
     public void setZipCode(String zipCode) {
         this.zipCode = zipCode;
-    }    
-    
+    }
+
     public String getIpAddress() {
         return ipAddress;
     }
@@ -77,7 +89,7 @@ public class Terminal implements Serializable {
         this.chargingStatus = chargingStatus;
     }
 
-        public String getOfflineSince() {
+    public String getOfflineSince() {
         return offlineSince;
     }
 
@@ -88,23 +100,23 @@ public class Terminal implements Serializable {
     @Override
     public int hashCode() {
         int hash = 7;
-        hash =
-                67 * hash +
-                (this.hardwareNumb != null ? this.hardwareNumb.hashCode() : 0);
+        hash
+                = 67 * hash
+                + (this.hardwareNumb != null ? this.hardwareNumb.hashCode() : 0);
         hash = 67 * hash + (this.road != null ? this.road.hashCode() : 0);
         hash = 67 * hash + (this.zipCode != null ? this.zipCode.hashCode() : 0);
-        hash =
-                67 * hash +
-                (this.ipAddress != null ? this.ipAddress.hashCode() : 0);
-        hash =
-                67 * hash +
-                (this.installStatus != null ? this.installStatus.hashCode() : 0);
-        hash =
-                67 * hash +
-                (this.chargingStatus != null ? this.chargingStatus.hashCode() : 0);
-        hash =
-                67 * hash +
-                (this.offlineSince != null ? this.offlineSince.hashCode() : 0);
+        hash
+                = 67 * hash
+                + (this.ipAddress != null ? this.ipAddress.hashCode() : 0);
+        hash
+                = 67 * hash
+                + (this.installStatus != null ? this.installStatus.hashCode() : 0);
+        hash
+                = 67 * hash
+                + (this.chargingStatus != null ? this.chargingStatus.hashCode() : 0);
+        hash
+                = 67 * hash
+                + (this.offlineSince != null ? this.offlineSince.hashCode() : 0);
         return hash;
     }
 
@@ -147,6 +159,4 @@ public class Terminal implements Serializable {
         }
         return true;
     }
-
-    
 }
