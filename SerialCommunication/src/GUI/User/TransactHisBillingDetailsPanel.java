@@ -152,7 +152,7 @@ public class TransactHisBillingDetailsPanel extends javax.swing.JPanel {
         labChargingEnd.setText("End charging time");
 
         labkWhBilled.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
-        labkWhBilled.setText("kWh billed");
+        labkWhBilled.setText("Wh billed");
 
         textChargingEnd.setEditable(false);
         textChargingEnd.setText(" ");
