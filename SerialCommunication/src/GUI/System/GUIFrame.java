@@ -1,57 +1,42 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.System;
 
 import SQLDatabase.Managers.*;
 import java.awt.CardLayout;
 
 /**
- *
- * @author Qess
+ * The JFrame of the GUI, and the controller/manager of the different panels.
  */
 public class GUIFrame extends javax.swing.JFrame {
 
     private CardLayout cardLayout;
-    
-    /**
-     * Used for detailed view of a despoit instance. The history panel needs to
-     * change this field before calling changePanel, in order to collect the 
-     * correct data.
-     */
-    private String activeDepositNumber;
-    
-    /**
-     * Used for detailed view of a billing instance. The history panel needs to
-     * change this field before calling changePanel, in order to collect the 
-     * correct data.
-     */
-    private String activeBillingNumber;
-    
     public CustomerManager cManager;
     public DatabaseManager dbManager;
     public BillingManager bManager;
     public DepositManager depManager;
-    public TerminalManager tManager; 
-    
+    public TerminalManager tManager;
+
+
     /**
-     * Creates new form GUIFrame
+     * Used for detailed view of a deposit instance. The history panel needs to
+     * change this field before calling changePanel, in order to collect the
+     * correct data.
+     */
+    private String activeDepositNumber;
+
+    /**
+     * Used for detailed view of a billing instance. The history panel needs to
+     * change this field before calling changePanel, in order to collect the
+     * correct data.
+     */
+    private String activeBillingNumber;
+
+    /**
+     * Custom constructor.
      */
     public GUIFrame() {
         initComponents();
         cardLayout = new CardLayout();
-//        dbManager = new DatabaseManager();
-//        cManager = new CustomerManager();
-//        bManager = new BillingManager();
-//        depManager = new DepositManager();
-//        tManager = new TerminalManager();
-//        cManager.setDatabaseManager(dbManager);
-//        bManager.setDatabaseManager(dbManager);
-//        depManager.setDatabaseManager(dbManager);
-//        tManager.setDatabaseManager(dbManager);
-        
-        
+
         loginControllerPanel.setFrame(this);
         accountPanel.setFrame(this);
         signupPanel.setFrame(this);
@@ -77,7 +62,7 @@ public class GUIFrame extends javax.swing.JFrame {
         transactHisDepositDetailsAdminPanel.setFrame(this);
         transactHisBillingDetailsAdminPanel.setFrame(this);
         transactionManagementPanel.setFrame(this);
-        
+
         cards.setLayout(cardLayout);
         cards.add(loginControllerPanel, "card1");
         cards.add(accountPanel, "card2");
@@ -104,75 +89,121 @@ public class GUIFrame extends javax.swing.JFrame {
         cards.add(transactHisDepositDetailsAdminPanel, "card23");
         cards.add(transactHisBillingDetailsAdminPanel, "card24");
         cards.add(transactionManagementPanel, "card25");
-    }    
+    }
 
+    /**
+     * Setter for CustomerManager reference.
+     *
+     * @param cManager CustomerManager object.
+     */
     public void setCustomerManager(CustomerManager cManager) {
         this.cManager = cManager;
     }
 
+    /**
+     * Setter for DatabaseManager reference.
+     *
+     * @param dbManager DatabaseManager object.
+     */
     public void setDatabaseManager(DatabaseManager dbManager) {
         this.dbManager = dbManager;
     }
 
+    /**
+     * Setter for BillingManager reference.
+     *
+     * @param bManager BillingManager object.
+     */
     public void setBillingManager(BillingManager bManager) {
         this.bManager = bManager;
     }
 
+    /**
+     * Setter for DepositManager reference.
+     *
+     * @param depManager DepositManager object.
+     */
     public void setDepositManager(DepositManager depManager) {
         this.depManager = depManager;
     }
 
+    /**
+     * Setter for TerminalManager reference.
+     *
+     * @param tManager TerminalManager object.
+     */
     public void setTerminalManager(TerminalManager tManager) {
         this.tManager = tManager;
     }
-    
-    public void changePanel(String panel){
-        
-        if(panel.equals("card2")){
-            updateUser();
-            accountPanel.loadPage();
-        } else if(panel.equals("card7")){
-            passwordFoundPanel.loadPage();
-        } else if(panel.equals("card8")){
-            editAccountPanel.loadPage();
-        } else if(panel.equals("card16")){
-            editAccountAdminPanel.loadPage();
-        } else if(panel.equals("card12")){
-            loginAsPanel.loadPage();
-        } else if(panel.equals("card13")){
-            updateUser();
-            accountAdminPanel.loadPage();
-        }else if (panel.equals("card19")){
-            terminalListAdminPanel.loadPage();
-        }else if (panel.equals("card10")){
-            transactionHistoryPanel.loadPage();
-        }else if (panel.equals("card18")){
-            transactionHistoryAdminPanel.loadPage();
-        }else if(panel.equals("card20")) {
-            terminalListPanel.loadPage();
-        }else if (panel.equals("card21")) {
-            transactHisDepositDetailsPanel.loadPage(activeDepositNumber);
-        }else if (panel.equals("card22")) {
-            transactHisBillingDetailsPanel.loadPage(activeBillingNumber);
-        }else if (panel.equals("card23")) {
-            transactHisDepositDetailsAdminPanel.loadPage(activeDepositNumber);
-        }else if (panel.equals("card24")) {
-            transactHisBillingDetailsAdminPanel.loadPage(activeBillingNumber);
-        }else if (panel.equals("card25")) {
-            transactionManagementPanel.loadPage();
-        }
-        cardLayout.show(cards, panel);
-    }
-    
+
+    /**
+     * Setter for the deposit number denoting the currently active deposit.
+     *
+     * @param newNumber deposit number.
+     */
     public void setActiveDepositNumber(String newNumber) {
         activeDepositNumber = newNumber;
     }
-    
+
+    /**
+     * Setter for the billing number denoting the currently active billing.
+     *
+     * @param newNumber billing number.
+     */
     public void setActiveBillingNumber(String newNumber) {
         activeBillingNumber = newNumber;
     }
-    
-    private void updateUser(){
+
+    /**
+     * Change to a new panel in the CardLayout, and perform necessary method
+     * calls, if any.
+     *
+     * @param panel the card name of the panel to switch to. See GUIFrame's
+     *              constructor.
+     */
+    public void changePanel(String panel) {
+
+        if (panel.equals("card2")) {
+            updateUser();
+            accountPanel.loadPage();
+        } else if (panel.equals("card7")) {
+            passwordFoundPanel.loadPage();
+        } else if (panel.equals("card8")) {
+            editAccountPanel.loadPage();
+        } else if (panel.equals("card16")) {
+            editAccountAdminPanel.loadPage();
+        } else if (panel.equals("card12")) {
+            loginAsPanel.loadPage();
+        } else if (panel.equals("card13")) {
+            updateUser();
+            accountAdminPanel.loadPage();
+        } else if (panel.equals("card19")) {
+            terminalListAdminPanel.loadPage();
+        } else if (panel.equals("card10")) {
+            transactionHistoryPanel.loadPage();
+        } else if (panel.equals("card18")) {
+            transactionHistoryAdminPanel.loadPage();
+        } else if (panel.equals("card20")) {
+            terminalListPanel.loadPage();
+        } else if (panel.equals("card21")) {
+            transactHisDepositDetailsPanel.loadPage(activeDepositNumber);
+        } else if (panel.equals("card22")) {
+            transactHisBillingDetailsPanel.loadPage(activeBillingNumber);
+        } else if (panel.equals("card23")) {
+            transactHisDepositDetailsAdminPanel.loadPage(activeDepositNumber);
+        } else if (panel.equals("card24")) {
+            transactHisBillingDetailsAdminPanel.loadPage(activeBillingNumber);
+        } else if (panel.equals("card25")) {
+            transactionManagementPanel.loadPage();
+        }
+
+        cardLayout.show(cards, panel);
+    }
+
+    /**
+     * Update the tracker of the currently logged in customer.
+     */
+    private void updateUser() {
         String customerNumb = cManager.getLoggedInUser().getCustomerNumb();
         cManager.updateLoggedInCustomer(customerNumb);
     }
@@ -256,45 +287,6 @@ public class GUIFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info
-                    : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GUIFrame.class.getName()).log(
-                    java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GUIFrame.class.getName()).log(
-                    java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GUIFrame.class.getName()).log(
-                    java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GUIFrame.class.getName()).log(
-                    java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new GUIFrame().setVisible(true);
-            }
-        });
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private GUI.Admin.AccountAdminPanel accountAdminPanel;
     private GUI.User.AccountPanel accountPanel;

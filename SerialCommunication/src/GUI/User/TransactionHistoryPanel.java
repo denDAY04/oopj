@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.User;
 
 import GUI.System.GUIFrame;
@@ -12,56 +6,79 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author AndreasStensig
+ * Panel for displaying a simply overview over billings and deposits for the
+ * logged in customer.
  */
 public class TransactionHistoryPanel extends javax.swing.JPanel {
 
     private DefaultTableModel tableModel;
     private GUIFrame frame;
 
+    /**
+     * Custom constructor.
+     */
     public TransactionHistoryPanel() {
         initComponents();
-        
-        /* Set column headers and special width on tables */
-        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue("Deposit number");
+        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue(
+                "Deposit number");
         tableDepositHistory.getColumnModel().getColumn(0).setPreferredWidth(20);
         tableDepositHistory.getColumnModel().getColumn(1).setHeaderValue("Date");
-        tableDepositHistory.getColumnModel().getColumn(2).setHeaderValue("Amount (DKK)");
+        tableDepositHistory.getColumnModel().getColumn(2).setHeaderValue(
+                "Amount (DKK)");
         tableDepositHistory.getColumnModel().getColumn(2).setPreferredWidth(15);
-        tableDepositHistory.getColumnModel().getColumn(3).setHeaderValue("New balance (DKK)");
+        tableDepositHistory.getColumnModel().getColumn(3).setHeaderValue(
+                "New balance (DKK)");
         tableDepositHistory.getColumnModel().getColumn(3).setPreferredWidth(15);
-        tableDepositHistory.getColumnModel().getColumn(4).setHeaderValue("Card number");
+        tableDepositHistory.getColumnModel().getColumn(4).setHeaderValue(
+                "Card number");
         tableDepositHistory.getColumnModel().getColumn(4).setPreferredWidth(20);
-        
-        tableBillingHistory.getColumnModel().getColumn(0).setHeaderValue("Transaction number");
-        tableBillingHistory.getColumnModel().getColumn(1).setHeaderValue("Recieved at server");
-        tableBillingHistory.getColumnModel().getColumn(2).setHeaderValue("Amount (DKK)");
-        tableBillingHistory.getColumnModel().getColumn(3).setHeaderValue("New balance (DKK)");
+
+        tableBillingHistory.getColumnModel().getColumn(0).setHeaderValue(
+                "Transaction number");
+        tableBillingHistory.getColumnModel().getColumn(1).setHeaderValue(
+                "Recieved at server");
+        tableBillingHistory.getColumnModel().getColumn(2).setHeaderValue(
+                "Amount (DKK)");
+        tableBillingHistory.getColumnModel().getColumn(3).setHeaderValue(
+                "New balance (DKK)");
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Load fields.
+     */
     public void loadPage() {
         tableModel = (DefaultTableModel) tableDepositHistory.getModel();
-        /* Clear table and insert values */
         clearTable(tableModel);
-        ArrayList<String[]> depositList = frame.depManager.getSimpleDeposits(frame.cManager.getLoggedInUser().getCustomerNumb());
-        for(String[] iter : depositList) {
+        ArrayList<String[]> depositList = frame.depManager.getSimpleDeposits(
+                frame.cManager.getLoggedInUser().getCustomerNumb());
+        for (String[] iter : depositList) {
             tableModel.addRow(iter);
         }
-        
+
         tableModel = (DefaultTableModel) tableBillingHistory.getModel();
-        /* Clear table and insert values */
         clearTable(tableModel);
-        ArrayList<String[]> billingList = frame.bManager.getSimpleBillings(frame.cManager.getLoggedInUser().getCustomerNumb());
+        ArrayList<String[]> billingList = frame.bManager.getSimpleBillings(
+                frame.cManager.getLoggedInUser().getCustomerNumb());
         for (String[] iter : billingList) {
             tableModel.addRow(iter);
         }
     }
-    
+
+    /**
+     * Clear the fields of the JTable to which the parameterized TableModel
+     * belongs.
+     *
+     * @param tableModel TableModel of the JTable whose data should be cleared.
+     */
     private void clearTable(DefaultTableModel tableModel) {
         if (tableModel != null) {
             while (tableModel.getRowCount() != 0) {
@@ -211,32 +228,49 @@ public class TransactionHistoryPanel extends javax.swing.JPanel {
     );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Clear tables and change to account panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         clearTable((DefaultTableModel) tableBillingHistory.getModel());
-        clearTable((DefaultTableModel) tableDepositHistory.getModel());   
+        clearTable((DefaultTableModel) tableDepositHistory.getModel());
         frame.changePanel("card2");
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Get selected deposit and change to detailed deposit panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnDepositDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDepositDetailsActionPerformed
         int rowSelected = tableDepositHistory.getSelectedRow();
         if (rowSelected == -1) {
             JOptionPane.showMessageDialog(this, "No deposit selected.");
             return;
         }
-        
-        String depositNumber = (String) tableDepositHistory.getValueAt(rowSelected, 0);
+
+        String depositNumber = (String) tableDepositHistory.getValueAt(
+                rowSelected, 0);
         frame.setActiveDepositNumber(depositNumber);
         frame.changePanel("card21");
     }//GEN-LAST:event_btnDepositDetailsActionPerformed
 
+    /**
+     * Get selected billing and change to detailed billing panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBillingDetailsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBillingDetailsActionPerformed
         int rowSelected = tableBillingHistory.getSelectedRow();
         if (rowSelected == -1) {
             JOptionPane.showMessageDialog(this, "No billing selected.");
             return;
         }
-        
-        String billingNumber = (String) tableBillingHistory.getValueAt(rowSelected, 0);
+
+        String billingNumber = (String) tableBillingHistory.getValueAt(
+                rowSelected, 0);
         frame.setActiveBillingNumber(billingNumber);
         frame.changePanel("card22");
     }//GEN-LAST:event_btnBillingDetailsActionPerformed

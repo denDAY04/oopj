@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.User;
 
 import GUI.System.GUIFrame;
@@ -11,36 +5,48 @@ import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author AndreasStensig
+ * Panel with a list of all terminals, for a customer's view.
  */
 public class TerminalListPanel extends javax.swing.JPanel {
 
     private final DefaultTableModel tableModel;
     private GUIFrame frame;
-    
+
     /**
-     * Creates new form ChargingStationListViewPanel
+     * Custom constructor.
      */
     public TerminalListPanel() {
         initComponents();
         tableModel = (DefaultTableModel) tableTerminalList.getModel();
-        tableTerminalList.getColumnModel().getColumn(0).setHeaderValue("ID number");
+        tableTerminalList.getColumnModel().getColumn(0).setHeaderValue(
+                "ID number");
         tableTerminalList.getColumnModel().getColumn(0).setPreferredWidth(10);
-        tableTerminalList.getColumnModel().getColumn(1).setHeaderValue("Address");
+        tableTerminalList.getColumnModel().getColumn(1).
+                setHeaderValue("Address");
         tableTerminalList.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tableTerminalList.getColumnModel().getColumn(2).setHeaderValue("Zip code");
+        tableTerminalList.getColumnModel().getColumn(2).setHeaderValue(
+                "Zip code");
         tableTerminalList.getColumnModel().getColumn(2).setPreferredWidth(12);
-        tableTerminalList.getColumnModel().getColumn(3).setHeaderValue("Charging status");
+        tableTerminalList.getColumnModel().getColumn(3).setHeaderValue(
+                "Charging status");
         tableTerminalList.getColumnModel().getColumn(3).setPreferredWidth(30);
-        tableTerminalList.getColumnModel().getColumn(4).setHeaderValue("Offline since");
+        tableTerminalList.getColumnModel().getColumn(4).setHeaderValue(
+                "Offline since");
         tableTerminalList.getColumnModel().getColumn(4).setPreferredWidth(30);
     }
-    
+
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Load fields.
+     */
     public void loadPage() {
         resetPage();
         ArrayList<String[]> list = frame.tManager.getAllTerminals();
@@ -49,13 +55,17 @@ public class TerminalListPanel extends javax.swing.JPanel {
             tableModel.addRow(temp);
         }
     }
-    
+
+    /**
+     * Reset fields.
+     */
     private void resetPage() {
         /* First clear the selection in order to ensure that no erros occour due
-        to selection listener.
-        */
+         to selection listener.
+         */
         tableTerminalList.clearSelection();
-        while(tableModel.getRowCount() != 0) {
+
+        while (tableModel.getRowCount() != 0) {
             tableModel.removeRow(0);
         }
     }
@@ -135,11 +145,15 @@ public class TerminalListPanel extends javax.swing.JPanel {
     );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to account panel.
+     *
+     * @param evt
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         resetPage();
         frame.changePanel("card2");
     }//GEN-LAST:event_btnBackActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;

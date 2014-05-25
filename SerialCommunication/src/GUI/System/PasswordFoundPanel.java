@@ -1,32 +1,42 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.System;
 
-import GUI.*;
-
 /**
- *
- * @author Qess
+ * Panel for displaying a password, should the customer have forgotten it.
  */
 public class PasswordFoundPanel extends javax.swing.JPanel {
-    
+
     private GUIFrame frame;
+
     /**
-     * Creates new form PasswordViewPanel
+     * Custom constructor.
      */
     public PasswordFoundPanel() {
         initComponents();
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
 
-    public void loadPage(){
+    /**
+     * Set fields.
+     */
+    public void loadPage() {
         labPasswordFound.setText(frame.cManager.getLoggedInUser().getPassword());
     }
+
+    /**
+     * Reset fields.
+     */
+    private void resetPage() {
+        labPasswordFound.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -85,15 +95,17 @@ public class PasswordFoundPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to login panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         frame.cManager.setLoggedInUser(null);
         frame.changePanel("card1");
         resetPage();
     }//GEN-LAST:event_btnOKActionPerformed
-    
-    private void resetPage(){
-        labPasswordFound.setText("");
-    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnOK;
     private javax.swing.JLabel labInformation;

@@ -1,10 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.Admin;
 
-import GUI.*;
 import GUI.System.GUIFrame;
 import java.awt.Color;
 import java.util.ArrayList;
@@ -13,16 +8,16 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
 /**
- *
- * @author Qess
+ * Panel for an administrator to log in as a customer.
  */
 public class LoginAsPanel extends javax.swing.JPanel {
-    
+
     private GUIFrame frame;
     private int errors;
     private DefaultListModel listModel;
+
     /**
-     * Creates new form ForgotPassControllerPanel
+     * Custom constructor.
      */
     public LoginAsPanel() {
         initComponents();
@@ -32,22 +27,87 @@ public class LoginAsPanel extends javax.swing.JPanel {
 
             public void valueChanged(ListSelectionEvent e) {
                 if (!e.getValueIsAdjusting()) {
-                   //Check for null to avoid nullpointerexception when clearing list
-                   if(listCustomers.getSelectedValue() == null){
-                       return;
-                   } else{
-                    String item =(listCustomers.getSelectedValue().toString());
-                    //Make array of substrings by splitting on whitespace
-                    String substrings[] = item.split("\\s+");
-                    textEmail.setText(substrings[substrings.length-1]);
-                   }
+                    //Check for null to avoid nullpointerexception when clearing list
+                    if (listCustomers.getSelectedValue() == null) {
+                        return;
+                    } else {
+                        String item = (listCustomers.getSelectedValue().
+                                toString());
+                        //Make array of substrings by splitting on whitespace
+                        String substrings[] = item.split("\\s+");
+                        textEmail.setText(substrings[substrings.length - 1]);
+                    }
                 }
             }
         });
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
+    }
+
+    /**
+     * Load all customers into JList.
+     */
+    public void loadPage() {
+        ArrayList<String> arr = frame.cManager.getCustomersByFirstName(
+                "%" + textSearch.getText() + "%");
+        listModel.clear();
+        if (arr.isEmpty() == false) {
+            for (String customer : arr) {
+                listModel.addElement(customer);
+            }
+            listCustomers.setModel(listModel);
+        }
+    }
+
+    /**
+     * Check input fields for errors.
+     */
+    private void inputCheck() {
+        if (isValidEmailAddress(textEmail.getText()) == true) {
+            labEmail.setForeground(Color.BLACK);
+            labErrorEmail.setVisible(false);
+            errors--;
+        } else {
+            labEmail.setForeground(Color.RED);
+            labErrorEmail.setVisible(true);
+        }
+    }
+
+    /**
+     * Method found at StackOverflow.com, which validates the syntax of an email
+     * address.
+     * http://stackoverflow.com/questions/624581/what-is-the-best-java-email
+     * -address-validation-method
+     *
+     * @param email
+     *
+     * @return true if the string matches the structure of a valid email
+     *         address; false oStherwise.
+     */
+    private boolean isValidEmailAddress(String email) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(
+                ".+@.+\\.[a-z]+");
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
+    /**
+     * Reset fields.
+     */
+    public void resetPage() {
+        textEmail.setText("");
+        textSearch.setText("");
+        listCustomers.clearSelection();
+        listModel.clear();
+        labErrorEmail.setVisible(false);
+        labEmail.setForeground(Color.BLACK);
     }
 
     /**
@@ -161,93 +221,54 @@ public class LoginAsPanel extends javax.swing.JPanel {
         labErrorEmail.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
-    public void loadPage(){
-        //Loads JList with all the customers
-        ArrayList<String> arr = frame.cManager.getCustomersByFirstName("%"+textSearch.getText()+"%");
-        listModel.clear();
-        if(arr.isEmpty() == false){
-            for (String customer : arr) {
-                listModel.addElement(customer);
-            }
-            listCustomers.setModel(listModel);
-        }
-    }
-    
+    /**
+     * Change to administrator's control panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-       frame.changePanel("card11");
-       resetPage();
+        frame.changePanel("card11");
+        resetPage();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Change to administrator's customer-account panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNextActionPerformed
         inputCheck();
-        if (errors == 0 && frame.cManager.admLoggedInAs(textEmail.getText().toLowerCase()) == true){
+        if (errors == 0 && frame.cManager.admLoggedInAs(textEmail.getText().
+                toLowerCase()) == true) {
             frame.changePanel("card13");
             resetPage();
         }
-//        } else {
-//            labEmail.setForeground(Color.RED);
-//            labErrorEmail.setVisible(true);
-//        }
         errors = 1;
     }//GEN-LAST:event_btnNextActionPerformed
 
+    /**
+     * On every key release, search for a customer in the database with a first
+     * name containing such character sequence as are in the input field.
+     *
+     * @param evt KeyEvent
+     */
     private void textSearchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchKeyReleased
-        ArrayList<String> arr = frame.cManager.getCustomersByFirstName("%"+textSearch.getText()+"%");
-            System.err.println(textSearch.getText());
+        ArrayList<String> arr = frame.cManager.getCustomersByFirstName(
+                "%" + textSearch.getText() + "%");
+        System.err.println(textSearch.getText());
         listModel.clear();
-        if(arr.isEmpty() == false){
+        if (arr.isEmpty() == false) {
             for (String customer : arr) {
                 listModel.addElement(customer);
             }
             listCustomers.setModel(listModel);
-        } else{
+        } else {
             listModel.add(0, "No customer found - Try again");
             listCustomers.setModel(listModel);
         }
         System.err.println(textSearch.getText());
     }//GEN-LAST:event_textSearchKeyReleased
 
-    private void inputCheck(){
-        if (isValidEmailAddress(textEmail.getText()) == true){
-            labEmail.setForeground(Color.BLACK);
-            labErrorEmail.setVisible(false);
-            errors--;
-        } else{
-            labEmail.setForeground(Color.RED);
-            labErrorEmail.setVisible(true);
-        }
-//       if(!textEmail.getText().equals("")){
-//            if (isValidEmailAddress(textEmail.getText()) == true){
-//                labEmail.setForeground(Color.BLACK);
-//                labErrorEmail.setVisible(false);
-//                errors--;
-//            } else{
-//                labEmail.setForeground(Color.RED);
-//                labErrorEmail.setVisible(true);
-//            }
-//        } else{
-//            labEmail.setForeground(Color.RED);
-//            labErrorEmail.setVisible(true);
-//        }
-    }
-    
-    // Metod found at StackOverflow.com, which validates the syntax of an emailadress
-    // http://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
-    private boolean isValidEmailAddress(String email) {
-       java.util.regex.Pattern p = java.util.regex.Pattern.compile(".+@.+\\.[a-z]+");
-       java.util.regex.Matcher m = p.matcher(email);
-       return m.matches();
-    }
-    
-    public void resetPage(){
-        textEmail.setText("");
-        textSearch.setText("");
-        listCustomers.clearSelection();
-        listModel.clear();
-        labErrorEmail.setVisible(false);
-        labEmail.setForeground(Color.BLACK);
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnNext;

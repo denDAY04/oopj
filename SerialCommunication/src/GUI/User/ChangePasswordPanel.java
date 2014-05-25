@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.User;
 
 import GUI.System.GUIFrame;
@@ -9,25 +5,78 @@ import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Qess
+ * Panel for the customer to change his password.
  */
 public class ChangePasswordPanel extends javax.swing.JPanel {
-    
+
     private GUIFrame frame;
     private int errors;
+
     /**
-     * Creates new form LoginControllerPanel
+     * Custom constructor.
      */
     public ChangePasswordPanel() {
         initComponents();
         errors = 3;
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Check input fields.
+     */
+    private void inputCheck() {
+        String currentPassword = new StringBuilder().append(textCurrentPass.
+                getPassword()).toString();
+        if (currentPassword.equals(frame.cManager.getLoggedInUser().
+                getPassword())) {
+            labCurrentPass.setForeground(Color.BLACK);
+            labErrorWrongPass.setVisible(false);
+            errors--;
+        } else {
+            labCurrentPass.setForeground(Color.RED);
+            labErrorWrongPass.setVisible(true);
+        }
+
+        String newPassword = new StringBuilder().append(textNewPass.
+                getPassword()).toString();
+        if (newPassword.matches("^\\S*") && newPassword.length() >= 4
+                && newPassword.length() <= 30) {
+            labNewPass.setForeground(Color.BLACK);
+            errors--;
+        } else {
+            labNewPass.setForeground(Color.RED);
+        }
+
+        String confirmPassword = new StringBuilder().append(textConfirmPass.
+                getPassword()).toString();
+        if ((!confirmPassword.equals("")) && confirmPassword.equals(textNewPass.
+                getText())) {
+            labConfirmPass.setForeground(Color.BLACK);
+            labErrorMatch.setVisible(false);
+            errors--;
+        } else {
+            labConfirmPass.setForeground(Color.RED);
+            labErrorMatch.setVisible(true);
+        }
+    }
+
+    /**
+     * Reset fields.
+     */
+    private void resetPage() {
+        textCurrentPass.setText("");
+        textNewPass.setText("");
+        textConfirmPass.setText("");
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -98,65 +147,47 @@ public class ChangePasswordPanel extends javax.swing.JPanel {
         add(textConfirmPass, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 190, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Prompt the user for confirmation of going back, and then change to
+     * account panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-        int reply = JOptionPane.showConfirmDialog(null,"Are you sure you want to go back?\n"
-                                         + "All changes will be discarded.", 
-                                         "choose one", JOptionPane.YES_NO_OPTION);
+        int reply = JOptionPane.showConfirmDialog(null,
+                "Are you sure you want to go back?\n"
+                + "All changes will be discarded.",
+                "choose one", JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
-          frame.changePanel("card2");
-          resetPage();
+            frame.changePanel("card2");
+            resetPage();
         }
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * If no errors in input fields, change the customer's password in the
+     * database and change to account panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
         inputCheck();
-        if (errors ==0){
+        if (errors == 0) {
             String[] newValues = new String[1];
-            newValues[0] = new StringBuilder().append(textConfirmPass.getPassword()).toString();
-            frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 4, newValues);
-            JOptionPane.showMessageDialog(null, "Your password has been changed.", "Password change successfull", JOptionPane.INFORMATION_MESSAGE);
+            newValues[0] = new StringBuilder().append(textConfirmPass.
+                    getPassword()).toString();
+            frame.cManager.updateCustomerInformation(frame.cManager.
+                    getLoggedInUser().getCustomerNumb(), 4, newValues);
+            JOptionPane.showMessageDialog(null,
+                    "Your password has been changed.",
+                    "Password change successfull",
+                    JOptionPane.INFORMATION_MESSAGE);
             frame.changePanel("card2");
             resetPage();
         }
         errors = 3;
     }//GEN-LAST:event_btnChangePassActionPerformed
-    
-    private void inputCheck() {
-        String currentPassword = new StringBuilder().append(textCurrentPass.getPassword()).toString();
-        if(currentPassword.equals(frame.cManager.getLoggedInUser().getPassword())){
-            labCurrentPass.setForeground(Color.BLACK);
-            labErrorWrongPass.setVisible(false);
-            errors--;
-        } else{
-            labCurrentPass.setForeground(Color.RED);
-            labErrorWrongPass.setVisible(true);
-        }
-        
-        String newPassword = new StringBuilder().append(textNewPass.getPassword()).toString();
-        if(newPassword.matches("^\\S*") && newPassword.length() >= 4 && newPassword.length() <= 30) {
-            labNewPass.setForeground(Color.BLACK);
-            errors--;
-        } else{
-            labNewPass.setForeground(Color.RED);
-        }
-        
-        String confirmPassword = new StringBuilder().append(textConfirmPass.getPassword()).toString();
-        if((!confirmPassword.equals("")) && confirmPassword.equals(textNewPass.getText())) {
-            labConfirmPass.setForeground(Color.BLACK);
-            labErrorMatch.setVisible(false);
-            errors--;
-        } else{
-            labConfirmPass.setForeground(Color.RED);
-            labErrorMatch.setVisible(true);
-        }
-    }
-    
-    private void resetPage(){
-        textCurrentPass.setText("");
-        textNewPass.setText("");
-        textConfirmPass.setText("");
-    }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnChangePass;

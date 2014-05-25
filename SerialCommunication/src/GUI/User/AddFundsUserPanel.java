@@ -1,15 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.User;
 
 import GUI.System.GUIFrame;
 import GUI.System.JTextFieldLimit;
 import java.awt.Color;
-import java.awt.event.KeyEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,23 +10,21 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author AndreasStensig
+ * Panel for a customer to add funds to the account.
  */
 public class AddFundsUserPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
     private String wrongCardNBR = "9999999999999999";
     private ImageIcon icon;
-    private boolean inputError;
     private int errors;
     private DateFormat dateFormat;
     private Date date;
     private int month;
     private int year;
-    
+
     /**
-     * Creates new form AddFundsViewPanel
+     * Custom constructor.
      */
     public AddFundsUserPanel() {
         initComponents();
@@ -51,29 +42,111 @@ public class AddFundsUserPanel extends javax.swing.JPanel {
         textAmount.setDocument(new JTextFieldLimit(4));
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Create a new reposit in the database.
+     */
     private void registerDeposit() {
-        int customerID = Integer.parseInt(frame.cManager.getLoggedInUser().getCustomerNumb());
-        int oldBalance  = frame.cManager.getLoggedInUser().getBalance();
-        int depositAmount = Integer.parseInt(textAmount.getText())*100;
+        int customerID = Integer.parseInt(frame.cManager.getLoggedInUser().
+                getCustomerNumb());
+        int oldBalance = frame.cManager.getLoggedInUser().getBalance();
+        int depositAmount = Integer.parseInt(textAmount.getText()) * 100;
         int newBalance = oldBalance + depositAmount;
         int lastFourDigits = Integer.parseInt(textCardNumber4.getText());
-        
+
         /* External reference number is for simulation purposes only. 
-        Originally this numbers would be supplied by the 3rd-party banking 
-        instituts. 
-        */
+         Originally this numbers would be supplied by the 3rd-party banking 
+         instituts. 
+         */
         long randomNum = System.currentTimeMillis() * 13 * 29;
         String randomNumString = "" + randomNum;
-        randomNumString = randomNumString.substring(randomNumString.length() - 6);
+        randomNumString = randomNumString.
+                substring(randomNumString.length() - 6);
         int externalRefNumb = Integer.parseInt(randomNumString);
-        
+
         /* Log deposit on database (also changes customer's balance) */
         Object[] depositData = {customerID, depositAmount, newBalance, externalRefNumb, lastFourDigits};
         frame.depManager.registerDeposit(depositData);
+    }
+
+    /**
+     * Check input fields for errors.
+     */
+    private void inputCheck() {
+        String cardNumber = textCardNumber1.getText() + textCardNumber2.
+                getText()
+                + textCardNumber3.getText() + textCardNumber4.getText();
+        if (cardNumber.equals(wrongCardNBR)) {
+            labError1.setVisible(true);
+            labError2.setVisible(true);
+        } else {
+            labError1.setVisible(false);
+            labError2.setVisible(false);
+            errors--;
+        }
+
+        if (!cardNumber.matches(
+                "\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d")) {
+            labError1.setVisible(true);
+            labError2.setVisible(true);
+        } else {
+            labError1.setVisible(false);
+            labError2.setVisible(false);
+            errors--;
+        }
+
+        if (!textCSC.getText().matches("\\d\\d\\d")) {
+            labError1.setVisible(true);
+            labError2.setVisible(true);
+        } else {
+            labError1.setVisible(false);
+            labError2.setVisible(false);
+            errors--;
+        }
+
+        if (!textAmount.getText().matches(
+                "[1-9][0-9][0-9]|[1][0-9][0-9][0-9]|[2][0][0][0]")) {
+            labValue.setForeground(Color.RED);
+        } else {
+            labValue.setForeground(Color.BLACK);
+            errors--;
+        }
+
+        int monthValue = (Integer) spinMonth.getValue();
+        int yearValue = (Integer) spinYear.getValue();
+        if (monthValue > month && yearValue >= year) {
+            labMonth.setForeground(Color.BLACK);
+            labYear.setForeground(Color.BLACK);
+            errors--;
+        } else {
+            labMonth.setForeground(Color.RED);
+            labYear.setForeground(Color.RED);
+        }
+    }
+
+    /**
+     * Reset fields.
+     */
+    private void resetFields() {
+        textCardNumber1.setText("");
+        textCardNumber2.setText("");
+        textCardNumber3.setText("");
+        textCardNumber4.setText("");
+        textAmount.setText("");
+        textCSC.setText("");
+        spinMonth.setValue(1);
+        spinYear.setValue(14);
+        labValue.setForeground(Color.BLACK);
+        labError1.setVisible(false);
+        labError2.setVisible(false);
     }
 
     /**
@@ -303,115 +376,82 @@ public class AddFundsUserPanel extends javax.swing.JPanel {
         labError2.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * If no errors in fields, create new deposit in the database.
+     *
+     * @param evt ActionEvent
+     */
     private void btnAcceptActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcceptActionPerformed
         inputCheck();
-        if (errors == 0){
+        if (errors == 0) {
             registerDeposit();
-            JOptionPane.showMessageDialog(this, "The following amount has been added to your account balance.\n"+textAmount.getText()+" DKK");
+            JOptionPane.showMessageDialog(this,
+                    "The following amount has been added to your account "
+                    + "balance.\n" + textAmount.
+                    getText() + " DKK");
             frame.changePanel("card2");
             resetFields();
         }
-//        } else{
-//            //labError1.setVisible(inputError);
-//            //labError2.setVisible(inputError);
-//        }
         errors = 5;
     }//GEN-LAST:event_btnAcceptActionPerformed
 
+    /**
+     * Upon key press, if input string of CardNumber1 field is four, move focus
+     * to next field.
+     *
+     * @param evt KeyEvent
+     */
     private void textCardNumber1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCardNumber1KeyPressed
-        if(textCardNumber1.getText().length() == 4){
-           textCardNumber2.requestFocusInWindow();
+        if (textCardNumber1.getText().length() == 4) {
+            textCardNumber2.requestFocusInWindow();
         }
     }//GEN-LAST:event_textCardNumber1KeyPressed
 
+    /**
+     * Upon key press, if input string of CardNumber2 field is four, move focus
+     * to next field.
+     *
+     * @param evt KeyEvent
+     */
     private void textCardNumber2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCardNumber2KeyPressed
-        if(textCardNumber2.getText().length() == 4){
-           textCardNumber3.requestFocusInWindow();
+        if (textCardNumber2.getText().length() == 4) {
+            textCardNumber3.requestFocusInWindow();
         }
     }//GEN-LAST:event_textCardNumber2KeyPressed
 
+    /**
+     * Upon key press, if input string of CardNumber3 field is four, move focus
+     * to next field.
+     *
+     * @param evt KeyEvent
+     */
     private void textCardNumber3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textCardNumber3KeyPressed
-        if(textCardNumber3.getText().length() == 4){
-           textCardNumber4.requestFocusInWindow();
+        if (textCardNumber3.getText().length() == 4) {
+            textCardNumber4.requestFocusInWindow();
         }
     }//GEN-LAST:event_textCardNumber3KeyPressed
 
+    /**
+     * Display help-image for CVV number.
+     *
+     * @param evt ActionEvent
+     */
     private void btnHelpActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHelpActionPerformed
-        //Absolute path
-        //icon = new ImageIcon("C:\\Users\\Mathias Rasmussen\\Desktop\\Project\\SerialCommunication\\CreditCardCVV.gif");
-        //Relative path
         icon = new ImageIcon(".\\CreditCardCVV.gif");
-        JOptionPane.showMessageDialog(null, "", "CSC Help", JOptionPane.INFORMATION_MESSAGE, icon);
+        JOptionPane.showMessageDialog(null, "", "CSC Help",
+                JOptionPane.INFORMATION_MESSAGE, icon);
     }//GEN-LAST:event_btnHelpActionPerformed
 
+    /**
+     * Change to account panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         resetFields();
         frame.changePanel("card2");
     }//GEN-LAST:event_btnBackActionPerformed
-    
-    private void inputCheck(){
-        String cardNumber = textCardNumber1.getText()+textCardNumber2.getText()+
-                            textCardNumber3.getText()+textCardNumber4.getText();
-        if (cardNumber.equals(wrongCardNBR)){
-            labError1.setVisible(true);
-            labError2.setVisible(true);
-        } else{
-            labError1.setVisible(false);
-            labError2.setVisible(false);
-            errors--;
-        }
-            
-        if (!cardNumber.matches("\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d")){
-            labError1.setVisible(true);
-            labError2.setVisible(true);
-        } else{
-            labError1.setVisible(false);
-            labError2.setVisible(false);
-            errors--; 
-        }
-        
-        if (!textCSC.getText().matches("\\d\\d\\d")){
-            labError1.setVisible(true);
-            labError2.setVisible(true);
-        } else{
-            labError1.setVisible(false);
-            labError2.setVisible(false);
-            errors--;
-        }
-        
-        //                                 Regex: 100-999 or 1000-1999 or 2000
-        if (!textAmount.getText().matches("[1-9][0-9][0-9]|[1][0-9][0-9][0-9]|[2][0][0][0]")){
-            labValue.setForeground(Color.RED);
-        } else{
-            labValue.setForeground(Color.BLACK);
-            errors--;
-        }   
-        
-        int monthValue = (Integer) spinMonth.getValue();
-        int yearValue = (Integer) spinYear.getValue();
-        if(monthValue > month && yearValue >= year){
-            labMonth.setForeground(Color.BLACK);
-            labYear.setForeground(Color.BLACK);
-            errors--;
-        } else{
-            labMonth.setForeground(Color.RED);
-            labYear.setForeground(Color.RED);
-        }
-    }
-    
-    private void resetFields(){
-        textCardNumber1.setText("");
-        textCardNumber2.setText("");
-        textCardNumber3.setText("");
-        textCardNumber4.setText("");
-        textAmount.setText("");
-        textCSC.setText("");
-        spinMonth.setValue(1);
-        spinYear.setValue(14);
-        labValue.setForeground(Color.BLACK);
-        labError1.setVisible(false);
-        labError2.setVisible(false);
-    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAccept;
     private javax.swing.JButton btnBack;

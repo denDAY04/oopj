@@ -1,50 +1,58 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.User;
 
-import GUI.*;
 import GUI.System.GUIFrame;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author AndreasStensig
+ * Panel for detailed display of a billing, for a customer.
  */
 public class TransactHisBillingDetailsPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
-    
+
     /**
-     * Creates new form ChargingStationListViewPanel
+     * Custom constructor.
      */
     public TransactHisBillingDetailsPanel() {
         initComponents();
     }
-    
+
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Load fields.
+     *
+     * @param transactionNumber transaction number of the billing to show in
+     *                          details.
+     */
     public void loadPage(String transactionNumber) {
         int transactionNumb;
         try {
             transactionNumb = Integer.parseInt(transactionNumber);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "An error has occoured.\n No valid transaction number was found.");
+            JOptionPane.showMessageDialog(this,
+                    "An error has occoured.\n No valid transaction number was"
+                    + " found.");
             return;
         }
-        
-        ArrayList<String> data = frame.bManager.getDetailedBilling(transactionNumb);
+
+        ArrayList<String> data = frame.bManager.getDetailedBilling(
+                transactionNumb);
         if (data.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "An error has occoured.\n No valid billing instance was found.");
+            JOptionPane.showMessageDialog(this,
+                    "An error has occoured.\n No valid billing instance was"
+                    + " found.");
             return;
         }
-        
+
         textTransactionNumber.setText(data.get(0));
         textChargingStart.setText(data.get(1));
         textChargingEnd.setText(data.get(2));
@@ -56,7 +64,10 @@ public class TransactHisBillingDetailsPanel extends javax.swing.JPanel {
         textBillingAddress.setText(data.get(8));
         textBillingZip.setText(data.get(9));
     }
-    
+
+    /**
+     * Reset fields.
+     */
     private void resetPage() {
         textTransactionNumber.setText("");
         textChargingStart.setText("");
@@ -152,7 +163,7 @@ public class TransactHisBillingDetailsPanel extends javax.swing.JPanel {
         labRecieved.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         labRecieved.setText("Recieved on server at");
 
-        labkWh.setText("kWh");
+        labkWh.setText("Wh");
 
         textTransactionNumber.setEditable(false);
         textTransactionNumber.setText(" ");
@@ -273,7 +284,7 @@ public class TransactHisBillingDetailsPanel extends javax.swing.JPanel {
                 .addComponent(textBillingZip, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24)
                 .addComponent(btnBack)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addGap(79, 79, 79)
@@ -300,6 +311,11 @@ public class TransactHisBillingDetailsPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to transaction history panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         resetPage();
         frame.changePanel("card10");

@@ -1,51 +1,63 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.User;
 
 import GUI.System.GUIFrame;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author Qess
+ * Account panel for the logged in customer.
  */
 public class AccountPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
-    
+
+    /**
+     * Custom constructor.
+     */
     public AccountPanel() {
         initComponents();
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUIFrame frame) {
         this.frame = frame;
     }
 
-    public void loadPage(){
-        labCName.setText(frame.cManager.getLoggedInUser().getFirstName()+" "+
-                         frame.cManager.getLoggedInUser().getLastName());
+    /**
+     * Load customer details into labels.
+     */
+    public void loadPage() {
+        labCName.setText(frame.cManager.getLoggedInUser().getFirstName() + " "
+                + frame.cManager.getLoggedInUser().getLastName());
         labCEmail.setText(frame.cManager.getLoggedInUser().getEmail());
         labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb());
-        labCBalance.setText(frame.cManager.getLoggedInUser().getBalance()*0.01+"");
-        if(frame.cManager.getLoggedInUser().getAccountStatus().equals("PENAPP")){
+        labCBalance.setText(
+                frame.cManager.getLoggedInUser().getBalance() * 0.01 + "");
+        if (frame.cManager.getLoggedInUser().getAccountStatus().
+                equals("PENAPP")) {
             labCAccStatus.setText("Pending Approval");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("PENACT")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals(
+                "PENACT")) {
             labCAccStatus.setText("Pending Activation");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("DISABL")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals(
+                "DISABL")) {
             labCAccStatus.setText("Disabled");
-        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals("ACTIVE")){
+        } else if (frame.cManager.getLoggedInUser().getAccountStatus().equals(
+                "ACTIVE")) {
             labCAccStatus.setText("Activated");
         }
-        
-        if(frame.cManager.getLoggedInUser().getUseStatus().equals("CHAR")){
+
+        if (frame.cManager.getLoggedInUser().getUseStatus().equals("CHAR")) {
             labCUseStatus.setText("Charging");
-        } else if (frame.cManager.getLoggedInUser().getUseStatus().equals("IDLE")){
+        } else if (frame.cManager.getLoggedInUser().getUseStatus().
+                equals("IDLE")) {
             labCUseStatus.setText("Idle");
         }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -181,51 +193,91 @@ public class AccountPanel extends javax.swing.JPanel {
         add(btnTerminalList, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, 140, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to login panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         frame.changePanel("card1");
         frame.cManager.setLoggedInUser(null);
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    /**
+     * Change to panel for editing account details.
+     *
+     * @param evt ActionEvent
+     */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
         frame.changePanel("card8");
     }//GEN-LAST:event_btnEditActionPerformed
 
+    /**
+     * Change to panel for changing password.
+     *
+     * @param evt ActionEvent
+     */
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
         frame.changePanel("card9");
     }//GEN-LAST:event_btnChangePassActionPerformed
 
+    /**
+     * Change to transaction history panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnTransactionHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionHistoryActionPerformed
         frame.changePanel("card10");
     }//GEN-LAST:event_btnTransactionHistoryActionPerformed
 
+    /**
+     * Change to panel for adding funds.
+     *
+     * @param evt ActionEvent
+     */
     private void btnAddFundsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddFundsActionPerformed
         frame.changePanel("card15");
     }//GEN-LAST:event_btnAddFundsActionPerformed
 
+    /**
+     * Checks fist that customer does not have any more funds available. If so,
+     * asks the customer to accept wishing to delete his account. If confirmed,
+     * the customer is disabled in the database. The change to login panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnDeleteAccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteAccountActionPerformed
-        if(frame.cManager.getLoggedInUser().getBalance() != 0){
-            JOptionPane.showMessageDialog(this, "Sorry, you can not delete your account\n"
-                                             + "as you still have some funds available.\n"
-                                             + "You will either have to use the remaining\n"
-                                             + "funds, or you can contact customers support.");
-        } else{
-            int reply = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete your account?\n"
-                                                          + "If you choose to delete your account, you will\n"
-                                                          + "be logged out and you will not be able to login\n"
-                                                          + "or reenable your account unless you contact\n"
-                                                          + "customers support.\n "
-                                                          + "Are you sure you want to proceed deleting your "
-                                                          + "account\n","Are you sure?", JOptionPane.YES_NO_OPTION);
+        if (frame.cManager.getLoggedInUser().getBalance() != 0) {
+            JOptionPane.showMessageDialog(this,
+                    "Sorry, you can not delete your account\n"
+                    + "as you still have some funds available.\n"
+                    + "You will either have to use the remaining\n"
+                    + "funds, or you can contact customers support.");
+        } else {
+            int reply = JOptionPane.showConfirmDialog(null,
+                    "Are you sure you want to delete your account?\n"
+                    + "If you choose to delete your account, you will\n"
+                    + "be logged out and you will not be able to login\n"
+                    + "or reenable your account unless you contact\n"
+                    + "customers support.\n "
+                    + "Are you sure you want to proceed deleting your "
+                    + "account\n", "Are you sure?", JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 frame.changePanel("card1");
                 String[] newValues = new String[1];
                 newValues[0] = "Disabl";
-                frame.cManager.updateCustomerInformation(frame.cManager.getLoggedInUser().getCustomerNumb(), 7, newValues);
+                frame.cManager.updateCustomerInformation(frame.cManager.
+                        getLoggedInUser().getCustomerNumb(), 7, newValues);
                 frame.cManager.setLoggedInUser(null);
             }
-        }        
+        }
     }//GEN-LAST:event_btnDeleteAccountActionPerformed
 
+    /**
+     * Change to terminal-list panel.
+     *
+     * @param evt ActionEvent.
+     */
     private void btnTerminalListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTerminalListActionPerformed
         frame.changePanel("card20");
     }//GEN-LAST:event_btnTerminalListActionPerformed

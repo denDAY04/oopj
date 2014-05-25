@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.Admin;
 
 import GUI.System.GUIFrame;
@@ -13,44 +7,58 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
-
-
 /**
- *
- * @author AndreasStensig
+ * Panel for displaying all terminals. This also allows for changing of a
+ * terminal's data.
  */
 public class TerminalListAdminPanel extends javax.swing.JPanel {
 
     private final DefaultTableModel tableModel;
     private GUIFrame frame;
-    
+
     /**
-     * Creates new form ChargingStationListViewPanel
+     * Custom constructor which also sets the column names of the table.
      */
     public TerminalListAdminPanel() {
         initComponents();
         tableModel = (DefaultTableModel) tableTerminalList.getModel();
-        tableTerminalList.getColumnModel().getColumn(0).setHeaderValue("ID number");
+        tableTerminalList.getColumnModel().getColumn(0).setHeaderValue(
+                "ID number");
         tableTerminalList.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tableTerminalList.getColumnModel().getColumn(1).setHeaderValue("Address");
+        tableTerminalList.getColumnModel().getColumn(1).
+                setHeaderValue("Address");
         tableTerminalList.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tableTerminalList.getColumnModel().getColumn(2).setHeaderValue("Zip code");
+        tableTerminalList.getColumnModel().getColumn(2).setHeaderValue(
+                "Zip code");
         tableTerminalList.getColumnModel().getColumn(2).setPreferredWidth(20);
-        tableTerminalList.getColumnModel().getColumn(3).setHeaderValue("Charging status");
+        tableTerminalList.getColumnModel().getColumn(3).setHeaderValue(
+                "Charging status");
         tableTerminalList.getColumnModel().getColumn(3).setPreferredWidth(35);
-        tableTerminalList.getColumnModel().getColumn(4).setHeaderValue("Offline since");
+        tableTerminalList.getColumnModel().getColumn(4).setHeaderValue(
+                "Offline since");
         tableTerminalList.getColumnModel().getColumn(4).setPreferredWidth(30);
-        tableTerminalList.getColumnModel().getColumn(5).setHeaderValue("IP address");
+        tableTerminalList.getColumnModel().getColumn(5).setHeaderValue(
+                "IP address");
         tableTerminalList.getColumnModel().getColumn(5).setPreferredWidth(20);
-        tableTerminalList.getColumnModel().getColumn(6).setHeaderValue("Install status");
+        tableTerminalList.getColumnModel().getColumn(6).setHeaderValue(
+                "Install status");
         tableTerminalList.getColumnModel().getColumn(6).setPreferredWidth(30);
-        tableTerminalList.getSelectionModel().addListSelectionListener(new CustomSelectionListener());
+        tableTerminalList.getSelectionModel().addListSelectionListener(
+                new CustomSelectionListener());
     }
-    
+
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Load all terminals into the JTable.
+     */
     public void loadPage() {
         clearTable();
         ArrayList<String[]> list = frame.tManager.getAllTerminals();
@@ -58,17 +66,24 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
             tableModel.addRow(iter);
         }
     }
-    
+
+    /**
+     * Clear the JTable.
+     */
     private void clearTable() {
         /* First clear the selection in order to ensure that no erros occour due
-        to selection listener.
-        */
+         to selection listener.
+         */
         tableTerminalList.clearSelection();
-        while(tableModel.getRowCount() != 0) {
+
+        while (tableModel.getRowCount() != 0) {
             tableModel.removeRow(0);
         }
     }
 
+    /**
+     * Reset input fields.
+     */
     private void resetPage() {
         textAddress.setText("");
         textZipCode.setText("");
@@ -77,27 +92,36 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
         textIPAddress.setText("");
         comboInstallStatus.setSelectedIndex(0);
     }
-    
+
+    /**
+     * Custom ListSelectionListener for the table. With this, whenever a
+     * terminal is selected in the table, its data is written to the input
+     * fields in which the administrator can then change them.
+     */
     class CustomSelectionListener implements ListSelectionListener {
+
         public void valueChanged(ListSelectionEvent e) {
             int row = tableTerminalList.getSelectedRow();
             /* If no rows are selected, it is likely because they are being 
-            removed, so it should not try and collect data.
-            */
-            if(row == -1) {
+             removed, so it should not try and collect data.
+             */
+            if (row == -1) {
                 return;
             }
-            textAddress.setText((String)tableTerminalList.getValueAt(row, 1));
-            textZipCode.setText((String)tableTerminalList.getValueAt(row, 2));
-            String chargingStatus = (String)tableTerminalList.getValueAt(row, 3);
+
+            textAddress.setText((String) tableTerminalList.getValueAt(row, 1));
+            textZipCode.setText((String) tableTerminalList.getValueAt(row, 2));
+            String chargingStatus = (String) tableTerminalList.
+                    getValueAt(row, 3);
             if (chargingStatus.equals("IDLE")) {
                 comboChargingStatus.setSelectedIndex(0);
             } else {
                 comboChargingStatus.setSelectedIndex(1);
             }
-            textOfflineSince.setText((String)tableTerminalList.getValueAt(row, 4));
-            textIPAddress.setText((String)tableTerminalList.getValueAt(row, 5));        
-            String installStatus = (String)tableTerminalList.getValueAt(row, 6);
+            textOfflineSince.setText((String) tableTerminalList.getValueAt(row,
+                    4));
+            textIPAddress.setText((String) tableTerminalList.getValueAt(row, 5));
+            String installStatus = (String) tableTerminalList.getValueAt(row, 6);
             if (installStatus.equals("PENDEP")) {
                 comboInstallStatus.setSelectedIndex(0);
             } else if (installStatus.equals("ENABLE")) {
@@ -282,18 +306,31 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
     );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to administrator's control panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         resetPage();
         clearTable();
         frame.changePanel("card11");
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * Collect data from the input fields and use them to change the terminal in
+     * the database.
+     *
+     * @param evt ActionEvent
+     */
     private void btnEditTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditTerminalActionPerformed
-        if(tableTerminalList.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(this, "No terminal was selected for editing. ");
+        if (tableTerminalList.getSelectedRow() == -1) {
+            JOptionPane.showMessageDialog(this,
+                    "No terminal was selected for editing. ");
             return;
         }
-        int terminalID = Integer.parseInt((String)tableModel.getValueAt(tableTerminalList.getSelectedRow(), 0));
+        int terminalID = Integer.parseInt((String) tableModel.getValueAt(
+                tableTerminalList.getSelectedRow(), 0));
         System.err.println("" + terminalID);
         String address = textAddress.getText();
         String zipCode = textZipCode.getText();
@@ -318,7 +355,8 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
         String[] arr = {address, zipCode, chargingStatus, offlineSince, ipAddress, installStatus};
         for (String element : arr) {
             if (element.isEmpty()) {
-                JOptionPane.showMessageDialog(this, "One or more fields are empty. Could not edit data.");
+                JOptionPane.showMessageDialog(this,
+                        "One or more fields are empty. Could not edit data.");
                 return;
             }
         }
@@ -326,12 +364,19 @@ public class TerminalListAdminPanel extends javax.swing.JPanel {
         loadPage();
     }//GEN-LAST:event_btnEditTerminalActionPerformed
 
+    /**
+     * Collect some of the data from the input fields required to create a new
+     * terminal im the database.
+     *
+     * @param evt ActionEvent
+     */
     private void btnAddNewTerminalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddNewTerminalActionPerformed
         String address = textAddress.getText();
         String zipCode = textZipCode.getText();
         String ipAddress = textIPAddress.getText();
         if (address.isEmpty() || zipCode.isEmpty() || ipAddress.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "One or more of the required fiels are empty.\n Could not create ne terminal.");
+            JOptionPane.showMessageDialog(this,
+                    "One or more of the required fiels are empty.\n Could not create ne terminal.");
             return;
         }
         frame.tManager.addTerminal(address, zipCode, ipAddress);

@@ -1,50 +1,58 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.Admin;
 
-import GUI.*;
 import GUI.System.GUIFrame;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author AndreasStensig
+ * Panel for detailed administrator view of a deposit.
  */
 public class TransactHisDepositDetailsAdminPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
-    
+
     /**
-     * Creates new form ChargingStationListViewPanel
+     * Custom constructor
      */
     public TransactHisDepositDetailsAdminPanel() {
         initComponents();
     }
-    
+
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Find the desired deposit in the database with the deposit number and fill
+     * fields with the data.
+     *
+     * @param depositNumber deposit number of the deposit instance.
+     */
     public void loadPage(String depositNumber) {
         int depositNumb;
         try {
             depositNumb = Integer.parseInt(depositNumber);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "An error has occoured.\n No valid deposit number was found.");
+            JOptionPane.showMessageDialog(this,
+                    "An error has occoured.\n No valid deposit number was"
+                            + " found.");
             return;
         }
-        
-        ArrayList<String> data = frame.depManager.getDetailedDeposit(depositNumb);
+
+        ArrayList<String> data = frame.depManager.
+                getDetailedDeposit(depositNumb);
         if (data.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "An error has occoured.\n No valid deposit instance was found.");
+            JOptionPane.showMessageDialog(this,
+                    "An error has occoured.\n No valid deposit instance was"
+                            + " found.");
             return;
         }
-        
+
         textDepositNumber.setText(data.get(0));
         textDepositDate.setText(data.get(1));
         textDepositAmount.setText(data.get(2));
@@ -52,7 +60,10 @@ public class TransactHisDepositDetailsAdminPanel extends javax.swing.JPanel {
         textLast4CardNumber.setText(data.get(4));
         textExternalRefNumb.setText(data.get(5));
     }
-    
+
+    /**
+     * Reset fields.
+     */
     private void resetPage() {
         textDepositNumber.setText("");
         textDepositDate.setText("");
@@ -217,6 +228,10 @@ public class TransactHisDepositDetailsAdminPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to administrator's transaction history panel.
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         resetPage();
         frame.changePanel("card18");

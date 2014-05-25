@@ -1,27 +1,30 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.Admin;
 
 import GUI.System.GUIFrame;
 
 /**
- *
- * @author Qess
+ * Control panel for the administrator.
  */
 public class ControlPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
-    
+
+    /**
+     * Custom constructor which initializes the panel's components.
+     */
     public ControlPanel() {
         initComponents();
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUIFrame frame) {
         this.frame = frame;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -126,19 +129,39 @@ public class ControlPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to the log-in panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
         frame.cManager.setLoggedInUser(null);
         frame.changePanel("card1");
     }//GEN-LAST:event_btnLogoutActionPerformed
 
+    /**
+     * Change panel to allow administrator to log in as another customer.
+     *
+     * @param evt ActionEvent
+     */
     private void btnAccManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAccManageActionPerformed
         frame.changePanel("card12");
     }//GEN-LAST:event_btnAccManageActionPerformed
 
+    /**
+     * Change to transaction administrator-view.
+     *
+     * @param evt ActionEvent
+     */
     private void btnTransManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransManageActionPerformed
         frame.changePanel("card25");
     }//GEN-LAST:event_btnTransManageActionPerformed
 
+    /**
+     * Change to view list of all terminals as administrator.
+     *
+     * @param evt ActionEvent
+     */
     private void btnTermManageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTermManageActionPerformed
         frame.changePanel("card19");
     }//GEN-LAST:event_btnTermManageActionPerformed

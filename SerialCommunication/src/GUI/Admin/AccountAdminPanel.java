@@ -34,12 +34,12 @@ public class AccountAdminPanel extends javax.swing.JPanel {
         labCName.setText(frame.cManager.getLoggedInUser().getFirstName() + " "
                 + frame.cManager.getLoggedInUser().getLastName());
         labCEmail.setText(frame.cManager.getLoggedInUser().getEmail());
-        labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb() 
-                                + " , " 
-                                + frame.cManager.getLoggedInUser().getPin());
-        labCBalance.setText(frame.cManager.getLoggedInUser().getBalance() 
-                            * 0.01 + "");
-        
+        labCCardNumber.setText(frame.cManager.getLoggedInUser().getCardNumb()
+                + " , "
+                + frame.cManager.getLoggedInUser().getPin());
+        labCBalance.setText(frame.cManager.getLoggedInUser().getBalance()
+                * 0.01 + "");
+
         if (frame.cManager.getLoggedInUser().getAccountStatus().
                 equals("PENAPP")) {
             labCAccStatus.setText("Pending Approval");
@@ -251,8 +251,9 @@ public class AccountAdminPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Log out as a given customer and return to screen for logging in as customer.
-     * 
+     * Log out as a given customer and return to screen for logging in as
+     * customer.
+     *
      * @param evt ActionEvent
      */
     private void btnLogoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLogoutActionPerformed
@@ -262,6 +263,7 @@ public class AccountAdminPanel extends javax.swing.JPanel {
 
     /**
      * Change panel to allow administrator to edit customer's details.
+     *
      * @param evt ActionEvent
      */
     private void btnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditActionPerformed
@@ -270,6 +272,7 @@ public class AccountAdminPanel extends javax.swing.JPanel {
 
     /**
      * Change panel to allow administrator to edit customer's password.
+     *
      * @param evt ActionEvent
      */
     private void btnChangePassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnChangePassActionPerformed
@@ -277,7 +280,8 @@ public class AccountAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnChangePassActionPerformed
 
     /**
-     * Chance panel to administrator view of customer's transaction history. 
+     * Chance panel to administrator view of customer's transaction history.
+     *
      * @param evt ActionEvent
      */
     private void btnTransactionHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTransactionHistoryActionPerformed
@@ -285,8 +289,10 @@ public class AccountAdminPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnTransactionHistoryActionPerformed
 
     /**
-     * Change panel to allow administrator to perform a deposit to customer's account.
-     * @param evt 
+     * Change panel to allow administrator to perform a deposit to customer's
+     * account.
+     *
+     * @param evt ActionEvent
      */
     private void btnCreditDebitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreditDebitActionPerformed
         frame.changePanel("card14");

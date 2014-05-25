@@ -1,19 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.Admin;
 
 import GUI.System.GUIFrame;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author AndreasStensig
+ * * Panel with two JTables for deposits and billings, separately. This is
+ * viewed by the administrator without posing as a customer.
  */
 public class TransactionManagementPanel extends javax.swing.JPanel {
 
@@ -21,52 +14,70 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
     private GUIFrame frame;
     private ArrayList<String[]> billingList;
     private ArrayList<String[]> depositList;
-    
-    //private ResultSetTableModel tableModel;
+
     /**
-     * Creates new form ChargingStationListViewPanel
+     * Custom constructor that also sets the column labels of the JTables.
      */
     public TransactionManagementPanel() {
-        initComponents();  
-        /* Set column headers and special width on tables */         
-        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue("Number");
+        initComponents();
+        tableDepositHistory.getColumnModel().getColumn(0).setHeaderValue(
+                "Number");
         tableDepositHistory.getColumnModel().getColumn(0).setPreferredWidth(20);
-        tableDepositHistory.getColumnModel().getColumn(1).setHeaderValue("Customer");
+        tableDepositHistory.getColumnModel().getColumn(1).setHeaderValue(
+                "Customer");
         tableDepositHistory.getColumnModel().getColumn(1).setPreferredWidth(20);
-        tableDepositHistory.getColumnModel().getColumn(2).setHeaderValue("Deposit Date");
+        tableDepositHistory.getColumnModel().getColumn(2).setHeaderValue(
+                "Deposit Date");
         tableDepositHistory.getColumnModel().getColumn(2).setPreferredWidth(15);
-        tableDepositHistory.getColumnModel().getColumn(3).setHeaderValue("Amount(DKK)");
+        tableDepositHistory.getColumnModel().getColumn(3).setHeaderValue(
+                "Amount(DKK)");
         tableDepositHistory.getColumnModel().getColumn(3).setPreferredWidth(15);
-        tableDepositHistory.getColumnModel().getColumn(4).setHeaderValue("Balance(DKK)");
+        tableDepositHistory.getColumnModel().getColumn(4).setHeaderValue(
+                "Balance(DKK)");
         tableDepositHistory.getColumnModel().getColumn(4).setPreferredWidth(20);
-        tableDepositHistory.getColumnModel().getColumn(5).setHeaderValue("Ref. number");
+        tableDepositHistory.getColumnModel().getColumn(5).setHeaderValue(
+                "Ref. number");
         tableDepositHistory.getColumnModel().getColumn(5).setPreferredWidth(15);
-        tableDepositHistory.getColumnModel().getColumn(6).setHeaderValue("Card number");
-        
-        tableBillingHistory.getColumnModel().getColumn(0).setHeaderValue("Number");
+        tableDepositHistory.getColumnModel().getColumn(6).setHeaderValue(
+                "Card number");
+
+        tableBillingHistory.getColumnModel().getColumn(0).setHeaderValue(
+                "Number");
         tableBillingHistory.getColumnModel().getColumn(0).setPreferredWidth(15);
-        tableBillingHistory.getColumnModel().getColumn(1).setHeaderValue("Customer");
+        tableBillingHistory.getColumnModel().getColumn(1).setHeaderValue(
+                "Customer");
         tableBillingHistory.getColumnModel().getColumn(1).setPreferredWidth(35);
-        tableBillingHistory.getColumnModel().getColumn(2).setHeaderValue("Hw number");
+        tableBillingHistory.getColumnModel().getColumn(2).setHeaderValue(
+                "Hw number");
         tableBillingHistory.getColumnModel().getColumn(2).setPreferredWidth(35);
-        tableBillingHistory.getColumnModel().getColumn(3).setHeaderValue("Start charge");
+        tableBillingHistory.getColumnModel().getColumn(3).setHeaderValue(
+                "Start charge");
         tableBillingHistory.getColumnModel().getColumn(3).setPreferredWidth(90);
-        tableBillingHistory.getColumnModel().getColumn(4).setHeaderValue("Amount(DKK)");
+        tableBillingHistory.getColumnModel().getColumn(4).setHeaderValue(
+                "Amount(DKK)");
         tableBillingHistory.getColumnModel().getColumn(4).setPreferredWidth(60);
         tableBillingHistory.getColumnModel().getColumn(5).setHeaderValue("Rate");
         tableBillingHistory.getColumnModel().getColumn(5).setPreferredWidth(10);
-        tableBillingHistory.getColumnModel().getColumn(6).setHeaderValue("kWh");
+        tableBillingHistory.getColumnModel().getColumn(6).setHeaderValue("Wh");
         tableBillingHistory.getColumnModel().getColumn(6).setPreferredWidth(10);
-        tableBillingHistory.getColumnModel().getColumn(7).setHeaderValue("Balance(DKK)");
+        tableBillingHistory.getColumnModel().getColumn(7).setHeaderValue(
+                "Balance(DKK)");
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Load all billings and deposits into the two tables, with simple details.
+     */
     public void loadPage() {
         tableModel = (DefaultTableModel) tableBillingHistory.getModel();
-        /* Clear table and insert values */
         clearTable(tableModel);
         billingList = frame.bManager.getAllBillings();
         for (String[] iter : billingList) {
@@ -74,14 +85,19 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
         }
 
         tableModel = (DefaultTableModel) tableDepositHistory.getModel();
-        /* Clear table and insert values */
         clearTable(tableModel);
         depositList = frame.depManager.getAllDeposits();
-        for(String[] iter : depositList) {
+        for (String[] iter : depositList) {
             tableModel.addRow(iter);
         }
     }
-    
+
+    /**
+     * Clear the content of the table to which the parameterized TableModel
+     * belongs.
+     *
+     * @param tableModle TableModel object of the JTable to clear of data.
+     */
     private void clearTable(DefaultTableModel tableModle) {
         if (tableModle != null) {
             while (tableModle.getRowCount() != 0) {
@@ -197,66 +213,84 @@ public class TransactionManagementPanel extends javax.swing.JPanel {
     labSearchBil.setText("Search billings");
     add(labSearchBil, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 60, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+     * Clear tables and change to administrator's customer-account panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         clearTable((DefaultTableModel) tableBillingHistory.getModel());
-        clearTable((DefaultTableModel) tableDepositHistory.getModel()); 
+        clearTable((DefaultTableModel) tableDepositHistory.getModel());
         frame.changePanel("card11");
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * When a key is released in the deposit search field, search for a deposit
+     * with the matching deposit number, if input text is at least 5 characters.
+     *
+     * @param evt KeyEvent
+     */
     private void textSearchDepKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchDepKeyReleased
 
-        if(textSearchDep.getText().length() == 5){
-            try{
-                int ExternalReferenceNumb = Integer.parseInt(textSearchDep.getText());
-                if (ExternalReferenceNumb <= 0){
+        if (textSearchDep.getText().length() == 5) {
+            try {
+                int ExternalReferenceNumb = Integer.parseInt(textSearchDep.
+                        getText());
+                if (ExternalReferenceNumb <= 0) {
                     return;
                 }
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 System.err.println("Catch");
                 return;
             }
+
             tableModel = (DefaultTableModel) tableDepositHistory.getModel();
-            /* Clear table and insert values */
             clearTable(tableModel);
-            depositList = frame.depManager.getDepositsByRefNumber(textSearchDep.getText());
-            for(String[] iter : depositList) {
+            depositList = frame.depManager.getDepositsByRefNumber(textSearchDep.
+                    getText());
+            for (String[] iter : depositList) {
                 tableModel.addRow(iter);
             }
-        } else if(textSearchDep.getText().length() == 0){
+        } else if (textSearchDep.getText().length() == 0) {
             tableModel = (DefaultTableModel) tableDepositHistory.getModel();
-            /* Clear table and insert values */
             clearTable(tableModel);
             depositList = frame.depManager.getAllDeposits();
-            for(String[] iter : depositList) {
+            for (String[] iter : depositList) {
                 tableModel.addRow(iter);
             }
         }
     }//GEN-LAST:event_textSearchDepKeyReleased
 
+    /**
+     * When a key is released in the billing search field, search for a billing
+     * with the matching billing number.
+     *
+     * @param evt
+     */
     private void textSearchBilKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textSearchBilKeyReleased
-        if(textSearchBil.getText().length() != 0){
-            try{
+        if (textSearchBil.getText().length() != 0) {
+            try {
                 int transactionNumb = Integer.parseInt(textSearchBil.getText());
-                if (transactionNumb <= 0){
+                if (transactionNumb <= 0) {
                     return;
                 }
-            } catch(NumberFormatException e){
+            } catch (NumberFormatException e) {
                 return;
             }
             tableModel = (DefaultTableModel) tableBillingHistory.getModel();
             /* Clear table and insert values */
             clearTable(tableModel);
-            billingList = frame.bManager.getBillingsByTransactionNumb(textSearchBil.getText());
-            for(String[] iter : billingList) {
+            billingList = frame.bManager.getBillingsByTransactionNumb(
+                    textSearchBil.getText());
+            for (String[] iter : billingList) {
                 tableModel.addRow(iter);
             }
-        } else if(textSearchBil.getText().length() == 0){
+        } else if (textSearchBil.getText().length() == 0) {
             tableModel = (DefaultTableModel) tableBillingHistory.getModel();
             /* Clear table and insert values */
             clearTable(tableModel);
             billingList = frame.bManager.getAllBillings();
-            for(String[] iter : billingList) {
+            for (String[] iter : billingList) {
                 tableModel.addRow(iter);
             }
         }

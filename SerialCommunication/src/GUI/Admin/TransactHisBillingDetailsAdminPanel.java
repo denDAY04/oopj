@@ -1,50 +1,58 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.Admin;
 
-import GUI.*;
 import GUI.System.GUIFrame;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
- *
- * @author AndreasStensig
+ * Panel for detailed administrator view of a billing.
  */
 public class TransactHisBillingDetailsAdminPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
-    
+
     /**
-     * Creates new form ChargingStationListViewPanel
+     * Custom constructor.
      */
     public TransactHisBillingDetailsAdminPanel() {
         initComponents();
     }
-    
+
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Load the detailed billing into the fields.
+     *
+     * @param transactionNumber the transaction number of the billing instance
+     *                          to show in detail.
+     */
     public void loadPage(String transactionNumber) {
         int transactionNumb;
         try {
             transactionNumb = Integer.parseInt(transactionNumber);
         } catch (NumberFormatException e) {
-            JOptionPane.showMessageDialog(this, "An error has occoured.\n No valid transaction number was found.");
+            JOptionPane.showMessageDialog(this,
+                    "An error has occoured.\n No valid transaction number was"
+                    + " found.");
             return;
         }
-        
-        ArrayList<String> data = frame.bManager.getDetailedBilling(transactionNumb);
+
+        ArrayList<String> data = frame.bManager.getDetailedBilling(
+                transactionNumb);
         if (data.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "An error has occoured.\n No valid billing instance was found.");
+            JOptionPane.showMessageDialog(this,
+                    "An error has occoured.\n No valid billing instance was"
+                    + " found.");
             return;
         }
-        
+
         textTransactionNumber.setText(data.get(0));
         textChargingStart.setText(data.get(1));
         textChargingEnd.setText(data.get(2));
@@ -56,7 +64,10 @@ public class TransactHisBillingDetailsAdminPanel extends javax.swing.JPanel {
         textBillingAddress.setText(data.get(8));
         textBillingZip.setText(data.get(9));
     }
-    
+
+    /**
+     * Reset fields.
+     */
     private void resetPage() {
         textTransactionNumber.setText("");
         textChargingStart.setText("");
@@ -152,7 +163,7 @@ public class TransactHisBillingDetailsAdminPanel extends javax.swing.JPanel {
         labRecieved.setFont(new java.awt.Font("Dialog", 1, 11)); // NOI18N
         labRecieved.setText("Recieved on server at");
 
-        labkWh.setText("kWh");
+        labkWh.setText("Wh");
 
         textTransactionNumber.setEditable(false);
         textTransactionNumber.setText(" ");
@@ -304,6 +315,10 @@ public class TransactHisBillingDetailsAdminPanel extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to administrator's transaction history panel.
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         resetPage();
         frame.changePanel("card18");

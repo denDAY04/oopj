@@ -1,27 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package GUI.System;
 
-import GUI.*;
-
 /**
- *
- * @author Jonas
+ * Panel for confirmation message when customer has signed up.
  */
 public class SignupCongratulationsPanel extends javax.swing.JPanel {
 
     private GUIFrame frame;
+
     /**
-     * Creates new form SignupCongratulationsPanel
+     * Custom constructor.
      */
     public SignupCongratulationsPanel() {
         initComponents();
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
@@ -102,6 +99,11 @@ public class SignupCongratulationsPanel extends javax.swing.JPanel {
             + "you have logged in with your email and self chosen password.\n");
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to login panel.
+     *
+     * @param evt
+     */
     private void btnOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOKActionPerformed
         frame.changePanel("card1");
     }//GEN-LAST:event_btnOKActionPerformed

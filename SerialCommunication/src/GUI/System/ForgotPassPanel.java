@@ -1,30 +1,75 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.System;
 
-import GUI.*;
 import java.awt.Color;
 
 /**
- *
- * @author Qess
+ * Panel for when a customer has forgotten their password.
  */
 public class ForgotPassPanel extends javax.swing.JPanel {
-    
+
     private GUIFrame frame;
     private int errors;
+
     /**
-     * Creates new form ForgotPassControllerPanel
+     * Custom constructor.
      */
     public ForgotPassPanel() {
         initComponents();
         errors = 1;
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
+    }
+
+    /**
+     * Check input fields for errors.
+     */
+    private void inputCheck() {
+        if (!textEmail.getText().equals("")) {
+            if (isValidEmailAddress(textEmail.getText()) == true) {
+                labEmail.setForeground(Color.BLACK);
+                labErrorEmail.setVisible(false);
+                errors--;
+            } else {
+                labEmail.setForeground(Color.RED);
+                labErrorEmail.setVisible(true);
+            }
+        } else {
+            labEmail.setForeground(Color.RED);
+            labErrorEmail.setVisible(true);
+        }
+    }
+
+    /**
+     * Method found at StackOverflow.com, which validates the syntax of an email
+     * address.
+     * http://stackoverflow.com/questions/624581/what-is-the-best-java-email
+     * -address-validation-method
+     *
+     * @param email
+     *
+     * @return true if the string matches the structure of a valid email
+     *         address; false oStherwise.
+     */
+    private boolean isValidEmailAddress(String email) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(
+                ".+@.+\\.[a-z]+");
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
+    /**
+     * Reset fields.
+     */
+    private void resetPage() {
+        labEmail.setForeground(Color.BLACK);
+        labErrorEmail.setVisible(false);
     }
 
     /**
@@ -118,46 +163,30 @@ public class ForgotPassPanel extends javax.swing.JPanel {
         labErrorEmail.setVisible(false);
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to login panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
-       frame.changePanel("card1");
-       resetPage();
+        frame.changePanel("card1");
+        resetPage();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * If no errors in input fields, change to panel for password found.
+     *
+     * @param evt ActionEvent
+     */
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         inputCheck();
-        if (errors == 0){
-            frame.cManager.setLoggedInUser(frame.cManager.getCustomerByEmail(textEmail.getText().toLowerCase()));
+        if (errors == 0) {
+            frame.cManager.setLoggedInUser(frame.cManager.getCustomerByEmail(
+                    textEmail.getText().toLowerCase()));
             frame.changePanel("card7");
         }
     }//GEN-LAST:event_btnSubmitActionPerformed
 
-    private void inputCheck(){
-       if(!textEmail.getText().equals("")){
-            if (isValidEmailAddress(textEmail.getText()) == true){
-                labEmail.setForeground(Color.BLACK);
-                labErrorEmail.setVisible(false);
-                errors--;
-            } else{
-                labEmail.setForeground(Color.RED);
-                labErrorEmail.setVisible(true);
-            }
-        } else{
-            labEmail.setForeground(Color.RED);
-            labErrorEmail.setVisible(true);
-        }
-    }
-    // Metod found at StackOverflow.com, which validates the syntax of an emailadress
-    // http://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
-    private boolean isValidEmailAddress(String email) {
-       java.util.regex.Pattern p = java.util.regex.Pattern.compile(".+@.+\\.[a-z]+");
-       java.util.regex.Matcher m = p.matcher(email);
-       return m.matches();
-    }
-    
-    private void resetPage(){
-       labEmail.setForeground(Color.BLACK);
-       labErrorEmail.setVisible(false);
-    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;

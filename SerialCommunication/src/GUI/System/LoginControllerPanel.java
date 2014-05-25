@@ -1,31 +1,30 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.System;
 
 /**
- *
- * @author Qess
+ * Login panel for all users of the GUI - customers and administrators alike.
  */
 public class LoginControllerPanel extends javax.swing.JPanel {
 
-    //private CustomerManager cManager;
     private GUIFrame frame;
     private String adminEmail = "admin@ta.dk";
     private String adminPassword = "teamawesome";
-    
+
     /**
-     * Creates new form LoginControllerPanel
+     * Custom constructor.
      */
     public LoginControllerPanel() {
         initComponents();
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUIFrame frame) {
         this.frame = frame;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -113,20 +112,30 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         add(labAdminInfo3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, -1, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * If values from input fields matches those of an administrator, log in as
+     * such. Otherwise, search database for matching email and password. If
+     * found, log in as customer.
+     *
+     * @param evt ActionEvent
+     */
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
         StringBuilder sb = new StringBuilder();
-        String password =  sb.append(textPassword.getPassword()).toString();
+        String password = sb.append(textPassword.getPassword()).toString();
 
-        if(textEmail.getText().equals(adminEmail) && password.equals(adminPassword)){
+        if (textEmail.getText().equals(adminEmail) && password.equals(
+                adminPassword)) {
             labError.setVisible(false);
             frame.changePanel("card11");
             textEmail.setText("");
             textPassword.setText("");
-        } else if(frame.cManager.loggedInAs(textEmail.getText().toLowerCase(), password.toLowerCase()) == true){
-            if(frame.cManager.getLoggedInUser().getAccountStatus().equals("Disabl")){
+        } else if (frame.cManager.loggedInAs(textEmail.getText().toLowerCase(),
+                password.toLowerCase()) == true) {
+            if (frame.cManager.getLoggedInUser().getAccountStatus().equals(
+                    "Disabl")) {
                 System.err.println("Account is disabled");
                 labError.setVisible(true);
-            } else{
+            } else {
                 labError.setVisible(false);
                 frame.changePanel("card2");
                 textEmail.setText("");
@@ -135,13 +144,23 @@ public class LoginControllerPanel extends javax.swing.JPanel {
         } else {
             labError.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_btnLoginActionPerformed
 
+    /**
+     * Change to sign-up panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnSignupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSignupActionPerformed
         frame.changePanel("card3");
     }//GEN-LAST:event_btnSignupActionPerformed
 
+    /**
+     * Change to panel for forgotten password.
+     *
+     * @param evt ActionEvent
+     */
     private void btnForgotActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnForgotActionPerformed
         frame.changePanel("card6");
     }//GEN-LAST:event_btnForgotActionPerformed

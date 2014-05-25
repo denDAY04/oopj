@@ -1,31 +1,183 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package GUI.System;
 
 import java.awt.Color;
 
 /**
- *
- * @author Qess
+ * Panel for signing up.
  */
 public class SignupPanel extends javax.swing.JPanel {
-    
+
     private GUIFrame frame;
     private int errors;
+
     /**
-     * Creates new form LoginControllerPanel
+     * Custom constructor.
      */
     public SignupPanel() {
         initComponents();
         errors = 8;
     }
 
+    /**
+     * Setter for GUIFrame reference.
+     *
+     * @param frame GUIFrame object.
+     */
     public void setFrame(GUI.System.GUIFrame frame) {
         this.frame = frame;
     }
-    
+
+    /**
+     * Reset fields.
+     */
+    private void resetPage() {
+        textFirstName.setText("");
+        textLastName.setText("");
+        textRoad.setText("");
+        textZip.setText("");
+        textPhoneNBR.setText("");
+        textEmail.setText("");
+        textPassword.setText("");
+        textConfirmPassword.setText("");
+        labFirstName.setForeground(Color.BLACK);
+        labLastName.setForeground(Color.BLACK);
+        labRoad.setForeground(Color.BLACK);
+        labZip.setForeground(Color.BLACK);
+        labPhoneNBR.setForeground(Color.BLACK);
+        labEmail.setForeground(Color.BLACK);
+        labPassword.setForeground(Color.BLACK);
+        labConfirmPassword.setForeground(Color.BLACK);
+        labErrorConfirmPassword.setVisible(false);
+        labErrorEmail.setVisible(false);
+        labError1.setVisible(false);
+        labError2.setVisible(false);
+    }
+
+    /**
+     * Check input fields for errors.
+     */
+    private void inputCheck() {
+        /*
+         * (?i) = Case Insensitive, [a-å] = any letter from a to å
+         * "+" = any combination of the previous, 
+         * [a-å\\-\\s] = any letter from a-å incl "-" and " "
+         * "?" = the previous can appear once or none  */
+        if (textFirstName.getText().matches(
+                "(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+")) {
+            labFirstName.setForeground(Color.BLACK);
+            errors--;
+        } else {
+            labFirstName.setForeground(Color.RED);
+        }
+
+        if (textLastName.getText().matches(
+                "(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+")) {
+            labLastName.setForeground(Color.BLACK);
+            errors--;
+        } else {
+            labLastName.setForeground(Color.RED);
+        }
+
+        if (textRoad.getText().matches(
+                "(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)"
+                + "[a-å\\d]+")) {
+            labRoad.setForeground(Color.BLACK);
+            errors--;
+        } else {
+            labRoad.setForeground(Color.RED);
+        }
+
+        if (textZip.getText().length() == 4) {
+            try {
+                int zipcode = Integer.parseInt(textZip.getText());
+                labZip.setForeground(Color.BLACK);
+                errors--;
+            } catch (NumberFormatException e) {
+                labZip.setForeground(Color.RED);
+            }
+        } else {
+            labZip.setForeground(Color.RED);
+        }
+
+        if (textPhoneNBR.getText().length() == 8) {
+            try {
+                int phoneNBR = Integer.parseInt(textPhoneNBR.getText());
+                labPhoneNBR.setForeground(Color.BLACK);
+                errors--;
+            } catch (NumberFormatException e) {
+                labPhoneNBR.setForeground(Color.RED);
+            }
+        } else {
+            labPhoneNBR.setForeground(Color.RED);
+        }
+
+        if (isValidEmailAddress(textEmail.getText()) == true) {
+            try {
+                frame.cManager.getCustomerByEmail(textEmail.getText());
+            } catch (NullPointerException e) {
+                errors--;
+            }
+        }
+
+        String password = new StringBuilder().append(textPassword.getPassword()).
+                toString();
+        if (password.matches("^\\S*") && password.length() >= 4 && password.
+                length() <= 30) {
+            labPassword.setForeground(Color.BLACK);
+            errors--;
+        } else {
+            labPassword.setForeground(Color.RED);
+        }
+
+        String passwordConfirm = new StringBuilder().append(textPassword.
+                getPassword()).toString();
+        if ((!passwordConfirm.equals("")) && passwordConfirm.equals(password)) {
+            labConfirmPassword.setForeground(Color.BLACK);
+            labErrorConfirmPassword.setVisible(false);
+            errors--;
+        } else {
+            labConfirmPassword.setForeground(Color.RED);
+            labErrorConfirmPassword.setVisible(true);
+        }
+    }
+
+    /**
+     * Collect values from fields and create new customer in database.
+     */
+    private void registerUser() {
+        Object[] userData = new Object[8];
+        userData[0] = new StringBuilder().append(textConfirmPassword.
+                getPassword()).toString();
+        userData[1] = textFirstName.getText();
+        userData[2] = textLastName.getText();
+        userData[3] = textRoad.getText();
+        userData[4] = textZip.getText();
+        userData[5] = textEmail.getText().toLowerCase();
+        userData[6] = textPhoneNBR.getText();
+        userData[7] = 0;           // Is set in next panel
+
+        /* Create customer in database */
+        frame.cManager.addNewCustomer(userData);
+    }
+
+    /**
+     * Method found at StackOverflow.com, which validates the syntax of an email
+     * address.
+     * http://stackoverflow.com/questions/624581/what-is-the-best-java-email
+     * -address-validation-method
+     *
+     * @param email
+     *
+     * @return true if the string matches the structure of a valid email
+     *         address; false oStherwise.
+     */
+    private boolean isValidEmailAddress(String email) {
+        java.util.regex.Pattern p = java.util.regex.Pattern.compile(
+                ".+@.+\\.[a-z]+");
+        java.util.regex.Matcher m = p.matcher(email);
+        return m.matches();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -172,172 +324,65 @@ public class SignupPanel extends javax.swing.JPanel {
         add(textConfirmPassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 230, 190, -1));
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Change to login panel.
+     *
+     * @param evt ActionEvent
+     */
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
         frame.changePanel("card1");
         resetPage();
     }//GEN-LAST:event_btnBackActionPerformed
 
+    /**
+     * If no errors in input fields, create the new user in the database. Then
+     * change to panel for adding funds.
+     *
+     * @param evt ActionEvent
+     */
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         inputCheck();
-        if (errors == 0){
+        if (errors == 0) {
             registerUser();
             /* Set the user as logged in */
             String email = textEmail.getText();
-            System.out.println(frame.cManager.getCustomerByEmail(email).toString());
-            frame.cManager.setLoggedInUser(frame.cManager.getCustomerByEmail(email));
-            
+            System.out.println(frame.cManager.getCustomerByEmail(email).
+                    toString());
+            frame.cManager.setLoggedInUser(frame.cManager.getCustomerByEmail(
+                    email));
+
             frame.changePanel("card4");
             resetPage();
         }
-//        } else{
-//            labError1.setVisible(inputError);
-//            labError2.setVisible(inputError);
-//        }
         errors = 8;
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    /**
+     * When email input field looses focus, make sure that the syntax follows
+     * that of an email address, and that the address does not already exist in
+     * the database.
+     *
+     * @param evt FocusEvent
+     */
     private void textEmailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textEmailFocusLost
         System.err.println(errors);
-        if(isValidEmailAddress(textEmail.getText()) == true){
-           labErrorEmail.setVisible(false);
-           try{
-               frame.cManager.getCustomerByEmail(textEmail.getText());
-               labEmail.setForeground(Color.RED);
-               labErrorExistingEmail.setVisible(true);
-           } catch(NullPointerException e){
-               System.out.println(e);
-               labEmail.setForeground(Color.BLACK);
-               labErrorExistingEmail.setVisible(false);
-           }
-       } else{
-           labErrorEmail.setVisible(true);
-           labEmail.setForeground(Color.RED);
-       }
-    }//GEN-LAST:event_textEmailFocusLost
-    
-    private void resetPage(){
-        textFirstName.setText("");
-        textLastName.setText("");
-        textRoad.setText("");
-        textZip.setText("");
-        textPhoneNBR.setText("");
-        textEmail.setText("");
-        textPassword.setText("");
-        textConfirmPassword.setText("");
-        labFirstName.setForeground(Color.BLACK);
-        labLastName.setForeground(Color.BLACK);
-        labRoad.setForeground(Color.BLACK);
-        labZip.setForeground(Color.BLACK);
-        labPhoneNBR.setForeground(Color.BLACK);
-        labEmail.setForeground(Color.BLACK);
-        labPassword.setForeground(Color.BLACK);
-        labConfirmPassword.setForeground(Color.BLACK);
-        labErrorConfirmPassword.setVisible(false);
-        labErrorEmail.setVisible(false);
-        labError1.setVisible(false);
-        labError2.setVisible(false);
-    }
-    
-    private void inputCheck() {
-        /*
-         * (?i) = Case Insensitive, [a-å] = any letter from a to å
-         * "+" = any combination of the previous, [a-å\\-\\s] = any letter from a-å incl "-" and " "
-         * "?" = the previous can appear once or none*/
-        if (textFirstName.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+")){
-           labFirstName.setForeground(Color.BLACK);
-            errors--;
-        } else{
-            labFirstName.setForeground(Color.RED);
-        }
-
-        if (textLastName.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+")){
-            labLastName.setForeground(Color.BLACK);  
-            errors--;
-        } else{
-            labLastName.setForeground(Color.RED);
-        }
-
-        if (textRoad.getText().matches("(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å]+(?i)[a-å\\-\\s]?(?i)[a-å\\d]+")){
-            labRoad.setForeground(Color.BLACK);
-            errors--;
-        } else{
-            labRoad.setForeground(Color.RED);
-        }
-        
-        if (textZip.getText().length() == 4){
+        if (isValidEmailAddress(textEmail.getText()) == true) {
+            labErrorEmail.setVisible(false);
             try {
-                int zipcode = Integer.parseInt(textZip.getText());
-                labZip.setForeground(Color.BLACK);
-                errors--;
-            } catch(NumberFormatException e){
-                labZip.setForeground(Color.RED);
-            }
-        } else{
-            labZip.setForeground(Color.RED);
-        }
-        
-        if (textPhoneNBR.getText().length() == 8){
-            try {
-                int phoneNBR = Integer.parseInt(textPhoneNBR.getText());
-                labPhoneNBR.setForeground(Color.BLACK);
-                errors--;
-            } catch(NumberFormatException e){
-                labPhoneNBR.setForeground(Color.RED);
-            }
-        } else{
-            labPhoneNBR.setForeground(Color.RED);
-        }
-        
-        if(isValidEmailAddress(textEmail.getText()) == true){
-            try{
                 frame.cManager.getCustomerByEmail(textEmail.getText());
-            } catch(NullPointerException e){
-                errors--;
+                labEmail.setForeground(Color.RED);
+                labErrorExistingEmail.setVisible(true);
+            } catch (NullPointerException e) {
+                System.out.println(e);
+                labEmail.setForeground(Color.BLACK);
+                labErrorExistingEmail.setVisible(false);
             }
+        } else {
+            labErrorEmail.setVisible(true);
+            labEmail.setForeground(Color.RED);
         }
+    }//GEN-LAST:event_textEmailFocusLost
 
-        String password =  new StringBuilder().append(textPassword.getPassword()).toString();
-        if(password.matches("^\\S*") && password.length() >= 4 && password.length() <= 30) {
-            labPassword.setForeground(Color.BLACK);
-            errors--;
-        } else{
-            labPassword.setForeground(Color.RED);
-        }
-
-        String passwordConfirm =  new StringBuilder().append(textPassword.getPassword()).toString();
-        if((!passwordConfirm.equals("")) && passwordConfirm.equals(password)) {
-            labConfirmPassword.setForeground(Color.BLACK);
-            labErrorConfirmPassword.setVisible(false);
-            errors--;
-        } else{
-            labConfirmPassword.setForeground(Color.RED);
-            labErrorConfirmPassword.setVisible(true);
-        }
-    }
-    
-    private void registerUser() {
-        Object[] userData = new Object[8];
-        userData[0] = new StringBuilder().append(textConfirmPassword.getPassword()).toString();
-        userData[1] = textFirstName.getText();
-        userData[2] = textLastName.getText();
-        userData[3] = textRoad.getText();
-        userData[4] = textZip.getText();
-        userData[5] = textEmail.getText().toLowerCase();
-        userData[6] = textPhoneNBR.getText();
-        userData[7] = 0;           // Is set in next panel
-        
-        /* Create customer in database */
-        frame.cManager.addNewCustomer(userData);
-    }
-    
-    // Metod found at StackOverflow.com, which validates the syntax of an emailadress
-    // http://stackoverflow.com/questions/624581/what-is-the-best-java-email-address-validation-method
-    private boolean isValidEmailAddress(String email) {
-       java.util.regex.Pattern p = java.util.regex.Pattern.compile(".+@.+\\.[a-z]+");
-       java.util.regex.Matcher m = p.matcher(email);
-       return m.matches();
-    }
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
     private javax.swing.JButton btnSubmit;
