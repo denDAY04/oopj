@@ -134,7 +134,7 @@ public class HardwareSimulator_Integration_Test {
        expectedRequest = "VC";
        actualRequest = hardwareSimulator.getPacket().getCommandStatus();  
        
-       String expectedData = "000500000000IDLEACTIVEHans";
+       String expectedData = "000500010000IDLEACTIVEHans";
        String actualData = hardwareSimulator.getPacket().getData();
        
        System.out.println("actualRequest: "+actualRequest);

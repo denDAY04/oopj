@@ -15,10 +15,10 @@ public class Billing implements Serializable {
     private String startCharge;
     private String endCharge;
     private String recieved;
-    private double billingAmount;
-    private double billingRate;
-    private double billingKWH;
-    private double newBalanceBilling;
+    private int billingAmount;
+    private int billingRate;
+    private int billingKWH;
+    private int newBalanceBilling;
 
     /**
      * Custom constructor that simple assigns every field. 
@@ -37,8 +37,8 @@ public class Billing implements Serializable {
     public Billing(String transactionNumb, String customerNumb,
             String hardwareNumb, String startCharge, String endCharge,
             String recieved,
-            double billingAmount, double billingRate, double billingKWH,
-            double newBalanceBilling) {
+            int billingAmount, int billingRate, int billingKWH,
+            int newBalanceBilling) {
         this.transactionNumb = transactionNumb;
         this.customerNumb = customerNumb;
         this.hardwareNumb = hardwareNumb;
@@ -99,35 +99,35 @@ public class Billing implements Serializable {
         this.recieved = Recieved;
     }
 
-    public double getBillingAmount() {
+    public int getBillingAmount() {
         return billingAmount;
     }
 
-    public void setBillingAmount(double BillingAmount) {
+    public void setBillingAmount(int BillingAmount) {
         this.billingAmount = BillingAmount;
     }
 
-    public double getBillingRate() {
+    public int getBillingRate() {
         return billingRate;
     }
 
-    public void setBillingRate(double BillingRate) {
+    public void setBillingRate(int BillingRate) {
         this.billingRate = BillingRate;
     }
 
-    public double getBillingWH() {
+    public int getBillingWH() {
         return billingKWH;
     }
 
-    public void setBillingKWH(double BillingKWH) {
+    public void setBillingKWH(int BillingKWH) {
         this.billingKWH = BillingKWH;
     }
 
-    public double getNewBalanceBilling() {
+    public int getNewBalanceBilling() {
         return newBalanceBilling;
     }
 
-    public void setNewBalanceBilling(double NewBalanceBilling) {
+    public void setNewBalanceBilling(int NewBalanceBilling) {
         this.newBalanceBilling = NewBalanceBilling;
     }
 

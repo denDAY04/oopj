@@ -45,10 +45,10 @@ public class BillingManagerTest {
         String startCharge = "2014-03-24 13:10:02.047";
         String endCharge = "2014-03-24 16:10:02.047";
         String recieved = "2014-05-18 17:36:10.478";
-        double BillingAmount = 10000;
-        double BillingRate = 1050;
-        double BillingKWH = 7530;
-        double newBalance = 5040;
+        int BillingAmount = 10000;
+        int BillingRate = 1050;
+        int BillingKWH = 7530;
+        int newBalance = 5040;
         billing = new Billing(transactionNumb, customerNumb, hardwareNumb, startCharge, 
                 endCharge, recieved, BillingAmount, BillingRate, BillingKWH, newBalance);
     }

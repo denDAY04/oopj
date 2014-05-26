@@ -12,8 +12,8 @@ public class Deposit implements Serializable {
     private String depositsNumb;
     private String customerNumb;
     private String depositsDate;
-    private double depositAmount;
-    private double newBalanceDeposit;
+    private int depositAmount;
+    private int newBalanceDeposit;
     private String externalRefNumb;
     private String last4CardNumb;
 
@@ -29,7 +29,7 @@ public class Deposit implements Serializable {
      * @param last4CardNumb
      */
     public Deposit(String depositsNumb, String customerNumb, String depositsDate,
-            double depositAmount, double newBalanceDeposit,
+            int depositAmount, int newBalanceDeposit,
             String externalRefNumb,
             String last4CardNumb) {
         this.depositsNumb = depositsNumb;
@@ -66,19 +66,19 @@ public class Deposit implements Serializable {
         this.depositsDate = DepositsDate;
     }
 
-    public double getDepositAmount() {
+    public int getDepositAmount() {
         return depositAmount;
     }
 
-    public void setDepositAmount(double DepositAmount) {
+    public void setDepositAmount(int DepositAmount) {
         this.depositAmount = DepositAmount;
     }
 
-    public double getNewBalanceDeposit() {
+    public int getNewBalanceDeposit() {
         return newBalanceDeposit;
     }
 
-    public void setNewBalanceDeposit(double NewBalanceDeposit) {
+    public void setNewBalanceDeposit(int NewBalanceDeposit) {
         this.newBalanceDeposit = NewBalanceDeposit;
     }
 

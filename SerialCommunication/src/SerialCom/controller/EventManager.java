@@ -427,7 +427,7 @@ public class EventManager implements FrameEventListener {
         /* Extract billing data from packet */
         String kWhRate = packet.getData().substring(DATAKWHRATEINDEX,
                 DATAKWHRATEINDEX + DATAKWHRATESIZE);
-        String kwHAmount = packet.getData().substring(DATAKWHAMOUNTINDEX,
+        String wHAmount = packet.getData().substring(DATAKWHAMOUNTINDEX,
                 DATAKWHAMOUNTINDEX + DATAKWHAMOUNTSIZE);
         String DKKAmount = packet.getData().substring(DATADKKAMOUNTINDEX,
                 DATADKKAMOUNTINDEX + DATADKKAMOUNTSIZE);
@@ -440,7 +440,7 @@ public class EventManager implements FrameEventListener {
         /* Calcualte new balance after billing */
         String newBalanceString = "" + (oldBalance - Integer.parseInt(DKKAmount));
         String[] arr = {customerID, terminalID, startTime, endTime, DKKAmount, 
-            kWhRate, kwHAmount, newBalanceString};
+            kWhRate, wHAmount, newBalanceString};
         return arr;
     }
 }

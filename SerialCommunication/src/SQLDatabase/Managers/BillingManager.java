@@ -171,8 +171,8 @@ public class BillingManager {
      * <li>Start time of charging
      * <li>End time of charging
      * <li>The amount of DKK to be billed
-     * <li>The rate to which he is billed (DKK/kwH)
-     * <li>The amount of kWh that was charged
+     * <li>The rate to which he is billed (DKK/kWh)
+     * <li>The amount of Wh that was charged
      * <li>The new balance of the the customer after being billed
      * <br> <br>
      *
