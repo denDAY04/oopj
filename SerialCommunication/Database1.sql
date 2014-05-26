@@ -54,8 +54,8 @@ CREATE TABLE Billing (
    TransactionNumb  INT GENERATED ALWAYS AS IDENTITY,
    CustomerNumb INT,
    HardwareNumb  INT,
-   StartCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
-   EndCharge  varchar (25) NOT NULL, --2007-04-30 13:10:02.047
+   StartCharge  varchar (25) NOT NULL, --Format : 2007-04-30 13:10:02.047
+   EndCharge  varchar (25) NOT NULL, --Format : 2007-04-30 13:10:02.047
    Recieved TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
    BillingAmount INT NOT NULL,
    BillingRate INT NOT NULL,
@@ -75,7 +75,7 @@ INSERT INTO Customer (Pin,Password,CardNumb,FirstName,LastName,Road,ZipCode,Emai
 VALUES 
    ('1337','password','9bfa0ee8','Hans','Hansen','vej 4','2730','hans@hansen.dk','25302308',10000,'ACTIVE','IDLE'), -- CARD 1
    ('1235','password','cba6a213','Hans','Jensen','vej 8','5530','hansemand@hotmail.com','44592271',0,'ACTIVE','IDLE'),   
-   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','jens@hotmail.com','44596871',0,'PENAPP','IDLE'),    
+   ('1234','password1','cba60ce8','Jens','Jensen','vej 5','4530','jens@hotmail.com','44596871',0,'PENAPP','IDLE'),  -- CARD 2  
    ('1338','mor','0003','Niels','Nielsen','vej 6','3310','funkytown@gmail.com','88888888',50000,'PENACT','CHAR'),
    ('9999','andreas','0004','Anders','Andersen','vej 7','2400','anders@tdc.dk','33108891',60000,'DISABL','IDLE'),
    ('1234','123456','abcdefg','James','Smith','Someroad 1','1234','james@smith.com','12345678',20000,'PENAPP','IDLE');
@@ -107,4 +107,3 @@ VALUES
 INSERT INTO Rate (CurrentRate)
 VALUES
    (500);
-
