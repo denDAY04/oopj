@@ -17,9 +17,9 @@ import java.sql.*;
  */
 public class ConnectionManager {
 
-    private static final String URL = "jdbc:derby://localhost:1527/Books";
-    private static final String USERNAME = "hbe";
-    private static final String PASSWORD = "hbe";
+    private static final String URL = "jdbc:derby://localhost:1527/TA";
+    private static final String USERNAME = "TA";
+    private static final String PASSWORD = "TA";
 
     /**
      * Factory method to return a connection to a specific Java Derby database.
