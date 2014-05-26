@@ -265,7 +265,7 @@ public class AccountPanel extends javax.swing.JPanel {
             if (reply == JOptionPane.YES_OPTION) {
                 frame.changePanel("card1");
                 String[] newValues = new String[1];
-                newValues[0] = "Disabl";
+                newValues[0] = "DISABL";
                 frame.cManager.updateCustomerInformation(frame.cManager.
                         getLoggedInUser().getCustomerNumb(), 7, newValues);
                 frame.cManager.setLoggedInUser(null);
