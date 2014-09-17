@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package computerscience;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 
 
 /**
- *
- * @author AndreasStensig
+ * @revision 1.0
+ * @author Andreas Stensig Jensen
+ * @contributers Mathias Nordahl, Jonas Grum-Schwensen, Rasmus Loft 
  */
 public class ArraySorting {
 
@@ -20,29 +17,52 @@ public class ArraySorting {
      */
     public static void main(String[] args) {
         int arrSize = 10000;
-        long timeBegin, timeEnd;                        // For quick-sort
-        int[] testArr = generateArray(arrSize, 0);      // Randome
-        //int[] testArr = generateArray(length, 1);     // Best case
-        //int[] testArr = generateArray(length, 2);     // Worst case
-        /* Full-copy of array for quick-sort */
-        int[] testArrCopy = Arrays.copyOf(testArr, testArr.length);
+        long timeBegin, timeEnd;            // For quick-sort time calculation
         
-        /* Insertion sort */
-        long time = insertionSort(testArr);
-        System.err.println("Isertion sort elapsed time: " + time + " ms = "
-                            + time / 60000.0 + " minutes");
+        /* Assortment type of the values in the array.
+        0 = random; 1 = ascending; 2 = descending */
+        int arrType = 0;         
         
-        /* Quick-sort */
-        timeBegin = System.currentTimeMillis();
-        Arrays.sort(testArrCopy);
-        timeEnd = System.currentTimeMillis();
-        long time2 = timeEnd - timeBegin;
-        System.err.println("Quick sort elapsed time: " + time2 + " ms = "
-                            + time2 / 60000.0 + " minutes");
+        /* Six arrays are needed for each test at different arrSize: 
+        Three for Insertion sort and three for Quick sort. Three because there 
+        will be done three runs of the same sort, on the same array-values, to
+        minimize meassuring errors.
+        */
+        ArrayList<int[]> testArrIns;                // For insertion sort
+        ArrayList<int[]> testArrQui;                // For quick sort
         
-       /* For cross-checking that the original array is sorted */ 
-//        for (int i = 0; i < length; i++) {
-//            System.err.println("" + testArr[i]);
+        
+        /* Do full-copy of array values into the six arrays */
+        int[] tempArr = generateArray(arrSize, arrType);
+        testArrIns = new ArrayList<>();
+        testArrQui = new ArrayList<>();
+        for (int i = 0; i < 3; i++) {
+            testArrIns.add(Arrays.copyOf(tempArr, arrSize));
+            testArrQui.add(Arrays.copyOf(tempArr, arrSize));
+        }
+
+        /* Sorting of the six arrays, in pairs of Insertion & quick sort with 
+        each iteration. */
+        long timeIns, timeQui;
+        for (int i = 0; i < 3; i++) {
+            /* Insertion sort */ 
+            timeIns = insertionSort(testArrIns.get(i));
+            System.out.println("Insertion sort elapsed time: " + timeIns 
+                               + " ms." );
+            /* Quick sort */
+            timeBegin = System.currentTimeMillis();
+            Arrays.sort(testArrQui.get(i));
+            timeEnd = System.currentTimeMillis();
+            timeQui = timeEnd - timeBegin;
+            System.out.println("Quick sort elapsed time: " + timeQui 
+                                + " ms.");
+            System.out.println("");                     // empty line 
+            
+        }
+        
+       /* For cross-checking that the array is sorted */ 
+//        for (int i = 0; i < arrSize; i++) {
+//            System.err.println("" + testArrIns.get(0)[i]);
 //        }
     }
 
@@ -58,10 +78,10 @@ public class ArraySorting {
     public static long insertionSort(int[] arr) {
         int currentValue;   // Value we are currently comparing against array
         long timeBegin, timeEnd;
-        int j, temp;
+        int j;                                         // Secondary index value
 
         timeBegin = System.currentTimeMillis();
-        for (int i = 1; i < (arr.length); i++) {
+        for (int i = 1; i < arr.length; i++) {
             j = i;
             currentValue = arr[i];
             while ((j > 0) && (arr[j-1] > currentValue)) {
@@ -106,7 +126,7 @@ public class ArraySorting {
                 }
                 break;
 
-            /* Descending assortment*/
+            /* Descending assortment */
             case 2:
                 int k = 0;
                 for (int i = length; i > 0; i--) {
