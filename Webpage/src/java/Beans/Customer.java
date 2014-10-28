@@ -14,6 +14,10 @@ public class Customer {
 int CustomerNumber;
 String Firstname;
 String Lastname;
+String Email;
+String Password;
+//String Status;        // Logged in, Valid customer, e.t.c  
+
 
     public String getPassword() {
         return Password;
@@ -22,9 +26,6 @@ String Lastname;
     public void setPassword(String Password) {
         this.Password = Password;
     }
-String Email;
-String Password;
-//String Status;        // Logged in, Valid customer, e.t.c  
 
     public int getCustomerNumber() {
         return CustomerNumber;
