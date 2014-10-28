@@ -21,9 +21,10 @@ public int value = 5;
 public int newcustomer;
 
 String customerNumber;
-String firstname;
-String lastname;
+String firstName;
+String lastName;
 String email;
+String password;
 
     public int getValue() {
         return value;
@@ -42,19 +43,19 @@ String email;
     }
 
     public String getFirstname() {
-        return firstname;
+        return firstName;
     }
 
     public void setFirstname(String Firstname) {
-        this.firstname = Firstname;
+        this.firstName = Firstname;
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
     public void setLastname(String Lastname) {
-        this.lastname = Lastname;
+        this.lastName = Lastname;
     }
 
     public String getEmail() {

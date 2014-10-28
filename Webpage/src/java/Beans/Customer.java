@@ -11,51 +11,51 @@ package Beans;
  */
 public class Customer {
     
-int CustomerNumber;
-String Firstname;
-String Lastname;
-String Email;
-String Password;
+int customerNumber;
+String firstName;
+String lastName;
+String email;
+String password;
 //String Status;        // Logged in, Valid customer, e.t.c  
 
 
     public String getPassword() {
-        return Password;
+        return password;
     }
 
     public void setPassword(String Password) {
-        this.Password = Password;
+        this.password = Password;
     }
 
     public int getCustomerNumber() {
-        return CustomerNumber;
+        return customerNumber;
     }
 
     public void setCustomerNumber(int CustomerNumber) {
-        this.CustomerNumber = CustomerNumber;
+        this.customerNumber = CustomerNumber;
     }
 
     public String getFirstname() {
-        return Firstname;
+        return firstName;
     }
 
     public void setFirstname(String Firstname) {
-        this.Firstname = Firstname;
+        this.firstName = Firstname;
     }
 
     public String getLastname() {
-        return Lastname;
+        return lastName;
     }
 
     public void setLastname(String Lastname) {
-        this.Lastname = Lastname;
+        this.lastName = Lastname;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String Email) {
-        this.Email = Email;
+        this.email = Email;
     }
 }
