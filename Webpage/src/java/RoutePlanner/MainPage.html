@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <HEAD>
+        <TITLE>Oink Oink Route Planner</TITLE>
+        <STYLE>
+            body{text-align:center;}
+        </STYLE>
+    </HEAD>
+    <BODY>
+        <BR><BR><BR>
+        <FORM METHOD=GET ACTION="ResultPage.jsp">
+            <TABLE>
+                <TR>
+                    <TD>Start Station:</TD>
+                    <TD><INPUT TYPE="text" NAME= "start"></TD>
+                </TR>
+                <TR>
+                    <TD>End Station:</TD>
+                    <TD><INPUT TYPE="text" NAME= "end"></TD>
+                </TR>
+                <TR>
+                    <TD>Arrival Time:</TD>
+                    <TD><INPUT TYPE="text" NAME= "arrival"></TD>
+                </TR>
+            </TABLE>
+            <INPUT TYPE="Submit" VALUE = "Find Journey">
+        </FORM>
+    </BODY>
+</html>
