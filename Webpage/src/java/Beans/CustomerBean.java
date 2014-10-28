@@ -20,11 +20,11 @@ public String name = "Rasmus";
 public int value = 5;
 public int newcustomer;
 
-String customerNumber;
-String firstName;
-String lastName;
-String email;
-String password;
+String customerNumber = "1234";
+String firstName = "Mister";
+String lastName = "Bean";
+String email = "Test@Test.Test";
+String password = "1234";
 
     public int getValue() {
         return value;
@@ -42,19 +42,19 @@ String password;
         this.customerNumber = CustomerNumber;
     }
 
-    public String getFirstname() {
+    public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstname(String Firstname) {
+    public void setFirstName(String Firstname) {
         this.firstName = Firstname;
     }
 
-    public String getLastname() {
+    public String getLastName() {
         return lastName;
     }
 
-    public void setLastname(String Lastname) {
+    public void setLastName(String Lastname) {
         this.lastName = Lastname;
     }
 
