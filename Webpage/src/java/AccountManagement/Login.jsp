@@ -27,7 +27,7 @@
             <INPUT TYPE="Submit" VALUE = "Login">
         </FORM>
         <P>Not registered yet? Press Sign Up.</P>
-        <FORM METHOD=LINK ACTION="Customerinput.jsp">
+        <FORM METHOD=LINK ACTION="SignUp.jsp">
             <INPUT TYPE="Submit" VALUE ="Sign Up">
         </FORM>
     </BODY>

@@ -7,36 +7,35 @@
     </HEAD>
     <BODY>
         <BR><BR>
-        <H1><P STYLE="color:red">Customer Details</P>
+        <H1><P STYLE="color:black">Account Information</P>
         </H1>
         <BR>
         <!-- Pass all form entries to Order.jsp ? -->
         <FORM METHOD=POST ACTION="CustomerTestConfirm.jsp">
-            <TABLE>
+            <TABLE align="CENTER">
                 <TR>
-                    
-                    
-                    <TD>customerNumber:</TD>
-                    <TD><INPUT TYPE="text" NAME= "customerNumber"></TD>
-                </TR>
-                <TR>
-                    <TD>firstname:</TD>
+                    <TD>First name:</TD>
                     <TD><INPUT TYPE="text"
-                               NAME= "firstname"></TD>
+                               NAME= "firstName"></TD>
                 </TR>
                 <TR>
-                    <TD>lastname:</TD>
+                    <TD>Last name:</TD>
                     <TD><INPUT TYPE="text"
-                               NAME= "lastname"></TD>
+                               NAME= "lastName"></TD>
                 </TR>
                 <TR>
-                    <TD>email:</TD>
+                    <TD>Email:</TD>
                     <TD><INPUT TYPE="text"
                                NAME= "email"></TD>
                 </TR>
+                <TR>
+                    <TD>Password:</TD>
+                    <TD><INPUT TYPE="password"
+                               NAME= "password"></TD>
+                </TR>
             </TABLE>
             <BR><BR>
-            <INPUT TYPE="submit" VALUE= "send details">
+            <INPUT TYPE="submit" VALUE= "Sign Up">
         </FORM>
     </BODY>
 </HTML>
