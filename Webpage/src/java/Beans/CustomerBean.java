@@ -62,8 +62,8 @@ String password = "1234";
         return email;
     }
 
-    public void setEmail(String Email) {
-        this.email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
 

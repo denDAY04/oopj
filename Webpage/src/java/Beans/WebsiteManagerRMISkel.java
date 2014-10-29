@@ -51,8 +51,7 @@ public class WebsiteManagerRMISkel implements WebsiteManagerRMISkelInterface {
     }
 
     @Override
-    public void setCustomerDetails(Customer customer) {
-        
+    public void setCustomerDetails(Customer customer) {        
     }
 
     @Override
