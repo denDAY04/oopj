@@ -11,7 +11,7 @@
         </H1>
         <BR>
         <!-- Pass all form entries to Order.jsp ? -->
-        <FORM METHOD=POST ACTION="CustomerTestConfirm.jsp">
+        <FORM METHOD=POST ACTION="TermsOfUse.jsp">
             <TABLE align="CENTER">
                 <TR>
                     <TD>First name:</TD>

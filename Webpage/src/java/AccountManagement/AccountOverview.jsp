@@ -27,7 +27,7 @@
                 </FORM>
             </TR>
             <TR>
-                <FORM METHOD=GET ACTION="Logout.jsp">
+                <FORM METHOD=GET ACTION="Login.jsp">
                     <INPUT TYPE="submit" VALUE="Log out">
                 </FORM>
             </TR>
