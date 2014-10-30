@@ -33,8 +33,13 @@
             
             // Apply CSS for table
             table.setAttribute('class', 'article');
-            // Insert New Row for table at index '0'.
-            var row1 = table.insertRow(0);
+
+            // Create an empty <thead> element and add it to the table:
+            var header = table.createTHead();
+
+            // Create an empty <tr> element and add it to the first position of <thead>:
+            var row1 = header.insertRow(0);     
+
             // Insert New Column for Row1 at index '0'.
             var row1col1 = row1.insertCell(0);
             row1col1.innerHTML = 'Date/Time';
