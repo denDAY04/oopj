@@ -5,6 +5,7 @@
  */
 package Beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -13,8 +14,8 @@ import java.util.List;
  */
 public interface WebsiteManagerRMISkelInterface {    
     
-List<Journey> getJourneyHistory(int customerNumber);        // (precision?) 3 / 5 / 10
-Customer getCustomerDetails(int customerNumber);
+ArrayList<Journey> getJourneyHistory(String customerNumber, int index);        // (precision?) 3 / 5 / 10
+Customer getCustomerDetails(String customerNumber);
 void setCustomerDetails(Customer customer);
 boolean createCustomer(Customer customer);
 boolean logOn(String email, String password);

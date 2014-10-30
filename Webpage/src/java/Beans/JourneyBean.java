@@ -6,41 +6,85 @@
 package Beans;
 
 import java.io.Serializable;
-import java.util.GregorianCalendar;
-import java.util.List;
+import java.util.ArrayList;
+
 
 /**
  *
  * @author Qess
  */
 public class JourneyBean implements Serializable {
-    private int i;
-   // private int customerNumber;
+    // used to itterate through the journeys in the journey array list.
+    private int i=0;
+        // index used to track what section of the journey history to be retrived.
+    private int index;
+    private String customerNumber;
     private WebsiteManagerRMISkel skel;
-    private List<Journey> journeyList;
+    private ArrayList<Journey> journeyList;
 
+    
+    public int getDisplayFrom(){
+        return index+1;
+    }
+    public int getDisplayTo(){
 
+        return index+getListSize();
+    }
     
     public JourneyBean() {
             this.skel = new WebsiteManagerRMISkel();
     }
     
     
+    public ArrayList<Journey> getJourneyList(){
+    return journeyList;
+    }
     
-    public int getNextI(){
+
+    public void setIndex(int index){
+    this.index = index;
+    journeyList = skel.getJourneyHistory(customerNumber, index);
+    }
+    
+    public int getIndex(){
+    return index;
+    }
+    
+    public int getNextIndex(){
+
+        return index+5;
+    }
+    
+    public int getprevIndex(){
+        if (index>5){
+        return index-5;
+        }
+        else return 0;
+    }
+    
+    public void setNext(String nexti){
         i++;
+    }
+    
+    public int getI(){
         return i;
+     }
+    
+    public int getListSize(){
+    return journeyList.size();
     }
     
     public int getNextStartzone() {
         return journeyList.get(i).getStartzone();
     }
         
-    public void setCustomerNumber(int customerNumber){
-  //  this.customerNumber=customerNumber;
-    journeyList = skel.getJourneyHistory(customerNumber);
+    public void setCustomerNumber(String customerNumber){
+    this.customerNumber=customerNumber;
     }
 
+    public String getCustomerNumber(){
+    return customerNumber;
+    }
 
     public int getNextNumberofzones() {
         return journeyList.get(i).getNumberofzones();
@@ -50,7 +94,7 @@ public class JourneyBean implements Serializable {
         return journeyList.get(i).getPrice();
     }
 
-    public GregorianCalendar getNextStarttime() {
+    public String getNextStarttime() {
         return journeyList.get(i).getStarttime();
     }
 }

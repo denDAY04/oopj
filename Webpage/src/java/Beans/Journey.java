@@ -19,7 +19,7 @@ public class Journey {
     int startzone = 0;
     int numberofzones = 0;
     int price =0;
-    GregorianCalendar starttime;
+    String starttime;
 
     public int getStartzone() {
         return startzone;
@@ -45,11 +45,11 @@ public class Journey {
         this.price = price;
     }
 
-    public GregorianCalendar getStarttime() {
+    public String getStarttime() {
         return starttime;
     }
 
-    public void setStarttime(GregorianCalendar starttime) {
+    public void setStarttime(String starttime) {
         this.starttime = starttime;
     }
     

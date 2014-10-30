@@ -11,7 +11,7 @@ package Beans;
  */
 public class Customer {
     
-int customerNumber;
+String customerNumber;
 String firstName;
 String lastName;
 String email;
@@ -27,11 +27,11 @@ String password;
         this.password = Password;
     }
 
-    public int getCustomerNumber() {
+    public String getCustomerNumber() {
         return customerNumber;
     }
 
-    public void setCustomerNumber(int CustomerNumber) {
+    public void setCustomerNumber(String CustomerNumber) {
         this.customerNumber = CustomerNumber;
     }
 
