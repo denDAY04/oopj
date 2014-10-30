@@ -7,8 +7,11 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 
+<jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
+
+
 <%
-  if( true )
+  if( idtestbean.getCustomerNumber()=="")
     response.sendRedirect("/Webpage/form.html");
 %>
 
