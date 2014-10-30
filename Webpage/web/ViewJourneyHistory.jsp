@@ -10,7 +10,7 @@
         </STYLE>
         <script language="javascript" type="text/javascript">
         // Create table.
-        var table = document.createElement('table');
+        /*var table = document.createElement('table');
         
         function updateTable() {
             // Create table.
@@ -58,7 +58,7 @@
             // Append Table into div.
             var div = document.getElementById('divTable');
             div.appendChild(table);
-        }
+        }*/
 	</script>
     </HEAD>
     <BODY>
@@ -67,13 +67,37 @@
         </H1>
         <BR>
         <!-- Pass all form entries to Order.jsp ? -->
-        <form id="form1" runat="server">
-        <div>
+        <form id="form1" runat="server" method="POST" action="ViewJourneyHistory.jsp">
+<!--        <div>
             <input type="button" value="Create Table" onclick="createTable()" />
             <input type="button" value="Update Table" onclick="updateTable()" />
         </div>
         <div id="divTable">
-        </div>
+        </div>-->
+            <div>
+                <INPUT type="submit" value="Show more journeys">
+            </div>
+            <BR>
+            <div>
+                <table id="journeys" border="1" style="width:50%">
+                    <tr>
+                        <th>Date</th>
+                        <th>Start Destination</th> 
+                        <th>Start Zone</th>
+                        <th>Zones</th>
+                        <th>Price</th>
+                    </tr>
+                    <% for(int row=1; row <= 10; row++) { %>
+                        <TR>
+                    <%      for(int col=1; col<=5; col++) { %>
+                                <TD> (<%=col%>, <%=row%>) </TD>
+                            <% } %>
+                        </TR>
+                    <% } %>
+                </table>
+
+        
+            </div>
         </form>        
     </BODY>
 </HTML>
