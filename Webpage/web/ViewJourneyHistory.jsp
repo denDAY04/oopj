@@ -16,7 +16,7 @@
             // Create table.
             //var table = document.getElementById('table');
             // Insert New Row for table at index '0'.
-            for(r=0; r<10; r++){
+            for(r=1; r<=10; r++){
                 var row = table.insertRow(r);
                 for(c=0; c<5; c++){
                     // Insert New Column for Row1 at index '0'.
