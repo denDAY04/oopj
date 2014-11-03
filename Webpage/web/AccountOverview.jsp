@@ -1,7 +1,8 @@
 <HTML>
     <%@ page language="java" contentType="text/html"%>
 
-    <jsp:useBean id="customer" class="Beans.CustomerBean">
+    <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
+        <jsp:setProperty name="customer" property="*"/>
     </jsp:useBean>
     <HEAD>
         <TITLE>Account</TITLE>

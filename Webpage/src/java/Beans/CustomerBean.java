@@ -16,9 +16,9 @@ import java.sql.SQLException;
  */
 public class CustomerBean {
     
-public String name = "Rasmus";
+/*public String name = "Rasmus";
 public int value = 5;
-public int newcustomer;
+public int newcustomer;*/
 
 String customerNumber = "1234";
 String firstName = "Mister";
@@ -26,13 +26,13 @@ String lastName = "Bean";
 String email = "Test@Test.Test";
 String password = "1234";
 
-    public int getValue() {
+    /*public int getValue() {
         return value;
     }
 
     public void setValue(int value) {
         this.value = value;
-    }
+    }*/
 
     public String getCustomerNumber() {
         return customerNumber;
@@ -65,9 +65,17 @@ String password = "1234";
     public void setEmail(String email) {
         this.email = email;
     }
+    
+    public String getPassword(){
+        return password;
+    }
+    
+    public void setPassword(String password){
+        this.password = password;
+    }
 
 
-    public String getName() {
+    /*public String getName() {
         return name;
     }
 
@@ -79,13 +87,13 @@ String password = "1234";
 
     public void setValue(String name) {
         this.name = name;
-    }
+    }*/
     
 //    public String getNewcustomer(){
 //        return newcustomer;
 //    }
     
-    public void setNewcustomer(int newcustomer){
+    /*public void setNewcustomer(int newcustomer){
     this.newcustomer=newcustomer;
     }
     
@@ -132,7 +140,7 @@ String password = "1234";
         }
     
          return rows;
-    }
+    }*/
     
 }
 
