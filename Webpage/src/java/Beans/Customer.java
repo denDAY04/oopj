@@ -16,8 +16,17 @@ String firstName;
 String lastName;
 String email;
 String password;
-//String Status;        // Logged in, Valid customer, e.t.c  
+int totalRecords;
+//String Status;        // Logged in, Valid customer, e.t.c
 
+
+public void setTotalRecords(int totalRecords){
+ this.totalRecords=totalRecords;
+}
+
+public int getTotalRecords(){
+ return totalRecords;
+}
 
     public String getPassword() {
         return password;

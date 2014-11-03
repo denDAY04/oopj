@@ -6,8 +6,6 @@
 package Beans;
 
 import java.util.ArrayList;
-import java.util.GregorianCalendar;
-import java.util.List;
 
 /**
  *
@@ -107,6 +105,7 @@ public class WebsiteManagerRMISkel implements WebsiteManagerRMISkelInterface {
         customer.setFirstname("Hans");
         customer.setLastname("Jensen");
         customer.setEmail("hans@jensen.dk");
+        customer.totalRecords=24;
         
         return customer;
     }
@@ -122,11 +121,6 @@ public class WebsiteManagerRMISkel implements WebsiteManagerRMISkelInterface {
 
     @Override
     public boolean logOn(String email, String password) {
-        return true;
-    }
-
-    @Override
-    public boolean logOff() {
         return true;
     }
     

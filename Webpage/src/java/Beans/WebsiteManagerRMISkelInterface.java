@@ -6,7 +6,6 @@
 package Beans;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  *
@@ -19,5 +18,5 @@ Customer getCustomerDetails(String customerNumber);
 void setCustomerDetails(Customer customer);
 boolean createCustomer(Customer customer);
 boolean logOn(String email, String password);
-boolean logOff();
+//boolean logOff();
 }
