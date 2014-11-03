@@ -5,6 +5,10 @@
     <jsp:useBean id="customerBean" class="Beans.CustomerBean" scope="session" />
     <jsp:setProperty name="journey" property="customerNumber" value="<%=customerBean.getCustomerNumber()%>"/>
     <jsp:setProperty name="journey" property="index" value="${param.index}"/>
+    <%
+        if( customer.getCustomerNumber()=="")
+          response.sendRedirect("/Webpage/Login.jsp");
+    %>
     
     <HEAD>
         <TITLE>Recent Journeys</TITLE>
@@ -36,6 +40,7 @@
                     <TD> <jsp:getProperty name="journey" property="nextNumberofzones"/> </TD>
                     <TD> <jsp:getProperty name="journey" property="nextPrice"/> </TD>
                         <jsp:setProperty name="journey" property="next" value=""/>
+                </TR>
                         <% }%>
             </table>
             <br>

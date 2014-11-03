@@ -1,12 +1,14 @@
-<jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
-
-<%
-  if( idtestbean.getCustomerNumber()!="")
-    response.sendRedirect("/Webpage/AccountOverview.jsp");
-%>
 <HTML>
+    <%@ page language="java" contentType="text/html"%>
+
+    <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
+    </jsp:useBean>
+    <%
+        if( customer.getCustomerNumber()=="")
+          response.sendRedirect("/Webpage/Login.jsp");
+    %>
     <HEAD>
-        <TITLE>Customer</TITLE>
+        <TITLE>Edit Info</TITLE>
         <STYLE>
             body {text-align:center;}
         </STYLE>
@@ -64,39 +66,46 @@
 		}
                 return isValid;
 	}
-    </SCRIPT>
+	</script>
     </HEAD>
     <BODY>
         <BR><BR>
-        <H1><P STYLE="color:black">Account Information</P>
+        <H1><P STYLE="color:black">Edit Information</P>
         </H1>
         <BR>
         <!-- Pass all form entries to Order.jsp ? -->
-        <FORM NAME="inputs" METHOD=POST ACTION="TermsOfUse.jsp" onsubmit="return validate()">
+        <FORM NAME="inputs" METHOD="POST" ACTION="AccountOverview.jsp" onsubmit="return validate()">
             <TABLE align="CENTER">
                 <TR>
                     <TD><DIV id="fName"><font color="black">First Name:</font></DIV></TD>
                     <TD><INPUT TYPE="text"
-                               NAME= "firstName"></TD>
+                               NAME= "firstName"
+                               VALUE="<jsp:getProperty name="customer" property="firstName" />"></TD>
                 </TR>
                 <TR>
                     <TD><DIV id="lName"><font color="black">Last Name:</font></DIV></TD>
                     <TD><INPUT TYPE="text"
-                               NAME= "lastName"></TD>
+                               NAME= "lastName"
+                               VALUE="<jsp:getProperty name="customer" property="lastName" />"></TD>
                 </TR>
                 <TR>
                     <TD><DIV id="mail"><font color="black">Email:</font></DIV></TD>
                     <TD><INPUT TYPE="text"
-                               NAME= "email"></TD>
+                               NAME= "email"
+                               VALUE="<jsp:getProperty name="customer" property="email" />"></TD>
                 </TR>
                 <TR>
                     <TD><DIV id="pwd"><font color="black">Password:</font></DIV></TD>
                     <TD><INPUT TYPE="password"
-                               NAME= "password"></TD>
+                               NAME= "password"
+                               VALUE="<jsp:getProperty name="customer" property="password" />"></TD>
                 </TR>
             </TABLE>
             <BR><BR>
-            <INPUT TYPE="submit" VALUE= "Sign Up">
+            <INPUT TYPE="submit" VALUE= "Save Changes">
+        </FORM>
+        <FORM METHOD=LINK ACTION="AccountOverview.jsp">
+            <INPUT TYPE="submit" VALUE= "Back">
         </FORM>
     </BODY>
 </HTML>

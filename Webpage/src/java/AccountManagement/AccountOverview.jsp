@@ -2,8 +2,12 @@
     <%@ page language="java" contentType="text/html"%>
 
     <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
-        <jsp:setProperty name="customer" property="*"/>
     </jsp:useBean>
+    <%
+        if( customer.getCustomerNumber()=="")
+          response.sendRedirect("/Webpage/Login.jsp");
+      %>
+    <jsp:setProperty name="customer" property="*"/>
     <HEAD>
         <TITLE>Account</TITLE>
         <STYLE>
