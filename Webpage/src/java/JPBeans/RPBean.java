@@ -1,0 +1,128 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package JPBeans;
+
+import JPBeans.model.RoutePlannerJourney;
+import java.io.Serializable;
+import java.util.GregorianCalendar;
+import java.util.TimeZone;
+
+/**
+ *
+ * @author Qesss
+ */
+public class RPBean implements Serializable{
+
+    public RPBean() {
+        this.startTime = new GregorianCalendar(TimeZone.getTimeZone("Europe/Copenhagen"));
+        startTime.add(GregorianCalendar.MINUTE, 5); // add 5 minute
+        this.year = startTime.get(GregorianCalendar.YEAR);
+        this.month = startTime.get(GregorianCalendar.MONTH);
+        this.day = startTime.get(GregorianCalendar.DAY_OF_MONTH);   
+        this.hour = startTime.get(GregorianCalendar.HOUR_OF_DAY);
+        this.minute = startTime.get(GregorianCalendar.MINUTE);
+        this.rPJSkel = new RPJSkel();
+        // test
+        this.origin="ballerup";
+        this.destination="valby";
+        
+    }
+    
+    GregorianCalendar startTime;
+    
+    private int year;   
+    private int month;
+    private int day;    
+    private int hour;
+    private int minute;    
+    private String rpj;
+    private RPJSkel rPJSkel;
+    private String origin;
+    private String destination;
+
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getDestination() {
+        return destination;
+    }
+
+    public void setDestination(String destination) {
+        this.destination = destination;
+    }
+
+//    public RoutePlannerJourney getRPJ() {
+//        return rPJ;
+//    }
+    
+        public String getRpj() {
+        return rpj;
+    }
+
+    public void setRpj(String var) {
+
+        this.rpj = rPJSkel.createRouteplannerJourney(origin, destination,  startTime).getWPStopName(1);
+
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+        startTime.set(GregorianCalendar.YEAR, year);
+    }
+
+    public int getMonth() {
+        return month;
+    }
+
+    public void setMonth(int month) {
+        this.month = month;
+        startTime.set(GregorianCalendar.MONTH, month);
+    }
+
+    public int getDay() {
+        return day;
+    }
+
+    public void setDay(int day) {
+        this.day = day;
+        startTime.set(GregorianCalendar.DAY_OF_MONTH, day);      
+    }
+
+    public int getHour() {
+        return hour;
+    }
+
+    public void setHour(int hour) {
+        this.hour = hour;
+        startTime.set(GregorianCalendar.HOUR_OF_DAY, hour);
+    }
+
+    public int getMinute() {
+        return minute;
+    }
+
+    public void setMinute(int minute) {
+        this.minute = minute;
+        startTime.set(GregorianCalendar.MINUTE, minute);
+    }
+
+
+    
+    
+    
+    
+    
+}
