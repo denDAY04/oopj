@@ -13,6 +13,8 @@
 </jsp:useBean>
 
 <jsp:setProperty name="RPBean" property="*"/>
+<jsp:setProperty name="RPBean" property="nextwaypoint" value="0"/>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -71,9 +73,9 @@
                 </TR>
                 <TR>
                     <TD></TD>
-                    <TD><INPUT TYPE="test"
-                               NAME="rpj"
-                               VALUE="<jsp:getProperty name="RPBean" property="rpj" />"></TD>
+                    <TD><INPUT TYPE="hidden"
+                               NAME="stringrpj"
+                               VALUE="<jsp:getProperty name="RPBean" property="stringrpj" />"></TD>
                 </TR>
             </TABLE>
             <BR><BR>
@@ -82,5 +84,23 @@
 
         <DIV id="route"></div>    
 
+             <table id="journeyplanner" border="1" style="width:50%">
+<!--                <tr>
+                    <th>Date</th>
+                    <th>Start Zone</th>
+                    <th>Zones</th>
+                    <th>Price</th>
+                </tr>-->
+                <% for (int row = 1; row <= RPBean.getNumberofwaypoints(); row++) { %>
+                <TR>
+                    <TD> <jsp:getProperty name="RPBean" property="stop"/> </TD>
+                        <jsp:getProperty name="RPBean" property="nextwaypoint"/>
+                </TR>
+                        <% }%>
+            </table>
+
+        
+        
+        
     </body>
 </html>

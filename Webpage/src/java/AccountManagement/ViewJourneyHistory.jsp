@@ -60,7 +60,6 @@
                     </TD>
                 </tr>
             </table>
-        </div>
-    </form>        
+        </div>      
 </BODY>
 </HTML>

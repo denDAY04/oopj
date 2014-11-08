@@ -39,11 +39,35 @@ public class RPBean implements Serializable{
     private int day;    
     private int hour;
     private int minute;    
-    private String rpj;
+    private String stringrpj;
+    private RoutePlannerJourney rpj;
     private RPJSkel rPJSkel;
     private String origin;
     private String destination;
+    private int currentwaypoint=0;
+    
+    
+    public int getNumberofwaypoints(){
+    
+        if (rpj==null) return 0;
+        
+    return  rpj.getNumberofWaypoints();
+    }
+    
+    public void setNextwaypoint(int currentwaypoint){
+        this.currentwaypoint=currentwaypoint;
+    }
+    
+    public String getStop(){
 
+    return rpj.getWPStopName(currentwaypoint);
+    }
+    
+    public int getNextwaypoint(){
+        currentwaypoint++;
+        return 0;
+    }
+    
     public String getOrigin() {
         return origin;
     }
@@ -64,14 +88,13 @@ public class RPBean implements Serializable{
 //        return rPJ;
 //    }
     
-        public String getRpj() {
-        return rpj;
+        public String getStringrpj() {
+        return stringrpj;
     }
 
-    public void setRpj(String var) {
-
-        this.rpj = rPJSkel.createRouteplannerJourney(origin, destination,  startTime).getWPStopName(1);
-
+    public void setStringrpj(String var) {
+        rpj = rPJSkel.createRouteplannerJourney(origin, destination,  startTime);
+        this.stringrpj = rpj.getWPStopName(1);
     }
 
     public int getYear() {
@@ -118,11 +141,5 @@ public class RPBean implements Serializable{
         this.minute = minute;
         startTime.set(GregorianCalendar.MINUTE, minute);
     }
-
-
-    
-    
-    
-    
     
 }
