@@ -20,7 +20,8 @@ public class CustomerBean {
 public int value = 5;
 public int newcustomer;*/
 
-String customerNumber = "1234";
+//String customerNumber = "1234"; //change to "" to test page redirects 
+String customerNumber = "";
 String firstName = "Mister";
 String lastName = "Bean";
 String email = "Test@Test.Test";
