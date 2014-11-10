@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
 <jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
 
 <%

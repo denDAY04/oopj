@@ -1,5 +1,5 @@
 <HTML>
-    <%@ page language="java" contentType="text/html"%>
+    <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
 
     <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
     </jsp:useBean>

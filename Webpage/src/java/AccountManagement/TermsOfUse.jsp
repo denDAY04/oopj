@@ -1,10 +1,5 @@
-<%-- 
-    Document   : Login
-    Created on : Oct 28, 2014, 10:27:29 AM
-    Author     : Mathias
---%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!DOCTYPE html>
 <html>
     <head>
