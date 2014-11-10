@@ -9,6 +9,9 @@
 package RmiServer;
 
 import java.rmi.*;
+import java.rmi.server.*;
+import java.rmi.registry.*;
+
 import RmiServer.Skeleton.*;
 import RmiServer.Skeleton.Interface.*;
 import ModelClasses.*;
@@ -19,44 +22,55 @@ import java.util.logging.Logger;
 
 public class RMIServer implements IntRMIServer {
 
- // private static final String HOST = "goonhilly6.eitlab.ihk-edu.dk"; 
+    // private static final String HOST = "goonhilly6.eitlab.ihk-edu.dk"; 
     private static final String HOST = "localhost";
-    
-    
-    
+    private static final int PORT = 1099;
+    public static void main(String[] args) {
+
+        String host = HOST;
+        int port = PORT;
+        
+        if (args.length > 0) {
+            host = args[0];
+        }
+        if (args.length > 1) {
+            port = Integer.parseInt(args[1]);
+        }
+        System.out.println();
+        System.out.println("Using registry on " + host + " port " + port);
+        System.out.println();
+//        if (System.getSecurityManager() == null) {
+//            System.setSecurityManager(new RMISecurityManager());
+//        }
+        try {
+            System.out.println("DataServer: Instantiating server objects...");
+           // DataImpl p1 = new DataImpl("Jacks data");
+            WebsiteManagerRMISkel websiteManager = new WebsiteManagerRMISkel();
+            JourneyManagerRMISkel journeyManager = new JourneyManagerRMISkel();
+            RouteplannerJourneyManagerRMISkel routeplannerJourneyManager = new RouteplannerJourneyManagerRMISkel();
+            
+            
+            System.out.println("DataServer: Connecting server objects to registry...");
+            Registry registry = LocateRegistry.getRegistry(host, port);
+            //registry.rebind("jack", p1);
+            registry.rebind("websiteManager", websiteManager);
+            registry.rebind("journeyManager", journeyManager); 
+            registry.rebind("routeplannerJourneyManager ", routeplannerJourneyManager );
+           
+            System.out.println("DataServer: Waiting for client messages...");
+        } catch (Exception e) {
+            System.out.println("=== DataServer Error ===");
+            System.out.println("DataServer: Error description: " + e);
+            System.out.println("---DataServer: StackTrace ---: ");
+            e.printStackTrace();
+            System.out.println("=== DataServer Error (end) ===");
+        }
+
+    }
 
 //    JourneyManagerRMISkel journeyManager = new JourneyManagerRMISkel();
 //    RouteplannerJourneyManagerRMISkel routeplannerJourneyManager = new RouteplannerJourneyManagerRMISkel();
 //    WebsiteManagerRMISkel websiteManager = new WebsiteManagerRMISkel();
-
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 //    @Override
 //    public boolean createCustomer(Customer obj) {
 //        try {
@@ -94,11 +108,6 @@ public class RMIServer implements IntRMIServer {
 //    }
 //    
 //    
-    
-    
-    
-    
-
 ////Create an initialised array of four Account
 //      //objects...
 //      Account[] account =
@@ -151,6 +160,4 @@ public class RMIServer implements IntRMIServer {
 //        }
 //        return "Error";
 //    }
-
-    
 }
