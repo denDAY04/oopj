@@ -18,18 +18,18 @@ import java.net.UnknownHostException;
  */
 public class UDPTrafficManager {
 
-    private static DatagramSocket socket;
-    private static String rmiHost, rmiJournayManagerName;
-    private static int rmiPort;
-    private static int udpSocketPort = 2409;
+    private DatagramSocket socket;
+    private String rmiHost, rmiJournayManagerName;
+    private int rmiPort;
+    private int udpSocketPort = 2409;
 
     // Test for input buffer size with 800 passengers was 8207
     protected static final int BUFFER_IN_SIZE = 8300;
     // Test for input buffer size with 800 passengers was 21833
     protected static final int BUFFER_OUT_SIZE = 21900;
 
-
-    public synchronized static boolean sendDatagram(DatagramPacket packet) {
+// Legacy method
+    public synchronized boolean sendDatagram(DatagramPacket packet) {
         try {
             socket.send(packet);
             return true;
@@ -41,7 +41,7 @@ public class UDPTrafficManager {
 // Legacy method -- possibly not needed
 // Handlers should themselves determin when to stop execution, via their acks 
 // and seq#. 
-    private static boolean closeHandlerThread(String threadName) {
+    private boolean closeHandlerThread(String threadName) {
 //        for (UDPPacketHandler handler : handlers) {
 //            if (handler.name().equals(threadName)) {
 //                handler.killThread();
@@ -52,7 +52,7 @@ public class UDPTrafficManager {
         return false;
     }
 
-    private static void openUDPSocket(String host, String port) {
+    private void openUDPSocket(String host, String port) {
         try {
             int socketPort = Integer.parseInt(port);
             InetAddress hostAddr = InetAddress.getByName(host);
@@ -64,7 +64,7 @@ public class UDPTrafficManager {
         }
     }
 
-    private static void setRMIpropperties(String RMIHost, String RMIPort,
+    private void setRMIpropperties(String RMIHost, String RMIPort,
                                           String RMIJouenryManName) {
         try {
             rmiHost = RMIHost;
@@ -88,7 +88,7 @@ public class UDPTrafficManager {
      * @throws IOException if an I/O exception occurs during the output streams 
      * generating the reply. 
      */
-    private static void replyWithHandlerPort(DatagramPacket packet) throws IOException {
+    private void replyWithHandlerPort(DatagramPacket packet) throws IOException {
         // Create output streams and generate reply
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(bos);
@@ -110,7 +110,7 @@ public class UDPTrafficManager {
      * @param packet the <code>DatagramPacket</code> received from a client that 
      * wishes to be serviced. 
      */
-    private static void distributeDatagram(DatagramPacket packet) {
+    private void distributeDatagram(DatagramPacket packet) {
         /*
         Do not offer port numbers greater than 2,409 + 2,000. With a restiction
         of a maximum users of 1,000, we can expect to be able to reuse port 
@@ -149,13 +149,13 @@ public class UDPTrafficManager {
      * @throws UnknownHostException
      */
     public static void main(String[] args) throws UnknownHostException {
+        UDPTrafficManager manager = new UDPTrafficManager();
     /* testing */
         InetAddress addr = InetAddress.getLocalHost();
         String port = "2408";
         String host = addr.getHostName();
-        openUDPSocket(host, port);
-    /* -- */
-        
+        manager.openUDPSocket(host, port);
+    /* -- */      
     // Outcommented for testing
         //openUDPSocket(args[0], args[1]);
         //setRMIpropperties(args[2], args[3], args[4]);
@@ -167,8 +167,8 @@ public class UDPTrafficManager {
                 System.err.println("Waiting for packet. . . ");
                 packet = new DatagramPacket(new byte[BUFFER_IN_SIZE],
                                             BUFFER_IN_SIZE);
-                socket.receive(packet);
-                distributeDatagram(packet);
+                manager.socket.receive(packet);
+                manager.distributeDatagram(packet);
             } catch (IOException ex) {
                 System.err.println("-- UDPTrafficManager --");
                 System.err.println("I/O exception; datagram dropped.");
