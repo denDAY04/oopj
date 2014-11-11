@@ -11,8 +11,7 @@ import java.net.InetAddress;
 import java.net.SocketException;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.Arrays;
 
 
 /**
@@ -29,6 +28,8 @@ import java.util.logging.Logger;
  */
 public class UDPPacketHandler extends Thread {
 
+    private final int SEQ_NUM_Index = 0;
+    
     private boolean alive = true;
     private final int destPort;
     private final InetAddress destAddr;
@@ -36,6 +37,7 @@ public class UDPPacketHandler extends Thread {
     private byte[] bufferOut = new byte[UDPTrafficManager.BUFFER_OUT_SIZE];
     private final DatagramSocket socket;
     private DatagramPacket packet;
+    private byte expSeqNum, currSeqNum;
     private JourneyManager journeyManager;
 
 
@@ -139,9 +141,12 @@ public class UDPPacketHandler extends Thread {
      * Processes the data in the <code>DatagramPacket</code>.
      */
     private void processDatagram() throws IOException {
+        // Extract sequence number and preapre data input stream
         bufferIn = packet.getData();
-        ByteArrayInputStream bis = new ByteArrayInputStream(bufferIn);
-        ObjectInputStream ois = null;
+        byte seqNum = bufferIn[SEQ_NUM_Index];
+        byte[] dataIn = Arrays.copyOfRange(bufferIn, (SEQ_NUM_Index + 1), bufferIn.length);
+        ByteArrayInputStream bis = new ByteArrayInputStream(dataIn);
+        ObjectInputStream ois;
         try {
             ois = new ObjectInputStream(bis);
         } catch (IOException ex) {
@@ -150,24 +155,51 @@ public class UDPPacketHandler extends Thread {
             return;
         }
 
-        PassengerList passengers;
-        try {
-            // Test: generate tickets through RMI and return the list
-            passengers = (PassengerList) ois.readObject();
-            TicketList tickets = journeyManager.generateTickets(passengers);
-            ByteArrayOutputStream bos = new ByteArrayOutputStream();
-            ObjectOutputStream oos = new ObjectOutputStream(bos);
-            oos.writeObject(tickets);
-            bufferOut = bos.toByteArray();
-            DatagramPacket replyPacket = new DatagramPacket(bufferOut, bufferOut.length, destAddr, destPort);
-            socket.send(replyPacket);
-            
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(UDPPacketHandler.class.getName()).
-                    log(Level.SEVERE, null, ex);
+        switch (seqNum) {
+            case 0 :  // Request for service and tickets
+                PassengerList passengers;
+                try {
+                    // Extract passenger list and get ticket list from JourneyManager
+                    passengers = (PassengerList) ois.readObject();
+                    TicketList tickets = journeyManager.generateTickets(passengers);
+                    
+                    // Serialize ticket list
+                    ByteArrayOutputStream bos = new ByteArrayOutputStream();
+                    ObjectOutputStream oos = new ObjectOutputStream(bos);
+                    oos.writeObject(tickets);
+                    byte[] dataOut = bos.toByteArray();
+                                        
+                    //Incerement sequence number and populate output buffer
+                    prepBufferOut(++seqNum, dataOut);
+                    
+                    // Reply to client
+                    DatagramPacket replyPacket = new DatagramPacket(bufferOut, bufferOut.length, destAddr, destPort);
+                    socket.send(replyPacket);
+                } catch (IOException | ClassNotFoundException ex) {
+                    System.err.println("Could not process data in datagram.");
+                    ex.printStackTrace();
+                    System.err.println("Dropping datagram.");
+                    return;
+                }
+                break;
         }
-
-        killThread();
     }
 
+    /**
+     * Fill the output buffer with the supplied sequence number and data. 
+     * @param seqNum sequence number to be placed in the buffer.
+     * @param data data to be placed in the buffer.
+     */
+    private void prepBufferOut(byte seqNum, byte[] data) {
+        bufferOut[SEQ_NUM_Index] = seqNum;
+        /*
+        Copy data into output buffer, beginning from index next to sequence 
+        number and stopping at index one over data length due to one extra 
+        index for sequence number. 
+        */
+        for (int i = (SEQ_NUM_Index + 1); i != (data.length + 1); ++i) {
+            bufferOut[i] = data[i];
+        }
+    }
+    
 }
