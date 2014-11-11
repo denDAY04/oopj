@@ -6,6 +6,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.SocketException;
 import java.net.UnknownHostException;
+import java.rmi.NotBoundException;
+import java.rmi.RemoteException;
 
 
 /**
@@ -113,17 +115,15 @@ public class UDPTrafficManager {
          */
         try {
             // Using test constructor to ignore RMI. 
-            UDPPacketHandler handler
-                    = new UDPPacketHandler(packet, udpSocketPort);
-            // Outcommented to ignore RMI
-            //UDPPacketHandler handler = 
-            //       new UDPPacketHandler(packet, udpSocketPort, rmiHost,
-            //                               rmiPort, rmiJournayManagerName)
-            System.err.println("Handler created.");
+//            UDPPacketHandler handler
+//                    = new UDPPacketHandler(packet, udpSocketPort);
+        // Outcommented to ignore RMI
+            UDPPacketHandler handler = 
+                   new UDPPacketHandler(packet, udpSocketPort, rmiHost,
+                                           rmiPort, rmiJournayManagerName);
             handler.start();
-            System.err.println("Handler started.");
             ++udpSocketPort;
-        } catch (SocketException ex) {
+        } catch (SocketException | NotBoundException |RemoteException ex) {
             System.err.println("-- UDPTRafficManager --");
             System.err.println("Handler exception; datagram dropped.");
             System.err.println(ex.getMessage());
@@ -148,18 +148,17 @@ public class UDPTrafficManager {
     public static void main(String[] args) {
         UDPTrafficManager manager = new UDPTrafficManager();
         /* testing */
-        String port = "2408";
-        manager.openUDPSocket(port);
+//        String port = "2408";
+//        manager.openUDPSocket(port);
         /* -- */
-        // Outcommented for testing
-        //manager.openUDPSocket(args[0]);
-        //manager.setRMIpropperties(args[1], args[2], args[3]);
+        manager.openUDPSocket(args[0]);
+        manager.setRMIpropperties(args[1], args[2], args[3]);
 
         DatagramPacket packet;
         while (true) {
             // Wait for new DatagramPacket and distribute it to a new handler.
             try {
-                System.err.println("Waiting for packet. . . ");
+                System.out.println("Waiting for packet. . . ");
                 packet = new DatagramPacket(new byte[BUFFER_IN_SIZE],
                                             BUFFER_IN_SIZE);
                 manager.socket.receive(packet);

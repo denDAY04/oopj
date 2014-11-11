@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  * <code>VehicleComputer</code> in regards to producing a
  * <code>TicketList</code> out of a <code>PassengerList</code>.
  * <p>
- * This class is meant to be instanciated with each new session with a
+ * This class is meant to be instantiated with each new session with a
  * vehicle computer client, and terminate itself after having completed its
  * service of the client, as dictated by a custom protocol.
  * <p>
@@ -40,7 +40,7 @@ public class UDPPacketHandler extends Thread {
 
 
     /**
-     * Implementational constructer that incorporates RMI variables.
+     * Proper constructor that incorporates RMI variables.
      * <p>
      * @param packet            initial <code>DatagramPacket</code> from client
      *                          wanted to
@@ -74,16 +74,16 @@ public class UDPPacketHandler extends Thread {
     }
 
     /**
-     * Test constructor for testing. Ignores RMI initialization. Use for
+     * Test constructor that ignores RMI initialization. Use for
      * internal testing that doesn't concern itself with RMI.
      * <p>
      * @param packet     initial <code>DatagramPacket</code> from client wanted
-     *                   to
-     *                   be serviced.
+     *                   to be serviced.
      * @param socketPort the port number on which the handler shall open a
      *                   <code>DatagramSocket</code>.
      * <p>
-     * @throws SocketException if the socket is in use.
+     * @throws SocketException if unable to open a <code>DatagramSocket</code>
+     *                         on the specified port.
      */
     public UDPPacketHandler(DatagramPacket packet, int socketPort) throws
             SocketException {
@@ -123,7 +123,7 @@ public class UDPPacketHandler extends Thread {
                 System.err.println("I/O exception; datagram dropped.");
             }
         }
-        System.err.println("Thread killed. . . ");
+        System.out.println("Thread killed. . . ");
     }
 
     /**
@@ -151,26 +151,38 @@ public class UDPPacketHandler extends Thread {
             return;
         }
 
-        String s = "NO DATA";
+        PassengerList passengers;
         try {
-            s = (String) ois.readObject();
+            passengers = (PassengerList) ois.readObject();
+            TicketList tickets = journeyManager.generateTickets(passengers);
+            
+//            for (Ticket t : tickets.getAllTickets()) {
+//                System.out.println("Ticket nr. " + t.getNumber());
+//            }
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            ObjectOutputStream oos = new ObjectOutputStream(bos);
+            oos.writeObject(tickets);
+            bufferOut = bos.toByteArray();
+            DatagramPacket replyPacket = new DatagramPacket(bufferOut, bufferOut.length, destAddr, destPort);
+            socket.send(replyPacket);
+            
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(UDPPacketHandler.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        System.err.println(s);
-
+        
+        
         // Test reply back to client
-        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-        ObjectOutputStream oos = new ObjectOutputStream(bos);
-        String replyMsg = "This is the Handler replying";
-        oos.writeObject(replyMsg);
-        bufferOut = bos.toByteArray();
-
-        DatagramPacket replyPacket = new DatagramPacket(bufferOut,
-                                                        bufferOut.length,
-                                                        destAddr, destPort);
-        socket.send(replyPacket);
+//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+//        ObjectOutputStream oos = new ObjectOutputStream(bos);
+//        String replyMsg = "This is the Handler replying";
+//        oos.writeObject(replyMsg);
+//        bufferOut = bos.toByteArray();
+//
+//        DatagramPacket replyPacket = new DatagramPacket(bufferOut,
+//                                                        bufferOut.length,
+//                                                        destAddr, destPort);
+//        socket.send(replyPacket);
 
         killThread();
     }

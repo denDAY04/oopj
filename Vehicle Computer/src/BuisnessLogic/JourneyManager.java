@@ -42,8 +42,8 @@ public class JourneyManager {
     }
 
     /**
-     * Constructor for concept testing, bypassing the need for an RMI registry
-     * to be present by supplying the implementation class directly
+     * Test constructor, bypassing the need for an RMI registry to be 
+     * present by supplying the implementation class directly
      * <p>
      * @param rmiImpl the implementation class of the RMI skeleton, which would
      *                normally be placed in a registry.

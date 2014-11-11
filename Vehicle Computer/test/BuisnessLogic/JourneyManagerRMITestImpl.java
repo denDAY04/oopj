@@ -1,6 +1,7 @@
 package BuisnessLogic;
 
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 
 /**
@@ -10,11 +11,11 @@ import java.rmi.RemoteException;
  * @author Andreas Stensig Jensen, on 04-11-2014
  * Contributors: 
  */
-public class JourneyManagerRMITestImpl implements JourneyManagerRMISkel {
+public class JourneyManagerRMITestImpl extends UnicastRemoteObject implements JourneyManagerRMISkel {
 
     TicketList tickets = null;
 
-    public JourneyManagerRMITestImpl() {
+    public JourneyManagerRMITestImpl() throws RemoteException{
         // Create tickets to put into TicketList
         int[] numbers = {4, 5};
         String[] times = {"2014-10-31 00:00:01", "2014-10-31 00:00:02"};
@@ -47,6 +48,7 @@ public class JourneyManagerRMITestImpl implements JourneyManagerRMISkel {
     @Override
     public TicketList getExistingTickets(PassengerList passengers) throws
             RemoteException {
+        simulateDelay();
         return tickets;
     }
 
@@ -73,7 +75,21 @@ public class JourneyManagerRMITestImpl implements JourneyManagerRMISkel {
                             custommerNumber);
         TicketList ticketList = new TicketList();
         ticketList.addSingleTicket(ticket);
+        simulateDelay();
         return ticketList;
     }
 
+    /**
+     * Simulation of some measure of delay which would be present in the real
+     * implementation with RMI accessing a database in the end system.
+     * <p>
+     * Delay should be around 4 to 6 ms. 
+     */
+    private void simulateDelay() {
+        System.out.println("Delay simulation");
+        for (int i = 0; i != 10000000; ++i) {
+            // Do nothing. 
+        }
     }
+    
+}
