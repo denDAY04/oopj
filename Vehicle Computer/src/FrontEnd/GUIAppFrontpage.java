@@ -5,6 +5,9 @@
  */
 package FrontEnd;
 
+import javax.swing.JOptionPane;
+
+
 
 /**
  *
@@ -31,6 +34,7 @@ public class GUIAppFrontpage extends javax.swing.JPanel {
 
         btnShowTicket = new javax.swing.JButton();
         btnRoutePlanner = new javax.swing.JButton();
+        labPDASeen = new javax.swing.JLabel();
 
         setMinimumSize(new java.awt.Dimension(250, 400));
         setPreferredSize(new java.awt.Dimension(250, 400));
@@ -53,6 +57,9 @@ public class GUIAppFrontpage extends javax.swing.JPanel {
             }
         });
 
+        labPDASeen.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        labPDASeen.setText("Your device has been registered.");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -60,9 +67,13 @@ public class GUIAppFrontpage extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(50, 50, 50)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnRoutePlanner, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnShowTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(labPDASeen, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnRoutePlanner, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnShowTicket, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 42, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -71,7 +82,9 @@ public class GUIAppFrontpage extends javax.swing.JPanel {
                 .addComponent(btnShowTicket, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addComponent(btnRoutePlanner, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addComponent(labPDASeen)
+                .addContainerGap())
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -81,7 +94,10 @@ public class GUIAppFrontpage extends javax.swing.JPanel {
     }//GEN-LAST:event_btnShowTicketActionPerformed
 
     private void btnRoutePlannerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRoutePlannerActionPerformed
-        // TODO add your handling code here:
+        String message = "Redirecting to browser. . .";
+        String title = "Route Planner redirect";
+        JOptionPane.showMessageDialog(this, message, title,
+                                      JOptionPane.INFORMATION_MESSAGE);
         // Go to website
     }//GEN-LAST:event_btnRoutePlannerActionPerformed
 
@@ -89,5 +105,6 @@ public class GUIAppFrontpage extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRoutePlanner;
     private javax.swing.JButton btnShowTicket;
+    private javax.swing.JLabel labPDASeen;
     // End of variables declaration//GEN-END:variables
 }

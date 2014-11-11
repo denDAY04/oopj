@@ -96,7 +96,7 @@ public class UDPPacketHandler extends Thread {
     /**
      * Main flow of the the thread. Will continue to run, processing data
      * whenever a new <code>DatagramPacket</code> is available, until
-     * <code>killThread()</code> is called.
+     * <code>killThread()</code> has been called.
      */
     @Override
     public void run() {
@@ -107,7 +107,7 @@ public class UDPPacketHandler extends Thread {
             /*
              If first datagram is dropped then client won't know the port of 
              the handler. Thus the handler serves no purpose as the client will 
-             contant UDPTrafficManager again. There, kill the handler. 
+             contant UDPTrafficManager again. Therefore, kill the handler. 
              */
             System.err.println("-- UDPPacketHandler --");
             System.err.println("I/O exception in initial datagram.");
@@ -136,8 +136,7 @@ public class UDPPacketHandler extends Thread {
     }
 
     /**
-     * Processes the data in the <code>DatagramPacket</code> and changes
-     * newData flag to false.
+     * Processes the data in the <code>DatagramPacket</code>.
      */
     private void processDatagram() throws IOException {
         bufferIn = packet.getData();
@@ -153,12 +152,9 @@ public class UDPPacketHandler extends Thread {
 
         PassengerList passengers;
         try {
+            // Test: generate tickets through RMI and return the list
             passengers = (PassengerList) ois.readObject();
             TicketList tickets = journeyManager.generateTickets(passengers);
-            
-//            for (Ticket t : tickets.getAllTickets()) {
-//                System.out.println("Ticket nr. " + t.getNumber());
-//            }
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             ObjectOutputStream oos = new ObjectOutputStream(bos);
             oos.writeObject(tickets);
@@ -170,19 +166,6 @@ public class UDPPacketHandler extends Thread {
             Logger.getLogger(UDPPacketHandler.class.getName()).
                     log(Level.SEVERE, null, ex);
         }
-        
-        
-        // Test reply back to client
-//        ByteArrayOutputStream bos = new ByteArrayOutputStream();
-//        ObjectOutputStream oos = new ObjectOutputStream(bos);
-//        String replyMsg = "This is the Handler replying";
-//        oos.writeObject(replyMsg);
-//        bufferOut = bos.toByteArray();
-//
-//        DatagramPacket replyPacket = new DatagramPacket(bufferOut,
-//                                                        bufferOut.length,
-//                                                        destAddr, destPort);
-//        socket.send(replyPacket);
 
         killThread();
     }

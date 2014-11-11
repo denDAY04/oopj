@@ -27,10 +27,16 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="btnRoutePlanner" min="-2" pref="146" max="-2" attributes="0"/>
-                  <Component id="btnShowTicket" min="-2" pref="146" max="-2" attributes="0"/>
+                  <Component id="labPDASeen" alignment="1" max="32767" attributes="0"/>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="btnRoutePlanner" min="-2" pref="146" max="-2" attributes="0"/>
+                          <Component id="btnShowTicket" min="-2" pref="146" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="42" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace pref="54" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -41,7 +47,9 @@
               <Component id="btnShowTicket" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
               <Component id="btnRoutePlanner" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="119" max="32767" attributes="0"/>
+              <EmptySpace pref="92" max="32767" attributes="0"/>
+              <Component id="labPDASeen" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -74,6 +82,12 @@
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnRoutePlannerActionPerformed"/>
       </Events>
+    </Component>
+    <Component class="javax.swing.JLabel" name="labPDASeen">
+      <Properties>
+        <Property name="horizontalAlignment" type="int" value="11"/>
+        <Property name="text" type="java.lang.String" value="Your device has been registered."/>
+      </Properties>
     </Component>
   </SubComponents>
 </Form>
