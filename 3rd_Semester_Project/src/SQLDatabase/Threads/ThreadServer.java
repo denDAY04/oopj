@@ -54,10 +54,11 @@ public class ThreadServer {
 ////        es.execute(new WorkerThread(Action, Query, Values));
 //        
         
-        WorkerThread workerThread = new WorkerThread();        
-        ResultSet executeUpdate = workerThread.executeUpdate(Action, Query, Values);
+        //WorkerThread workerThread = new WorkerThread();        
+        WorkerThread workerThread = new WorkerThread(Action, Query, Values);
+       // int executeUpdate = workerThread.executeUpdate(Action, Query, Values);
         workerThread.run();
-            System.out.println(executeUpdate.toString());
+           //  System.out.println(executeUpdate + "");
         
         
         

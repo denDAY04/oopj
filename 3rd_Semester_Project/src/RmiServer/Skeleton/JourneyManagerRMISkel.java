@@ -5,7 +5,7 @@ import ModelClasses.TicketList;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-public class JourneyManagerRMISkel extends UnicastRemoteObject implements RmiServer.Skeleton.Interface.IntJourneyManagerRMISkel{
+public class JourneyManagerRMISkel extends UnicastRemoteObject implements RmiServer.Interface.IntJourneyManagerRMISkel{
 
     public JourneyManagerRMISkel() throws RemoteException{
     

@@ -21,7 +21,7 @@ public class Test_WebsiteManager_NewCustomer {
     public void Test_WebsiteManager_NewCustomer() throws RemoteException {
         System.err.println("break a");
         this.citizenKane = new Customer();   //create test customer object
-        citizenKane.setFirstname("Citizen");
+        citizenKane.setFirstname("dskcmlsksdmlkl");
         citizenKane.setLastname("Kane");
         citizenKane.setEmail("Kane@Citizen.com");
         citizenKane.setPassword("LetMeIn");        

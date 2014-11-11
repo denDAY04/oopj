@@ -4,7 +4,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 
-public class RouteplannerJourneyManagerRMISkel extends UnicastRemoteObject implements RmiServer.Skeleton.Interface.IntRouteplannerJourneyManagerRMISkel{
+public class RouteplannerJourneyManagerRMISkel extends UnicastRemoteObject implements RmiServer.Interface.IntRouteplannerJourneyManagerRMISkel{
 
     
     public RouteplannerJourneyManagerRMISkel()throws RemoteException{

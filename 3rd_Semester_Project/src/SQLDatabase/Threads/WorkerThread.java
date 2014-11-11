@@ -26,21 +26,116 @@ import java.util.logging.Logger;
     private String action;
     private String query;
     private ArrayList<Object> parameters;
+
+       
     
+    
+    @Override
+    public void run() {
+        setupCon(); // test no connection is parsed yet so we try to make it ourself 
         
-    public void WorkerThread(String Action, String Query, ArrayList<Object> Parameters){  
+        if ("update".equals(this.action)) executeUpdate();  
+        if ("query".equals(this.action)) executeQuery();
+        
+        
+    }
+    
+       
+    
+    
+    public WorkerThread(String Action, String Query, ArrayList<Object> Parameters){  
     this.action = Action;
     this.query = Query;
     this.parameters = Parameters;  
-   
-    
+    this.preparedStatement = null; 
+    this.resultSet = null;      
     
     
     Object object = (Integer) rowCount;
     // return object
     }    
     
+         
+    
+    
+    
+    
+    
+    public int executeUpdate() throws NullPointerException {        
+             
+                   
+          
+        try {if (!connection()) {throw new NullPointerException("Database connection lost");}  //if (!connection())        
+            preparedStatement = con.prepareStatement(query);
             
+            
+            for (int i = 0; i < parameters.size(); ++i) {
+                Class indexedClass = parameters.get(i).getClass();
+                if (indexedClass == String.class) {
+                    preparedStatement.setString(i + 1, (String) parameters.get(i));}
+                else if (indexedClass == Integer.class) {
+                    preparedStatement.setInt(i + 1, (Integer) parameters.get(i));
+                }
+            }
+            //this.resultSet = preparedStatement.executeQuery(); 
+            
+                rowCount = preparedStatement.executeUpdate();
+
+        } catch (SQLException e) {e.printStackTrace();}    
+        
+        return rowCount;
+    }
+    
+    
+
+    ///////////////////////////////executeQuery//////////////////////////////////
+    
+    
+    
+    
+    // ResultSet executeQuery(String Query) throws NullPointerException
+    public ResultSet executeQuery() throws NullPointerException {
+       
+
+        try {if (!connection()) {throw new NullPointerException("Database connection lost");} 
+
+            PreparedStatement preparedStatement;
+            preparedStatement = con.prepareStatement(query);
+
+            System.out.println("Success, Connection created");   // test output
+
+            resultSet = preparedStatement.executeQuery();
+
+            return resultSet;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e1) {
+                    e1.printStackTrace();
+                }
+            }
+        }
+        return resultSet;
+
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
         
     /**
      * executeUpdate
@@ -88,35 +183,35 @@ import java.util.logging.Logger;
     
     
     
-    // ResultSet executeQuery(String Query) throws NullPointerException
-    public ResultSet executeQuery() throws NullPointerException {
-       resultSet = null;
-       preparedStatement = null;
+//    // ResultSet executeQuery(String Query) throws NullPointerException
+//    public ResultSet executeQuery() throws NullPointerException {
+//       resultSet = null;
+//       preparedStatement = null;
+//
+//        try {if (!connection()) {throw new NullPointerException("Database connection lost");} 
+//
+//            PreparedStatement preparedStatement;
+//            preparedStatement = con.prepareStatement(query);
+//
+//            System.out.println("Success, Connection created");   // test output
+//
+//            resultSet = preparedStatement.executeQuery();
+//
+//            return resultSet;
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        } finally {
+//            if (con != null) {
+//                try {
+//                    con.close();
+//                } catch (SQLException e1) {
+//                    e1.printStackTrace();
+//                }
+//            }
+//        }
+//        return resultSet;
 
-        try {if (!connection()) {throw new NullPointerException("Database connection lost");} 
-
-            PreparedStatement preparedStatement;
-            preparedStatement = con.prepareStatement(query);
-
-            System.out.println("Success, Connection created");   // test output
-
-            resultSet = preparedStatement.executeQuery();
-
-            return resultSet;
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e1) {
-                    e1.printStackTrace();
-                }
-            }
-        }
-        return resultSet;
-
-    }
+ //   }
         
         
         
@@ -189,6 +284,8 @@ import java.util.logging.Logger;
       private boolean connection() throws SQLException{  // check if connection is alive       
       return (con.isValid(5));                         // value is timeout in seconds       
     }
+
+    
         
         
 

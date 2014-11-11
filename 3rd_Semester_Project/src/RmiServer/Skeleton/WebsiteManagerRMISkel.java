@@ -12,10 +12,12 @@ import SQLDatabase.Threads.ThreadServer;
 
 
 
-public class WebsiteManagerRMISkel extends UnicastRemoteObject implements RmiServer.Skeleton.Interface.IntWebsiteManagerRMISkel {
+public class WebsiteManagerRMISkel extends UnicastRemoteObject implements RmiServer.Interface.IntWebsiteManagerRMISkel {
 
     public WebsiteManagerRMISkel() throws RemoteException {
      //constructor... Not implemented yet
+        System.out.println("WebSmRmi executed");
+        
     }
  
     
@@ -34,8 +36,9 @@ public class WebsiteManagerRMISkel extends UnicastRemoteObject implements RmiSer
         Values.add(customer.getEmail());
         Values.add(customer.getPassword());
         String Action = "update"; //query or update
-        status = ThreadServer.nextThread(Action, Query, Values);
-               
+        //status = ThreadServer.nextThread(Action, Query, Values);
+        ThreadServer.nextThread(Action, Query, Values); 
+        
         System.out.println("Query string output: " + Query);  // test output
         System.out.println(Values.toString());
         
