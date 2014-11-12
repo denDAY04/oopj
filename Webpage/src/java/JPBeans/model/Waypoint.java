@@ -1,6 +1,6 @@
 package JPBeans.model;
 
-
+import java.io.Serializable;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
@@ -11,7 +11,7 @@ import java.util.Objects;
  *
  * @author Rasmus
  */
-public class Waypoint {
+public class Waypoint implements Serializable {
 
     private String StopName;
     private int StopZone;
@@ -24,10 +24,19 @@ public class Waypoint {
     private String departureType;
     private String departureDirection;
     private int travelTimeDays;
-    private int travelTimeHours;  
-    private int travelTimeMinutes;    
+    private int travelTimeHours;
+    private int travelTimeMinutes;
+    private int changeCounter;
 
-    public Waypoint(String StopName, int StopZone, GregorianCalendar arrivalTimeAtStop, int waitTimeDays, int waitTimeHours, int waitTimeMinutes, GregorianCalendar DepartureTimeFromStop, String departureLine, String departureType, String departureDirection) {
+    public int getChangeCounter() {
+        return changeCounter;
+    }
+
+    public void setChangeCounter(int changeCounter) {
+        this.changeCounter = changeCounter;
+    }
+
+    public Waypoint(String StopName, int StopZone, GregorianCalendar arrivalTimeAtStop, int waitTimeDays, int waitTimeHours, int waitTimeMinutes, GregorianCalendar DepartureTimeFromStop, String departureLine, String departureType, String departureDirection, int changeCounter) {
         this.StopName = StopName;
         this.StopZone = StopZone;
         this.arrivalTimeAtStop = arrivalTimeAtStop;
@@ -38,6 +47,7 @@ public class Waypoint {
         this.departureLine = departureLine;
         this.departureType = departureType;
         this.departureDirection = departureDirection;
+        this.changeCounter = changeCounter;
     }
 
     public String getStopName() {
@@ -213,9 +223,5 @@ public class Waypoint {
         }
         return true;
     }
-
-
-
-
 
 }

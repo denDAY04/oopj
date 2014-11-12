@@ -24,10 +24,11 @@ public class RPJSkel implements RPJInterface, Serializable {
     public RoutePlannerJourney createRouteplannerJourney(String origin, String destination, GregorianCalendar timeDeparture) {
 
          ArrayList<Waypoint> waypoints = new ArrayList();
-        waypoints.add(0, WaypointManager.CreateWayPoint("Ballerup", 6, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby"));
-        waypoints.add(0, WaypointManager.CreateWayPoint("Skovlunde", 5, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby"));
-        waypoints.add(0, WaypointManager.CreateWayPoint("Malmparken", 4, new GregorianCalendar(), new GregorianCalendar(), "153", "Bus", "Vesterport"));
-        waypoints.add(0, WaypointManager.CreateWayPoint("Herlev", 3, new GregorianCalendar(), new GregorianCalendar(), "153", "Bus", "Vesterport"));
-        return RoutePlannerJourneyManager.CreateRoutePlannerJourney(waypoints, new GregorianCalendar(), new GregorianCalendar(), 4);
+        waypoints.add(0, WaypointManager.CreateWayPoint("Ballerup", 6, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby",1));
+        waypoints.add(0, WaypointManager.CreateWayPoint("Malmparken", 5, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby",1));        
+        waypoints.add(0, WaypointManager.CreateWayPoint("Herlev", 5, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby",1));
+        waypoints.add(0, WaypointManager.CreateWayPoint("Husum", 4, new GregorianCalendar(), new GregorianCalendar(), "153", "Bus", "Vesterport",0));
+        waypoints.add(0, WaypointManager.CreateWayPoint("Valby", 3, new GregorianCalendar(), new GregorianCalendar(), "153", "Bus", "Vesterport",0));
+        return RoutePlannerJourneyManager.CreateRoutePlannerJourney(waypoints, new GregorianCalendar(), new GregorianCalendar(), 5);
     }
 }

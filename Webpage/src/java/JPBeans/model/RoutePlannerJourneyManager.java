@@ -12,7 +12,7 @@ import java.util.GregorianCalendar;
  * RoutePlannerJourneyManager bla bla bla Not implementing index out of bounds
  * or nullpointer checks
  *
- * @author Qesss
+ * @author Rasmus
  */
 public class RoutePlannerJourneyManager {
 
@@ -34,9 +34,9 @@ public class RoutePlannerJourneyManager {
 
         // calculate travel time for waypoints
         // Travel time is the time between departing from a stop (index) and arriving at the following stop (index+1)
-        for (int i = 0; i < waypoints.size()-1; i++) {
+        for (int i = 0; i < waypoints.size() - 1; i++) {
             waypoints.get(i).setTravelTimeDays((int) (Math.floor((waypoints.get(i + 1).getArrivalTimeAtStop().getTimeInMillis()
-           -waypoints.get(i).getDepartureTimeFromStop().getTimeInMillis()) / (HOURS * MINUTES * SECONDS * MILLISECONDS))));
+                    - waypoints.get(i).getDepartureTimeFromStop().getTimeInMillis()) / (HOURS * MINUTES * SECONDS * MILLISECONDS))));
 
             // GetTravelTimeHours returns the number of whole hours. returns only hours in excess of whole days.
             int temp = (int) (Math.floor((waypoints.get(i + 1).getArrivalTimeAtStop().getTimeInMillis()
@@ -46,7 +46,7 @@ public class RoutePlannerJourneyManager {
 
             // getTravelTimeMinutes returns the number of whole minutes. Returns only minutes in excess of whole hours.  
             temp = (int) (Math.floor((waypoints.get(i + 1).getArrivalTimeAtStop().getTimeInMillis()
-           -waypoints.get(i).getDepartureTimeFromStop().getTimeInMillis()) / (SECONDS * MILLISECONDS)));
+                    - waypoints.get(i).getDepartureTimeFromStop().getTimeInMillis()) / (SECONDS * MILLISECONDS)));
             temp = temp - (60 * ((int) (Math.floor(temp / 60))));
             waypoints.get(i).setTravelTimeMinutes(temp);
         }
@@ -64,8 +64,8 @@ public class RoutePlannerJourneyManager {
     public static void testOutput(RoutePlannerJourney rPJ) {
 
         System.err.println("**** RoutePlannerJourney ****");
-        System.err.println("Departure Station: "+rPJ.getWPStopName(0));
-        System.err.println("Destination Station: "+rPJ.getWPStopName(rPJ.getNumberofWaypoints()-1));
+        System.err.println("Departure Station: " + rPJ.getWPStopName(0));
+        System.err.println("Destination Station: " + rPJ.getWPStopName(rPJ.getNumberofWaypoints() - 1));
         System.err.println("Departure: " + "Year: " + rPJ.getDeparture().get(GregorianCalendar.YEAR) + " date: " + rPJ.getDeparture().get(GregorianCalendar.DATE) + ", hours: " + rPJ.getDeparture().get(GregorianCalendar.HOUR_OF_DAY) + ", minutes:  " + rPJ.getDeparture().get(GregorianCalendar.MINUTE));
         System.err.println("Arrival: " + rPJ.getArrival().get(GregorianCalendar.YEAR) + " date: " + rPJ.getArrival().get(GregorianCalendar.DATE) + ", hours: " + rPJ.getArrival().get(GregorianCalendar.HOUR_OF_DAY) + ", minutes:  " + rPJ.getArrival().get(GregorianCalendar.MINUTE));
         System.err.println("Number of waypoints: " + rPJ.getNumberofWaypoints());
@@ -90,6 +90,7 @@ public class RoutePlannerJourneyManager {
                 System.err.println("waypoint " + i + ": Departure Line: " + rPJ.getWPDepartureLine(i));
                 System.err.println("waypoint " + i + ": Departure type: " + rPJ.getWPDepartureType(i));
                 System.err.println("waypoint " + i + ": Departure Direction: " + rPJ.getWPDepartureDirection(i));
+                System.err.println("waypoint " + i + ": Change Counter: " + rPJ.getWPChangeCounter(i));
             }
         }
     }

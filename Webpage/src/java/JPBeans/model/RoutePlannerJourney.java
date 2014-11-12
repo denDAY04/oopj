@@ -1,5 +1,6 @@
 package JPBeans.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.Objects;
@@ -11,7 +12,7 @@ import java.util.Objects;
  *
  * @author Rasmus
  */
-public class RoutePlannerJourney {
+public class RoutePlannerJourney implements Serializable {
 
     private ArrayList<Waypoint> waypoints;
     private GregorianCalendar arrival;
@@ -36,7 +37,7 @@ public class RoutePlannerJourney {
     public int getNumberofWaypoints() {
         return waypoints.size();
     }
-    
+
     public GregorianCalendar getArrival() {
         return arrival;
     }
@@ -93,7 +94,6 @@ public class RoutePlannerJourney {
         this.travelTimeMinutes = travelTimeMinutes;
     }
 
-    
 // Get methods to access Waypoint Array data.    
     public String getWPStopName(int index) {
         return waypoints.get(index).getStopName();
@@ -134,22 +134,23 @@ public class RoutePlannerJourney {
     public String getWPDepartureDirection(int index) {
         return waypoints.get(index).getDepartureDirection();
     }
-    
-    
-        public int getTravelTimeDays(int index) {
+    public int getWPChangeCounter(int index){
+    return waypoints.get(index).getChangeCounter();
+    }
+
+    public int getTravelTimeDays(int index) {
         return waypoints.get(index).getTravelTimeDays();
-    }    
+    }
 
     public int getTravelTimeHours(int index) {
         return waypoints.get(index).getTravelTimeHours();
-    }    
+    }
 
     public int getTravelTimeMinutes(int index) {
         return waypoints.get(index).getTravelTimeMinutes();
     }
     
     
-
     @Override
     public int hashCode() {
         int hash = 5;
@@ -198,5 +199,39 @@ public class RoutePlannerJourney {
             return false;
         }
         return true;
+    }
+
+    public void testOutput() {
+
+        System.err.println("**** RoutePlannerJourney ****");
+        System.err.println("Departure Station: " + getWPStopName(0));
+        System.err.println("Destination Station: " + getWPStopName(getNumberofWaypoints() - 1));
+        System.err.println("Departure: " + "Year: " + getDeparture().get(GregorianCalendar.YEAR) + " date: " + getDeparture().get(GregorianCalendar.DATE) + ", hours: " + getDeparture().get(GregorianCalendar.HOUR_OF_DAY) + ", minutes:  " + getDeparture().get(GregorianCalendar.MINUTE));
+        System.err.println("Arrival: " + getArrival().get(GregorianCalendar.YEAR) + " date: " + getArrival().get(GregorianCalendar.DATE) + ", hours: " + getArrival().get(GregorianCalendar.HOUR_OF_DAY) + ", minutes:  " + getArrival().get(GregorianCalendar.MINUTE));
+        System.err.println("Number of waypoints: " + getNumberofWaypoints());
+        System.err.println("Number of zones: " + getZones());
+        System.err.println("Price: " + getPrice() + " kr.");
+        System.err.println("Travel Time days: " + getTravelTimeDays());
+        System.err.println("Travel Time hours: " + getTravelTimeHours());
+        System.err.println("Travel Time minutes: " + getTravelTimeMinutes());
+        for (int i = 0; i < getNumberofWaypoints(); i++) {
+            System.err.println("**** Waypoint " + i + " ****");
+            System.err.println("waypoint " + i + ": StopName: " + getWPStopName(i));
+            System.err.println("waypoint " + i + ": StopZone: " + getWPStopZone(i));
+            System.err.println("waypoint " + i + ": arrivalTimeAtStop: " + "Year: " + getWPArrivalTimeAtStop(i).get(GregorianCalendar.YEAR) + " date: " + getWPArrivalTimeAtStop(i).get(GregorianCalendar.DATE) + ", hours: " + getWPArrivalTimeAtStop(i).get(GregorianCalendar.HOUR_OF_DAY) + ", minutes:  " + getWPArrivalTimeAtStop(i).get(GregorianCalendar.MINUTE));
+            if (getWPDepartureTimeFromStop(i) != null) {
+                System.err.println("waypoint " + i + ": DepartureTimeFromStop: " + "Year: " + getWPDepartureTimeFromStop(i).get(GregorianCalendar.YEAR) + " date: " + getWPDepartureTimeFromStop(i).get(GregorianCalendar.DATE) + ", hours: " + getWPDepartureTimeFromStop(i).get(GregorianCalendar.HOUR_OF_DAY) + ", minutes:  " + getWPDepartureTimeFromStop(i).get(GregorianCalendar.MINUTE));
+                System.err.println("waypoint " + i + ": Wait time days: " + getWPWaitTimeDays(i));
+                System.err.println("waypoint " + i + ": Wait time Hours: " + getWPWaitTimeHours(i));
+                System.err.println("waypoint " + i + ": Wait time Minutes: " + getWPWaitTimeMinutes(i));
+                System.err.println("waypoint " + i + ": Travel time days: " + getTravelTimeDays(i));
+                System.err.println("waypoint " + i + ": Travel time hours: " + getTravelTimeHours(i));
+                System.err.println("waypoint " + i + ": Travel time minutes: " + getTravelTimeMinutes(i));
+                System.err.println("waypoint " + i + ": Departure Line: " + getWPDepartureLine(i));
+                System.err.println("waypoint " + i + ": Departure type: " + getWPDepartureType(i));
+                System.err.println("waypoint " + i + ": Departure Direction: " + getWPDepartureDirection(i));
+                System.err.println("waypoint " + i + ": Change Counter: " + getWPChangeCounter(i));
+            }
+        }
     }
 }

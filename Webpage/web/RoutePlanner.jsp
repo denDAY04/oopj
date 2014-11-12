@@ -94,7 +94,7 @@
                 <% for (int row = 1; row <= RPBean.getNumberofwaypoints(); row++) { %>
                 <TR>
                     <TD> <jsp:getProperty name="RPBean" property="stop"/> </TD>
-                        <jsp:getProperty name="RPBean" property="nextwaypoint"/>
+                    <!--<jsp:getProperty name="RPBean" property="nextwaypoint"/>-->
                 </TR>
                         <% }%>
             </table>

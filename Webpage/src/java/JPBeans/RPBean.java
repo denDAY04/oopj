@@ -49,9 +49,10 @@ public class RPBean implements Serializable{
     
     public int getNumberofwaypoints(){
     
-        if (rpj==null) return 0;
-        
-    return  rpj.getNumberofWaypoints();
+        if (rpj==null) 
+            return 0;
+     // get the total number of changes
+    return  rpj.getWPChangeCounter(0);
     }
     
     public void setNextwaypoint(int currentwaypoint){
@@ -62,6 +63,12 @@ public class RPBean implements Serializable{
 
     return rpj.getWPStopName(currentwaypoint);
     }
+    
+    public String getWaypointtransport(){
+      return  rpj.getWPDepartureType(currentwaypoint)+" "+rpj.getWPDepartureLine(currentwaypoint)+ " to "+rpj.getWPDepartureDirection(currentwaypoint);
+    
+    }
+    
     
     public int getNextwaypoint(){
         currentwaypoint++;
@@ -95,6 +102,18 @@ public class RPBean implements Serializable{
     public void setStringrpj(String var) {
         rpj = rPJSkel.createRouteplannerJourney(origin, destination,  startTime);
         this.stringrpj = rpj.getWPStopName(1);
+        
+        currentwaypoint++;
+        String currentTransport = getWaypointtransport();
+        currentwaypoint++;
+        String nextTransport = getWaypointtransport();
+        while (currentTransport.equals(nextTransport)){
+            currentTransport = nextTransport;
+            currentwaypoint++;
+            nextTransport = getWaypointtransport();        
+        }
+        currentwaypoint--;
+        
     }
 
     public int getYear() {
