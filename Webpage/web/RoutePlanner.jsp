@@ -75,7 +75,7 @@
                     <TD></TD>
                     <TD><INPUT TYPE="hidden"
                                NAME="stringrpj"
-                               VALUE="<jsp:getProperty name="RPBean" property="stringrpj" />"></TD>
+                               VALUE=" "></TD>
                 </TR>
             </TABLE>
             <BR><BR>

@@ -45,10 +45,11 @@ public class RoutePlannerJourneyManager {
             waypoints.get(i).setTravelTimeHours(temp);
 
             // getTravelTimeMinutes returns the number of whole minutes. Returns only minutes in excess of whole hours.  
-            temp = (int) (Math.floor((waypoints.get(i + 1).getArrivalTimeAtStop().getTimeInMillis()
+           // System.err.println("travel time: i:"+i+" (i + 1).getArrivalTimeAtStop: "+waypoints.get(i + 1).getArrivalTimeAtStop().getTimeInMillis()+"(i).getDepartureTimeFromStop(): "+waypoints.get(i).getDepartureTimeFromStop().getTimeInMillis());
+            int temp2 = (int) (Math.floor((waypoints.get(i + 1).getArrivalTimeAtStop().getTimeInMillis()
                     - waypoints.get(i).getDepartureTimeFromStop().getTimeInMillis()) / (SECONDS * MILLISECONDS)));
-            temp = temp - (60 * ((int) (Math.floor(temp / 60))));
-            waypoints.get(i).setTravelTimeMinutes(temp);
+            temp2 = temp2 - (60 * ((int) (Math.floor(temp2 / 60))));
+            waypoints.get(i).setTravelTimeMinutes(temp2);
         }
 
         int price = zones*10;

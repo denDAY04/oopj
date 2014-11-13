@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package JPBeans;
 
 import JPBeans.model.RoutePlannerJourney;
@@ -15,66 +14,71 @@ import java.util.TimeZone;
  *
  * @author Qesss
  */
-public class RPBean implements Serializable{
+public class RPBean implements Serializable {
 
     public RPBean() {
         this.startTime = new GregorianCalendar(TimeZone.getTimeZone("Europe/Copenhagen"));
         startTime.add(GregorianCalendar.MINUTE, 5); // add 5 minute
         this.year = startTime.get(GregorianCalendar.YEAR);
         this.month = startTime.get(GregorianCalendar.MONTH);
-        this.day = startTime.get(GregorianCalendar.DAY_OF_MONTH);   
+        this.day = startTime.get(GregorianCalendar.DAY_OF_MONTH);
         this.hour = startTime.get(GregorianCalendar.HOUR_OF_DAY);
         this.minute = startTime.get(GregorianCalendar.MINUTE);
         this.rPJSkel = new RPJSkel();
         // test
-        this.origin="ballerup";
-        this.destination="valby";
-        
+        this.origin = "ballerup";
+        this.destination = "valby";
+
     }
-    
+
     GregorianCalendar startTime;
-    
-    private int year;   
+
+    private int year;
     private int month;
-    private int day;    
+    private int day;
     private int hour;
-    private int minute;    
+    private int minute;
     private String stringrpj;
     private RoutePlannerJourney rpj;
     private RPJSkel rPJSkel;
     private String origin;
     private String destination;
-    private int currentwaypoint=0;
-    
-    
-    public int getNumberofwaypoints(){
-    
-        if (rpj==null) 
-            return 0;
-     // get the total number of changes
-    return  rpj.getWPChangeCounter(0);
-    }
-    
-    public void setNextwaypoint(int currentwaypoint){
-        this.currentwaypoint=currentwaypoint;
-    }
-    
-    public String getStop(){
+    private int currentwaypoint = 0;
 
-    return rpj.getWPStopName(currentwaypoint);
+    public int getNumberofwaypoints() {
+
+        if (rpj == null) {
+            return 0;
+        }
+        // get the total number of changes
+        return rpj.getWPChangeCounter(0);
     }
-    
-    public String getWaypointtransport(){
-      return  rpj.getWPDepartureType(currentwaypoint)+" "+rpj.getWPDepartureLine(currentwaypoint)+ " to "+rpj.getWPDepartureDirection(currentwaypoint);
-    
+
+    public void setNextwaypoint(int currentwaypoint) {
+        this.currentwaypoint = currentwaypoint;
     }
-    
-    
-    public int getNextwaypoint(){
+
+    public String getStop() {
+
+        return rpj.getWPStopName(currentwaypoint);
+    }
+
+    public String getWaypointtransport() {
+        return rpj.getWPDepartureType(currentwaypoint) + " " + rpj.getWPDepartureLine(currentwaypoint) + " to " + rpj.getWPDepartureDirection(currentwaypoint);
+
+    }
+
+    public int getNextwaypoint() {
         currentwaypoint++;
+        if ((currentwaypoint+1) < rpj.getNumberofWaypoints()) {
+            while (rpj.getWPChangeCounter(currentwaypoint) == rpj.getWPChangeCounter(currentwaypoint + 1)) {
+                currentwaypoint++;
+                if (((currentwaypoint+1) >= rpj.getNumberofWaypoints())){break;}
+            }
+        }
         return 0;
     }
-    
+
     public String getOrigin() {
         return origin;
     }
@@ -94,26 +98,14 @@ public class RPBean implements Serializable{
 //    public RoutePlannerJourney getRPJ() {
 //        return rPJ;
 //    }
-    
-        public String getStringrpj() {
+    public String getStringrpj() {
         return stringrpj;
     }
 
     public void setStringrpj(String var) {
-        rpj = rPJSkel.createRouteplannerJourney(origin, destination,  startTime);
+        rpj = rPJSkel.createRouteplannerJourney(origin, destination, startTime);
         this.stringrpj = rpj.getWPStopName(1);
-        
-        currentwaypoint++;
-        String currentTransport = getWaypointtransport();
-        currentwaypoint++;
-        String nextTransport = getWaypointtransport();
-        while (currentTransport.equals(nextTransport)){
-            currentTransport = nextTransport;
-            currentwaypoint++;
-            nextTransport = getWaypointtransport();        
-        }
-        currentwaypoint--;
-        
+
     }
 
     public int getYear() {
@@ -140,7 +132,7 @@ public class RPBean implements Serializable{
 
     public void setDay(int day) {
         this.day = day;
-        startTime.set(GregorianCalendar.DAY_OF_MONTH, day);      
+        startTime.set(GregorianCalendar.DAY_OF_MONTH, day);
     }
 
     public int getHour() {
@@ -160,5 +152,5 @@ public class RPBean implements Serializable{
         this.minute = minute;
         startTime.set(GregorianCalendar.MINUTE, minute);
     }
-    
+
 }
