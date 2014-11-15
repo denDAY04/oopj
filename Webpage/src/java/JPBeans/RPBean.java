@@ -70,10 +70,16 @@ public class RPBean implements Serializable {
 
     public int getNextwaypoint() {
         currentwaypoint++;
+
+        if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint -1)){return 0;}
+        
         if ((currentwaypoint+1) < rpj.getNumberofWaypoints()) {
             while (rpj.getWPChangeCounter(currentwaypoint) == rpj.getWPChangeCounter(currentwaypoint + 1)) {
                 currentwaypoint++;
-                if (((currentwaypoint+1) >= rpj.getNumberofWaypoints())){break;}
+                    
+                    if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint -1)){return 0;}
+ 
+                    if (((currentwaypoint+1) > rpj.getNumberofWaypoints())){return 0;}
             }
         }
         return 0;

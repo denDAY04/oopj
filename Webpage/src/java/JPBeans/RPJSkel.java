@@ -24,7 +24,7 @@ public class RPJSkel implements RPJInterface, Serializable {
     public RoutePlannerJourney createRouteplannerJourney(String origin, String destination, GregorianCalendar timeDeparture) {
 
          ArrayList<Waypoint> waypoints = new ArrayList();
-        waypoints.add( WaypointManager.CreateWayPoint("Ballerup", 6, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby",1));
+        waypoints.add( WaypointManager.CreateWayPoint("Ballerup", 6, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby",2));
         waypoints.add( WaypointManager.CreateWayPoint("Malmparken", 5, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby",1));        
         waypoints.add( WaypointManager.CreateWayPoint("Herlev", 5, new GregorianCalendar(), new GregorianCalendar(), "B", "Train", "Valby",1));
         waypoints.add( WaypointManager.CreateWayPoint("Husum", 4, new GregorianCalendar(), new GregorianCalendar(), "153", "Bus", "Vesterport",0));
