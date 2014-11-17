@@ -44,6 +44,12 @@ public class RPBean implements Serializable {
     private String origin;
     private String destination;
     private int currentwaypoint = 0;
+    private boolean getOn = true;
+    private int departureStopIndex;
+    private static final int HOURS = 24;
+    private static final int MINUTES = 60;
+    private static final int SECONDS = 60;
+    private static final int MILLISECONDS = 1000;
 
     public int getNumberofwaypoints() {
 
@@ -51,7 +57,7 @@ public class RPBean implements Serializable {
             return 0;
         }
         // get the total number of changes
-        return rpj.getWPChangeCounter(0);
+        return 2 + (2 * rpj.getWPChangeCounter(0));
     }
 
     public void setNextwaypoint(int currentwaypoint) {
@@ -64,22 +70,82 @@ public class RPBean implements Serializable {
     }
 
     public String getWaypointtransport() {
-        return rpj.getWPDepartureType(currentwaypoint) + " " + rpj.getWPDepartureLine(currentwaypoint) + " to " + rpj.getWPDepartureDirection(currentwaypoint);
+        if (getOn) {
+            getOn = false;
+            
+            departureStopIndex = currentwaypoint;
+            if (currentwaypoint>0){departureStopIndex--;}
+            if (currentwaypoint == 0) {
+                return "Take " + rpj.getWPDepartureType(currentwaypoint) + " " + rpj.getWPDepartureLine(currentwaypoint) + " from " + rpj.getWPStopName(currentwaypoint) + " towards " + rpj.getWPDepartureDirection(currentwaypoint);
+            } else {
+                return "Take " + rpj.getWPDepartureType(currentwaypoint) + " " + rpj.getWPDepartureLine(currentwaypoint) + " from " + rpj.getWPStopName(currentwaypoint - 1) + " towards " + rpj.getWPDepartureDirection(currentwaypoint);
+            }
+
+        } else {
+            getOn = true;
+            return "Get off " + rpj.getWPDepartureType(currentwaypoint) + " " + rpj.getWPDepartureLine(currentwaypoint) + " at " + rpj.getWPStopName(currentwaypoint);
+        }
 
     }
+
+    public String getTime() {
+        if (getOn) {
+            String waittime = "";
+            if (currentwaypoint > 0) {
+
+                //int days = (int)(Math.floor((rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis() - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
+                int hours = (int) (Math.floor((rpj.getWPDepartureTimeFromStop(currentwaypoint-1).getTimeInMillis()
+                        - rpj.getWPArrivalTimeAtStop(currentwaypoint-1).getTimeInMillis()) / (MINUTES * SECONDS * MILLISECONDS)));
+                hours = hours - (24 * ((int) (Math.floor(hours / 24))));
+
+                int minutes = (int) (Math.floor(((rpj.getWPDepartureTimeFromStop(currentwaypoint-1).getTimeInMillis()
+                        - rpj.getWPArrivalTimeAtStop(currentwaypoint-1).getTimeInMillis()) / (SECONDS * MILLISECONDS))));
+                minutes = minutes - (60 * ((int) (Math.floor(minutes / 60))));
+
+                waittime = "    Wait time: " + String.format("%02d", hours) + ":" + String.format("%02d", minutes);
+            }
+            if (currentwaypoint == 0) {
+                return "Departure: " + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint).get(GregorianCalendar.MINUTE)) + waittime;
+            } else {
+                return "Departure: " + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint - 1).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint - 1).get(GregorianCalendar.MINUTE)) + waittime;
+            }
+        } else {
+
+                
+            //int days = (int)(Math.floor((rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis() - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
+            int hours = (int) (Math.floor(rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis()
+                    - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (MINUTES * SECONDS * MILLISECONDS));
+            hours = hours - (24 * ((int) (Math.floor(hours / 24))));
+
+            int minutes = (int) (Math.floor((rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis()
+                    - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (SECONDS * MILLISECONDS)));
+            minutes = minutes - (60 * ((int) (Math.floor(minutes / 60))));
+
+            
+                return "Arrival: " + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint).get(GregorianCalendar.MINUTE)) + "        Duration: " + String.format("%02d", hours) + ":" + String.format("%02d", minutes);
+
+            }
+        }
+    
 
     public int getNextwaypoint() {
         currentwaypoint++;
 
-        if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint -1)){return 0;}
-        
-        if ((currentwaypoint+1) < rpj.getNumberofWaypoints()) {
+        if ((currentwaypoint + 1) < rpj.getNumberofWaypoints()) {
+            if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint - 1)) {
+                return 0;
+            }
+
             while (rpj.getWPChangeCounter(currentwaypoint) == rpj.getWPChangeCounter(currentwaypoint + 1)) {
                 currentwaypoint++;
-                    
-                    if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint -1)){return 0;}
- 
-                    if (((currentwaypoint+1) > rpj.getNumberofWaypoints())){return 0;}
+
+                if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint - 1)) {
+                    return 0;
+                }
+
+                if (((currentwaypoint + 1) >= rpj.getNumberofWaypoints())) {
+                    return 0;
+                }
             }
         }
         return 0;
@@ -101,18 +167,20 @@ public class RPBean implements Serializable {
         this.destination = destination;
     }
 
-//    public RoutePlannerJourney getRPJ() {
-//        return rPJ;
-//    }
-    public String getStringrpj() {
-        return stringrpj;
-    }
 
-    public void setStringrpj(String var) {
+    // Method for
+    
+    public void setDorouteplanning(String var) {
+        // reset
+            currentwaypoint = 0;
+            getOn = true;
+            departureStopIndex=0;
+
         rpj = rPJSkel.createRouteplannerJourney(origin, destination, startTime);
-        this.stringrpj = rpj.getWPStopName(1);
 
     }
+    
+    // Getters and setters for the field on the website.
 
     public int getYear() {
         return year;

@@ -5,7 +5,7 @@
 --%>
 
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-
+<%@ page trimDirectiveWhitespaces="false" %>
 
 <!DOCTYPE html>
 
@@ -74,7 +74,7 @@
                 <TR>
                     <TD></TD>
                     <TD><INPUT TYPE="hidden"
-                               NAME="stringrpj"
+                               NAME="dorouteplanning"
                                VALUE=" "></TD>
                 </TR>
             </TABLE>
@@ -84,22 +84,28 @@
 
         <DIV id="route"></div>    
 
+        <% if (RPBean.getNumberofwaypoints()>0){%>
+        
+        <h1  align="CENTER">Journey:</h1>
+        <br>
+        Zone numbers <br>
+        zones <br>
+        price, <br>
+        duration <br>
+        number of changes <br>
+        
              <table id="journeyplanner" border="1" style="width:50%">
-<!--                <tr>
-                    <th>Date</th>
-                    <th>Start Zone</th>
-                    <th>Zones</th>
-                    <th>Price</th>
-                </tr>-->
                 <% for (int row = 1; row <= RPBean.getNumberofwaypoints(); row++) { %>
                 <TR>
-                    <TD> <jsp:getProperty name="RPBean" property="stop"/> </TD>
+                    <TD><jsp:getProperty name="RPBean" property="time"/></TD>
+                    <TD> <jsp:getProperty name="RPBean" property="waypointtransport"/> </TD>
+                    
                     <!--<jsp:getProperty name="RPBean" property="nextwaypoint"/>-->
                 </TR>
                         <% }%>
             </table>
 
-        
+        <% }%>
         
         
     </body>
