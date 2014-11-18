@@ -52,7 +52,7 @@ public class RoutePlannerJourneyManager {
             waypoints.get(i).setTravelTimeMinutes(temp2);
         }
 
-        int price = zones*10;
+        int price = zones*1000;
         long deltaT = arrival.getTimeInMillis() - departure.getTimeInMillis();
         int travelTimeDays = (int) (Math.floor(deltaT / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
         int travelTimeHours = (int) (Math.floor(deltaT / (MINUTES * SECONDS * MILLISECONDS))) - (travelTimeDays * HOURS);

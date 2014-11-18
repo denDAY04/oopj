@@ -12,6 +12,12 @@ import java.util.Objects;
  *
  * @author Rasmus
  */
+
+	import javax.xml.bind.annotation.XmlRootElement;
+	 
+	//Below statement means that class 'Country.java' is the root-element of our example
+	@XmlRootElement(namespace = "RoutePlannerJourney")
+
 public class RoutePlannerJourney implements Serializable {
 
     private ArrayList<Waypoint> waypoints;
@@ -23,6 +29,15 @@ public class RoutePlannerJourney implements Serializable {
     private int travelTimeHours;
     private int travelTimeMinutes;
 
+    
+    public ArrayList<Waypoint> getWaypoints() {
+        return waypoints;
+    }
+
+    public void setWaypoints(ArrayList<Waypoint> waypoints) {
+        this.waypoints = waypoints;
+    }
+
     public RoutePlannerJourney(ArrayList<Waypoint> waypoints, GregorianCalendar arrival, GregorianCalendar departure, int zones, int price, int travelTimeDays, int travelTimeHours, int travelTimeMinutes) {
         this.waypoints = waypoints;
         this.arrival = arrival;
@@ -33,6 +48,7 @@ public class RoutePlannerJourney implements Serializable {
         this.travelTimeHours = travelTimeHours;
         this.travelTimeMinutes = travelTimeMinutes;
     }
+    public RoutePlannerJourney(){}
 
     public int getNumberofWaypoints() {
         return waypoints.size();

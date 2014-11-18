@@ -7,6 +7,8 @@ package JPBeans;
 
 import JPBeans.model.RoutePlannerJourney;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
@@ -63,6 +65,42 @@ public class RPBean implements Serializable {
     public void setNextwaypoint(int currentwaypoint) {
         this.currentwaypoint = currentwaypoint;
     }
+    
+    public String getZones(){
+
+        ArrayList<String> zoneCount = new ArrayList();
+
+        for (int i = 0; i < rpj.getNumberofWaypoints(); i++) {
+            if (!zoneCount.contains(""+rpj.getWPStopZone(i)))
+         zoneCount.add(rpj.getWPStopZone(i)+"");    
+        }
+        String output="";
+        for (String zc : zoneCount) {
+            output=output+" "+zc;
+        }
+        
+        return output;
+    }
+    
+    
+    public int getZonecount(){
+    return rpj.getZones();
+    }
+    public String getPrice(){
+        int wholecrowns = rpj.getPrice()/100;
+        int ore = rpj.getPrice()-(wholecrowns*100);
+    return wholecrowns+"."+String.format("%02d",ore)+" kr.";
+    }
+    
+    public int getChangecount(){
+    return rpj.getWPChangeCounter(0);
+    }
+    
+    public String getTotalduration(){
+    
+
+    return rpj.getTravelTimeHours()+":"+String.format("%02d",rpj.getTravelTimeMinutes());
+    }
 
     public String getStop() {
 
@@ -102,12 +140,12 @@ public class RPBean implements Serializable {
                         - rpj.getWPArrivalTimeAtStop(currentwaypoint-1).getTimeInMillis()) / (SECONDS * MILLISECONDS))));
                 minutes = minutes - (60 * ((int) (Math.floor(minutes / 60))));
 
-                waittime = "    Wait time: " + String.format("%02d", hours) + ":" + String.format("%02d", minutes);
+                waittime = "&nbsp &nbsp &nbsp &nbsp Wait time:" + String.format("%02d", hours) + ":" + String.format("%02d", minutes);
             }
             if (currentwaypoint == 0) {
-                return "Departure: " + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint).get(GregorianCalendar.MINUTE)) + waittime;
+                return "Departure:" + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint).get(GregorianCalendar.MINUTE)) + waittime;
             } else {
-                return "Departure: " + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint - 1).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint - 1).get(GregorianCalendar.MINUTE)) + waittime;
+                return "Departure:" + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint - 1).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPDepartureTimeFromStop(currentwaypoint - 1).get(GregorianCalendar.MINUTE)) + waittime;
             }
         } else {
 
@@ -122,7 +160,7 @@ public class RPBean implements Serializable {
             minutes = minutes - (60 * ((int) (Math.floor(minutes / 60))));
 
             
-                return "Arrival: " + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint).get(GregorianCalendar.MINUTE)) + "        Duration: " + String.format("%02d", hours) + ":" + String.format("%02d", minutes);
+                return "Arrival: &nbsp &nbsp" + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint).get(GregorianCalendar.MINUTE)) + " &nbsp &nbsp &nbsp &nbsp  Duration: " + String.format("%02d", hours) + ":" + String.format("%02d", minutes);
 
             }
         }
