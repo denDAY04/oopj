@@ -51,8 +51,11 @@ public class JourneyBean implements Serializable {
     }
     
     public int getNextIndex(){
-
-        return index+5;
+        if(journeyList.size() == 5){
+            return index+5;
+        }else{
+            return index;
+        }
     }
     
     public int getprevIndex(){

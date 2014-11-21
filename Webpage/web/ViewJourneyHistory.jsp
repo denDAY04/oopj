@@ -5,10 +5,10 @@
     <jsp:useBean id="customerBean" class="Beans.CustomerBean" scope="session" />
     <jsp:setProperty name="journey" property="customerNumber" value="<%=customerBean.getCustomerNumber()%>"/>
     <jsp:setProperty name="journey" property="index" value="${param.index}"/>
-    <%
-        if( customer.getCustomerNumber()=="")
+    <%--
+        if( customerBean.getCustomerNumber()=="")
           response.sendRedirect("/Webpage/Login.jsp");
-    %>
+    --%>
     
     <HEAD>
         <TITLE>Recent Journeys</TITLE>
