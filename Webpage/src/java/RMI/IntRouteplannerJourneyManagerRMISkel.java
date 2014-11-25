@@ -6,7 +6,7 @@ package RMI;
 
 
 
-import JPBeans.model.*;
+import ModelClasses.*;
 import java.rmi.*;
 import java.sql.Time;
 

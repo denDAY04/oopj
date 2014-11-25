@@ -6,34 +6,83 @@
 
 package JPBeans;
 
-import JPBeans.model.RoutePlannerJourney;
-import JPBeans.model.RoutePlannerJourneyManager;
-import JPBeans.model.Waypoint;
-import JPBeans.model.WaypointManager;
+import ModelClasses.RoutePlannerJourney;
+import java.io.ByteArrayInputStream;
+import java.io.ObjectInput;
+import java.io.ObjectInputStream;
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.net.DatagramPacket;
+import java.net.DatagramSocket;
+import java.net.InetAddress;
 import java.util.GregorianCalendar;
 
 /**
  *
  * @author Qesss
  */
-public class RPJSkel implements RPJInterface, Serializable {
+public class RPJSkel implements RPJInterface, Serializable  {
 
     @Override
-    public RoutePlannerJourney createRouteplannerJourney(String origin, String destination, GregorianCalendar timeDeparture) {
+    public RoutePlannerJourney createRouteplannerJourney(int origin, int destination, GregorianCalendar timeDeparture) throws Exception{
+        
+    final int ServerPort = 44448;
+            /*
+         Station index:
+         0 Ballerup
+         1 Malmparken
+         2 Skovlunde
+         3 Herlev
+         4 Husum
+         5 Islev
+         6 Flintholm
+         7 Valby
+         8 Enghave
+         9 Vesterport
+         */
+    RoutePlannerJourney result = null;
 
-         ArrayList<Waypoint> waypoints = new ArrayList();
-        waypoints.add( WaypointManager.CreateWayPoint("Ballerup1", 6, new GregorianCalendar(2014,11,15,15,15), new GregorianCalendar(2014,11,15,15,17), "B", "Train", "Valby",2));
-        waypoints.add( WaypointManager.CreateWayPoint("Malmparken1", 5, new GregorianCalendar(2014,11,15,15,19), new GregorianCalendar(2014,11,15,15,20), "B", "Train", "Valby",2));
-        waypoints.add( WaypointManager.CreateWayPoint("Malmparken2", 5, new GregorianCalendar(2014,11,15,15,25), new GregorianCalendar(2014,11,15,15,30), "B", "Train", "Valby",2));        
-        waypoints.add( WaypointManager.CreateWayPoint("Malmparken3", 5, new GregorianCalendar(2014,11,15,15,32), new GregorianCalendar(2014,11,15,15,35), "B", "Train", "Valby",2));
-        waypoints.add( WaypointManager.CreateWayPoint("Ballerup", 6, new GregorianCalendar(2014,11,15,15,40), new GregorianCalendar(2014,11,15,15,42), "B", "Train", "Valby",1));
-        waypoints.add( WaypointManager.CreateWayPoint("Malmparken", 5, new GregorianCalendar(2014,11,15,15,44), new GregorianCalendar(2014,11,15,15,46), "B", "Train", "Valby",1));        
-        waypoints.add( WaypointManager.CreateWayPoint("Herlev", 5, new GregorianCalendar(2014,11,15,15,50), new GregorianCalendar(2014,11,15,15,57), "B", "Train", "Valby",1));
-        waypoints.add( WaypointManager.CreateWayPoint("Husum", 4, new GregorianCalendar(2014,11,15,15,58), new GregorianCalendar(2014,11,15,15,59), "153", "Bus", "Vesterport",0));
-        waypoints.add( WaypointManager.CreateWayPoint("peter", 3, new GregorianCalendar(2014,11,15,16,05), new GregorianCalendar(2014,11,15,16,15), "153", "Bus", "Vesterport",0));        
-        waypoints.add( WaypointManager.CreateWayPoint("Valby", 3, new GregorianCalendar(2014,11,15,16,18), new GregorianCalendar(2014,11,15,16,30), "153", "Bus", "Vesterport",0));
-        return RoutePlannerJourneyManager.CreateRoutePlannerJourney(waypoints, new GregorianCalendar(2014,11,15,16,18), new GregorianCalendar(2014,11,15,15,17), 4);
+//try {
+            DatagramSocket datagramSocket = new DatagramSocket();
+            DatagramPacket outPacket;
+            InetAddress address = InetAddress.getByName("thelizard6.eitlab.ihk-edu.dk");
+//            GregorianCalendar testtime= new GregorianCalendar();
+//            System.err.println(testtime.getTimeInMillis());
+           
+            
+            String msg = origin + ";" + destination + ";" + timeDeparture.getTimeInMillis();
+            outPacket = new DatagramPacket(msg.getBytes(), msg.length(), address, ServerPort);
+            datagramSocket.send(outPacket);
+            DatagramPacket reply;
+            byte[] dataBuffIn;
+            byte[] packetBuffIn = new byte[10000]; // "5 waypoint" trip size < 7000
+
+
+            reply = new DatagramPacket(packetBuffIn, packetBuffIn.length);
+            datagramSocket.receive(reply);
+            dataBuffIn = reply.getData();
+            ByteArrayInputStream bis = new ByteArrayInputStream(dataBuffIn);
+            ObjectInput oi = null;
+            oi = new ObjectInputStream(bis);
+//            try {
+                result = (RoutePlannerJourney) oi.readObject();
+//        } catch (ClassNotFoundException ex) {
+//            System.err.println("exception: " + ex);
+//        }
+
+            //result.testOutput();
+            //System.err.println(result.getWPStopName(1));
+
+            datagramSocket.close();
+            oi.close();
+            bis.close();
+//        } catch (Exception ex) {
+//            System.err.println("exception:" + ex);
+//        }
+
+      //  if (result == null)         throw new NullPointerException();
+        
+        
+        return result;
+                //RoutePlannerJourneyManager.CreateRoutePlannerJourney(waypoints, new GregorianCalendar(2014,11,15,16,18), new GregorianCalendar(2014,11,15,15,17), 4);
     }
 }

@@ -3,7 +3,7 @@
     Created on : Oct 31, 2014, 3:54:30 PM
     Author     : Rasmus
 --%>
-
+<%@ page errorPage="error.jsp" %>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page trimDirectiveWhitespaces="false" %>
 
@@ -22,12 +22,53 @@
 
         </script>
         
+        <script type="text/javascript">
+        //Function validate()
+        //Validates the inputs in the 4 text fields are of valid syntax
+	function validate(){
+                //Variable to ensure no regularexpressions are violated
+                var isValid = true;                                     
+
+        //
+        var stations = ["ballerup", "malmparken", "skovlunde","herlev","islev","flintholm","valby","enghave","vesterport"];
+                
+               
+                //Check regularexpression for firstName
+		if(stations.indexOf(document.getElementById("origin").value) < -1){
+			//If regularexpression is violated, mark field name with red
+                        document.getElementById('from').innerHTML = "<font color=\"red\">From</font>";
+			console.log("False");
+			isValid = false;
+		} else{
+                        //Else, mark field name with black
+			document.getElementById('from').innerHTML = "<font color=\"black\">From</font>";
+                        console.log("True");
+		}
+                
+                //Check regularexpression for lastName
+		if(stations.indexOf(document.getElementById("destination").value) >= -1){
+			//If regularexpression is violated, mark field name with red
+                        document.getElementById('to').innerHTML = "<font color=\"red\">to</font>";
+			console.log("False");
+			isValid = false;
+		} else{
+                        //Else, mark field name with black
+			document.getElementById('to').innerHTML = "<font color=\"black\">to</font>";
+                        console.log("True");
+		}
+                
+                //If no errors occured, the isValid == true, else false
+                return isValid;
+	}
+	</script>        
+        
+        
     </head>
     <body>
         
              <h1  align="CENTER">Enter Journey Details</h1>
 
-        <FORM NAME="routeplanner" METHOD="POST" ACTION="RoutePlanner.jsp"> 
+        <FORM NAME="routeplanner" METHOD="POST" ACTION="RoutePlanner.jsp" onsubmit="return validate()> 
             <TABLE align="CENTER" style="width:50%">
                 <TR>
                     <TD>Year</TD>
@@ -57,10 +98,12 @@
                 </TR>
                 <TR>
                 <br>
-                     <TD>From:</TD>
-                     <TD>To:</TD>
+                     <TD><DIV id="from"><font color="black">From</font></DIV></TD>
+                     <TD><DIV id="to"><font color="black">to</font></DIV></TD>
                 </TR>
                 <TR>
+                    
+                    
                     
                     <TD><INPUT TYPE="text"
                                NAME= "origin"
@@ -70,11 +113,10 @@
                                VALUE="<jsp:getProperty name="RPBean" property="destination" />"></TD>
                 </TR>
                 <TR>
-                    <TD></TD>
                     <TD><INPUT TYPE="hidden"
                                NAME="dorouteplanning"
                                VALUE=" "></TD>
-                    <td>            <INPUT TYPE="submit" VALUE= "Find Journey"></td>
+                    <td><INPUT TYPE="submit" VALUE= "Find Journey"></td>
                 </TR>
             </TABLE>
             <BR><BR>
@@ -88,10 +130,10 @@
         <h1  align="CENTER">Journey:</h1>
         <br>
         Number of zones: <jsp:getProperty name="RPBean" property="zonecount"/><br>
-        zones: <jsp:getProperty name="RPBean" property="zones"/><br>
-        price <jsp:getProperty name="RPBean" property="price"/><br>
-        duration <jsp:getProperty name="RPBean" property="totalduration"/><br>
-        number of changes <jsp:getProperty name="RPBean" property="changecount"/><br>
+        Zones: <jsp:getProperty name="RPBean" property="zones"/><br>
+        Price <jsp:getProperty name="RPBean" property="price"/><br>
+        Duration <jsp:getProperty name="RPBean" property="totalduration"/><br>
+        Number of changes <jsp:getProperty name="RPBean" property="changecount"/><br>
         <br>
    
              <table id="journeyplanner" border="0" style="width:50%">

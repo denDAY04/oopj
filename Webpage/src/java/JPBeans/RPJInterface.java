@@ -6,7 +6,7 @@
 
 package JPBeans;
 
-import JPBeans.model.RoutePlannerJourney;
+import ModelClasses.RoutePlannerJourney;
 import java.util.GregorianCalendar;
 
 /**
@@ -14,5 +14,5 @@ import java.util.GregorianCalendar;
  * @author Qesss
  */
 public interface RPJInterface {
-   RoutePlannerJourney createRouteplannerJourney(String origin, String destination, GregorianCalendar timeDeparture);
+   RoutePlannerJourney createRouteplannerJourney(int origin, int destination, GregorianCalendar timeDeparture) throws Exception;
 }

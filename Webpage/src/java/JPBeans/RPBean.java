@@ -5,12 +5,13 @@
  */
 package JPBeans;
 
-import JPBeans.model.RoutePlannerJourney;
+import ModelClasses.RoutePlannerJourney;
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 /**
  *
@@ -30,6 +31,8 @@ public class RPBean implements Serializable {
         // test
         this.origin = "ballerup";
         this.destination = "valby";
+        this.destinationint=2;
+        this.destinationint=4;
 
     }
 
@@ -44,7 +47,9 @@ public class RPBean implements Serializable {
     private RoutePlannerJourney rpj;
     private RPJSkel rPJSkel;
     private String origin;
+    private int originint;
     private String destination;
+    private int destinationint;
     private int currentwaypoint = 0;
     private boolean getOn = true;
     private int departureStopIndex;
@@ -208,14 +213,18 @@ public class RPBean implements Serializable {
 
     // Method for
     
-    public void setDorouteplanning(String var) {
+    public void setDorouteplanning(String var) throws Exception {
         // reset
             currentwaypoint = 0;
             getOn = true;
             departureStopIndex=0;
-
-        rpj = rPJSkel.createRouteplannerJourney(origin, destination, startTime);
-
+//       try{
+        rpj = rPJSkel.createRouteplannerJourney(originint, destinationint, startTime);
+//          }
+//       catch (InterruptedException //| TimeoutException | ExecutionException 
+//               e) {
+//timeout
+//}
     }
     
     // Getters and setters for the field on the website.
@@ -265,4 +274,13 @@ public class RPBean implements Serializable {
         startTime.set(GregorianCalendar.MINUTE, minute);
     }
 
+    public void setOriginint(int o){
+    this.originint = o;
+    }
+    
+    public void setDestinationint(int d){
+    this.destinationint = d;
+    }
+    
+    
 }
