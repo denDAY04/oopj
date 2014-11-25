@@ -73,7 +73,7 @@
         </H1>
         <BR>
         <!-- Pass all form entries to Order.jsp ? -->
-        <FORM NAME="inputs" METHOD=POST ACTION="TermsOfUse.jsp" onsubmit="return validate()">
+        <FORM NAME="inputs" METHOD=POST ACTION="ValidateSignUp.jsp" onsubmit="return validate()">
             <TABLE align="CENTER">
                 <TR>
                     <TD><DIV id="fName"><font color="black">First Name:</font></DIV></TD>
@@ -86,7 +86,7 @@
                                NAME= "lastName"></TD>
                 </TR>
                 <TR>
-                    <TD><DIV id="mail"><font color="black">Email:</font></DIV></TD>
+                    <TD><DIV id="mail"><font color="black">Email: </font></DIV><font color="red"><jsp:getProperty name="idtestbean" property="errorMessage2"/></font></TD>
                     <TD><INPUT TYPE="text"
                                NAME= "email"></TD>
                 </TR>

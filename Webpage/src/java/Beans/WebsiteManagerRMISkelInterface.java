@@ -14,9 +14,9 @@ import java.util.ArrayList;
 public interface WebsiteManagerRMISkelInterface {    
     
 ArrayList<Journey> getJourneyHistory(String customerNumber, int index);        // (precision?) 3 / 5 / 10
-Customer getCustomerDetails(String customerNumber);
+Customer getCustomerDetails(String customerNumber); //redundant
 void setCustomerDetails(Customer customer);
-boolean createCustomer(Customer customer);
-boolean logOn(String email, String password);
+String createCustomer(Customer customer);
+Customer logOn(String email, String password);
 //boolean logOff();
 }

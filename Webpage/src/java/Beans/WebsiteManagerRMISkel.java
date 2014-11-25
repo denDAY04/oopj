@@ -115,13 +115,31 @@ public class WebsiteManagerRMISkel implements WebsiteManagerRMISkelInterface {
     }
 
     @Override
-    public boolean createCustomer(Customer customer) {
-        return true;
+    public String createCustomer(Customer customer) {
+        //Do some check if the email exists on the DB
+        // if(Email already exists)
+        //    return an error message
+        // else
+        // createCustomer in DB and
+        // return newly generated customerNumber
+        return "5678";
     }
 
     @Override
-    public boolean logOn(String email, String password) {
-        return true;
+    public Customer logOn(String email, String password) {
+        //Run a DB query on email and password
+        //If(customer exist)
+        //  return customer
+        //Else
+        //  return null
+        Customer user;
+        if((email.equals("Test@Test.Test")) && (password.equals("1337"))){
+            user = new Customer("Abc","Def","Abc@def.gh","1337");
+            user.setCustomerNumber("1337");
+        } else{
+            user = null;
+        }
+        return user;        
     }
     
 }

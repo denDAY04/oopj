@@ -15,15 +15,16 @@
     </head>
     <BODY>
         <BR><BR><BR>
-        <FORM METHOD=GET ACTION="AccountOverview.jsp">
+        <FORM METHOD=GET ACTION="ValidateLogin.jsp">
             <TABLE>
+                <TR> <font color="red"><jsp:getProperty name="idtestbean" property="errorMessage" /></font></TR>
                 <TR>
                     <TD>Username:</TD>
-                    <TD><INPUT TYPE="text" NAME= "start"></TD>
+                    <TD><INPUT TYPE="text" NAME= "email"></TD>
                 </TR>
                 <TR>
                     <TD>Password:</TD>
-                    <TD><INPUT TYPE="password" NAME= "end"></TD>
+                    <TD><INPUT TYPE="password" NAME= "password"></TD>
                 </TR>
             </TABLE>
             <INPUT TYPE="Submit" VALUE = "Login">

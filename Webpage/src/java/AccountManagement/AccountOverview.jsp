@@ -1,13 +1,13 @@
 <HTML>
     <%@ page language="java" contentType="text/html" errorPage="error.jsp" %>
 
-    <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
+    <jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session">
     </jsp:useBean>
     <%
-        if( customer.getCustomerNumber()=="")
+        if( idtestbean.getCustomerNumber()=="")
           response.sendRedirect("/Webpage/Login.jsp");
       %>
-    <jsp:setProperty name="customer" property="*"/>
+    <jsp:setProperty name="idtestbean" property="*"/>
     <HEAD>
         <TITLE>Account</TITLE>
         <STYLE>
@@ -40,19 +40,19 @@
             <TABLE align="CENTER">
                 <TR>
                     <TD>First name: </TD>
-                    <TD><jsp:getProperty name="customer" property="firstName" /></TD>
+                    <TD><jsp:getProperty name="idtestbean" property="firstName" /></TD>
                 </TR>
                 <TR>
                     <TD>Last name: </TD>
-                    <TD><jsp:getProperty name="customer" property="lastName" /></TD>
+                    <TD><jsp:getProperty name="idtestbean" property="lastName" /></TD>
                 </TR>
                 <TR>
                     <TD>Email: </TD>
-                    <TD><jsp:getProperty name="customer" property="email" /></TD>
+                    <TD><jsp:getProperty name="idtestbean" property="email" /></TD>
                 </TR>
                 <TR>
                     <TD>Customer Number: </TD>
-                    <TD><jsp:getProperty name="customer" property="customerNumber" /></TD>
+                    <TD><jsp:getProperty name="idtestbean" property="customerNumber" /></TD>
                 </TR>
             </TABLE>
             <BR><BR>
