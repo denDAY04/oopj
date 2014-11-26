@@ -5,8 +5,12 @@
  */
 package JPBeans;
 
-import ModelClasses.RoutePlannerJourney;
+import ModelClasses.*;
+import RMI.IntRouteplannerJourneyManagerRMISkel;
 import java.io.Serializable;
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -33,6 +37,44 @@ public class RPBean implements Serializable {
         this.destination = "valby";
         this.destinationint=2;
         this.destinationint=4;
+        
+        //////////////////////////////////////////////////////////////////////// TEST
+        Stop[] stopArr = null;
+               
+        String host = "goonhilly6.eitlab.ihk-edu.dk";        
+        int port = 20422;               
+        System.out.println("Client: Starting...");
+        System.out.println("Using registry at: " + host + " port " + port);
+
+        
+        final Registry registryA;
+        try {registryA = LocateRegistry.getRegistry(host, port);        
+       
+         final String[] boundNames = registryA.list();
+         System.out.println(
+            "Names bound to RMI registry at host " + host + " and port " + port + ":");
+         for (final String name : boundNames)
+         {System.out.println("\t" + name);}        
+        }
+         catch (RemoteException ex) {
+             System.err.println("Setup graph Remote ex: " +ex);
+        }
+
+        
+        try {Registry registry = LocateRegistry.getRegistry(host, port);     
+
+        
+
+ IntRouteplannerJourneyManagerRMISkel rpjMgr = (IntRouteplannerJourneyManagerRMISkel)registry.lookup("routeplannerJourneyManager");                      
+
+ 
+        stopArr = rpjMgr.SetupGraph();
+                }catch(Exception e){
+        System.err.println(" SetupGraph e: " +e);
+        }
+        //////////////////////////////////////////////////////////////////////// TEST END
+        
+        this.destination = stopArr[1].name;  // SET FEILD FROM RMI DATA FOR VERIFICATION
 
     }
 
