@@ -1,9 +1,11 @@
+package Beans;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Beans;
+
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -19,7 +21,7 @@ public class JourneyBean implements Serializable {
         // index used to track what section of the journey history to be retrived.
     private int index;
     private String customerNumber;
-    private WebsiteManagerRMISkel skel;
+    private WebsiteManagerRMISkelImpl skel;
     private ArrayList<Journey> journeyList;
 
     
@@ -32,7 +34,7 @@ public class JourneyBean implements Serializable {
     }
     
     public JourneyBean() {
-            this.skel = new WebsiteManagerRMISkel();
+            this.skel = new WebsiteManagerRMISkelImpl();
     }
     
     

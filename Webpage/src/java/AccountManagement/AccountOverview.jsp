@@ -32,7 +32,7 @@
                 </FORM>
             </TR>
             <TR>
-                <FORM METHOD=GET ACTION="Login.jsp">
+                <FORM METHOD=GET ACTION="Logout.jsp">
                     <INPUT TYPE="submit" VALUE="Log out">
                 </FORM>
             </TR>
