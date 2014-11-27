@@ -1,6 +1,14 @@
 package Beans;
 
 
+
+import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -18,10 +26,44 @@ public int newcustomer;*/
 
 //String customerNumber = "1234"; //change to "" to test page redirects 
 String customerNumber = "";
-String firstName = "Mister";
-String lastName = "Bean";
-String email = "Test@Test.Test";
-String password = "1234";
+String firstName;
+String lastName;
+String email;
+String password;
+private WebsiteManagerRMISkel skel;
+String errorMessage = ""; //Email/Password combination not found
+String errorMessage2 = ""; //Email already exists
+String errorMessage3 = ""; //Email already exists (EditInformation)
+
+    public CustomerBean() throws Exception{
+
+        //this.skel = new WebsiteManagerRMISkel();
+        String host = "goonhilly6.eitlab.ihk-edu.dk";        
+        int port = 20423;               
+        System.out.println("Client: Starting...");
+        System.out.println("Using registry at: " + host + " port " + port);
+
+        
+        final Registry registryA;
+        try {registryA = LocateRegistry.getRegistry(host, port);        
+       
+         final String[] boundNames = registryA.list();
+         System.out.println(
+            "Names bound to RMI registry at host " + host + " and port " + port + ":");
+         for (final String name : boundNames)
+         {System.out.println("\t" + name);}        
+        }
+         catch (RemoteException ex) {
+             System.err.println("Setup graph Remote ex: " +ex);
+        }
+   
+            Registry registry = LocateRegistry.getRegistry(host, port);     
+            this.skel = (WebsiteManagerRMISkel)registry.lookup("websiteManager");                      
+
+    }    
+                     
+        
+
 
     /*public int getValue() {
         return value;
@@ -30,7 +72,74 @@ String password = "1234";
     public void setValue(int value) {
         this.value = value;
     }*/
+    public boolean login() throws RemoteException{
+        Customer user = this.skel.logOn(email, password);
+        if(user!= null){
+            this.customerNumber = user.getCustomerNumber();
+            this.firstName = user.getFirstname();
+            this.lastName = user.getLastname();
+            this.email = user.getEmail();
+            setErrorMessage("");
+            return true;
+        } else{
+            setErrorMessage("Error - Could not login, user not found");
+            return false;
+        }
+    }
+    
+    public boolean signUp() throws RemoteException{
+        Customer user = new Customer(firstName,lastName,email,password);
+        int cNumber = this.skel.createCustomer(user);
+        if(cNumber!=-1){
+            this.customerNumber = Integer.toString(cNumber);
+            setErrorMessage2("");
+            return true;
+        } else{
+            setErrorMessage2("Error - Email address is already in use");
+            return false;
+        }
+    }
+    /*
+    public boolean changeDetails(){
+        Customer user = new Customer(firstName,lastName,email,password);
+        Customer upUser = this.skel.setCustomerDetails(user);
+        if(upUser!=null){
+            this.firstName = upUser.getFirstname();
+            this.lastName = upUser.getLastname();
+            this.email = upUser.getEmail();
+            this.password = upUser.getPassword();
+            errorMessage3="";
+            return true;
+        } else{
+            //Set the bean properties to the returned customer object
+            errorMessage3="Error - Email address is already in use";
+            return false;
+        }
+    }*/
+    public String getErrorMessage(){
+        return errorMessage;
+    }
+    
+    public void setErrorMessage(String errorMessage){
+        this.errorMessage = errorMessage;
+    }
 
+    public String getErrorMessage2(){
+        return errorMessage2;
+    }
+    
+    public void setErrorMessage2(String errorMessage2){
+        this.errorMessage2 = errorMessage2;
+    }
+    
+    public String getErrorMessage3(){
+        return errorMessage3;
+    }
+    
+    public void setErrorMessage3(String errorMessage3){
+        this.errorMessage3 = errorMessage3;
+    }
+    
     public String getCustomerNumber() {
         return customerNumber;
     }
