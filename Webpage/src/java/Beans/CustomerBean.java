@@ -30,6 +30,11 @@ String firstName;
 String lastName;
 String email;
 String password;
+
+String oldFirst;
+String oldLast;
+String oldEmail;
+String oldPassword;
 private WebsiteManagerRMISkel skel;
 String errorMessage = ""; //Email/Password combination not found
 String errorMessage2 = ""; //Email already exists
@@ -60,10 +65,7 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
             Registry registry = LocateRegistry.getRegistry(host, port);     
             this.skel = (WebsiteManagerRMISkel)registry.lookup("websiteManager");                      
 
-    }    
-                     
-        
-
+    }                   
 
     /*public int getValue() {
         return value;
@@ -99,11 +101,12 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
             return false;
         }
     }
-    /*
-    public boolean changeDetails(){
+    
+    public boolean changeDetails() throws RemoteException{
         Customer user = new Customer(firstName,lastName,email,password);
         Customer upUser = this.skel.setCustomerDetails(user);
-        if(upUser!=null){
+        if(!upUser.equals(user)){
+            this.customerNumber = upUser.getCustomerNumber();
             this.firstName = upUser.getFirstname();
             this.lastName = upUser.getLastname();
             this.email = upUser.getEmail();
@@ -111,11 +114,16 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
             errorMessage3="";
             return true;
         } else{
-            //Set the bean properties to the returned customer object
+            this.customerNumber = upUser.getCustomerNumber();
+            this.firstName = upUser.getFirstname();
+            this.lastName = upUser.getLastname();
+            this.email = upUser.getEmail();
+            this.password = upUser.getPassword(); 
             errorMessage3="Error - Email address is already in use";
             return false;
         }
-    }*/
+    }
+    
     public String getErrorMessage(){
         return errorMessage;
     }

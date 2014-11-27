@@ -1,6 +1,7 @@
 package Beans;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -79,4 +80,44 @@ public int getTotalRecords(){
     public void setEmail(String Email) {
         this.email = Email;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.customerNumber);
+        hash = 41 * hash + Objects.hashCode(this.firstName);
+        hash = 41 * hash + Objects.hashCode(this.lastName);
+        hash = 41 * hash + Objects.hashCode(this.email);
+        hash = 41 * hash + Objects.hashCode(this.password);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Customer other = (Customer) obj;
+        if (!Objects.equals(this.customerNumber, other.customerNumber)) {
+            return false;
+        }
+        if (!Objects.equals(this.firstName, other.firstName)) {
+            return false;
+        }
+        if (!Objects.equals(this.lastName, other.lastName)) {
+            return false;
+        }
+        if (!Objects.equals(this.email, other.email)) {
+            return false;
+        }
+        if (!Objects.equals(this.password, other.password)) {
+            return false;
+        }
+        return true;
+    }
+    
+    
 }
