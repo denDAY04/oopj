@@ -20,7 +20,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Route Planner</title>
 
-        </script>
         
         <script type="text/javascript">
         //Function validate()

@@ -5,12 +5,8 @@
  */
 package JPBeans;
 
-import ModelClasses.*;
-import RMI.IntRouteplannerJourneyManagerRMISkel;
+import ModelClasses.RoutePlannerJourney;
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
@@ -35,46 +31,8 @@ public class RPBean implements Serializable {
         // test
         this.origin = "ballerup";
         this.destination = "valby";
-        this.destinationint=2;
+        this.originint=2;
         this.destinationint=4;
-        
-        //////////////////////////////////////////////////////////////////////// TEST
-        Stop[] stopArr = null;
-               
-        String host = "goonhilly6.eitlab.ihk-edu.dk";        
-        int port = 20422;               
-        System.out.println("Client: Starting...");
-        System.out.println("Using registry at: " + host + " port " + port);
-
-        
-        final Registry registryA;
-        try {registryA = LocateRegistry.getRegistry(host, port);        
-       
-         final String[] boundNames = registryA.list();
-         System.out.println(
-            "Names bound to RMI registry at host " + host + " and port " + port + ":");
-         for (final String name : boundNames)
-         {System.out.println("\t" + name);}        
-        }
-         catch (RemoteException ex) {
-             System.err.println("Setup graph Remote ex: " +ex);
-        }
-
-        
-        try {Registry registry = LocateRegistry.getRegistry(host, port);     
-
-        
-
- IntRouteplannerJourneyManagerRMISkel rpjMgr = (IntRouteplannerJourneyManagerRMISkel)registry.lookup("routeplannerJourneyManager");                      
-
- 
-        stopArr = rpjMgr.SetupGraph();
-                }catch(Exception e){
-        System.err.println(" SetupGraph e: " +e);
-        }
-        //////////////////////////////////////////////////////////////////////// TEST END
-        
-        this.destination = stopArr[1].name;  // SET FEILD FROM RMI DATA FOR VERIFICATION
 
     }
 
@@ -155,6 +113,7 @@ public class RPBean implements Serializable {
     }
 
     public String getWaypointtransport() {
+        System.err.println("getWaypointtransport called, geton is :"+getOn+", currentwaypoint is "+currentwaypoint);
         if (getOn) {
             getOn = false;
             
@@ -174,6 +133,7 @@ public class RPBean implements Serializable {
     }
 
     public String getTime() {
+        System.err.println("Get time called, geton is :"+getOn+", currentwaypoint is "+currentwaypoint);
         if (getOn) {
             String waittime = "";
             if (currentwaypoint > 0) {
@@ -214,21 +174,19 @@ public class RPBean implements Serializable {
     
 
     public int getNextwaypoint() {
+        // allways count up once
         currentwaypoint++;
-
+        //if the current waypoint is not the last waypoint
         if ((currentwaypoint + 1) < rpj.getNumberofWaypoints()) {
+            // if the current waypoint differs from the previous waypoint, return.
             if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint - 1)) {
                 return 0;
             }
-
+            // while the next waypoint is the same as the current one
             while (rpj.getWPChangeCounter(currentwaypoint) == rpj.getWPChangeCounter(currentwaypoint + 1)) {
                 currentwaypoint++;
 
-                if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint - 1)) {
-                    return 0;
-                }
-
-                if (((currentwaypoint + 1) >= rpj.getNumberofWaypoints())) {
+                if (((currentwaypoint + 1) < rpj.getNumberofWaypoints())) {
                     return 0;
                 }
             }
