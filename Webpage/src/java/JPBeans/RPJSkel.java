@@ -24,7 +24,11 @@ public class RPJSkel implements RPJInterface, Serializable  {
 
     @Override
     public RoutePlannerJourney createRouteplannerJourney(int origin, int destination, GregorianCalendar timeDeparture) throws Exception{
-        
+    
+    // test
+    //timeDeparture.set(GregorianCalendar.HOUR_OF_DAY, 12);
+    //timeDeparture.set(GregorianCalendar.MINUTE, 00);
+       
     final int ServerPort = 44448;
             /*
          Station index:

@@ -23,36 +23,35 @@
         
         <script type="text/javascript">
         //Function validate()
-        //Validates the inputs in the 4 text fields are of valid syntax
 	function validate(){
-                //Variable to ensure no regularexpressions are violated
                 var isValid = true;                                     
 
         //
-        var stations = ["ballerup", "malmparken", "skovlunde","herlev","islev","flintholm","valby","enghave","vesterport"];
-                
-               
-                //Check regularexpression for firstName
-		if(stations.indexOf(document.getElementById("origin").value) < -1){
-			//If regularexpression is violated, mark field name with red
+        var stations = ["ballerup", "malmparken", "skovlunde","herlev","husum","islev","flintholm","valby","enghave","vesterport"];
+                                                           
+                              
+                var originindex = stations.indexOf(document.getElementById('origin').value.toLowerCase());
+		if (originindex === -1){
+			//If violated, mark field name with red
                         document.getElementById('from').innerHTML = "<font color=\"red\">From</font>";
 			console.log("False");
 			isValid = false;
 		} else{
                         //Else, mark field name with black
 			document.getElementById('from').innerHTML = "<font color=\"black\">From</font>";
+                        document.getElementById('originintid').value = originindex;
                         console.log("True");
 		}
-                
-                //Check regularexpression for lastName
-		if(stations.indexOf(document.getElementById("destination").value) >= -1){
-			//If regularexpression is violated, mark field name with red
+                var destinationindex = stations.indexOf(document.getElementById("destination").value.toLowerCase());
+		if(destinationindex === -1){
+			//If violated, mark field name with red
                         document.getElementById('to').innerHTML = "<font color=\"red\">to</font>";
 			console.log("False");
 			isValid = false;
 		} else{
                         //Else, mark field name with black
 			document.getElementById('to').innerHTML = "<font color=\"black\">to</font>";
+                        document.getElementById('destinationintid').value = destinationindex;
                         console.log("True");
 		}
                 
@@ -67,7 +66,7 @@
         
              <h1  align="CENTER">Enter Journey Details</h1>
 
-        <FORM NAME="routeplanner" METHOD="POST" ACTION="RoutePlanner.jsp" onsubmit="return validate()> 
+        <FORM NAME="routeplanner" METHOD="POST" ACTION="RoutePlanner.jsp" onsubmit="return validate()"> 
             <TABLE align="CENTER" style="width:50%">
                 <TR>
                     <TD>Year</TD>
@@ -102,19 +101,29 @@
                 </TR>
                 <TR>
                     
-                    
-                    
                     <TD><INPUT TYPE="text"
                                NAME= "origin"
+                               ID ="origin"
                                VALUE="<jsp:getProperty name="RPBean" property="origin" />"></TD>
                     <TD><INPUT TYPE="text"
                                NAME= "destination"
+                               ID ="destination"
                                VALUE="<jsp:getProperty name="RPBean" property="destination" />"></TD>
                 </TR>
                 <TR>
                     <TD><INPUT TYPE="hidden"
+                               NAME="originint"
+                               ID ="originintid"
+                               ></TD>
+                    <TD><INPUT TYPE="hidden"
+                               NAME="destinationint"
+                               ID ="destinationintid"
+                               ></TD>
+                    <TD><INPUT TYPE="hidden"
                                NAME="dorouteplanning"
                                VALUE=" "></TD>
+                    
+                    
                     <td><INPUT TYPE="submit" VALUE= "Find Journey"></td>
                 </TR>
             </TABLE>
