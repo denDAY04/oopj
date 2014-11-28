@@ -28,10 +28,10 @@
 
         //
         var stations = ["ballerup", "malmparken", "skovlunde","herlev","husum","islev","flintholm","valby","enghave","vesterport"];
-                                                           
-                              
-                var originindex = stations.indexOf(document.getElementById('origin').value.toLowerCase());
-		if (originindex === -1){
+             var originindex = stations.indexOf(document.getElementById('origin').value.toLowerCase());                                              
+              var destinationindex = stations.indexOf(document.getElementById("destination").value.toLowerCase());                 
+                
+		if ((originindex === -1)|(originindex===destinationindex)){
 			//If violated, mark field name with red
                         document.getElementById('from').innerHTML = "<font color=\"red\">From</font>";
 			console.log("False");
@@ -42,8 +42,8 @@
                         document.getElementById('originintid').value = originindex;
                         console.log("True");
 		}
-                var destinationindex = stations.indexOf(document.getElementById("destination").value.toLowerCase());
-		if(destinationindex === -1){
+               
+		if((destinationindex === -1)|(originindex===destinationindex)){
 			//If violated, mark field name with red
                         document.getElementById('to').innerHTML = "<font color=\"red\">to</font>";
 			console.log("False");

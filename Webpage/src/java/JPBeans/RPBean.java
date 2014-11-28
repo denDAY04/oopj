@@ -126,6 +126,8 @@ public class RPBean implements Serializable {
         } else {
             getOn = true;
             
+            if (currentwaypoint == rpj.getNumberofWaypoints())
+            return " Get off " + rpj.getWPDepartureType(currentwaypoint-1) + " " + rpj.getWPDepartureLine(currentwaypoint-1) + " at " + rpj.getWPStopName(currentwaypoint-1);
             return " Get off " + rpj.getWPDepartureType(currentwaypoint-1) + " " + rpj.getWPDepartureLine(currentwaypoint-1) + " at " + rpj.getWPStopName(currentwaypoint);
         }
 
