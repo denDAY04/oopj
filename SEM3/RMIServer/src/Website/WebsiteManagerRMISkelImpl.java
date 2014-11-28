@@ -1,3 +1,5 @@
+package Website;
+
 import Manager.DatabaseManager;
 import ModelClasses.*;
 import java.util.ArrayList;
@@ -25,8 +27,9 @@ public class WebsiteManagerRMISkelImpl extends UnicastRemoteObject implements We
     }
 
     @Override
-    public void setCustomerDetails(Customer customer) throws RemoteException {
-    databasemanager.setCustomerDetails(customer);
+    public Customer setCustomerDetails(Customer customer) throws RemoteException {
+    return databasemanager.setCustomerDetails(customer);
+        //return null;
     }
 
     @Override
@@ -40,7 +43,7 @@ public class WebsiteManagerRMISkelImpl extends UnicastRemoteObject implements We
     }
 
     @Override
-    public ArrayList<Journey> getJourneyHistory(String customerNumber, int index) throws RemoteException {  
+    public ArrayList<Journey> getJourneyHistory(int customerNumber, int index) throws RemoteException {  
     return  databasemanager.getJourneyHistory(customerNumber,index);    
     }
         
