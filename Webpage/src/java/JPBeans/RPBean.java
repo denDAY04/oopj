@@ -39,7 +39,6 @@ public class RPBean implements Serializable {
     private int day;
     private int hour;
     private int minute;
-    private String stringrpj;
     private RoutePlannerJourney rpj;
     private RPJSkel rPJSkel;
     private String origin;
@@ -98,7 +97,6 @@ public class RPBean implements Serializable {
     }
     
     public String getTotalduration(){
-    
 
     return rpj.getTravelTimeHours()+":"+String.format("%02d",rpj.getTravelTimeMinutes());
     }

@@ -30,19 +30,7 @@ public class RPJSkel implements RPJInterface, Serializable  {
     //timeDeparture.set(GregorianCalendar.MINUTE, 00);
        
     final int ServerPort = 44448;
-            /*
-         Station index:
-         0 Ballerup
-         1 Malmparken
-         2 Skovlunde
-         3 Herlev
-         4 Husum
-         5 Islev
-         6 Flintholm
-         7 Valby
-         8 Enghave
-         9 Vesterport
-         */
+
     RoutePlannerJourney result = null;
 
 //try {
@@ -87,6 +75,5 @@ public class RPJSkel implements RPJInterface, Serializable  {
         
         
         return result;
-                //RoutePlannerJourneyManager.CreateRoutePlannerJourney(waypoints, new GregorianCalendar(2014,11,15,16,18), new GregorianCalendar(2014,11,15,15,17), 4);
     }
 }
