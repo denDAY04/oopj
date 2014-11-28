@@ -1,0 +1,1 @@
+java -Djava.rmi.server.codebase=http://goonhilly6.eitlab.ihk-edu.dk/~jonas3e14/RMIServer.jar -Djava.rmi.server.hostname=goonhilly6.eitlab.ihk-edu.dk -jar RMIServer.jar localhost 20421
