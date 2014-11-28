@@ -157,15 +157,28 @@ public class DatabaseManager implements IntDatabaseManager {
      */
     @Override
     public int createCustomer(Customer customer) {
-        this.query = SQLLibrary.CREATE_CUSTOMER;
+        this.query = SQLLibrary.SEARCH_EMAIL;
         ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(customer.getFirstname());
-        parameters.add(customer.getLastname());
         parameters.add(customer.getEmail());
-        parameters.add(customer.getPassword());
         this.parameters = parameters;
-        executeUpdate();
+        executeQuery();
+        
 
+        try {
+            if(!this.resultset.next()){
+                this.query = SQLLibrary.CREATE_CUSTOMER;
+                parameters = new ArrayList<>();
+                parameters.add(customer.getFirstname());
+                parameters.add(customer.getLastname());
+                parameters.add(customer.getEmail());
+                parameters.add(customer.getPassword());
+                this.parameters = parameters;
+                executeUpdate();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         try {
             return getCustomerNumber(customer);
         }
@@ -201,17 +214,47 @@ public class DatabaseManager implements IntDatabaseManager {
 
     //<editor-fold defaultstate="collapsed" desc="Update Customer details in the SQL Database">
     @Override
-    public void setCustomerDetails(Customer customer) {
-        this.query = SQLLibrary.UPDATE_CUSTOMER;
+    public Customer setCustomerDetails(Customer customer) {
+        this.query = SQLLibrary.SEARCH_EMAIL;
         ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(customer.getFirstname());
-        parameters.add(customer.getLastname());
         parameters.add(customer.getEmail());
-        parameters.add(customer.getPassword());
-        //parameters.add(customer.getStatus());   //not used
-        parameters.add(customer.getCustomerNumber());
         this.parameters = parameters;
-        executeUpdate();
+        executeQuery();
+        
+        try {
+            if(!this.resultset.next()){
+                this.query = SQLLibrary.UPDATE_CUSTOMER;
+                parameters = new ArrayList<>();
+                parameters.add(customer.getFirstname());
+                parameters.add(customer.getLastname());
+                parameters.add(customer.getEmail());
+                parameters.add(customer.getPassword());
+                //parameters.add(customer.getStatus());   //not used
+                parameters.add(customer.getCustomerNumber());
+                this.parameters = parameters;
+                executeUpdate();
+                return customer;
+            } else{
+                this.query = SQLLibrary.SYSTEM_GET_CUSTOMER_BY_CUSTOMERNUMB;
+                parameters = new ArrayList<>();
+                parameters.add(customer.getCustomerNumber());
+                this.parameters = parameters;
+                executeQuery();
+                
+                try {
+                    if (resultset.next()) {
+                        return createCustomer(resultset);
+                    }
+                }
+                catch (SQLException ex) {
+                    Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return new Customer("La","La","La@La.La","Lalala");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return new Customer("Blah","Blah","Blah@Blah.Blah","Blalala");
     }
 
 //</editor-fold>
@@ -285,10 +328,10 @@ public class DatabaseManager implements IntDatabaseManager {
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Retrieve Customer Journey History from the SQL Database">
     @Override
-    public ArrayList<Journey> getJourneyHistory(String customerNumber, int index) {
+    public ArrayList<Journey> getJourneyHistory(int customerNumber, int index) {
         this.query = SQLLibrary.SYSTEM_GET_JOURNEY_HISTORY_RANGE;
         ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(Integer.parseInt(customerNumber));
+        parameters.add(customerNumber);
         parameters.add(index);
         this.parameters = parameters;
         System.err.println("executeQuery!!");

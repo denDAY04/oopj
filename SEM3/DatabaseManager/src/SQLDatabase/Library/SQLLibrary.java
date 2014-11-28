@@ -13,7 +13,11 @@ public class SQLLibrary {
      */
     public static final String CREATE_CUSTOMER = "INSERT INTO "
             + "Customer (FirstName, LastName, eMail, Password) "
-            + "VALUES (?,?,?,?)";      
+            + "VALUES (?,?,?,?)";  
+    
+    public static final String SEARCH_EMAIL = "SELECT *"
+            + "FROM Customer "
+            + "WHERE eMail = ?";
     
     /**
      * Get a customer with customer number.

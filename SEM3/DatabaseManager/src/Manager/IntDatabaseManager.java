@@ -8,10 +8,10 @@ public interface IntDatabaseManager {
     
     //<editor-fold defaultstate="collapsed" desc="WebsiteManager">
     public int createCustomer(Customer customer);
-    public void setCustomerDetails(Customer customer);
+    public Customer setCustomerDetails(Customer customer);
     public Customer getCustomerDetails(int customerNumber);
     public Customer logOn(String email, String password);
-    public ArrayList<Journey> getJourneyHistory(String customerNumber, int index);
+    public ArrayList<Journey> getJourneyHistory(int customerNumber, int index);
     //</editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="RouteplannerJourneyManager">
     public double getNextDeparture(int startPosition, int endPosition, int timeDeparture);// Return is availible departure; timeDeparture is the desired departure time   
