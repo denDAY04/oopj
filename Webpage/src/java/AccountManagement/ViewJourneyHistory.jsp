@@ -2,13 +2,13 @@
     <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
 
     <jsp:useBean id="journey" class="Beans.JourneyBean" scope = "page"/>
-    <jsp:useBean id="customerBean" class="Beans.CustomerBean" scope="session" />
-    <jsp:setProperty name="journey" property="customerNumber" value="<%=customerBean.getCustomerNumber()%>"/>
+    <jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
+    <jsp:setProperty name="journey" property="customerNumber" value="<%=idtestbean.getCustomerNumber()%>"/>
     <jsp:setProperty name="journey" property="index" value="${param.index}"/>
-    <%--
-        if( customerBean.getCustomerNumber()=="")
+    <%
+        if( idtestbean.getCustomerNumber()=="")
           response.sendRedirect("/Webpage/Login.jsp");
-    --%>
+    %>
     
     <HEAD>
         <TITLE>Recent Journeys</TITLE>
@@ -24,7 +24,7 @@
         </H1>
         <BR>
         <BR>
-        displaying  <jsp:getProperty name="journey" property="displayFrom"/> to <jsp:getProperty name="journey" property="displayTo"/>
+        Displaying:  <jsp:getProperty name="journey" property="displayFrom"/> to <jsp:getProperty name="journey" property="displayTo"/>
         <div>
             <table id="journeys" border="1" style="width:50%">
                 <tr>
@@ -48,7 +48,7 @@
                 <tr>
                     <TD>
                         <form action="ViewJourneyHistory.jsp">
-                            <input type="submit" value="previous journeys">
+                            <input type="submit" value="Previous journeys">
                             <input type="hidden" name="index" value="<%=journey.getprevIndex()%>">
                         </form>
                     </TD>
@@ -57,6 +57,11 @@
                             <input type="submit" value="Next journeys">
                             <input type="hidden" name="index" value="<%=journey.getNextIndex()%>">
                         </form>   
+                    </TD>
+                    <TD>
+                        <form action="AccountOverview.jsp">
+                            <input type="submit" value="Back">
+                        </form>
                     </TD>
                 </tr>
             </table>

@@ -106,7 +106,6 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
         Customer user = new Customer(firstName,lastName,email,password);
         Customer upUser = this.skel.setCustomerDetails(user);
         if(!upUser.equals(user)){
-            this.customerNumber = upUser.getCustomerNumber();
             this.firstName = upUser.getFirstname();
             this.lastName = upUser.getLastname();
             this.email = upUser.getEmail();
@@ -114,7 +113,6 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
             errorMessage3="";
             return true;
         } else{
-            this.customerNumber = upUser.getCustomerNumber();
             this.firstName = upUser.getFirstname();
             this.lastName = upUser.getLastname();
             this.email = upUser.getEmail();

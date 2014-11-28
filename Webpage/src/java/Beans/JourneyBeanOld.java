@@ -8,9 +8,6 @@ package Beans;
 
 
 import java.io.Serializable;
-import java.rmi.RemoteException;
-import java.rmi.registry.LocateRegistry;
-import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
 
@@ -18,13 +15,13 @@ import java.util.ArrayList;
  *
  * @author Qess
  */
-public class JourneyBean implements Serializable {
+public class JourneyBeanOld implements Serializable {
     // used to itterate through the journeys in the journey array list.
     private int i=0;
         // index used to track what section of the journey history to be retrived.
     private int index;
     private String customerNumber;
-    private WebsiteManagerRMISkel skel;
+    private WebsiteManagerRMISkelImpl skel;
     private ArrayList<Journey> journeyList;
 
     
@@ -36,29 +33,8 @@ public class JourneyBean implements Serializable {
         return index+getListSize();
     }
     
-    public JourneyBean() throws Exception{
-        
-        String host = "goonhilly6.eitlab.ihk-edu.dk";        
-        int port = 20423;               
-        System.out.println("Client: Starting...");
-        System.out.println("Using registry at: " + host + " port " + port);
-
-        
-        final Registry registryA;
-        try {registryA = LocateRegistry.getRegistry(host, port);        
-       
-         final String[] boundNames = registryA.list();
-         System.out.println(
-            "Names bound to RMI registry at host " + host + " and port " + port + ":");
-         for (final String name : boundNames)
-         {System.out.println("\t" + name);}        
-        }
-         catch (RemoteException ex) {
-             System.err.println("Setup graph Remote ex: " +ex);
-        }
-   
-            Registry registry = LocateRegistry.getRegistry(host, port);     
-            this.skel = (WebsiteManagerRMISkel)registry.lookup("websiteManager");
+    public JourneyBeanOld() {
+            this.skel = new WebsiteManagerRMISkelImpl();
     }
     
     
@@ -67,7 +43,7 @@ public class JourneyBean implements Serializable {
     }
     
 
-    public void setIndex(int index) throws RemoteException{
+    public void setIndex(int index){
     this.index = index;
     journeyList = skel.getJourneyHistory(customerNumber, index);
     }
