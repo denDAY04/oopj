@@ -105,8 +105,12 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
     
     public boolean changeDetails() throws RemoteException{
         Customer user = new Customer(firstName,lastName,email,password);
+        user.setCustomerNumber(customerNumber);
+        System.err.println(user.getFirstname()+" "+user.getLastname()+" "+user.getEmail());
         Customer upUser = this.skel.setCustomerDetails(user);
-        if(!upUser.equals(user)){
+        System.err.println(upUser.getFirstname()+" "+upUser.getLastname()+" "+upUser.getEmail());
+        System.err.println(!upUser.equals(user));
+        if(upUser.equals(user)){
             this.firstName = upUser.getFirstname();
             this.lastName = upUser.getLastname();
             this.email = upUser.getEmail();
