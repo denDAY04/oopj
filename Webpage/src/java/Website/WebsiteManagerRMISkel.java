@@ -23,5 +23,5 @@ public interface WebsiteManagerRMISkel extends Remote
     public Customer logOn(String email, String password) throws RemoteException;  // changed return type from boolean to customer
    
     //public ArrayList<Journey> getJourneyHistory(int customerNumber) throws RemoteException;	// customer number is stored as an integer in the databese
-    public ArrayList<Journey> getJourneyHistory(String customerNumber, int index) throws RemoteException;        // (precision?) 3 / 5 / 10   ... cast integer to string
+    public ArrayList<Journey> getJourneyHistory(int customerNumber, int index) throws RemoteException;        // (precision?) 3 / 5 / 10   ... cast integer to string
 }

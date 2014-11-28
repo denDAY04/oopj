@@ -70,7 +70,7 @@ public class JourneyBean implements Serializable {
 
     public void setIndex(int index) throws RemoteException{
     this.index = index;
-    journeyList = skel.getJourneyHistory(Integer.toString(customerNumber), index);
+    journeyList = skel.getJourneyHistory(customerNumber, index);
     }
     
     public int getIndex(){
