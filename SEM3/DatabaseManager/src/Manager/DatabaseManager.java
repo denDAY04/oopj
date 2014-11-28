@@ -22,8 +22,6 @@ import SQLDatabase.Library.SQLLibrary;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Collection;
-import java.util.ListIterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -74,8 +72,6 @@ public class DatabaseManager implements IntDatabaseManager {
     private void executeUpdate() throws NullPointerException {
         try {
 
-//            if (this.con != null){System.err.println("Connection not null");}
-//            if (this.con.isClosed()){System.err.println("Connection is Closed");}
             dbConnect();
             preparedStatement = con.prepareStatement(query);
 
@@ -95,16 +91,16 @@ public class DatabaseManager implements IntDatabaseManager {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        finally {
-            if (con != null) {
-                try {
-                    con.close();
-                }
-                catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
+//        finally {
+//            if (con != null) {
+//                try {
+//                    con.close();
+//                }
+//                catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
 
     }
     private void executeQuery() throws NullPointerException {
@@ -123,29 +119,24 @@ public class DatabaseManager implements IntDatabaseManager {
             }
 
             this.resultset = preparedStatement.executeQuery();
-            // while (resultset.next()) {}
         }
         catch (SQLException ex) {
             Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        finally {
-            if (con != null) {
-                try {
-                    con.close();
+//        finally {
+//            if (con != null) {
+//                try {
+//                    con.close();
+//                }
+//                catch (SQLException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
                 }
-                catch (SQLException e) {
-                    e.printStackTrace();
-                }
-            }
-        }
-    }
 
 
-    
-    
-    
-    
 
     //<editor-fold defaultstate="collapsed" desc="WebsiteManager">
     //<editor-fold defaultstate="collapsed" desc="Create a new Customer in the SQL Database">    
@@ -328,10 +319,10 @@ public class DatabaseManager implements IntDatabaseManager {
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Retrieve Customer Journey History from the SQL Database">
     @Override
-    public ArrayList<Journey> getJourneyHistory(int customerNumber, int index) {
+    public ArrayList<Journey> getJourneyHistory(String customerNumber, int index) {
         this.query = SQLLibrary.SYSTEM_GET_JOURNEY_HISTORY_RANGE;
         ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(customerNumber);
+        parameters.add(Integer.parseInt(customerNumber));
         parameters.add(index);
         this.parameters = parameters;
         System.err.println("executeQuery!!");
@@ -429,10 +420,7 @@ public class DatabaseManager implements IntDatabaseManager {
 
     
     
-    //</editor-fold> 
-    
-    
-    
+    //</editor-fold>     
     //<editor-fold defaultstate="collapsed" desc="JourneyManager">
     @Override
     public TicketList createNewTickets(PassengerList pLst) {     //the check for existing tickets is handled by the JourneyManager 
@@ -463,8 +451,8 @@ public class DatabaseManager implements IntDatabaseManager {
     
         for (Ticket t : unchecked) { 
             try {
-                Ticket checked = validate(t, pLst);
-                if (checked != null)  returnTicketList.addSingleTicket(checked);          
+                Ticket checked = validate(t, pLst.getZone());
+                if (checked != null) returnTicketList.addSingleTicket(checked);          
             }
             catch (SQLException ex) {ex.printStackTrace();
             }    
@@ -477,11 +465,12 @@ public class DatabaseManager implements IntDatabaseManager {
                     
                     private TicketList getTickets(PassengerList pLst){
                         this.query = SQLLibrary.SYSTEM_GET_TICKETLIST;
-                        ArrayList<Object> parameters = new ArrayList<>();
+                        ArrayList<Object> parameters;
                         ArrayList<Integer> passengers = pLst.getAllPassengers();
                         
                         TicketList returnTicketList = new TicketList();
                         for (Integer passenger : passengers) {
+                            parameters = new ArrayList<>();
                             parameters.add(passenger);
                             this.parameters = parameters;
                             executeQuery();
@@ -497,21 +486,19 @@ public class DatabaseManager implements IntDatabaseManager {
                                             resultset.getInt("zonecount"),
                                             resultset.getInt("customer")
                                     );
+                                    returnTicketList.addSingleTicket(t);
                                 }
                             }
                             catch (SQLException ex) {ex.printStackTrace();                            
                             }                            
-                            parameters.clear();
                         }
-                        
                         return returnTicketList;
-                        
                         
                     }
                     
 //</editor-fold> 
      //<editor-fold defaultstate="collapsed" desc="Validate Ticket">
-    private Ticket validate(Ticket t, PassengerList pLst) throws SQLException{
+    private Ticket validate(Ticket t, int zoneNumber) throws SQLException{
         
         if (!validateTicketTime(t)){  // move invalid ticket to history using transaction
             try {
@@ -534,22 +521,26 @@ public class DatabaseManager implements IntDatabaseManager {
                 
                 //2. Remove Ticket t from Ticket on the database
                 this.query = SQLLibrary.DELETE_TICKET;
-                input.clear();
+                input = new ArrayList<>();
                 input.add(t.getNumber());
                 this.parameters = input;
-                executeQuery();
+                executeUpdate();
                 
                 //3. Commit to transaction
                 con.commit();
             }
-            catch (Exception e) {con.rollback(); System.err.println("Rollback error");}
+            catch (Exception e) {
+                e.printStackTrace();
+                System.err.println("Rollback error");
+                con.rollback();
+            }
             
             //4. Disable Transaction
             con.setAutoCommit(true);
             return null;            
         }
         
-        else if (!validateTicketZone(t, pLst.getZone())){       
+        else if (!validateTicketZone(t, zoneNumber)){       
               //Ticket Zone is invalid... update ticket:                        
                 updateTicket(t);              
         }
@@ -659,126 +650,4 @@ public class DatabaseManager implements IntDatabaseManager {
       
     //</editor-fold>
 
- 
-    
-    
 } 
-
-    
-    
-
-
-    
- 
-    //<editor-fold defaultstate="collapsed" desc="Snippet 3">
-    //         PreparedStatement pstmt = con.prepareStatement("UPDATE EMPLOYEES
-    //                                     SET SALARY = ? WHERE ID = ?");
-    //   pstmt.setBigDecimal(1, 153833.00)
-    //   pstmt.setInt(2, 110592)
-        //</editor-fold>
-    // //<editor-fold defaultstate="collapsed" desc="Snippet 4">
-    //    
-    //    @Override
-    //    public TicketList createNewTickets(PassengerList pLst) {      
-    //         ArrayList<Object> parameters = new ArrayList<>();
-    //         this.query = SQLLibrary.CREATE_TICKET; 
-    //         int zone = pLst.getZone();
-    //         ArrayList<Integer> passengers = pLst.getAllPassengers(); 
-    //         
-    //         
-    //          TicketList check = getExistingTickets(pLst); // check if ticket exists
-    //         
-    //         
-    //         
-    //        //  for (int i = 0; i < passengers.size(); i++) System.out.println(passengers.get(i).toString());
-    //        for (Integer passenger : passengers) {
-    //            System.out.println(passenger.toString());
-    //            parameters.add(PRICE_ONE_ZONE_ADULT); // ticket price for one zone adult
-    //            parameters.add(zone);       // zone **********************
-    //            parameters.add(passenger);
-    //            
-    //            System.out.println(parameters.toString());
-    //            
-    //            executeUpdate();
-    //            parameters.clear();
-    //            
-    //        }
-    //         
-    //        //should a price field in the old tickets be added to the sql database to enable prize and zone calculation if and when the ticket prize is changed
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //        
-    //         
-    //         
-    ////        
-    ////        
-    ////         parameters.addAll((Collection<? extends Object>) passengers);
-    ////        
-    ////         
-    ////         
-    ////         
-    ////         
-    ////         //evt use sql trans action here.........
-    ////        
-    ////        ListIterator itr = passengers.listIterator();
-    ////        
-    ////         while(itr.hasNext()){   // not a effecient solution, consider improvement
-    ////            parameters.clear();
-    ////            parameters.add(PRICE_ONE_ZONE_ADULT); // ticket price for one zone adult
-    ////            parameters.add(zone);       // zone
-    ////            parameters.add(itr.next());           // add customer   (integer customer number)     
-    ////            
-    ////            // check to se if passenger is allready active
-    ////            
-    ////            executeUpdate();           
-    ////         }
-    ////         
-    //         
-    //         
-    //         
-    //         TicketList returnTicketList = new TicketList();      //return select * from ticket where zone = ?    
-    //         parameters.clear();
-    //         this.query = SQLLibrary.SYSTEM_GET_TICKETLIST;
-    //         parameters.add(zone);
-    //         executeQuery();
-    //         
-    //         
-    //              try {
-    //            
-    //            while (resultset.next()) {
-    //                Ticket t = new Ticket();
-    //                 
-    //                t.createTicket(
-    //                    resultset.getInt("ticketnumber"),
-    //                    resultset.getTimestamp("datetimestamp").toString().substring(0, 16), // 2014-11-19 15:44:09.630 format returned from database
-    //                    resultset.getInt("ticketprice"),
-    //                    resultset.getInt("startzone"),
-    //                    resultset.getInt("customer")
-    //                ); 
-    //                
-    //                returnTicketList.addSingleTicket(t);
-    //                
-    //      
-    //            }
-    //            
-    //        }
-    //        catch (SQLException ex) {
-    //            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-    //        }
-    //       
-    //         
-    //        return returnTicketList;
-    //      
-    //    }
-    //    
-    //    
-    //    
-    //    
-    //    
-    //    //</editor-fold>             
-
-

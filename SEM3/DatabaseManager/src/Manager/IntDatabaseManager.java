@@ -11,7 +11,7 @@ public interface IntDatabaseManager {
     public Customer setCustomerDetails(Customer customer);
     public Customer getCustomerDetails(int customerNumber);
     public Customer logOn(String email, String password);
-    public ArrayList<Journey> getJourneyHistory(int customerNumber, int index);
+    public ArrayList<Journey> getJourneyHistory(String customerNumber, int index);
     //</editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="RouteplannerJourneyManager">
 

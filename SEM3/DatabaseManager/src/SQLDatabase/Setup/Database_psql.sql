@@ -33,7 +33,7 @@ Customer      INT REFERENCES Customer(CustomerNumber)
 -- JourneyHistory: --
 CREATE TABLE JourneyHistory(
 TicketNumber  INT,
-DateTimeStamp TIMESTAMP,
+DateTimeStamp VARCHAR(32),
 Ticketprice   INT,
 StartZone     INT, 
 ZoneCount     INT,
