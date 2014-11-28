@@ -9,6 +9,7 @@
 
 
 import Website.WebsiteManagerRMISkelImpl;
+import RMI.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -75,7 +76,7 @@ public class RMIServer{
             System.out.println("DataServer: Instantiating server objects...");        
             
             JourneyManagerRMISkelImpl journeyManager = new JourneyManagerRMISkelImpl();
-            RouteplannerJourneyManagerRMISkelImpl routeplannerJourneyManager = new RouteplannerJourneyManagerRMISkelImpl();
+            IntRouteplannerJourneyManagerRMISkel routeplannerJourneyManager = new RouteplannerJourneyManagerRMISkel();
             WebsiteManagerRMISkelImpl websiteManager = new WebsiteManagerRMISkelImpl();
             
             System.out.println("DataServer: Connecting server objects to registry...");    
