@@ -363,24 +363,72 @@ public class DatabaseManager implements IntDatabaseManager {
 //</editor-fold>    
 //</editor-fold>          
     //<editor-fold defaultstate="collapsed" desc="RouteplannerJourneyManager">
-    @Override
-    public double getNextDeparture(int startPosition, int endPosition, int timeDeparture) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
 
+         
     @Override              //Objects may be defined as a modelclass Stop[]
-    public ArrayList<Object> SetupGraph() {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Stop[] SetupGraph() {
+       
 
-    //  int GetSpeedBound()
+        int speed;
+        ArrayList<StopLink>[] stopLinkArr;
+        
+        this.query = SQLLibrary.ROUTEPLANNER_GET_SPEEDBOUND;
+        
+        System.err.println("executeQuery!!");
+        this.parameters = new ArrayList();
+        executeQuery();
+        ArrayList<Stop> stopArr = new ArrayList();
+        try {
+            if (resultset.next()){
+            speed = resultset.getInt(1);
+            this.query=SQLLibrary.ROUTEPLANNER_GET_STOP;
+            executeQuery();
+            while (resultset.next()) { // itterates through lines to create stops
+                stopArr.add(new Stop(resultset.getString(1), resultset.getInt(2), (long) resultset.getInt(3), (long) resultset.getInt(4), speed));
+                //System.err.println(stopArr[i].name+" "+stopArr[i].zoneNumber+" "+stopArr[i].longitude+" "+stopArr[i].latitude);
+            }
+            stopLinkArr = new ArrayList[stopArr.size()];
+            for (int i = 0; i < stopArr.size(); i++) {
+                stopLinkArr[i] = new ArrayList<>(); // if no array exsists yet, make one
+            }
+            this.query = SQLLibrary.ROUTEPLANNER_GET_STOPLINK;
+            executeQuery();
+            
+            
+            while (resultset.next()) { // itterates through lines to create links
+                String type = resultset.getString(1);
+                String line = resultset.getString(2);
+                Stop parent = stopArr.get(resultset.getInt(3) - 1);
+                Stop stop = stopArr.get(resultset.getInt(4) - 1);
+                Stop towards = stopArr.get(resultset.getInt(5) - 1);
+
+                // add the link to the arrayarray list in the array with index toStop
+                stopLinkArr[resultset.getInt(3) - 1].add(new StopLink(type, line, parent, stop, towards));
+            //System.err.println("index "+(rs.getInt(3) - 1));
+                //System.err.println("type: "+rs.getString(1)+" line"+rs.getString(2)+parent.name+" "+stop.name+" "+towards.name);
+              }
+            
+             for (int i = 0; i < stopLinkArr.length; i++) {
+               if (stopLinkArr[i] != null) {
+                   StopLink[] currStopLinkArr = stopLinkArr[i].toArray(new StopLink[stopLinkArr[i].size()]);
+                   stopArr.get(i).links = currStopLinkArr;
+                }
+            
+            
+             }
+        }}
+        catch (SQLException ex) {
+            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        // convert arraylist toarray
+        Stop[] stopArr2 = new Stop[stopArr.size()];
+        stopArr2 = stopArr.toArray(stopArr2);
+        
+        return stopArr2;
     }
 
-    // GetNextDeparute   IS ....DEPARUTE a spelling error ????????????
-
-    @Override              //Objects may be defined as a modelclass time[]
-    public ArrayList<Object> GetNextDeparute(String type, String line, String fromStop, String towardsStop, int hour, int minute) {
-        throw new UnsupportedOperationException("Not supported yet.");
-    }
+    
+    
     //</editor-fold> 
     
     

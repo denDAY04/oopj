@@ -14,9 +14,9 @@ public interface IntDatabaseManager {
     public ArrayList<Journey> getJourneyHistory(int customerNumber, int index);
     //</editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="RouteplannerJourneyManager">
-    public double getNextDeparture(int startPosition, int endPosition, int timeDeparture);// Return is availible departure; timeDeparture is the desired departure time   
-    public ArrayList<Object> SetupGraph(); //Objects may be defined as a modelclass Stop[]
-    public ArrayList<Object> GetNextDeparute(String type, String line, String fromStop, String towardsStop,int hour, int minute);    //Objects may be defined as a modelclass time[]
+
+    public Stop[] SetupGraph(); //Objects may be defined as a modelclass Stop[]
+
     //</editor-fold> 
     //<editor-fold defaultstate="collapsed" desc="JourneyManager">
     public TicketList getExistingTickets(PassengerList pLst);

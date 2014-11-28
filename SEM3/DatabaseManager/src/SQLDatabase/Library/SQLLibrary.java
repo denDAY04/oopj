@@ -279,7 +279,22 @@ public class SQLLibrary {
             + "VALUES (?,?,?,?,?,?,?,?)";
 
    
-
-
     
+        
+    /**
+     * "select speedbound FROM speedbound"
+     */
+    public static final String ROUTEPLANNER_GET_SPEEDBOUND = "select speedbound FROM speedbound";
+    
+    
+    /**
+     * "select stopname,zoneNumber,longitude,latitude FROM stops"
+     */
+     public static final String ROUTEPLANNER_GET_STOP = "select stopname,zoneNumber,longitude,latitude FROM stops";
+    
+     /**
+      * select vehicle,line,fromstop,tostop,towards FROM stoplinks
+      */
+     public static final String ROUTEPLANNER_GET_STOPLINK ="select vehicle,line,fromstop,tostop,towards FROM stoplinks";
+
 }
