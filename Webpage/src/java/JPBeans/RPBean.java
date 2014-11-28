@@ -60,7 +60,6 @@ public class RPBean implements Serializable {
             return 0;
         }
         // get the total number of changes
-        //System.err.println("2 + (2 * rpj.getWPChangeCounter(0): "+(2 + (2 * rpj.getWPChangeCounter(0))));
         return 2 + (2 * rpj.getWPChangeCounter(0)); //Determines times JSP loop runs
     }
 
@@ -110,8 +109,6 @@ public class RPBean implements Serializable {
     }
 
     public String getWaypointtransport() {
-//        System.err.println("getWaypointtransport called, geton is :"+getOn+", currentwaypoint is "+currentwaypoint);
-//        System.err.println(" stop name: "+rpj.getWPStopName(currentwaypoint));
         if (getOn) {
             getOn = false;
             
@@ -134,10 +131,6 @@ public class RPBean implements Serializable {
     }
 
     public String getTime() {
-//        System.err.println("Get time called, geton is :"+getOn+", currentwaypoint is "+currentwaypoint);
-//        System.err.println(" stop name: "+rpj.getWPStopName(currentwaypoint));
-//        System.err.println("rpj.getNumberofWaypoints(): "+rpj.getNumberofWaypoints());
-//        System.err.println("getNumberofwaypoints: "+getNumberofwaypoints());
         if (getOn) {
             String waittime = "";
             if (currentwaypoint > 0) {
@@ -160,8 +153,8 @@ public class RPBean implements Serializable {
             }
         } else {
 
-                
-            //int days = (int)(Math.floor((rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis() - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
+            if (currentwaypoint==rpj.getNumberofWaypoints()){
+                            //int days = (int)(Math.floor((rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis() - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
             int hours = (int) (Math.floor(rpj.getWPArrivalTimeAtStop(currentwaypoint-1).getTimeInMillis()
                     - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (MINUTES * SECONDS * MILLISECONDS));
             hours = hours - (24 * ((int) (Math.floor(hours / 24))));
@@ -169,10 +162,17 @@ public class RPBean implements Serializable {
             int minutes = (int) (Math.floor((rpj.getWPArrivalTimeAtStop(currentwaypoint-1).getTimeInMillis()
                     - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (SECONDS * MILLISECONDS)));
             minutes = minutes - (60 * ((int) (Math.floor(minutes / 60))));
-
-            
                 return "Arrival: &nbsp &nbsp" + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint-1).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint-1).get(GregorianCalendar.MINUTE)) + " &nbsp &nbsp &nbsp &nbsp  Duration: " + String.format("%02d", hours) + ":" + String.format("%02d", minutes);
+            }
+                        //int days = (int)(Math.floor((rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis() - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
+            int hours = (int) (Math.floor(rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis()
+                    - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (MINUTES * SECONDS * MILLISECONDS));
+            hours = hours - (24 * ((int) (Math.floor(hours / 24))));
 
+            int minutes = (int) (Math.floor((rpj.getWPArrivalTimeAtStop(currentwaypoint).getTimeInMillis()
+                    - rpj.getWPDepartureTimeFromStop(departureStopIndex).getTimeInMillis()) / (SECONDS * MILLISECONDS)));
+            minutes = minutes - (60 * ((int) (Math.floor(minutes / 60))));
+            return "Arrival: &nbsp &nbsp" + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint).get(GregorianCalendar.HOUR_OF_DAY)) + ":" + String.format("%02d", rpj.getWPArrivalTimeAtStop(currentwaypoint).get(GregorianCalendar.MINUTE)) + " &nbsp &nbsp &nbsp &nbsp  Duration: " + String.format("%02d", hours) + ":" + String.format("%02d", minutes);
             }
 
         }
@@ -180,8 +180,6 @@ public class RPBean implements Serializable {
 
  public int getNextwaypoint() {
         currentwaypoint++;
-        //System.err.println("Current Station: "+rpj.getWPStopName(currentwaypoint-1)+", ");
-       // System.err.println("Current waypoint: "+currentwaypoint);
         if ((currentwaypoint + 1) < rpj.getNumberofWaypoints()) {
             if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint - 1)) {
                 return 0;
@@ -189,7 +187,6 @@ public class RPBean implements Serializable {
 
             while (rpj.getWPChangeCounter(currentwaypoint) == rpj.getWPChangeCounter(currentwaypoint + 1)) {
                 currentwaypoint++;
-              //  System.err.println(currentwaypoint+"");
                 if (rpj.getWPChangeCounter(currentwaypoint) != rpj.getWPChangeCounter(currentwaypoint - 1)) {
                     return 0;
                 }
@@ -228,7 +225,6 @@ public class RPBean implements Serializable {
             getOn = true;
             departureStopIndex=0;
 //       try{
-           System.err.println("Doing route planning"+originint+destinationint);
         rpj = rPJSkel.createRouteplannerJourney(originint, destinationint, startTime);
 //          }
 //       catch (InterruptedException //| TimeoutException | ExecutionException 
@@ -280,18 +276,15 @@ public class RPBean implements Serializable {
     }
 
     public void setMinute(int minute) {
-        System.err.println("Setting Minute.");
         this.minute = minute;
         startTime.set(GregorianCalendar.MINUTE, minute);
     }
 
     public void setOriginint(int o){
-        System.err.println("Setting origin integer.");
     this.originint = o;
     }
     
     public void setDestinationint(int d){
-         System.err.println("Setting destination integer.");
     this.destinationint = d;
     }
     
