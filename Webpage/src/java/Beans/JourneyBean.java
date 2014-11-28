@@ -6,7 +6,8 @@ package Beans;
  * and open the template in the editor.
  */
 
-
+import Website.WebsiteManagerRMISkel;
+import ModelClasses.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -23,7 +24,7 @@ public class JourneyBean implements Serializable {
     private int i=0;
         // index used to track what section of the journey history to be retrived.
     private int index;
-    private String customerNumber;
+    private int customerNumber;
     private WebsiteManagerRMISkel skel;
     private ArrayList<Journey> journeyList;
 
@@ -69,7 +70,7 @@ public class JourneyBean implements Serializable {
 
     public void setIndex(int index) throws RemoteException{
     this.index = index;
-    journeyList = skel.getJourneyHistory(customerNumber, index);
+    journeyList = skel.getJourneyHistory(Integer.toString(customerNumber), index);
     }
     
     public int getIndex(){
@@ -107,11 +108,11 @@ public class JourneyBean implements Serializable {
         return journeyList.get(i).getStartzone();
     }
         
-    public void setCustomerNumber(String customerNumber){
+    public void setCustomerNumber(int customerNumber){
     this.customerNumber=customerNumber;
     }
 
-    public String getCustomerNumber(){
+    public int getCustomerNumber(){
     return customerNumber;
     }
 

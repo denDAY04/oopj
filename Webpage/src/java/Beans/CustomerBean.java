@@ -1,7 +1,8 @@
 package Beans;
 
 
-
+import Website.WebsiteManagerRMISkel;
+import ModelClasses.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -25,7 +26,7 @@ public int value = 5;
 public int newcustomer;*/
 
 //String customerNumber = "1234"; //change to "" to test page redirects 
-String customerNumber = "";
+int customerNumber;
 String firstName;
 String lastName;
 String email;
@@ -93,7 +94,7 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
         Customer user = new Customer(firstName,lastName,email,password);
         int cNumber = this.skel.createCustomer(user);
         if(cNumber!=-1){
-            this.customerNumber = Integer.toString(cNumber);
+            this.customerNumber = cNumber;
             setErrorMessage2("");
             return true;
         } else{
@@ -146,11 +147,11 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
         this.errorMessage3 = errorMessage3;
     }
     
-    public String getCustomerNumber() {
+    public int getCustomerNumber() {
         return customerNumber;
     }
 
-    public void setCustomerNumber(String CustomerNumber) {
+    public void setCustomerNumber(int CustomerNumber) {
         this.customerNumber = CustomerNumber;
     }
 

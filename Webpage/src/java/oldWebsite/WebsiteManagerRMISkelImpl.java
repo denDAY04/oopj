@@ -1,4 +1,4 @@
-package Beans;
+package oldWebsite;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -13,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author Rasmus
  */
-public class WebsiteManagerRMISkelImpl implements WebsiteManagerRMISkelInterface {
+/*public class WebsiteManagerRMISkelImpl implements WebsiteManagerRMISkelInterface {
 
     @Override
     public ArrayList<Journey> getJourneyHistory(String customerNumber, int index) {
@@ -152,4 +152,4 @@ public class WebsiteManagerRMISkelImpl implements WebsiteManagerRMISkelInterface
         return user;        
     }
     
-}
+}*/

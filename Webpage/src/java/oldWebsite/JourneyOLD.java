@@ -1,4 +1,4 @@
-package Beans;
+package oldWebsite;
 
 import java.io.Serializable;
 
@@ -14,9 +14,9 @@ import java.io.Serializable;
  *
  * @author Rasmus
  */
-public class Journey implements Serializable{
+public class JourneyOLD implements Serializable{
 
-    public Journey() {
+    public JourneyOLD() {
     }
     
     int startzone = 0;

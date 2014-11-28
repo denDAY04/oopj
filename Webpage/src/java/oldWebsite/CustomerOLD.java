@@ -1,4 +1,4 @@
-package Beans;
+package oldWebsite;
 
 import java.io.Serializable;
 import java.util.Objects;
@@ -14,7 +14,7 @@ import java.util.Objects;
  *
  * @author Rasmus
  */
-public class Customer implements Serializable {
+public class CustomerOLD implements Serializable {
     
 String customerNumber;
 String firstName;
@@ -23,11 +23,11 @@ String email;
 String password;
 int totalRecords;
 //String Status;        // Logged in, Valid customer, e.t.c
-public Customer(){
+public CustomerOLD(){
     
 }
 
-public Customer(String firstName, String lastName, String email, String password){
+public CustomerOLD(String firstName, String lastName, String email, String password){
     this.firstName = firstName;
     this.lastName = lastName;
     this.email = email;
@@ -100,7 +100,7 @@ public int getTotalRecords(){
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final Customer other = (Customer) obj;
+        final CustomerOLD other = (CustomerOLD) obj;
         if (!Objects.equals(this.customerNumber, other.customerNumber)) {
             return false;
         }
