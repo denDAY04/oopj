@@ -9,7 +9,8 @@ import java.rmi.server.UnicastRemoteObject;
 public class WebsiteManagerRMISkelImpl extends UnicastRemoteObject implements WebsiteManagerRMISkel {
     DatabaseManager databasemanager;      
     public WebsiteManagerRMISkelImpl() throws RemoteException {  
-        databasemanager = new DatabaseManager();      
+        databasemanager = new DatabaseManager();
+         System.out.println("WebsiteManagerRMI constructor executed"); 
     }  
     
     /**

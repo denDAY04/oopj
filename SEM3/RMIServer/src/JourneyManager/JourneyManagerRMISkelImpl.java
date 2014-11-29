@@ -13,13 +13,10 @@ public class JourneyManagerRMISkelImpl extends UnicastRemoteObject implements Jo
     }  
     
     
-        
-    
     @Override
     public TicketList getExistingTickets(PassengerList pLst) throws RemoteException {
         return databasemanager.getExistingTickets(pLst);
-        
-        
+             
     }
 
     @Override
