@@ -53,9 +53,3 @@ public class Journey implements Serializable {
     
  
 }
-
-
-
-
-
-

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ModelClasses;
 
 import java.io.Serializable;
@@ -70,7 +65,7 @@ public class Stop implements Serializable{
     public final void calcExpDistGoal(Stop goal) {
         long deltaLatitude = Math.abs(latitude - goal.latitude);
         long deltaLongitude = Math.abs(longitude - goal.longitude);
-// local variables for magic numbers 60, 1000 etc (e.g. seconds, minutes etc)
+  // local variables for magic numbers 60, 1000 etc (e.g. seconds, minutes etc)
         this.expTimetoGoal = (long) (Math.sqrt((deltaLatitude * deltaLatitude) + (deltaLongitude * deltaLongitude)) * ((60 * 60 * 1000) / maximumSpeed)); // for time in MS @ 100km / h
     }
 }

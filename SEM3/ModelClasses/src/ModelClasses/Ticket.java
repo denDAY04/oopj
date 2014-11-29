@@ -1,8 +1,3 @@
-
-
-//!!!!!!!!!!!!! NEEDS TO BE MERGED WITH TICKET-OLD!!!!!!!!!!!!!!!!!!!!!!!!!
-
-
 package ModelClasses;
 
 import java.io.Serializable;
@@ -13,8 +8,9 @@ import java.util.Objects;
  * Model class encapsulating relevant data constituting a ticket, such as price,
  * start zone, time etc.
  * <p>
- * @author Andreas Stensig Jensen on Oct 30, 2014
+ * @author Jonas Grum-Schwensen
  * Contributors:
+ * Andreas Stensig Jensen
  */
 public class Ticket implements Serializable {
 

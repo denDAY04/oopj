@@ -1,7 +1,5 @@
 package ModelClasses;
 
-
-
 //Model Class for Object creation
 import java.io.Serializable;
 import java.util.Objects;
@@ -13,11 +11,7 @@ public class Customer implements Serializable {
     private String lastName;
     private String email;
     private String password;
-    public int totalRecords;
-   // private String status; // Logged in, Valid customer, Active/Disabled e.t.c
-
-    
-       
+    public int totalRecords;          
     
 public Customer(){
         this.customerNumber = -1;
@@ -25,8 +19,7 @@ public Customer(){
         this.lastName = null;
         this.email = null;
         this.password = null;
-}
-    
+}    
  
 public Customer(String firstname, String lastname, String email, String password){
         this.firstName = firstname;
@@ -34,37 +27,9 @@ public Customer(String firstname, String lastname, String email, String password
         this.email = email;
         this.password = password;        
     }
-  
 
-
-
-
-
-
-    
-    
-//    public Customer(int customerNumb, String email, // String status,            
-//            String firstname, String lastname) throws RemoteException {
-//        this.customerNumber = customerNumb;
-//        //   this.status = status;
-//        this.firstName = firstname;
-//        this.lastName = lastname;
-//        this.email = email;
-//    }
-//
-//    public Customer(Customer obj) throws RemoteException {
-//        this.customerNumber = obj.customerNumber;
-//        this.firstName = obj.firstName;
-//        this.lastName = obj.lastName;
-//        this.email = obj.email;
-//    }
-
-    /**
-     *
-     * getters and setters
-     */
     public int getCustomerNumber() {return customerNumber;}
-   // public String getCustomerNumber(){return "" + customerNumber;}        // return as string
+  
     public void setCustomerNumber(int customerNumber) {
         this.customerNumber = customerNumber;}
     public void setCustomerNumber(String CustomerNumber) {
@@ -89,20 +54,11 @@ public Customer(String firstname, String lastname, String email, String password
 
     public void setPassword(String Password) {this.password = Password;}
 
-  //  public String getStatus() {return status;}
-    //  public void setStatus(String status) {this.status = status;}
-    /**
-     * Pass the Customer object to a formated string. Format: "FIRSTNAME,
-     * LASTNAME, EMAIL"
-     *
-     * @return the formated string.
-     */
     @Override
     public String toString() {
         String s = firstName + ", " + lastName + ", " + email + ", " + password;
         return s;
     }
-
     
     @Override
     public int hashCode() {
@@ -144,5 +100,4 @@ public Customer(String firstname, String lastname, String email, String password
         }
         return true;
     }
-
 }

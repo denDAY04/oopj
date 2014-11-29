@@ -1,7 +1,5 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * @author Rasmus
  */
 package ModelClasses;
 
@@ -32,10 +30,10 @@ public class RoutePlannerJourneyManager {
      */
     public static RoutePlannerJourney CreateRoutePlannerJourney(ArrayList<Waypoint> waypoints, GregorianCalendar arrival, GregorianCalendar departure, int zones) {
 
-        int price = 1200*zones;
+        int price = 1200 * zones;
         long deltaT = arrival.getTimeInMillis() - waypoints.get(0).getDepartureTimeFromStop().getTimeInMillis();
-        int travelTimeDays = (int) (Math.floor(deltaT / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
-        int travelTimeHours = (int) (Math.floor(deltaT / (MINUTES * SECONDS * MILLISECONDS))) - (travelTimeDays * HOURS);
+        int travelTimeDays    = (int) (Math.floor(deltaT / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
+        int travelTimeHours   = (int) (Math.floor(deltaT / (MINUTES * SECONDS * MILLISECONDS))) - (travelTimeDays * HOURS);
         int travelTimeMinutes = (int) (Math.floor(deltaT / (SECONDS * MILLISECONDS))) - (travelTimeDays * HOURS * MINUTES) - (travelTimeHours * MINUTES);
 
         return new RoutePlannerJourney(waypoints, arrival, departure, zones, price, travelTimeDays, travelTimeHours, travelTimeMinutes);
