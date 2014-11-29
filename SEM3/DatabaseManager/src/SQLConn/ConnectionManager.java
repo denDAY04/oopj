@@ -22,15 +22,15 @@ import org.postgresql.ds.jdbc23.AbstractJdbc23PoolingDataSource;
  */
 public class ConnectionManager {
 
-    private static final String URL = SQLConn.Setup.Settings.URL;
-    private static final String USERNAME = SQLConn.Setup.Settings.USERNAME;
-    private static final String PASSWORD = SQLConn.Setup.Settings.PASSWORD;
+    private static final String URL = Setup.Settings.URL;
+    private static final String USERNAME = Setup.Settings.USERNAME;
+    private static final String PASSWORD = Setup.Settings.PASSWORD;
 
-    private static final String serverName = SQLConn.Setup.Settings.SERVERNAME;
-    private static final int portNumber = SQLConn.Setup.Settings.PORT;
-    private static final String databaseName = SQLConn.Setup.Settings.USERNAME;
-    private static final String user = SQLConn.Setup.Settings.USERNAME;
-    private static final String password = SQLConn.Setup.Settings.PASSWORD;
+    private static final String serverName = Setup.Settings.SERVERNAME;
+    private static final int portNumber = Setup.Settings.PORT;
+    private static final String databaseName = Setup.Settings.USERNAME;
+    private static final String user = Setup.Settings.USERNAME;
+    private static final String password = Setup.Settings.PASSWORD;
     private static PoolingDataSource source = new PoolingDataSource();
 
   

@@ -36,12 +36,10 @@ public class DatabaseManager implements IntDatabaseManager {
         this.zdc =  new ZoneDistanceCalc();
     }
     
-    
-    private static final int PRICE_ONE_ZONE_ADULT = 1200; //<editor-fold defaultstate="collapsed" desc="comment">    
-    //price is in danish øre.
-    //future update: retrieve value from database table called price    
-    //</editor-fold>    
+    private static final int PRICE_ONE_ZONE_ADULT = Setup.Settings.PRICE_ONE_ZONE_ADULT; 
+    private static final  int minZoneCount = Setup.Settings.minZoneCount;
     private static ZoneDistanceCalc zdc;
+    private int ct;
     private Connection con;
     private String query;
     private ArrayList<Object> parameters;
@@ -85,7 +83,7 @@ public class DatabaseManager implements IntDatabaseManager {
             }
 
             preparedStatement.executeUpdate();
-        }
+                    }
         catch (SQLException ex) {ex.printStackTrace();}
 
 //        finally {
@@ -228,7 +226,6 @@ public class DatabaseManager implements IntDatabaseManager {
         } catch (SQLException ex) {ex.printStackTrace();}
         return new Customer("Blah","Blah","Blah@Blah.Blah","Blalala");
     }
-
 //</editor-fold>
   
     //<editor-fold defaultstate="collapsed" desc="Retrieve Customer details from the SQL Database">
@@ -273,14 +270,7 @@ public class DatabaseManager implements IntDatabaseManager {
         return null;
     }
 //</editor-fold>
-
-    //<editor-fold defaultstate="collapsed" desc="Readme: to do list">        
-    // index 0 --- return the last five histories..
-    // index 5 --- return return histories from 5 to 10
-    // index 10 --- return histories from 10 to 15
-    // e.t.c.
-       
-    //</editor-fold>
+    
     //<editor-fold defaultstate="collapsed" desc="Retrieve Customer Journey History from the SQL Database">
     @Override
     public ArrayList<Journey> getJourneyHistory(int customerNumber, int index) {
@@ -314,8 +304,7 @@ public class DatabaseManager implements IntDatabaseManager {
 //</editor-fold>          
     //<editor-fold defaultstate="collapsed" desc="RouteplannerJourneyManager">
 
-         
-    @Override              //Objects may be defined as a modelclass Stop[]
+    @Override            
     public Stop[] SetupGraph() {
        
 
@@ -354,7 +343,7 @@ public class DatabaseManager implements IntDatabaseManager {
 
                 // add the link to the arrayarray list in the array with index toStop
                 stopLinkArr[resultset.getInt(3) - 1].add(new StopLink(type, line, parent, stop, towards));
-            //System.err.println("index "+(rs.getInt(3) - 1));
+                //System.err.println("index "+(rs.getInt(3) - 1));
                 //System.err.println("type: "+rs.getString(1)+" line"+rs.getString(2)+parent.name+" "+stop.name+" "+towards.name);
               }
             
@@ -386,7 +375,7 @@ public class DatabaseManager implements IntDatabaseManager {
          ArrayList<Object> parameters = new ArrayList<>();
          this.query = SQLLibrary.CREATE_TICKET; 
          int zone = pLst.getZone();
-         int minZoneCount = 2;                                   // new tickets start with a minimum of 2 zones
+        
          
         ArrayList<Integer> passengers = pLst.getAllPassengers();
         for (Integer passenger : passengers) {      
@@ -397,16 +386,21 @@ public class DatabaseManager implements IntDatabaseManager {
             this.parameters = parameters;
             executeUpdate();
             parameters.clear();
+            
         }
         return getExistingTickets(pLst); 
     }
  
     
+    
+    
     @Override
     public TicketList getExistingTickets(PassengerList pLst) {
+        
     TicketList usort = getTickets(pLst);    
     ArrayList<Ticket> unchecked = usort.getAllTickets(); 
-    TicketList returnTicketList = new TicketList();    
+    TicketList returnTicketList = new TicketList();       
+    refreshTime();    // get database current time in seconds
     
         for (Ticket t : unchecked) { 
             try {
@@ -416,10 +410,29 @@ public class DatabaseManager implements IntDatabaseManager {
             catch (SQLException ex) {ex.printStackTrace();
             }    
         }   
-    return returnTicketList;
+    return returnTicketList; 
+       
     }
- 
     
+ 
+     //<editor-fold defaultstate="collapsed" desc="refreshTime">
+     private void refreshTime(){
+    try {             
+                dbConnect(); 
+                Statement statement = con.createStatement();
+                statement.execute(SQLLibrary.GET_TIME); 
+                ResultSet rSet = statement.getResultSet();
+                rSet.next();
+                String time = rSet.getString("timetz");                 
+                int ct = Integer.parseInt(time.substring(0, 2)); 
+                ct = ct * 60 + Integer.parseInt(time.substring(3, 5));
+                ct = ct * 60 + Integer.parseInt(time.substring(6, 8));                                
+                this.ct = ct;                
+                }
+                catch (Exception e) {e.printStackTrace();
+                }
+}
+   //</editor-fold> 
      //<editor-fold defaultstate="collapsed" desc="getTickets">
                     
                     private TicketList getTickets(PassengerList pLst){
@@ -511,27 +524,25 @@ public class DatabaseManager implements IntDatabaseManager {
      //<editor-fold defaultstate="collapsed" desc="validateTicketTime">
     
 // Method for validating a ticket based on its time of purchase and zone amount
-// Return: false is invalid tikcet time, true is valid ticket time
+// Returns false for: invalid tikcet time
+//         true  for: valid ticket time
+// Return: boolean
     private boolean validateTicketTime(Ticket ticket){
-        int zc = ticket.getZoneCount();
-        System.out.println("" + zc);        
-        
+        int zc = ticket.getZoneCount();         
         int tm = Integer.parseInt(ticket.getTimestamp().substring(11, 13));
         tm = tm * 60 + Integer.parseInt(ticket.getTimestamp().substring(14, 16));
         tm = tm * 60 + Integer.parseInt(ticket.getTimestamp().substring(17, 19));
         // tm is ticket creation time in seconds
         
-        // new SQL query use instead --> this.query = SQLLibrary.GET_TIME; // To get the server time 
+//        new SQL query use instead --> this.query = SQLLibrary.GET_TIME; // To get the server time                          
+//        int ct = 60 * 60 * Calendar.getInstance().get(Calendar.HOUR_OF_DAY); // current hours in seconds
+//        ct = ct + 60 * Calendar.getInstance().get(Calendar.MINUTE); //  current hours in seconds + current minutes in seconds
+//      
         
-//        dbConnect();        
-//        Statement stm = con.createStatement();
-//        stm.execute(SQLLibrary.GET_TIME);
-//        String time = stm.getResultSet().getString("timetz");
-                
-                
-        int ct = 60 * 60 * Calendar.getInstance().get(Calendar.HOUR_OF_DAY); // current hours in seconds
-        ct = ct + 60 * Calendar.getInstance().get(Calendar.MINUTE); //  current hours in seconds + current minutes in seconds
-                
+               
+        if (ct < tm ) {        // newday overflow .. ticket was issued before midnight (23:59:59) the previous day            
+            ct = ct + 86400;}  // adding one day in sec to curent time       
+        
         boolean answer;
         switch (zc) {
             case 2: if (ct - tm >  3600) {answer = false; break;} // 60 min
@@ -573,8 +584,7 @@ public class DatabaseManager implements IntDatabaseManager {
         
         return t;
     }    
-//</editor-fold>  
-                 
+//</editor-fold>                   
                     
      //<editor-fold defaultstate="collapsed" desc="Create a Customer object from a ResultSet">
                     
@@ -604,7 +614,9 @@ public class DatabaseManager implements IntDatabaseManager {
                     
 //</editor-fold>
     
-      
+
+     
+
     //</editor-fold>
 
 } 

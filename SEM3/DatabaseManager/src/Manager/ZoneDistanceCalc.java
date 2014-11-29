@@ -24,9 +24,9 @@ import java.util.LinkedList;
  */
 public class ZoneDistanceCalc implements ZoneMapeUpdates {
 
-    private final String URL = SQLConn.Setup.Settings.URL;            
-    private final String USERNAME = SQLConn.Setup.Settings.USERNAME;
-    private final String PASSWORD = SQLConn.Setup.Settings.PASSWORD;
+    private final String URL = Setup.Settings.URL;            
+    private final String USERNAME = Setup.Settings.USERNAME;
+    private final String PASSWORD = Setup.Settings.PASSWORD;
     private final String DB_TABLE_NAME = "ZoneMap";
     private final int MAX_ADJACENCY = 5;
     private ArrayList<Zone> zonelist = new ArrayList<>();
