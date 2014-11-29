@@ -38,11 +38,7 @@ INSERT INTO Customer (FirstName, LastName, eMail, Password) VALUES ('Bruce', 'le
 
 
 
--- CREATE TABLE birthdays (
--- firstname varchar(80),
--- surname varchar(80),
--- dob date
--- );
+-- CREATE TABLE birthdays (firstname varchar(80), surname varchar(80), dob date);
 -- INSERT INTO birthdays (firstname, surname, dob) VALUES ('Fred', 'Smith', '1989-05-02');
 
 

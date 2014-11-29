@@ -54,14 +54,13 @@ public class DatabaseManager implements IntDatabaseManager {
 
         try {
             if (this.con == null || this.con.isClosed()) {
-                //      this.con = ConnectionManager.getConnection();
+        //      this.con = ConnectionManager.getConnection();
                 this.con = ConnectionManager.createConnection();     // replace this with getConnection
                 System.out.println("Connection: Created...");
                 if (this.con == null) {
                     throw new NullPointerException("Could not create database connection");
                 }
             }
-            System.out.println("Connection: Still valid...");
         }
         catch (SQLException e) {
             e.printStackTrace();
@@ -87,9 +86,7 @@ public class DatabaseManager implements IntDatabaseManager {
 
             preparedStatement.executeUpdate();
         }
-        catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (SQLException ex) {ex.printStackTrace();}
 
 //        finally {
 //            if (con != null) {
@@ -120,9 +117,7 @@ public class DatabaseManager implements IntDatabaseManager {
 
             this.resultset = preparedStatement.executeQuery();
         }
-        catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (SQLException ex) {ex.printStackTrace();}
 
 //        finally {
 //            if (con != null) {
@@ -135,7 +130,6 @@ public class DatabaseManager implements IntDatabaseManager {
 //            }
 //        }
                 }
-
 
 
     //<editor-fold defaultstate="collapsed" desc="WebsiteManager">
@@ -152,8 +146,7 @@ public class DatabaseManager implements IntDatabaseManager {
         ArrayList<Object> parameters = new ArrayList<>();
         parameters.add(customer.getEmail());
         this.parameters = parameters;
-        executeQuery();
-        
+        executeQuery();        
 
         try {
             if(!this.resultset.next()){
@@ -166,16 +159,11 @@ public class DatabaseManager implements IntDatabaseManager {
                 this.parameters = parameters;
                 executeUpdate();
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
+        } catch (SQLException ex) {ex.printStackTrace();}
         try {
             return getCustomerNumber(customer);
         }
-        catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (SQLException ex) {ex.printStackTrace();}
         
         return -1;
     }
@@ -195,9 +183,7 @@ public class DatabaseManager implements IntDatabaseManager {
             }
                 return resultset.getInt("CustomerNumber");
             }
-        catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (SQLException ex) {ex.printStackTrace();}
         return -1;
        
     }
@@ -220,7 +206,6 @@ public class DatabaseManager implements IntDatabaseManager {
                 parameters.add(customer.getLastname());
                 parameters.add(customer.getEmail());
                 parameters.add(customer.getPassword());
-                //parameters.add(customer.getStatus());   //not used
                 parameters.add(customer.getCustomerNumber());
                 this.parameters = parameters;
                 executeUpdate();
@@ -237,28 +222,15 @@ public class DatabaseManager implements IntDatabaseManager {
                         return createCustomer(resultset);
                     }
                 }
-                catch (SQLException ex) {
-                    Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                catch (SQLException ex) {ex.printStackTrace();}
                 return new Customer("La","La","La@La.La","Lalala");
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        } catch (SQLException ex) {ex.printStackTrace();}
         return new Customer("Blah","Blah","Blah@Blah.Blah","Blalala");
     }
 
 //</editor-fold>
-    //<editor-fold defaultstate="collapsed" desc="Readme: to do list">
-    //
-    //        // return test customer
-    //        Customer customer = new Customer();
-    //        customer.setCustomerNumber("1234");
-    //        customer.setFirstname("Hans");
-    //        customer.setLastname("Jensen");
-    //        customer.setEmail("hans@jensen.dk");
-    //        customer.totalRecords=24;  //field in customer is set as public for testing
-    //</editor-fold>
+  
     //<editor-fold defaultstate="collapsed" desc="Retrieve Customer details from the SQL Database">
     @Override
     public Customer getCustomerDetails(int customerNumber) {
@@ -274,18 +246,11 @@ public class DatabaseManager implements IntDatabaseManager {
                 return createCustomer(resultset);
             }
         }
-        catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (SQLException ex) {ex.printStackTrace();}
         return null;
     }
 //</editor-fold>
 
-    //<editor-fold defaultstate="collapsed" desc="Readme: to do list">
-    // possibility of dublicate customers in the database
-    // email may have to be made unique in the sql database
-    // does not check for customer not found!!
-    //</editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="Customer logon credentials check">
     @Override
     public Customer logOn(String email, String password) {
@@ -314,15 +279,14 @@ public class DatabaseManager implements IntDatabaseManager {
     // index 5 --- return return histories from 5 to 10
     // index 10 --- return histories from 10 to 15
     // e.t.c.
-        // SQL LIMIT 5 sort Decending ???
-    // preparedstatement.setMaxRows(1); ?? -> stoplink.java in algorithme
+       
     //</editor-fold>
     //<editor-fold defaultstate="collapsed" desc="Retrieve Customer Journey History from the SQL Database">
     @Override
-    public ArrayList<Journey> getJourneyHistory(String customerNumber, int index) {
+    public ArrayList<Journey> getJourneyHistory(int customerNumber, int index) {
         this.query = SQLLibrary.SYSTEM_GET_JOURNEY_HISTORY_RANGE;
         ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(Integer.parseInt(customerNumber));
+        parameters.add(customerNumber);
         parameters.add(index);
         this.parameters = parameters;
         System.err.println("executeQuery!!");
@@ -340,15 +304,10 @@ public class DatabaseManager implements IntDatabaseManager {
                 journey.setStarttime(resultset.getTimestamp("datetimestamp").toString().substring(0, 16)); // 2014-11-19 15:44:09.630 format returned from database
                 journeyArray.add(journey);
             }
-
         }
-        catch (SQLException ex) {
-            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        catch (SQLException ex) {ex.printStackTrace();}
         return journeyArray;
 
-        
-        
         
     }
 //</editor-fold>    
@@ -427,13 +386,13 @@ public class DatabaseManager implements IntDatabaseManager {
          ArrayList<Object> parameters = new ArrayList<>();
          this.query = SQLLibrary.CREATE_TICKET; 
          int zone = pLst.getZone();
-         int zonecount = 2;          // Start with a minimum of 2 zones
+         int minZoneCount = 2;                                   // new tickets start with a minimum of 2 zones
          
         ArrayList<Integer> passengers = pLst.getAllPassengers();
         for (Integer passenger : passengers) {      
-            parameters.add(PRICE_ONE_ZONE_ADULT * zonecount);
+            parameters.add(PRICE_ONE_ZONE_ADULT * minZoneCount);
             parameters.add(zone);           
-            parameters.add(zonecount);            
+            parameters.add(minZoneCount);            
             parameters.add(passenger);            
             this.parameters = parameters;
             executeUpdate();
@@ -629,19 +588,17 @@ public class DatabaseManager implements IntDatabaseManager {
                      */
                     private Customer createCustomer(ResultSet resultSet) {
                         try {
-                            Customer jDoe = new Customer();
-                            jDoe.setCustomerNumber(Integer.parseInt(resultSet.getString("CustomerNumber")));
-                            jDoe.setFirstname(resultSet.getString("FirstName"));
-                            jDoe.setLastname(resultSet.getString("LastName"));
-                            jDoe.setEmail(resultSet.getString("Email"));
-                            jDoe.setPassword(resultSet.getString("Password"));
-                            // resultSet.getString("status");                               // may have no use
-                            //   jDoe.setTotalRecords(resultSet.getString("TotalRecords"));        // field still missing in modelclass
-                            return jDoe;
+                            Customer c = new Customer();
+                        //  c.setCustomerNumber(Integer.parseInt(resultSet.getString("CustomerNumber")));
+                            c.setCustomerNumber(resultSet.getInt("CustomerNumber"));                     
+                            c.setFirstname(resultSet.getString("FirstName"));
+                            c.setLastname(resultSet.getString("LastName"));
+                            c.setEmail(resultSet.getString("Email"));
+                            c.setPassword(resultSet.getString("Password"));
+                       //   c.setTotalRecords(resultSet.getString("TotalRecords")); 
+                            return c;
                         }
-                        catch (SQLException ex) {
-                            Logger.getLogger(DatabaseManager.class.getName()).log(Level.SEVERE, null, ex);
-                        }
+                        catch (SQLException ex) {ex.printStackTrace();}
                         return null;
                     }
                     

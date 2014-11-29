@@ -15,10 +15,13 @@ public class SQLLibrary {
             + "Customer (FirstName, LastName, eMail, Password) "
             + "VALUES (?,?,?,?)";  
     
+    /**
+     * Get a customer with email.
+     */
     public static final String SEARCH_EMAIL = "SELECT *"
             + "FROM Customer "
             + "WHERE eMail = ?";
-    
+        
     /**
      * Get a customer with customer number.
      */
@@ -107,14 +110,27 @@ public class SQLLibrary {
             + "AND eMail = ? "
             + "AND Password = ? ";        
     
-     /**
+    /**
      * Get Database Time:
      */
     public static final String GET_TIME= "SELECT "
-            + "current_time ";
+            + "current_time ";    
+            
+    /**
+     * "select speedbound FROM speedbound"
+     */
+    public static final String ROUTEPLANNER_GET_SPEEDBOUND = "select speedbound FROM speedbound";    
     
+    /**
+     * "select stopname,zoneNumber,longitude,latitude FROM stops"
+     */
+     public static final String ROUTEPLANNER_GET_STOP = "select stopname,zoneNumber,longitude,latitude FROM stops";
+    
+     /**
+      * select vehicle,line,fromstop,tostop,towards FROM stoplinks
+      */
+     public static final String ROUTEPLANNER_GET_STOPLINK ="select vehicle,line,fromstop,tostop,towards FROM stoplinks";
 
-    
     
     
     
@@ -178,123 +194,21 @@ public class SQLLibrary {
 //in a transaction block, and rolls back to the savepoint on error.
 
     
-
-    
-    
-    
-    
-    
     
 //    xml queryRoutePlanner(startPosition, endPosition, timeDeparture)
 //    xml viewJourneysWithPrice(customerNumber)
     
-    
-   
-    
-    
-    
-    
-    
-    
-    
-    /**
-     * Get simple billing with customer number.
-     */
-    public static final String USER_GET_BILLING = "SELECT * "
-            + "FROM Billing "
-            + "WHERE CustomerNumb = ?";
-
-    /**
-     * Get detailed billing with transaction number.
-     */
-    public static final String USER_GET_BILLING_AND_TERMINAL = "SELECT "
-            + "TransactionNumber, StartCharge, EndCharge, Recieved, "
-            + "BillingAmount, BillingRate, BillingWH, NewBalanceBilling, Road,"
-            + " ZipCode, CustomerNumb, Terminals.HardwareNumb "
-            + "FROM Billing "
-            + "inner join Terminals "
-            + "on Billing.HardwareNumb = Terminals.HardwareNumb "
-            + "WHERE TransactionNumber= ?";
-
  
-    
 
     
+//
+//    /**
+//     * Get customers by first name.
+//     */
+//    public static final String ADMIN_SEARCH_USER_FIRSTNAME = "SELECT * "
+//            + "FROM Customer "
+//            + "WHERE UPPER(FirstName) "
+//            + "LIKE UPPER(?)";
 
-    /**
-     * Get customers by first name.
-     */
-    public static final String ADMIN_SEARCH_USER_FIRSTNAME = "SELECT * "
-            + "FROM Customer "
-            + "WHERE UPPER(FirstName) "
-            + "LIKE UPPER(?)";
-
-    
-
-    /**
-     * Get billings with transaction number.
-     */
-    public static final String ADMIN_SEARCH_BILLINGS_TRANSNUMB = "SELECT * "
-            + "FROM Billing "
-            + "WHERE TransactionNumber = ?";
-
-  
-
- /**
-     * Get a customer with email.
-     */
-    public static final String SYSTEM_GET_CUSTOMER_BY_EMAIL = "SELECT * "
-            + "FROM Customer "
-            + "WHERE Email = ?";
-    
-
-    /**
-     * Create new deposit with data:
-     * <li> customer number
-     * <li> deposit amount
-     * <li> new balance
-     * <li> external reference number
-     * <li> last four digits of debit card number
-     */
-    public static final String SYSTEM_LOG_DEPOSIT = "INSERT INTO Deposits "
-            + "(CustomerNumb, DepositAmount, NewBalanceDeposit, "
-            + "ExternalRefNumb, last4CardNumb) "
-            + "VALUES (?,?,?,?,?)";
-
-    /**
-     * Create new billing with data:
-     * <li> customer number
-     * <li> hardware number
-     * <li> start charge time
-     * <li> end charge time
-     * <li> billed amount of DKK
-     * <li> rate of a watt-hour
-     * <li> amount of watt-hours
-     * <li> the new balance after billed
-     */
-    public static final String SYSTEM_LOG_NEW_BILLING = "INSERT INTO Billing "
-            + "(CustomerNumb, HardwareNumb, StartCharge, EndCharge, "
-            + "BillingAmount, "
-            + "BillingRate, BillingWH, NewBalanceBilling) "
-            + "VALUES (?,?,?,?,?,?,?,?)";
-
-   
-    
-        
-    /**
-     * "select speedbound FROM speedbound"
-     */
-    public static final String ROUTEPLANNER_GET_SPEEDBOUND = "select speedbound FROM speedbound";
-    
-    
-    /**
-     * "select stopname,zoneNumber,longitude,latitude FROM stops"
-     */
-     public static final String ROUTEPLANNER_GET_STOP = "select stopname,zoneNumber,longitude,latitude FROM stops";
-    
-     /**
-      * select vehicle,line,fromstop,tostop,towards FROM stoplinks
-      */
-     public static final String ROUTEPLANNER_GET_STOPLINK ="select vehicle,line,fromstop,tostop,towards FROM stoplinks";
 
 }
