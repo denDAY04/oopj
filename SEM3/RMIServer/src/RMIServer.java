@@ -8,6 +8,7 @@
  */
 
 
+import JourneyManager.JourneyManagerRMISkelImpl;
 import Website.WebsiteManagerRMISkelImpl;
 import RMI.*;
 import java.rmi.RemoteException;

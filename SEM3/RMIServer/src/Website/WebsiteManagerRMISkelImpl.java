@@ -9,32 +9,29 @@ import java.rmi.server.UnicastRemoteObject;
 public class WebsiteManagerRMISkelImpl extends UnicastRemoteObject implements WebsiteManagerRMISkel {
     DatabaseManager databasemanager;      
     public WebsiteManagerRMISkelImpl() throws RemoteException {  
-        databasemanager = new DatabaseManager();
-        System.out.println("WebsiteManagerRMISkel constructor executed");       
+        databasemanager = new DatabaseManager();      
     }  
     
-    
     /**
-     * WebsiteManger boolean createCustomer(Customer)
+     * int createCustomer(Customer)
      * @param customer
      * @return customer number
      * @throws java.rmi.RemoteException 
      */   
-    @Override //adds a customer to the SQL database
+    @Override //adds a customer to the SQL database returns the customer number
     public int createCustomer(Customer customer) throws RemoteException { 
-    int status = databasemanager.createCustomer(customer);  
-    return status;
+    return databasemanager.createCustomer(customer);  
     }
 
     @Override
     public Customer setCustomerDetails(Customer customer) throws RemoteException {
-    return databasemanager.setCustomerDetails(customer);
-        //return null;
+    return databasemanager.setCustomerDetails(customer);        
     }
 
     @Override
-    public Customer getCustomerDetails(int customerNumber) throws RemoteException {
-    return databasemanager.getCustomerDetails(customerNumber);
+    public Customer getCustomerDetails(String customerNumber) throws RemoteException {
+        // insert String to int - try catch protection here
+    return databasemanager.getCustomerDetails(Integer.parseInt(customerNumber));            
     }             
  
     @Override
@@ -43,8 +40,9 @@ public class WebsiteManagerRMISkelImpl extends UnicastRemoteObject implements We
     }
 
     @Override
-    public ArrayList<Journey> getJourneyHistory(int customerNumber, int index) throws RemoteException {  
-    return  databasemanager.getJourneyHistory(customerNumber,index);    
+    public ArrayList<Journey> getJourneyHistory(String customerNumber, int index) throws RemoteException {  
+        // insert String to int - try catch protection here
+    return  databasemanager.getJourneyHistory(Integer.parseInt(customerNumber), index);    
     }
         
 }      

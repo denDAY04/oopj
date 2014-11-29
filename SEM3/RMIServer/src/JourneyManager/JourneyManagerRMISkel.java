@@ -1,3 +1,5 @@
+package JourneyManager;
+
 import ModelClasses.*;
 import java.rmi.*;
 

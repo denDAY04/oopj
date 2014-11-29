@@ -1,3 +1,5 @@
+package JourneyManager;
+
 import Manager.DatabaseManager;
 import ModelClasses.*;
 import java.rmi.RemoteException;
