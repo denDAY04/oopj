@@ -393,7 +393,6 @@ public class DatabaseManager implements IntDatabaseManager {
  
     
     
-    
     @Override
     public TicketList getExistingTickets(PassengerList pLst) {
         
@@ -534,13 +533,10 @@ public class DatabaseManager implements IntDatabaseManager {
         tm = tm * 60 + Integer.parseInt(ticket.getTimestamp().substring(17, 19));
         // tm is ticket creation time in seconds
         
-//        new SQL query use instead --> this.query = SQLLibrary.GET_TIME; // To get the server time                          
 //        int ct = 60 * 60 * Calendar.getInstance().get(Calendar.HOUR_OF_DAY); // current hours in seconds
-//        ct = ct + 60 * Calendar.getInstance().get(Calendar.MINUTE); //  current hours in seconds + current minutes in seconds
-//      
-        
-               
-        if (ct < tm ) {        // newday overflow .. ticket was issued before midnight (23:59:59) the previous day            
+//        ct = ct + 60 * Calendar.getInstance().get(Calendar.MINUTE); //  current hours in seconds + current minutes in seconds     
+                       
+        if (ct < tm ) {        // newday overflow .. ticket was issued the previous day before midnight (23:59:59)            
             ct = ct + 86400;}  // adding one day in sec to curent time       
         
         boolean answer;
@@ -615,7 +611,6 @@ public class DatabaseManager implements IntDatabaseManager {
 //</editor-fold>
     
 
-     
 
     //</editor-fold>
 
