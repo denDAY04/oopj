@@ -4,6 +4,7 @@ import Manager.DatabaseManager;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import ModelClasses.*;
+import java.util.ArrayList;
 
 
 public class RouteplannerJourneyManagerRMISkel extends UnicastRemoteObject implements IntRouteplannerJourneyManagerRMISkel{
@@ -12,10 +13,17 @@ public class RouteplannerJourneyManagerRMISkel extends UnicastRemoteObject imple
         databasemanager = new DatabaseManager();
         System.out.println("RouteplannerJourneyManagerRMISkel constructor executed");  
     }    
- 
-    @Override
-    public Stop[] SetupGraph() throws RemoteException {
-    return databasemanager.SetupGraph();     
+
+
+    @Override 
+    public Stop[] setupGraph() throws RemoteException {
+    return databasemanager.setupGraph();     
     }
-    
+
+    @Override
+    public ArrayList<Zone> setupZoneDistance() throws RemoteException {
+       return databasemanager.setupZoneDistance();
+
+    }
+
 }
