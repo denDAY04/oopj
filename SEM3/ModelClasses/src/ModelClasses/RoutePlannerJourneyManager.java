@@ -30,6 +30,12 @@ public class RoutePlannerJourneyManager {
      */
     public static RoutePlannerJourney CreateRoutePlannerJourney(ArrayList<Waypoint> waypoints, GregorianCalendar arrival, GregorianCalendar departure, int zones) {
 
+        if (zones < 2) {
+            zones = 2;
+        }
+        if (zones > 8) {
+            zones = 8;
+        }
         int price = 1200 * zones;
         long deltaT = arrival.getTimeInMillis() - waypoints.get(0).getDepartureTimeFromStop().getTimeInMillis();
         int travelTimeDays    = (int) (Math.floor(deltaT / (HOURS * MINUTES * SECONDS * MILLISECONDS)));
