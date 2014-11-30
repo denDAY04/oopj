@@ -19,16 +19,16 @@ CREATE TABLE stops(
  );
 INSERT INTO stops (stopname,zoneNumber,longitude,latitude) VALUES 
 
-('Ballerup',1,5,35),
-('Malmparken',2,20,25),
-('Skovlunde',3,10,55),
+('Ballerup',2,5,35),
+('Malmparken',3,20,25),
+('Skovlunde',2,10,55),
 ('Herlev',1,5,10),
-('Husum',2,25,15),
+('Husum',1,25,15),
 ('Islev',4,25,55),
 ('Flintholm',3,30,35),
 ('Valby',4,40,50),
-('Enghave',4,45,35),
-('Vesterport',4,45,20)
+('Enghave',5,45,35),
+('Vesterport',5,45,20)
 ;
 
 DROP TABLE stoplinks;
