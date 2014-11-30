@@ -38,8 +38,10 @@ public class RMIServer{
         System.out.println();
 
        
-        
-        
+          if (System.getProperty("java.rmi.server.codebase") == null)
+    {
+        System.setProperty("java.rmi.server.codebase", "http://goonhilly6.eitlab.ihk-edu.dk/~jonas3e14/RMIServer.jar");
+    }
         
 //         if (System.getProperty("java.security.policy") == null)
 //    {
@@ -75,7 +77,6 @@ public class RMIServer{
                 System.out.println("Searching existing registry...");  //this part fails!!
                 
                               
-                
                  final Registry registryA;
         try {
             registryA = LocateRegistry.getRegistry(host, port);        

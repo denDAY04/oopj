@@ -1,0 +1,7 @@
+The server as a .jar file (se the dist folder) including the lib folder within the dist folder
+  is uploated to the "root" aka home folder on the web/RMI server ... 
+Since this folder is unavaliable to the outside world, and since the RMI skeletons needs to be
+remote accessible to outside clients, the jar file is also copied to the public_html folder
+
+the . ExecuteServer script that (when given execute status under nix) is responsible for executing the server, and 
+should be in the "root"/home folder and NOT the public_html
