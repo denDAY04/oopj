@@ -13,7 +13,7 @@ import java.util.TimeZone;
 
 /**
  *
- * @author Qesss
+ * @author Rasmus
  */
 public class RPBean implements Serializable {
 

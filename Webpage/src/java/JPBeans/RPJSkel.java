@@ -18,7 +18,7 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Qesss
+ * @author Rasmus
  */
 public class RPJSkel implements RPJInterface, Serializable  {
 

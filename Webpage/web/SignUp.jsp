@@ -3,7 +3,7 @@
 
 <%
   if( idtestbean.getCustomerNumber()!=0)
-    response.sendRedirect("/Webpage/AccountOverview.jsp");
+    response.sendRedirect("../AccountOverview.jsp");
 %>
 <HTML>
     <HEAD>

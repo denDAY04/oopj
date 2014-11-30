@@ -7,7 +7,7 @@
     <jsp:setProperty name="journey" property="index" value="${param.index}"/>
     <%
         if( idtestbean.getCustomerNumber()==0)
-          response.sendRedirect("/Webpage/Login.jsp");
+          response.sendRedirect("./Login.jsp");
     %>
     
     <HEAD>

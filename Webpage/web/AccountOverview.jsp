@@ -5,7 +5,7 @@
     </jsp:useBean>
     <%
         if( idtestbean.getCustomerNumber()==0)
-          response.sendRedirect("/Webpage/Login.jsp");
+          response.sendRedirect("./Login.jsp");
       %>
     <jsp:setProperty name="idtestbean" property="*"/>
     <HEAD>

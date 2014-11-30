@@ -7,7 +7,7 @@
     <%-- Check if the session has a Customer object, if not redirect to login page-->
     <%
         if( idtestbean.getCustomerNumber()=="")
-          response.sendRedirect("/Webpage/Login.jsp");
+          response.sendRedirect("./Login.jsp");
     %>--%>
     <HEAD>
         <TITLE>Edit Info</TITLE>

@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author Qess
+ * @author Rasmus
  */
 public class JourneyBean implements Serializable {
     // used to itterate through the journeys in the journey array list.
@@ -40,7 +40,7 @@ public class JourneyBean implements Serializable {
     public JourneyBean() throws Exception{
         
         String host = "goonhilly6.eitlab.ihk-edu.dk";        
-        int port = 20423;               
+        int port = 20421;               
         System.out.println("Client: Starting...");
         System.out.println("Using registry at: " + host + " port " + port);
 

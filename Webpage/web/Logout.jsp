@@ -15,6 +15,6 @@
         <title>Logout</title>
     </head>
     <BODY>
-        <% response.sendRedirect("/Webpage/Login.jsp"); %>
+        <% response.sendRedirect("./Login.jsp"); %>
     </BODY>
 </html>

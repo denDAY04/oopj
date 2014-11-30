@@ -14,9 +14,9 @@
     </head>
     <BODY>
         <% if(idtestbean.changeDetails() == true){
-               response.sendRedirect("/Webpage/AccountOverview.jsp");
+               response.sendRedirect("./AccountOverview.jsp");
            } else{
-               response.sendRedirect("/Webpage/EditInformation.jsp");
+               response.sendRedirect("./EditInformation.jsp");
            }
         %>
     </BODY>

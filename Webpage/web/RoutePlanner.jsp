@@ -5,7 +5,6 @@
 --%>
 <%@ page errorPage="error.jsp" %>
 <%@ page language="java" contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page trimDirectiveWhitespaces="false" %>
 
 <!DOCTYPE html>
 

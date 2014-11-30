@@ -1,7 +1,7 @@
 <%-- 
     Document   : RedirectTest
     Created on : Oct 29, 2014, 12:00:36 PM
-    Author     : Qess
+    Author     : Rasmus
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -12,7 +12,7 @@
 
 <%
   if( idtestbean.getCustomerNumber()=="")
-    response.sendRedirect("/Webpage/form.html");
+    response.sendRedirect("./form.html");
 %>
 
 <html>

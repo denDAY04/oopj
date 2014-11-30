@@ -13,10 +13,10 @@
         <title>Validating Login</title>
     </head>
     <BODY>
-        <% if(idtestbean.signUp() == true){
-               response.sendRedirect("/Webpage/TermsOfUse.jsp");
+        <% if(idtestbean.login() == true){
+               response.sendRedirect("./AccountOverview.jsp");
            } else{
-               response.sendRedirect("/Webpage/SignUp.jsp");
+               response.sendRedirect("./Login.jsp");
            }
         %>
     </BODY>

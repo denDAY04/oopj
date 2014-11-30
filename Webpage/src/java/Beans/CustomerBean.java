@@ -43,7 +43,7 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
 
         //this.skel = new WebsiteManagerRMISkel();
         String host = "goonhilly6.eitlab.ihk-edu.dk";        
-        int port = 20423;               
+        int port = 20421;               
         System.out.println("Client: Starting...");
         System.out.println("Using registry at: " + host + " port " + port);
 

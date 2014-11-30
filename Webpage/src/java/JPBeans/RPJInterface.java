@@ -11,7 +11,7 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Qesss
+ * @author Rasmus
  */
 public interface RPJInterface {
    RoutePlannerJourney createRouteplannerJourney(int origin, int destination, GregorianCalendar timeDeparture) throws Exception;
