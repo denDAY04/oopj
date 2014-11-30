@@ -305,7 +305,7 @@ public class DatabaseManager implements IntDatabaseManager {
     //<editor-fold defaultstate="collapsed" desc="RouteplannerJourneyManager">
 
     @Override            
-    public Stop[] SetupGraph() {
+    public Stop[] setupGraph() {
        
 
         int speed;
@@ -366,6 +366,10 @@ public class DatabaseManager implements IntDatabaseManager {
         return stopArr2;
     }
 
+    @Override
+    public ArrayList<Zone> setupZoneDistance(){
+        return zdc.getZonelist();
+    }
     
     
     //</editor-fold>     

@@ -1,6 +1,7 @@
 package Manager;
 
 import ModelClasses.*;
+import java.rmi.RemoteException;
 import java.util.ArrayList;
 
 public interface IntDatabaseManager {
@@ -15,7 +16,8 @@ public interface IntDatabaseManager {
     //</editor-fold>    
     //<editor-fold defaultstate="collapsed" desc="RouteplannerJourneyManager">
 
-    public Stop[] SetupGraph(); //Objects may be defined as a modelclass Stop[]
+    public Stop[] setupGraph(); //Objects may be defined as a modelclass Stop[]
+    public ArrayList<Zone> setupZoneDistance();
 
     //</editor-fold> 
     //<editor-fold defaultstate="collapsed" desc="JourneyManager">
