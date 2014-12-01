@@ -8,6 +8,7 @@
  */
 
 
+import Manager.DatabaseDemon;
 import RMIInterfaces.*;
 import RMIImpl.*;
 import java.rmi.RemoteException;
@@ -21,8 +22,11 @@ public class RMIServer{
     // private static final String HOST = "localhost";
     private static final int PORT = 20421;
 
-    public static void main(String[] args) {
-
+    public static void main(String[] args) {        
+     
+        Thread DatabaseDemon = new DatabaseDemon();
+        DatabaseDemon.start();  // unleash the demon    
+        
         String host = HOST;
         int port = PORT;
 
