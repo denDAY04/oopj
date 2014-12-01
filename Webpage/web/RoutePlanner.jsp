@@ -8,7 +8,7 @@
 
 <!DOCTYPE html>
 
-<jsp:useBean id="RPBean" class="JPBeans.RPBean" scope="session">
+<jsp:useBean id="RPBean" class="Beans.RPBean" scope="session">
 </jsp:useBean>
 
 <jsp:setProperty name="RPBean" property="*"/>

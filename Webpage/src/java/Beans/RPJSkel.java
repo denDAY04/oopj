@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package JPBeans;
+package Beans;
 
 import ModelClasses.RoutePlannerJourney;
 import java.io.ByteArrayInputStream;
