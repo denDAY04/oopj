@@ -10,7 +10,7 @@ package testbean;
 
 /**
  *
- * @author Qesss
+ * @author Rasmus
  */
 public class test {
     int counter =0;
