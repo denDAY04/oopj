@@ -4,7 +4,7 @@ import java.rmi.*;
 import java.sql.Time;
 import ModelClasses.*;
 
-public interface IntRouteplannerJourneyManagerRMISkel extends Remote
+public interface RouteplannerJourneyManagerRMISkel extends Remote
 {
 //    public double getNextDeparture(int startPosition, int endPosition, int timeDeparture) throws RemoteException;
 //   // Return is availible departure; timeDeparture is the desired departure time

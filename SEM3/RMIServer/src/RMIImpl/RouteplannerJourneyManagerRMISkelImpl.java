@@ -4,12 +4,12 @@ import Manager.DatabaseManager;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import ModelClasses.*;
-import RMIInterfaces.IntRouteplannerJourneyManagerRMISkel;
+import RMIInterfaces.RouteplannerJourneyManagerRMISkel;
 
 
-public class RouteplannerJourneyManagerRMISkel extends UnicastRemoteObject implements IntRouteplannerJourneyManagerRMISkel{
+public class RouteplannerJourneyManagerRMISkelImpl extends UnicastRemoteObject implements RouteplannerJourneyManagerRMISkel{
     DatabaseManager databasemanager;
-    public RouteplannerJourneyManagerRMISkel()throws RemoteException{  
+    public RouteplannerJourneyManagerRMISkelImpl()throws RemoteException{  
         databasemanager = new DatabaseManager();
         System.out.println("RouteplannerJourneyManagerRMISkel constructor executed");  
     }    

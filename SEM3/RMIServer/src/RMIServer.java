@@ -63,7 +63,7 @@ public class RMIServer{
             System.out.println("DataServer: Instantiating server objects...");        
             
             JourneyManagerRMISkelImpl journeyManager = new JourneyManagerRMISkelImpl();
-            IntRouteplannerJourneyManagerRMISkel routeplannerJourneyManager = new RouteplannerJourneyManagerRMISkel();
+            RouteplannerJourneyManagerRMISkel routeplannerJourneyManager = new RouteplannerJourneyManagerRMISkelImpl();
             WebsiteManagerRMISkelImpl websiteManager = new WebsiteManagerRMISkelImpl();
             
             System.out.println("DataServer: Connecting server objects to registry...");    
