@@ -15,7 +15,7 @@ public class RouteplannerJourneyManagerRMISkelImpl extends UnicastRemoteObject i
     }    
  
     @Override
-    public Stop[] SetupGraph() throws RemoteException {
+    public Stop[] setupGraph() throws RemoteException {
     return databasemanager.setupGraph();
     }
     
