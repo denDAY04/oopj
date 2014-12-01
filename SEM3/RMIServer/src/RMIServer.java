@@ -7,10 +7,8 @@
  * deleteWebsiteMangerRMI(objName) // (unbind from registry)
  */
 
-
-import JourneyManager.JourneyManagerRMISkelImpl;
-import Website.WebsiteManagerRMISkelImpl;
-import RMI.*;
+import RMIInterfaces.*;
+import RMIImpl.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
