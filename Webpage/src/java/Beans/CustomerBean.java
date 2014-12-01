@@ -1,7 +1,7 @@
 package Beans;
 
 
-import Website.WebsiteManagerRMISkel;
+import RMIInterfaces.WebsiteManagerRMISkel;
 import ModelClasses.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;

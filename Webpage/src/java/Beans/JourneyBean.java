@@ -6,7 +6,7 @@ package Beans;
  * and open the template in the editor.
  */
 
-import Website.WebsiteManagerRMISkel;
+import RMIInterfaces.WebsiteManagerRMISkel;
 import ModelClasses.*;
 import java.io.Serializable;
 import java.rmi.RemoteException;
