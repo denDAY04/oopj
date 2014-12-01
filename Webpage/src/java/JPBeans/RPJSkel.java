@@ -20,9 +20,8 @@ import java.util.GregorianCalendar;
  *
  * @author Rasmus
  */
-public class RPJSkel implements RPJInterface, Serializable  {
+public class RPJSkel implements  Serializable  {
 
-    @Override
     public RoutePlannerJourney createRouteplannerJourney(int origin, int destination, GregorianCalendar timeDeparture) throws Exception{
     
     // test
