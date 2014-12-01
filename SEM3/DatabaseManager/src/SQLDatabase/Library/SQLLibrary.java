@@ -85,8 +85,8 @@ public class SQLLibrary {
             + "JourneyHistory (ticketnumber, datetimestamp, ticketprice, startzone, zonecount, customer)  "
             + "VALUES (?,?,?,?,?,?)";  
     
-     /**
-     * Create Ticket in JourneyHistory:
+    /**
+     * Delete a ticket in Ticket table:
      */
     public static final String DELETE_TICKET= "DELETE FROM "
             + "ticket * "
@@ -114,13 +114,7 @@ public class SQLLibrary {
      * Get Database Time:
      */
     public static final String GET_TIME= "SELECT "
-            + "current_time ";   
-    
-    /**
-     * Get Database TimeStamp:
-     */
-    public static final String GET_TIMESTAMP= "SELECT "
-            + "current_timestamp ";     
+            + "current_time ";       
             
     /**
      * "select speedbound FROM speedbound"
