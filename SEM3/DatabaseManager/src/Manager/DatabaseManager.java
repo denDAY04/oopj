@@ -190,13 +190,13 @@ public class DatabaseManager implements IntDatabaseManager {
     //<editor-fold defaultstate="collapsed" desc="Update Customer details in the SQL Database">
     @Override
     public Customer setCustomerDetails(Customer customer) {
-        this.query = SQLLibrary.SEARCH_EMAIL;
-        ArrayList<Object> parameters = new ArrayList<>();
-        parameters.add(customer.getEmail());
-        this.parameters = parameters;
-        executeQuery();
-        
         try {
+            this.query = SQLLibrary.SEARCH_EMAIL;
+            ArrayList<Object> parameters = new ArrayList<>();
+            parameters.add(customer.getEmail());
+            this.parameters = parameters;
+            executeQuery();
+            
             if(!this.resultset.next()){
                 this.query = SQLLibrary.UPDATE_CUSTOMER;
                 parameters = new ArrayList<>();
@@ -207,24 +207,57 @@ public class DatabaseManager implements IntDatabaseManager {
                 parameters.add(customer.getCustomerNumber());
                 this.parameters = parameters;
                 executeUpdate();
+                System.err.println("No email found. Customer Updated.");
                 return customer;
             } else{
-                this.query = SQLLibrary.SYSTEM_GET_CUSTOMER_BY_CUSTOMERNUMB;
-                parameters = new ArrayList<>();
-                parameters.add(customer.getCustomerNumber());
-                this.parameters = parameters;
-                executeQuery();
-                
-                try {
-                    if (resultset.next()) {
-                        return createCustomer(resultset);
+                Customer user = createCustomer(resultset);
+                if(user.getCustomerNumber() == customer.getCustomerNumber()){
+                    this.query = SQLLibrary.UPDATE_CUSTOMER;
+                    parameters = new ArrayList<>();
+                    parameters.add(customer.getFirstname());
+                    parameters.add(customer.getLastname());
+                    parameters.add(customer.getEmail());
+                    parameters.add(customer.getPassword());
+                    parameters.add(customer.getCustomerNumber());
+                    this.parameters = parameters;
+                    executeUpdate();
+                    System.err.println("Email is own. Customer Updated.");
+                    return customer;
+                }else{
+                    this.query = SQLLibrary.SYSTEM_GET_CUSTOMER_BY_CUSTOMERNUMB;
+                    parameters = new ArrayList<>();
+                    parameters.add(customer.getCustomerNumber());
+                    this.parameters = parameters;
+                    executeQuery();
+                    try {
+                        if (resultset.next()) {
+                            return createCustomer(resultset);
+                        }
+                    } catch (SQLException ex) {
+                        ex.printStackTrace();
+                        return new Customer("NA","NA","NA","NA");
                     }
+                    System.err.println("Customer exist. Update Canceled.");
+                    return null;
                 }
-                catch (SQLException ex) {ex.printStackTrace();}
-                return new Customer("La","La","La@La.La","Lalala");
             }
-        } catch (SQLException ex) {ex.printStackTrace();}
-        return new Customer("Blah","Blah","Blah@Blah.Blah","Blalala");
+            
+            /*
+            try {
+            if (resultset.next()) {
+            return createCustomer(resultset);
+            }
+            }
+            catch (SQLException ex) {ex.printStackTrace();}
+            return new Customer("NA","NA","NA","NA");*/
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+            System.err.println("**********ERROR OCCURED**********");
+            return null;
+        }
+ 
+
+       
     }
 //</editor-fold>
   
