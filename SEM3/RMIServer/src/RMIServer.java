@@ -8,7 +8,7 @@
  */
 
 
-import Manager.DatabaseDemon;
+import Manager.DatabaseDaemon;
 import RMIInterfaces.*;
 import RMIImpl.*;
 import java.rmi.RemoteException;
@@ -24,8 +24,9 @@ public class RMIServer{
 
     public static void main(String[] args) {        
      
-        Thread DatabaseDemon = new DatabaseDemon();
-        DatabaseDemon.start();  // unleash the demon    
+        Thread databaseDemon = new DatabaseDaemon();
+        databaseDemon.setDaemon(true);  
+        databaseDemon.start();  // unleash the demon    
         
         String host = HOST;
         int port = PORT;
