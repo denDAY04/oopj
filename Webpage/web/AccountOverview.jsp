@@ -37,7 +37,8 @@
                 </FORM>
             </TR>
         </Table>
-            <TABLE align="CENTER">
+        <BR><BR><BR>
+            <TABLE align="Left">
                 <TR>
                     <TD>First name: </TD>
                     <TD><jsp:getProperty name="idtestbean" property="firstName" /></TD>

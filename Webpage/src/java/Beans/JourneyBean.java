@@ -23,18 +23,23 @@ public class JourneyBean implements Serializable {
     // used to itterate through the journeys in the journey array list.
     private int i=0;
         // index used to track what section of the journey history to be retrived.
-    private int index;
+    private int index=0;
     private int customerNumber;
     private WebsiteManagerRMISkel skel;
     private ArrayList<Journey> journeyList;
 
     
     public int getDisplayFrom(){
-        return index+1;
+        if(index == 0){
+            return 0;
+        } else{
+            return index+1;
+        }
     }
     public int getDisplayTo(){
-
+        System.err.println(index+" "+getListSize());
         return index+getListSize();
+        
     }
     
     public JourneyBean() throws Exception{
@@ -60,6 +65,8 @@ public class JourneyBean implements Serializable {
    
             Registry registry = LocateRegistry.getRegistry(host, port);     
             this.skel = (WebsiteManagerRMISkel)registry.lookup("websiteManager");
+            
+            //journeyList = this.skel.getJourneyHistory(Integer.toString(customerNumber), index);
     }
     
     
@@ -70,7 +77,7 @@ public class JourneyBean implements Serializable {
 
     public void setIndex(int index) throws RemoteException{
     this.index = index;
-    journeyList = skel.getJourneyHistory(customerNumber, index);
+    journeyList = skel.getJourneyHistory(Integer.toString(customerNumber), index);
     }
     
     public int getIndex(){
