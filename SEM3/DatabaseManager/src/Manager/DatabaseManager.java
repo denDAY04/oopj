@@ -177,12 +177,17 @@ public class DatabaseManager implements IntDatabaseManager {
         executeQuery(); 
         
         try {
-            if (resultset.next()) {            
-            }
+            if (resultset.next()) {
                 return resultset.getInt("CustomerNumber");
+            } else{
+                return -1;
             }
-        catch (SQLException ex) {ex.printStackTrace();}
-        return -1;
+                
+        }catch (SQLException ex) {
+            ex.printStackTrace();
+            return -1;
+        }
+        
        
     }
      //</editor-fold>    
