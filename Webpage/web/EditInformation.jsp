@@ -3,12 +3,11 @@
 
     <jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session">
     </jsp:useBean>
-    
-    <%-- Check if the session has a Customer object, if not redirect to login page-->
+    <!-- Check if the session has a Customer object, if not redirect to login page-->
     <%
-        if( idtestbean.getCustomerNumber()=="")
+        if( idtestbean.getCustomerNumber()==0)
           response.sendRedirect("./Login.jsp");
-    %>--%>
+    %>
     <HEAD>
         <TITLE>Edit Info</TITLE>
         <STYLE>
@@ -115,6 +114,8 @@
                 </TR>
                 <TR>
                     <TD><font color="red"><jsp:getProperty name="idtestbean" property="errorMessage3"/></TD>
+                </TR>
+                <TR>
                     <TD><DIV id="mail"><font color="black">Email:</font></DIV></TD>
                     <TD><INPUT TYPE="text"
                                NAME= "email"

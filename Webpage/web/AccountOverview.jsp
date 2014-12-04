@@ -7,6 +7,8 @@
         if( idtestbean.getCustomerNumber()==0)
           response.sendRedirect("./Login.jsp");
       %>
+    <jsp:setProperty name="idtestbean" property="errorMessage" value=""/>
+    <jsp:setProperty name="idtestbean" property="errorMessage3" value=""/>
     <jsp:setProperty name="idtestbean" property="*"/>
     <HEAD>
         <TITLE>Account</TITLE>

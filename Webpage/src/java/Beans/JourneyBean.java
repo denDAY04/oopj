@@ -37,9 +37,7 @@ public class JourneyBean implements Serializable {
         }
     }
     public int getDisplayTo(){
-        System.err.println(index+" "+getListSize());
-        return index+getListSize();
-        
+        return index+getListSize();        
     }
     
     public JourneyBean() throws Exception{
