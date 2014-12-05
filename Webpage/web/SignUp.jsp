@@ -1,16 +1,20 @@
+<!DOCTYPE html>
 <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
 <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
-
 <%
   if( customer.getCustomerNumber()!=0)
     response.sendRedirect("../AccountOverview.jsp");
 %>
+
 <HTML>
     <HEAD>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+        <meta http-equiv="pragma" content="no-cache" />
         <TITLE>Customer</TITLE>
-        <STYLE>
-            body {text-align:center;}
-        </STYLE>
         <script type="text/javascript">
 	function validate(){
                 var isValid = true;
@@ -65,11 +69,12 @@
 		}
                 return isValid;
 	}
-    </SCRIPT>
+        </SCRIPT>
     </HEAD>
     <BODY>
         <BR><BR>
-        <H1><P STYLE="color:black">Account Information</P>
+        <H1>
+            <P STYLE="color:black">Account Information</P>
         </H1>
         <BR>
         <!-- Pass all form entries to Order.jsp ? -->

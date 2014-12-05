@@ -1,18 +1,16 @@
-<HTML>
-    <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
+<jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
+</jsp:useBean>
+<!-- Check if the session has a Customer object, if not redirect to login page-->
+<%
+    if( customer.getCustomerNumber()==0)
+      response.sendRedirect("./Login.jsp");
+%>
 
-    <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
-    </jsp:useBean>
-    <!-- Check if the session has a Customer object, if not redirect to login page-->
-    <%
-        if( customer.getCustomerNumber()==0)
-          response.sendRedirect("./Login.jsp");
-    %>
+<HTML>
     <HEAD>
         <TITLE>Edit Info</TITLE>
-        <STYLE>
-            body {text-align:center;}
-        </STYLE>
         <script type="text/javascript">
         //Function validate()
         //Validates the inputs in the 4 text fields are of valid syntax
@@ -90,7 +88,8 @@
     </HEAD>
     <BODY>
         <BR><BR>
-        <H1><P STYLE="color:black">Edit Information</P>
+        <H1>
+            <P STYLE="color:black">Edit Information</P>
         </H1>
         <BR>
         <!-- Pass all form entries to AccountOverview.jsp, and post properties if 

@@ -1,31 +1,34 @@
-<HTML>
-    <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
+<!DOCTYPE html>
+<%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
+<jsp:useBean id="journey" class="Beans.JourneyBean" scope = "page"/>
+<jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
+<jsp:setProperty name="journey" property="customerNumber" value="<%=customer.getCustomerNumber()%>"/>
+<jsp:setProperty name="journey" property="index" value="${param.index}"/>
+<%
+    if( customer.getCustomerNumber()==0)
+      response.sendRedirect("./Login.jsp");
+%>
 
-    <jsp:useBean id="journey" class="Beans.JourneyBean" scope = "page"/>
-    <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
-    <jsp:setProperty name="journey" property="customerNumber" value="<%=customer.getCustomerNumber()%>"/>
-    <jsp:setProperty name="journey" property="index" value="${param.index}"/>
-    <%
-        if( customer.getCustomerNumber()==0)
-          response.sendRedirect("./Login.jsp");
-    %>
-    
+<HTML>  
     <HEAD>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="cache-control" content="max-age=0" />
+        <meta http-equiv="cache-control" content="no-cache" />
+        <meta http-equiv="expires" content="0" />
+        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
+        <meta http-equiv="pragma" content="no-cache" />
         <TITLE>Recent Journeys</TITLE>
-        <STYLE>
-            body {text-align:left;}
-        </STYLE>
     </HEAD>
     <BODY>
         Customer number: <jsp:getProperty name="journey" property="customerNumber"/><br>
         index is :  <jsp:getProperty name="journey" property="index"/>
         <BR><BR>
-        <H1><P STYLE="color:black">Journey History</P>
+        <H1>
+            <P STYLE="color:black">Journey History</P>
         </H1>
-        <BR>
-        <BR>
+        <BR><BR>
         Displaying:  <jsp:getProperty name="journey" property="displayFrom"/> to <jsp:getProperty name="journey" property="displayTo"/>
-        <div>
+        <div align="LEFT">
             <table id="journeys" border="1" style="width:50%">
                 <tr>
                     <th>Date</th>
@@ -66,5 +69,5 @@
                 </tr>
             </table>
         </div> 
-</BODY>
+    </BODY>
 </HTML>
