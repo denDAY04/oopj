@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class DatabaseDaemon extends Thread {
+public class TicketArchiver extends Thread {
     
     private Connection        con;    
     private ResultSet         resultset;
