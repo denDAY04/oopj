@@ -8,7 +8,7 @@
  */
 
 
-import Manager.DatabaseDaemon;
+import Manager.TicketArchiver;
 import RMIInterfaces.*;
 import RMIImpl.*;
 import java.rmi.RemoteException;
@@ -24,9 +24,9 @@ public class RMIServer{
 
     public static void main(String[] args) {        
      
-        Thread databaseDemon = new DatabaseDaemon();
-        databaseDemon.setDaemon(true);  
-        databaseDemon.start();  // unleash the demon    
+        Thread ticketArchiver = new TicketArchiver();
+      //  ticketArchiver.setDaemon(true);  //   don't use daemon 
+        ticketArchiver.start();    
         
         String host = HOST;
         int port = PORT;
