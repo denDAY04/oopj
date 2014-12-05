@@ -1,78 +1,51 @@
 package Beans;
 
-
 import RMIInterfaces.WebsiteManagerRMISkel;
 import ModelClasses.*;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-/**
- *
- * @author RAsmus
- */
 public class CustomerBean {
-    
-/*public String name = "Rasmus";
-public int value = 5;
-public int newcustomer;*/
 
-//String customerNumber = "1234"; //change to "" to test page redirects 
-int customerNumber;
-String firstName;
-String lastName;
-String email;
-String password;
-
-String oldFirst;
-String oldLast;
-String oldEmail;
-String oldPassword;
+private int customerNumber;
+private String firstName;
+private String lastName;
+private String email;
+private String password;
+private String errorMessage = ""; //Email/Password combination not found
+private String errorMessage2 = ""; //Email already exists
+private String errorMessage3 = ""; //Email already exists (EditInformation)
 private WebsiteManagerRMISkel skel;
-String errorMessage = ""; //Email/Password combination not found
-String errorMessage2 = ""; //Email already exists
-String errorMessage3 = ""; //Email already exists (EditInformation)
 
+    //0-argument constructor
     public CustomerBean() throws Exception{
 
-        //this.skel = new WebsiteManagerRMISkel();
+        //Setup RMI Client
         String host = "goonhilly6.eitlab.ihk-edu.dk";        
         int port = 20421;               
         System.out.println("Client: Starting...");
         System.out.println("Using registry at: " + host + " port " + port);
-
         
         final Registry registryA;
-        try {registryA = LocateRegistry.getRegistry(host, port);        
-       
-         final String[] boundNames = registryA.list();
-         System.out.println(
-            "Names bound to RMI registry at host " + host + " and port " + port + ":");
-         for (final String name : boundNames)
-         {System.out.println("\t" + name);}        
+        try{
+            registryA = LocateRegistry.getRegistry(host, port);        
+            final String[] boundNames = registryA.list();
+            System.out.println(
+               "Names bound to RMI registry at host " + host + " and port " + port + ":");
+            for (final String name : boundNames){
+                System.out.println("\t" + name);
+            }        
         }
-         catch (RemoteException ex) {
+         catch (RemoteException ex){
              System.err.println("Setup graph Remote ex: " +ex);
         }
-   
-            Registry registry = LocateRegistry.getRegistry(host, port);     
-            this.skel = (WebsiteManagerRMISkel)registry.lookup("websiteManager");                      
-
+        
+        Registry registry = LocateRegistry.getRegistry(host, port);     
+        this.skel = (WebsiteManagerRMISkel)registry.lookup("websiteManager");                      
     }                   
-
-    /*public int getValue() {
-        return value;
-    }
-
-    public void setValue(int value) {
-        this.value = value;
-    }*/
+    
+    //Method for RMI Communication
     public boolean login() throws RemoteException{
         Customer user = this.skel.logOn(email, password);
         if(user!= null){
@@ -88,6 +61,7 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
         }
     }
     
+    //Method for RMI Communication
     public boolean signUp() throws RemoteException{
         Customer user = new Customer(firstName,lastName,email,password);
         int cNumber = this.skel.createCustomer(user);
@@ -101,6 +75,7 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
         }
     }
     
+    //Method for RMI Communication
     public boolean changeDetails() throws RemoteException{
         Customer user = new Customer(firstName,lastName,email,password);
         user.setCustomerNumber(customerNumber);
@@ -125,6 +100,7 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
         }
     }
     
+    //Accessor and Mutator methods
     public String getErrorMessage(){
         return errorMessage;
     }
@@ -187,75 +163,6 @@ String errorMessage3 = ""; //Email already exists (EditInformation)
     
     public void setPassword(String password){
         this.password = password;
-    }
-
-
-    /*public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-    
-
-
-    public void setValue(String name) {
-        this.name = name;
-    }*/
-    
-//    public String getNewcustomer(){
-//        return newcustomer;
-//    }
-    
-    /*public void setNewcustomer(int newcustomer){
-    this.newcustomer=newcustomer;
-    }
-    
-    
-    
-    public int getNewcustomer(){
-        int rows=0;
-    
-         try {
-
-    String url = "jdbc:postgresql://thelizard6.eitlab.ihk-edu.dk:5432/rasmus3e14";
-    String userName = "rasmus3e14";
-    String password = "s132309";
-    Connection con=null;
-
-    PreparedStatement preparedStatementTest;
-    //PreparedStatement preparedStatementInsert;
-    String testStatementString = "INSERT INTO ntest(name,age) Values (?,?)";
-   // String insertStatement = "INSERT into transport (CustomerNumb) Values (?)";
-
-            try {
-            try {
-            Class.forName("org.postgresql.Driver").newInstance();
-            } catch (ClassNotFoundException ex) {
-                System.err.println("ClassNotFoundException "+ex);
-            } catch (InstantiationException ex) {
-                System.err.println(ex);
-        } catch (IllegalAccessException ex) {
-                System.err.println(ex);
-        }
-            con = DriverManager.getConnection(url, userName, password);
-
-        } catch (SQLException ex) {
-            System.err.println("cannot connect to database! "+ex);
-        }
-    
-            preparedStatementTest = con.prepareStatement(testStatementString);
-            preparedStatementTest.setString(1, name);
-            preparedStatementTest.setInt(2, value);
-           rows = preparedStatementTest.executeUpdate();
-
-        } catch (SQLException ex) {
-            System.out.println("SQL exception!");
-        }
-    
-         return rows;
-    }*/
-    
+    }    
 }
 
