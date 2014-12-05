@@ -2,8 +2,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!DOCTYPE html>
-<jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
-<jsp:setProperty name="idtestbean" property="*"/>
+<jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
+<jsp:setProperty name="customer" property="*"/>
 
 
    
@@ -13,7 +13,7 @@
         <title>Validating Information</title>
     </head>
     <BODY>
-        <% if(idtestbean.changeDetails() == true){
+        <% if(customer.changeDetails() == true){
                response.sendRedirect("./AccountOverview.jsp");
            } else{
                response.sendRedirect("./EditInformation.jsp");

@@ -2,11 +2,12 @@ package Beans;
 
 import RMIInterfaces.WebsiteManagerRMISkel;
 import ModelClasses.*;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
-public class CustomerBean {
+public class CustomerBean implements Serializable {
 
 private int customerNumber;
 private String firstName;
@@ -18,7 +19,6 @@ private String errorMessage2 = ""; //Email already exists
 private String errorMessage3 = ""; //Email already exists (EditInformation)
 private WebsiteManagerRMISkel skel;
 
-    //0-argument constructor
     public CustomerBean() throws Exception{
 
         //Setup RMI Client
@@ -40,12 +40,20 @@ private WebsiteManagerRMISkel skel;
          catch (RemoteException ex){
              System.err.println("Setup graph Remote ex: " +ex);
         }
-        
         Registry registry = LocateRegistry.getRegistry(host, port);     
         this.skel = (WebsiteManagerRMISkel)registry.lookup("websiteManager");                      
     }                   
     
-    //Method for RMI Communication
+    /**
+    * Invokes the logOn method specified in the WebsiteManagerRMISkel in the
+    * RMIInterfaces package. The method login() gets a Customer object from the
+    * RMI server, and verifies if it is not null.
+    * <p>
+    * The bean properties are set if a Customer object is returned from logOn
+    * @param  None
+    * @return      True if Customer != null, False otherwise
+    * @see         RMIInterfaces.WebsiteManagerRMISkel
+    */
     public boolean login() throws RemoteException{
         Customer user = this.skel.logOn(email, password);
         if(user!= null){
@@ -61,13 +69,23 @@ private WebsiteManagerRMISkel skel;
         }
     }
     
-    //Method for RMI Communication
+    /**
+    * Invokes the createCustomer method specified in the WebsiteManagerRMISkel in the
+    * RMIInterfaces package. The method signUp() gets a customerNumber from the
+    * RMI server, and verifies it is not -1.
+    * <p>
+    * The bean property customerNumber are set if the received number != -1.
+    * @param  None
+    * @return      True if customerNumber != -1, False otherwise
+    * @see         RMIInterfaces.WebsiteManagerRMISkel
+    */
     public boolean signUp() throws RemoteException{
         Customer user = new Customer(firstName,lastName,email,password);
         int cNumber = this.skel.createCustomer(user);
         if(cNumber!=-1){
             this.customerNumber = cNumber;
             setErrorMessage2("");
+            
             return true;
         } else{
             setErrorMessage2("Error - Email address is already in use");
@@ -75,7 +93,18 @@ private WebsiteManagerRMISkel skel;
         }
     }
     
-    //Method for RMI Communication
+    /**
+    * Invokes the setCustomerDetails method specified in the WebsiteManagerRMISkel 
+    * in the RMIInterfaces package. The method changeDetails() gets a Customer 
+    * object from the RMI server, and verifies if the objects properties are
+    * identical to those in the bean. 
+    * <p>
+    * The bean properties are set in both cases as the old data would need to
+    * be filled back in if the submission failed.
+    * @param  None
+    * @return      True if CustomerSent == CustomerReceived, False otherwise
+    * @see         RMIInterfaces.WebsiteManagerRMISkel
+    */
     public boolean changeDetails() throws RemoteException{
         Customer user = new Customer(firstName,lastName,email,password);
         user.setCustomerNumber(customerNumber);

@@ -2,11 +2,11 @@
     <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
 
     <jsp:useBean id="journey" class="Beans.JourneyBean" scope = "page"/>
-    <jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
-    <jsp:setProperty name="journey" property="customerNumber" value="<%=idtestbean.getCustomerNumber()%>"/>
+    <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
+    <jsp:setProperty name="journey" property="customerNumber" value="<%=customer.getCustomerNumber()%>"/>
     <jsp:setProperty name="journey" property="index" value="${param.index}"/>
     <%
-        if( idtestbean.getCustomerNumber()==0)
+        if( customer.getCustomerNumber()==0)
           response.sendRedirect("./Login.jsp");
     %>
     

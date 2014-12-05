@@ -1,11 +1,9 @@
-
-
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!DOCTYPE html>
-<jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
+<jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
 
 <%
-  if( idtestbean.getCustomerNumber()!=0)
+  if( customer.getCustomerNumber()!=0)
     response.sendRedirect("./AccountOverview.jsp");
 %>
 <html>
@@ -17,7 +15,7 @@
         <BR><BR><BR>
         <FORM METHOD=GET ACTION="ValidateLogin.jsp">
             <TABLE>
-                <TR> <font color="red"><jsp:getProperty name="idtestbean" property="errorMessage" /></font></TR>
+                <TR> <font color="red"><jsp:getProperty name="customer" property="errorMessage" /></font></TR>
                 <TR>
                     <TD>Username:</TD>
                     <TD><INPUT TYPE="text" NAME= "email"></TD>

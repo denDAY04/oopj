@@ -1,11 +1,11 @@
 <HTML>
     <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
 
-    <jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session">
+    <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
     </jsp:useBean>
     <!-- Check if the session has a Customer object, if not redirect to login page-->
     <%
-        if( idtestbean.getCustomerNumber()==0)
+        if( customer.getCustomerNumber()==0)
           response.sendRedirect("./Login.jsp");
     %>
     <HEAD>
@@ -104,28 +104,28 @@
                     <TD><DIV id="fName"><font color="black">First Name:</font></DIV></TD>
                     <TD><INPUT TYPE="text"
                                NAME= "firstName"
-                               VALUE="<jsp:getProperty name="idtestbean" property="firstName" />"></TD>
+                               VALUE="<jsp:getProperty name="customer" property="firstName" />"></TD>
                 </TR>
                 <TR>
                     <TD><DIV id="lName"><font color="black">Last Name:</font></DIV></TD>
                     <TD><INPUT TYPE="text"
                                NAME= "lastName"
-                               VALUE="<jsp:getProperty name="idtestbean" property="lastName" />"></TD>
+                               VALUE="<jsp:getProperty name="customer" property="lastName" />"></TD>
                 </TR>
                 <TR>
-                    <TD><font color="red"><jsp:getProperty name="idtestbean" property="errorMessage3"/></TD>
+                    <TD><font color="red"><jsp:getProperty name="customer" property="errorMessage3"/></TD>
                 </TR>
                 <TR>
                     <TD><DIV id="mail"><font color="black">Email:</font></DIV></TD>
                     <TD><INPUT TYPE="text"
                                NAME= "email"
-                               VALUE="<jsp:getProperty name="idtestbean" property="email" />"></TD>
+                               VALUE="<jsp:getProperty name="customer" property="email" />"></TD>
                 </TR>
                 <TR>
                     <TD><DIV id="pwd"><font color="black">Password:</font></DIV></TD>
                     <TD><INPUT TYPE="password"
                                NAME= "password"
-                               VALUE="<jsp:getProperty name="idtestbean" property="password" />"></TD>
+                               VALUE="<jsp:getProperty name="customer" property="password" />"></TD>
                 </TR>
             </TABLE>
             <BR><BR>

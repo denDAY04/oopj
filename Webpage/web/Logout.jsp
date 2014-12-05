@@ -2,12 +2,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!DOCTYPE html>
-<jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
-<jsp:setProperty name="idtestbean" property="customerNumber" value="0"/>
-<jsp:setProperty name="idtestbean" property="firstName" value=""/>
-<jsp:setProperty name="idtestbean" property="lastName" value=""/>
-<jsp:setProperty name="idtestbean" property="email" value=""/>
-<jsp:setProperty name="idtestbean" property="password" value=""/>
+<jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
+<jsp:setProperty name="customer" property="customerNumber" value="0"/>
+<jsp:setProperty name="customer" property="firstName" value=""/>
+<jsp:setProperty name="customer" property="lastName" value=""/>
+<jsp:setProperty name="customer" property="email" value=""/>
+<jsp:setProperty name="customer" property="password" value=""/>
    
 <html>
     <head>

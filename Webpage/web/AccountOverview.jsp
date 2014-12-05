@@ -1,15 +1,15 @@
 <HTML>
     <%@ page language="java" contentType="text/html" errorPage="error.jsp" %>
 
-    <jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session">
+    <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">
     </jsp:useBean>
     <%
-        if( idtestbean.getCustomerNumber()==0)
+        if( customer.getCustomerNumber()==0)
           response.sendRedirect("./Login.jsp");
       %>
-    <jsp:setProperty name="idtestbean" property="errorMessage" value=""/>
-    <jsp:setProperty name="idtestbean" property="errorMessage3" value=""/>
-    <jsp:setProperty name="idtestbean" property="*"/>
+    <jsp:setProperty name="customer" property="errorMessage" value=""/>
+    <jsp:setProperty name="customer" property="errorMessage3" value=""/>
+    <jsp:setProperty name="customer" property="*"/>
     <HEAD>
         <TITLE>Account</TITLE>
         <STYLE>
@@ -43,19 +43,19 @@
             <TABLE align="Left">
                 <TR>
                     <TD>First name: </TD>
-                    <TD><jsp:getProperty name="idtestbean" property="firstName" /></TD>
+                    <TD><jsp:getProperty name="customer" property="firstName" /></TD>
                 </TR>
                 <TR>
                     <TD>Last name: </TD>
-                    <TD><jsp:getProperty name="idtestbean" property="lastName" /></TD>
+                    <TD><jsp:getProperty name="customer" property="lastName" /></TD>
                 </TR>
                 <TR>
                     <TD>Email: </TD>
-                    <TD><jsp:getProperty name="idtestbean" property="email" /></TD>
+                    <TD><jsp:getProperty name="customer" property="email" /></TD>
                 </TR>
                 <TR>
                     <TD>Customer Number: </TD>
-                    <TD><jsp:getProperty name="idtestbean" property="customerNumber" /></TD>
+                    <TD><jsp:getProperty name="customer" property="customerNumber" /></TD>
                 </TR>
             </TABLE>
             <BR><BR>

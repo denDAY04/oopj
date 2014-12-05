@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
-<jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
+<jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
 
 <%
-  if( idtestbean.getCustomerNumber()!=0)
+  if( customer.getCustomerNumber()!=0)
     response.sendRedirect("../AccountOverview.jsp");
 %>
 <HTML>
@@ -86,7 +86,7 @@
                                NAME= "lastName"></TD>
                 </TR>
                 <TR>
-                    <TD><DIV id="mail"><font color="black">Email: </font></DIV><font color="red"><jsp:getProperty name="idtestbean" property="errorMessage2"/></font></TD>
+                    <TD><DIV id="mail"><font color="black">Email: </font></DIV><font color="red"><jsp:getProperty name="customer" property="errorMessage2"/></font></TD>
                     <TD><INPUT TYPE="text"
                                NAME= "email"></TD>
                 </TR>

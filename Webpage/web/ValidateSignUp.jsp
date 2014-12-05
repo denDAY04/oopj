@@ -2,8 +2,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <!DOCTYPE html>
-<jsp:useBean id="idtestbean" class="Beans.CustomerBean" scope="session" />
-<jsp:setProperty name="idtestbean" property="*"/>
+<jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
+<jsp:setProperty name="customer" property="*"/>
 
 
    
@@ -13,7 +13,7 @@
         <title>Validating Login</title>
     </head>
     <BODY>
-        <% if(idtestbean.signUp() == true){
+        <% if(customer.signUp() == true){
                response.sendRedirect("./TermsOfUse.jsp");
            } else{
                response.sendRedirect("./SignUp.jsp");
