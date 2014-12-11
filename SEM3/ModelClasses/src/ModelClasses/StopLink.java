@@ -77,7 +77,7 @@ public class StopLink implements Serializable{
                     + "(Line = ?) AND "
                     + "(Station = ?) AND "
                     + "(Destination = ?) AND "
-                    + "(Departure > ?)");
+                    + "(Departure >= ?)");
             preparedStatementGetToday.setMaxRows(1);
             preparedStatementGetToday.setString(1, type);
             preparedStatementGetToday.setString(2, line);
