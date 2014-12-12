@@ -25,7 +25,7 @@ public class RPBean implements Serializable {
         this.day = startTime.get(GregorianCalendar.DAY_OF_MONTH);
         this.hour = startTime.get(GregorianCalendar.HOUR_OF_DAY);
         this.minute = startTime.get(GregorianCalendar.MINUTE);
-        this.rPJSkel = new RPJSkel();
+        this.rPJSkel = new UDPBean();
         // test
         this.origin = "Ballerup";
         this.destination = "Husum";
@@ -40,7 +40,7 @@ public class RPBean implements Serializable {
     private int hour;
     private int minute;
     private RoutePlannerJourney rpj;
-    private RPJSkel rPJSkel;
+    private UDPBean rPJSkel;
     private String origin;
     private int originint;
     private String destination;
@@ -223,7 +223,7 @@ public class RPBean implements Serializable {
             getOn = true;
             departureStopIndex=0;
 //       try{
-        rpj = rPJSkel.createRouteplannerJourney(originint, destinationint, startTime);
+        rpj = rPJSkel.sendRequest(originint, destinationint, startTime);
 //          }
 //       catch (InterruptedException //| TimeoutException | ExecutionException 
 //               e) {

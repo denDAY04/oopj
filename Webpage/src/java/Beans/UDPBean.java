@@ -20,9 +20,9 @@ import java.util.GregorianCalendar;
  *
  * @author Rasmus
  */
-public class RPJSkel implements  Serializable  {
+public class UDPBean implements  Serializable  {
 
-    public RoutePlannerJourney createRouteplannerJourney(int origin, int destination, GregorianCalendar timeDeparture) throws Exception{
+    public RoutePlannerJourney sendRequest(int origin, int destination, GregorianCalendar timeDeparture) throws Exception{
     
     // test
     //timeDeparture.set(GregorianCalendar.HOUR_OF_DAY, 12);
