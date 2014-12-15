@@ -3,7 +3,10 @@ package ModelClasses;
 import java.util.GregorianCalendar;
 
 /**
- *
+ * Waypoint Manager class.
+ * This class was used for calculations of data stored in the waypoints.
+ * since this function was moved to the receiver, the class has been left
+ * un-utilized.
  * @author Rasmus
  */
 public class WaypointManager {

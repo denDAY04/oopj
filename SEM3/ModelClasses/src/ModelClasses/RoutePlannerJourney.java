@@ -12,11 +12,10 @@ import java.util.Objects;
  *
  * @author Rasmus
  */
+import javax.xml.bind.annotation.XmlRootElement;
 
-	import javax.xml.bind.annotation.XmlRootElement;
-	 
-	//Below statement means that class 'Country.java' is the root-element of our example
-	@XmlRootElement(namespace = "RoutePlannerJourney")
+//Set element to be the root element for the xml structure
+@XmlRootElement(namespace = "RoutePlannerJourney")
 
 public class RoutePlannerJourney implements Serializable {
 
@@ -29,15 +28,33 @@ public class RoutePlannerJourney implements Serializable {
     private int travelTimeHours;
     private int travelTimeMinutes;
 
-    
+    /**
+     * Getter for the araylist of waypoints
+     * @return waypoints
+     */
     public ArrayList<Waypoint> getWaypoints() {
         return waypoints;
     }
 
+    /**
+     * Setter for the araylist of waypoints
+     * @param waypoints
+     */
     public void setWaypoints(ArrayList<Waypoint> waypoints) {
         this.waypoints = waypoints;
     }
 
+    /**
+     * Constructor for the RoutePlannerJourney class.
+     * @param waypoints
+     * @param arrival
+     * @param departure
+     * @param zones
+     * @param price
+     * @param travelTimeDays
+     * @param travelTimeHours
+     * @param travelTimeMinutes
+     */
     public RoutePlannerJourney(ArrayList<Waypoint> waypoints, GregorianCalendar arrival, GregorianCalendar departure, int zones, int price, int travelTimeDays, int travelTimeHours, int travelTimeMinutes) {
         this.waypoints = waypoints;
         this.arrival = arrival;
@@ -48,102 +65,207 @@ public class RoutePlannerJourney implements Serializable {
         this.travelTimeHours = travelTimeHours;
         this.travelTimeMinutes = travelTimeMinutes;
     }
-    public RoutePlannerJourney(){}
 
+    /**
+     * Default 0-argument constructor used by the XML.
+     */
+    public RoutePlannerJourney() {
+    }
+
+    /**
+     * Getter for the number of waypoints.
+     * @return
+     */
     public int getNumberofWaypoints() {
         return waypoints.size();
     }
 
+    /**
+     * Getter for the arrival time of the journey
+     * @return
+     */
     public GregorianCalendar getArrival() {
         return arrival;
     }
 
+    /**
+     * Setter for the arrival time of the journey
+     * @param arrival
+     */
     public void setArrival(GregorianCalendar arrival) {
         this.arrival = arrival;
     }
 
+    /**
+     * Getter for the departure time of the journey
+     * @return
+     */
     public GregorianCalendar getDeparture() {
         return departure;
     }
 
+    /**
+     * Setter for the arrival time of the journey
+     * @param departure
+     */
     public void setDeparture(GregorianCalendar departure) {
         this.departure = departure;
     }
 
+    /**
+     * Getter for the number of zones of the journey
+     * @return
+     */
     public int getZones() {
         return zones;
     }
 
+    /**
+     * Setter for the number of zones of the journey
+     * @param zones
+     */
     public void setZones(int zones) {
         this.zones = zones;
     }
 
+    /**
+     * Getter for the price of the journey
+     * @return
+     */
     public int getPrice() {
         return price;
     }
 
+    /**
+     * Setter for the price of the journey
+     * @param price
+     */
     public void setPrice(int price) {
         this.price = price;
     }
 
+    /**
+     * Getter for the travel time in whole days, of the journey
+     * @return
+     */
     public int getTravelTimeDays() {
         return travelTimeDays;
     }
 
+    /**
+     * Setter for the travel time in whole days, of the journey
+     * @param travelTimeDays
+     */
     public void setTravelTimeDays(int travelTimeDays) {
         this.travelTimeDays = travelTimeDays;
     }
 
+    /**
+     * Getter for the travel time in whole hours, of the journey.
+     * @return
+     */
     public int getTravelTimeHours() {
         return travelTimeHours;
     }
 
+    /**
+     * Setter for the travel time in whole hours, of the journey.
+     * @param travelTimeHours
+     */
     public void setTravelTimeHours(int travelTimeHours) {
         this.travelTimeHours = travelTimeHours;
     }
 
+    /**
+     * Getter for the travel time in whole minutes, of the journey.
+     * @return
+     */
     public int getTravelTimeMinutes() {
         return travelTimeMinutes;
     }
 
+    /**
+     * Setter for the travel time in whole minutes, of the journey.
+     * @param travelTimeMinutes
+     */
     public void setTravelTimeMinutes(int travelTimeMinutes) {
         this.travelTimeMinutes = travelTimeMinutes;
     }
 
 // Get methods to access Waypoint Array data.    
-    public String getWPStopName(int index) {
+
+    /**
+     * Getter for a Waypoints stop name at an index
+     * @param index
+     * @return
+     */
+        public String getWPStopName(int index) {
         return waypoints.get(index).getStopName();
     }
 
+    /**
+     * Getter for a Waypoints stop zone at an index
+     * @param index
+     * @return
+     */
     public int getWPStopZone(int index) {
         return waypoints.get(index).getStopZone();
     }
 
+    /**
+     * Getter for a Waypoints arrival time at a stop, at an index
+     * @param index
+     * @return
+     */
     public GregorianCalendar getWPArrivalTimeAtStop(int index) {
         return waypoints.get(index).getArrivalTimeAtStop();
     }
 
-
+    /**
+     * Getter for a Waypoints departure time from a stop, at an index
+     * @param index
+     * @return
+     */
     public GregorianCalendar getWPDepartureTimeFromStop(int index) {
         return waypoints.get(index).getDepartureTimeFromStop();
     }
 
+    /**
+     * Getter for a Waypoints departure line, at an index
+     * @param index
+     * @return
+     */
     public String getWPDepartureLine(int index) {
         return waypoints.get(index).getDepartureLine();
     }
 
+    /**
+     * Getter for a Waypoints departure type, at an index
+     * @param index
+     * @return
+     */
     public String getWPDepartureType(int index) {
         return waypoints.get(index).getDepartureType();
     }
 
+    /**
+     * Getter for a Waypoints departure direction, at an index
+     * @param index
+     * @return
+     */
     public String getWPDepartureDirection(int index) {
         return waypoints.get(index).getDepartureDirection();
     }
-    public int getWPChangeCounter(int index){
-    return waypoints.get(index).getChangeCounter();
+
+    /**
+     * Getter for a Waypoints change counter, at an index
+     * @param index
+     * @return
+     */
+    public int getWPChangeCounter(int index) {
+        return waypoints.get(index).getChangeCounter();
     }
-    
-    
+
     @Override
     public int hashCode() {
         int hash = 5;
@@ -194,6 +316,11 @@ public class RoutePlannerJourney implements Serializable {
         return true;
     }
 
+    /**
+     * Test output method used for confirmation of route planner function.
+     * outputs all information stored in the route planner journey class
+     * and all contained waypoints.
+     */
     public void testOutput() {
 
         System.err.println("**** RoutePlannerJourney ****");
@@ -218,7 +345,7 @@ public class RoutePlannerJourney implements Serializable {
                 System.err.println("waypoint " + i + ": Departure type: " + getWPDepartureType(i));
                 System.err.println("waypoint " + i + ": Departure Direction: " + getWPDepartureDirection(i));
             }
-           System.err.println("waypoint " + i + ": Change Counter: " + getWPChangeCounter(i));
+            System.err.println("waypoint " + i + ": Change Counter: " + getWPChangeCounter(i));
         }
     }
 }

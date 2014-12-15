@@ -3,34 +3,36 @@ package ModelClasses;
 import java.io.Serializable;
 import java.util.GregorianCalendar;
 
-/**
- *
- * @author Rasmus
- */
+    /**
+     * Stop class stores all the information about a stop. Tracks the
+     * fastest time at stop in timeAtStop, and the way to get there in the
+     * previousStop and previousStopLink.
+     * Also contains geographical information, used in the heuristic.
+     *  @author Rasmus
+     */
 public class Stop implements Serializable{
 
-    /**
-     * Stop class stores all the information about the current stop. Tracks the
-     * best time at stop in timeAtStop, and the way to get there in the
-     * previousStop and previousStopLink.
-     */
+
     public String name;
     public int zoneNumber;
+    // location used for heuristic
     public long longitude, latitude;
-
+    // Array of connections to and from this stop.
     public StopLink[] links;
-
+    // used for backtracking though the graph.
     public Stop previousStop = null;
     public StopLink previousStopLink = null;
+    // used for finding the fastest arrival time
     public GregorianCalendar timeAtStop = new GregorianCalendar(2050, 1, 1, 1, 1, 1);
+    // used for displaying both departure and arrival times.
     public GregorianCalendar DepartureTimeFromPreviousStop = new GregorianCalendar(2050, 1, 1, 1, 1, 1);
+    // the heuristic time, calculated from the euclidian distance
     public long expTimetoGoal; // calculated MS time to the goal.
     public int maximumSpeed;
 
     /**
      * Standard constructor for stop objects. longitude and latitude are
-     * positive and given in the same coordinate system as other stops, in
-     * kilometers.
+     * positive and given in the same coordinate system as other stops.
      *
      * @param name
      * @param zoneNumber
@@ -66,6 +68,8 @@ public class Stop implements Serializable{
         long deltaLatitude = Math.abs(latitude - goal.latitude);
         long deltaLongitude = Math.abs(longitude - goal.longitude);
   // local variables for magic numbers 60, 1000 etc (e.g. seconds, minutes etc)
-        this.expTimetoGoal = (long) (Math.sqrt((deltaLatitude * deltaLatitude) + (deltaLongitude * deltaLongitude)) * ((60 * 60 * 1000) / maximumSpeed)); // for time in MS @ 100km / h
+        this.expTimetoGoal = (long) (Math.sqrt((deltaLatitude * deltaLatitude) + 
+                             (deltaLongitude * deltaLongitude)) * 
+                             ((60 * 60 * 1000) / maximumSpeed)); // for time in MS @ 100km / h
     }
 }

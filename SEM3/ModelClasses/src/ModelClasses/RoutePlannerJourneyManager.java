@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
 /**
- * RoutePlannerJourneyManager bla bla bla Not implementing index out of bounds
- * or nullpointer checks
- *
- * @author Rasmus
+ * RoutePlannerJourneyManager. Creates RoutePlannerJourney objects.
+ * Originally it also calculated all wait and duration times, but was moved.
+
+* @author Rasmus
  */
 public class RoutePlannerJourneyManager {
 
@@ -46,7 +46,12 @@ public class RoutePlannerJourneyManager {
     }
 
     // Test output method.
-    public static void testOutput(RoutePlannerJourney rPJ) {
+
+    /**
+     * Test method. Same as in the journey object.
+     * @param rPJ
+     */
+        public static void testOutput(RoutePlannerJourney rPJ) {
 
         System.err.println("**** RoutePlannerJourney ****");
         System.err.println("Departure Station: " + rPJ.getWPStopName(0));

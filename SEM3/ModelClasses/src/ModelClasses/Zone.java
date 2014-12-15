@@ -4,13 +4,17 @@ package ModelClasses;
 import java.io.Serializable;
 import java.util.LinkedList;
 
-public class Zone implements Serializable {
-    
-    
     /**
+     * Zone model class.
      * Contains the zone number, a linkedlist of adjacent zones, a visited
      * boolean and a reference to the parent zone in the search tree.
+     * The zone class is used in the zone distance calculator.
+     * @author Rasmus
+     *  * Contributors:
+     * Andreas Stensig Jensen
      */
+
+public class Zone implements Serializable {
 
         public int zoneNumber;
         public LinkedList<Zone> Zonelink = new LinkedList();

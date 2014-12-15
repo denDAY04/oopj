@@ -5,8 +5,8 @@ import java.util.GregorianCalendar;
 import java.util.Objects;
 
 /**
- * Waypoint Model class used as inner class for the RoutePlannerJourney Model
- * Class. This class stores all information about a stop in a journey, and
+ * Waypoint Model class used as aggregated class for the RoutePlannerJourney Model
+ * Class. This class stores all information about a single stop in a journey, and
  * information about the transport to the following stop.
  *
  * @author Rasmus

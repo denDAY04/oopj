@@ -20,11 +20,11 @@ public class StopLink implements Serializable{
      * database connection, to look up the next departure time. Stoplinks are
      * one way, as the departures are different in either direction.
      */
-    public String type;
-    public String line;
-    public Stop fromStop; // fromStop of the link
-    public Stop toStop;   // destination of the link
-    public Stop towards;
+    public String type;   // type of transportation
+    public String line;   // number or letter of the bus or train
+    public Stop fromStop; // origin stop of the link
+    public Stop toStop;   // arrival of the link
+    public Stop towards;  // destination of the line
     Connection con;
 
     /**
