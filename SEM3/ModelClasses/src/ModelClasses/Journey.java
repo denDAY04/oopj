@@ -4,7 +4,7 @@ package ModelClasses;
 import java.io.Serializable;
 
 /**
- *
+ * 
  * @author Rasmus
  */
 
