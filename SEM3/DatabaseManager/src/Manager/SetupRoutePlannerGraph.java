@@ -1,5 +1,8 @@
 /*
- *Sets up the Graph data for the Routeplanner from the database
+ * Sets up the Graph data for the Routeplanner from the database
+ * This data consists of the stops and connections, but not the departure
+ * times.
+* @author Rasmus Loft
  */
 package Manager;
 
@@ -13,11 +16,10 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Sets up the Graph data for the Routeplanner from the database
- * @author Rasmus Loft
+ * Sets up the Graph data for the Routeplanner from the database.
  */
 public class SetupRoutePlannerGraph {
-
+    
     private final String URL = Setup.Settings.URL;
     private final String USERNAME = Setup.Settings.USERNAME;
     private final String PASSWORD = Setup.Settings.PASSWORD;
@@ -25,6 +27,7 @@ public class SetupRoutePlannerGraph {
     public Stop[] setupGraph(DatabaseManager dBM) {
         Connection con = null;
         ArrayList<Stop> stopArr = new ArrayList();
+        // Connect to database
         try {
             Class.forName("org.postgresql.Driver").newInstance();
             con = DriverManager.getConnection(URL, USERNAME, PASSWORD);
@@ -40,7 +43,7 @@ public class SetupRoutePlannerGraph {
             System.err.println("executeQuery, Setup route planner");
 
             resultset = statement.executeQuery(query);
-
+            // Get stops from the database
             if (resultset.next()) {
                 speed = resultset.getInt(1);
                 query = SQLLibrary.ROUTEPLANNER_GET_STOP;
@@ -52,6 +55,7 @@ public class SetupRoutePlannerGraph {
                 for (int i = 0; i < stopArr.size(); i++) {
                     stopLinkArr[i] = new ArrayList<>(); // if no array exsists yet, make one
                 }
+                // Get stoplinks (connections) from the database
                 query = SQLLibrary.ROUTEPLANNER_GET_STOPLINK;
                 resultset = statement.executeQuery(query);
 
@@ -65,7 +69,7 @@ public class SetupRoutePlannerGraph {
                     // add the link to the arrayarray list in the array with index toStop
                     stopLinkArr[resultset.getInt(3) - 1].add(new StopLink(type, line, parent, stop, towards));
                 }
-
+                // add each array of stoplinks to the correct stop.
                 for (int i = 0; i < stopLinkArr.length; i++) {
                     if (stopLinkArr[i] != null) {
                         StopLink[] currStopLinkArr = stopLinkArr[i].toArray(new StopLink[stopLinkArr[i].size()]);
