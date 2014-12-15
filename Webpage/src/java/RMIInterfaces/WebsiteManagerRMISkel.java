@@ -1,3 +1,4 @@
+//Author: Mathias Nordahl
 package RMIInterfaces;
 
 import ModelClasses.*;

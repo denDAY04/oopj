@@ -1,3 +1,4 @@
+//Author: Mathias Nordahl
 package Beans;
 
 import RMIInterfaces.WebsiteManagerRMISkel;

@@ -1,3 +1,4 @@
+<!--Author: Mathias Nordahl-->
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html" errorPage="error.jsp"%>
 <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session">

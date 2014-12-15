@@ -1,3 +1,4 @@
+<!--Author: Mathias Nordahl-->
 <!DOCTYPE html>
 <%@page contentType="text/html" pageEncoding="UTF-8" errorPage="error.jsp"%>
 <jsp:useBean id="customer" class="Beans.CustomerBean" scope="session" />
