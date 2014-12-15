@@ -1,6 +1,7 @@
 -- @author Rasmus
 DROP TABLE speedbound;
 
+-- Speedbound is the upper speedlimit in the graph
 CREATE TABLE speedbound(
    speedbound INT NOT NULL,
    PRIMARY KEY (speedbound)
@@ -8,6 +9,7 @@ CREATE TABLE speedbound(
 
 INSERT INTO speedbound (speedbound) VALUES (100);
 
+-- the stops represent stops and stations.
 DROP TABLE stops;
 CREATE TABLE stops(
    ID SERIAL UNIQUE PRIMARY KEY,
@@ -15,8 +17,8 @@ CREATE TABLE stops(
    zoneNumber INT NOT NULL,
    longitude INT NOT NULL,
    latitude INT NOT NULL
-   --PRIMARY KEY (ID)
  );
+
 INSERT INTO stops (stopname,zoneNumber,longitude,latitude) VALUES 
 
 ('Ballerup',2,5,35),
@@ -30,7 +32,7 @@ INSERT INTO stops (stopname,zoneNumber,longitude,latitude) VALUES
 ('Enghave',5,45,35),
 ('Vesterport',5,45,20)
 ;
-
+-- The stoplinks represent the connections between stops, by busses and trains.
 DROP TABLE stoplinks;
 CREATE TABLE stoplinks(
    ID SERIAL UNIQUE PRIMARY KEY,

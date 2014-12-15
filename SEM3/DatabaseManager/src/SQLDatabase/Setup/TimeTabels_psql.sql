@@ -1,6 +1,9 @@
 -- @author Rasmus
 DROP TABLE TimeTable CASCADE;
 
+--Table of departure times. Note that the second station name is the destination 
+-- stop name, not the arrival stop name.
+
 CREATE TABLE TimeTable(
    ID SERIAL UNIQUE PRIMARY KEY, 
    TransportationType VARCHAR(5) NOT NULL,
@@ -14,7 +17,7 @@ CREATE TABLE TimeTable(
 
 INSERT INTO TimeTable (TransportationType,Line,Station,Destination,Departure,NextArrival) VALUES 
 
- --Train B to Malmparken
+ --Train B to Malmparken                              (travel time)
 ('Train','B','Herlev','Malmparken','12:00','12:18'), --18m
 ('Train','B','Herlev','Malmparken','13:00','13:18'),
 ('Train','B','Herlev','Malmparken','14:00','14:18'),

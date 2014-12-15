@@ -1,5 +1,6 @@
 drop table ZoneMap;
 
+-- THe Zonemap sets up the adjecency of zones. Defaulted to 4 maximum.
 create table ZoneMap (
     zoneNum int,
     adjacent1 int,

@@ -2,7 +2,7 @@
  * Sets up the Graph data for the Routeplanner from the database
  * This data consists of the stops and connections, but not the departure
  * times.
-* @author Rasmus Loft
+ * @author Rasmus Loft
  */
 package Manager;
 
@@ -16,10 +16,12 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
- * Sets up the Graph data for the Routeplanner from the database.
+ * Sets up the Graph data for the Routeplanner from the database. Returns an
+ * array of the stops. each stop having an array of stoplinks connecting them to
+ * other stops.
  */
 public class SetupRoutePlannerGraph {
-    
+
     private final String URL = Setup.Settings.URL;
     private final String USERNAME = Setup.Settings.USERNAME;
     private final String PASSWORD = Setup.Settings.PASSWORD;
@@ -34,12 +36,9 @@ public class SetupRoutePlannerGraph {
             Statement statement = con.createStatement();
             ResultSet resultset;
             String query;
-
             int speed;
             ArrayList<StopLink>[] stopLinkArr;
-
             query = SQLLibrary.ROUTEPLANNER_GET_SPEEDBOUND;
-
             System.err.println("executeQuery, Setup route planner");
 
             resultset = statement.executeQuery(query);
@@ -50,7 +49,7 @@ public class SetupRoutePlannerGraph {
                 resultset = statement.executeQuery(query);
                 while (resultset.next()) { // itterates through lines to create stops
                     stopArr.add(new Stop(resultset.getString(1), resultset.getInt(2), (long) resultset.getInt(3), (long) resultset.getInt(4), speed));
-                 }
+                }
                 stopLinkArr = new ArrayList[stopArr.size()];
                 for (int i = 0; i < stopArr.size(); i++) {
                     stopLinkArr[i] = new ArrayList<>(); // if no array exsists yet, make one
@@ -86,5 +85,4 @@ public class SetupRoutePlannerGraph {
 
         return stopArr2;
     }
-
 }
