@@ -1,3 +1,4 @@
+-- @author Rasmus
 drop table ZoneMap;
 
 -- THe Zonemap sets up the adjecency of zones. Defaulted to 4 maximum.
