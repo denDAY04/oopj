@@ -8,6 +8,16 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.ArrayList;
 
+/**
+ * JourneyBean.
+ * JourneyBean is used to get the journeys from the RMI backend server, 
+ * and show the results one line at a time. This allows the JSP to 
+ * dynamically generate the table, allowing for easy implementation 
+ * of dynamic table sizes in the future.
+ * 
+ * @author Rasmus Loft
+ * (RMI Implementation by Mathias)
+ */
 public class JourneyBean implements Serializable {
     // used to itterate through the journeys in the journey array list.
     private int i=0;

@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package Beans;
 
 import ModelClasses.RoutePlannerJourney;
@@ -18,61 +12,44 @@ import java.util.GregorianCalendar;
 
 /**
  *
- * @author Rasmus
+ * UDPBean The UDPBean contacts the Route Planner Server and receives a Route
+ * Planner Journey model class back.
+ *
+ *
+ * @author Rasmus LOft
  */
-public class UDPBean implements  Serializable  {
+public class UDPBean implements Serializable {
 
-    public RoutePlannerJourney sendRequest(int origin, int destination, GregorianCalendar timeDeparture) throws Exception{
-    
-    // test
-    //timeDeparture.set(GregorianCalendar.HOUR_OF_DAY, 12);
-    //timeDeparture.set(GregorianCalendar.MINUTE, 00);
-       
-    final int ServerPort = 44448;
+    public RoutePlannerJourney sendRequest(int origin, int destination, GregorianCalendar timeDeparture) throws Exception {
 
-    RoutePlannerJourney result = null;
+        final int ServerPort = 44448;
 
-//try {
-            DatagramSocket datagramSocket = new DatagramSocket();
-            DatagramPacket outPacket;
-            InetAddress address = InetAddress.getByName("thelizard6.eitlab.ihk-edu.dk");
-//            GregorianCalendar testtime= new GregorianCalendar();
-//            System.err.println(testtime.getTimeInMillis());
-           
-            
-            String msg = origin + ";" + destination + ";" + timeDeparture.getTimeInMillis();
-            outPacket = new DatagramPacket(msg.getBytes(), msg.length(), address, ServerPort);
-            datagramSocket.send(outPacket);
-            DatagramPacket reply;
-            byte[] dataBuffIn;
-            byte[] packetBuffIn = new byte[10000]; // "5 waypoint" trip size < 7000
+        RoutePlannerJourney result = null;
 
+        DatagramSocket datagramSocket = new DatagramSocket();
+        DatagramPacket outPacket;
+        InetAddress address = InetAddress.getByName("thelizard6.eitlab.ihk-edu.dk");
 
-            reply = new DatagramPacket(packetBuffIn, packetBuffIn.length);
-            datagramSocket.receive(reply);
-            dataBuffIn = reply.getData();
-            ByteArrayInputStream bis = new ByteArrayInputStream(dataBuffIn);
-            ObjectInput oi = null;
-            oi = new ObjectInputStream(bis);
-//            try {
-                result = (RoutePlannerJourney) oi.readObject();
-//        } catch (ClassNotFoundException ex) {
-//            System.err.println("exception: " + ex);
-//        }
+        String msg = origin + ";" + destination + ";" + timeDeparture.getTimeInMillis();
+        outPacket = new DatagramPacket(msg.getBytes(), msg.length(), address, ServerPort);
+        datagramSocket.send(outPacket);
+        DatagramPacket reply;
+        byte[] dataBuffIn;
+        byte[] packetBuffIn = new byte[10000]; // "5 waypoint" trip size < 7000
 
-            //result.testOutput();
-            //System.err.println(result.getWPStopName(1));
+        reply = new DatagramPacket(packetBuffIn, packetBuffIn.length);
+        datagramSocket.receive(reply);
+        dataBuffIn = reply.getData();
+        ByteArrayInputStream bis = new ByteArrayInputStream(dataBuffIn);
+        ObjectInput oi = null;
+        oi = new ObjectInputStream(bis);
 
-            datagramSocket.close();
-            oi.close();
-            bis.close();
-//        } catch (Exception ex) {
-//            System.err.println("exception:" + ex);
-//        }
+        result = (RoutePlannerJourney) oi.readObject();
 
-      //  if (result == null)         throw new NullPointerException();
-        
-        
+        datagramSocket.close();
+        oi.close();
+        bis.close();
+
         return result;
     }
 }
