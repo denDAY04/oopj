@@ -12,7 +12,6 @@ CREATE TABLE TimeTable(
    Destination VARCHAR(30) NOT NULL,
    Departure TIME, 
    NextArrival TIME
-   --PRIMARY KEY (ID)
 );
 
 INSERT INTO TimeTable (TransportationType,Line,Station,Destination,Departure,NextArrival) VALUES 

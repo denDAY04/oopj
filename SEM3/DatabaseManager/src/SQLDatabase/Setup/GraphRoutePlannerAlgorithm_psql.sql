@@ -41,8 +41,8 @@ CREATE TABLE stoplinks(
    fromstop INT NOT NULL,
    tostop INT NOT NULL,
    towards INT NOT NULL
-   --PRIMARY KEY (ID)
  );
+
 INSERT INTO stoplinks (vehicle,line,fromstop,tostop,towards) VALUES 
 ('Train','B',4,1,2),
 ('Train','B',1,4,4),
