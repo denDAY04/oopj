@@ -1,5 +1,5 @@
 /* @author Jonas
- * Contributors:
+ * Contributors: Mathias
  */
 
 package RMIImpl;
