@@ -1,3 +1,8 @@
+/* @author Jonas
+ * Contributors: 
+ */
+
+
 package SQLDatabase.Library;
 
 /**
@@ -131,7 +136,7 @@ public class SQLLibrary {
       */
      public static final String ROUTEPLANNER_GET_STOPLINK ="select vehicle,line,fromstop,tostop,towards FROM stoplinks";
 
-    
+} 
     
     
 //   LIMIT { count | ALL }
@@ -192,23 +197,3 @@ public class SQLLibrary {
 //an error aborts the entire transaction. The on_error_rollback-on mode works 
 //by issuing an implicit SAVEPOINT for you, just before each command that is 
 //in a transaction block, and rolls back to the savepoint on error.
-
-    
-    
-//    xml queryRoutePlanner(startPosition, endPosition, timeDeparture)
-//    xml viewJourneysWithPrice(customerNumber)
-    
- 
-
-    
-//
-//    /**
-//     * Get customers by first name.
-//     */
-//    public static final String ADMIN_SEARCH_USER_FIRSTNAME = "SELECT * "
-//            + "FROM Customer "
-//            + "WHERE UPPER(FirstName) "
-//            + "LIKE UPPER(?)";
-
-
-}

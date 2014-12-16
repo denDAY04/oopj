@@ -1,4 +1,6 @@
-
+/* @author Jonas
+ * Contributors: 
+ */
 package Setup;
 
 public class Settings {

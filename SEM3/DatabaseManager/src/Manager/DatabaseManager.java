@@ -1,3 +1,7 @@
+/* @author Jonas
+ * Contributors: Mathias, Rasmus
+ */
+
 /**
  * DatabaseManager (factory)
  * -- Interact-with SQL library
@@ -21,7 +25,6 @@ import SQLConn.*;
 import SQLDatabase.Library.SQLLibrary;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -67,7 +70,7 @@ public class DatabaseManager implements IntDatabaseManager {
         }
     }
 
-    //</editor-fold>         // needs connection pool implementation !!
+    //</editor-fold>         // needs upgrading with a connection pool implementation !!
     private void executeUpdate() throws NullPointerException {
         try {
 
@@ -356,7 +359,7 @@ public class DatabaseManager implements IntDatabaseManager {
     }
     
     
-    //</editor-fold>     
+    //</editor-fold>     // Rasmus 
     //<editor-fold defaultstate="collapsed" desc="JourneyManager">
     @Override
     public TicketList createNewTickets(PassengerList pLst) {     //the check for existing tickets is handled by the JourneyManager 

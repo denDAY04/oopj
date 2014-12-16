@@ -1,3 +1,7 @@
+/* @author Jonas
+ * Contributors:
+ */
+
 package Manager;
 
 import ModelClasses.*;

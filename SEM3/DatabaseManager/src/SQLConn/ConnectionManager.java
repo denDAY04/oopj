@@ -1,12 +1,12 @@
+/* @author Jonas
+ * Contributors: 
+ */
+
 package SQLConn;
 
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.postgresql.ds.PGPoolingDataSource;
 import org.postgresql.ds.common.BaseDataSource;
 import org.postgresql.jdbc2.optional.PoolingDataSource;

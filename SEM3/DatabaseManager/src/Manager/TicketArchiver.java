@@ -1,8 +1,10 @@
+/* @author Jonas
+ * Contributors:
+ */
+
 package Manager;
 import SQLConn.ConnectionManager;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class TicketArchiver extends Thread {
     
@@ -36,17 +38,17 @@ public class TicketArchiver extends Thread {
      
     @Override
     public void run() {   
-        System.out.println("Database daemon unleashed...");        
+        System.out.println("TicketArchiver started...");        
     while (true){
     
-//RETRY:    
+   
        try      {if (!errFlag) Thread.sleep(SLEEP_LONG);
                 else           Thread.sleep(SLEEP_SHORT);       
-                connect();           if (errFlag) continue; //break RETRY;                
-                getExpiredTickets(); if (errFlag) continue; //break RETRY;   
+                connect();           if (errFlag) continue;                
+                getExpiredTickets(); if (errFlag) continue;   
                 transferTicket();}
        
-       catch    (Exception e) {System.out.println("Demon says err");
+       catch    (Exception e) {System.out.println("TicketArchiver says err");
                 e.printStackTrace(); this.errFlag = true;}
        
        finally  {this.errFlag = false;
@@ -125,14 +127,5 @@ public class TicketArchiver extends Thread {
     }
     
     
-}  //class DatabaseDemon
+}  //class TicketArchiver
 
-//<editor-fold defaultstate="collapsed" desc="Snippet">
-//
-//Thread t1 = new Thread(new Runnable() {
-//public void run() {
-//// code goes here.
-//}
-//});
-//t1.start();
-//</editor-fold>
