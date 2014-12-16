@@ -1,3 +1,8 @@
+/* @author Jonas
+ * Contributors:
+ */
+
+
 package RMIInterfaces;
 
 import ModelClasses.*;

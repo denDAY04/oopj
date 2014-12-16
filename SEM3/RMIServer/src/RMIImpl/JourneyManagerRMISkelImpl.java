@@ -1,3 +1,8 @@
+/* @author Jonas
+ * Contributors:
+ */
+
+
 package RMIImpl;
 
 import RMIInterfaces.JourneyManagerRMISkel;

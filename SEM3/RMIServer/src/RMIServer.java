@@ -1,3 +1,8 @@
+/* @author Jonas
+ * Contributors:
+ */
+
+
 /**
  * // RMIServer: -- Maintain RMI registry -- Supply Manager-RMI-Implementation
  * classes in RMI registry String createJourneyManagerRMI(objName)
