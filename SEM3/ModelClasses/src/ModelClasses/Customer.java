@@ -1,3 +1,8 @@
+/* @author Jonas
+ * Contributors:
+ */
+
+
 package ModelClasses;
 
 //Model Class for Object creation
